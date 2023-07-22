@@ -1,0 +1,795 @@
+#'ps-menu-commands/parse-talon-token
+clj꞉ps-menu-commands꞉> 
+; Syntax error compiling at (ps_menu_commands.clj:0:0).
+; Unable to resolve symbol: Tool in this context
+clj꞉ps-menu-commands꞉> 
+"Count Tool"
+clj꞉ps-menu-commands꞉> 
+["Set Measurement Scale" "Select Data Points" "Record Measurements" "Ruler Tool" "Count Tool" "Place Scale Marker..."]
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+; Syntax error compiling at (ps_menu_commands.clj:0:0).
+; Unable to resolve symbol: greetTool in this context
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+"Snap To"
+clj꞉ps-menu-commands꞉> 
+"Artboard Bounds"
+clj꞉ps-menu-commands꞉> 
+"90° Clockwise"
+clj꞉ps-menu-commands꞉> 
+"90° Clockwise"
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+; Syntax error compiling at (ps_menu_commands.clj:0:0).
+; Unable to resolve symbol: Clockwise in this context
+clj꞉ps-menu-commands꞉> 
+; Syntax error compiling at (ps_menu_commands.clj:0:0).
+; Unable to resolve symbol: Clockwise in this context
+clj꞉ps-menu-commands꞉> 
+; Syntax error compiling at (ps_menu_commands.clj:0:0).
+; Unable to resolve symbol: Clockwise in this context
+clj꞉ps-menu-commands꞉> 
+; Syntax error compiling at (ps_menu_commands.clj:0:0).
+; Unable to resolve symbol: Clockwise in this context
+clj꞉ps-menu-commands꞉> 
+; Syntax error compiling at (ps_menu_commands.clj:0:0).
+; Unable to resolve symbol: rotate in this context
+clj꞉ps-menu-commands꞉> 
+; Syntax error compiling at (ps_menu_commands.clj:0:0).
+; Unable to resolve symbol: rotate in this context
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+"rotate image (one eighty [degrees] | half)"
+clj꞉ps-menu-commands꞉> 
+[{:pre "color mode",
+  "Mode"
+  ["Bitmap"
+   "Grayscale"
+   "Duotone"
+   ["Indexed Color..." "Indexed"]
+   ["RGB Color" "(red green blue | rgb)"]
+   ["CMYK Color" "(cmyk | cyan magenta)"]
+   ["Lab Color" "lab"]
+   "Multichannel"
+   ["8 Bits/Channel" "eight bits"]
+   ["16 Bits Channel" "sixteen bits"]
+   ["32 Bits/Channel" "thirty two bits"]
+   ["Color Table..." {:pre ""}]]}
+ {:pre "[adjust]",
+  "Adjustments"
+  [["Brightness/Contrast..." "(Brightness | Contrast)"]
+   "Levels..."
+   "Curves..."
+   "Exposure..."
+   "Vibrance..."
+   ["Hue Saturation..." "(Hue | Saturation)"]
+   "Color Balance..."
+   ["Black & White..." "Black and White"]
+   "Photo Filter..."
+   "Channel Mixer..."
+   ["Color Lookup..." "(Lookup color | Color Lookup)"]
+   "Invert"
+   "Posterize..."
+   "Threshold..."
+   "Gradient Map..."
+   "Selective Color..."
+   ["Shadows Highlights..." "(Shadows |  Highlights)"]
+   "HDR Toning..."
+   "(HDR | High Def range)"
+   "Desaturate"
+   "Match Color..."
+   "Replace Color.."
+   ["Equalize" {:post "[color]"}]
+   ""]}
+ "Auto Tone"
+ "Auto Contrast"
+ "Auto Color"
+ "Image Size..."
+ "Canvas Size..."
+ {"Image Rotation"
+  [["180°" "rotate image (one eighty [degrees] | half)"]
+   ["90° Clockwise" "rotate image ninety [degrees] [clockwise]"]
+   ["90° Counter Clockwise" "rotate image ninety [degrees] counter [clockwise]"]
+   ["Arbitrary..." " rotate image [ arbitrary]"]
+   "Flip Canvas Horizontal"
+   "Flip Canvas Vertical"]}
+ "Crop"
+ "Trim..."
+ "Reveal All"
+ "Duplicate..."
+ "Apply Image.."
+ "Calculations..."
+ {"Variables" [["Define..." "define variables"] ["Data Sets.." " [variable] data sets"]]}
+ "Apply Data Set..."
+ "Trap..."
+ {"Analysis"
+  ["Set Measurement Scale"
+   "Select Data Points"
+   "Record Measurements"
+   "Ruler Tool"
+   "Count Tool"
+   "Place Scale Marker..."]}]
+clj꞉ps-menu-commands꞉> 
+[{:pre "color mode",
+  "Mode"
+  ["Bitmap"
+   "Grayscale"
+   "Duotone"
+   ["Indexed Color..." "Indexed"]
+   ["RGB Color" "(red green blue | rgb)"]
+   ["CMYK Color" "(cmyk | cyan magenta)"]
+   ["Lab Color" "lab"]
+   "Multichannel"
+   ["8 Bits/Channel" "eight bits"]
+   ["16 Bits Channel" "sixteen bits"]
+   ["32 Bits/Channel" "thirty two bits"]
+   ["Color Table..." {:pre ""}]]}
+ {:pre "[adjust]",
+  "Adjustments"
+  [["Brightness/Contrast..." "(Brightness | Contrast)"]
+   "Levels..."
+   "Curves..."
+   "Exposure..."
+   "Vibrance..."
+   ["Hue Saturation..." "(Hue | Saturation)"]
+   "Color Balance..."
+   ["Black & White..." "Black and White"]
+   "Photo Filter..."
+   "Channel Mixer..."
+   ["Color Lookup..." "(Lookup color | Color Lookup)"]
+   "Invert"
+   "Posterize..."
+   "Threshold..."
+   "Gradient Map..."
+   "Selective Color..."
+   ["Shadows Highlights..." "(Shadows |  Highlights)"]
+   "HDR Toning..."
+   "(HDR | High Def range)"
+   "Desaturate"
+   "Match Color..."
+   "Replace Color.."
+   ["Equalize" {:post "[color]"}]
+   ""]}
+ "Auto Tone"
+ "Auto Contrast"
+ "Auto Color"
+ "Image Size..."
+ "Canvas Size..."
+ {"Image Rotation"
+  [["180°" "rotate image (one eighty [degrees] | half)"]
+   ["90° Clockwise" "rotate image ninety [degrees] [clockwise]"]
+   ["90° Counter Clockwise" "rotate image ninety [degrees] counter [clockwise]"]
+   ["Arbitrary..." " rotate image [ arbitrary]"]
+   "Flip Canvas Horizontal"
+   "Flip Canvas Vertical"]}
+ "Crop"
+ "Trim..."
+ "Reveal All"
+ "Duplicate..."
+ "Apply Image.."
+ "Calculations..."
+ {"Variables" [["Define..." "define variables"] ["Data Sets.." " [variable] data sets"]]}
+ "Apply Data Set..."
+ "Trap..."
+ {"Analysis"
+  ["Set Measurement Scale"
+   "Select Data Points"
+   "Record Measurements"
+   "Ruler Tool"
+   "Count Tool"
+   "Place Scale Marker..."]}]
+clj꞉ps-menu-commands꞉> 
+[{:pre "color mode",
+  "Mode"
+  ["Bitmap"
+   "Grayscale"
+   "Duotone"
+   ["Indexed Color..." "Indexed"]
+   ["RGB Color" "(red green blue | rgb)"]
+   ["CMYK Color" "(cmyk | cyan magenta)"]
+   ["Lab Color" "lab"]
+   "Multichannel"
+   ["8 Bits/Channel" "eight bits"]
+   ["16 Bits Channel" "sixteen bits"]
+   ["32 Bits/Channel" "thirty two bits"]
+   ["Color Table..." {:pre ""}]]}
+ {:pre "[adjust]",
+  "Adjustments"
+  [["Brightness/Contrast..." "(Brightness | Contrast)"]
+   "Levels..."
+   "Curves..."
+   "Exposure..."
+   "Vibrance..."
+   ["Hue Saturation..." "(Hue | Saturation)"]
+   "Color Balance..."
+   ["Black & White..." "Black and White"]
+   "Photo Filter..."
+   "Channel Mixer..."
+   ["Color Lookup..." "(Lookup color | Color Lookup)"]
+   "Invert"
+   "Posterize..."
+   "Threshold..."
+   "Gradient Map..."
+   "Selective Color..."
+   ["Shadows Highlights..." "(Shadows |  Highlights)"]
+   "HDR Toning..."
+   "(HDR | High Def range)"
+   "Desaturate"
+   "Match Color..."
+   "Replace Color.."
+   ["Equalize" {:post "[color]"}]
+   ""]}
+ "Auto Tone"
+ "Auto Contrast"
+ "Auto Color"
+ "Image Size..."
+ "Canvas Size..."
+ {"Image Rotation"
+  [["180°" "rotate image (one eighty [degrees] | half)"]
+   ["90° Clockwise" "rotate image ninety [degrees] [clockwise]"]
+   ["90° Counter Clockwise" "rotate image ninety [degrees] counter [clockwise]"]
+   ["Arbitrary..." " rotate image [ arbitrary]"]
+   "Flip Canvas Horizontal"
+   "Flip Canvas Vertical"]}
+ "Crop"
+ "Trim..."
+ "Reveal All"
+ "Duplicate..."
+ "Apply Image.."
+ "Calculations..."
+ {"Variables" [["Define..." "define variables"] ["Data Sets.." " [variable] data sets"]]}
+ "Apply Data Set..."
+ "Trap..."
+ {"Analysis"
+  ["Set Measurement Scale"
+   "Select Data Points"
+   "Record Measurements"
+   "Ruler Tool"
+   "Count Tool"
+   "Place Scale Marker..."]}]
+clj꞉ps-menu-commands꞉> 
+[{:pre "color mode",
+  "Mode"
+  ["Bitmap"
+   "Grayscale"
+   "Duotone"
+   ["Indexed Color..." "Indexed"]
+   ["RGB Color" "(red green blue | rgb)"]
+   ["CMYK Color" "(cmyk | cyan magenta)"]
+   ["Lab Color" "lab"]
+   "Multichannel"
+   ["8 Bits/Channel" "eight bits"]
+   ["16 Bits Channel" "sixteen bits"]
+   ["32 Bits/Channel" "thirty two bits"]
+   ["Color Table..." {:pre ""}]]}
+ {:pre "[adjust]",
+  "Adjustments"
+  [["Brightness/Contrast..." "(Brightness | Contrast)"]
+   "Levels..."
+   "Curves..."
+   "Exposure..."
+   "Vibrance..."
+   ["Hue Saturation..." "(Hue | Saturation)"]
+   "Color Balance..."
+   ["Black & White..." "Black and White"]
+   "Photo Filter..."
+   "Channel Mixer..."
+   ["Color Lookup..." "(Lookup color | Color Lookup)"]
+   "Invert"
+   "Posterize..."
+   "Threshold..."
+   "Gradient Map..."
+   "Selective Color..."
+   ["Shadows Highlights..." "(Shadows |  Highlights)"]
+   "HDR Toning..."
+   "(HDR | High Def range)"
+   "Desaturate"
+   "Match Color..."
+   "Replace Color.."
+   ["Equalize" {:post "[color]"}]
+   ""]}
+ "Auto Tone"
+ "Auto Contrast"
+ "Auto Color"
+ "Image Size..."
+ "Canvas Size..."
+ {"Image Rotation"
+  [["180°" "rotate image (one eighty [degrees] | half)"]
+   ["90° Clockwise" "rotate image ninety [degrees] [clockwise]"]
+   ["90° Counter Clockwise" "rotate image ninety [degrees] counter [clockwise]"]
+   ["Arbitrary..." " rotate image [ arbitrary]"]
+   "Flip Canvas Horizontal"
+   "Flip Canvas Vertical"]}
+ "Crop"
+ "Trim..."
+ "Reveal All"
+ "Duplicate..."
+ "Apply Image.."
+ "Calculations..."
+ {"Variables" [["Define..." "define variables"] ["Data Sets.." " [variable] data sets"]]}
+ "Apply Data Set..."
+ "Trap..."
+ {"Analysis"
+  ["Set Measurement Scale"
+   "Select Data Points"
+   "Record Measurements"
+   "Ruler Tool"
+   "Count Tool"
+   "Place Scale Marker..."]}]
+clj꞉ps-menu-commands꞉> 
+[{:pre "color mode",
+  "Mode"
+  ["Bitmap"
+   "Grayscale"
+   "Duotone"
+   ["Indexed Color..." "Indexed"]
+   ["RGB Color" "(red green blue | rgb)"]
+   ["CMYK Color" "(cmyk | cyan magenta)"]
+   ["Lab Color" "lab"]
+   "Multichannel"
+   ["8 Bits/Channel" "eight bits"]
+   ["16 Bits Channel" "sixteen bits"]
+   ["32 Bits/Channel" "thirty two bits"]
+   ["Color Table..." {:pre ""}]]}
+ {:pre "[adjust]",
+  "Adjustments"
+  [["Brightness/Contrast..." "(Brightness | Contrast)"]
+   "Levels..."
+   "Curves..."
+   "Exposure..."
+   "Vibrance..."
+   ["Hue Saturation..." "(Hue | Saturation)"]
+   "Color Balance..."
+   ["Black & White..." "Black and White"]
+   "Photo Filter..."
+   "Channel Mixer..."
+   ["Color Lookup..." "(Lookup color | Color Lookup)"]
+   "Invert"
+   "Posterize..."
+   "Threshold..."
+   "Gradient Map..."
+   "Selective Color..."
+   ["Shadows Highlights..." "(Shadows |  Highlights)"]
+   "HDR Toning..."
+   "(HDR | High Def range)"
+   "Desaturate"
+   "Match Color..."
+   "Replace Color.."
+   ["Equalize" {:post "[color]"}]
+   ""]}
+ "Auto Tone"
+ "Auto Contrast"
+ "Auto Color"
+ "Image Size..."
+ "Canvas Size..."
+ {"Image Rotation"
+  [["180°" "rotate image (one eighty [degrees] | half)"]
+   ["90° Clockwise" "rotate image ninety [degrees] [clockwise]"]
+   ["90° Counter Clockwise" "rotate image ninety [degrees] counter [clockwise]"]
+   ["Arbitrary..." " rotate image [ arbitrary]"]
+   "Flip Canvas Horizontal"
+   "Flip Canvas Vertical"]}
+ "Crop"
+ "Trim..."
+ "Reveal All"
+ "Duplicate..."
+ "Apply Image.."
+ "Calculations..."
+ {"Variables" [["Define..." "define variables"] ["Data Sets.." " [variable] data sets"]]}
+ "Apply Data Set..."
+ "Trap..."
+ {"Analysis"
+  ["Set Measurement Scale"
+   "Select Data Points"
+   "Record Measurements"
+   "Ruler Tool"
+   "Count Tool"
+   "Place Scale Marker..."]}]
+clj꞉ps-menu-commands꞉> 
+[{:pre "color mode",
+  "Mode"
+  ["Bitmap"
+   "Grayscale"
+   "Duotone"
+   ["Indexed Color..." "Indexed"]
+   ["RGB Color" "(red green blue | rgb)"]
+   ["CMYK Color" "(cmyk | cyan magenta)"]
+   ["Lab Color" "lab"]
+   "Multichannel"
+   ["8 Bits/Channel" "eight bits"]
+   ["16 Bits Channel" "sixteen bits"]
+   ["32 Bits/Channel" "thirty two bits"]
+   ["Color Table..." {:pre ""}]]}
+ {:pre "[adjust]",
+  "Adjustments"
+  [["Brightness/Contrast..." "(Brightness | Contrast)"]
+   "Levels..."
+   "Curves..."
+   "Exposure..."
+   "Vibrance..."
+   ["Hue Saturation..." "(Hue | Saturation)"]
+   "Color Balance..."
+   ["Black & White..." "Black and White"]
+   "Photo Filter..."
+   "Channel Mixer..."
+   ["Color Lookup..." "(Lookup color | Color Lookup)"]
+   "Invert"
+   "Posterize..."
+   "Threshold..."
+   "Gradient Map..."
+   "Selective Color..."
+   ["Shadows Highlights..." "(Shadows |  Highlights)"]
+   "HDR Toning..."
+   "(HDR | High Def range)"
+   "Desaturate"
+   "Match Color..."
+   "Replace Color.."
+   ["Equalize" {:post "[color]"}]
+   ""]}
+ "Auto Tone"
+ "Auto Contrast"
+ "Auto Color"
+ "Image Size..."
+ "Canvas Size..."
+ {"Image Rotation"
+  [["180°" "rotate image (one eighty [degrees] | half)"]
+   ["90° Clockwise" "rotate image ninety [degrees] [clockwise]"]
+   ["90° Counter Clockwise" "rotate image ninety [degrees] counter [clockwise]"]
+   ["Arbitrary..." " rotate image [ arbitrary]"]
+   "Flip Canvas Horizontal"
+   "Flip Canvas Vertical"]}
+ "Crop"
+ "Trim..."
+ "Reveal All"
+ "Duplicate..."
+ "Apply Image.."
+ "Calculations..."
+ {"Variables" [["Define..." "define variables"] ["Data Sets.." " [variable] data sets"]]}
+ "Apply Data Set..."
+ "Trap..."
+ {"Analysis"
+  ["Set Measurement Scale"
+   "Select Data Points"
+   "Record Measurements"
+   "Ruler Tool"
+   "Count Tool"
+   "Place Scale Marker..."]}]
+clj꞉ps-menu-commands꞉> 
+[{:pre "color mode",
+  "Mode"
+  ["Bitmap"
+   "Grayscale"
+   "Duotone"
+   ["Indexed Color..." "Indexed"]
+   ["RGB Color" "(red green blue | rgb)"]
+   ["CMYK Color" "(cmyk | cyan magenta)"]
+   ["Lab Color" "lab"]
+   "Multichannel"
+   ["8 Bits/Channel" "eight bits"]
+   ["16 Bits Channel" "sixteen bits"]
+   ["32 Bits/Channel" "thirty two bits"]
+   ["Color Table..." {:pre ""}]]}
+ {:pre "[adjust]",
+  "Adjustments"
+  [["Brightness/Contrast..." "(Brightness | Contrast)"]
+   "Levels..."
+   "Curves..."
+   "Exposure..."
+   "Vibrance..."
+   ["Hue Saturation..." "(Hue | Saturation)"]
+   "Color Balance..."
+   ["Black & White..." "Black and White"]
+   "Photo Filter..."
+   "Channel Mixer..."
+   ["Color Lookup..." "(Lookup color | Color Lookup)"]
+   "Invert"
+   "Posterize..."
+   "Threshold..."
+   "Gradient Map..."
+   "Selective Color..."
+   ["Shadows Highlights..." "(Shadows |  Highlights)"]
+   "HDR Toning..."
+   "(HDR | High Def range)"
+   "Desaturate"
+   "Match Color..."
+   "Replace Color.."
+   ["Equalize" {:post "[color]"}]
+   ""]}
+ "Auto Tone"
+ "Auto Contrast"
+ "Auto Color"
+ "Image Size..."
+ "Canvas Size..."
+ {"Image Rotation"
+  [["180°" "rotate image (one eighty [degrees] | half)"]
+   ["90° Clockwise" "rotate image ninety [degrees] [clockwise]"]
+   ["90° Counter Clockwise" "rotate image ninety [degrees] counter [clockwise]"]
+   ["Arbitrary..." " rotate image [ arbitrary]"]
+   "Flip Canvas Horizontal"
+   "Flip Canvas Vertical"]}
+ "Crop"
+ "Trim..."
+ "Reveal All"
+ "Duplicate..."
+ "Apply Image.."
+ "Calculations..."
+ {"Variables" [["Define..." "define variables"] ["Data Sets.." " [variable] data sets"]]}
+ "Apply Data Set..."
+ "Trap..."
+ {"Analysis"
+  ["Set Measurement Scale"
+   "Select Data Points"
+   "Record Measurements"
+   "Ruler Tool"
+   "Count Tool"
+   "Place Scale Marker..."]}]
+clj꞉ps-menu-commands꞉> 
+[["Define..." "define variables"] ["Data Sets.." " [variable] data sets"]]
+clj꞉ps-menu-commands꞉> 
+[["Define..." "define variables"] ["Data Sets.." " [variable] data sets"]]
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+[["Define..." "define variables"] ["Data Sets.." " [variable] data sets"]]
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+[["Define..." "define variables"] ["Data Sets.." " [variable] data sets"]]
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+[["Define..." "define variables"] ["Data Sets.." " [variable] data sets"]]
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+[["Define..." "define variables"] ["Data Sets.." " [variable] data sets"]]
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+[["Define..." "define variables"] ["Data Sets.." " [variable] data sets"]]
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+"Apply Image.."
+clj꞉ps-menu-commands꞉> 
+["Define..." "define variables"]
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 
+; Syntax error (ClassNotFoundException) compiling at (ps_menu_commands.clj:0:0).
+; Trim///
+clj꞉ps-menu-commands꞉> 
+"Reveal All"
+clj꞉ps-menu-commands꞉> 
+[{:pre "color mode",
+  "Mode"
+  ["Bitmap"
+   "Grayscale"
+   "Duotone"
+   ["Indexed Color..." "Indexed"]
+   ["RGB Color" "(red green blue | rgb)"]
+   ["CMYK Color" "(cmyk | cyan magenta)"]
+   ["Lab Color" "lab"]
+   "Multichannel"
+   ["8 Bits/Channel" "eight bits"]
+   ["16 Bits Channel" "sixteen bits"]
+   ["32 Bits/Channel" "thirty two bits"]
+   ["Color Table..." {:pre ""}]]}
+ {:pre "[adjust]",
+  "Adjustments"
+  [["Brightness/Contrast..." "(Brightness | Contrast)"]
+   "Levels..."
+   "Curves..."
+   "Exposure..."
+   "Vibrance..."
+   ["Hue Saturation..." "(Hue | Saturation)"]
+   "Color Balance..."
+   ["Black & White..." "Black and White"]
+   "Photo Filter..."
+   "Channel Mixer..."
+   ["Color Lookup..." "(Lookup color | Color Lookup)"]
+   "Invert"
+   "Posterize..."
+   "Threshold..."
+   "Gradient Map..."
+   "Selective Color..."
+   ["Shadows Highlights..." "(Shadows |  Highlights)"]
+   "HDR Toning..."
+   "(HDR | High Def range)"
+   "Desaturate"
+   "Match Color..."
+   "Replace Color.."
+   ["Equalize" {:post "[color]"}]
+   ""]}
+ "Auto Tone"
+ "Auto Contrast"
+ "Auto Color"
+ "Image Size..."
+ "Canvas Size..."
+ {"Image Rotation"
+  [["180°" "rotate image (one eighty [degrees] | half)"]
+   ["90° Clockwise" "rotate image ninety [degrees] [clockwise]"]
+   ["90° Counter Clockwise" "rotate image ninety [degrees] counter [clockwise]"]
+   ["Arbitrary..." " rotate image [ arbitrary]"]
+   "Flip Canvas Horizontal"
+   "Flip Canvas Vertical"]}
+ "Crop"
+ "Trim..."
+ "Reveal All"
+ "Duplicate..."
+ "Apply Image.."
+ "Calculations..."
+ {"Variables" [["Define..." "define variables"] ["Data Sets.." " [variable] data sets"]]}
+ "Apply Data Set..."
+ "Trap..."
+ {"Analysis"
+  ["Set Measurement Scale"
+   "Select Data Points"
+   "Record Measurements"
+   "Ruler Tool"
+   "Count Tool"
+   "Place Scale Marker..."]}]
+clj꞉ps-menu-commands꞉> 
+#'ps-menu-commands/menu-commands
+clj꞉ps-menu-commands꞉> 

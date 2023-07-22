@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../repos"
+		}
+	],
+	"settings": {
+		"favorites.resources": [
+			{
+				"filePath": "/Users/ryan/.talon/user/cursorless-settings",
+				"group": "Default"
+			}
+		]
+	}
+}

@@ -1,0 +1,556 @@
+app.name: Roam Research 
+-
+
+tag(): user.line_commands
+# tag(): user.file_manager
+# tag(): user.find_and_replace
+# tag(): user.multiple_cursors
+# tag(): user.snippets
+# tag(): user.splits
+# tag(): user.tabs
+
+demo open file: user.file_manager_open_file("~/Documents/ticket reciept.pdf")
+    # user.file_maDemo actionnager_open_directory(system_path)
+    # file = user.file_manager_get_file_by_index(number_small - 1)
+    # insert(file)
+    
+
+
+
+
+
+# todo: setup defualt timeout
+    
+please: key(cmd-p)
+
+#left sidebar
+
+(toggle | hide |  show) ( shortcuts |  (left | l) sidebar | bookmarks): key(cmd-\)
+
+#not working
+add (shortcut | bookmark): 
+    key(cmd-p)
+    sleep(100ms)
+    insert("wb add shortcut")
+    sleep(100ms)
+    key(enter)
+
+embed (block | ref | reference):
+    insert("/embed")
+    sleep(100ms)
+    key(enter)
+    sleep(100ms)
+    key(right:2 backspace:4)
+    edit.paste()
+    sleep(100ms)
+    key(esc)
+
+    ###-------- alternative implementation
+    # edit.paste()
+    # sleep(300ms)
+    # key(cmd-a)
+    # sleep(300ms)
+    # refstr = edit.selected_text()
+    # firsthalf = "{{[[embed]]: " + refstr
+    # fullembed = firsthalf + "}}"
+    # insert(fullembed)
+    # sleep(300ms)
+    # key(cmd-a)
+    # sleep(300ms)
+    # key({)
+    # sleep(300ms)
+    # key(esc)
+
+
+replace ref with original: 
+    key(cmd-p)
+    sleep(100ms)
+    insert("wb replace last reference before cursor with original")
+    sleep(100ms)
+    key(enter)
+replace ref with alias: 
+    key(cmd-p)
+    sleep(100ms)
+    insert("wb replace last reference before cursor with text and alias")
+    sleep(100ms)
+    key(enter)
+
+
+cut block: 
+    key(esc)
+    sleep(100ms)
+    key(cmd-x)
+
+#navigation
+
+go all pages: 
+    key(cmd-p)
+    sleep(100ms)
+    insert("wb all pages")
+    sleep(100ms)
+    key(enter)
+
+go [page] top: 
+    key(cmd-p)
+    sleep(100ms)
+    insert("jump top")
+    sleep(100ms)
+    key(enter)
+
+go [page] bottom: 
+    key(cmd-p)
+    sleep(100ms)
+    insert("jump bottom")
+    sleep(100ms)
+    key(enter)
+
+go today:  key(ctrl-shift-d)
+go next day:  key(ctrl-alt-n)
+go (prev | previous | last) day:  key(ctrl-alt-p)
+
+go back:  key(cmd-[)
+go (forward | fore):  key(cmd-])
+
+jump link: key(ctr-o)
+
+page blocks [panel]: key(cmd-shift-p)
+page (refs | references) [panel]: 
+    key(cmd-shift-p)
+    sleep(500ms)
+    insert("@")
+
+zoom (block  | down): key(cmd-.)
+#not working
+zoom (parent |  up): key(cmd-shift-ctrl-alt-8)
+        
+deep nav:key(alt-g)
+
+###sidebar
+
+(toggle | hide |  show) (sidebar | side bar) :  key(cmd-/)
+
+(swap with sidebar | swap with main):
+    key(cmd-p)
+    sleep(100ms)
+    insert("wb sidebars - swap with main window (swap)")
+    sleep(100ms)
+    key(enter)  
+
+(expand | collapse | fold) (sidebar | side bar):
+    key(cmd-p)
+    sleep(100ms)
+    insert("toggle expand sidebar")
+    sleep(100ms)
+    key(enter)  
+
+#switch+ sidebar
+(sidebar |  side bar) panel: 
+    key(cmd-shift-p)
+    sleep(500ms)
+    insert("r:")
+
+open link in sidebar: key(ctrl-shift-o)
+open page in sidebar: 
+    key(cmd-p)
+    sleep(100ms)
+    insert("wb open page in sidebar")
+    sleep(100ms)
+    key(enter)
+
+clear sidebar: key(ctr-l)
+
+###roam prefs
+
+open hotkeys: 
+    key(cmd-p)
+    sleep(100ms)
+    insert("hotkeys")
+    sleep(100ms)
+    key(enter)
+
+#search
+
+search: key(cmd-u)
+search page: key(cmd-f)
+exit search: key(cmd-enter)
+search advanced: key(ctrl-shift-p)
+search block refs: key(ctrl-shift-9)
+
+Open query builder: key(cmd-shift-ctrl-alt-8)
+
+#block refs
+
+copy [block] (ref | reference): key (cmd-shift-c)
+
+# todo: turn this into proper ordinal
+(choose | pick) (<digits> | that): 
+    key("down:{digits or 1}")
+    key(enter)
+    key(space)
+
+
+
+#block nav / editing
+
+#set up ordinal versions, with defualt sleep timing
+next block: key(ctrl-n)
+(block | move) up: key(cmd-shift-up)
+(block | move) down: key(cmd-shift-down)
+(block | move) (in | right | forward | fore | four): key(tab)
+(block | move) (out | left | back): key(shift-tab)
+#make unlimited todo
+(block | move) (all [(the way | way)] (out | left | back) | top level | base | wayback ): 
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+
+(fold | close | hide children) block: key(cmd-up)
+(unfold | open | show children) block: key(cmd-down)
+
+(collapse | fold) tree: 
+    key(cmd-p)
+    sleep(100ms)
+    insert("collapse current block tree")
+    sleep(100ms)
+    key(enter)
+#only exands one leve deep (not recursive)
+expand block:
+    key(cmd-p)
+    sleep(100ms)
+    insert("Expand current block tree")
+    sleep(100ms)
+    key(enter)
+    
+(collapse | fold) all [blocks]: 
+    key(cmd-p)
+    sleep(100ms)
+    insert("collapse all blocks on page")
+    sleep(100ms)
+    key(enter)
+(expand | unfold) all [blocks]: 
+    key(cmd-p)
+    sleep(100ms)
+    insert("expand all blocks on page")
+    sleep(100ms)
+    key(enter)
+
+#working kind of inconsistanly
+#how to take a digit, do math on in, then use as key
+(expand | fold) all [blocks] <digits>: 
+    mynumber = digits + 1
+    key(cmd-p)
+    sleep(100ms)
+    insert("wb expand/collapse block tree")
+    sleep(100ms)
+    key(enter)
+    sleep(500ms)
+    key("{mynumber}")
+
+
+go block end: 
+    edit.select_all()
+    sleep(100ms)
+    key(right)
+
+go block start: 
+    edit.select_all()
+    sleep(100ms)
+    key(left)
+
+(delete block | block delete): 
+    # key(cmd-backspace)
+    key(esc)
+    key(delete)
+
+
+#select blocks
+
+(multi select | multiselect |  select multi | exit multi):  key(cmd-m)
+
+select all blocks: key(cmd-shift-a)
+
+
+
+# Select the block above where the cursor is placed
+
+# Shift
+# Up
+# Select the block below where the cursor is placed
+
+# Shift
+# Down
+# Select all blocks
+
+# Cmd
+# Shift
+# A
+
+
+#child block
+
+(new child block | child block | New child):
+    #todo change to enter command
+    edit.select_all()
+      sleep(100ms)
+    key(right)
+    key(enter)
+    key(tab)
+
+new block:
+    edit.select_all()
+    sleep(100ms)
+    key(right)
+    key(enter)
+    
+#todo: copy imlementation from block all the way back
+new base block:
+    edit.select_all()
+    sleep(100ms)
+    key(right)
+    key(enter)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+
+#todo is this the same as split..?
+nest here:
+    key(enter)
+    sleep(100ms)
+    key(tab)
+    key(escape)
+    key(escape)
+
+# Insert block above or below, skips children   
+(new block up | insert block above): key(cmd-shift-i)
+(new block down | insert block below): key(cmd-shift-k)
+new block back: 
+    key(cmd-shift-k)
+    sleep(500ms)
+    key(shift-tab)
+
+#todo use new block down instead of going to end and enter in all of these commends
+
+(split | break) [new] [block] : 
+    # mouse_click(0)
+    # close the mouse grid if open
+    # user.grid_close()
+    # End any open drags
+    # Touch automatically ends left drags so this is for right drags specifically
+    # user.mouse_drag_end()
+    # sleep(100ms)
+    key(enter)
+
+(split | break) (child | right) [block]: 
+    #mouse_click(0)
+    # close the mouse grid if open
+    #user.grid_close()
+    # End any open drags
+    # Touch automatically ends left drags so this is for right drags specifically
+    #user.mouse_drag_end()
+    #sleep(100ms)
+    key(enter)
+    sleep(100ms)
+    key(tab)
+    key(down)
+    key(shift-tab)
+    key(escape)
+
+(split | break) [and] (stack | top) [block]: 
+    # mouse_click(0)
+    # close the mouse grid if open
+    # user.grid_close()
+    # End any open drags
+    # Touch automatically ends left drags so this is for right drags specifically
+    # user.mouse_drag_end()
+    # edit.paragraph_end()
+    key(shift-end)
+    sleep(300ms)
+    key(cmd-x)
+    sleep(300ms)
+    key(enter)
+    sleep(300ms)
+    key(shift-cmd-v)
+    sleep(300ms)
+    key(escape)
+    # key(enter)
+    # sleep(100ms)
+    # key(tab)
+    # key(down)
+    # key(shift-tab)
+    
+copy block:
+    key(esc)
+    sleep(100ms)
+    key(cmd-c)
+
+paste [new] block:
+    edit.select_all()
+    sleep(100ms)
+    key(right)
+    key(enter)
+    key(cmd-v)
+    sleep(100ms)
+    key(esc)
+
+paste [new] child [block]:
+    edit.select_all()
+    sleep(100ms)
+    key(right)
+    key(enter)
+    sleep(100ms)
+    key(tab)
+    key(cmd-v)
+    sleep(100ms)
+    key(esc)
+
+paste child [block] raw:
+    edit.select_all()
+    sleep(100ms)
+    key(right)
+    key(enter)
+    sleep(100ms)
+    key(tab)
+    key(cmd-shift-v)
+
+# new parent: 
+#     edit.paragraph_end()
+
+#tagging 
+
+# Hash tagging
+
+
+(h tag | hashtag) [that]: 
+    s = edit.selected_text() 
+    sf = "#" + s
+    insert(sf)
+
+(h tag | hashtag) (word | single | 1):
+    user.cut_word()
+    # edit.select_word()
+    # edit.cut()
+    sleep(100ms)
+    insert("#")
+    edit.paste()
+
+(h tag | hashtag) <user.text>:
+    insert("#")
+    user.insert_formatted(text, "SLASH_SEPARATED")
+    sleep(100ms)
+    user.select_last_phrase()
+    key(left)
+    key(delete)
+    edit.line_end()
+
+(h tag | hashtag) (auto | one | use | force) <user.text>:
+    insert("#")
+    user.insert_formatted(text, "SLASH_SEPARATED")
+    sleep(100ms)
+    user.select_last_phrase()
+    key(left delete)
+    sleep(100ms)
+    key(down enter)
+    sleep(100ms)
+    edit.word_right()
+    sleep(100ms)
+    key(space)
+
+kebab (h tag | hashtag) <user.text>:
+    insert("#")
+    user.insert_formatted(text, "DASH_SEPARATED")
+    
+# bracket tagging
+
+(s tag | dub square) that: 
+    key([:2 right)
+    
+(s tag | dub square) (word | single | 1):
+    edit.select_word()
+    # insert("[[")
+    # edit.paste()
+    # insert("]]")
+
+(s tag | dub square) <user.text>:
+    insert("[[")
+    user.insert_formatted(text, "SLASH_SEPARATED")
+    sleep(100ms)
+    user.select_last_phrase()
+    key(left delete)
+    edit.word_right()
+
+(s tag | dub square) (auto | one | use) <user.text>:
+    insert("[[")
+    user.insert_formatted(text, "SLASH_SEPARATED")
+    sleep(100ms)
+    user.select_last_phrase()
+    key(left delete)
+    key(down enter)
+    edit.word_right()
+    key(space)
+
+
+    
+((bee | back) link | dub paren): 
+    key((:2)
+    
+((bee | back) link | dub paren) that: 
+    key((:2 right)
+        
+
+((bee | back) link | dub paren) <user.text>:
+    insert("((")
+    insert(text)
+    # sleep(100ms)
+    # user.select_last_phrase()
+    # key(left delete)
+    # edit.word_right()
+    
+
+#formatting
+
+paste unformatted: key(shift-cmd-v)
+
+([make] (todo | action) ): key(cmd-return)
+
+bold that: key(cmd-b)
+
+heading one: key(cmd-alt-1)
+heading two: key(cmd-alt-2)
+heading three: key(cmd-alt-3)
+heading none: key(cmd-alt-0)
+    
+code (line | inline) that: key(` esc:2)
+    # s = edit.selected_text() 
+    # sf = "`" + s
+    # insert(sf)
+
+
+exit: key(esc)
+
+new code block: 
+    key(`:3)   
+code block that: key(`:3 esc)
+(make code block | block make code [block]): 
+    key(cmd-a)
+    sleep(100ms)
+    key(`:3 esc)
+
+#add components
+
+(add | insert) divider:
+    key(ctrl-e) 
+    key(enter)
+    sleep(100ms)
+    key(-:3 enter) 
+
+# edit.paragraph_start()
+# edit.jump_line
+# edit.sentence_start
