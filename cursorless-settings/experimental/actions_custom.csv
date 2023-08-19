@@ -1,1 +1,49 @@
 Spoken form, VSCode command
+convolute, paredit.convolute
+move expression back, paredit.dragSexprBackward
+move expression back down, paredit.dragSexprBackwardDown
+move expression back up, paredit.dragSexprBackwardUp
+move expression forward, paredit.dragSexprForward
+move expression forward up, paredit.dragSexprForwardUp
+move expression forward down, paredit.dragSexprForwardDown
+join expressions, paredit.joinSexp
+kill right, paredit.killRight
+kill forward, paredit.killSexpForward
+kill to end, paredit.killListForward
+kill back, paredit.killSexpBackward
+kill from start, paredit.killListBackward
+force chuck back, paredit.forceDeleteBackward
+force chuck forward, paredit.forceDeleteForward
+chuck back, paredit.deleteBackward
+chuck forward, paredit.deleteForward
+raise expression, paredit.raiseSexp
+rewrap dub quotes, paredit.rewrapQuote
+rewrap round, paredit.rewrapParens
+rewrap box, paredit.rewrapSquare
+rewrap curly, paredit.rewrapCurly
+rewrap set, paredit.rewrapSet
+barf back, paredit.barfSexpBackward
+barf forward, paredit.barfSexpForward
+slurp back, paredit.slurpSexpBackward
+slurp forward, paredit.slurpSexpForward
+splice and kill back, paredit.spliceSexpKillBackward
+splice and kill forward, paredit.spliceSexpKillForward
+splice, paredit.spliceSexp
+split, paredit.splitSexp
+swap around cursor, paredit.transpose
+wrap around dub quotes, paredit.wrapAroundQuote
+wrap around round, paredit.wrapAroundParens
+wrap around box, paredit.wrapAroundSquare
+wrap around curly, paredit.wrapAroundCurly
+push, calva-fmt.tabIndent
+pull, calva-fmt.tabDedent
+evaluate top, calva.evaluateCurrentTopLevelForm
+evaluate top comment, calva.evaluateTopLevelFormAsComment
+evaluate parent, calva.evaluateEnclosingForm
+evaluate, calva.evaluateSelection 
+evaluate comment, calva.evaluateSelectionAsComment
+evaluate from file start to, calva.evaluateStartOfFileToCursor
+evaluate from start to, calva.evaluateToCursor
+evaluate from top to, calva.evaluateTopLevelFormToCursor
+joyride evaluate, joyride.evaluateSelection
+

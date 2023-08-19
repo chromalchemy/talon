@@ -6,7 +6,7 @@ tag(): browser
 
 (toggle | hide | show | open) (devtools | dev tools | console): key(cmd-alt-i)
 
-search bookmarks [<user.text>]:
+search (bookmarks |  bookmark) [<user.text>]:
     key(cmd-l)
     sleep(100ms)
     insert("@bookmarks")
@@ -50,3 +50,4 @@ search bookmarks [<user.text>]:
     insert("->Live - j")
     sleep(100ms)
     key(tab enter)
+

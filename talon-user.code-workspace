@@ -12,7 +12,218 @@
 			{
 				"filePath": "/Users/ryan/.talon/user/cursorless-settings",
 				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/cursorless-settings/experimental/actions_custom.csv",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/settings",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/vscode.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/roam.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/ps_menu_commands.clj",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/photoshop.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/gb.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/clojure.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/general.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/talon_axkit/window_action.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/talon_axkit/notification.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/talon_axkit/menu.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/talon_axkit/menu.talon",
+				"group": "test group"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/talon_axkit/notification.talon",
+				"group": "test group"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/talon_axkit/window_action.talon",
+				"group": "test group"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/talon_axkit/window_doc.talon",
+				"group": "test group"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/mouse_guide/mouse_guide.talon",
+				"group": "test group"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/rango-talon/rango.talon",
+				"group": "test group"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/modified_full_mouse_grid/full_mouse_grid.talon",
+				"group": "test group"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/modified_full_mouse_grid/full_mouse_grid_open.talon",
+				"group": "test group"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/flex-mouse-grid/flex_mouse_grid.talon",
+				"group": "test group"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/flex-mouse-grid/flex_mouse_grid_active.talon",
+				"group": "test group"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/apps/vscode/vscode.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/calva.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/apps/chrome/chrome.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/apps/talon_repl/talon_repl.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/apps/finder/finder.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/apps/slack/slack_mac.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/app_switcher/app_name_overrides.mac.csv",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/edit/edit.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/homophones/homophones.csv",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/modes/dictation_mode.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/mouse_grid/mouse_grid.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/mouse_grid/mouse_grid_open.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/mouse_grid/mouse_grid_always.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/text/text.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/vocabulary/edit_vocabulary.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/windows_and_tabs/tabs.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/windows_and_tabs/window_management.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/plugin/desktops/desktops.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/plugin/dropdown/dropdown.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/plugin/macro/macro.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/plugin/mouse/mouse.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/plugin/repeater/repeater.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/plugin/screenshot/screenshot.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/plugin/symbols/symbols.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/plugin/talon_draft_window/draft_window.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/plugin/talon_helpers/talon_helpers.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/plugin/text_navigation/text_navigation.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/edit/edit_mac.py",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/edit/edit.py",
+				"group": "Default"
 			}
-		]
+		],
+		"favorites.sortOrder": "ASC",
+		"favorites.groups": [
+			"Default",
+			"accessibility",
+			"test group"
+		],
+		"favorites.currentGroup": "Default"
 	}
 }

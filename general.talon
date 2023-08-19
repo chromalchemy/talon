@@ -1,12 +1,10 @@
+# not mode: sleep
+# -
 
 # tag: terminal
 
 #keys 
 (for | fore) (delete | dell): key(delete)
-
-# #homerow
-target: key(shift-f12)
-search target: key(cmd-shift-f12)
 
 copy it: key(cmd-c)
 paste it: key(cmd-v)
@@ -63,7 +61,7 @@ open sound panel:
 (win | window) (max | maximize): key(cmd-alt-shift-ctrl-up)
 
 pick (win | window) [spotlight]: key(ctrl-up)
-pick (win | window) grid]: key(cmd-alt-shift-ctrl-down)
+pick (win | window) grid: key(cmd-alt-shift-ctrl-down)
 pick (win | window) (ray | list): 
     key(cmd-space)
     insert("switch windows")
@@ -179,4 +177,54 @@ select or: key(cmd-a)
 
 # [open] (cursorless | cursor less) (reference | cheat sheet | cheatsheet | wacky): user.open_url("file:///Users/ryan/.cursorless/cheatsheet.html")
 
- 
+paste there: key(cmd-v)
+
+(toggle | enter | leave | exit) [system] dark mode:
+    key(cmd-space)
+    sleep(100ms)
+    insert("toggle system appearance")
+    sleep(100ms)
+    key(enter)
+
+#todo: get this working in finder
+
+# end drag | drag end: user.mouse_drag_end()
+option drag:
+    user.mouse_drag(0)
+    sleep(300ms)
+    key(alt:down)
+    user.grid_close()
+    
+hold option: key(alt:down)
+    
+shift drag:
+    key(shift:down)
+    user.mouse_drag(0)
+    user.grid_close()
+
+command drag:
+    key(cmd:down)
+    user.mouse_drag(0)
+    user.grid_close()
+    
+# repeat command key    
+key(cmd-ctrl-alt-shift-q) : core.repeat_command(1)
+
+# talon sleep
+key(cmd-ctrl-alt-shift-x): speech.disable()
+
+Open linear mouse [panel]: 
+    key(cmd-space)
+    # sleep(100ms)
+    insert("linearmouse")
+    sleep(100ms)
+    key(enter)
+
+
+#break cursorless commands, to say n in same
+then: skip()
+
+#no op prefix commant to prime dictation to recieve next text without Clipping first  syllable
+^now: skip()
+
+

@@ -1,0 +1,3 @@
+{:deps {com.lambdaisland/ornament {:mvn/version "0.9.87"}
+        garden/garden {:mvn/version "1.3.10"}}
+ :aliases {}}

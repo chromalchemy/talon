@@ -151,5 +151,16 @@ set [transform] (anchor | origin) [point]:
     insert(mynum)
     key(enter)
     
-
+#doesnt work for dragging transform
+drag copy:
+    key(alt:down)
+    user.mouse_drag(0)
+    # # close the mouse grid
+    user.grid_close()
+    
+drag [current] layer:
+    key(cmd:down)
+    user.mouse_drag(0)
+    # # close the mouse grid
+    user.grid_close()
     

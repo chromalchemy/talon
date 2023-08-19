@@ -120,9 +120,16 @@ page (refs | references) [panel]:
     insert("@")
 
 zoom (block  | down): key(cmd-.)
-#not working
-zoom (parent |  up): key(cmd-shift-ctrl-alt-8)
-        
+zoom (parent |  up): key(cmd-shift-ctrl-alt-u)
+
+go parent [block]: key(ctrl-alt-u)
+    # key(cmd-p)
+    # sleep(200ms)
+    # insert("go to parent block")
+    # sleep(200ms)
+    # key(enter)
+
+
 deep nav:key(alt-g)
 
 ###sidebar
@@ -170,21 +177,59 @@ open hotkeys:
 
 #search
 
+#top bar search
 search: key(cmd-u)
+
+#traditional page search
 search page: key(cmd-f)
 exit search: key(cmd-enter)
+
+#search+
 search advanced: key(ctrl-shift-p)
+
+#native block ref search
 search block refs: key(ctrl-shift-9)
 
-Open query builder: key(cmd-shift-ctrl-alt-8)
+#find and replace extension search page or workspace
+search workspace: key(ctrl-s)
+search (whole | entire) graph: 
+    key(cmd-p)
+    sleep(100ms)
+    insert("wgs")
+    sleep(300ms)
+    key(enter)
+
+#search pages block
+new search block:
+    edit.select_all()
+    sleep(100ms)
+    key(right)
+    key(enter)
+    sleep(100ms)
+    insert("{{{[[search]]}}}")
+    # sleep(100ms)
+    # key(escape)
+
+#native roam query
+# {{[[query]]: {and: [[ex-A]] {or: [[ex-B]] [[ex-C]]}}}}
+
+#query builder
+Open query (drawer | builder): key(cmd-shift-ctrl-alt-8)
+
+# open query drawer
+
+#roam portal search
+(go | open | search | toggle | show | hide) portal: key(cmd-ctrl-alt-shift-p)
+
+#search roam graph visualization
 
 #block refs
 
 copy [block] (ref | reference): key (cmd-shift-c)
 
 # todo: turn this into proper ordinal
-(choose | pick) (<digits> | that): 
-    key("down:{digits or 1}")
+(choose | pick) (<number_small> | that): 
+    key("down:{number_small or 1}")
     key(enter)
     key(space)
 
@@ -240,8 +285,8 @@ expand block:
 
 #working kind of inconsistanly
 #how to take a digit, do math on in, then use as key
-(expand | fold) all [blocks] <digits>: 
-    mynumber = digits + 1
+(expand | fold) all [blocks] <number_small>: 
+    mynumber = number_small + 1
     key(cmd-p)
     sleep(100ms)
     insert("wb expand/collapse block tree")
@@ -292,7 +337,7 @@ select all blocks: key(cmd-shift-a)
 
 #child block
 
-(new child block | child block | New child):
+(new child block | child block | New child | nuchal):
     #todo change to enter command
     edit.select_all()
       sleep(100ms)
@@ -348,14 +393,28 @@ new block back:
     # sleep(100ms)
     key(enter)
 
-(split | break) (child | right) [block]: 
-    #mouse_click(0)
+(split | break) here : 
+    mouse_click(0)
+    user.mouse_drag_end()
+    sleep(100ms)
+    key(enter)
+
+(split | break) (child | right) [block] here: 
+    mouse_click(0)
     # close the mouse grid if open
-    #user.grid_close()
+    user.grid_close()
     # End any open drags
     # Touch automatically ends left drags so this is for right drags specifically
-    #user.mouse_drag_end()
-    #sleep(100ms)
+    user.mouse_drag_end()
+    sleep(100ms)
+    key(enter)
+    sleep(100ms)
+    key(tab)
+    key(down)
+    key(shift-tab)
+    key(escape)
+
+(split | break) (child | right) [block]: 
     key(enter)
     sleep(100ms)
     key(tab)
@@ -450,18 +509,15 @@ paste child [block] raw:
     key(delete)
     edit.line_end()
 
-(h tag | hashtag) (auto | one | use | force) <user.text>:
+#why is this short circuiting  before completion
+(h tag | hashtag | hash tag ) (auto | one | use | force) <user.text>:
     insert("#")
     user.insert_formatted(text, "SLASH_SEPARATED")
     sleep(100ms)
     user.select_last_phrase()
     key(left delete)
-    sleep(100ms)
-    key(down enter)
-    sleep(100ms)
-    edit.word_right()
-    sleep(100ms)
-    key(space)
+    #todo use prase.right style fn
+    key(cmd-right space)
 
 kebab (h tag | hashtag) <user.text>:
     insert("#")
@@ -545,12 +601,97 @@ code block that: key(`:3 esc)
 
 #add components
 
-(add | insert) divider:
+(insert | (add | ad) | paste) divider:
+    insert("---")
+    key(enter)  
+
+new divider [block]:
     key(ctrl-e) 
     key(enter)
     sleep(100ms)
-    key(-:3 enter) 
+    insert("---")
+    key(esc:2) 
+
 
 # edit.paragraph_start()
 # edit.jump_line
 # edit.sentence_start
+
+
+
+# explicit tags
+
+make project: 
+    edit.select_all()
+    sleep(100ms)
+    key(right)
+    insert(" #project")
+    sleep(300ms)
+    key(enter)
+
+    
+#tabs extension
+
+pick page: key(cmd-ctrl-alt-shift-t)
+
+go page <number_small>:
+    spacesDown=number_small - 1  
+    key(cmd-ctrl-alt-shift-t)
+    sleep(300ms)
+    key(cmd-a delete)
+    sleep(100ms)
+    key("down:{spacesDown} enter")
+
+(choose | pick) page <number_small>:
+    spacesDown=number_small - 1  
+    key("down:{spacesDown} enter")
+
+go page <user.text>:
+    key(cmd-ctrl-alt-shift-t)
+    sleep(300ms)
+    key(cmd-a delete)
+    sleep(100ms)
+    insert(text)
+    sleep(200ms)
+    key(enter)
+
+# not canonical bc search is fuzz and filters char in middle of word    
+pick page <user.letter>:
+    key(cmd-ctrl-alt-shift-t)
+    sleep(300ms)
+    key(cmd-a delete)
+    sleep(100ms)
+    insert(letter)
+    
+open page in tab: 
+    key(ctrl:down)
+    mouse_click(0)
+    
+go (crown | top [of] [page]):
+    key(cmd-p)
+    sleep(100ms)
+    insert("wb jump to top of page")
+    sleep(100ms)
+    key(enter)    
+
+
+#not behaving consistently, assign keyboard shortcuts    
+(insert | new) top block:
+    key(cmd-p)
+    sleep(200ms)
+    insert("wb jump to top of page")
+    sleep(200ms)
+    key(enter)
+    sleep(200ms)
+    key(esc)
+    sleep(200ms)
+    key(right)
+    sleep(300ms)
+    key(cmd-p)
+    sleep(200ms)
+    insert("Insert block above")
+    sleep(300ms)
+    key(esc)
+    sleep(200ms)
+    key(right)
+    
