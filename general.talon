@@ -32,7 +32,36 @@ show (clip | clipboard | image | screengrab) [in] preview:
 
 #raycast 
 (raycast | ray cast): key(cmd-space)
+
 search (menu | menus): key(cmd-alt-shift-ctrl-l)
+
+run (copied | clipboard) in raycast:
+    key(cmd-space)
+    edit.paste()
+    sleep(100ms)
+    key(enter) 
+
+open path [in finder]:
+    key(cmd-space)
+    edit.paste()
+    sleep(100ms)
+    key(enter) 
+
+run [that] in raycast:
+    selectedText = edit.selected_text() 
+    key(cmd-space)
+    insert(selectedText)
+    sleep(100ms)
+    key(enter) 
+
+open that path [in finder]:
+    selectedText = edit.selected_text() 
+    key(cmd-space)
+    insert(selectedText)
+    sleep(100ms)
+    key(enter) 
+
+
 
 # finder
 show hidden folders: key(ctr-shift-period)
