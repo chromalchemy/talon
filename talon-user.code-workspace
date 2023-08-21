@@ -216,6 +216,30 @@
 			{
 				"filePath": "/Users/ryan/.talon/user/community/core/edit/edit.py",
 				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/lang/typescript",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/clojure.py",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/lang/javascript",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/keys/keys.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/keys/keys.py",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/tags/find_and_replace/find_and_replace.talon",
+				"group": "Default"
 			}
 		],
 		"favorites.sortOrder": "ASC",

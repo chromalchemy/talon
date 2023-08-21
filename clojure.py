@@ -1,52 +1,20 @@
-from talon import Context, Module, actions, app, imgui, registry, settings
-import re
-# This is obviously not "lisp" but clojure specific currently. That will change over time.
+from talon import Context, Module, actions, settings
 
 mod = Module()
 ctx = Context()
 ctx.matches = r"""
-mode: user.clojure
-mode: command
-and code.language: clojure
+tag: user.clojure
 """
 
-mod.tag("code_clojure", desc="Tag for enabling clojure-things")
+mod.list("clojure_core", desc="Clojure functions")
 
-def insert_plain(s) -> str:
-    return f"({s} )"
-
-mod.list('clojure_string', desc='Clojure string functions.')
-ctx.lists['self.clojure_string'] = {
-    	"blank": "blank?",
-    	"capitalize": "capitalize",
-    	"ends with": "ends-with?",
-    	"escape": "escape",
-    	"includes": "includes?",
-    	"index of": "index-of",
-    	"join": "join",
-    	"last index of": "last-index-of",
-    	"lower case": "lower-case",
-    	"re quote replacement": "re-quote-replacement",
-    	"replace": "replace",
-    	"replace first": "replace-first",
-    	"reverse": "reverse",
-    	"split": "split",
-    	"split lines": "split-lines",
-    	"starts with": "starts-with?",
-    	"trim": "trim",
-    	"trim newline": "trim-newline",
-    	"trim left": "triml",
-    	"trim right": "trimr",
-    	"upper case": "upper-case"
-}
-
-@mod.capture(rule="string {self.clojure_string}")
-def clj_string(m) -> str:
-    return insert_plain(m.clojure_string)
+@mod.capture(rule="{self.clojure_core}")
+def clojure_fn(m) -> str:
+    "One Clojure Function"
+    return str(m)
 
 
-mod.list('clojure_core', desc='Clojure core functions.')
-ctx.lists['self.clojure_core'] = {
+ctx.lists["self.clojure_core"] = {
     "asterisk": "*",
     "asterisk quote": "*'",
     "last result": "*1",
@@ -715,7 +683,60 @@ ctx.lists['self.clojure_core'] = {
     "zipmap": "zipmap",
 }
 
-@mod.capture(rule="core {self.clojure_core}")
-def clj_string(m) -> str:
-    return insert_plain(m.clojure_core)
+
+
+
+# mod.tag("code_clojure", desc="Tag for enabling clojure-things")
+
+
+# ctx.lists["user.clojure_string"] = {
+#     	"blank": "blank?",
+#     	"capitalize": "capitalize",
+#     	"ends with": "ends-with?",
+#     	"escape": "escape",
+#     	"includes": "includes?",
+#     	"index of": "index-of",
+#     	"join": "join",
+#     	"last index of": "last-index-of",
+#     	"lower case": "lower-case",
+#     	"re quote replacement": "re-quote-replacement",
+#     	"replace": "replace",
+#     	"replace first": "replace-first",
+#     	"reverse": "reverse",
+#     	"split": "split",
+#     	"split lines": "split-lines",
+#     	"starts with": "starts-with?",
+#     	"trim": "trim",
+#     	"trim newline": "trim-newline",
+#     	"trim left": "triml",
+#     	"trim right": "trimr",
+#     	"upper case": "upper-case"
+# }
+
+# @ctx.action_class("user")
+# class UserActions:
+#     # def code_state_return():
+#     #     actions.insert("")
+    
+#     def code_insert_is_not_null():
+#         actions.insert("some?")
+
+#     def code_state_if():
+#         actions.user.insert_between("(if", " )")
+    
+#     def code_insert_function(text: str, selection: str):
+#         text += f"({selection or ''})"
+#         actions.user.insert_between("(", " )")
+#         actions.user.paste(text)
+#         actions.edit.left()
+
+#     # def code_default_function(text: str):
+#     #     """Inserts function declaration without modifiers"""
+#     #     result = "function {}".format(
+#     #         actions.user.formatted_text(
+#     #             text, settings.get("user.code_private_function_formatter")
+#     #         )
+#     #     )
+
+#     #     actions.user.code_insert_function(result, None)
 
