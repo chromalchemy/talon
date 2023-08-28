@@ -36,6 +36,11 @@ function <user.clojure_fn>:
     key(delete)
     user.insert_between("({clojure_fn} ", ")")
 
+function <user.word>: 
+    key(delete)
+    user.insert_between("({word} ", ")")
+
+
 function it: 
     selectedText = edit.selected_text()
     key(delete)
