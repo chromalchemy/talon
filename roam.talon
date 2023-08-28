@@ -199,14 +199,14 @@ search (whole | entire) graph:
     sleep(300ms)
     key(enter)
 
-#search pages block
-new search block:
-    edit.select_all()
-    sleep(100ms)
-    key(right)
-    key(enter)
-    sleep(100ms)
-    insert("{{{[[search]]}}}")
+    #search pages block
+# new search block:
+#     edit.select_all()
+#     sleep(100ms)
+#     key(right)
+#     key(enter)
+#     sleep(100ms)
+#     insert("{{{[[search]]}}}")
     # sleep(100ms)
     # key(escape)
 
@@ -253,8 +253,8 @@ next block: key(ctrl-n)
     sleep(100ms)
     key(shift-tab)
 
-(fold | close | hide children) block: key(cmd-up)
-(unfold | open | show children) block: key(cmd-down)
+(fold | close | hide (children | kids)) block: key(cmd-up)
+(unfold | open | show (children | kids)) block: key(cmd-down)
 
 (collapse | fold) tree: 
     key(cmd-p)
@@ -337,7 +337,7 @@ select all blocks: key(cmd-shift-a)
 
 #child block
 
-(new child block | child block | New child | nuchal):
+(insert | new | add | put) (child | kid) [block] | (child | kid) block | nuchal:
     #todo change to enter command
     edit.select_all()
       sleep(100ms)
@@ -345,11 +345,6 @@ select all blocks: key(cmd-shift-a)
     key(enter)
     key(tab)
 
-new block:
-    edit.select_all()
-    sleep(100ms)
-    key(right)
-    key(enter)
     
 #todo: copy imlementation from block all the way back
 new base block:
@@ -374,8 +369,8 @@ nest here:
     key(escape)
 
 # Insert block above or below, skips children   
-(new block up | insert block above): key(cmd-shift-i)
-(new block down | insert block below): key(cmd-shift-k)
+(new | insert) block (up | above): key(cmd-shift-i)
+[(new | insert)] block [(down | below)]: key(cmd-shift-k)
 new block back: 
     key(cmd-shift-k)
     sleep(500ms)
@@ -459,7 +454,7 @@ paste [new] block:
     sleep(100ms)
     key(esc)
 
-paste [new] child [block]:
+paste [new] (child | kid) [block]:
     edit.select_all()
     sleep(100ms)
     key(right)
@@ -470,7 +465,7 @@ paste [new] child [block]:
     sleep(100ms)
     key(esc)
 
-paste child [block] raw:
+paste (child | kid) [block] raw:
     edit.select_all()
     sleep(100ms)
     key(right)
