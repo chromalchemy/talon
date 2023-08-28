@@ -42,7 +42,10 @@ deselect: key(cmd-d)
 (brush | brushy) [(s | size)] down [<user.number_string>]: key("[:{number_string or 1}")
 (brush | brushy) [(s | size)] up [<user.number_string>]: key("]:{number_string or 1}")
 brush [tool]: key(b)
-[other | next] brush [tool]: key(shift-b)
+(other | next) brush [tool]: key(shift-b)
+brush (next | last | prev): key(shift-b)
+
+rotate [tool]: key(r)
 
 flow <user.number_string>: key("ctrl-shift-{number_string}")
     
@@ -64,6 +67,8 @@ paste layer style: key(cmd-ctrl-v)
 move group [tool]: key(shift-f19)
 move layer [tool]: key(shift-cmd-f19)
 move [tool]: key(v)
+move (next | last | prev) :key(shift-v)
+
 Text [tool]: key(t)
 
 (show | hide) layer:  key(cmd-,)
@@ -141,7 +146,7 @@ set [transform] (anchor | origin) [point]:
     insert(number_string)
     key(enter)
 
-[set] tracking (negative | negg) [<user.number_string>]: 
+[set] tracking (negative | neg) [<user.number_string>]: 
     mouse_move(914.6171875, 186.5703125)
     sleep(3300ms)
     mouse_click(0)
@@ -164,3 +169,26 @@ drag [current] layer:
     # # close the mouse grid
     user.grid_close()
     
+
+(modal | mode) color picker:
+    key(cmd:down alt:down ctrl:down)
+    # user.mouse_drag(0)
+
+pick color: key(n)
+
+^okay$: key(enter)
+
+#todo: not working right, mouse doesnt click
+(choose | take ) color:
+    # mouse.click(0)
+    # sleep(100ms)
+    key(enter)
+    
+# these drags dont work in photoshop
+
+swap colors: key(x)
+default colors: key(d)
+
+(toggle | show | hide) quick mask: key(q)
+
+eraser [tool]: key(e)
