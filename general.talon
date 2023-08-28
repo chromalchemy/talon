@@ -166,30 +166,28 @@ open [that] [(code | line)] [as] link [in code]:
     key(enter)
 
 
-(go | show | open) (photoshop | ps | pee ess | photo ):
-    key(cmd-space)
-    insert("photoshop beta")
-    key(enter)
+# (go | show | open) (photoshop | ps | pee ess | photo ):
+#     key(cmd-space)
+#     insert("photoshop beta")
+#     key(enter)
 
-(go | show | open) (roam | notes | note | rome):
-    key(cmd-space)
-    insert("roam research")
-    key(enter)
+# (go | show | open) (roam | notes | note | rome):
+#     key(cmd-space)
+#     insert("roam research")
+#     key(enter)
     
 (go | show | open) (chrome | browse | browser):
-    key(cmd-space)
-    insert("google chrome")
-    key(enter)
+    user.switcher_focus("Chrome")
     
-(go | show | open) (finder | file manager):
-    key(cmd-space)
-    insert("finder")
-    key(enter)
+# (go | show | open) (finder | file manager):
+#     key(cmd-space)
+#     insert("finder")
+#     key(enter)
     
-(go | show | open) (ide | code | editor | vscode | vs code):
-    key(cmd-space)
-    insert("visual studio code")
-    key(enter)
+# (go | show | open) (ide | code | editor | vscode | vs code):
+#     key(cmd-space)
+#     insert("visual studio code")
+#     key(enter)
     
 
 #cursorless
@@ -256,4 +254,71 @@ then: skip()
 #no op prefix commant to prime dictation to recieve next text without Clipping first  syllable
 ^now: skip()
 
+
+
+#roam raycast 
+(note | roam | rome) capture: 
+    key(cmd-ctrl-alt-shift-;)
+    # key(cmd-space)
+    # insert("roam quick capture")
+    # sleep(100ms)
+    # key(enter)
+
+
+#input focus fails randomly
+(note | no to | not to | don't | roam | rome) capture (that | it | then): 
+    edit.copy()
+    sleep(100ms)
+    key(cmd-ctrl-alt-shift-;)
+    sleep(200ms)
+    edit.paste()
+
+(ok | confirm) note:
+    key(cmd-enter)
+    sleep(100ms)
+    key(escape:2)
+
+dedent: key(shift-tab)
+
+#------------------ no click edits
+#Is this implemented anywhere else?
+
+#todo: Implement option clicks
+
+take (Pointer | point):
+    key(shift:down)
+    mouse_click(0)
+    
+(chuck | crop | clear) (Pointer | point):
+    key(shift:down)
+    mouse_click(0)
+    edit.delete()
+(chuck | crop | clear) (Pointer | point) force:
+    key(shift:down)
+    mouse_click(0)
+    edit.delete()
+    key(escape)    
+
+(copy) (Pointer | point):
+    key(shift:down)
+    mouse_click(0)
+    edit.copy()
+(copy) (Pointer | point) force:
+    key(shift:down)
+    mouse_click(0)
+    edit.copy()
+    key(escape)
+    # cursor go back action
+
+
+(cut) (Pointer | point):
+    key(shift:down)
+    mouse_click(0)
+    edit.cut()
+
+# Make version that leaves the pasted text selected    
+(paste) (Pointer | point):
+    key(shift:down)
+    mouse_click(0)
+    edit.paste()
 
