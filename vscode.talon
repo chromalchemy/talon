@@ -1,6 +1,35 @@
 app.name: Code
 -
 
+clone string:
+    s = edit.selected_text()
+    insert("[{s}")
+    key(delete space)
+    sleep(100ms)
+    insert("{s}")
+    sleep(100ms)
+    # key(delete)
+    
+
+(add | ad) post:
+    s = edit.selected_text()
+    insert("[{s}")
+    key(delete space)
+    sleep(100ms)
+    insert("{:post \"")
+    
+    
+(add | ad) pre:
+    s = edit.selected_text()
+    insert("[{s}")
+    key(delete space)
+    sleep(100ms)
+    insert("{:pre \"")
+    
+    
+    
+
+
 #talon edit fns
 sleep action <user.number_string>:
     a = "sleep(" + number_string
@@ -20,20 +49,24 @@ sleep action <user.number_string>:
     insert("sleep(ms)")
     key(left:3)
 
+[(add | new)] insert action:
+    insert("insert(\"\")")
+    key(left:2)
+
 [(add | new)] code action:
     insert("user.vscode(\"\")")
     key(left:2)
 
+    
 paste code action:
     # mimic("take tail")
     # sleep(500ms)
     mimic("new code action")
     sleep(500ms)
-    mimic("paste that")
-
+    edit.past()
+    
 insert hyper key [token]:  insert("cmd-ctrl-alt-shift-")
 
-    
 #general editor stuff
 
 choose [color] theme: user.menu_select('Code|Settings…|Theme|Color Theme [⌘K ⌘T]')
@@ -50,7 +83,7 @@ choose [color] theme: user.menu_select('Code|Settings…|Theme|Color Theme [⌘K
 
 #bars
 
-(show | reveal) [file] [in] (explore | explorer): user.vscode("workbench.files.action.showActiveFileInExplorer")
+(show | reveal) [file] [in] (explore | explorer) | dock reveal: user.vscode("workbench.files.action.showActiveFileInExplorer")
     
 collapse (explore | Explorer) [(bar | view)]: user.vscode("workbench.files.action.collapseExplorerFolders")
 
@@ -82,11 +115,11 @@ kill (line | lines) | killing | k line | cline: user.vscode("editor.action.delet
 
 [new] search to side: user.vscode("search.action.openNewEditorToSide")
 
-collapse search results: user.vscode("search.action.collapseSearchResults")
+(collapse | fold) search [results]: user.vscode("search.action.collapseSearchResults")
 
 clear search results: user.vscode("search.action.clearSearchResults")
     
-find file [<user.text>]: 
+(find | fine) file [<user.text>]: 
     key(cmd-p)
     sleep(100ms)
     insert(text)
@@ -282,7 +315,7 @@ Zoom in font: user.vscode("editor.action.fontZoomIn")
 reset font (zoom | size) | zoom font (reset | default): user.vscode("editor.action.fontZoomReset")
 
 pick code (window | winner | win): user.vscode("workbench.action.switchWindow")
-swap code (window | winner | win) | code (window | winner | win) swap: 
+(swap code | code swap) (window | winner | win) | code (window | winner | win) swap: 
     user.vscode("workbench.action.switchWindow")
     key(enter)
 
@@ -339,7 +372,7 @@ split editor to below: user.vscode("workbench.action.splitEditorToBelowGroup")
 
 (toggle | show | hide ) mini map: user.vscode("editor.action.toggleMinimap")
 
-(show | view) (tokens | scopes | scope): user.vscode("editor.action.inspectTMScopes")
+(show | view | visualize) (tokens | scopes | scope): user.vscode("editor.action.inspectTMScopes")
 
 (toggle | show | hide ) (cursors | curses): user.vscode("cursorless.toggleDecorations")
 
@@ -411,3 +444,34 @@ tree git:
     user.run_rpc_command("talon-filetree.toggleGitIgnoredFiles")
 tree current:
     user.run_rpc_command("talon-filetree.revealCurrentFile")
+
+
+#which key menu
+(which | witch) key: user.vscode("whichkey.show")
+
+copy relative path: user.vscode("copyRelativeFilePath")
+copy path: user.vscode("copyFilePath")
+
+
+#pokey stuff
+symbol last: user.vscode("gotoNextPreviousMember.previousMember")
+symbol next: user.vscode("gotoNextPreviousMember.nextMember")
+
+problem show: user.vscode("workbench.panel.markers.view.focus")
+
+term show:
+    user.vscode("workbench.action.terminal.focus")
+    sleep(250ms)
+
+show shortcuts: user.vscode("workbench.action.openGlobalKeybindings")
+show shortcuts json: user.vscode("workbench.action.openGlobalKeybindingsFile")
+show snippets: user.vscode("workbench.action.openSnippets")
+
+
+break <user.cursorless_target>:
+    user.cursorless_command("setSelectionBefore", cursorless_target)
+    user.vscode("hideSuggestWidget")
+    key("enter")
+break:
+    user.vscode("hideSuggestWidget")
+    key("enter")
