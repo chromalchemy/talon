@@ -1,0 +1,1033 @@
+# Query: search
+# Flags: IgnoreExcludeSettings
+# Including: *.talon
+# ContextLines: 1
+
+421 results - 126 files
+
+user • gb.talon:
+   8  
+   9: search (bookmarks |  bookmark) [<user.text>]:
+  10      key(cmd-l)
+
+  20  
+  21: (search | open) (products | prods): user.open_url("https://store-7hstasnrjg.mybigcommerce.com/manage/products")
+  22  
+
+user • general.talon:
+   35  
+   36: search (menu | menus): key(cmd-alt-shift-ctrl-l)
+   37  
+
+  120  #     sleep(100ms)
+  121: #     insert("search files")
+  122  #     sleep(100ms)
+
+  175      key(cmd-space)
+  176:     insert("roam research")
+  177      key(enter)
+
+user • intellij.talon:
+  108  
+  109: (open | search) file: key(cmd-shift-o)
+  110  
+
+user • photoshop.talon:
+  89  
+  90: search menu <user.text>:
+  91      key(cmd-alt-shift-ctrl-l)
+
+user • ps-menus.talon:
+  275  Image Assets: user.menu_select('File|Generate|Image Assets')
+  276: Search Adobe Stock: user.menu_select('File|Search Adobe Stock...')
+  277: Search Adobe Express Templates: user.menu_select('File|Search Adobe Express Templates...')
+  278  Place Embedded: user.menu_select('File|Place Embedded...')
+
+  404  Clear: user.menu_select('Edit|Clear')
+  405: Search: user.menu_select('Edit|Search')
+  406  Check Spelling: user.menu_select('Edit|Check Spelling...')
+
+user • roam.talon:
+    1: app.name: Roam Research 
+    2  -
+
+  177  
+  178: #search
+  179  
+  180: #top bar search
+  181: search: key(cmd-u)
+  182  
+  183: #traditional page search
+  184: search page: key(cmd-f)
+  185: exit search: key(cmd-enter)
+  186  
+  187: #search+
+  188: search advanced: key(ctrl-shift-p)
+  189  
+  190: #native block ref search
+  191: search block refs: key(ctrl-shift-9)
+  192  
+  193: #find and replace extension search page or workspace
+  194: search workspace: key(ctrl-s)
+  195: search (whole | entire) graph: 
+  196      key(cmd-p)
+
+  201  
+  202: #search pages block
+  203: new search block:
+  204      edit.select_all()
+
+  208      sleep(100ms)
+  209:     insert("{{{[[search]]}}}")
+  210      # sleep(100ms)
+
+  220  
+  221: #roam portal search
+  222: (go | open | search | toggle | show | hide) portal: key(cmd-ctrl-alt-shift-p)
+  223  
+  224: #search roam graph visualization
+  225  
+
+  652  
+  653: # not canonical bc search is fuzz and filters char in middle of word    
+  654  pick page <user.letter>:
+
+user • vscode.talon:
+   81  
+   82: #search 
+   83  
+   84: [new] search to side: user.vscode("search.action.openNewEditorToSide")
+   85  
+   86: (collapse | fold) search [results]: user.vscode("search.action.collapseSearchResults")
+   87  
+   88: clear search results: user.vscode("search.action.clearSearchResults")
+   89      
+
+   95  # find text  (deprecate for knausj?)
+   96: (find [text] [in file] | search file): key(cmd-f)
+   97: (search | find) in files:   user.vscode("workbench.action.findInFiles")
+   98: (search | find) [in] folder:  key(shift-alt-f)
+   99  # key(shift-cmd-e) # not reliable toggles back and forth
+  100: (search | find) that in folder:
+  101      key(shift-alt-f)
+
+  103      key(cmd-v)
+  104: (search | find in) in folder <user.text>:
+  105      key(shift-alt-f)
+
+  108  
+  109: [(search | find) and] replace [text]: key(cmd-alt-f)
+  110: [(search | find) and] that:
+  111      key(cmd-alt-f)
+
+  113      key(cmd-v)
+  114: [(search | find) and] replace <user.text>:
+  115      key(cmd-alt-f)
+
+  176  
+  177: (search bookmarks | bookmarks list) [<user.text>]:
+  178      key(cmd-shift-p)
+
+  183  
+  184: (search all bookmarks | all bookmarks list) [<user.text>]:
+  185      key(cmd-shift-p)
+
+user • community/apps/anaconda/anaconda.talon:
+  24  anaconda run: "conda run "
+  25: anaconda search: "conda search "
+  26  anaconda update: "conda update "
+
+user • community/apps/chrome/chrome.talon:
+   7  
+   8: tab (search | list): user.chrome_mod("shift-a")
+   9  
+  10: tab (search | list) <user.text>$:
+  11      user.chrome_mod("shift-a")
+
+user • community/apps/eclipse/eclipse.talon:
+  43      key(b)
+  44: panel search:
+  45      key(alt-shift-q)
+
+user • community/apps/emacs/emacs.talon:
+  192  
+  193: search back: user.emacs("isearch-backward")
+  194: (search regex | regex search): user.emacs("isearch-forward-regexp")
+  195: (search regex | regex search) back: user.emacs("isearch-backward-regexp")
+  196  replace: user.emacs("query-replace")
+  197  replace regex | regex replace: user.emacs("query-replace-regexp")
+  198: # These start a word/symbol-search or toggle an existing search's mode.
+  199: search [toggle] words: user.emacs("isearch-forward-word")
+  200: search [toggle] symbol: user.emacs("isearch-forward-symbol")
+  201: # These keybindings are only active in isearch-mode.
+  202: search edit: user.emacs_meta("e")
+  203: search toggle case [fold | sensitive]: user.emacs_meta("c")
+  204: search toggle regex: user.emacs_meta("r")
+  205  
+
+  293  project [run] eshell: user.emacs("projectile-run-eshell")
+  294: project search: user.emacs("project-search")
+  295  project vc dir: user.emacs("project-vc-dir")
+
+user • community/apps/finder/finder.talon:
+  7  options: key(cmd-j)
+  8: search: key(cmd-alt-f)
+  9  
+
+user • community/apps/firefox/firefox.talon:
+  5  
+  6: tab search:
+  7      browser.focus_address()
+  8      insert("% ")
+  9: tab search <user.text>$:
+  10      browser.focus_address()
+
+user • community/apps/github/github_web.talon:
+   6  # site wide shortcuts
+   7: focus search: key(s)
+   8  go to notifications: insert("gn")
+
+  38  (issue create | create [an] issue): key(c)
+  39: search (issues | [pull] requests): key(/)
+  40  (filter by | edit) labels: key(l)
+
+user • community/apps/gitlab/gitlab.talon:
+  14  go to snippets [page]: key(shift-s)
+  15: search page: key(s)
+  16  go to issues [page]: key(shift-i)
+
+  28  go [to] project files [list]: insert("gf")
+  29: go [to] project file search [page]: key(t)
+  30  go [to] project (commit | commits) [list]: insert("gc")
+
+user • community/apps/jetbrains/jetbrains.talon:
+  46  go forward: user.idea("action Forward")
+  47: # Search
+  48: find (everywhere | all): user.idea("action SearchEverywhere")
+  49  find (everywhere | all) <user.text> [over]:
+  50:     user.idea("action SearchEverywhere")
+  51      sleep(500ms)
+  52      insert(text)
+  53: (search | find) class: user.idea("action GotoClass")
+  54: (search | find) file: user.idea("action GotoFile")
+  55: (search | find) path: user.idea("action FindInPath")
+  56: (search | find) symbol: user.idea("action GotoSymbol")
+  57: (search | find) symbol <user.text>$:
+  58      user.idea("action GotoSymbol")
+
+user • community/apps/outlook/outlook_web.talon:
+  49      key(s)
+  50: search [email]: key(alt-q)
+  51  show help: key(?)
+
+user • community/apps/protonmail/protonmail.talon:
+  6  open help: key(?)
+  7: [focus] search: key(/)
+  8  confirm active: key(enter)
+
+user • community/apps/signal/signal_linux.talon:
+  14  open conversation menu: key("ctrl-shift-l")
+  15: search: key("ctrl-f")
+  16: search chat: key("ctrl-shift-f")
+  17  focus (chat | composer): key("ctrl-shift-t")
+
+user • community/apps/teams/teams_mac.talon:
+  7  show shortcuts: key(super-.)
+  8: [go] [to] search: key(super-e)
+  9  show commands: key(super-/)
+
+user • community/apps/teams/teams.talon:
+  10  show shortcuts: key(ctrl-.)
+  11: [go] [to] search: key(ctrl-e)
+  12  show commands: key(ctrl-/)
+
+user • community/apps/twitter/twitter.talon:
+  27  new direct message: key(m)
+  28: search: key(/)
+  29  like message: key(l)
+
+user • community/apps/vscode/vscode.talon:
+  22  bar run: user.vscode("workbench.view.debug")
+  23: bar search: user.vscode("workbench.view.search")
+  24  bar source: user.vscode("workbench.view.scm")
+
+  27  
+  28: # Symbol search
+  29  symbol hunt [<user.text>]:
+
+user • community/core/edit/edit.talon:
+  5  
+  6: # Searching
+  7  find it: edit.find()
+
+user • community/core/help/help.talon:
+  12  help active$: user.help_context_enabled()
+  13: help search <user.text>$: user.help_search(text)
+  14  help context {user.help_contexts}$: user.help_selected_context(help_contexts)
+  15: help help: user.help_search("help")
+  16  help scope$: user.help_scope_toggle()
+
+user • community/core/websites_and_search_engines/websites_and_search_engines.talon:
+   4  
+   5: {user.search_engine} hunt <user.text>$:
+   6:     user.search_with_search_engine(search_engine, user.text)
+   7: {user.search_engine} (that | this):
+   8      text = edit.selected_text()
+   9:     user.search_with_search_engine(search_engine, text)
+  10: {user.search_engine} paste: user.search_with_search_engine(search_engine, clip.text())
+
+user • community/lang/tags/functions.talon:
+  6  # The default action implementation looks for the token combination on the left
+  7: # (funky is added here for searchability) and calls the function on the right:
+  8  #
+
+user • community/plugin/text_navigation/text_navigation.talon:
+  21  #
+  22: # We can search several lines (default 10) above or below the cursor:
+  23  #
+
+  67  #   - "word" or "big" or "small"
+  68: #   - "phrase <some text to search for>"
+  69: #   Specifies the target to search for/navigate to.
+  70  
+
+user • community/tags/messaging/messaging.talon:
+  13  ([channel] unread next | goneck): user.messaging_unread_next()
+  14: go (find | search): user.messaging_open_search()
+  15  mark (all | workspace | server) read: user.messaging_mark_workspace_read()
+
+user • community/tags/snippets/snippets.talon:
+  3  snip {user.snippets}: user.snippet_insert(user.snippets)
+  4: snip hunt <user.text>: user.snippet_search(user.text)
+  5: snip hunt: user.snippet_search("")
+  6  snip create: user.snippet_create()
+
+user • community/tags/terminal/terminal.talon:
+  13  run last: user.terminal_run_last()
+  14: rerun [<user.text>]: user.terminal_rerun_search(text or "")
+  15: rerun search: user.terminal_rerun_search("")
+  16  kill all: user.terminal_kill_all()
+
+user • homerow/homerow_dictation.talon:
+  3  -
+  4: # Homerow (with search + labels enabled)
+  5: ^acts [<user.text>]: user.homerow_search("{text or ''}")
+
+user • homerow/homerow_search.talon:
+  1: tag: user.homerow_search
+  2  -
+
+user • homerow/homerow.talon:
+  29  target: key(shift-f12)
+  30: # search target: key(cmd-shift-f12)
+  31  
+  32: # Homerow (with search + labels enabled)
+  33: ^ax [<user.text>]: user.homerow_search("{text or ''}")
+
+repos • AdmiralBumbleBee_Talon/vim/vim.talon:
+  103  
+  104: # Search
+  105  
+  106: search:
+  107      user.normal_command("/")
+  108  
+  109: search under cursor:
+  110      user.normal_command("*")
+  111  
+  112: search word under cursor:
+  113      user.normal_command("#")
+  114  
+  115: search selected:
+  116      key(y)
+
+  121  
+  122: edit search:
+  123      key(q)
+
+  125  
+  126: search back:
+  127      user.normal_command("?")
+
+  191  
+  192: #select last search|match:
+  193  #    user.normal("g n")
+
+repos • AdmiralBumbleBee_Talon/vimium/vimium.talon:
+  40  
+  41: search:
+  42      key(/)
+
+  84      key(X)
+  85: search tabs:
+  86      key(T)
+
+repos • andreas-talon/apps/browser/firefox.talon:
+   7  # Tabs
+   8: tab search:
+   9      browser.focus_address()
+  10      "% "
+  11: tab search <user.text>$:
+  12      browser.focus_address()
+
+repos • andreas-talon/apps/browser/search_engine.talon:
+   1: search for <user.text>$:
+   2:     user.browser_search(text)
+   3  
+   4: search for (this | dis | is):
+   5:     user.browser_search_selected()
+   6  
+   7  define word <user.word>$:
+   8:     user.browser_search("https://www.merriam-webster.com/dictionary/{word}")
+   9  
+  10  define phrase <user.text>$:
+  11:     user.browser_search("https://www.merriam-webster.com/dictionary/{text}")
+
+repos • andreas-talon/apps/vscode/cursorless.talon:
+  61  
+  62: search for <user.cursorless_target>:
+  63      user.c_browser_open_target(cursorless_target)
+
+repos • andreas-talon/apps/vscode/vscode.talon:
+   62  bar debug:                  user.vscode("workbench.view.debug")
+   63: bar search:                 user.vscode("workbench.view.search")
+   64  bar source:                 user.vscode("workbench.view.scm")
+
+  257  copy command id:            user.copy_command_id()
+  258: scout again:                user.vscode("rerunSearchEditorSearch")
+  259  generate range [from <number_small>]:
+
+repos • andreas-talon/apps/web/slack.talon:
+   7  go unreads:                 key(ctrl-shift-a)
+   8: go threads:                 user.slack_open_search_result("Threads")
+   9  go [direct] messages:       key(ctrl-shift-k)
+  10  go (mentions | reactions):  key(ctrl-shift-m)
+  11: go drafts:                  user.slack_open_search_result("Drafts")
+  12  
+
+  16  pop channel <user.text>:
+  17:     user.slack_open_search_result(text)
+  18  
+
+repos • andreas-talon/core/talon_helpers/talon_helpers.talon:
+  16  talon print actions long:   print(" \n{user.talon_get_actions_long()}")
+  17: talon print <user.text> actions: print(" \n{user.talon_get_actions_search(text)}")
+  18  talon print list problems:  user.talon_print_list_problems()
+
+  27  talon copy actions long:    clip.set_text(user.talon_get_actions_long())
+  28: talon copy <user.text> actions: clip.set_text(user.talon_get_actions_search(text))
+  29  talon copy core:            clip.set_text(user.talon_get_core())
+
+repos • andreas-talon/plugins/help/help_search_open.talon:
+  1: tag: user.help_search
+  2  -
+  3  
+  4: ^search hide$:              user.help_search_hide()
+
+repos • andreas-talon/plugins/help/help.talon:
+  1  ^help active$:              user.help_active_toggle()
+  2: ^help search <user.text>$:  user.help_search(text)
+  3  ^help context {user.help_contexts}$: user.help_context(help_contexts)
+  4  
+  5: ^help <user.text> commands$: user.help_search_commands(text)
+  6: ^help <user.text> actions$: user.help_search_actions(text)
+  7  
+
+repos • community/apps/anaconda/anaconda.talon:
+  24  anaconda run: "conda run "
+  25: anaconda search: "conda search "
+  26  anaconda update: "conda update "
+
+repos • community/apps/chrome/chrome.talon:
+   7  
+   8: tab search: user.chrome_mod("shift-a")
+   9  
+  10: tab search <user.text>$:
+  11      user.chrome_mod("shift-a")
+
+repos • community/apps/eclipse/eclipse.talon:
+  43      key(b)
+  44: panel search:
+  45      key(alt-shift-q)
+
+repos • community/apps/emacs/emacs.talon:
+  192  
+  193: search back: user.emacs("isearch-backward")
+  194: (search regex | regex search): user.emacs("isearch-forward-regexp")
+  195: (search regex | regex search) back: user.emacs("isearch-backward-regexp")
+  196  replace: user.emacs("query-replace")
+  197  replace regex | regex replace: user.emacs("query-replace-regexp")
+  198: # These start a word/symbol-search or toggle an existing search's mode.
+  199: search [toggle] words: user.emacs("isearch-forward-word")
+  200: search [toggle] symbol: user.emacs("isearch-forward-symbol")
+  201: # These keybindings are only active in isearch-mode.
+  202: search edit: user.emacs_meta("e")
+  203: search toggle case [fold | sensitive]: user.emacs_meta("c")
+  204: search toggle regex: user.emacs_meta("r")
+  205  
+
+  293  project [run] eshell: user.emacs("projectile-run-eshell")
+  294: project search: user.emacs("project-search")
+  295  project vc dir: user.emacs("project-vc-dir")
+
+repos • community/apps/finder/finder.talon:
+  7  options: key(cmd-j)
+  8: search: key(cmd-alt-f)
+  9  
+
+repos • community/apps/firefox/firefox.talon:
+  5  
+  6: tab search:
+  7      browser.focus_address()
+  8      insert("% ")
+  9: tab search <user.text>$:
+  10      browser.focus_address()
+
+repos • community/apps/github/github_web.talon:
+   6  # site wide shortcuts
+   7: focus search: key(s)
+   8  go to notifications: insert("gn")
+
+  38  (issue create | create [an] issue): key(c)
+  39: search (issues | [pull] requests): key(/)
+  40  (filter by | edit) labels: key(l)
+
+repos • community/apps/gitlab/gitlab.talon:
+  14  go to snippets [page]: key(shift-s)
+  15: search page: key(s)
+  16  go to issues [page]: key(shift-i)
+
+  28  go [to] project files [list]: insert("gf")
+  29: go [to] project file search [page]: key(t)
+  30  go [to] project (commit | commits) [list]: insert("gc")
+
+repos • community/apps/jetbrains/jetbrains.talon:
+  46  go forward: user.idea("action Forward")
+  47: # Search
+  48: find (everywhere | all): user.idea("action SearchEverywhere")
+  49  find (everywhere | all) <user.text> [over]:
+  50:     user.idea("action SearchEverywhere")
+  51      sleep(500ms)
+  52      insert(text)
+  53: (search | find) class: user.idea("action GotoClass")
+  54: (search | find) file: user.idea("action GotoFile")
+  55: (search | find) path: user.idea("action FindInPath")
+  56: (search | find) symbol: user.idea("action GotoSymbol")
+  57: (search | find) symbol <user.text>$:
+  58      user.idea("action GotoSymbol")
+
+repos • community/apps/outlook/outlook_web.talon:
+  49      key(s)
+  50: search [email]: key(alt-q)
+  51  show help: key(?)
+
+repos • community/apps/protonmail/protonmail.talon:
+  6  open help: key(?)
+  7: [focus] search: key(/)
+  8  confirm active: key(enter)
+
+repos • community/apps/signal/signal_linux.talon:
+  14  open conversation menu: key("ctrl-shift-l")
+  15: search: key("ctrl-f")
+  16: search chat: key("ctrl-shift-f")
+  17  focus (chat | composer): key("ctrl-shift-t")
+
+repos • community/apps/teams/teams_mac.talon:
+  7  show shortcuts: key(super-.)
+  8: [go] [to] search: key(super-e)
+  9  show commands: key(super-/)
+
+repos • community/apps/teams/teams.talon:
+  10  show shortcuts: key(ctrl-.)
+  11: [go] [to] search: key(ctrl-e)
+  12  show commands: key(ctrl-/)
+
+repos • community/apps/twitter/twitter.talon:
+  27  new direct message: key(m)
+  28: search: key(/)
+  29  like message: key(l)
+
+repos • community/apps/vscode/vscode.talon:
+  22  bar run: user.vscode("workbench.view.debug")
+  23: bar search: user.vscode("workbench.view.search")
+  24  bar source: user.vscode("workbench.view.scm")
+
+  27  
+  28: # Symbol search
+  29  symbol hunt [<user.text>]:
+
+repos • community/core/edit/edit.talon:
+  5  
+  6: # Searching
+  7  find it: edit.find()
+
+repos • community/core/help/help.talon:
+  12  help active$: user.help_context_enabled()
+  13: help search <user.text>$: user.help_search(text)
+  14  help context {user.help_contexts}$: user.help_selected_context(help_contexts)
+  15: help help: user.help_search("help")
+  16  help scope$: user.help_scope_toggle()
+
+repos • community/core/websites_and_search_engines/websites_and_search_engines.talon:
+   4  
+   5: {user.search_engine} hunt <user.text>$:
+   6:     user.search_with_search_engine(search_engine, user.text)
+   7: {user.search_engine} (that | this):
+   8      text = edit.selected_text()
+   9:     user.search_with_search_engine(search_engine, text)
+  10: {user.search_engine} paste: user.search_with_search_engine(search_engine, clip.text())
+
+repos • community/lang/tags/functions.talon:
+  6  # The default action implementation looks for the token combination on the left
+  7: # (funky is added here for searchability) and calls the function on the right:
+  8  #
+
+repos • community/plugin/text_navigation/text_navigation.talon:
+  21  #
+  22: # We can search several lines (default 10) above or below the cursor:
+  23  #
+
+  67  #   - "word" or "big" or "small"
+  68: #   - "phrase <some text to search for>"
+  69: #   Specifies the target to search for/navigate to.
+  70  
+
+repos • community/tags/messaging/messaging.talon:
+  13  ([channel] unread next | goneck): user.messaging_unread_next()
+  14: go (find | search): user.messaging_open_search()
+  15  mark (all | workspace | server) read: user.messaging_mark_workspace_read()
+
+repos • community/tags/snippets/snippets.talon:
+  3  snip {user.snippets}: user.snippet_insert(user.snippets)
+  4: snip hunt <user.text>: user.snippet_search(user.text)
+  5: snip hunt: user.snippet_search("")
+  6  snip create: user.snippet_create()
+
+repos • community/tags/terminal/terminal.talon:
+  13  run last: user.terminal_run_last()
+  14: rerun [<user.text>]: user.terminal_rerun_search(text or "")
+  15: rerun search: user.terminal_rerun_search("")
+  16  kill all: user.terminal_kill_all()
+
+repos • nriley/knausj_talon/apps/1password/1password_global.talon:
+  4  password show: user.password_show()
+  5: password search <user.text>: user.password_search(text)
+
+repos • nriley/knausj_talon/apps/anaconda/anaconda.talon:
+  24  anaconda run: "conda run "
+  25: anaconda search: "conda search "
+  26  anaconda update: "conda update "
+
+repos • nriley/knausj_talon/apps/chrome/chrome.talon:
+   7  
+   8: tab search: user.chrome_mod("shift-a")
+   9  
+  10: tab search <user.text>$:
+  11      user.chrome_mod("shift-a")
+
+repos • nriley/knausj_talon/apps/eclipse/eclipse.talon:
+  43      key(b)
+  44: panel search:
+  45      key(alt-shift-q)
+
+repos • nriley/knausj_talon/apps/emacs/emacs.talon:
+  192  
+  193: search back: user.emacs("isearch-backward")
+  194: (search regex | regex search): user.emacs("isearch-forward-regexp")
+  195: (search regex | regex search) back: user.emacs("isearch-backward-regexp")
+  196  replace: user.emacs("query-replace")
+  197  replace regex | regex replace: user.emacs("query-replace-regexp")
+  198: # These start a word/symbol-search or toggle an existing search's mode.
+  199: search [toggle] words: user.emacs("isearch-forward-word")
+  200: search [toggle] symbol: user.emacs("isearch-forward-symbol")
+  201: # These keybindings are only active in isearch-mode.
+  202: search edit: user.emacs_meta("e")
+  203: search toggle case [fold | sensitive]: user.emacs_meta("c")
+  204: search toggle regex: user.emacs_meta("r")
+  205  
+
+  293  project [run] eshell: user.emacs("projectile-run-eshell")
+  294: project search: user.emacs("project-search")
+  295  project vc dir: user.emacs("project-vc-dir")
+
+repos • nriley/knausj_talon/apps/fastscripts/fastscripts.talon:
+  2  -
+  3: script <user.text>: user.fastscripts_search(text)
+
+repos • nriley/knausj_talon/apps/finder/finder.talon:
+  8  inspector: key(cmd-alt-i)
+  9: search: key(cmd-alt-f)
+  10  toolbar: key(cmd-alt-t)
+
+repos • nriley/knausj_talon/apps/firefox/firefox.talon:
+  5  
+  6: tab search:
+  7      browser.focus_address()
+  8      insert("% ")
+  9: tab search <user.text>$:
+  10      browser.focus_address()
+
+repos • nriley/knausj_talon/apps/fluent_search/fluent_search.talon:
+   2  -
+   3: # Fluent Search provides equivalents to my common uses of
+   4: # LaunchBar, Contexts, Homerow and menu search on Mac.
+   5  
+
+   9  # -- Homerow
+  10: # Search in-app using Screen hotkey (displays labels; frontmost app)
+  11  ^ax$: key(alt-;)
+  12  
+  13: # Search using Screen hotkey (displays labels; screen 1 only)
+  14  ^ax screen$: key(ctrl-alt-;)
+
+  16  # -- LaunchBar
+  17: # Search hotkey (in fluent_search.py)
+  18: launch <user.text>: user.fluent_search("apps\t{text}")
+  19: launch brief {user.abbreviation}: user.fluent_search("apps\t{abbreviation}")
+  20: launch bar: user.fluent_search("")
+  21  
+  22: # Search using Processes hotkey
+  23  launch running: key(ctrl-alt-shift-space)
+
+  25  # -- Contexts
+  26: ^con [<user.text>]: user.fluent_search(text or "")
+  27  
+  28: # -- Menu search / Homerow
+  29: # In-app search hotkey
+  30  ^(ax|menu) [<user.text>]$:
+  31:     user.fluent_search_in_app(text or "", false)
+
+repos • nriley/knausj_talon/apps/github/github_web.talon:
+   6  # site wide shortcuts
+   7: focus search: key(s)
+   8  go to notifications: insert("gn")
+
+  38  (issue create | create [an] issue): key(c)
+  39: search (issues | [pull] requests): key(/)
+  40  (filter by | edit) labels: key(l)
+
+repos • nriley/knausj_talon/apps/gitlab/gitlab.talon:
+  14  go to snippets [page]: key(shift-s)
+  15: search page: key(s)
+  16  go to issues [page]: key(shift-i)
+
+  28  go [to] project files [list]: insert("gf")
+  29: go [to] project file search [page]: key(t)
+  30  go [to] project (commit | commits) [list]: insert("gc")
+
+repos • nriley/knausj_talon/apps/homerow/homerow_dictation.talon:
+  3  -
+  4: # Homerow (with search + labels enabled)
+  5: ^acts [<user.text>]: user.homerow_search("{text or ''}")
+
+repos • nriley/knausj_talon/apps/homerow/homerow_search.talon:
+  1: tag: user.homerow_search
+  2  -
+
+repos • nriley/knausj_talon/apps/homerow/homerow.talon:
+  3  -
+  4: # Homerow (with search + labels enabled)
+  5: ^ax [<user.text>]: user.homerow_search("{text or ''}")
+
+repos • nriley/knausj_talon/apps/jetbrains/jetbrains.talon:
+  46  go forward: user.idea("action Forward")
+  47: # Search
+  48: find (everywhere | all): user.idea("action SearchEverywhere")
+  49  find (everywhere | all) <user.text> [over]:
+  50:     user.idea("action SearchEverywhere")
+  51      sleep(500ms)
+  52      insert(text)
+  53: (search | find) class: user.idea("action GotoClass")
+  54: (search | find) file: user.idea("action GotoFile")
+  55: (search | find) path: user.idea("action FindInPath")
+  56: (search | find) symbol: user.idea("action GotoSymbol")
+  57: (search | find) symbol <user.text>$:
+  58      user.idea("action GotoSymbol")
+
+repos • nriley/knausj_talon/apps/launchbar/launchbar.talon:
+  11  
+  12: web search <phrase>: user.launchbar_action("Google", "{phrase}")
+  13  
+
+repos • nriley/knausj_talon/apps/outlook/outlook_web.talon:
+  49      key(s)
+  50: search [email]: key(alt-q)
+  51  show help: key(?)
+
+repos • nriley/knausj_talon/apps/protonmail/protonmail.talon:
+  6  open help: key(?)
+  7: [focus] search: key(/)
+  8  confirm active: key(enter)
+
+repos • nriley/knausj_talon/apps/signal/signal_linux.talon:
+  14  open conversation menu: key("ctrl-shift-l")
+  15: search: key("ctrl-f")
+  16: search chat: key("ctrl-shift-f")
+  17  focus (chat | composer): key("ctrl-shift-t")
+
+repos • nriley/knausj_talon/apps/sublime_text/sublime_text_mac.talon:
+  41  
+  42: # navigate through multifile search (match) results
+  43  (match | result) next: key(f4 cmd-g)
+
+  56  
+  57: # Search through Talon or Python files when editing Talon configuration
+  58  hunt pie [<user.text>]$:
+
+repos • nriley/knausj_talon/apps/sublime_text/sublime_text_win.talon:
+  36  
+  37: # navigate through multifile search (match) results
+  38  (match|result) next: key(f4 f3)
+
+  45  
+  46: # Search through Talon or Python files when editing Talon configuration
+  47  hunt pie [<user.text>]$:
+
+repos • nriley/knausj_talon/apps/teams/teams_mac.talon:
+  7  show shortcuts: key(super-.)
+  8: [go] [to] search: key(super-e)
+  9  show commands: key(super-/)
+
+repos • nriley/knausj_talon/apps/teams/teams.talon:
+  10  show shortcuts: key(ctrl-.)
+  11: [go] [to] search: key(ctrl-e)
+  12  show commands: key(ctrl-/)
+
+repos • nriley/knausj_talon/apps/twitter/twitter.talon:
+  27  new direct message: key(m)
+  28: search: key(/)
+  29  like message: key(l)
+
+repos • nriley/knausj_talon/apps/vscode/vscode_talon.talon:
+  2  -
+  3: # Search through Talon or Python files when editing Talon configuration
+  4  hunt pie [<user.text>]$:
+
+repos • nriley/knausj_talon/apps/vscode/vscode.talon:
+   26  bar run: user.vscode("workbench.view.debug")
+   27: bar search: user.vscode("workbench.view.search")
+   28  bar source: user.vscode("workbench.view.scm")
+
+   31  
+   32: # Symbol search
+   33  symbol hunt [<user.text>]:
+
+  137  
+  138: # navigate through multifile search (match) results
+  139: (match | result) next: user.vscode("search.action.focusNextSearchResult")
+  140: (match | result) previous: user.vscode("search.action.focusPreviousSearchResult")
+  141  
+
+repos • nriley/knausj_talon/apps/xcode/xcode.talon:
+  26  bar symbols: key(cmd-3)
+  27: bar (find | search): key(cmd-4)
+  28  bar issues: key(cmd-5)
+
+repos • nriley/knausj_talon/core/edit/edit.talon:
+  5  
+  6: # Searching
+  7  hunt this: edit.find()
+
+repos • nriley/knausj_talon/core/help/help.talon:
+  12  help active$: user.help_context_enabled()
+  13: help search <user.text>$: user.help_search(text)
+  14  help context {user.help_contexts}$: user.help_selected_context(help_contexts)
+  15: help help: user.help_search("help")
+  16  help scope$: user.help_scope_toggle()
+
+repos • nriley/knausj_talon/core/websites_and_search_engines/websites_and_search_engines.talon:
+   4  
+   5: {user.search_engine} hunt <user.text>$:
+   6:     user.search_with_search_engine(search_engine, user.text)
+   7: {user.search_engine} (that | this):
+   8      text = edit.selected_text()
+   9:     user.search_with_search_engine(search_engine, text)
+  10: {user.search_engine} paste: user.search_with_search_engine(search_engine, clip.text())
+
+repos • nriley/knausj_talon/lang/tags/functions.talon:
+  6  # The default action implementation looks for the token combination on the left
+  7: # (funky is added here for searchability) and calls the function on the right:
+  8  #
+
+repos • nriley/knausj_talon/plugin/text_navigation/text_navigation.talon:
+  23  #
+  24: # We can search several lines (default 10) above or below the cursor:
+  25  #
+
+  69  #   - "word" or "big" or "small"
+  70: #   - "phrase <some text to search for>"
+  71: #   Specifies the target to search for/navigate to.
+  72  
+
+repos • nriley/knausj_talon/tags/messaging/messaging.talon:
+  13  ([channel] unread next | goneck): user.messaging_unread_next()
+  14: go (find | search): user.messaging_open_search()
+  15  mark (all | workspace | server) read: user.messaging_mark_workspace_read()
+
+repos • nriley/knausj_talon/tags/snippets/snippets.talon:
+  3  snip {user.snippets}: user.snippet_insert(user.snippets)
+  4: snip hunt <user.text>: user.snippet_search(user.text)
+  5: snip hunt: user.snippet_search("")
+  6  snip create: user.snippet_create()
+
+repos • nriley/knausj_talon/tags/terminal/terminal.talon:
+  13  run last: user.terminal_run_last()
+  14: rerun [<user.text>]: user.terminal_rerun_search(text or "")
+  15: rerun search: user.terminal_rerun_search("")
+  16  kill all: user.terminal_kill_all()
+
+repos • pokey_talon/apps/anaconda/anaconda.talon:
+  24  anaconda run: "conda run "
+  25: anaconda search: "conda search "
+  26  anaconda update: "conda update "
+
+repos • pokey_talon/apps/eclipse/eclipse.talon:
+  43      key(b)
+  44: panel search:
+  45      key(alt-shift-q)
+
+repos • pokey_talon/apps/finder/finder.talon:
+  7  options: key(cmd-j)
+  8: search: key(cmd-alt-f)
+  9  
+
+repos • pokey_talon/apps/firefox/firefox.talon:
+  4  tag(): user.tabs
+  5: tab search:
+  6      browser.focus_address()
+  7      insert("% ")
+  8: tab search <user.text>$:
+  9      browser.focus_address()
+
+repos • pokey_talon/apps/github/github_web.talon:
+   6  # site wide shortcuts
+   7: focus search: key(s)
+   8  go to notifications: insert("gn")
+
+  38  (issue make | create [an] issue): key(c)
+  39: search (issues | [pull] requests): key(/)
+  40  (filter by | edit) labels: key(l)
+
+repos • pokey_talon/apps/gitlab/gitlab.talon:
+  14  go to snippets [page]: key(shift-s)
+  15: search page: key(s)
+  16  go to issues [page]: key(shift-i)
+
+  28  go [to] project files [list]: insert("gf")
+  29: go [to] project file search [page]: key(t)
+  30  go [to] project (commit | commits) [list]: insert("gc")
+
+repos • pokey_talon/apps/jetbrains/jetbrains.talon:
+  46  go forward: user.idea("action Forward")
+  47: # Search
+  48: find (everywhere | all): user.idea("action SearchEverywhere")
+  49  find (everywhere | all) <user.text> [over]:
+  50:     user.idea("action SearchEverywhere")
+  51      sleep(500ms)
+  52      insert(text)
+  53: (search | find) class: user.idea("action GotoClass")
+  54: (search | find) file: user.idea("action GotoFile")
+  55: (search | find) path: user.idea("action FindInPath")
+  56: (search | find) symbol: user.idea("action GotoSymbol")
+  57: (search | find) symbol <user.text>$:
+  58      user.idea("action GotoSymbol")
+
+repos • pokey_talon/apps/outlook/outlook_web.talon:
+  49      key(s)
+  50: search [email]: key(alt-q)
+  51  show help: key(?)
+
+repos • pokey_talon/apps/protonmail/protonmail.talon:
+  6  open help: key(?)
+  7: [focus] search: key(/)
+  8  confirm active: key(enter)
+
+repos • pokey_talon/apps/signal/signal_linux.talon:
+  14  open conversation menu: key("ctrl-shift-l")
+  15: search: key("ctrl-f")
+  16: search chat: key("ctrl-shift-f")
+  17  focus (chat | composer): key("ctrl-shift-t")
+
+repos • pokey_talon/apps/teams/teams_mac.talon:
+  7  show shortcuts: key(super-.)
+  8: [go] [to] search: key(super-e)
+  9  show commands: key(super-/)
+
+repos • pokey_talon/apps/teams/teams.talon:
+  10  show shortcuts: key(ctrl-.)
+  11: [go] [to] search: key(ctrl-e)
+  12  show commands: key(ctrl-/)
+
+repos • pokey_talon/apps/twitter/twitter.talon:
+  27  new direct message: key(m)
+  28: search: key(/)
+  29  like message: key(l)
+
+repos • pokey_talon/apps/vscode/vscode.talon:
+   40  side dog: user.vscode("workbench.action.toggleSidebarVisibility")
+   41: search next: user.vscode("search.action.focusNextSearchResult")
+   42: search last: user.vscode("search.action.focusPreviousSearchResult")
+   43  bar collapse: user.vscode("workbench.files.action.collapseExplorerFolders")
+
+  707  
+  708: search again: user.vscode("rerunSearchEditorSearch")
+  709  preview markdown: user.vscode("markdown.showPreview")
+
+repos • pokey_talon/core/help/help.talon:
+  12  help active$: user.help_context_enabled()
+  13: help search <user.text>$: user.help_search(text)
+  14  help context {user.help_contexts}$: user.help_selected_context(help_contexts)
+  15: help help: user.help_search("help")
+  16  help scope$: user.help_scope_toggle()
+
+repos • pokey_talon/core/websites_and_search_engines/websites_and_search_engines.talon:
+  1  open {user.website}: user.open_url(website)
+  2: {user.search_engine} scout <user.text>$:
+  3:     user.search_with_search_engine(search_engine, user.text)
+  4: {user.search_engine} (that | this):
+  5      text = edit.selected_text()
+  6:     user.search_with_search_engine(search_engine, text)
+  7: {user.search_engine} clip:
+  8      text = clip.text()
+  9:     user.search_with_search_engine(search_engine, text)
+
+repos • pokey_talon/lang/tags/functions.talon:
+  6  # The default action implementation looks for the token combination on the left
+  7: # (funky is added here for searchability) and calls the function on the right:
+  8  #
+
+repos • pokey_talon/plugin/record/record_active.talon:
+   9  
+  10: # Use this after a cool command; can search through logs for it later
+  11  ^nice one$: skip()
+
+repos • pokey_talon/plugin/text_navigation/text_navigation.talon:
+  21  #
+  22: # We can search several lines (default 10) above or below the cursor:
+  23  #
+
+  67  #   - "word" or "big" or "small"
+  68: #   - "phrase <some text to search for>"
+  69: #   Specifies the target to search for/navigate to.
+  70  
+
+repos • pokey_talon/tags/browser/browser.talon:
+  70  # restore: key(X)
+  71: # search tabs: key(T)
+  72  # move to window: key(W)
+
+repos • pokey_talon/tags/messaging/messaging.talon:
+  19  ([channel] unread next | goneck): user.messaging_unread_next()
+  20: go (find | search): user.messaging_open_search()
+  21  mark (all | workspace | server) read: user.messaging_mark_workspace_read()
+
+repos • pokey_talon/tags/snippets/snippets.talon:
+  3  # snip {user.snippets}: user.snippet_insert(user.snippets)
+  4: snip hunt <user.text>: user.snippet_search(user.text)
+  5: snip hunt: user.snippet_search("")
+  6  # snip create: user.snippet_create()
+
+repos • pokey_talon/tags/terminal/terminal.talon:
+  11  run last: user.terminal_run_last()
+  12: rerun [<user.text>]: user.terminal_rerun_search(text or "")
+  13: rerun search: user.terminal_rerun_search("")
+  14  kill all: user.terminal_kill_all()

@@ -240,6 +240,90 @@
 			{
 				"filePath": "/Users/ryan/.talon/user/community/tags/find_and_replace/find_and_replace.talon",
 				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/cursorless-talon/src/cursorless.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/cursorless-talon/src/cursorless_global.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/cursorless-settings/experimental",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/cursorless-settings/actions.csv",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/repos/pokey_talon/apps/vscode/vscode.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/demo.clj",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/searches",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/app_switcher/app_switcher.py",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/abbreviate/abbreviate.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/file_extension/file_extension.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/modes/modes.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/modes/sleep_mode.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/modes/wake_and_sleep.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/numbers/ordinals.py",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/text",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/homophones",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/help/help.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/help/help_open.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/repos/andreas-talon/core/snippets",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/repos/andreas-talon/core/vocabulary/phrase_replacer.py",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/andreas-talon/core/snippets/snippets",
+				"group": "Default"
 			}
 		],
 		"favorites.sortOrder": "ASC",

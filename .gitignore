@@ -5,3 +5,7 @@ community/
 cursorless-talon/
 .portal/
 .DS_Store
+.cpcache/
+.clj-kondo/
+.calva/output-window/
+rango-talon/
