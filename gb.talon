@@ -2,11 +2,19 @@ app: chrome
 -
 tag(): browser
 
-(toggle | hide | show) bookmarks: key(cmd-shift-b)
 
 (toggle | hide | show | open) (devtools | dev tools | console): key(cmd-alt-i)
 
-search (bookmarks |  bookmark) [<user.text>]:
+go (bookmarks | marks): browser.bookmarks()
+
+(toggle | hide | show) bookmarks: browser.bookmarks_bar()
+
+#Doesn't work in search bar
+(choose | pick | hello) <user.number>: 
+    # key(down:{number})
+    insert("hello")
+
+search (bookmarks | bookmark | marks) [<user.text>]:
     key(cmd-l)
     sleep(100ms)
     insert("@bookmarks")
@@ -15,11 +23,9 @@ search (bookmarks |  bookmark) [<user.text>]:
     insert(text)
 
 
-
 ### gb
 
 (search | open) (products | prods): user.open_url("https://store-7hstasnrjg.mybigcommerce.com/manage/products")
-
 
 [open] edit product [page]:
     key(cmd-l)
