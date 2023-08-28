@@ -103,7 +103,7 @@ go [(repl | ripple)] ((repl | ripple) | results | output) [(view | window | tab)
 #evaluate
 
 
-[(rep | repl | ripple)] load file [in (rep | repl | ripple)]: user.vscode("calva.loadFile")
+[(rep | repl | ripple | rebel)] (load | run) file [in (rep | repl | ripple | rebel)]: user.vscode("calva.loadFile")
 
 
 #eval top form
@@ -141,7 +141,7 @@ evaluate from (start of file | file start):  user.vscode("calva.evaluateStartOfF
 evaluate from (start of list | list start): user.vscode("calva.evaluateToCursor")
 evaluate from top: user.vscode("calva.evaluateTopLevelFormToCursor")
 
-(interrupt | cancel) [running] (repl | evaluation | evaluations): user.vscode("calva.interruptAllEvaluations")
+(interrupt | cancel) [running] repl (evaluation | evaluations): user.vscode("calva.interruptAllEvaluations")
 
 toggle send evaluated code to repl [window]: user.vscode("calva.toggleEvaluationSendCodeToOutputWindow")
 toggle repl pretty printing: user.vscode("calva.togglePrettyPrint") 
@@ -204,17 +204,25 @@ open calva settings:
 
     
 # open calva repl snippets: user.vscode("calva.customREPLCommandSnippets")
-open calva [user] [repl snippets] config [eden]: user.vscode("calva.openUserConfigEdn")
+open [calva] [user]  (repl snippets | config) [eden]: user.vscode("calva.openUserConfigEdn")
 
 # todo: need enumerated versions of this?
-run custom (repl command  | function): user.vscode("calva.runCustomREPLCommand")
+(run | pick | choose) [custom] repl (command  | function | snippet): user.vscode("calva.runCustomREPLCommand")
 
 
 # Invoke actual snippets
 #  need to localize to workspace
  
 [repl] (build | rebuild) (templates | theme): 
-    user.vscode("calva.runCustomREPLCommand")
-    # sleep(100ms)
-    key(b)
-    key(enter)
+    user.run_rpc_command("calva.runCustomREPLCommand", "b")
+    
+    
+
+please run my repl command:
+    user.run_rpc_command("calva.runCustomREPLCommand", "f")
+    # user.run_rpc_command("calva.runCustomREPLCommand", "\{
+    #     \"ns\": \"user\",
+    #     \"snippet\": \"(prn \"hello\")\",
+    # \}")
+
+refresh [user] (repl snippets | calva user config): user.vscode("calva.rereadUserConfigEdn")
