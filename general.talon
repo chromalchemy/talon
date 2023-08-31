@@ -83,7 +83,6 @@ open sound panel:
     insert("sound")
     key(enter)
 
-
 #window Management
 (win | window) right: key(cmd-alt-shift-ctrl-right)
 (win | window) left: key(cmd-alt-shift-ctrl-left)
@@ -139,9 +138,6 @@ exit: key(escape)
     key(down left:2) 
     # mimic("go to line start")
     # insert("#")
-
-#talon stuff
-# talon log [window]:
 
 #right/context click
 ((right | r | are | part) click | (context | see | sea) (click | touch | that | menu | options)):
