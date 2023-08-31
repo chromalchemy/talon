@@ -1,0 +1,22 @@
+{
+  "functionDeclaration" : {
+    "description" : "Function declaration",
+    "variables" : {
+      "body" : {
+        "wrapperScopeType" : "statement"
+      }
+    },
+    "insertionScopeTypes" : [ "namedFunction", "statement", "line" ],
+    "definitions" : [ {
+      "scope" : {
+        "langIds" : [ "clojure", "clojurescript" ]
+      },
+      "body" : [ "($name $parameterList ", "\n\t$body", ")" ],
+      "variables" : {
+        "name" : {
+          "formatter" : "kebabCase"
+        }
+      }
+    } ]
+  }
+}
