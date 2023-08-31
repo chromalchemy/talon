@@ -3,9 +3,11 @@ modified_full_mouse_grid/
 flex-mouse-grid/
 community/
 cursorless-talon/
+rango-talon/
 .portal/
 .DS_Store
 .cpcache/
 .clj-kondo/
 .calva/output-window/
 rango-talon/
+cursorless-snippets/.calva/output-window/

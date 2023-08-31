@@ -1,4 +1,5 @@
 Spoken form, Cursorless identifier
+
 bottom, scrollToBottom
 break point, toggleLineBreakpoint
 bring, replaceWithTarget
@@ -41,8 +42,8 @@ reverse, reverseTargets
 scout, findInDocument
 scout all, findInWorkspace
 shuffle, randomizeTargets
-snippet, insertSnippet
-snippet make, generateSnippet
+snip, insertSnippet
+snip make, generateSnippet
 sort, sortTargets
 swap, swapTargets
 take, setSelection

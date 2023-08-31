@@ -715,6 +715,18 @@ ctx.lists["self.clojure_core"] = {
 
 # @ctx.action_class("user")
 # class UserActions:
+
+    #uses Andreas snippets fn
+    # Function declaration
+    # def code_function(name: str, modifiers: list[str]):
+    #     actions.user.code_insert_snippet(
+    #         "functionDeclaration",
+    #         {"name": name, "modifiers": get_modifiers(modifiers)},
+    #     )
+
+    
+
+
 #     # def code_state_return():
 #     #     actions.insert("")
     

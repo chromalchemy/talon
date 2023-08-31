@@ -324,6 +324,26 @@
 			{
 				"filePath": "/Users/ryan/.talon/user/andreas-talon/core/snippets/snippets",
 				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/andreas-talon/apps/vscode",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/andreas-talon/plugins/clipboard_manager/clipboard_manager_open.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/andreas-talon/plugins/clipboard_manager/clipboard_manager.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/andreas-talon/core/edit/edit.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/cursorless-snippets",
+				"group": "Default"
 			}
 		],
 		"favorites.sortOrder": "ASC",
