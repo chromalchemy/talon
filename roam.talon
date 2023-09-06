@@ -1,22 +1,11 @@
-tag: user.roam
-and app.name: Roam Research 
+app.name: Roam Research 
 -
 
 tag(): user.line_commands
-# tag(): user.file_manager
-# tag(): user.find_and_replace
-# tag(): user.multiple_cursors
-# tag(): user.snippets
-# tag(): user.splits
-# tag(): user.tabs
+tag(): user.roam
 
-demo open file: user.file_manager_open_file("~/Documents/ticket reciept.pdf")
-    # user.file_maDemo actionnager_open_directory(system_path)
-    # file = user.file_manager_get_file_by_index(number_small - 1)
-    # insert(file)
-    
-$tank <user.one_roam_tag>: 
-    insert("{one_roam_tag}")
+####################
+
 
     
 # todo: setup defualt timeout
@@ -518,9 +507,59 @@ paste (child | kid) [block] raw:
 # new parent: 
 #     edit.paragraph_end()
 
+
+[toggle] (multi select | select blocks) | select (multi | multiple) [blocks]: key(cmd-m)
+
+
+#move blocks 
+# move to top of date
+
+#make versions that leav reference
+
+move [block] [to] tomorrow: 
+    key(cmd-d)
+    sleep(100ms)
+    key(tab enter)
+    sleep(100ms)
+    key(tab:2 enter)
+
+move [block] [to] today: 
+    key(cmd-d)
+    sleep(100ms)
+    edit.select_all()
+    sleep(100ms)
+    key(delete)
+    insert("Today")
+    sleep(100ms)
+    key(tab enter)
+    sleep(100ms)
+    key(tab:2 enter)
+
+
+#insert dates
+
+insert today: 
+    insert("/today")
+    sleep(300ms)
+    key(enter)
+    sleep(100ms)
+    key(space)
+
+insert tomorrow: 
+    insert("/tomorrow")
+    sleep(300ms)
+    key(enter)
+    sleep(100ms)
+    key(space)
+    
+
 #tagging 
 
 # Hash tagging
+
+^tag <user.one_roam_tag>: 
+    insert("#{one_roam_tag}")
+
 
 
 (h tag | hashtag) [that]: 

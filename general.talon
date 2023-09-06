@@ -1,6 +1,8 @@
 # not mode: sleep
 # -
 
+# tag: user.file_manager
+
 # tag: terminal
 
 #keys 
@@ -42,12 +44,6 @@ run (copied | clipboard) in raycast:
     sleep(100ms)
     key(enter) 
 
-open path [in finder]:
-    key(cmd-space)
-    edit.paste()
-    sleep(100ms)
-    key(enter) 
-
 run [that] in raycast:
     selectedText = edit.selected_text() 
     key(cmd-space)
@@ -55,13 +51,30 @@ run [that] in raycast:
     sleep(100ms)
     key(enter) 
 
-open that path [in finder]:
+open paste path [in] [finder]:
+    key(cmd-space)
+    edit.paste()
+    sleep(100ms)
+    key(enter) 
+
+#spawns new window : todom make reuse open tab
+
+open <user.system_path> [folder]:
+    key(cmd-space)
+    insert(system_path)
+    sleep(100ms)
+    key(enter) 
+
+
+open that (path | in finder):
     selectedText = edit.selected_text() 
     key(cmd-space)
     insert(selectedText)
     sleep(100ms)
     key(enter) 
 
+
+    
 
 
 # finder
@@ -318,3 +331,7 @@ take (Pointer | point):
     mouse_click(0)
     edit.paste()
 
+# demo open file: user.file_manager_open_file("~/Documents/ticket reciept.pdf")
+# user.file_maDemo actionnager_open_directory(system_path)
+# file = user.file_manager_get_file_by_index(number_small - 1)
+# insert(file)
