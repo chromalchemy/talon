@@ -2,30 +2,7 @@ app: chrome
 -
 tag(): browser
 
-
-(toggle | hide | show | open) (devtools | dev tools | console): key(cmd-alt-i)
-
-go (bookmarks | marks): browser.bookmarks()
-
-(toggle | hide | show) bookmarks: browser.bookmarks_bar()
-
-#Doesn't work in search bar
-(choose | pick | hello) <user.number>: 
-    # key(down:{number})
-    insert("hello")
-
-search (bookmarks | bookmark | marks) [<user.text>]:
-    key(cmd-l)
-    sleep(100ms)
-    insert("@bookmarks")
-    key(space)
-    sleep(100ms)
-    insert(text)
-
-
-### gb
-
-(search | open) (products | prods): user.open_url("https://store-7hstasnrjg.mybigcommerce.com/manage/products")
+#open js bookmarklet links (parses page for input data)
 
 [open] edit product [page]:
     key(cmd-l)
@@ -57,3 +34,15 @@ search (bookmarks | bookmark | marks) [<user.text>]:
     sleep(100ms)
     key(tab enter)
 
+# constant contact editor
+email (add block | adblock | insert) link: 
+    mouse_click(0)
+    sleep(100ms)
+    key(down)
+    key(enter)
+    sleep(100ms)
+    edit.select_all()
+    edit.paste()
+    sleep(30ms)
+    key(enter)
+    

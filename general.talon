@@ -30,6 +30,7 @@ show (clip | clipboard | image | screengrab) [in] preview:
 
 
 
+
 #raycast 
 (raycast | ray cast): key(cmd-space)
 
@@ -113,6 +114,8 @@ exit: key(escape)
 
 [toggle] fullscreen: key(cmd-alt-shift-ctrl-a) 
 
+
+
 # already built in
 # open talon repl: 
 #     key(cmd-space) 
@@ -124,9 +127,6 @@ exit: key(escape)
 #     sleep(100ms)
 #     key(cmd-1)
     
-
-
-
 
 #global editor commands
 (override line | over ride line):
