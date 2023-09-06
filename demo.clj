@@ -1,11 +1,59 @@
-;; (ns demo)
 
-(def this is a thing 42)
+(defn hello [])
 
-(defn myfn []
-  (+ 1 1))
+(defn hello [] nil)
 
-(+ (inc 64) (myfn))
+#_Snip #_ funk world
 
-{:what-the-fuck "world"
- :yes "bit"} 
+(defn hello [] 
+  1693853185 )
+
+(defn Alligator [] 
+  )
+
+(defn world [)
+
+(defn alligator [nil?] 
+  (this is cool))  
+
+(defn a world [yes] 
+and)
+  
+Function *
+  
+ function last resultset-seq
+  
+ last result 
+  
+Testing ness
+  
+   testing this
+  hhhh
+hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+  
+
+  assert
+
+  
+hhhh
+
+assert
+
+  hhhh
+
+ac
+  
+assert
+             
+hhhh
+
+hhhh
+hhhh
+
+
+
+
+hhhh
+
+
+
