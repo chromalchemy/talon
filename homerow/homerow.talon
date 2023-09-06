@@ -2,7 +2,16 @@ os: mac
 mode: command
 -
 
-^(rolly | rolling | ruling) | ^roll (this | that | window | view | here): key(cmd-ctrl-alt-shift-j)
+^(rolly | rolling | ruling | rolle) [down] [a] <number>: 
+    n = 0 - number
+    na = n * 20
+    mouse_scroll(na)
+ 
+^(rolly | rolling | ruling | rolle) up [a] <number>: 
+    n= number * 20
+    mouse_scroll(n)  
+
+^(rolly | rolling | ruling | rolle) | ^roll (this | that | window | view | here): key(cmd-ctrl-alt-shift-j)
 
 #todo: How to only target and limit these to scroll mode
 
@@ -20,7 +29,7 @@ stop [(roll | rolly | rolling | ruling)]: key(j:up k:up)
 
 (roll | rolly | rolling | ruling) next: key(down)
 (roll | rolly | rolling | ruling) last: key(up)
-(roll | rolly | rolling | ruling) <user.number_key>: key(number_key)
+(roll | rolly | rolling | ruling) (pick | choose) <user.number_key>: key(number_key)
 
 
 # <user.number_key>
