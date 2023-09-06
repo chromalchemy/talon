@@ -1,5 +1,13 @@
 app.name: Code
 -
+# already in community
+# select breadcrumb: user.vscode("breadcrumbs.focusAndSelect")
+file context | path | crumb | breadcrumb | breadcrumbs: user.vscode("breadcrumbs.focusAndSelect")
+parent (context | path | crumb | breadcrumb | breadcrumbs): 
+    user.vscode("breadcrumbs.focusAndSelect")
+    key(left down)
+(go | focus) (file context | path | crumb | breadcrumb | breadcrumbs): user.vscode("breadcrumbs.focus")
+(toggle | show | hide) (file context | path | crumb | breadcrumb | breadcrumbs): user.vscode("breadcrumbs.toggle")
 
 clone string:
     s = edit.selected_text()
@@ -75,7 +83,7 @@ choose [color] theme:       user.menu_select('Code|Settings…|Theme|Color Theme
 
 #bars
 
-(show | reveal) file [in] (explore | explorer) | dock reveal | bar file: user.vscode("workbench.files.action.showActiveFileInExplorer")
+(show | reveal) file [in] [(explore | explorer)] | dock reveal | bar file: user.vscode("workbench.files.action.showActiveFileInExplorer")
 (show | reveal) file [in] (finder | files): user.vscode("workbench.files.action.showActiveFileInExplorer")
 
 collapse (explore | Explorer) [(bar | view)]: user.vscode("workbench.files.action.collapseExplorerFolders")
@@ -138,7 +146,7 @@ move search results to tab:
     user.vscode("search.action.clearSearchResults")
 
 #scrolls to top and focuses new input
-(go) [workspace] search (editor | tab): user.vscode("search.action.openEditor")
+(go) [workspace] search [(editor | tab)]: user.vscode("search.action.openEditor")
 
 # why is this popping normal search editor
 (search | find) in files:   user.vscode("workbench.action.findInFiles")
@@ -146,7 +154,7 @@ move search results to tab:
 ### search files
 
 #todo: use file hunt commands instead?
-(find | fine) file [<user.text>]:
+(find | fine | search) (file | files) [<user.text>]:
     key(cmd-p)
     sleep(100ms)
     insert(text)
@@ -221,20 +229,24 @@ pop forward | go (next | forward | for) used [(editor | tab)] : user.vscode("wor
 (pop back | go back used [(editor | tab)]) group: user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
 (pop forward | go (next | forward | for) used) group: user.vscode("workbench.action.openNextRecentlyUsedEditorInGroup")
 
+(join | merge) [(editor | tab)] groups: user.vscode("workbench.action.joinAllGroups")
+(join | merge) [(editor | tab)] group with next : user.vscode("workbench.action.joinTwoGroups")
+
 
 ####### comments
 (comment |  uncomment) that: key(cmd-/)
 
 #bookmark
 
-(toggle | show | hide | go | view | bar) (bookmarks | links) [(bar | panel | view)]: key(cmd-ctrl-alt-shift-b)
+(toggle | show | hide | go | view | bar) (bookmarks | links) [(bar | panel | view)]: 
+    user.vscode("workbench.view.extension.bookmarks")
 
-((toggle | create | add) [line] bookmark) | bookmark (that | line) | (remove | delete) bookmark: key(cmd-alt-k)
+((toggle | create | add) [line] bookmark) | bookmark (that | line) | (remove | delete) bookmark: user.vscode("bookmarks.toggle")
 
-bookmark (that | line) (name | named): key(cmd-alt-ctrl-k)
+bookmark (that | line) (name | named): user.vscode("bookmarks.toggleLabeled")
 
 bookmark (that | line) <user.text>:
-    key(cmd-alt-ctrl-k)
+    user.vscode("bookmarks.toggleLabeled")
     insert(text)
     sleep(300ms)
     key(enter)
@@ -263,33 +275,25 @@ copy bookmark name:
     key(esc)
 
 (search bookmarks | bookmarks list) [<user.text>]:
-    key(cmd-shift-p)
-    insert("bookmarks list")
-    key(enter)
+    user.vscode("bookmarks.list")
     sleep(300ms)
     insert(text)
 
 (search all bookmarks | all bookmarks list) [<user.text>]:
-    key(cmd-shift-p)
-    insert("bookmarks list from all files  ")
-    key(enter)
+    user.vscode("bookmarks.listFromAllFiles")
     sleep(300ms)
     insert(text)
 
 #open copied bookmark
 open bookmark [(text | name)]:
-    key(cmd-shift-p)
-    insert("bookmarks list from all files  ")
-    key(enter)
+    user.vscode("bookmarks.listFromAllFiles")
     sleep(300ms)
     key(cmd-v)
     sleep(300ms)
     key(enter)
 
 (bar | focus | go) (bookmarks | links) [(bar | panel | view)]:
-    key(cmd-shift-p)
-    insert("bookmarks focus on explorer view")
-    key(enter)
+    user.vscode("bookmarksExplorer.focus")
 
 [go] next bookmark:         key(cmd-alt-l)
 [go] (previous | prev | last) bookmark: key(cmd-alt-j)
@@ -364,48 +368,91 @@ pick code (window | winner | win): user.vscode("workbench.action.switchWindow")
 (swap code | code swap) (window | winner | win) | code (window | winner | win) swap:
     user.vscode("workbench.action.switchWindow")
     key(enter)
-
+     
 (hide | clear) notifications: user.vscode("notifications.clearAll")
 
 #tab navigation
 
 (bar | show | go | focus) open (files | editors) [view]: user.vscode("workbench.files.action.focusOpenEditorsView")
-split editor:               user.vscode("workbench.action.splitEditor")
-split editor down:          user.vscode("workbench.action.splitEditorDown")
-split editor up:            user.vscode("workbench.action.splitEditorUp")
-Split editor left:          user.vscode("workbench.action.splitEditorLeft")
-split editor right:         user.vscode("workbench.action.splitEditorRight")
-split editor ortho:         user.vscode("workbench.action.splitEditorOrthogonal")
+split (editor | tab):               user.vscode("workbench.action.splitEditor")
+split (editor | tab) down:          user.vscode("workbench.action.splitEditorDown")
+split (editor | tab) up:            user.vscode("workbench.action.splitEditorUp")
+Split (editor | tab | column) left:          user.vscode("workbench.action.splitEditorLeft")
+split (editor | tab | column) right:         user.vscode("workbench.action.splitEditorRight")
+split [(editor | tab)] (ortho | orthogonal | other) :         user.vscode("workbench.action.splitEditorOrthogonal")
 
-split editor in group:      user.vscode("workbench.action.toggleSplitEditorInGroup")
+split [(editor | tab)] [in group]:      user.vscode("workbench.action.toggleSplitEditorInGroup")
 
-split editor to right:      user.vscode("workbench.action.splitEditorToRightGroup")
-split editor to next:       user.vscode("workbench.action.splitEditorToNextGroup")
-split editor to first:      user.vscode("workbench.action.splitEditorToFirstGroup")
-split editor to last:       user.vscode("workbench.action.splitEditorToLastGroup")
-split editor to above:      user.vscode("workbench.action.splitEditorToAboveGroup")
-split editor to below:      user.vscode("workbench.action.splitEditorToBelowGroup")
+split [(editor | tab)] to right [group]:      user.vscode("workbench.action.splitEditorToRightGroup")
+split [(editor | tab)] to left [group]:      user.vscode("workbench.action.splitEditorToLeftGroup")
+split [(editor | tab)] [to] next [group]:       user.vscode("workbench.action.splitEditorToNextGroup")
+split [(editor | tab)] [to] first [group]:      user.vscode("workbench.action.splitEditorToFirstGroup")
+split [(editor | tab)] [to] last [group]:       user.vscode("workbench.action.splitEditorToLastGroup")
+split [(editor | tab)] [to] above [group]:      user.vscode("workbench.action.splitEditorToAboveGroup")
+split [(editor | tab)] [to] below [group]:      user.vscode("workbench.action.splitEditorToBelowGroup")
 
-(tab | tabby) (right | push): user.vscode("workbench.action.moveEditorRightInGroup")
-(tab | tabby) (left | pull): user.vscode("workbench.action.moveEditorLeftInGroup")
+[(shuffle | shift)] (editor | tab | tabby) (right | push | rate): user.vscode("workbench.action.moveEditorRightInGroup")
+[(shuffle | shift)] (editor | tab | tabby) (left | pull): user.vscode("workbench.action.moveEditorLeftInGroup")
 
-(send | move) (editor | tab) group right: user.vscode("workbench.action.moveActiveEditorGroupRight")
+(send | .move) (editor | tab) group right: user.vscode("workbench.action.moveActiveEditorGroupRight")
 (send | move) (editor | tab) group left: user.vscode("workbench.action.moveActiveEditorGroupLeft")
 (send | move) (editor | tab) group up: user.vscode("workbench.action.moveActiveEditorGroupUp")
 (send | move) (editor | tab) group down: user.vscode("workbench.action.moveActiveEditorGroupDown")
 
-(send | move) editor to right: user.vscode("workbench.action.moveEditorToRightGroup")
-(send | move) editor to left: user.vscode("workbench.action.moveEditorToLeftGroup")
-(send | move) editor to above: user.vscode("workbench.action.moveEditorToAboveGroup")
-(send | move) editor to  below: user.vscode("workbench.action.moveEditorToBelowGroup")
-(send | move) editor to  first: user.vscode("workbench.action.moveEditorToFirstGroup")
-(send | move) editor to  last: user.vscode("workbench.action.moveEditorToLastGroup")
-(send | move) editor to  previous: user.vscode("workbench.action.moveEditorToPreviousGroup")
-(send | move) editor to  next: user.vscode("workbench.action.moveEditorToNextGroup")
+(send | move) (editor | tab) to right [group]: user.vscode("workbench.action.moveEditorToRightGroup")
+(send | move) (editor | tab) to left [group]: user.vscode("workbench.action.moveEditorToLeftGroup")
+(send | move) (editor | tab) ([to] above | up) [group]: user.vscode("workbench.action.moveEditorToAboveGroup")
+(send | move) (editor | tab) ([to]  below | down) [group]: user.vscode("workbench.action.moveEditorToBelowGroup")
+(send | move) (editor | tab) [to]  first [group]: user.vscode("workbench.action.moveEditorToFirstGroup")
+(send | move) (editor | tab) [to]  last [group]: user.vscode("workbench.action.moveEditorToLastGroup")
+(send | move) (editor | tab) [to]  (previous | prev) [group]: user.vscode("workbench.action.moveEditorToPreviousGroup")
+(send | move) (editor | tab) [to]  next [group]: user.vscode("workbench.action.moveEditorToNextGroup")
 
 [i] please  (send | move) (editor | tab):
     key(cmd-shift-p)
     insert("move editor")
+
+#---------- layouts
+
+[i] please layout:
+    key(cmd-shift-p)
+    insert("layout")
+
+(toggle | flip | next | rotate | vertical | vertico | stacked | horizontal | column) (layout | lea): user.vscode("workbench.action.toggleEditorGroupLayout")
+
+centered [column] layout: user.vscode("workbench.action.toggleCenteredLayout")
+single [column] layout: user.vscode("workbench.action.editorLayoutSingle")
+(to | two) (column | columns) layout: user.vscode("workbench.action.editorLayoutSingle")
+(to | two) (row | rows) layout: user.vscode("workbench.action.editorLayoutTwoRows")
+
+customize layout: usBeer.vscode("workbench.action.customizeLayout") 
+
+# saved layouts extension
+bar (layout | layouts | lout): user.vscode("workbench.view.extension.editor-layouts")
+go (layout | layouts | lout) : user.vscode("layouts_list.focus")
+
+[i] please (save | saved) (layout | layouts | lout):
+    key(cmd-shift-p)
+    insert("saved layout")
+    
+#restore editors extension
+
+(bar | go) restore (layout | layouts | lout): user.vscode("restoreEditors.views.layouts.focus")
+(bar | go) (layout | layouts | lout) restore: user.vscode("restoreEditors.views.layouts.focus")
+
+[i] please restore (layout | layouts | lout):
+    key(cmd-shift-p)
+    insert("restore editor")
+
+# dynamic layouts    
+
+[i] please dynamic (layout | layouts | lout):
+    key(cmd-shift-p)
+    insert("dynamic layout")
+
+
+
+#__________________
 
 [i] please  (go | focus):
     key(cmd-shift-p)
@@ -414,6 +461,9 @@ split editor to below:      user.vscode("workbench.action.splitEditorToBelowGrou
 [i] please  (go | focus) [(editor | tab)]:
     key(cmd-shift-p)
     insert("view focus editor")
+
+
+
 
 (toggle | show | hide ) mini map: user.vscode("editor.action.toggleMinimap")
 
@@ -515,3 +565,21 @@ break <user.cursorless_target>:
 break:
     user.vscode("hideSuggestWidget")
     key("enter")
+
+
+(tab | editor | column) (close | clothes): key(cmd-w)
+
+
+(bar | go) outline: user.vscode("outline.focus")
+
+rename symbol: user.vscode("editor.action.rename")
+
+browse (json | jason): user.vscode("vscode-json-editor.start")
+
+
+(uncomment | remove comment [from]) <user.cursorless_target>:
+    user.cursorless_command("setSelectionBefore", cursorless_target)
+    key(backspace:3)
+
+^complete: user.vscode("editor.action.triggerSuggest")
+^complete inline: user.vscode("editor.action.inlineSuggest.trigger")
