@@ -344,6 +344,14 @@
 			{
 				"filePath": "/Users/ryan/.talon/user/cursorless-snippets",
 				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/repos/pokey_dotfiles/cursorless-snippets",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/cursorless-snippets/cursorless-snippets.json",
+				"group": "Default"
 			}
 		],
 		"favorites.sortOrder": "ASC",
@@ -352,6 +360,56 @@
 			"accessibility",
 			"test group"
 		],
-		"favorites.currentGroup": "Default"
+		"favorites.currentGroup": "Default",
+		"saveEditorLayout.list": [
+			{
+				"name": "test",
+				"documents": [
+					{
+						"fsPath": "/Users/ryan/.talon/user/vscode.talon",
+						"column": 2
+					}
+				],
+				"layout": {
+					"orientation": 0,
+					"groups": [
+						{
+							"size": 688
+						},
+						{
+							"size": 321
+						}
+					]
+				}
+			},
+			{
+				"name": "test 3",
+				"documents": [
+					{
+						"fsPath": "/Users/ryan/.talon/user/vscode.talon",
+						"column": 1
+					},
+					{
+						"fsPath": "/Users/ryan/.talon/user/vscode.talon",
+						"column": 2
+					}
+				],
+				"layout": {
+					"orientation": 0,
+					"groups": [
+						{
+							"size": 220
+						},
+						{
+							"size": 959
+						}
+					]
+				}
+			}
+		],
+		"[python]": {
+			"editor.defaultFormatter": "ms-python.black-formatter"
+		},
+		"python.formatting.provider": "none"
 	}
 }
