@@ -136,23 +136,26 @@ set [transform] (anchor | origin) [point]:
     key("alt:down")
     mouse_click(0)
 
-[set] tracking [<user.number_string>]: 
+go tracking: 
     # mimic("point tracking")
     mouse_move(914.6171875, 186.5703125)
     sleep(3300ms)
     mouse_click(0)
+
+[set] tracking [<user.number_string>]: 
+    # mimic("point tracking")
+    mouse_move(914.6171875, 186.5703125)
+    sleep(2500ms)
     mouse_click(0)
-    key(cmd-a)
     insert(number_string)
+    sleep(50ms)
     key(enter)
 
 [set] tracking (negative | neg) [<user.number_string>]: 
-    mouse_move(914.6171875, 186.5703125)
-    sleep(3300ms)
-    mouse_click(0)
-    mouse_click(0)
-    key(cmd-a)
     mynum = "-" + number_string
+    mouse_move(914.6171875, 186.5703125)
+    sleep(2500ms)
+    mouse_click(0)
     insert(mynum)
     key(enter)
     
