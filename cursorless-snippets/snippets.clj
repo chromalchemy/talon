@@ -53,7 +53,9 @@
     [{:scope {:lang-ids ["clojure" "clojurescript"],
               #_#_ :scope-types ["class"],
               #_#_ :exclude-descendant-scope-types ["namedFunction"]},
-      :body ["($name $parameterList " "\n\t$body" ")"],
+      :body ["(defn $name [$parameterList]" 
+             "\n\t$body" 
+             ")"],
       :variables {:name {:formatter "kebabCase"}}}
 
      ]}})

@@ -1,3 +1,5 @@
 Spoken form, Cursorless identifier
-funk, functionDeclaration.name
+general funk, functionDeclaration.name
 link, link.text
+funk, newFn.fnName
+

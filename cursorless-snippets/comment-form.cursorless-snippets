@@ -1,0 +1,17 @@
+{
+  "comment-form": {
+    "definitions": [
+      {
+        "scope": {
+          "langIds": [
+            "clojure"
+          ]
+        },
+        "body": [
+          "#_ $form"
+        ]
+      }
+    ],
+    "description": "clj fn"
+  }
+}

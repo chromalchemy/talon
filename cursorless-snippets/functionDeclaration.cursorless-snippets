@@ -1,22 +1,118 @@
 {
-  "functionDeclaration" : {
-    "description" : "Function declaration",
-    "variables" : {
-      "body" : {
-        "wrapperScopeType" : "statement"
-      }
-    },
-    "insertionScopeTypes" : [ "namedFunction", "statement", "line" ],
-    "definitions" : [ {
-      "scope" : {
-        "langIds" : [ "clojure", "clojurescript" ]
+  "functionDeclaration": {
+    "definitions": [
+      {
+        "scope": {
+          "langIds": [
+            "typescript",
+            "typescriptreact",
+            "javascript",
+            "javascriptreact"
+          ]
+        },
+        "body": [
+          "function $name($parameterList) {",
+          "\t$body",
+          "}"
+        ],
+        "variables": {
+          "name": {
+            "formatter": "camelCase"
+          }
+        }
       },
-      "body" : [ "($name $parameterList ", "\n\t$body", ")" ],
-      "variables" : {
-        "name" : {
-          "formatter" : "kebabCase"
+      {
+        "scope": {
+          "langIds": [
+            "typescript",
+            "typescriptreact",
+            "javascript",
+            "javascriptreact"
+          ],
+          "scopeTypes": [
+            "class"
+          ],
+          "excludeDescendantScopeTypes": [
+            "namedFunction"
+          ]
+        },
+        "body": [
+          "$name($parameterList) {",
+          "\t$body",
+          "}"
+        ],
+        "variables": {
+          "name": {
+            "formatter": "camelCase"
+          }
+        }
+      },
+      {
+        "scope": {
+          "langIds": [
+            "go"
+          ]
+        },
+        "body": [
+          "func $name($parameterList) {",
+          "\t$body",
+          "}"
+        ],
+        "variables": {
+          "name": {
+            "formatter": "camelCase"
+          }
+        }
+      },
+      {
+        "scope": {
+          "langIds": [
+            "python"
+          ]
+        },
+        "body": [
+          "def $name($parameterList):",
+          "\t$body"
+        ],
+        "variables": {
+          "name": {
+            "formatter": "snakeCase"
+          }
+        }
+      },
+      {
+        "scope": {
+          "langIds": [
+            "python"
+          ],
+          "scopeTypes": [
+            "class"
+          ],
+          "excludeDescendantScopeTypes": [
+            "namedFunction"
+          ]
+        },
+        "body": [
+          "def $name(self${parameterList:, }):",
+          "\t$body"
+        ],
+        "variables": {
+          "name": {
+            "formatter": "snakeCase"
+          }
         }
       }
-    } ]
+    ],
+    "description": "Function declaration",
+    "variables": {
+      "body": {
+        "wrapperScopeType": "statement"
+      }
+    },
+    "insertionScopeTypes": [
+      "namedFunction",
+      "statement",
+      "line"
+    ]
   }
 }

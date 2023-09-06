@@ -1,6 +1,8 @@
 Spoken form, Cursorless identifier
 else, ifElseStatement.alternative
-funk, functionDeclaration.body
+general funk, functionDeclaration.body
+funk, newFn.fnName
+comment, comment-form.form
 if, ifStatement.consequence
 if else, ifElseStatement.consequence
 link, link.text

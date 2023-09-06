@@ -1,0 +1,17 @@
+{
+  "newFn": {
+    "definitions": [
+      {
+        "scope": {
+          "langIds": [
+            "clojure"
+          ]
+        },
+        "body": [
+          "(defn $fnName [$params] \n  $CURRENT_SECONDS_UNIX $body)"
+        ]
+      }
+    ],
+    "description": "clj fn"
+  }
+}
