@@ -352,6 +352,14 @@
 			{
 				"filePath": "/Users/ryan/.talon/user/cursorless-snippets/cursorless-snippets.json",
 				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/rango-talon/rango.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/rango-talon/rango_direct_clicking.talon",
+				"group": "Default"
 			}
 		],
 		"favorites.sortOrder": "ASC",
