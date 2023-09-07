@@ -2,7 +2,7 @@ app.name: Roam Research
 -
 
 tag(): user.line_commands
-tag(): user.roam
+# tag(): user.roam
 
 ####################
 
@@ -770,3 +770,5 @@ go (crown | top [of] [page]):
     sleep(200ms)
     key(right)
     
+dedent: key(shift-tab)
+indent less: key(shift-tab)
