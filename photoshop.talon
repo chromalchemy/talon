@@ -195,3 +195,21 @@ default colors: key(d)
 (toggle | show | hide) quick mask: key(q)
 
 eraser [tool]: key(e)
+
+edit text: 
+    key(t:down)
+    mouse_click(0)
+    key(t:up)
+    
+
+take text:
+    key(t:down)
+    sleep(300ms)
+    mouse_click(0)
+    # sleep(300ms)
+    key(t:up)
+    sleep(300ms)
+    key(cmd-a)
+    # edit.select_all()
+
+
