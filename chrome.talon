@@ -2,7 +2,15 @@ app: chrome
 -
 tag(): browser
 
-(toggle | hide | show | open) (devtools | dev tools | console): key(cmd-alt-i)
+#### inspector
+
+(toggle | hide | show | open | close) (devtools | dev tools | tools): key(cmd-alt-i)
+
+(toggle | hide | show | open | close) console: key(cmd-alt-j)
+
+tools [dock] (sidebar | bar | panel | bottom | right | last | next): key(cmd-shift-d)
+
+##
 
 go (bookmarks | marks): browser.bookmarks()
 
@@ -28,3 +36,16 @@ copy [link] (address | url) (link | point | here)$:
     insert("copy link address")
     # sleep(100ms)
     key(enter)  
+
+
+zoom (default  | normal) | reset zoom: key(cmd-0)
+
+search <user.text>: 
+    browser.focus_search()
+    insert(text)
+
+search force <user.text>: 
+    browser.focus_search()
+    insert(text)
+    sleep(100ms)
+    key(enter)

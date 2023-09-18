@@ -135,6 +135,7 @@ go [page] bottom:
     key(enter)
 
 go today:  key(ctrl-shift-d)
+go tomorrow: key(ctrl-alt-n)
 go next day:  key(ctrl-alt-n)
 go (prev | previous | last) day:  key(ctrl-alt-p)
 
@@ -164,7 +165,7 @@ deep nav:key(alt-g)
 
 ###sidebar
 
-(toggle | hide |  show) (sidebar | side bar) :  key(cmd-/)
+(toggle | hide |  show | close | open) (sidebar | side bar) :  key(cmd-/)
 
 (swap with sidebar | swap with main):
     key(cmd-p)

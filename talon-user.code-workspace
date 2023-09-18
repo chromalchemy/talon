@@ -418,6 +418,11 @@
 		"[python]": {
 			"editor.defaultFormatter": "ms-python.black-formatter"
 		},
-		"python.formatting.provider": "none"
+		"python.formatting.provider": "none",
+		"editor.lineHeight": 2,
+		"editor.wordWrapColumn": 80,
+		"editor.rulers": [
+			120
+		]
 	}
 }

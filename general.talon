@@ -125,7 +125,7 @@ save file: key(cmd-s)
 quit app: key(cmd-q)
 exit: key(escape)
 
-[toggle] fullscreen: key(cmd-alt-shift-ctrl-a) 
+[(toggle | enter | exit | leave)] (fullscreen | full screen): key(cmd-alt-shift-ctrl-a) 
 
 
 

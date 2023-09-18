@@ -10,8 +10,8 @@ mode: command
 ^(rolly | rolling | ruling | rolle) up [a] <number>: 
     n= number * 20
     mouse_scroll(n)  
-
-^(rolly | rolling | ruling | rolle) | ^roll (this | that | window | view | here): key(cmd-ctrl-alt-shift-j)
+ 
+^(rolly | rolling | ruling | rolle) (this | that | window | view | here): key(cmd-ctrl-alt-shift-j)
 
 #todo: How to only target and limit these to scroll mode
 

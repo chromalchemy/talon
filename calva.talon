@@ -86,7 +86,7 @@ clear [(repl | ripple)] ((repl | ripple) | results | output) [(view | window | t
     sleep(200ms)
     user.vscode("workbench.action.navigateBack")
  
-close [(repl | ripple)] ((repl | ripple) | results | output) [(view | window | tab)]:
+(close | hide) [(repl | ripple)] ((repl | ripple) | results | output) [(view | window | tab)]:
     user.vscode("calva.showOutputWindow")
     user.vscode("workbench.action.closeActiveEditor")
     
