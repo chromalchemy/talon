@@ -3,7 +3,7 @@ app.name: Code
 # already in community
 # select breadcrumb: user.vscode("breadcrumbs.focusAndSelect")
 file context | path | crumb | breadcrumb | breadcrumbs: user.vscode("breadcrumbs.focusAndSelect")
-parent (context | path | crumb | breadcrumb | breadcrumbs): 
+parent ([file] context | path | crumb | breadcrumb | breadcrumbs): 
     user.vscode("breadcrumbs.focusAndSelect")
     key(left down)
 (go | focus) (file context | path | crumb | breadcrumb | breadcrumbs): user.vscode("breadcrumbs.focus")
@@ -86,21 +86,30 @@ choose [color] theme:       user.menu_select('Code|Settings…|Theme|Color Theme
 (show | reveal) file [in] [(explore | explorer)] | dock reveal | bar file: user.vscode("workbench.files.action.showActiveFileInExplorer")
 (show | reveal) file [in] (finder | files): user.vscode("workbench.files.action.showActiveFileInExplorer")
 
-collapse (explore | Explorer) [(bar | view)]: user.vscode("workbench.files.action.collapseExplorerFolders")
+collapse (explore | Explorer) [(bar | view)] [folders]: user.vscode("workbench.files.action.collapseExplorerFolders")
 
 ((activity bar | icons bar) (toggle | show | hide | view) | (toggle | show | hide | view) (activity bar | icons bar)):
     user.vscode("workbench.action.toggleActivityBarVisibility")
 
 (focus | go) (activity bar | icons bar): user.vscode("workbench.action.toggleActivityBarVisibility")
 
-(toggle | show | hide | view) [left] (sidebar | bar): key(cmd-b)
-bar (toggle | show | hide): key(cmd-b)
-(toggle | show | hide) bar: key(cmd-b)
-(toggle | show | hide | view) right (sidebar | bar): key(cmd-alt-b)
-((toggle | show | hide | view) [bottom] panel | [bottom] panel (toggle | show | hide | view)): key(cmd-j)
-panel (toggle | show | hide | view): key(cmd-j)
-(toggle | show | hide) zen mode: key(cmd-k z)
-(toggle | show | hide) line numbers: key(ctrl-shift-l)
+(toggle | show | hide | view) [left] (sidebar | bar): user.vscode("workbench.action.toggleSidebarVisibility")   
+[left] bar (toggle | show | hide): user.vscode("workbench.action.toggleSidebarVisibility")
+
+(toggle | show | hide | view) right (sidebar | bar): user.vscode("workbench.action.toggleAuxiliaryBar")
+right bar (toggle | show | hide): user.vscode("workbench.action.toggleAuxiliaryBar")
+
+(toggle | show | hide | view | close) [bottom] panel: user.vscode("workbench.action.togglePanel")
+panel (close | toggle | show | hide | view): user.vscode("workbench.action.togglePanel")
+
+[move] panel right: user.vscode("workbench.action.positionPanelRight")
+[move] panel left: user.vscode("workbench.action.positionPanelLeft")
+[move] panel (bottom | down.): user.vscode("workbench.action.positionPanelBottom")
+(panel | term | terminal) (max | min | regular | default): user.vscode("workbench.action.toggleMaximizedPanel")
+
+
+(go | toggle | enter | exit | leave) (in | then | zen | zend | full) mode: user.vscode("workbench.action.toggleZenMode")
+(toggle | show | hide) line numbers: user.vscode("lntoggle.toggle")
 
 bar (extension | extensions | plugins): user.vscode("workbench.view.extensions")
 
@@ -154,7 +163,7 @@ move search results to tab:
 ### search files
 
 #todo: use file hunt commands instead?
-(find | fine | search) (file | files) [<user.text>]:
+(open | find | fine | search) (file | files) [<user.text>]:
     key(cmd-p)
     sleep(100ms)
     insert(text)
@@ -365,17 +374,33 @@ Zoom in font:               user.vscode("editor.action.fontZoomIn")
 reset font (zoom | size) | zoom font (reset | default): user.vscode("editor.action.fontZoomReset")
 
 pick code (window | winner | win): user.vscode("workbench.action.switchWindow")
-(swap code | code swap) (window | winner | win) | code (window | winner | win) swap:
+
+code (swap | next | last) (window | winner | win):
     user.vscode("workbench.action.switchWindow")
     key(enter)
-     
+(swap | next | last) code (window | winner | win):
+    user.vscode("workbench.action.switchWindow")
+    key(enter)
+code (window | winner | win) (swap | next | last):
+    user.vscode("workbench.action.switchWindow")
+    key(enter)
+
+restart ( lsp | ell es pee) [server]: user.vscode("calva.clojureLsp.restart") 
+    
 (hide | clear) notifications: user.vscode("notifications.clearAll")
+
 
 #tab navigation
 
+move (editor | tab | group): 
+    key(cmd-shift-p)
+    insert("view move editor")
+
 (bar | show | go | focus) open (files | editors) [view]: user.vscode("workbench.files.action.focusOpenEditorsView")
-split (editor | tab):               user.vscode("workbench.action.splitEditor")
-split (editor | tab) down:          user.vscode("workbench.action.splitEditorDown")
+split (editor | tab) (right | horizontally ):               user.vscode("workbench.action.splitEditor")
+
+split (editor | tab) (down  | vertically):          user.vscode("workbench.action.splitEditorDown")
+
 split (editor | tab) up:            user.vscode("workbench.action.splitEditorUp")
 Split (editor | tab | column) left:          user.vscode("workbench.action.splitEditorLeft")
 split (editor | tab | column) right:         user.vscode("workbench.action.splitEditorRight")
@@ -478,9 +503,16 @@ open workspace (settings | sitting) (json | jay son): user.vscode("workbench.act
 
 (go [to] | pick) symbol:    user.vscode("workbench.action.gotoSymbol")
 
+(bar | hide | show) commits: user.vscode("gitlens.showCommitsView")
+(bar | hide | show) file history: user.vscode("gitlens.showFileHistoryView")
+go file history: user.vscode("gitlens.views.fileHistory.focus")
+
 #sources
 [(show | view | bar)] (sources | git | source control): user.vscode("workbench.view.scm")
-[(show | view | bar)] remotes: user.vscode("gitlens.views.remotes.focus")
+go (sources | git | source control): user.vscode("workbench.scm.focus")
+(show | view | bar | go) remotes: user.vscode("gitlens.views.remotes.focus")
+
+
 
 #todo make this hard prefix operational in vscode
 (number  | numb) <user.number_string>: "{number_string}"
@@ -550,9 +582,8 @@ symbol next:                user.vscode("gotoNextPreviousMember.nextMember")
 
 problem show:               user.vscode("workbench.panel.markers.view.focus")
 
-term show:
-    user.vscode("workbench.action.terminal.focus")
-    sleep(250ms)
+term show: user.vscode("workbench.action.terminal.focus")
+clear terminal: user.vscode("workbench.action.terminal.clear")    
 
 show shortcuts:             user.vscode("workbench.action.openGlobalKeybindings")
 show shortcuts json:        user.vscode("workbench.action.openGlobalKeybindingsFile")
@@ -583,3 +614,32 @@ browse (json | jason): user.vscode("vscode-json-editor.start")
 
 ^complete: user.vscode("editor.action.triggerSuggest")
 ^complete inline: user.vscode("editor.action.inlineSuggest.trigger")
+
+restore terminals: user.vscode("restore-terminals.restoreTerminals")
+
+stencil [force] push command: insert("stencil push -d -a") 
+
+move (view | widget): user.vscode("workbench.action.moveView")
+
+reset all view locations: user.vscode("workbench.action.resetViewLocations")
+
+format [current] (form | for): user.vscode("calva-fmt.formatCurrentForm")
+
+(hide | close) (both | all) bars: 
+    user.vscode("workbench.action.closeSidebar")
+    user.vscode("workbench.action.closeAuxiliaryBar")
+
+open project: user.vscode("vscode-open-project.openProject")
+
+(terminal | term) font [size] down: user.vscode("terminalFontSize.decrease")
+(terminal | term) font [size] up: user.vscode("terminalFontSize.increase")
+
+(change | switch | tab | editor) (font | text) size: user.vscode("extension.switchFontSize")
+[(change | switch | tab | editor)] (font | text) [size] <number>: 
+    user.vscode("extension.switchFontSize")
+    sleep(100ms)
+    insert(number)
+    sleep(100ms)
+    key(enter)
+
+check [for] extension updates | update extensions: user.vscode("workbench.extensions.action.checkForUpdates")
