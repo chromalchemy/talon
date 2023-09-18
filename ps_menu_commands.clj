@@ -540,6 +540,7 @@
     "Puppet Warp"
     "Perspective Warp"
     ["Free Transform" "( transform | free transform)"]
+    ["Free Transform Path" "[free] transform path"]
     {:pre "[transform]"
      "Transform"
      ["Again"
@@ -555,9 +556,9 @@
       "Remove Warp Split"
       "Convert warp anchor point"
       "Toggle Guides"
-      ["Rotate 180°" "Rotate 180"]
-      ["Rotate 90° Clockwise" "Rotate 90"]
-      ["Rotate 90° Counter Clockwise" "Rotate 90 Counter"]
+      ["Rotate 180°" "Rotate one eighty"]
+      ["Rotate 90° Clockwise" "Rotate Ninety"]
+      ["Rotate 90° Counter Clockwise" "Rotate Ninety Counter"]
       "Flip Horizontal"
       "Flip Vertical"]}
     ["Auto-Align Layers..." "Auto Align Layers"]
@@ -821,23 +822,27 @@
             (map? item)
             (process-menu (assoc item :top-menu menu-name)))
           )))))
+(do
+  (->> menu-commands
+    (map process-menu)
+    #_(repeat 5)
+    flatten
+    (interpose "\n")
+    (apply str)
+    (str "app.name: Adobe Photoshop (Beta)\napp.name: Adobe Photoshop\n-\n\n")
+    (spit "photoshop-menus.talon")
 
-(->> menu-commands
-  (map process-menu)
-  #_(repeat 5)
-  flatten
-  (interpose "\n")
-  (apply str)
-  (str "app.name: Adobe Photoshop (Beta)\napp.name: Adobe Photoshop\n-\n\n")
-  (spit "ps-menus.talon")
+    )
+  (println "wrote ps menu commands talon file"))
 
-  )
 ;; How many commands !?
-(->> menu-commands
-  (map process-menu)
-  #_(repeat 5)
-  flatten
-  count)
+(comment
+  (->> menu-commands
+    (map process-menu)
+    #_(repeat 5)
+    flatten
+    count)
+  )
     
 
 

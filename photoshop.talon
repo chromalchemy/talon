@@ -200,7 +200,6 @@ edit text:
     key(t:down)
     mouse_click(0)
     key(t:up)
-    
 
 take text:
     key(t:down)
@@ -211,5 +210,6 @@ take text:
     sleep(300ms)
     key(cmd-a)
     # edit.select_all()
+
 
 
