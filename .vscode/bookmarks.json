@@ -9,6 +9,21 @@
 					"label": "full grid  transparency settings"
 				}
 			]
+		},
+		{
+			"path": "vscode.talon",
+			"bookmarks": [
+				{
+					"line": 261,
+					"column": 10,
+					"label": ""
+				},
+				{
+					"line": 294,
+					"column": 12,
+					"label": "testing"
+				}
+			]
 		}
 	]
 }

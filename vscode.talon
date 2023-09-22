@@ -1,14 +1,25 @@
 app.name: Code
 -
-# already in community
-# select breadcrumb: user.vscode("breadcrumbs.focusAndSelect")
-file context | path | crumb | breadcrumb | breadcrumbs: user.vscode("breadcrumbs.focusAndSelect")
-parent ([file] context | path | crumb | breadcrumb | breadcrumbs): 
-    user.vscode("breadcrumbs.focusAndSelect")
-    key(left down)
-(go | focus) (file context | path | crumb | breadcrumb | breadcrumbs): user.vscode("breadcrumbs.focus")
-(toggle | show | hide) (file context | path | crumb | breadcrumb | breadcrumbs): user.vscode("breadcrumbs.toggle")
 
+# breadcrumbs, already in community
+
+# select breadcrumb: user.vscode("breadcrumbs.focusAndSelect")
+
+(toggle | show | hide) (file context | path | crumb | crumbs | breadcrumb | breadcrumbs): user.vscode("breadcrumbs.toggle")
+
+file context | path | crumb | crumbs | breadcrumb | breadcrumbs: user.vscode("breadcrumbs.focusAndSelect")
+
+(go | focus) (file context | path | crumb | crumbs | breadcrumb | breadcrumbs): user.vscode("breadcrumbs.focus")
+
+(crumb | crumbs | level) (left | [level] up | parent): key(alt-left)
+(crumb | crumbs | level) (right | [level] down | child): key(alt-right)
+
+# todo: (crumb | crumbs) parent ... doesnt work
+parent ([(file | level)] context | path | crumb | crumbs | breadcrumb | breadcrumbs): 
+    user.vscode("breadcrumbs.focusAndSelect")
+    key(alt-(left)  
+
+######## clone lines2
 clone string:
     s = edit.selected_text()
     insert("[{s}")
@@ -247,13 +258,10 @@ pop forward | go (next | forward | for) used [(editor | tab)] : user.vscode("wor
 
 #bookmark
 
-(toggle | show | hide | go | view | bar) (bookmarks | links) [(bar | panel | view)]: 
-    user.vscode("workbench.view.extension.bookmarks")
-
-((toggle | create | add) [line] bookmark) | bookmark (that | line) | (remove | delete) bookmark: user.vscode("bookmarks.toggle")
+(toggle | create | add) [line] bookmark | bookmark (that | line): user.vscode("bookmarks.toggle")
+(remove | delete) bookmark: user.vscode("bookmarks.toggle")
 
 bookmark (that | line) (name | named): user.vscode("bookmarks.toggleLabeled")
-
 bookmark (that | line) <user.text>:
     user.vscode("bookmarks.toggleLabeled")
     insert(text)
@@ -283,12 +291,25 @@ copy bookmark name:
     key(cmd-c)
     key(esc)
 
-(search bookmarks | bookmarks list) [<user.text>]:
+
+(toggle | show | hide | go | view | bar) (bookmarks | marks | links) [(bar | panel | view)]: 
+    user.vscode("workbench.view.extension.bookmarks")
+    
+
+(open | pick | search) (bookmark | mark) :
+    user.vscode("bookmarks.list")
+(show | open | list) (bookmarks | marks):
+    user.vscode("bookmarks.list")
+[(show | open)] (bookmarks | marks) list:
+    user.vscode("bookmarks.list")
+    
+
+[search] (bookmarks | marks) [for] <user.text>:
     user.vscode("bookmarks.list")
     sleep(300ms)
     insert(text)
 
-(search all bookmarks | all bookmarks list) [<user.text>]:
+search all bookmarks [<user.text>]:
     user.vscode("bookmarks.listFromAllFiles")
     sleep(300ms)
     insert(text)
@@ -301,11 +322,13 @@ open bookmark [(text | name)]:
     sleep(300ms)
     key(enter)
 
-(bar | focus | go) (bookmarks | links) [(bar | panel | view)]:
+(bar | focus | go) (bookmarks | marks | links) [(bar | panel | view)]:
     user.vscode("bookmarksExplorer.focus")
 
-[go] next bookmark:         key(cmd-alt-l)
-[go] (previous | prev | last) bookmark: key(cmd-alt-j)
+[go] next (bookmark | mark):    user.vscode("bookmarks.jumpToNext")
+[go] (previous | prev | last) (bookmark | mark): user.vscode("bookmarks.jumpToPrevious")
+
+###########
 
 copy line link:             user.vscode("extension.linkLine")
 
@@ -453,17 +476,16 @@ single [column] layout: user.vscode("workbench.action.editorLayoutSingle")
 customize layout: usBeer.vscode("workbench.action.customizeLayout") 
 
 # saved layouts extension
-bar (layout | layouts | lout): user.vscode("workbench.view.extension.editor-layouts")
-go (layout | layouts | lout) : user.vscode("layouts_list.focus")
+# bar (layout | layouts | lout): user.vscode("workbench.view.extension.editor-layouts")
+# go (layout | layouts | lout) : user.vscode("layouts_list.focus")
 
-[i] please (save | saved) (layout | layouts | lout):
-    key(cmd-shift-p)
-    insert("saved layout")
+# [i] please (save | saved) (layout | layouts | lout):
+#     key(cmd-shift-p)
+#     insert("saved layout")
     
 #restore editors extension
 
-(bar | go) restore (layout | layouts | lout): user.vscode("restoreEditors.views.layouts.focus")
-(bar | go) (layout | layouts | lout) restore: user.vscode("restoreEditors.views.layouts.focus")
+(bar | go) [restore] (layout | layouts | lout) [restore]: user.vscode("restoreEditors.views.layouts.focus")
 
 [i] please restore (layout | layouts | lout):
     key(cmd-shift-p)
@@ -625,9 +647,33 @@ reset all view locations: user.vscode("workbench.action.resetViewLocations")
 
 format [current] (form | for): user.vscode("calva-fmt.formatCurrentForm")
 
-(hide | close) (both | all) bars: 
+
+#toggle sidebars and panel visibility
+
+(hide | close) [(both | all)] (bars | sidebars) | wide (view | mode) | (tab | tabs) wide: 
     user.vscode("workbench.action.closeSidebar")
     user.vscode("workbench.action.closeAuxiliaryBar")
+
+(show | open | toggle) [(both | all)] (bars | sidebars) | stuffed mode: 
+    user.vscode("workbench.action.toggleSidebarVisibility")
+    user.vscode("workbench.action.toggleAuxiliaryBar")
+    
+#toggle bars and panel visibility
+
+(hide | close) [all] views | focused (view | mode) | focus (tab | tabs | file): 
+    user.vscode("workbench.action.closeSidebar")
+    user.vscode("workbench.action.closeAuxiliaryBar")
+    user.vscode("workbench.action.closePanel")
+    
+    
+(show | open | toggle) [all] views | kit mode: 
+    user.vscode("workbench.action.toggleSidebarVisibility")
+    user.vscode("workbench.action.toggleAuxiliaryBar")
+    user.vscode("workbench.action.togglePanel")
+
+swap (bars | sidebars) :  user.vscode("workbench.action.toggleSidebarPosition")
+
+#------------------
 
 open project: user.vscode("vscode-open-project.openProject")
 
