@@ -1,5 +1,5 @@
 app.name: Adobe Photoshop (Beta)
-app.name: Adobe Photoshop
+app.name: Adobe Photoshop 2024
 -
 
 new (file | pane): key(cmd-n)
@@ -196,12 +196,12 @@ default colors: key(d)
 
 eraser [tool]: key(e)
 
-edit text: 
+edit text [(here | point)]: 
     key(t:down)
     mouse_click(0)
     key(t:up)
 
-take text:
+take text [(here | point)]:
     key(t:down)
     sleep(300ms)
     mouse_click(0)

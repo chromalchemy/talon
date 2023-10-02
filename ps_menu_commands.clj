@@ -26,6 +26,7 @@
       "Hidden Layers"]}
     ["Export As..." "Export Layer As"]
     ["Rename Layer..." "(Rename Layer | layer rename)"]
+    ["Rename Artboard..." "(Rename artboard | artboard rename)"]
     {"Layer Style"
      [["Blending Options..." "[layer] (Blending | blend) (Options | opts)"]
       ["Bevel & Emboss..." "(Bevel | Emboss) [layer] style"]
@@ -455,7 +456,7 @@
     ["200%" "zoom 200"]
     "Print Size"
     "Actual Size"
-    "Flip Horizontal"
+    ["Flip Horizontal" "flip view horizontal"]
     "Pattern Preview"
     {"Screen Mode"
      ["Standard Screen Mode"
@@ -559,7 +560,7 @@
       ["Rotate 180°" "Rotate one eighty"]
       ["Rotate 90° Clockwise" "Rotate Ninety"]
       ["Rotate 90° Counter Clockwise" "Rotate Ninety Counter"]
-      "Flip Horizontal"
+      ["Flip Horizontal" "(flip | the) horizontal"]
       "Flip Vertical"]}
     ["Auto-Align Layers..." "Auto Align Layers"]
     ["Auto-Blend Layers..." "Auto Blend Layers"]
@@ -829,7 +830,7 @@
     flatten
     (interpose "\n")
     (apply str)
-    (str "app.name: Adobe Photoshop (Beta)\napp.name: Adobe Photoshop\n-\n\n")
+    (str "app.name: Adobe Photoshop (Beta)\napp.name: Adobe Photoshop 2024\n-\n\n")
     (spit "photoshop-menus.talon")
 
     )
