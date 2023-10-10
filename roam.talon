@@ -419,13 +419,13 @@ new block back:
     # sleep(100ms)
     key(enter)
 
-(split | break) here : 
+(split | break) [here | point] : 
     mouse_click(0)
     user.mouse_drag_end()
     sleep(100ms)
     key(enter)
 
-(split | break) (child | right) [block] here: 
+(split | break) (child | right) [block] [here | point]: 
     mouse_click(0)
     # close the mouse grid if open
     user.grid_close()
