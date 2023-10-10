@@ -423,6 +423,7 @@
 		"editor.wordWrapColumn": 80,
 		"editor.rulers": [
 			120
-		]
+		],
+		"calva.evalOnSave": true
 	}
 }

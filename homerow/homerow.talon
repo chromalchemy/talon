@@ -1,15 +1,6 @@
 os: mac
 mode: command
 -
-
-^(rolly | rolling | ruling | rolle) [down] [a] <number>: 
-    n = 0 - number
-    na = n * 20
-    mouse_scroll(na)
- 
-^(rolly | rolling | ruling | rolle) up [a] <number>: 
-    n= number * 20
-    mouse_scroll(n)  
  
 ^(rolly | rolling | ruling | rolle) (this | that | window | view | here): key(cmd-ctrl-alt-shift-j)
 
