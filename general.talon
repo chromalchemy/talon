@@ -11,9 +11,6 @@
 copy it: key(cmd-c)
 paste it: key(cmd-v)
 
-#shortcat
-retarget: key(alt-shift-cmd-ctrl-f12)
-
 show (clip | clipboard | image | screengrab) [in] preview:
     key(cmd-space)
     insert("preview")
