@@ -2,6 +2,8 @@ os: mac
 mode: command
 -
  
+#-------------- scrolling
+
 ^(rolly | rolling | ruling | rolle) (this | that | window | view | here): key(cmd-ctrl-alt-shift-j)
 
 #todo: How to only target and limit these to scroll mode
@@ -22,13 +24,10 @@ stop [(roll | rolly | rolling | ruling)]: key(j:up k:up)
 (roll | rolly | rolling | ruling) last: key(up)
 (roll | rolly | rolling | ruling) (pick | choose) <user.number_key>: key(number_key)
 
+#----------- picking targets
 
-# <user.number_key>
-# <user.number_string>
-
-# #homerow
-target: key(shift-f12)
+# target: key(shift-f12)
 # search target: key(cmd-shift-f12)
 
 # Homerow (with search + labels enabled)
-^ax [<user.text>]: user.homerow_search("{text or ''}")
+^(ax | acts | ex) [<user.text>]: user.homerow_search("{text or ''}")
