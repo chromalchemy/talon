@@ -392,9 +392,9 @@ kill process:               key(ctrl-c)
 
 reset [(code | app)] zoom:  user.vscode("workbench.action.zoomReset")
 
-Zoom out font:              user.vscode("editor.action.fontZoomOut")
-Zoom in font:               user.vscode("editor.action.fontZoomIn")
-reset font (zoom | size) | zoom font (reset | default): user.vscode("editor.action.fontZoomReset")
+Zoom out font | font zoom out:              user.vscode("editor.action.fontZoomOut")
+Zoom in font | font zoom in:               user.vscode("editor.action.fontZoomIn")
+(reset | default) font (zoom | size) | font zoom (reset | default): user.vscode("editor.action.fontZoomReset")
 
 pick code (window | winner | win): user.vscode("workbench.action.switchWindow")
 
@@ -509,14 +509,12 @@ customize layout: usBeer.vscode("workbench.action.customizeLayout")
     key(cmd-shift-p)
     insert("view focus editor")
 
-
-
-
 (toggle | show | hide ) mini map: user.vscode("editor.action.toggleMinimap")
 
 (show | view | visualize) (tokens | scopes | scope): user.vscode("editor.action.inspectTMScopes")
 
-(toggle | show | hide ) (cursors | curses): user.vscode("cursorless.toggleDecorations")
+(toggle | show | hide ) [cursorless] (hats | decorations): user.vscode("cursorless.toggleDecorations")
+(hats | decorations) (on | off): user.vscode("cursorless.toggleDecorations")
 
 #settings
 open (settings | sitting):  user.vscode("workbench.action.openSettings2")

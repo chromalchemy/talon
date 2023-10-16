@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../repos"
+		},
+		{
+			"path": "../../.config/joyride/scripts"
 		}
 	],
 	"settings": {
