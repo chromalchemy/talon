@@ -92,13 +92,14 @@ embed (block | black | ref | reference) (children | kids):
     # key(esc)
 
 
-replace ref with original: 
+^(replace | swap) (ref | reference) [with original]: 
     key(cmd-p)
     sleep(100ms)
     insert("wb replace last reference before cursor with original")
     sleep(100ms)
     key(enter)
-replace ref with alias: 
+
+^(replace | swap) (ref | reference) [with] alias: 
     key(cmd-p)
     sleep(100ms)
     insert("wb replace last reference before cursor with text and alias")
@@ -106,7 +107,7 @@ replace ref with alias:
     key(enter)
 
 
-cut block: 
+(cut | carve) block: 
     key(esc)
     sleep(100ms)
     key(cmd-x)
@@ -648,7 +649,7 @@ kebab (h tag | hashtag) <user.text>:
 
 #formatting
 
-paste unformatted: key(shift-cmd-v)
+(paste | pace) (unformatted | raw): key(shift-cmd-v)
 
 ([make] (todo | action) ): key(cmd-return)
 
