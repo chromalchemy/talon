@@ -319,8 +319,7 @@ take (Pointer | point):
     key(escape)
     # cursor go back action
 
-
-(cut) (Pointer | point):
+(cut | carve) (Pointer | point):
     key(shift:down)
     mouse_click(0)
     edit.cut()
