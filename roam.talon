@@ -410,28 +410,26 @@ new block back:
 
 #todo use new block down instead of going to end and enter in all of these commends
 
-(split | break) [new] [block] : 
-    # mouse_click(0)
-    # close the mouse grid if open
-    # user.grid_close()
-    # End any open drags
-    # Touch automatically ends left drags so this is for right drags specifically
-    # user.mouse_drag_end()
-    # sleep(100ms)
+(split | break) here [block] : 
     key(enter)
 
-(split | break) [here | point] : 
+(split | break) [point] : 
     mouse_click(0)
     user.mouse_drag_end()
     sleep(100ms)
     key(enter)
 
-(split | break) (child | right) [block] [here | point]: 
+# mouse_click(0)
+# # close the mouse grid if open
+# user.grid_close()
+# # End any open drags
+# # Touch automatically ends left drags so this is for right drags specifically
+# user.mouse_drag_end()
+# sleep(100ms)
+      
+
+(split | break) (child | right) [block] [point]: 
     mouse_click(0)
-    # close the mouse grid if open
-    user.grid_close()
-    # End any open drags
-    # Touch automatically ends left drags so this is for right drags specifically
     user.mouse_drag_end()
     sleep(100ms)
     key(enter)
@@ -441,7 +439,7 @@ new block back:
     key(shift-tab)
     key(escape)
 
-(split | break) (child | right) [block]: 
+(split | break) (child | right) here [block]: 
     key(enter)
     sleep(100ms)
     key(tab)
@@ -450,12 +448,6 @@ new block back:
     key(escape)
 
 (split | break) [and] (stack | top) [block]: 
-    # mouse_click(0)
-    # close the mouse grid if open
-    # user.grid_close()
-    # End any open drags
-    # Touch automatically ends left drags so this is for right drags specifically
-    # user.mouse_drag_end()
     # edit.paragraph_end()
     key(shift-end)
     sleep(300ms)
@@ -560,8 +552,7 @@ insert tomorrow:
 # Hash tagging
 
 ^tag <user.one_roam_tag>: 
-    insert("#{one_roam_tag}")
-
+    insert(" #{one_roam_tag} ")
 
 
 (h tag | hashtag) [that]: 
@@ -774,3 +765,5 @@ go (crown | top [of] [page]):
     
 dedent: key(shift-tab)
 indent less: key(shift-tab)
+
+nope: key(cmd-z)
