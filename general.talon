@@ -75,7 +75,7 @@ open that (path | in finder):
 
 
 # finder
-show hidden folders: key(ctr-shift-period)
+show hidden folders: key(ctrl-shift-period)
 open file: key(cmd-o)
 view: key(space)
 close: key(space)

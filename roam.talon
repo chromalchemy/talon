@@ -143,7 +143,7 @@ go (prev | previous | last) day:  key(ctrl-alt-p)
 go back:  key(cmd-[)
 go (forward | fore):  key(cmd-])
 
-jump link: key(ctr-o)
+jump link: key(ctrl-o)
 
 page blocks [panel]: key(cmd-shift-p)
 page (refs | references) [panel]: 
@@ -196,7 +196,7 @@ open page in sidebar:
     sleep(100ms)
     key(enter)
 
-clear sidebar: key(ctr-l)
+clear sidebar: key(ctrl-l)
 
 ###roam prefs
 
