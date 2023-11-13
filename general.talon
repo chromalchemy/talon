@@ -27,24 +27,31 @@ show (clip | clipboard | image | screengrab) [in] preview:
     sleep(600ms)
     key(cmd-n)
 
-
-
-
 #raycast 
-(raycast | ray cast): key(cmd-space)
 
-search (menu | menus): key(cmd-alt-shift-ctrl-l)
+raycast | ray cast | ray: key(cmd-space)
 
-run (copied | clipboard) in raycast:
-    key(cmd-space)
-    edit.paste()
-    sleep(100ms)
-    key(enter) 
+ ## ++++++ run selected text in raycast .
 
 run [that] in raycast:
     selectedText = edit.selected_text() 
     key(cmd-space)
     insert(selectedText)
+    sleep(100ms)
+    key(enter) 
+
+open that (path | in finder):
+    selectedText = edit.selected_text() 
+    key(cmd-space)
+    insert(selectedText)
+    sleep(100ms)
+    key(enter) 
+
+## +++++++++++++++ run pasted commands .
+
+run (copied | clipboard) in raycast:
+    key(cmd-space)
+    edit.paste()
     sleep(100ms)
     key(enter) 
 
@@ -55,24 +62,27 @@ open paste path [in] [finder]:
     key(enter) 
 
 #spawns new window : todom make reuse open tab
-
 open <user.system_path> [folder]:
     key(cmd-space)
     insert(system_path)
     sleep(100ms)
     key(enter) 
 
-
-open that (path | in finder):
-    selectedText = edit.selected_text() 
+(raycast | cast) that | run (that | clip | paste | pace) in raycast:
     key(cmd-space)
-    insert(selectedText)
     sleep(100ms)
-    key(enter) 
+    edit.paste()
+    key(enter)
 
+(go | open) [that] (code | line) link [in code] [(paste | pace | clip)]:
+    key(cmd-space)
+    sleep(100ms)
+    edit.paste()
+    sleep(100ms)
+    key(enter)
 
-    
-
+# search menus
+search (menu | menus): key(cmd-alt-shift-ctrl-l)
 
 # finder
 show hidden folders: key(ctrl-shift-period)
@@ -160,16 +170,8 @@ exit: key(escape)
 
 (unindent | un indent) [that]: key(shift-tab)
 
-(dell it | deli it | dell that): key(delete)
+dell it | deli it | dell that: key(delete)
 
-(raycast that | run that in raycast):
-    key(cmd-space)
-    key(cmd-v)
-    key(enter)
-open [that] [(code | line)] [as] link [in code]:
-    key(cmd-space)
-    key(cmd-v)
-    key(enter)
 
 
 # (go | show | open) (photoshop | ps | pee ess | photo ):
@@ -200,13 +202,14 @@ open [that] [(code | line)] [as] link [in code]:
 
 #bc bookmarks
 
+
 open (cats | categories):   user.open_url("https://store-7hstasnrjg.mybigcommerce.com/manage/products/categories")
 
 
 #other bookmarks
 # open (cursorless | cursor less) (docs | documentation): user.open_url("https://www.cursorless.org/docs/")
 
-select or: key(cmd-a)
+select (all | or): key(cmd-a)
 
 # [open] (cursorless | cursor less) (reference | cheat sheet | cheatsheet | wacky): user.open_url("file:///Users/ryan/.cursorless/cheatsheet.html")
 
