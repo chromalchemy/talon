@@ -1,8 +1,9 @@
 app.name: Code
 -
 
-# breadcrumbs, already in community
+########################### breadcrumbs
 
+# , already in community
 # select breadcrumb: user.vscode("breadcrumbs.focusAndSelect")
 
 (toggle | show | hide) (file context | path | crumb | crumbs | breadcrumb | breadcrumbs): user.vscode("breadcrumbs.toggle")
@@ -43,7 +44,8 @@ clone string:
     sleep(100ms)
     insert("{:pre \"")
 
-#talon edit fns
+###################### talon edit fns
+
 sleep action <user.number_string>:
     a = "sleep(" + number_string
     b = a + "ms)"
@@ -78,7 +80,7 @@ paste code action:
 
 insert hyper key [token]:   insert("cmd-ctrl-alt-shift-")
 
-#general editor stuff
+#####################################general editor stuff
 
 choose [color] theme:       user.menu_select('Code|Settings…|Theme|Color Theme [⌘K ⌘T]')
 
@@ -94,46 +96,83 @@ choose [color] theme:       user.menu_select('Code|Settings…|Theme|Color Theme
 
 #bars
 
+## +++++++++++++++++++++++++++++++++ file explorer
+
 (show | reveal) file [in] [(explore | explorer)] | dock reveal | bar file: user.vscode("workbench.files.action.showActiveFileInExplorer")
+
 (show | reveal) file [in] (finder | files): user.vscode("workbench.files.action.showActiveFileInExplorer")
 
 collapse (explore | Explorer) [(bar | view)] [folders]: user.vscode("workbench.files.action.collapseExplorerFolders")
 
-((activity bar | icons bar) (toggle | show | hide | view) | (toggle | show | hide | view) (activity bar | icons bar)):
+ ## ++++++++++++++++ sidebar visibility .
+
+
+[(toggle | show | hide | view | focus | go)] (activity | icons) bar [(toggle | show | hide | view)]: 
     user.vscode("workbench.action.toggleActivityBarVisibility")
 
-(focus | go) (activity bar | icons bar): user.vscode("workbench.action.toggleActivityBarVisibility")
-
-(toggle | show | hide | view) [left] (sidebar | bar): user.vscode("workbench.action.toggleSidebarVisibility")   
-[left] bar (toggle | show | hide): user.vscode("workbench.action.toggleSidebarVisibility")
+(toggle | show | view) [left] (sidebar | bar): user.vscode("workbench.action.toggleSidebarVisibility")   
+[left] (bar | sidebar) (toggle | show): user.vscode("workbench.action.toggleSidebarVisibility")
+[left] (sidebar | bar) hide: user.vscode("workbench.action.closeSidebar")
+hide [left] (sidebar | bar): user.vscode("workbench.action.closeSidebar")
 
 (toggle | show | hide | view) right (sidebar | bar): user.vscode("workbench.action.toggleAuxiliaryBar")
+
 right bar (toggle | show | hide): user.vscode("workbench.action.toggleAuxiliaryBar")
 
 (toggle | show | hide | view | close) [bottom] panel: user.vscode("workbench.action.togglePanel")
 panel (close | toggle | show | hide | view): user.vscode("workbench.action.togglePanel")
 
+(go | toggle | enter | exit | leave) (in | then | zen | zend | full) mode: user.vscode("workbench.action.toggleZenMode")
+
+# toggle sidebars and panel visibility
+
+(hide | close) [(both | all)] (bars | sidebars) | wide (view | mode) | (tab | tabs) wide: 
+    user.vscode("workbench.action.closeSidebar")
+    user.vscode("workbench.action.closeAuxiliaryBar")
+
+(show | open | toggle) [(both | all)] (bars | sidebars) | stuffed mode: 
+    user.vscode("workbench.action.toggleSidebarVisibility")
+    user.vscode("workbench.action.toggleAuxiliaryBar")
+    
+## ++++++++++++++++++ toggle bars and panel visibility
+
+(hide | close) [all] views | focused (view | mode) | focus (tab | tabs | file): 
+    user.vscode("workbench.action.closeSidebar")
+    user.vscode("workbench.action.closeAuxiliaryBar")
+    user.vscode("workbench.action.closePanel")
+    
+    
+(show | open | toggle) [all] views | kit mode: 
+    user.vscode("workbench.action.toggleSidebarVisibility")
+    user.vscode("workbench.action.toggleAuxiliaryBar")
+    user.vscode("workbench.action.togglePanel")
+
+## ++++++++++++++++++++++++ move panel .
+
 [move] panel right: user.vscode("workbench.action.positionPanelRight")
 [move] panel left: user.vscode("workbench.action.positionPanelLeft")
 [move] panel (bottom | down.): user.vscode("workbench.action.positionPanelBottom")
+
+## +++++++++++++++ resize  panels .
+
 (panel | term | terminal) (max | min | regular | default): user.vscode("workbench.action.toggleMaximizedPanel")
 
-
-(go | toggle | enter | exit | leave) (in | then | zen | zend | full) mode: user.vscode("workbench.action.toggleZenMode")
-(toggle | show | hide) line numbers: user.vscode("lntoggle.toggle")
+ ## +++++++++++++++++ vscode extensions .
 
 bar (extension | extensions | plugins): user.vscode("workbench.view.extensions")
 
+## ++++++++++++++++++++++++++++++ wrap lines .
+
 wrap (words | lines) | toggle (word | line) wrap: user.vscode("editor.action.toggleWordWrap")
 
-#general edit commands
+##### general edit commands
 
-# vscode delete line action
+#delete line
 kill (line | lines) | killing | k line | cline: user.vscode("editor.action.deleteLines")
 
 ############### search
 
-#search bar
+## ++++++++++++++++++++++++ search bar .
 
 bar search <user.text>:
     user.vscode("workbench.view.search")
@@ -194,69 +233,95 @@ move search results to tab:
     sleep(200ms)
     insert(text)
 
-### find text in current file
+## +++++++++ find text in current file .
 
-# find text  (deprecate for knausj?)
 # (find [text] [in file] | search file): key(cmd-f)
 
-[(search | find) and] replace [text]: key(cmd-alt-f)
-[(search | find) and] that:
-    key(cmd-alt-f)
-    sleep(200ms)
-    key(cmd-v)
-[(search | find) and] replace <user.text>:
-    key(cmd-alt-f)
-    sleep(200ms)
-    insert(text)
+# [(search | find) and] replace [text]: key(cmd-alt-f)
+# [(search | find) and] that:
+#     key(cmd-alt-f)
+#     sleep(200ms)
+#     key(cmd-v)
+# [(search | find) and] replace <user.text>:
+#     key(cmd-alt-f)
+#     sleep(200ms)
+#     insert(text)
 
 [toggle] hunt [in] (selection | [whole] page10): key(alt-cmd-l)
 
-##########  navigation
+##########  editor navigation
 
-(focus | go) editor: user.vscode("workbench.action.focusActiveEditorGroup")
+(focus | go) editor: 
+    user.vscode("workbench.action.focusActiveEditorGroup")
 
-go back: user.vscode("workbench.action.navigateBack")
-go (forward | for | next) : user.vscode("workbench.action.navigateForward")
+## +++++++++++++++++ back/forward form .
 
-##back/forward form
 # [go] (last |  previous | prev) form: key(alt-up)
 # [go] next form: key(alt-down)
 
-## navigate edit locations
+## ++++++++++++++++++ traverse recent edit location
 
-#back/forward edit location
-go back (edit | at it): user.vscode("workbench.action.navigateBackInEditLocations")
-go (forward | for | next) (edit | at it): user.vscode("workbench.action.navigateForwardInEditLocations")
+go back (edit | at it): 
+    user.vscode("workbench.action.navigateBackInEditLocations")
 
-go (prev | previous) (edit | at it): user.vscode("workbench.action.navigatePreviousInEditLocations")
+go (forward | for | next) (edit | at it): 
+    user.vscode("workbench.action.navigateForwardInEditLocations")
 
-go [to] last (edit | at it): user.vscode("workbench.action.navigateToLastEditLocation")
+go (prev | previous) (edit | at it): 
+    user.vscode("workbench.action.navigatePreviousInEditLocations")
 
-## navigation locations
+go [to] last (edit | at it): 
+    user.vscode("workbench.action.navigateToLastEditLocation")
 
-#back/forward nav location
-go back nav:  user.vscode("workbench.action.navigateBackInNavigationLocations")
-go (forward | for | next) nav: user.vscode("workbench.action.navigateForwardInNavigationLocations")
-go (prev | previous) nav: user.vscode("workbench.action.navigatePreviousInNavigationLocations")
+## ++++++++++++++ traverse recent nav location
 
-go [to] last nav: user.vscode("workbench.action.navigateToLastNavigationLocations")
+go back: 
+    user.vscode("workbench.action.navigateBack")
 
- 
-#back/forwardused the recent editor
-pop back | go back used [(editor | tab)]: user.vscode("workbench.action.openPreviousRecentlyUsedEditor")
-pop forward | go (next | forward | for) used [(editor | tab)] : user.vscode("workbench.action.openNextRecentlyUsedEditor")
+go (forward | for | next) : 
+    user.vscode("workbench.action.navigateForward")
 
-(pop back | go back used [(editor | tab)]) group: user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
-(pop forward | go (next | forward | for) used) group: user.vscode("workbench.action.openNextRecentlyUsedEditorInGroup")
+# what is defference here?
 
-(join | merge) [(editor | tab)] groups: user.vscode("workbench.action.joinAllGroups")
-(join | merge) [(editor | tab)] group with next : user.vscode("workbench.action.joinTwoGroups")
+go back nav:  
+    user.vscode("workbench.action.navigateBackInNavigationLocations")
 
+go (forward | for | next) nav: 
+    user.vscode("workbench.action.navigateForwardInNavigationLocations")
 
-####### comments
+go (prev | previous) nav: 
+    user.vscode("workbench.action.navigatePreviousInNavigationLocations")
+
+go [to] last nav: 
+    user.vscode("workbench.action.navigateToLastNavigationLocations")
+
+#------------ traverse recently used editors
+
+pop back | go back used [(editor | tab)]: 
+    user.vscode("workbench.action.openPreviousRecentlyUsedEditor")
+
+pop forward | go (next | forward | for) used [(editor | tab)] : 
+    user.vscode("workbench.action.openNextRecentlyUsedEditor")
+
+(pop back | go back used [(editor | tab)]) group: 
+    user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
+
+(pop forward | go (next | forward | for) used) group: 
+    user.vscode("workbench.action.openNextRecentlyUsedEditorInGroup")
+
+## +++++++++++++++++++ merge tab groups .
+
+(join | merge) [(editor | tab)] groups: 
+    user.vscode("workbench.action.joinAllGroups")
+
+(join | merge) [(editor | tab)] group with next : 
+    user.vscode("workbench.action.joinTwoGroups")
+
+ ## ++++++++++++++++++++++++++ comments .
+
 (comment |  uncomment) that: key(cmd-/)
 
-#bookmark
+## ++++++++++++++++++++++++++ bookmark .
 
 (toggle | create | add) [line] bookmark | bookmark (that | line): user.vscode("bookmarks.toggle")
 (remove | delete) bookmark: user.vscode("bookmarks.toggle")
@@ -291,25 +356,25 @@ copy bookmark name:
     key(cmd-c)
     key(esc)
 
-
 (toggle | show | hide | go | view | bar) (bookmarks | marks | links) [(bar | panel | view)]: 
     user.vscode("workbench.view.extension.bookmarks")
-    
 
-(open | pick | search) (bookmark | mark) :
-    user.vscode("bookmarks.list")
-(show | open | list) (bookmarks | marks):
-    user.vscode("bookmarks.list")
-[(show | open)] (bookmarks | marks) list:
-    user.vscode("bookmarks.list")
-    
+## ++++++ pick bookmark from current file .
 
-[search] (bookmarks | marks) [for] <user.text>:
+[(open | pick | search)] [file] (bookmark | bookmarks | mark | marks ) :
+    user.vscode("bookmarks.list")
+
+[(hunt | search)] (bookmarks | marks) [for] <user.text>:
     user.vscode("bookmarks.list")
     sleep(300ms)
     insert(text)
 
-search all bookmarks [<user.text>]:
+## ++++++ pick bookmark from all files .
+
+[(open | pick | search)] all (bookmark | bookmarks | mark | marks ) :
+    user.vscode("bookmarks.listFromAllFiles")
+
+[(hunt | search)] all (bookmarks | marks) [for] [<user.text>]:
     user.vscode("bookmarks.listFromAllFiles")
     sleep(300ms)
     insert(text)
@@ -322,19 +387,33 @@ open bookmark [(text | name)]:
     sleep(300ms)
     key(enter)
 
-(bar | focus | go) (bookmarks | marks | links) [(bar | panel | view)]:
+## +++++++++++++++++++ bookmarks panel .
+
+(focus | show) (bookmarks | marks | links) [(bar | panel | view)]:
     user.vscode("bookmarksExplorer.focus")
+
+# todo:  get these action working again
+# bar marks: user.vscode("workbench.view.extension.bookmarks")
+
+# bar marks: 
+#     user.vscode("workbench.action.openView")
+#     sleep(100ms)
+#     insert("Bookmarks")
+#     sleep(100ms)
+#     key(enter)
 
 [go] next (bookmark | mark):    user.vscode("bookmarks.jumpToNext")
 [go] (previous | prev | last) (bookmark | mark): user.vscode("bookmarks.jumpToPrevious")
 
-###########
 
-copy line link:             user.vscode("extension.linkLine")
+## ++++++++++++++++ line link url .
 
-[(show | view | bar)] projects: user.vscode("projectsExplorerFavorites.focus")
+copy (line | code) (link | address):           
+    user.vscode("extension.linkLine")
 
-#favorites
+#go to link (via raycast) is in general.talon
+
+## +++++++++++++++++++++++++ favorites (file bookmarks) .
 
 [(show | view | bar)] favorites: user.vscode("workbench.view.extension.favorites-explorer")
 
@@ -412,53 +491,95 @@ restart ( lsp | ell es pee) [server]: user.vscode("calva.clojureLsp.restart")
     
 (hide | clear) notifications: user.vscode("notifications.clearAll")
 
+ ## +++++++ expand and minimize editors .
+
+expand group | group max: 
+    user.vscode("workbench.action.minimizeOtherEditors")
+
+expand [(editor | tab)] group [and] hide (bars | sidebars | bar | sidebar) | [(editor | tab)] group full | hide other [(editor | tab)] groups: 
+    user.vscode("workbench.action.maximizeEditorHideSidebar")
+
+(toggle | flip | reset) [(editor | tab)] group (size | sizes): 
+    user.vscode("workbench.action.toggleEditorWidths")
+
+## ++++++++++++++++++++++++ close tabs .
+
+close (saved | safe) (tabs | editors): user.vscode("workbench.action.closeUnmodifiedEditors")
+
+close other (tabs | editors) [in] [group] : user.vscode("workbench.action.closeOtherEditors")
+
+(open | reopen) [last] closed (tab | editor): user.vscode("workbench.action.reopenClosedEditor")
+
 
 #tab navigation
 
-move (editor | tab | group): 
-    key(cmd-shift-p)
-    insert("view move editor")
-
+#open editors sidebar
 (bar | show | go | focus) open (files | editors) [view]: user.vscode("workbench.files.action.focusOpenEditorsView")
-split (editor | tab) (right | horizontally ):               user.vscode("workbench.action.splitEditor")
 
-split (editor | tab) (down  | vertically):          user.vscode("workbench.action.splitEditorDown")
+go (next | last) [(editor | tab)] group: user.vscode("workbench.action.navigateEditorGroups")
 
-split (editor | tab) up:            user.vscode("workbench.action.splitEditorUp")
-Split (editor | tab | column) left:          user.vscode("workbench.action.splitEditorLeft")
-split (editor | tab | column) right:         user.vscode("workbench.action.splitEditorRight")
-split [(editor | tab)] (ortho | orthogonal | other) :         user.vscode("workbench.action.splitEditorOrthogonal")
+
+## ++++++++++++++ andreas tab nav commands .
+[(focus | go)] tab {self.letter} [{self.letter}]:
+    user.run_rpc_command("andreas.focusTab", "{letter_1}{letter_2 or ''}")
+
+[(focus | go)] tab <number>:
+    myNum = number - 1
+    user.run_rpc_command("andreas.openEditorAtIndex", number)
+
+
+
+## ++++++++++++++++++++++++ split tab in place.
 
 split [(editor | tab)] [in group]:      user.vscode("workbench.action.toggleSplitEditorInGroup")
+
+split (editor | tab) up:            user.vscode("workbench.action.splitEditorUp")
+Split (editor | tab) left:          user.vscode("workbench.action.splitEditorLeft")
+split (editor | tab) right:         user.vscode("workbench.action.splitEditorRight")
+
+split (editor | tab) (right | horizontally | horizontal ):               user.vscode("workbench.action.splitEditor")
+split (editor | tab) (down  | vertically | vertical):          user.vscode("workbench.action.splitEditorDown")
+split [(editor | tab)] (ortho | orthogonal | other) :         user.vscode("workbench.action.splitEditorOrthogonal")
+
+ ## ++++++++ split tab to (another?) group .
 
 split [(editor | tab)] to right [group]:      user.vscode("workbench.action.splitEditorToRightGroup")
 split [(editor | tab)] to left [group]:      user.vscode("workbench.action.splitEditorToLeftGroup")
 split [(editor | tab)] [to] next [group]:       user.vscode("workbench.action.splitEditorToNextGroup")
+
 split [(editor | tab)] [to] first [group]:      user.vscode("workbench.action.splitEditorToFirstGroup")
 split [(editor | tab)] [to] last [group]:       user.vscode("workbench.action.splitEditorToLastGroup")
+
 split [(editor | tab)] [to] above [group]:      user.vscode("workbench.action.splitEditorToAboveGroup")
 split [(editor | tab)] [to] below [group]:      user.vscode("workbench.action.splitEditorToBelowGroup")
 
-[(shuffle | shift)] (editor | tab | tabby) (right | push | rate): user.vscode("workbench.action.moveEditorRightInGroup")
-[(shuffle | shift)] (editor | tab | tabby) (left | pull): user.vscode("workbench.action.moveEditorLeftInGroup")
+ ## +++++++++++++ shuffle tabs in group .
 
-(send | .move) (editor | tab) group right: user.vscode("workbench.action.moveActiveEditorGroupRight")
+[(shuffle | shift | push)] (editor | tab) (right | rite) [in group]: user.vscode("workbench.action.moveEditorRightInGroup")
+
+[pull] [(shuffle | shift)] (editor | tab) left [in group]: user.vscode("workbench.action.moveEditorLeftInGroup")
+
+ ## +++++++++ move tab group .
+
+(send | move) (editor | tab) group right: user.vscode("workbench.action.moveActiveEditorGroupRight")
 (send | move) (editor | tab) group left: user.vscode("workbench.action.moveActiveEditorGroupLeft")
 (send | move) (editor | tab) group up: user.vscode("workbench.action.moveActiveEditorGroupUp")
 (send | move) (editor | tab) group down: user.vscode("workbench.action.moveActiveEditorGroupDown")
 
-(send | move) (editor | tab) to right [group]: user.vscode("workbench.action.moveEditorToRightGroup")
-(send | move) (editor | tab) to left [group]: user.vscode("workbench.action.moveEditorToLeftGroup")
+ ## +++++++++ move tab to another group .
+
+move (editor | tab): 
+    key(cmd-shift-p)
+    insert("view move editor") 
+
+(send | move) (editor | tab) [to] right [group]: user.vscode("workbench.action.moveEditorToRightGroup")
+(send | move) (editor | tab) [to] left [group]: user.vscode("workbench.action.moveEditorToLeftGroup")
 (send | move) (editor | tab) ([to] above | up) [group]: user.vscode("workbench.action.moveEditorToAboveGroup")
 (send | move) (editor | tab) ([to]  below | down) [group]: user.vscode("workbench.action.moveEditorToBelowGroup")
 (send | move) (editor | tab) [to]  first [group]: user.vscode("workbench.action.moveEditorToFirstGroup")
 (send | move) (editor | tab) [to]  last [group]: user.vscode("workbench.action.moveEditorToLastGroup")
 (send | move) (editor | tab) [to]  (previous | prev) [group]: user.vscode("workbench.action.moveEditorToPreviousGroup")
 (send | move) (editor | tab) [to]  next [group]: user.vscode("workbench.action.moveEditorToNextGroup")
-
-[i] please  (send | move) (editor | tab):
-    key(cmd-shift-p)
-    insert("move editor")
 
 #---------- layouts
 
@@ -511,7 +632,15 @@ customize layout: usBeer.vscode("workbench.action.customizeLayout")
 
 (toggle | show | hide ) mini map: user.vscode("editor.action.toggleMinimap")
 
+
+#-------------- scopes
+
 (show | view | visualize) (tokens | scopes | scope): user.vscode("editor.action.inspectTMScopes")
+
+bar scopes: user.vscode("cursorless.scopes.focus")
+show scope visualizer: user.vscode("cursorless.showScopeVisualizer")
+hide scope (visualizer | viz): user.vscode("cursorless.hideScopeVisualizer")
+#--------------
 
 (toggle | show | hide ) [cursorless] (hats | decorations): user.vscode("cursorless.toggleDecorations")
 (hats | decorations) (on | off): user.vscode("cursorless.toggleDecorations")
@@ -527,11 +656,14 @@ open workspace (settings | sitting) (json | jay son): user.vscode("workbench.act
 (bar | hide | show) file history: user.vscode("gitlens.showFileHistoryView")
 go file history: user.vscode("gitlens.views.fileHistory.focus")
 
-#sources
+# git sources
 [(show | view | bar)] (sources | git | source control): user.vscode("workbench.view.scm")
+
 go (sources | git | source control): user.vscode("workbench.scm.focus")
+
 (show | view | bar | go) remotes: user.vscode("gitlens.views.remotes.focus")
 
+git (commands | menu): user.vscode("gitlens.gitCommands")
 
 
 #todo make this hard prefix operational in vscode
@@ -540,24 +672,13 @@ go (sources | git | source control): user.vscode("workbench.scm.focus")
 (find | show) references:   user.vscode("references-view.findReferences")
 (go | bar) references:      user.vscode("references-view.tree.focus")
 
-#andreas nav commands
-[(focus | go)] tab {self.letter} [{self.letter}]:
-    user.run_rpc_command("andreas.focusTab", "{letter_1}{letter_2 or ''}")
+## ++++++++++++++++++ file tree extension
 
-[(focus | go)] tab <number>:
-    myNum = number - 1
-    user.run_rpc_command("andreas.openEditorAtIndex", number)
-
-take to line <number>:
-    user.run_rpc_command("andreas.selectTo", number)
-
-#file tree extension
-
-# This opens the file tree in the sidebar
+## ++++++++++++++++++ This opens the file tree in the sidebar
 bar [file] tree:            user.vscode("workbench.view.extension.filetree")
 go [file] tree:             user.vscode("filetree.focus")
 
-# File tree commands
+## ++++++++++++++++++ File tree commands
 tree <user.letters>:
     user.run_rpc_command("talon-filetree.toggleDirectoryOrOpenFile", letters)
 tree parent <user.letters>:
@@ -593,10 +714,14 @@ tree current:
 #which key menu
 (which | witch) key:        user.vscode("whichkey.show")
 
-copy relative path:         user.vscode("copyRelativeFilePath")
+## +++++++++++++++++++++++++ copy path .
+
 copy path:                  user.vscode("copyFilePath")
 
-#pokey stuff
+copy relative path:         user.vscode("copyRelativeFilePath")
+
+## +++++++++++++++++++++++ pokey stuff .
+
 symbol last:                user.vscode("gotoNextPreviousMember.previousMember")
 symbol next:                user.vscode("gotoNextPreviousMember.nextMember")
 
@@ -623,7 +748,6 @@ break:
 
 (bar | go) outline: user.vscode("outline.focus")
 
-rename symbol: user.vscode("editor.action.rename")
 
 browse (json | jason): user.vscode("vscode-json-editor.start")
 
@@ -643,37 +767,46 @@ move (view | widget): user.vscode("workbench.action.moveView")
 
 reset all view locations: user.vscode("workbench.action.resetViewLocations")
 
-format [current] (form | for): user.vscode("calva-fmt.formatCurrentForm")
+format selection: user.vscode("editor.action.formatSelection")
+format document: user.vscode("editor.action.formatDocument")
+format modified lines: user.vscode("editor.action.formatChanges")
 
 
-#toggle sidebars and panel visibility
-
-(hide | close) [(both | all)] (bars | sidebars) | wide (view | mode) | (tab | tabs) wide: 
-    user.vscode("workbench.action.closeSidebar")
-    user.vscode("workbench.action.closeAuxiliaryBar")
-
-(show | open | toggle) [(both | all)] (bars | sidebars) | stuffed mode: 
-    user.vscode("workbench.action.toggleSidebarVisibility")
-    user.vscode("workbench.action.toggleAuxiliaryBar")
-    
-#toggle bars and panel visibility
-
-(hide | close) [all] views | focused (view | mode) | focus (tab | tabs | file): 
-    user.vscode("workbench.action.closeSidebar")
-    user.vscode("workbench.action.closeAuxiliaryBar")
-    user.vscode("workbench.action.closePanel")
-    
-    
-(show | open | toggle) [all] views | kit mode: 
-    user.vscode("workbench.action.toggleSidebarVisibility")
-    user.vscode("workbench.action.toggleAuxiliaryBar")
-    user.vscode("workbench.action.togglePanel")
+## +++++++++++++++++++++ swap sidebars .
 
 swap (bars | sidebars) :  user.vscode("workbench.action.toggleSidebarPosition")
 
-#------------------
 
-open project: user.vscode("vscode-open-project.openProject")
+## ++++++++++++++++++++++++++ navigate projects.
+
+open project [in]  [new window]: user.vscode("projectManager.listProjectsNewWindow")
+[open | go] get bit project [in]  [new window]: 
+    user.vscode("projectManager.listProjectsNewWindow")
+    sleep(300ms)
+    insert("gbo")
+    sleep(100ms)
+    key(enter)
+
+[open | go] (Talon | talent) project [in]  [new window]: 
+    user.vscode("projectManager.listProjectsNewWindow")
+    sleep(300ms)
+    insert("talon-user")
+    sleep(100ms)
+    key(enter)
+
+[open | go] (ground | grounded | grounded sol | groundedsol | granted sol ) project [in]  [new window]: 
+    # user.run_rpc_command("projectManager.listProjectsNewWindow", "groundesol w biff")
+    user.vscode("projectManager.listProjectsNewWindow")
+    sleep(300ms)
+    insert("groundesol")
+    sleep(100ms)
+    key(enter)
+
+change project: user.vscode("projectManager.listProjects")
+
+[(show | view | bar)] projects: user.vscode("projectsExplorerFavorites.focus")
+
+## ++++++++++++++++++++++ font sizes .
 
 (terminal | term) font [size] down: user.vscode("terminalFontSize.decrease")
 (terminal | term) font [size] up: user.vscode("terminalFontSize.increase")
@@ -686,4 +819,47 @@ open project: user.vscode("vscode-open-project.openProject")
     sleep(100ms)
     key(enter)
 
+## ___________________________________ .
+
 check [for] extension updates | update extensions: user.vscode("workbench.extensions.action.checkForUpdates")
+
+## ___________________________________ .
+
+open file: key(cmd-p)
+
+## ++++++++++++++++++++++++++ Dividers .
+
+(insert | add | make) divider line: user.vscode("comment-divider.insertSolidLine")
+
+(insert | add | make) [divider] header [<user.text>]: 
+    insert("{text or ''}")
+    sleep(100ms)
+    user.vscode("comment-divider.makeSubHeader")
+
+(talon | talent) (subhead | subheader) pretext: insert("## ++++++++++++++++++")
+
+## ++++++++++++++++++++++ Line numbers .
+
+(toggle | show | hide) line numbers: user.vscode("lntoggle.toggle")
+
+copy line number: user.vscode("copy-current-line-number.helloWorld")
+
+## ++++++++++++++++ jump to line .
+
+go [to] line: user.vscode("workbench.action.gotoLine")
+
+go [to] line <user.number_string>: 
+    user.vscode("workbench.action.gotoLine")
+    sleep(100ms)
+    insert("{number_string}")
+    key(enter)
+
+go [to] line (paste | pace | clip): 
+    user.vscode("workbench.action.gotoLine")
+    sleep(100ms)
+    edit.paste()
+    key(enter)
+
+## +++++++++++++++++++++++ refactoring .
+
+rename symbol: user.vscode("editor.action.rename")
