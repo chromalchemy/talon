@@ -160,8 +160,7 @@ go parent [block]: key(ctrl-alt-u)
     # insert("go to parent block")
     # sleep(200ms)
     # key(enter)
-
-
+    
 deep nav:key(alt-g)
 
 ###sidebar
@@ -265,16 +264,21 @@ copy [block] (ref | reference): key (cmd-shift-c)
     key(enter)
     key(space)
 
-
-
 #block nav / editing
 
 #set up ordinal versions, with defualt sleep timing
+
+## ++++++++++++++++++++++++  block navigation
+
 next block: key(ctrl-n)
+
+## ++++++++++++++++++++++++ move block 
+
 (block | move) up: key(cmd-shift-up)
 (block | move) down: key(cmd-shift-down)
 (block | move) (in | right | forward | fore | four): key(tab)
 (block | move) (out | left | back): key(shift-tab)
+
 #make unlimited todo
 (block | move) (all [(the way | way)] (out | left | back) | top level | base | wayback ): 
     key(shift-tab)
@@ -284,6 +288,8 @@ next block: key(ctrl-n)
     key(shift-tab)
     sleep(100ms)
     key(shift-tab)
+
+ ## +++++++++++++++++++++ block folding .
 
 (fold | close | hide (children | kids)) block: key(cmd-up)
 (unfold | open | show (children | kids)) block: key(cmd-down)
@@ -308,6 +314,7 @@ expand block:
     insert("collapse all blocks on page")
     sleep(100ms)
     key(enter)
+    
 (expand | unfold) all [blocks]: 
     key(cmd-p)
     sleep(100ms)
@@ -327,6 +334,7 @@ expand block:
     sleep(500ms)
     key("{mynumber}")
 
+## +++++++++++++ navigate within block .
 
 go block end: 
     edit.select_all()
@@ -338,7 +346,9 @@ go block start:
     sleep(100ms)
     key(left)
 
-(delete block | block delete): 
+## ++++++++++++++++++++++++ kill block .
+
+(delete | kill | remove) block | block delete: 
     # key(cmd-backspace)
     key(esc)
     key(delete)
@@ -346,10 +356,9 @@ go block start:
 
 #select blocks
 
-(multi select | multiselect |  select multi | exit multi):  key(cmd-m)
+multi select | multiselect |  select multi | exit multi:  key(cmd-m)
 
 select all blocks: key(cmd-shift-a)
-
 
 
 # Select the block above where the cursor is placed
@@ -365,11 +374,10 @@ select all blocks: key(cmd-shift-a)
 # Cmd
 # Shift
 # A
-
+## ++++++++++++++++++++++++ new blocks .
 
 #child block
-
-(insert | new | add | put) (child | kid) [block] | (child | kid) block | nuchal:
+(insert | new | add | put) (child | kid | right) [block] | (child | kid | right) block | nuchal:
     #todo change to enter command
     edit.select_all()
       sleep(100ms)
@@ -378,7 +386,7 @@ select all blocks: key(cmd-shift-a)
     key(tab)
 
     
-#todo: copy imlementation from block all the way back
+#todo: copy implementation from block all the way back
 new base block:
     edit.select_all()
     sleep(100ms)
@@ -392,16 +400,8 @@ new base block:
     sleep(100ms)
     key(shift-tab)
 
-#todo is this the same as split..?
-nest here:
-    key(enter)
-    sleep(100ms)
-    key(tab)
-    key(escape)
-    key(escape)
-
 # Insert block above or below, skips children   
-(new | insert) block (up | above): key(cmd-shift-i)
+[(new | insert)] block (up | above): key(cmd-shift-i)
 [(new | insert)] block [(down | below)]: key(cmd-shift-k)
 new block back: 
     key(cmd-shift-k)
@@ -410,10 +410,19 @@ new block back:
 
 #todo use new block down instead of going to end and enter in all of these commends
 
+## ++++++++++++++++++++++++++++ split/break block .
+#todo is this the same as split..?
+nest here:
+    key(enter)
+    sleep(100ms)
+    key(tab)
+    key(escape)
+    key(escape)
+
 (split | break) here [block] : 
     key(enter)
 
-(split | break) [point] : 
+(split | break | brick | brack) [point] : 
     mouse_click(0)
     user.mouse_drag_end()
     sleep(100ms)
@@ -428,7 +437,7 @@ new block back:
 # sleep(100ms)
       
 
-(split | break) (child | right) [block] [point]: 
+(split | break) (child | right | rate | [and] nest) [block] [point]: 
     mouse_click(0)
     user.mouse_drag_end()
     sleep(100ms)
@@ -437,9 +446,9 @@ new block back:
     key(tab)
     key(down)
     key(shift-tab)
-    key(escape)
+    key(escape:2)
 
-(split | break) (child | right) here [block]: 
+(split | break) (child | right | rate | [and] nest) [block] here: 
     key(enter)
     sleep(100ms)
     key(tab)
@@ -447,7 +456,7 @@ new block back:
     key(shift-tab)
     key(escape)
 
-(split | break) [and] (stack | top) [block]: 
+(split | break) [and] (stack | top) [block] [here]: 
     # edit.paragraph_end()
     key(shift-end)
     sleep(300ms)
@@ -463,11 +472,15 @@ new block back:
     # key(tab)
     # key(down)
     # key(shift-tab)
-    
+
+## ++++++++++++++++++++++++ copy block 
+
 copy block:
     key(esc)
     sleep(100ms)
     key(cmd-c)
+
+## +++++++++++++++++++++++ paste block .
 
 paste [new] block:
     edit.select_all()
@@ -501,11 +514,12 @@ paste (child | kid) [block] raw:
 # new parent: 
 #     edit.paragraph_end()
 
+## ++++++++++++++++++++++ multi select .
 
 [toggle] (multi select | select blocks) | select (multi | multiple) [blocks]: key(cmd-m)
 
+## +++++++++++++++++++++ #move blocks .
 
-#move blocks 
 # move to top of date
 
 #make versions that leav reference
@@ -642,7 +656,30 @@ kebab (h tag | hashtag) <user.text>:
 
 (paste | pace) (unformatted | raw): key(shift-cmd-v)
 
-([make] (todo | action) ): key(cmd-return)
+make (todo | action): 
+    key(cmd-return)
+    sleep(100ms)
+    # key(escape)
+
+mark done: 
+    key(cmd-return)
+    sleep(100ms)
+    # key(escape)
+
+make done: 
+    key(cmd-return:2)
+    sleep(100ms)
+    # key(escape)
+
+make undone: 
+    key(cmd-return:2)
+    sleep(100ms)
+    key(escape)
+
+remove (todo | action): 
+    key(cmd-return:2)
+    sleep(100ms)
+    key(escape)
 
 bold that: key(cmd-b)
 
@@ -659,15 +696,19 @@ code (line | inline) that: key(` esc:2)
 
 exit: key(esc)
 
-new code block: 
-    key(`:3)   
+## +++++++++++++++++++++++ code blocks .
+
+new code block: key(`:3)   
+
 code block that: key(`:3 esc)
+
 (make code block | block make code [block]): 
     key(cmd-a)
     sleep(100ms)
     key(`:3 esc)
 
-#add components
+
+## +++++++++++++++++++ add components .
 
 (insert | (add | ad) | paste) divider:
     insert("---")
@@ -734,14 +775,21 @@ pick page <user.letter>:
 open page in tab: 
     key(ctrl:down)
     mouse_click(0)
-    
-go (crown | top [of] [page]):
-    key(cmd-p)
-    sleep(100ms)
-    insert("wb jump to top of page")
-    sleep(100ms)
-    key(enter)    
 
+## ++++++++++++++++++++++++++ navigate .
+# go top and bottom doesnt work, overriden by gener edit cmds?
+# tail doesnt work either
+
+go [to] crown [of] [page]: key(cmd-alt-shift-t)
+# key(cmd-p)
+# sleep(100ms)
+# insert("wb jump to top of page")
+# sleep(100ms)
+# key(enter)    
+
+go [to] base [of] [page]: key(cmd-shift-enter)   
+
+## +++++++++++++++++++++ insert blocks .
 
 #not behaving consistently, assign keyboard shortcuts    
 (insert | new) top block:
@@ -767,3 +815,5 @@ dedent: key(shift-tab)
 indent less: key(shift-tab)
 
 nope: key(cmd-z)
+
+(go | page | scroll) [to] top: key(home) 

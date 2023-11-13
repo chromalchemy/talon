@@ -15,6 +15,7 @@ def clojure_fn(m) -> str:
 
 
 ctx.lists["self.clojure_core"] = {
+    "hiccup container": ":<>",
     "asterisk": "*",
     "asterisk quote": "*'",
     "last result": "*1",
