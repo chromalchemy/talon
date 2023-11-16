@@ -179,7 +179,7 @@ bar search <user.text>:
     sleep(100ms)
     insert(text)
 
-go [bar] search [bar] (list | results): user.vscode("search.action.focusSearchList")
+go [bar] search [bar] (list | results) | search bar: user.vscode("search.action.focusSearchList")
 
 bar search tree:            user.vscode("search.action.viewAsTree")
 bar search list:            user.vscode("search.action.viewAsList")
