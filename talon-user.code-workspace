@@ -363,6 +363,26 @@
 			{
 				"filePath": "/Users/ryan/.talon/user/rango-talon/rango_direct_clicking.talon",
 				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/settings/websites.csv",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/settings/system_paths.csv",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/settings/words_to_replace.csv",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/settings/additional_words.csv",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/settings/abbreviations.csv",
+				"group": "Default"
 			}
 		],
 		"favorites.sortOrder": "ASC",

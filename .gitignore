@@ -12,3 +12,4 @@ rango-talon/
 rango-talon/
 cursorless-snippets/.calva/output-window/
 .lsp/.cache/
+.joyride/.nrepl-port
