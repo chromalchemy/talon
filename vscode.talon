@@ -211,7 +211,7 @@ move search results to tab:
 (search | find) in files:   user.vscode("workbench.action.findInFiles")
 
 ### search files
-
+ 
 #todo: use file hunt commands instead?
 (open | find | fine | search) (file | files) [<user.text>]:
     key(cmd-p)
@@ -863,3 +863,20 @@ go [to] line (paste | pace | clip):
 ## +++++++++++++++++++++++ refactoring .
 
 rename symbol: user.vscode("editor.action.rename")
+
+## ++++++++++++++++++ native selection .
+
+expand (selection | take): user.vscode("editor.action.smartSelect.expand")
+^take more$: user.vscode("editor.action.smartSelect.expand")
+
+take form: user.vscode("editor.action.selectToBracket")
+
+## +++++++++++++++++++++ Navigate diff 
+#in regular editor
+next change: user.vscode("workbench.action.editor.nextChange")
+
+last change: user.vscode("workbench.action.editor.previousChange")
+
+#in compare view
+next diff change: user.vscode("workbench.action.compareEditor.nextChange")
+last diff change: user.vscode("workbench.action.compareEditor.previousChange")
