@@ -256,7 +256,7 @@ Open query (drawer | builder): key(cmd-shift-ctrl-alt-8)
 
 #block refs
 
-copy [block] (ref | reference): key (cmd-shift-c)
+copy [block] (ref | reference): key(cmd-shift-c)
 
 # todo: turn this into proper ordinal
 (choose | pick) (<number_small> | that): 
