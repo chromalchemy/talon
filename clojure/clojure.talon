@@ -1,7 +1,7 @@
-tag: user.clojure
-mode: command
-and code.language: clojure
+code.language: clojure
 -
+
+tag(): user.clojure_core
 
 # tag(): user.code_imperative
 # tag(): user.code_object_oriented
@@ -30,18 +30,21 @@ and code.language: clojure
 
 hello test: insert("test worked!!!")
 
-<user.clojure_fn>: insert("{clojure_fn}")
+test notification: app.notify('this is a notification')
 
-function <user.clojure_fn>: 
-    key(delete)
-    user.insert_between("({clojure_fn} ", ")")
+[(closure | clojure | my word)] {user.clojure_core}: 
+    insert("{clojure_core}")
 
-function <user.word>: 
-    key(delete)
-    user.insert_between("({word} ", ")")
+# function <user.clojure_fn>: 
+#     key(delete)
+#     user.insert_between("({clojure_fn} ", ")")
+
+# function <user.word>: 
+#     key(delete)
+#     user.insert_between("({word} ", ")")
 
 
-function it: 
-    selectedText = edit.selected_text()
-    key(delete)
-    user.insert_between("({selectedText} ", ")")
+# function it: 
+#     selectedText = edit.selected_text()
+#     key(delete)
+#     user.insert_between("({selectedText} ", ")")
