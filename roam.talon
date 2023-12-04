@@ -607,7 +607,7 @@ kebab (h tag | hashtag) <user.text>:
     
 # bracket tagging
 
-(s tag | dub square) that: 
+(s tag | dub square) [that] | make tag: 
     key([:2 right)
     
 (s tag | dub square) (word | single | 1):
