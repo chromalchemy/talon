@@ -222,9 +222,16 @@ paste there: key(cmd-v)
     sleep(100ms)
     key(enter)
 
+
+
 #todo: get this working in finder
 
-# end drag | drag end: user.mouse_drag_end()
+option drag:
+    user.mouse_drag(0)
+    sleep(300ms)
+    key(alt:down)
+    user.grid_close()
+
 option drag:
     user.mouse_drag(0)
     sleep(300ms)
@@ -232,6 +239,7 @@ option drag:
     user.grid_close()
     
 hold option: key(alt:down)
+
     
 shift drag:
     key(shift:down)
