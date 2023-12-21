@@ -321,50 +321,43 @@ pop forward | go (next | forward | for) used [(editor | tab)] :
 
 (comment |  uncomment) that: key(cmd-/)
 
-## ++++++++++++++++++++++++++ bookmark .
 
-(toggle | create | add) [line] bookmark | bookmark (that | line): user.vscode("bookmarks.toggle")
+
+## ++++++++++++++++++++++++++ bookmarks .
+
+
+#--------------------create bookmarks
+(toggle | create | add) [line] bookmark | bookmark line: user.vscode("bookmarks.toggle")
 (remove | delete) bookmark: user.vscode("bookmarks.toggle")
 
-bookmark (that | line) (name | named): user.vscode("bookmarks.toggleLabeled")
-bookmark (that | line) <user.text>:
+bookmark (that | line) (name | named | labeled): user.vscode("bookmarks.toggleLabeled")
+
+bookmark (that | line) [with] [label] <user.text>:
     user.vscode("bookmarks.toggleLabeled")
     insert(text)
     sleep(300ms)
     key(enter)
 
-rename bookmark:
-    mouse_click(1)
+bookmark that:
+    edit.copy()
+    user.vscode("bookmarks.toggleLabeled")
+    edit.paste()
     sleep(300ms)
-    key(down)
     key(enter)
+    
 
-rename bookmark [<user.text>]:
-    mouse_click(1)
-    sleep(300ms)
-    key(down)
-    key(enter)
-    insert(text)
-    sleep(300ms)
-    key(enter)
+## ++++++++++++++++++++++ bookmark nav .
 
-copy bookmark name:
-    mouse_click(1)
-    sleep(300ms)
-    key(down)
-    key(enter)
-    key(cmd-c)
-    key(esc)
+[go] next (bookmark | mark):    user.vscode("bookmarks.jumpToNext")
+[go] (previous | prev | last) (bookmark | mark): user.vscode("bookmarks.jumpToPrevious")
 
-(toggle | show | hide | go | view | bar) (bookmarks | marks | links) [(bar | panel | view)]: 
-    user.vscode("workbench.view.extension.bookmarks")
 
 ## ++++++ pick bookmark from current file .
 
 [(open | pick | search)] [file] (bookmark | bookmarks | mark | marks ) :
     user.vscode("bookmarks.list")
 
-[(hunt | search)] (bookmarks | marks) [for] <user.text>:
+[(hunt | search)] [file] (bookmarks | marks) [for] <user.text>:
     user.vscode("bookmarks.list")
     sleep(300ms)
     insert(text)
@@ -389,6 +382,11 @@ open bookmark [(text | name)]:
 
 ## +++++++++++++++++++ bookmarks panel .
 
+
+# (toggle | show | hide | go | view | bar) (bookmarks | marks | links) [(bar | panel | view)]: 
+#     user.vscode("workbench.view.extension.bookmarks")
+
+
 (focus | show) (bookmarks | marks | links) [(bar | panel | view)]:
     user.vscode("bookmarksExplorer.focus")
 
@@ -402,9 +400,31 @@ open bookmark [(text | name)]:
 #     sleep(100ms)
 #     key(enter)
 
-[go] next (bookmark | mark):    user.vscode("bookmarks.jumpToNext")
-[go] (previous | prev | last) (bookmark | mark): user.vscode("bookmarks.jumpToPrevious")
 
+# hover commands
+
+rename bookmark:
+    mouse_click(1)
+    sleep(300ms)
+    key(down)
+    key(enter)
+
+rename bookmark [<user.text>]:
+    mouse_click(1)
+    sleep(300ms)
+    key(down)
+    key(enter)
+    insert(text)
+    sleep(300ms)
+    key(enter)
+
+copy bookmark name:
+    mouse_click(1)
+    sleep(300ms)
+    key(down)
+    key(enter)
+    key(cmd-c)
+    key(esc)
 
 ## ++++++++++++++++ line link url .
 
