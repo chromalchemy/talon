@@ -64,10 +64,14 @@ new layer: key(shift-cmd-n)
 copy layer style:  key(cmd-ctrl-c)
 paste layer style: key(cmd-ctrl-v)
 
-move group [tool]: key(shift-f19)
-move layer [tool]: key(shift-cmd-f19)
 move [tool]: key(v)
-move (next | last | prev) :key(shift-v)
+move group [tool]: 
+    key(v)
+    key(shift-f19)
+move layer [tool]: 
+    key(v)
+    key(shift-cmd-f19)
+move (next | last | prev) [tool] :key(shift-v)
 
 Text [tool]: key(t)
 
