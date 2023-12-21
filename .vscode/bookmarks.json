@@ -14,14 +14,114 @@
 			"path": "vscode.talon",
 			"bookmarks": [
 				{
-					"line": 326,
+					"line": 330,
 					"column": 10,
 					"label": ""
 				},
 				{
-					"line": 358,
+					"line": 339,
 					"column": 12,
 					"label": "testing"
+				}
+			]
+		},
+		{
+			"path": "photoshop/ps_menu_commands.clj",
+			"bookmarks": [
+				{
+					"line": 3,
+					"column": 15,
+					"label": ""
+				},
+				{
+					"line": 169,
+					"column": 14,
+					"label": "type-menu"
+				},
+				{
+					"line": 232,
+					"column": 16,
+					"label": "filter-menu"
+				},
+				{
+					"line": 321,
+					"column": 14,
+					"label": "file-menu"
+				},
+				{
+					"line": 411,
+					"column": 16,
+					"label": "select-menu"
+				},
+				{
+					"line": 441,
+					"column": 14,
+					"label": "view-menu"
+				},
+				{
+					"line": 517,
+					"column": 14,
+					"label": "edit-menu"
+				},
+				{
+					"line": 589,
+					"column": 15,
+					"label": "image-menu"
+				},
+				{
+					"line": 660,
+					"column": 16,
+					"label": "window-menu"
+				},
+				{
+					"line": 746,
+					"column": 18,
+					"label": "menu-commands"
+				},
+				{
+					"line": 765,
+					"column": 19,
+					"label": "talon-command"
+				},
+				{
+					"line": 825,
+					"column": 18,
+					"label": "process-menu"
+				}
+			]
+		},
+		{
+			"path": "community/settings.talon",
+			"bookmarks": [
+				{
+					"line": 14,
+					"column": 39,
+					"label": "continuous_scroll_amount"
+				},
+				{
+					"line": 26,
+					"column": 33,
+					"label": "enable_hiss_scroll"
+				},
+				{
+					"line": 35,
+					"column": 32,
+					"label": "wheel_down_amount"
+				},
+				{
+					"line": 52,
+					"column": 1,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "community/core/numbers/ordinals.py",
+			"bookmarks": [
+				{
+					"line": 18,
+					"column": 13,
+					"label": "ordinal_words"
 				}
 			]
 		}
