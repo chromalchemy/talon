@@ -2,16 +2,23 @@ app.name: Adobe Photoshop (Beta)
 app.name: Adobe Photoshop 2024
 -
 
+## +++++++++++++++ open and save files .
+
 new (file | pane): key(cmd-n)
 open file: key(cmd-o)
 close file: key(cmd-w)
 open folder: key(cmd-shift-o)
 save as: key(cmd-shift-s)
 
+ ## +++++++++++++++++++++++++ undeform
 
 undeform: user.menu_select('File|Scripts|[M] Undeform 1.1')
 
+ ## ++++++++++++++++++++++ screen modes .
+
 standard screen mode: user.menu_select('View|Screen Mode|Standard Screen Mode')
+
+ ## +++++++++++++++++++++++++++ zooming .
 
 zoom fit [on screen]: key(cmd-0)
 zoom fit artboard [on screen]: user.menu_select('View|Fit Artboard on Screen')
@@ -20,8 +27,9 @@ zoom (base | 100): key(cmd-1)
 zoom (2 x | 200): user.menu_select('View|200%')
 zoom actual [size]: user.menu_select('View|Actual Size')
 
-(toggle | hide | show) panels:  key(tab)
+## +++++++++++++++++++++ toggle visual stuff .
 
+(toggle | hide | show) panels:  key(tab)
 
 (toggle | hide | show) extras:  key(cmd-h)
 (toggle | hide | show) layer edges:  user.menu_select('View|Show|Layer Edges')
@@ -31,21 +39,35 @@ zoom actual [size]: user.menu_select('View|Actual Size')
 (toggle | hide | show)  smart guides: user.menu_select('View|Show|Smart Guides')
 (toggle | hide | show) grid: user.menu_select('View|Show|Grid')
 
+## +++++++++++ keyboard shortcuts
 
 keyboard shortcuts: key(alt-shift-cmd-k)
 
+ ## +++++++++++++++++++++++++ selecting .
+
 deselect: key(cmd-d)
+
+ ## ++++++++++++++++ history navigation .
 
 # step backwards [<user.n20>]: key("cmd-alt-z:{n20 or 1}")
 # step forwards [<user.n20>]: key("cmd-shift-z:{n20 or 1}")
 
-(brush | brushy) [(s | size)] down [<user.number_string>]: key("[:{number_string or 1}")
-(brush | brushy) [(s | size)] up [<user.number_string>]: key("]:{number_string or 1}")
-brush [tool]: key(b)
-(other | next) brush [tool]: key(shift-b)
-brush (next | last | prev): key(shift-b)
+ ## ++++++ brush  manipulation .
 
-rotate [tool]: key(r)
+ ## ++++++++++++++++++++++++ brush size .
+
+brush [size] down [<user.number_string>]: key("[:{number_string or 1}")
+brush [size] up [<user.number_string>]: key("]:{number_string or 1}")
+
+## ++++++++++++++++++++ Brush hardness .
+
+[brush] (hardness | hard) up [<user.number_string>]: 
+    key("shift-]:{number_string or 1}")
+
+[brush] (hardness | hard) down [<user.number_string>]: 
+    key("shift-[:{number_string or 1}")
+
+ ## ++++++++++++++++++++++++++++++ flow .
 
 flow <user.number_string>: key("ctrl-shift-{number_string}")
     
@@ -64,20 +86,33 @@ new layer: key(shift-cmd-n)
 copy layer style:  key(cmd-ctrl-c)
 paste layer style: key(cmd-ctrl-v)
 
+
+
+## ++++++++++++++++++++++++ Move tool .
+
 move [tool]: key(v)
+
 move group [tool]: 
     key(v)
     key(shift-f19)
+
 move layer [tool]: 
     key(v)
     key(shift-cmd-f19)
+
 move (next | last | prev) [tool] :key(shift-v)
 
+## +++++++++++++++++++++++++ text tool .
+
 Text [tool]: key(t)
+
+ ## ++++++++++++++++++ layer visibility .
 
 (show | hide) layer:  key(cmd-,)
 layer (show | hide):  key(cmd-,)
 toggle layer [visibility]: key(cmd-,)
+
+ ## ++++++++++++ layer stack navigation .
 
 layer (send | move) [to] (back | bottom):  key(cmd-shift-[)
 layer (send | move) [to] (front | top):  key(cmd-shift-])
@@ -88,6 +123,8 @@ layer (send | move) (down | back | backwards | backward) [<digits>]:
     key(cmd-[)
     repeat(digits - 1)
 
+ ## ++++++++++++++++++ gradient overlay .
+
 gradient overlay: 
     key(cmd-alt-shift-ctrl-l)
     sleep(100ms)
@@ -95,6 +132,7 @@ gradient overlay:
     sleep(100ms)
     key(enter)
 
+ ## +++++++++++++++++++++++ menu search .
 
 search menu <user.text>:
     key(cmd-alt-shift-ctrl-l)
@@ -108,6 +146,8 @@ hit menu <user.text>:
     sleep(100ms)
     key(enter)
 
+ ## ++++++++++++++++++++++ layer styles .
+
 outer glow: 
     key(cmd-alt-shift-ctrl-l)
     sleep(300ms)
@@ -115,13 +155,24 @@ outer glow:
     sleep(300ms)
     key(enter)
 
+ ## +++++++++++++++++++++++ lock layers .
+
 layer (lock | unlock):  key(cmd-/)
+
+ ## +++++++++++++++++++++ smart objects .
+
 (make | convert to) smart object: key(ctrl-f11)
+
+ ## +++++++++++++++++++++++++ transform .
 
 transform: key(cmd-t)
 
+ ## +++++++++++++++++++++++++++ filters .
+
 camera (raw | module): key(shift-cmd-a)
 
+
+## +++++++++++++++++++++++++++++ transform draggging .
 
 centered [scale] drag:
     user.mouse_drag(0)
@@ -129,7 +180,6 @@ centered [scale] drag:
     sleep(2000ms)
     key("alt:down")
     
-
 clone drag:
     key("alt:down")
     user.mouse_drag(0)
@@ -137,17 +187,22 @@ clone drag:
     user.grid_close()
 
 set [transform] (anchor | origin) [point]:
-    key("alt:down")
+    key(alt:down)
     mouse_click(0)
 
+ ## +++++++++++++++++ font manipulation .
+
+
+ ## ++++++++++++++++++++++++++ tracking .
+
+#  # mimic("point tracking")
 go tracking: 
-    # mimic("point tracking")
     mouse_move(914.6171875, 186.5703125)
     sleep(3300ms)
     mouse_click(0)
 
+# # mimic("point tracking")
 [set] tracking [<user.number_string>]: 
-    # mimic("point tracking")
     mouse_move(914.6171875, 186.5703125)
     sleep(2500ms)
     mouse_click(0)
@@ -162,8 +217,11 @@ go tracking:
     mouse_click(0)
     insert(mynum)
     key(enter)
-    
+
+## +++++++++++++++++++++++++++++ drags .
+
 #doesnt work for dragging transform
+
 drag copy:
     key(alt:down)
     user.mouse_drag(0)
@@ -176,6 +234,7 @@ drag [current] layer:
     # # close the mouse grid
     user.grid_close()
     
+ ## +++++++++++++++++++++++ pick colors .
 
 (modal | mode) color picker:
     key(cmd:down alt:down ctrl:down)
@@ -183,22 +242,71 @@ drag [current] layer:
 
 pick color: key(n)
 
-^okay$: key(enter)
-
 #todo: not working right, mouse doesnt click
 (choose | take ) color:
     # mouse.click(0)
     # sleep(100ms)
     key(enter)
-    
-# these drags dont work in photoshop
 
-swap colors: key(x)
 default colors: key(d)
+
+(swap | flip) (colors | color | brush): key(x)
+
+## ++++++++++++++++++ Masking commands .
+
+ paint (inside | outside): key(x)
+
+fill [with] foreground color: key(alt-delete)
+fill [with] background color: key(cmd-delete)
+
+invert layer: key(cmd-i)
+
+(swap | flip) masking [brush] [polarity]: key(x)
+
+
+color black | paint mask | (mask | erase) (pixels | layer): 
+    key(d)
+    sleep(100ms)
+    key(x)
+
+color white | erase mask | (unmask | paint) (pixels | layer): 
+    key(d)
+    
+
+
+
+
+
+ ## +++++++++++++++++++++++++++ confirm .
+
+^okay$: key(enter)
+
+## +++++++++++++++++++++++ layer masks .
+
+(select | go)  layer mask: key(cmd-\)
+
+ ## ++++++++++++++++++++++++ quick mask .
 
 (toggle | show | hide) quick mask: key(q)
 
+ ## +++++++++++++++++++++++++++++ tools .
+
 eraser [tool]: key(e)
+zoom [tool]: key(z)
+brush [tool]: key(b)
+
+(hand | pan) [tool]: key(h)
+hold (hand | pan): key(space:down)
+(release | exit) hand: key(space:up)
+
+rotate (tool | canvas): key(r)
+(other | next) brush [tool]: key(shift-b)
+brush (next | last | prev): key(shift-b)
+
+rotate [tool]: key(r)
+
+
+ ## +++++++++++++++++++++++++ edit text .
 
 edit text [(here | point)]: 
     key(t:down)
