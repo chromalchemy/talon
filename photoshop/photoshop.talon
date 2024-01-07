@@ -323,5 +323,25 @@ take text [(here | point)]:
     key(cmd-a)
     # edit.select_all()
 
+## +++++++++++++++++++++++++++++ inbox .
 
+Center layer  [on (page | artboard )]:
+    key(cmd-a)
+    sleep(100ms)
+    user.menu_select('Layer|Align Layers to Selection|Horizontal Centers')
+    sleep(200ms)
+    key(cmd-d)
+
+
+## ++++++ Clone and rasterize gradient .
+
+Clone and (raster | rasterize) layer:
+    user.menu_select('Layer|Duplicate Layer...')
+    sleep(300ms)
+    key(enter)
+    sleep(300ms)
+    key(cmd-,)
+    sleep(300ms)
+    key(alt-[)
+    user.menu_select('Layer|Rasterize|Layer')
 
