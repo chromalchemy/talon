@@ -14,14 +14,19 @@
 			"path": "vscode.talon",
 			"bookmarks": [
 				{
-					"line": 330,
+					"line": 331,
 					"column": 10,
 					"label": ""
 				},
 				{
-					"line": 339,
+					"line": 340,
 					"column": 12,
 					"label": "testing"
+				},
+				{
+					"line": 381,
+					"column": 4,
+					"label": ""
 				}
 			]
 		},
@@ -122,6 +127,16 @@
 					"line": 18,
 					"column": 13,
 					"label": "ordinal_words"
+				}
+			]
+		},
+		{
+			"path": "mixed-mode.talon",
+			"bookmarks": [
+				{
+					"line": 8,
+					"column": 13,
+					"label": "short circuit over cmd"
 				}
 			]
 		}

@@ -220,7 +220,7 @@ refresh [user] (repl snippets | calva user config): user.vscode("calva.rereadUse
 #  need to localize to a vscode workspace
 [repl] (build | rebuild) (templates | theme): 
     user.vscode("calva.loadFile")
-    sleep(1000ms)
+    sleep(500ms)
     user.run_rpc_command("calva.runCustomREPLCommand", "b")
     
 test run repl command:

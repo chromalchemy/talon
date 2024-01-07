@@ -32,8 +32,29 @@ hello test: insert("test worked!!!")
 
 test notification: app.notify('this is a notification')
 
-[(closure | clojure | my word)] {user.clojure_core}: 
+[(closure | clojure)] [token] {user.clojure_core}: 
     insert("{clojure_core}")
+
+
+keyword [<user.text>]: 
+    insert(":")
+    user.insert_formatted(text, "DASH_SEPARATED")
+    
+(namespace | namespaced) keyword [<user.text>]: 
+    insert("::")
+    user.insert_formatted(text, "DASH_SEPARATED")
+
+open keyword <user.format_code>+: 
+    insert(":")
+    user.insert_many(format_code_list)
+
+open namespace keyword <user.format_code>+: 
+    insert("::")
+    user.insert_many(format_code_list)
+
+# <user.format_code>+ over: user.insert_many(format_code_list)
+# <user.formatters> that: user.formatters_reformat_selection(user.formatters)
+
 
 # function <user.clojure_fn>: 
 #     key(delete)
