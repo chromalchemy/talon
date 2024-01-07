@@ -387,6 +387,10 @@
 			{
 				"filePath": "/Users/ryan/.talon/user/community/core/numbers/numbers.talon",
 				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/text/formatters.py",
+				"group": "Default"
 			}
 		],
 		"favorites.sortOrder": "ASC",

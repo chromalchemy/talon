@@ -325,12 +325,13 @@ pop forward | go (next | forward | for) used [(editor | tab)] :
 
 ## ++++++++++++++++++++++++++ bookmarks .
 
-
 #--------------------create bookmarks
+
 (toggle | create | add) [line] bookmark | bookmark line: user.vscode("bookmarks.toggle")
+
 (remove | delete) bookmark: user.vscode("bookmarks.toggle")
 
-bookmark (that | line) (name | named | labeled): user.vscode("bookmarks.toggleLabeled")
+bookmark (that | line) (named | labeled): user.vscode("bookmarks.toggleLabeled")
 
 bookmark (that | line) [with] [label] <user.text>:
     user.vscode("bookmarks.toggleLabeled")
@@ -338,15 +339,14 @@ bookmark (that | line) [with] [label] <user.text>:
     sleep(300ms)
     key(enter)
 
-bookmark that:
+bookmark that [(paste | pace)]:
     edit.copy()
     user.vscode("bookmarks.toggleLabeled")
     edit.paste()
     sleep(300ms)
     key(enter)
     
-
-## ++++++++++++++++++++++ bookmark nav .
+## ++++++++++++++++++++++ jump to via bookmark order .
 
 [go] next (bookmark | mark):    user.vscode("bookmarks.jumpToNext")
 [go] (previous | prev | last) (bookmark | mark): user.vscode("bookmarks.jumpToPrevious")
@@ -354,54 +354,35 @@ bookmark that:
 
 ## ++++++ pick bookmark from current file .
 
-[(open | pick | search)] [file] (bookmark | bookmarks | mark | marks ) :
+(hunt | search | pick | list) file (bookmark | bookmarks | mark | marks ) [for] [<user.text>]:
     user.vscode("bookmarks.list")
-
-[(hunt | search)] [file] (bookmarks | marks) [for] <user.text>:
-    user.vscode("bookmarks.list")
-    sleep(300ms)
+    # sleep(200ms)
     insert(text)
 
 ## ++++++ pick bookmark from all files .
-
-[(open | pick | search)] all (bookmark | bookmarks | mark | marks ) :
+(hunt | search | pick | list) [all] (bookmark | bookmarks | mark | marks ) [for] [<user.text>]:
     user.vscode("bookmarks.listFromAllFiles")
-
-[(hunt | search)] all (bookmarks | marks) [for] [<user.text>]:
-    user.vscode("bookmarks.listFromAllFiles")
+    # sleep(100ms)
+    key(enter)
     sleep(300ms)
     insert(text)
 
-#open copied bookmark
-open bookmark [(text | name)]:
+       
+#open copied bookmark from all files
+open (bookmark | mark) [(paste | pace)]:
     user.vscode("bookmarks.listFromAllFiles")
+    # sleep(100ms)
+    key(enter)
     sleep(300ms)
     key(cmd-v)
     sleep(300ms)
     key(enter)
 
-## +++++++++++++++++++ bookmarks panel .
-
-
-# (toggle | show | hide | go | view | bar) (bookmarks | marks | links) [(bar | panel | view)]: 
-#     user.vscode("workbench.view.extension.bookmarks")
-
-
-(focus | show) (bookmarks | marks | links) [(bar | panel | view)]:
+# bookmarks panel .
+(focus | show | bar) (bookmarks | marks | links) [(bar | panel | view)]:
     user.vscode("bookmarksExplorer.focus")
 
-# todo:  get these action working again
-# bar marks: user.vscode("workbench.view.extension.bookmarks")
-
-# bar marks: 
-#     user.vscode("workbench.action.openView")
-#     sleep(100ms)
-#     insert("Bookmarks")
-#     sleep(100ms)
-#     key(enter)
-
-
-# hover commands
+ ## ++++++++++++++++++++ hover commands .
 
 rename bookmark:
     mouse_click(1)
