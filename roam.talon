@@ -444,15 +444,26 @@ nest here:
     key(enter)
     sleep(100ms)
     key(tab)
-    key(down)
-    key(shift-tab)
     key(escape:2)
 
 (split | break) (child | right | rate | [and] nest) [block] here: 
     key(enter)
     sleep(100ms)
     key(tab)
-    key(down)
+    key(escape)
+
+(split | break) [block] (back  | left) [point]: 
+    mouse_click(0)
+    user.mouse_drag_end()
+    sleep(100ms)
+    key(enter)
+    sleep(100ms)
+    key(shift-tab)
+    key(escape:2)
+
+(split | break) [block] (back  | left)  here: 
+    key(enter)
+    sleep(100ms)
     key(shift-tab)
     key(escape)
 
