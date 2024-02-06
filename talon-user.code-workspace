@@ -391,6 +391,18 @@
 			{
 				"filePath": "/Users/ryan/.talon/user/community/core/text/formatters.py",
 				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/settings.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/talon-ai-tools/GPT/staticPrompt.talon-list",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/talon-ai-tools",
+				"group": "Default"
 			}
 		],
 		"favorites.sortOrder": "ASC",
