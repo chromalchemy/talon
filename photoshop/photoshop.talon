@@ -69,17 +69,33 @@ brush [size] up [<user.number_string>]: key("]:{number_string or 1}")
 
  ## ++++++++++++++++++++++++++++++ flow .
 
-flow <user.number_string>: key("ctrl-shift-{number_string}")
-    
-flow double <user.number_string> <user.number_string> : 
-    key(ctrl-shift:down)
-    key("ctrl-shift-{number_string_1}")
-    key("ctrl-shift-{number_string_2}")
+[brush] flow <user.number_string> <user.number_string> : 
+    key("shift-{number_string_1}")
+    key("shift-{number_string_2}")
 
-flow single <digits>: 
-    key(ctrl-shift:down)
-    key(ctrl-shift-0)
-    key("ctrl-shift-{digits}")
+[brush] flow single <digits> : 
+    key(shift:down)
+    key(shift-0)
+    key("shift-{digits}")
+
+[brush] flow level <user.number_string>: 
+    key("shift-{number_string}")
+
+## +++++++++++++++++++++++++++ opacity .
+
+[brush] (opacity | transparency | trans | opaque) <user.number_string> <user.number_string> : 
+    key("{number_string_1}")
+    key("{number_string_2}")
+
+[brush] (opacity | transparency | trans | opaque) level <user.number_string>: 
+    key("{number_string}")
+
+
+[brush] full (opacity | transparency | trans | opaque)  | brush fully opaque: 
+    key(0)    
+
+
+# ---------------
 
 new layer: key(shift-cmd-n)
 
@@ -91,6 +107,8 @@ paste layer style: key(cmd-ctrl-v)
 ## ++++++++++++++++++++++++ Move tool .
 
 move [tool]: key(v)
+(next | last | prev) move tool :key(shift-v)
+
 
 move group [tool]: 
     key(v)
@@ -100,11 +118,10 @@ move layer [tool]:
     key(v)
     key(shift-cmd-f19)
 
-move (next | last | prev) [tool] :key(shift-v)
 
 ## +++++++++++++++++++++++++ text tool .
 
-Text [tool]: key(t)
+(Text | type) tool: key(t:down)
 
  ## ++++++++++++++++++ layer visibility .
 
@@ -248,13 +265,13 @@ pick color: key(n)
     # sleep(100ms)
     key(enter)
 
-default colors: key(d)
+(default | reset) colors: key(d)
 
 (swap | flip) (colors | color | brush): key(x)
 
 ## ++++++++++++++++++ Masking commands .
 
- paint (inside | outside): key(x)
+paint (inside | outside): key(x)
 
 fill [with] foreground color: key(alt-delete)
 fill [with] background color: key(cmd-delete)
@@ -273,10 +290,6 @@ color white | erase mask | (unmask | paint) (pixels | layer):
     key(d)
     
 
-
-
-
-
  ## +++++++++++++++++++++++++++ confirm .
 
 ^okay$: key(enter)
@@ -291,13 +304,13 @@ color white | erase mask | (unmask | paint) (pixels | layer):
 
  ## +++++++++++++++++++++++++++++ tools .
 
-eraser [tool]: key(e)
-zoom [tool]: key(z)
-brush [tool]: key(b)
+eraser [(tool | to)]: key(e)
+zoom [(tool | to)]: key(z)
+brush [(tool | to)]: key(b)
 
-(hand | pan) [tool]: key(h)
-hold (hand | pan): key(space:down)
-(release | exit) hand: key(space:up)
+(hand | pan) [(tool | to)]: key(h)
+hold (hand | pan) | pan mode: key(space:down)
+(release | exit) (hand | pan): key(space:up)
 
 rotate (tool | canvas): key(r)
 (other | next) brush [tool]: key(shift-b)
