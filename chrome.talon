@@ -30,7 +30,7 @@ search (bookmarks | bookmark | marks) [<user.text>]:
     insert(text)
 
 
-copy [link] (address | url) (link | point | here)$:
+copy  (link | address | url) (point | here)$:
     mouse_click(1)
     sleep(100ms)
     insert("copy link address")
@@ -49,3 +49,20 @@ search force <user.text>:
     insert(text)
     sleep(100ms)
     key(enter)
+
+    
+
+
+## ++++++++++ copy web page address to roam .
+
+(notes | note | no to | not to | don't | roam | rome) capture address | (copy | send) address [to] notes:
+    browser.focus_address()
+    sleep(50ms)
+    edit.copy()
+    key(cmd-ctrl-alt-shift-;)
+    sleep(200ms)
+    edit.paste()
+    sleep(100ms)
+    key(cmd-enter)
+    sleep(100ms)
+    key(escape)
