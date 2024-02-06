@@ -10,13 +10,30 @@ tag(): user.line_commands
     
 # todo: setup defualt timeout
     
-please: key(cmd-p)
+please [<user.text>]: 
+    key(cmd-p)
+    sleep(200ms)
+    insert(text)
 
-#left sidebar
+## +++++++++++++++++++++ open settings .
+
+^workbench settings$: 
+    key(cmd-p)
+    sleep(200ms)
+    insert("settings workbench")
+    key(enter)
+
+^(tag (icons | icon) | magic (tag | tags)) settings$: 
+    key(cmd-p)
+    sleep(200ms)
+    insert("magic tags")
+    key(enter)
+
+#------------------left sidebar
 
 (toggle | hide |  show) ( shortcuts |  (left | l) sidebar | bookmarks): key(cmd-\)
 
-#not working
+#------------------not working
 add (shortcut | bookmark): 
     key(cmd-p)
     sleep(100ms)
@@ -24,7 +41,7 @@ add (shortcut | bookmark):
     sleep(100ms)
     key(enter)
 
-# embed block
+#----------------- embed block
 
 embed (block | ref | reference):
     insert("/embed")
@@ -47,7 +64,7 @@ embed (block | black | ref | reference) (children | kids):
     sleep(100ms)
     key(esc)
 
-# block/page mentions
+# ----------- block/page mentions
 
 (paste | embed | insert) (block | black | ref | reference) (mentions | links):
     key({:2)
@@ -73,8 +90,6 @@ embed (block | black | ref | reference) (children | kids):
     sleep(100ms)
     insert(text)
 
-
-
     ###-------- alternative implementation
     # edit.paste()
     # sleep(300ms)
@@ -91,6 +106,7 @@ embed (block | black | ref | reference) (children | kids):
     # sleep(300ms)
     # key(esc)
 
+## +++++++++++++++++++++++ Swap blocks .
 
 ^(replace | swap) (ref | reference) [with original]: 
     key(cmd-p)
@@ -106,11 +122,6 @@ embed (block | black | ref | reference) (children | kids):
     sleep(100ms)
     key(enter)
 
-
-(cut | carve) block: 
-    key(esc)
-    sleep(100ms)
-    key(cmd-x)
 
 #navigation
 
@@ -138,12 +149,12 @@ go [page] bottom:
 go today:  key(ctrl-shift-d)
 go tomorrow: key(ctrl-alt-n)
 go next day:  key(ctrl-alt-n)
-go (prev | previous | last) day:  key(ctrl-alt-p)
+go (prev | previous | last | yesterday) day:  key(ctrl-alt-p)
 
 go back:  key(cmd-[)
 go (forward | fore):  key(cmd-])
 
-jump link: key(ctr-o)
+jump link: key(ctrl-o)
 
 page blocks [panel]: key(cmd-shift-p)
 page (refs | references) [panel]: 
@@ -160,8 +171,7 @@ go parent [block]: key(ctrl-alt-u)
     # insert("go to parent block")
     # sleep(200ms)
     # key(enter)
-
-
+    
 deep nav:key(alt-g)
 
 ###sidebar
@@ -196,7 +206,7 @@ open page in sidebar:
     sleep(100ms)
     key(enter)
 
-clear sidebar: key(ctr-l)
+clear sidebar: key(ctrl-l)
 
 ###roam prefs
 
@@ -207,11 +217,28 @@ open hotkeys:
     sleep(100ms)
     key(enter)
 
+ ## +++++++++++++++++++++++++++ roam queries .
+
+#native roam query
+# {{[[query]]: {and: [[ex-A]] {or: [[ex-B]] [[ex-C]]}}}}
+
+#query builder
+Open query (drawer | builder): key(cmd-shift-ctrl-alt-8)
+
+# open query drawer
+
+## +++++++++++++++++++ Searching 
+
 #search
 
 #top bar search
-search: key(cmd-u)
 
+#top quick search 
+search [<user.text>]:
+    key(cmd-u)
+    sleep(200ms)
+    insert(text)
+    
 #traditional page search
 search page: key(cmd-f)
 exit search: key(cmd-enter)
@@ -242,13 +269,7 @@ search (whole | entire) graph:
     # sleep(100ms)
     # key(escape)
 
-#native roam query
-# {{[[query]]: {and: [[ex-A]] {or: [[ex-B]] [[ex-C]]}}}}
 
-#query builder
-Open query (drawer | builder): key(cmd-shift-ctrl-alt-8)
-
-# open query drawer
 
 #roam portal search
 (go | open | search | toggle | show | hide) portal: key(cmd-ctrl-alt-shift-p)
@@ -257,24 +278,29 @@ Open query (drawer | builder): key(cmd-shift-ctrl-alt-8)
 
 #block refs
 
-copy [block] (ref | reference): key (cmd-shift-c)
+copy [block] (ref | reference): key(cmd-shift-c)
 
+# community dropdown cmd: drop up <number_small>: key("up:{number_small} enter")
 # todo: turn this into proper ordinal
-(choose | pick) (<number_small> | that): 
+^(choose | pick) (<number_small> | that): 
     key("down:{number_small or 1}")
     key(enter)
     key(space)
 
-
+^(choose | pick) <user.ordinals>: 
+    key("down:{ordinals}")
+    key(enter)
+    key(space)
+    
 
 #block nav / editing
 
 #set up ordinal versions, with defualt sleep timing
+
+## ++++++++++++++++++++++++  block navigation
+
 next block: key(ctrl-n)
-(block | move) up: key(cmd-shift-up)
-(block | move) down: key(cmd-shift-down)
-(block | move) (in | right | forward | fore | four): key(tab)
-(block | move) (out | left | back): key(shift-tab)
+
 #make unlimited todo
 (block | move) (all [(the way | way)] (out | left | back) | top level | base | wayback ): 
     key(shift-tab)
@@ -285,6 +311,8 @@ next block: key(ctrl-n)
     sleep(100ms)
     key(shift-tab)
 
+ ## +++++++++++++++++++++ block folding .
+
 (fold | close | hide (children | kids)) block: key(cmd-up)
 (unfold | open | show (children | kids)) block: key(cmd-down)
 
@@ -294,6 +322,7 @@ next block: key(ctrl-n)
     insert("collapse current block tree")
     sleep(100ms)
     key(enter)
+
 #only exands one leve deep (not recursive)
 expand block:
     key(cmd-p)
@@ -308,6 +337,7 @@ expand block:
     insert("collapse all blocks on page")
     sleep(100ms)
     key(enter)
+    
 (expand | unfold) all [blocks]: 
     key(cmd-p)
     sleep(100ms)
@@ -327,6 +357,7 @@ expand block:
     sleep(500ms)
     key("{mynumber}")
 
+## +++++++++++++ navigate within block .
 
 go block end: 
     edit.select_all()
@@ -338,18 +369,30 @@ go block start:
     sleep(100ms)
     key(left)
 
-(delete block | block delete): 
-    # key(cmd-backspace)
-    key(esc)
+## ++++++++++++++++++++++++ kill block .
+
+# only for use when cursor is inside block
+(delete | kill | remove) [whole] block | block delete: 
+    key(cmd-backspace)
+    # key(esc)
+    # key(delete)
+
+# kill highlighted block(s)
+((delete | kill | remove) [(highlighted | selected | these)] [(multiple | multi)] blocks)| (delete | kill | remove) (highlighted | selected) block: 
     key(delete)
 
 
-#select blocks
+## ++++++++++++++++++++++++ cut blocks .
+(cut | carve) block: 
+    key(esc)
+    sleep(100ms)
+    key(cmd-x)
 
-(multi select | multiselect |  select multi | exit multi):  key(cmd-m)
+## +++++++++++++++++++++ select blocks .
+
+multi select | multiselect |  select multi | exit multi:  key(cmd-m)
 
 select all blocks: key(cmd-shift-a)
-
 
 
 # Select the block above where the cursor is placed
@@ -366,116 +409,32 @@ select all blocks: key(cmd-shift-a)
 # Shift
 # A
 
+## ++++++++++++++++++++++++ new blocks .
 
-#child block
+## ++++++++++ new block on top of page .
 
-(insert | new | add | put) (child | kid) [block] | (child | kid) block | nuchal:
-    #todo change to enter command
-    edit.select_all()
-      sleep(100ms)
-    key(right)
+#not behaving consistently, assign keyboard shortcuts    
+(insert | new) top block:
+    key(cmd-p)
+    sleep(200ms)
+    insert("wb jump to top of page")
+    sleep(200ms)
     key(enter)
-    key(tab)
-
-    
-#todo: copy imlementation from block all the way back
-new base block:
-    edit.select_all()
-    sleep(100ms)
-    key(right)
-    key(enter)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-
-#todo is this the same as split..?
-nest here:
-    key(enter)
-    sleep(100ms)
-    key(tab)
-    key(escape)
-    key(escape)
-
-# Insert block above or below, skips children   
-(new | insert) block (up | above): key(cmd-shift-i)
-[(new | insert)] block [(down | below)]: key(cmd-shift-k)
-new block back: 
-    key(cmd-shift-k)
-    sleep(500ms)
-    key(shift-tab)
-
-#todo use new block down instead of going to end and enter in all of these commends
-
-(split | break) [new] [block] : 
-    # mouse_click(0)
-    # close the mouse grid if open
-    # user.grid_close()
-    # End any open drags
-    # Touch automatically ends left drags so this is for right drags specifically
-    # user.mouse_drag_end()
-    # sleep(100ms)
-    key(enter)
-
-(split | break) [here | point] : 
-    mouse_click(0)
-    user.mouse_drag_end()
-    sleep(100ms)
-    key(enter)
-
-(split | break) (child | right) [block] [here | point]: 
-    mouse_click(0)
-    # close the mouse grid if open
-    user.grid_close()
-    # End any open drags
-    # Touch automatically ends left drags so this is for right drags specifically
-    user.mouse_drag_end()
-    sleep(100ms)
-    key(enter)
-    sleep(100ms)
-    key(tab)
-    key(down)
-    key(shift-tab)
-    key(escape)
-
-(split | break) (child | right) [block]: 
-    key(enter)
-    sleep(100ms)
-    key(tab)
-    key(down)
-    key(shift-tab)
-    key(escape)
-
-(split | break) [and] (stack | top) [block]: 
-    # mouse_click(0)
-    # close the mouse grid if open
-    # user.grid_close()
-    # End any open drags
-    # Touch automatically ends left drags so this is for right drags specifically
-    # user.mouse_drag_end()
-    # edit.paragraph_end()
-    key(shift-end)
-    sleep(300ms)
-    key(cmd-x)
-    sleep(300ms)
-    key(enter)
-    sleep(300ms)
-    key(shift-cmd-v)
-    sleep(300ms)
-    key(escape)
-    # key(enter)
-    # sleep(100ms)
-    # key(tab)
-    # key(down)
-    # key(shift-tab)
-    
-copy block:
+    sleep(200ms)
     key(esc)
-    sleep(100ms)
-    key(cmd-c)
+    sleep(200ms)
+    key(right)
+    sleep(300ms)
+    key(cmd-p)
+    sleep(200ms)
+    insert("Insert block above")
+    sleep(300ms)
+    key(esc)
+    sleep(200ms)
+    key(right)
+    
+
+## +++++++++++++++++++ new block below .
 
 paste [new] block:
     edit.select_all()
@@ -485,6 +444,29 @@ paste [new] block:
     key(cmd-v)
     sleep(100ms)
     key(esc)
+
+
+## +++++++++++++++++ new child block .
+
+(insert | new | add | put) (child | kid | right) [block] | (child | kid | right) block | nuchal:
+    #todo change to enter command
+    edit.select_all()
+    sleep(100ms)
+    key(right)
+    key(enter)
+    key(tab)
+
+# pasting children
+
+(insert | new | add | put) (child | kid | right) [block] (paste | pace) | (paste | pace) (child | kid | right | nuchal) [block]:
+    #todo change to enter command
+    edit.select_all()
+    sleep(100ms)
+    key(right)
+    key(enter)
+    key(tab)
+    sleep(100ms)
+    edit.paste()
 
 paste [new] (child | kid) [block]:
     edit.select_all()
@@ -506,17 +488,133 @@ paste (child | kid) [block] raw:
     key(tab)
     key(cmd-shift-v)
 
-# new parent: 
-#     edit.paragraph_end()
+ ## ++++++++++++++++++++ new block back .
+    
+#todo: copy implementation from block all the way back
+new base block:
+    edit.select_all()
+    sleep(100ms)
+    key(right)
+    key(enter)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
 
+## +++++++++++++ # Insert block above, .
+[(new | insert)] block (up | above): key(cmd-shift-i)
+
+## +++++++++++++ # Insert block below, .
+# skips children   
+[(new | insert)] block [(down | below)]: key(cmd-shift-k)
+new block back: 
+    key(cmd-shift-k)
+    sleep(500ms)
+    key(shift-tab)
+
+#todo use new block down instead of going to end and enter in all of these commends
+
+## ++++++++++++++++++++++++++++ split/break block .
+#todo is this the same as split..?
+nest here:
+    key(enter)
+    sleep(100ms)
+    key(tab)
+    key(escape)
+    key(escape)
+
+(split | break) here [block] : 
+    key(enter)
+
+(split | break | brick | brack) [point] : 
+    mouse_click(0)
+    user.mouse_drag_end()
+    sleep(200ms)
+    key(enter)
+
+# mouse_click(0)
+# # close the mouse grid if open
+# user.grid_close()
+# # End any open drags
+# # Touch automatically ends left drags so this is for right drags specifically
+# user.mouse_drag_end()
+# sleep(100ms)
+      
+
+(split | break) (child | right | rate | [and] nest) [block] [point]: 
+    mouse_click(0)
+    user.mouse_drag_end()
+    sleep(200ms)
+    key(enter)
+    sleep(100ms)
+    key(tab)
+    key(escape:2)
+
+(split | break) (child | right | rate | [and] nest) [block] here: 
+    key(enter)
+    sleep(100ms)
+    key(tab)
+    key(escape)
+
+(split | break) [block] (back  | left) [point]: 
+    mouse_click(0)
+    user.mouse_drag_end()
+    sleep(200ms)
+    key(enter)
+    sleep(100ms)
+    key(shift-tab)
+    key(escape:2)
+
+(split | break) [block] (back  | left)  here: 
+    key(enter)
+    sleep(100ms)
+    key(shift-tab)
+    key(escape)
+
+(split | break) [and] (stack | top) [block] [here]: 
+    # edit.paragraph_end()
+    key(shift-end)
+    sleep(300ms)
+    key(cmd-x)
+    sleep(300ms)
+    key(enter)
+    sleep(300ms)
+    key(shift-cmd-v)
+    sleep(300ms)
+    key(escape)
+    # key(enter)
+    # sleep(100ms)
+    # key(tab)
+    # key(down)
+    # key(shift-tab)
+
+## ++++++++++++++++++++++++ copy block 
+
+copy block:
+    key(esc)
+    sleep(100ms)
+    key(cmd-c)
+
+## ++++++++++++++++++++++ multi select .
 
 [toggle] (multi select | select blocks) | select (multi | multiple) [blocks]: key(cmd-m)
 
+## +++++++++++++++++++++ #move blocks .
 
-#move blocks 
-# move to top of date
 
-#make versions that leav reference
+## ++++++++++++++++++++++++ move block on page 
+
+(block | move) up: key(cmd-shift-up)
+(block | move) down: key(cmd-shift-down)
+(block | move) (in | right | forward | fore | four): key(tab)
+(block | move) (out | left | back): key(shift-tab)
+
+## ++++++++++++++++ move block to DNP date (str)
+
+#make versions that leave reference
 
 move [block] [to] tomorrow: 
     key(cmd-d)
@@ -525,6 +623,7 @@ move [block] [to] tomorrow:
     sleep(100ms)
     key(tab:2 enter)
 
+#todo: why inserting at bottom
 move [block] [to] today: 
     key(cmd-d)
     sleep(100ms)
@@ -537,6 +636,37 @@ move [block] [to] today:
     sleep(100ms)
     key(tab:2 enter)
 
+## ++++++++++++++++++++++ Move block to page .
+
+# make version that leaves reference
+
+# make take an official roam tag from a list
+
+
+move [block] [to] (paste | pace): 
+    key(cmd-alt-m)
+    # todo: why is this taking so long!
+    sleep(2500ms)
+    key(right)
+    sleep(100ms)        
+    edit.paste()
+    sleep(300ms)        
+    key(enter tab:2 enter)
+
+
+move [block] [to] (paste | pace) sidebar: 
+    key(cmd-p)
+    sleep(300ms)
+    insert("mbts")
+    sleep(300ms)
+    key(enter)
+    sleep(3000ms)
+    key(right)
+    sleep(200ms)        
+    edit.paste()
+    sleep(300ms)        
+    key(enter tab:2 enter)
+    
 
 #insert dates
 
@@ -554,14 +684,12 @@ insert tomorrow:
     sleep(100ms)
     key(space)
     
-
 #tagging 
 
 # Hash tagging
 
 ^tag <user.one_roam_tag>: 
-    insert("#{one_roam_tag}")
-
+    insert(" #{one_roam_tag} ")
 
 
 (h tag | hashtag) [that]: 
@@ -599,19 +727,33 @@ insert tomorrow:
 kebab (h tag | hashtag) <user.text>:
     insert("#")
     user.insert_formatted(text, "DASH_SEPARATED")
-    
-# bracket tagging
 
-(s tag | dub square) that: 
+
+# explicit hashtags
+
+make project: 
+    edit.select_all()
+    sleep(100ms)
+    key(right)
+    insert(" #project")
+    sleep(300ms)
+    key(enter)
+    
+## +++++++++++++++++ # bracket tagging .
+
+(make | new) tag: 
+    key([:2)
+    
+(square tag | dub square) [that]: 
     key([:2 right)
     
-(s tag | dub square) (word | single | 1):
+(square tag | dub square) (word | single | one):
     edit.select_word()
     # insert("[[")
     # edit.paste()
     # insert("]]")
 
-(s tag | dub square) <user.text>:
+(square tag | dub square) <user.text>:
     insert("[[")
     user.insert_formatted(text, "SLASH_SEPARATED")
     sleep(100ms)
@@ -619,7 +761,7 @@ kebab (h tag | hashtag) <user.text>:
     key(left delete)
     edit.word_right()
 
-(s tag | dub square) (auto | one | use) <user.text>:
+(square tag | dub square) (auto | one | use) <user.text>:
     insert("[[")
     user.insert_formatted(text, "SLASH_SEPARATED")
     sleep(100ms)
@@ -629,16 +771,16 @@ kebab (h tag | hashtag) <user.text>:
     edit.word_right()
     key(space)
 
-
+## +++++++++++++ block reference links .
     
-((bee | back) link | dub paren): 
+[new] (bee | back) link | dub paren: 
     key((:2)
     
 ((bee | back) link | dub paren) that: 
     key((:2 right)
         
 
-((bee | back) link | dub paren) <user.text>:
+[new]  ((bee | back) link | dub paren) <user.text>:
     insert("((")
     insert(text)
     # sleep(100ms)
@@ -647,36 +789,74 @@ kebab (h tag | hashtag) <user.text>:
     # edit.word_right()
     
 
-#formatting
+## +++++++++++++++++++++++   pasting
 
 (paste | pace) (unformatted | raw): key(shift-cmd-v)
 
-([make] (todo | action) ): key(cmd-return)
+## +++++++++++++++++++ edit checkboxes .
+
+make (todo | action): 
+    key(cmd-return)
+    sleep(100ms)
+    # key(escape)
+
+mark done: 
+    key(cmd-return)
+    sleep(100ms)
+    # key(escape)
+
+make done: 
+    key(cmd-return:2)
+    sleep(100ms)
+    # key(escape)
+
+make undone: 
+    key(cmd-return:2)
+    sleep(100ms)
+    key(escape)
+
+remove (todo | action): 
+    key(cmd-return:2)
+    sleep(100ms)
+    key(escape)
+
+## +++++++++++++++ markdown formatting .
 
 bold that: key(cmd-b)
 
+## ++++++++++++++++++++++++++ headings .
 heading one: key(cmd-alt-1)
 heading two: key(cmd-alt-2)
 heading three: key(cmd-alt-3)
 heading none: key(cmd-alt-0)
-    
+
+## +++++++++++++++++++   inline code  formatting.
 code (line | inline) that: key(` esc:2)
     # s = edit.selected_text() 
     # sf = "`" + s
     # insert(sf)
+ 
 
+## +++++++++++++++++++++++ code blocks .
+
+new code block: key(`:3)   
+
+code block that: key(`:3 esc)
+
+make code block | block make code [block]: 
+    key(cmd-a)
+    sleep(100ms)
+    key(`:3)
+    key(esc)
+
+   
+ ## +++++++++++++ enter general utility .
 
 exit: key(esc)
 
-new code block: 
-    key(`:3)   
-code block that: key(`:3 esc)
-(make code block | block make code [block]): 
-    key(cmd-a)
-    sleep(100ms)
-    key(`:3 esc)
+## +++++++++++++++++++ add components .
 
-#add components
+ ## ++++++++++++++++++++++++++ dividers .
 
 (insert | (add | ad) | paste) divider:
     insert("---")
@@ -694,17 +874,6 @@ new divider [block]:
 # edit.jump_line
 # edit.sentence_start
 
-
-
-# explicit tags
-
-make project: 
-    edit.select_all()
-    sleep(100ms)
-    key(right)
-    insert(" #project")
-    sleep(300ms)
-    key(enter)
 
     
 #tabs extension
@@ -743,34 +912,57 @@ pick page <user.letter>:
 open page in tab: 
     key(ctrl:down)
     mouse_click(0)
-    
-go (crown | top [of] [page]):
-    key(cmd-p)
-    sleep(100ms)
-    insert("wb jump to top of page")
-    sleep(100ms)
-    key(enter)    
 
+## ++++++++++++++++++++++++++ navigate .
+# go top and bottom doesnt work, overriden by gener edit cmds?
+# tail doesnt work either
 
-#not behaving consistently, assign keyboard shortcuts    
-(insert | new) top block:
-    key(cmd-p)
-    sleep(200ms)
-    insert("wb jump to top of page")
-    sleep(200ms)
-    key(enter)
-    sleep(200ms)
-    key(esc)
-    sleep(200ms)
-    key(right)
-    sleep(300ms)
-    key(cmd-p)
-    sleep(200ms)
-    insert("Insert block above")
-    sleep(300ms)
-    key(esc)
-    sleep(200ms)
-    key(right)
-    
+go [to] crown [of] [page]: key(cmd-alt-shift-t)
+# key(cmd-p)
+# sleep(100ms)
+# insert("wb jump to top of page")
+# sleep(100ms)
+# key(enter)    
+
+go [to] base [of] [page]: key(cmd-shift-enter)   
+
 dedent: key(shift-tab)
 indent less: key(shift-tab)
+
+nope: key(cmd-z)
+
+(go | page | scroll) [to] top: key(home) 
+
+[toggle] (multi select | select (multi | multiple [blocks])) [(off | on)]: key(cmd-m)
+
+## ++++++++++++++++ workbench extension .
+
+#deep nav (cursorless style) hats 
+
+^(hat | hats | nav | deep nav [hats] | block point | block hats | show hats)$: key(cmd-alt-0)
+
+(deep | do you) grab deep grab | go <user.number_string>: 
+    insert(number_string)
+    sleep(200ms)
+    key(enter)
+
+(deep | do you ) grab | go  <user.number_key>:
+    key(number_key)
+    sleep(100ms)
+    key(enter)
+    
+(deep | do you ) grab | go <user.number_key> <user.number_key>:
+    key(number_key_1 number_key_2)
+    sleep(100ms)
+    key(enter)
+
+(deep | do you ) grab | go  <user.letter>:
+    key("{letter}")
+    sleep(100ms)
+    key(enter)
+    
+(deep | do you ) grab | go  <user.letter> <user.letter>:
+    key("{letter_1} {letter_2}")
+    sleep(100ms)
+    key(enter)
+

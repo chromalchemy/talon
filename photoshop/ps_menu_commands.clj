@@ -823,18 +823,17 @@
             (map? item)
             (process-menu (assoc item :top-menu menu-name)))
           )))))
-(do
-  (->> menu-commands
-    (map process-menu)
-    #_(repeat 5)
-    flatten
-    (interpose "\n")
-    (apply str)
-    (str "app.name: Adobe Photoshop (Beta)\napp.name: Adobe Photoshop 2024\n-\n\n")
-    (spit "photoshop-menus.talon")
 
-    )
-  (println "wrote ps menu commands talon file"))
+(->> menu-commands
+  (map process-menu)
+  #_(repeat 5)
+  flatten
+  (interpose "\n")
+  (apply str)
+  (str "app.name: Adobe Photoshop (Beta)\napp.name: Adobe Photoshop 2024\n-\n\n")
+  (spit "photoshop-menus.talon"))
+
+(println "wrote ps menu commands talon file")
 
 ;; How many commands !?
 (comment

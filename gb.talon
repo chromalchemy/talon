@@ -35,7 +35,7 @@ tag(): browser
     key(tab enter)
 
 # constant contact editor
-email (add block | adblock | insert) link: 
+email (add block | adblock | insert | paste) link: 
     mouse_click(0)
     sleep(100ms)
     key(down)
@@ -46,3 +46,4 @@ email (add block | adblock | insert) link:
     sleep(30ms)
     key(enter)
     
+(paste | pace | insert) get bit address: insert("https://getbitoutdoors.com")

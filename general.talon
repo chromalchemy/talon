@@ -27,55 +27,64 @@ show (clip | clipboard | image | screengrab) [in] preview:
     sleep(600ms)
     key(cmd-n)
 
-
-
-
 #raycast 
-(raycast | ray cast): key(cmd-space)
 
-search (menu | menus): key(cmd-alt-shift-ctrl-l)
-
-run (copied | clipboard) in raycast:
+(raycast | ray cast | ray) [<user.text>]: 
     key(cmd-space)
+    insert(text)
+
+## ++++++ open pasted (path) via raycast .
+
+(go | open | run) (paste | pace | copied | carved | clipped | clipboard | clip) [(path | (code | line) link)] [in (code | finder | raycast)] | (raycast | cast | run) (paste | pace | copied | carved | clipped | clipboard | clip) [in raycast] :
+    key(cmd-space)
+    sleep(100ms)
     edit.paste()
     sleep(100ms)
-    key(enter) 
+    key(enter)
 
-run [that] in raycast:
-    selectedText = edit.selected_text() 
+ ## ++++++ run selected (path) in raycast .
+
+(go | open | run) (that | selected) [(path | (code | line) link)] [in (code | finder | raycast)] | (raycast | cast | run) (paste | pace | copied | carved | clipped | clipboard | clip) [in raycast]:
+    # selectedText = edit.selected_text() 
     key(cmd-space)
-    insert(selectedText)
-    sleep(100ms)
-    key(enter) 
+    # insert(selectedText)
+    # sleep(100ms)
+    # key(enter) 
 
-open paste path [in] [finder]:
-    key(cmd-space)
-    edit.paste()
-    sleep(100ms)
-    key(enter) 
 
-#spawns new window : todom make reuse open tab
+## ++++++++++++++++++ open saved finder path folder w raycast
 
+#spawns new window : todo make reuse open tab
 open <user.system_path> [folder]:
     key(cmd-space)
     insert(system_path)
     sleep(100ms)
-    key(enter) 
+    key(enter)
+    sleep(200ms)
+    key(cmd-o) 
 
+#open folder and osx File chooser  popup
 
-open that (path | in finder):
-    selectedText = edit.selected_text() 
-    key(cmd-space)
-    insert(selectedText)
+(modal | dialog) search [<user.text>]: 
+    key(cmd-f)
+    sleep(200ms)
+    insert(text)
+
+(modal | dialog) (browse | search) [(file |folder)] path:
+    key(cmd-shift-g) 
+
+(modal | dialog) open <user.system_path> [folder]:
+    key(cmd-shift-g) 
+    sleep(300ms)
+    insert(system_path)
     sleep(100ms)
     key(enter) 
 
-
-    
-
+## ++++++++++++++++++++ # search menus .
+search (menu | menus): key(cmd-alt-shift-ctrl-l)
 
 # finder
-show hidden folders: key(ctr-shift-period)
+show hidden folders: key(ctrl-shift-period)
 open file: key(cmd-o)
 view: key(space)
 close: key(space)
@@ -160,17 +169,7 @@ exit: key(escape)
 
 (unindent | un indent) [that]: key(shift-tab)
 
-(dell it | deli it | dell that): key(delete)
-
-(raycast that | run that in raycast):
-    key(cmd-space)
-    key(cmd-v)
-    key(enter)
-open [that] [(code | line)] [as] link [in code]:
-    key(cmd-space)
-    key(cmd-v)
-    key(enter)
-
+dell it | deli it | dell that: key(delete)
 
 # (go | show | open) (photoshop | ps | pee ess | photo ):
 #     key(cmd-space)
@@ -200,13 +199,14 @@ open [that] [(code | line)] [as] link [in code]:
 
 #bc bookmarks
 
+
 open (cats | categories):   user.open_url("https://store-7hstasnrjg.mybigcommerce.com/manage/products/categories")
 
 
 #other bookmarks
 # open (cursorless | cursor less) (docs | documentation): user.open_url("https://www.cursorless.org/docs/")
 
-select or: key(cmd-a)
+select (all | or): key(cmd-a)
 
 # [open] (cursorless | cursor less) (reference | cheat sheet | cheatsheet | wacky): user.open_url("file:///Users/ryan/.cursorless/cheatsheet.html")
 
@@ -219,9 +219,16 @@ paste there: key(cmd-v)
     sleep(100ms)
     key(enter)
 
+
+
 #todo: get this working in finder
 
-# end drag | drag end: user.mouse_drag_end()
+option drag:
+    user.mouse_drag(0)
+    sleep(300ms)
+    key(alt:down)
+    user.grid_close()
+
 option drag:
     user.mouse_drag(0)
     sleep(300ms)
@@ -229,6 +236,7 @@ option drag:
     user.grid_close()
     
 hold option: key(alt:down)
+
     
 shift drag:
     key(shift:down)
@@ -262,27 +270,51 @@ then: skip()
 
 
 
-#roam raycast 
-(note | roam | rome) capture: 
-    key(cmd-ctrl-alt-shift-;)
-    # key(cmd-space)
-    # insert("roam quick capture")
-    # sleep(100ms)
-    # key(enter)
+## ++++++++++++++++++++++ roam raycast extension
 
+(notes | note | no to | not to | don't | roam | rome) capture: 
+    key(cmd-ctrl-alt-shift-;)
 
 #input focus fails randomly
-(note | no to | not to | don't | roam | rome) capture (that | it | then): 
-    edit.copy()
-    sleep(100ms)
+
+#send copied text to roam
+(notes | note | no to | not to | don't | roam | rome) capture (paste | pace | clip) | (send) (clip | paste) [to] notes:
     key(cmd-ctrl-alt-shift-;)
     sleep(200ms)
     edit.paste()
 
-(ok | confirm) note:
+# Send selected text to roam
+(notes | note | no to | not to | don't | roam | rome) capture that | send that [to] notes:
+    # edit.copy()
+    key(cmd-c)
+    sleep(200ms)
+    key(cmd-ctrl-alt-shift-;)
+    sleep(200ms)
+    edit.paste()
+    sleep(100ms)
     key(cmd-enter)
     sleep(100ms)
-    key(escape:2)
+    key(escape)
+
+# Send selected text with point touch to roam
+(notes | note | no to | not to | don't | roam | rome) capture point | send point [to] notes:
+    key(shift:down)
+    mouse_click(1)
+    edit.copy()
+    key(cmd-ctrl-alt-shift-;)
+    sleep(200ms)
+    edit.paste()
+    sleep(100ms)
+    key(cmd-enter)
+    sleep(100ms)
+    key(escape)
+
+(ok | confirm | send) note:
+    key(cmd-enter)
+    sleep(100ms)
+    key(escape)
+
+ ## +++++++++++++++++++++ basic editing .
 
 dedent: key(shift-tab)
 
@@ -331,3 +363,30 @@ take (Pointer | point):
 # user.file_maDemo actionnager_open_directory(system_path)
 # file = user.file_manager_get_file_by_index(number_small - 1)
 # insert(file)
+
+## ++++++++++++ Navigate osx file menu .
+
+go menu: 
+    key(fn-ctrl-f2)
+
+go menu <user.letter>: 
+    key(fn-ctrl-f2)
+    insert(letter)
+    key(down)
+
+go menu <user.letters> : 
+    key(fn-ctrl-f2)
+    insert(letters)
+    key(down)
+
+go menu <user.text>: 
+    key(fn-ctrl-f2)
+    insert(text)
+    key(down)
+
+menu pick <user.text>: 
+    insert(text)
+    
+menu (touch | punch | hit | press | select) <user.text>: 
+    insert(text)
+    key(enter)

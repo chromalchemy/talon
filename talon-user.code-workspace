@@ -363,6 +363,46 @@
 			{
 				"filePath": "/Users/ryan/.talon/user/rango-talon/rango_direct_clicking.talon",
 				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/settings/websites.csv",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/settings/system_paths.csv",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/settings/words_to_replace.csv",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/settings/additional_words.csv",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/settings/abbreviations.csv",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/numbers/numbers.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/core/text/formatters.py",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/settings.talon",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/talon-ai-tools/GPT/staticPrompt.talon-list",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/talon-ai-tools",
+				"group": "Default"
 			}
 		],
 		"favorites.sortOrder": "ASC",
