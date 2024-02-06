@@ -1,3 +1,4 @@
 hello function () {
-    take
+    let foo = 1;
+    console.log(foo);
 }
