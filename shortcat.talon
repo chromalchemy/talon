@@ -23,7 +23,7 @@
     insert(text)
 
 # Search menus for phrase and automatically choose first    
-(target | shortcat ) <user.text>:
+(target | shortcat ) force <user.text>:
     key("alt-shift-cmd-ctrl-f12")
     sleep(300ms)
     insert(text)
