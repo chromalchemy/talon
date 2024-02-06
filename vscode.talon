@@ -1,6 +1,7 @@
 app.name: Code
 -
 
+
 ########################### breadcrumbs
 
 # , already in community
@@ -98,11 +99,11 @@ choose [color] theme:       user.menu_select('Code|Settings…|Theme|Color Theme
 
 ## +++++++++++++++++++++++++++++++++ file explorer
 
-(show | reveal) file [in] [(explore | explorer)] | dock reveal | bar file: user.vscode("workbench.files.action.showActiveFileInExplorer")
+(show | reveal) file [in] [(explore | explorer)] | bar file: user.vscode("workbench.files.action.showActiveFileInExplorer")
 
-(show | reveal) file [in] (finder | files): user.vscode("workbench.files.action.showActiveFileInExplorer")
+(show | reveal) [file] [in] (finder | files): user.vscode("revealFileInOS")
 
-collapse (explore | Explorer) [(bar | view)] [folders]: user.vscode("workbench.files.action.collapseExplorerFolders")
+(fold | collapse) (explore | Explorer) [(bar | view)] [folders]: user.vscode("workbench.files.action.collapseExplorerFolders")
 
  ## ++++++++++++++++ sidebar visibility .
 
@@ -213,17 +214,20 @@ move search results to tab:
 ### search files
  
 #todo: use file hunt commands instead?
-(open | find | fine | search) (file | files) [<user.text>]:
+(open | find | fine | search) file [<user.text>]:
     key(cmd-p)
     sleep(100ms)
     insert(text)
 
-## find in folder
+## ++++++++++++++++++++ find in folder .
+
+## find in folder (folder must be focused in explorer)
 
 (search | find in) folder: key(shift-alt-f)
 
 # key(shift-cmd-e) # not reliable toggles back and forth
-(search | find) that in folder:
+
+(search | find) folder (paste | pace):
     key(shift-alt-f)
     sleep(200ms)
     key(cmd-v)
@@ -258,6 +262,8 @@ move search results to tab:
 
 # [go] (last |  previous | prev) form: key(alt-up)
 # [go] next form: key(alt-down)
+
+#move form defined in calva.talon
 
 ## ++++++++++++++++++ traverse recent edit location
 
@@ -320,6 +326,14 @@ pop forward | go (next | forward | for) used [(editor | tab)] :
  ## ++++++++++++++++++++++++++ comments .
 
 (comment |  uncomment) that: key(cmd-/)
+
+
+(uncomment | remove comment [from]) <user.cursorless_target>:
+    user.cursorless_command("setSelectionBefore", cursorless_target)
+    key(backspace:3)
+
+
+
 
 
 
@@ -420,7 +434,8 @@ copy (line | code) (link | address):
 
 (focus | go | bar) favorites: user.vscode("favorites-full-view.focus")
 
-(focus | go | bar) (explore |explorer) favorites: user.vscode("favorites.focus")
+(focus | go | bar) (explore |explorer) favorites: 
+    user.vscode("favorites.focus")
 
 file (add | send) [to] (favorite | favorites) | make file favorite | add [file] [to] (favorite | favorites): user.vscode("favorites.addToFavorites")
 
@@ -476,15 +491,15 @@ Zoom out font | font zoom out:              user.vscode("editor.action.fontZoomO
 Zoom in font | font zoom in:               user.vscode("editor.action.fontZoomIn")
 (reset | default) font (zoom | size) | font zoom (reset | default): user.vscode("editor.action.fontZoomReset")
 
-pick code (window | winner | win): user.vscode("workbench.action.switchWindow")
+pick (code | could) (window | winner | win): user.vscode("workbench.action.switchWindow")
 
-code (swap | next | last) (window | winner | win):
+(code | could) (swap | next | last) (window | winner | win):
     user.vscode("workbench.action.switchWindow")
     key(enter)
-(swap | next | last) code (window | winner | win):
+(swap | next | last) (code | could) (window | winner | win):
     user.vscode("workbench.action.switchWindow")
     key(enter)
-code (window | winner | win) (swap | next | last):
+(code | could) (window | winner | win) (swap | next | last):
     user.vscode("workbench.action.switchWindow")
     key(enter)
 
@@ -514,11 +529,14 @@ close other (tabs | editors) [in] [group] : user.vscode("workbench.action.closeO
 
 #tab navigation
 
-#open editors sidebar
-(bar | show | go | focus) open (files | editors) [view]: user.vscode("workbench.files.action.focusOpenEditorsView")
+# select tab via sidebar
 
-go (next | last) [(editor | tab)] group: user.vscode("workbench.action.navigateEditorGroups")
+#open editors/tabs sidebar
+(bar | show | go | focus | list)  (tabs | taps | editors | [tab] groups | open files) [view]: 
+    user.vscode("andreas.tabs.focus")
+    #user.vscode("workbench.files.action.focusOpenEditorsView")
 
+go (next | last) [(editor | tab | tap)] group: user.vscode("workbench.action.navigateEditorGroups")
 
 ## ++++++++++++++ andreas tab nav commands .
 [(focus | go)] tab {self.letter} [{self.letter}]:
@@ -528,17 +546,15 @@ go (next | last) [(editor | tab)] group: user.vscode("workbench.action.navigateE
     myNum = number - 1
     user.run_rpc_command("andreas.openEditorAtIndex", number)
 
-
-
 ## ++++++++++++++++++++++++ split tab in place.
 
 split [(editor | tab)] [in group]:      user.vscode("workbench.action.toggleSplitEditorInGroup")
 
 split (editor | tab) up:            user.vscode("workbench.action.splitEditorUp")
-Split (editor | tab) left:          user.vscode("workbench.action.splitEditorLeft")
-split (editor | tab) right:         user.vscode("workbench.action.splitEditorRight")
+Split [(editor | tab)] left:          user.vscode("workbench.action.splitEditorLeft")
+split [(editor | tab)] right:         user.vscode("workbench.action.splitEditorRight")
 
-split (editor | tab) (right | horizontally | horizontal ):               user.vscode("workbench.action.splitEditor")
+split (editor | tab) [(horizontally | horizontal)]:               user.vscode("workbench.action.splitEditor")
 split (editor | tab) (down  | vertically | vertical):          user.vscode("workbench.action.splitEditorDown")
 split [(editor | tab)] (ortho | orthogonal | other) :         user.vscode("workbench.action.splitEditorOrthogonal")
 
@@ -636,11 +652,16 @@ customize layout: usBeer.vscode("workbench.action.customizeLayout")
 
 #-------------- scopes
 
-(show | view | visualize) (tokens | scopes | scope): user.vscode("editor.action.inspectTMScopes")
+(show | hide | view | visualize) [context] (tokens | scopes | scope): user.vscode("editor.action.inspectTMScopes")
 
-bar scopes: user.vscode("cursorless.scopes.focus")
-show scope visualizer: user.vscode("cursorless.showScopeVisualizer")
-hide scope (visualizer | viz): user.vscode("cursorless.hideScopeVisualizer")
+(bar | go) (scope | scopes): 
+    user.vscode("cursorless.scopes.focus")
+# todo: bug, working from command menu, but not talon command (context issue?)
+show (scope | scopes) (visualizer | viz): 
+    user.vscode("cursorless.showScopeVisualizer")
+hide (scope | scopes) (visualizer | viz): 
+    user.vscode("cursorless.hideScopeVisualizer")
+
 #--------------
 
 (toggle | show | hide ) [cursorless] (hats | decorations): user.vscode("cursorless.toggleDecorations")
@@ -653,7 +674,7 @@ open workspace (settings | sitting) (json | jay son): user.vscode("workbench.act
 
 (go [to] | pick) symbol:    user.vscode("workbench.action.gotoSymbol")
 
-(bar | hide | show) commits: user.vscode("gitlens.showCommitsView")
+(bar | hide | show) commits | arc emits: user.vscode("gitlens.showCommitsView")
 (bar | hide | show) file history: user.vscode("gitlens.showFileHistoryView")
 go file history: user.vscode("gitlens.views.fileHistory.focus")
 
@@ -670,46 +691,69 @@ git (commands | menu): user.vscode("gitlens.gitCommands")
 #todo make this hard prefix operational in vscode
 (number  | numb) <user.number_string>: "{number_string}"
 
-(find | show) references:   user.vscode("references-view.findReferences")
+## +++++++++++++++++ Symbol references .
+
+(find | show) [all] references:   user.vscode("references-view.findReferences")
+
 (go | bar) references:      user.vscode("references-view.tree.focus")
+
+go to references:      user.vscode("editor.action.goToReferences")
+
+(peek | peak) (reference | reference): user.vscode("editor.action.referenceSearch.trigger")
 
 ## ++++++++++++++++++ file tree extension
 
 ## ++++++++++++++++++ This opens the file tree in the sidebar
+
 bar [file] tree:            user.vscode("workbench.view.extension.filetree")
+
 go [file] tree:             user.vscode("filetree.focus")
 
 ## ++++++++++++++++++ File tree commands
 tree <user.letters>:
     user.run_rpc_command("talon-filetree.toggleDirectoryOrOpenFile", letters)
+
 tree parent <user.letters>:
     user.run_rpc_command("talon-filetree.closeParent", letters)
+
 tree <user.letters> <number>:
     user.run_rpc_command("talon-filetree.expandDirectory", letters, number)
-tree collapse <user.letters>:
+
+tree (collapse | fold) <user.letters>:
     user.run_rpc_command("talon-filetree.expandDirectory", letters, 0)
+
 tree move <user.letters> to <user.letters>:
     user.run_rpc_command("talon-filetree.moveFile", letters_1, letters_2)
+
 tree move <user.letters> [to] root:
     user.run_rpc_command("talon-filetree.moveFile", letters_1)
+
 # the recommended way to open a file is using the "toggleDirectoryOrOpenFile" command
 # but this may be useful for people that want to separate the two actions
 # e.g. to create very distinct commands that are easier for talon to differentiate
+
 tree open <user.letters>:
     user.run_rpc_command("talon-filetree.openFile", letters)
+
 tree rename <user.letters>:
     user.run_rpc_command("talon-filetree.renameFile", letters)
+
 tree create <user.letters>:
     user.run_rpc_command("talon-filetree.createFile", letters)
+
 tree delete <user.letters>:
     user.run_rpc_command("talon-filetree.deleteFile", letters)
-tree collapse root:
+
+tree (collapse | fold) (root | all):
     user.run_rpc_command("talon-filetree.collapseRoot")
-tree select <user.letters>:
+
+tree (select | pick | choose) <user.letters>:
     user.run_rpc_command("talon-filetree.select", letters)
+
 tree git:
     user.run_rpc_command("talon-filetree.toggleGitIgnoredFiles")
-tree current:
+    
+tree (current | file) | reveal [file] ([in] tree | entry):
     user.run_rpc_command("talon-filetree.revealCurrentFile")
 
 #which key menu
@@ -727,9 +771,7 @@ symbol last:                user.vscode("gotoNextPreviousMember.previousMember")
 symbol next:                user.vscode("gotoNextPreviousMember.nextMember")
 
 problem show:               user.vscode("workbench.panel.markers.view.focus")
-
-term show: user.vscode("workbench.action.terminal.focus")
-clear terminal: user.vscode("workbench.action.terminal.clear")    
+ 
 
 show shortcuts:             user.vscode("workbench.action.openGlobalKeybindings")
 show shortcuts json:        user.vscode("workbench.action.openGlobalKeybindingsFile")
@@ -746,22 +788,14 @@ break:
 
 (tab | editor | column) (close | clothes): key(cmd-w)
 
-
 (bar | go) outline: user.vscode("outline.focus")
 
-
 browse (json | jason): user.vscode("vscode-json-editor.start")
-
-
-(uncomment | remove comment [from]) <user.cursorless_target>:
-    user.cursorless_command("setSelectionBefore", cursorless_target)
-    key(backspace:3)
 
 ^complete: user.vscode("editor.action.triggerSuggest")
 ^complete inline: user.vscode("editor.action.inlineSuggest.trigger")
 
-restore terminals: user.vscode("restore-terminals.restoreTerminals")
-
+#todo: put this command line scripts/snippets registry, maybe in ide config (warp?)
 stencil [force] push command: insert("stencil push -d -a") 
 
 move (view | widget): user.vscode("workbench.action.moveView")
@@ -780,22 +814,25 @@ swap (bars | sidebars) :  user.vscode("workbench.action.toggleSidebarPosition")
 
 ## ++++++++++++++++++++++++++ navigate projects.
 
+#todo: make projects list
+
 open project [in]  [new window]: user.vscode("projectManager.listProjectsNewWindow")
-[open | go] get bit project [in]  [new window]: 
+
+[open | go] get bit project [in]  [new window] | project get bit: 
     user.vscode("projectManager.listProjectsNewWindow")
     sleep(300ms)
     insert("gbo")
     sleep(100ms)
     key(enter)
 
-[open | go] (Talon | talent) project [in]  [new window]: 
+[open | go] (Talon | talent) project [in]  [new window]  | project (Talon | talent | town): 
     user.vscode("projectManager.listProjectsNewWindow")
     sleep(300ms)
     insert("talon-user")
     sleep(100ms)
     key(enter)
 
-[open | go] (ground | grounded | grounded sol | groundedsol | granted sol ) project [in]  [new window]: 
+[open | go] (ground | grounded | grounded sol | groundedsol | granted sol ) project [in]  [new window] | project (ground | grounded | grounded sol | groundedsol | granted sol ): 
     # user.run_rpc_command("projectManager.listProjectsNewWindow", "groundesol w biff")
     user.vscode("projectManager.listProjectsNewWindow")
     sleep(300ms)
@@ -874,10 +911,33 @@ take form: user.vscode("editor.action.selectToBracket")
 
 ## +++++++++++++++++++++ Navigate diff 
 #in regular editor
-next change: user.vscode("workbench.action.editor.nextChange")
-
-last change: user.vscode("workbench.action.editor.previousChange")
+[go] (file | tab | editor) next [diff] change: user.vscode("workbench.action.editor.nextChange")
+[go] (file | tab | editor) last [diff] change: user.vscode("workbench.action.editor.previousChange")
 
 #in compare view
-next diff change: user.vscode("workbench.action.compareEditor.nextChange")
-last diff change: user.vscode("workbench.action.compareEditor.previousChange")
+[go] next [diff] change: user.vscode("workbench.action.compareEditor.nextChange")
+[go] last [diff] change: user.vscode("workbench.action.compareEditor.previousChange")
+
+
+## +++++++++++++++++++++++++++ gitlens .
+
+(open  | go) working file : user.vscode("gitlens.openWorkingFile")
+open file at revision: user.vscode("gitlens.openFileRevision")
+
+## +++++++++++++++++++++++++++++++ git .
+stage [this] file [changes]: user.vscode("git.stage")
+
+## ++++++++++++++++++++++++++ terminal .
+
+(go | show) (term | terminal) | term show: user.vscode("workbench.action.terminal.focus")
+clear terminal: user.vscode("workbench.action.terminal.clear")   
+restore terminals: user.vscode("restore-terminals.restoreTerminals")
+
+add to git ignore [point]:
+    mouse_click(1)
+    sleep(200ms)
+    insert("Add to .gitgnore")
+    key(enter)
+
+change [code] [editor | tab] language [mode]:
+    user.vscode("workbench.action.editor.changeLanguageMode") 

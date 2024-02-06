@@ -14,17 +14,17 @@
 			"path": "vscode.talon",
 			"bookmarks": [
 				{
-					"line": 331,
+					"line": 345,
 					"column": 10,
 					"label": ""
 				},
 				{
-					"line": 340,
+					"line": 354,
 					"column": 12,
 					"label": "testing"
 				},
 				{
-					"line": 381,
+					"line": 395,
 					"column": 4,
 					"label": ""
 				}
@@ -114,7 +114,7 @@
 					"label": "wheel_down_amount"
 				},
 				{
-					"line": 52,
+					"line": 53,
 					"column": 1,
 					"label": ""
 				}
