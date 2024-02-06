@@ -1,5 +1,10 @@
 app: vscode
 -
+# todo: limit to clj files
+# code.language: clojure
+
+
+tag(): user.clojure_core
 tag(): user.find_and_replace
 tag(): user.line_commands
 tag(): user.multiple_cursors
@@ -7,19 +12,52 @@ tag(): user.snippets
 tag(): user.splits
 tag(): user.tabs
 
+# Native vscode move form commands
+
+native move up: key(alt-up)
+native move down: key(alt-down)
+
 #----------------------- paredit navigation
 
-go back down [form]: user.vscode("paredit.backwardDownSexp")
-(move | go) back (form | expression):  user.vscode("paredit.backwardSexp")
-go back up [form]: user.vscode("paredit.backwardUpSexp")
-go forward [down] [form]: user.vscode("paredit.forwardDownSexp")
-go up [form]: user.vscode("paredit.forwardUpSexp")
-go [form]: user.vscode("paredit.forwardSexp")
-go to end: user.vscode("paredit.closeList")
+## +++++++++++++++++++++++++ move form .
+
+move [form] (up | back | left): user.vscode("paredit.dragSexprBackward")
+move [form] (down | forward | right): user.vscode("paredit.dragSexprForward")
+
+ ## ++++++++++++++++++++ navigate forms .
+
+
+ #back
+go (back | previous | prev) (form | expression):  user.vscode("paredit.backwardSexp")
+
+go (back | previous | prev) down [form]: 
+    user.vscode("paredit.backwardDownSexp")
+
+go (back | previous | prev) up [form]: 
+    user.vscode("paredit.backwardUpSexp")
+
 # go back to start: 
-go forward up: user.vscode("paredit.forwardUpSexp")
-go back or up: user.vscode("paredit.backwardSexpOrUp")
-Go forward or up: user.vscode("paredit.forwardSexpOrUp")
+go back or up: 
+    user.vscode("paredit.backwardSexpOrUp")
+
+#forward
+go (forward | fore | next) [down] [form]: 
+    user.vscode("paredit.forwardDownSexp")
+
+go up [form]: 
+    user.vscode("paredit.forwardUpSexp")
+
+go (forward | fore | next) [form]: 
+    user.vscode("paredit.forwardSexp")
+
+go forward up: 
+    user.vscode("paredit.forwardUpSexp")
+
+Go forward or up: 
+    user.vscode("paredit.forwardSexpOrUp")
+
+go to end: 
+    user.vscode("paredit.closeList")
 
 #----------------------- paredit selection
 
@@ -117,7 +155,7 @@ evaluate from (start of file | file start):  user.vscode("calva.evaluateStartOfF
 evaluate from (start of list | list start): user.vscode("calva.evaluateToCursor")
 evaluate from top: user.vscode("calva.evaluateTopLevelFormToCursor")
 
-(interrupt | cancel) [running] repl (evaluation | evaluations): user.vscode("calva.interruptAllEvaluations")
+(interrupt | cancel) [running] repl [(evaluation | evaluations)]: user.vscode("calva.interruptAllEvaluations")
 
 toggle send evaluated code to repl [window]: user.vscode("calva.toggleEvaluationSendCodeToOutputWindow")
 toggle repl pretty printing: user.vscode("calva.togglePrettyPrint") 
@@ -169,7 +207,22 @@ replace with pretty (print | printed): user.vscode("calva.prettyPrintReplaceCurr
 ## ++++++++++ comments
 
 [(insert | add)] comment (symbol | mark): insert("#_")
+[(insert | add)] dub comment (symbol | symbols | mark | marks): insert("#_#_")
+
 (make | add) rich comment: user.vscode("paredit.addRichComment")
+
+(comment |  uncomment) form: key(cmd-/)
+(comment |  uncomment) line: 
+    key(shift-right cmd-/)
+
+(comment |  uncomment) point:
+    key("shift:down")
+    mouse_click(0)
+    user.mouse_drag_end() 
+    key(shift-right cmd-/)
+
+
+
 
 ## ++++++++++++++++++ paredit commands .
 
