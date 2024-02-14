@@ -32,7 +32,7 @@ hello test: insert("test worked!!!")
 
 test notification: app.notify('this is a notification')
 
-[(closure | clojure)] [(token | symbol)]$ {user.clojure_core}: 
+[(closure | clojure)] [(token | symbol)] {user.clojure_core}: 
     insert("{clojure_core}")
 
 
