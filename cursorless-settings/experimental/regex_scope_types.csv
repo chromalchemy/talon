@@ -1,2 +1,2 @@
 Spoken form, Regex
-keyword,":\w+"
+keyword,":(?:[a-z]+(?:-[a-z]+)*/)?[a-z]+(?:-[a-z]+)*"
