@@ -13,20 +13,3 @@ mod.list("roam_tag", desc="Declared Roam tag names")
 def one_roam_tag(m) -> str:
     "One Roam Tag"
     return str(m)
-
-# ctx.lists["self.roam_tag"] = {
-#     "project": "project",
-#     "conflict": "conflict",
-#     "today": "today",
-#     "week": "week",
-#     "someday": "someday",
-#     "urgent": "urgent",
-#     "roam": "roam",
-#     "library": "lib",
-#     "get bit": "gb",
-#     "clj": "clojure",
-#     "talon": "talon",
-#     "cursorless": "cursorles",
-#     "ergonomics": "ergonomics",
-# }
-
