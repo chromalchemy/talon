@@ -120,7 +120,7 @@ please calva (evaluate | eval):
     key(cmd-shift-p)
     insert("evaluate ")
 
-[(rep | repl | ripple | rebel)] (load | run) file [in (rep | repl | ripple | rebel)]: user.vscode("calva.loadFile")
+[(rep | repl | ripple | rebel)] (load | reload | run) file [in (rep | repl | ripple | rebel)]: user.vscode("calva.loadFile")
 
 #eval top form
 (rep | repl | ripple | evaluate | eval | compute | comp | run | runt) [it] [(top | top form)]:
@@ -232,8 +232,8 @@ please (paredit | pare edit | pear edit):
 
 open [paredit] list: user.vscode("paredit.openList")
     
-slurp [forward]: user.vscode("paredit.slurpSexpForward")
-slurp (backward | back): user.vscode("paredit.slurpSexpBackward")
+(slurp | slip) [(forward | for it)]: user.vscode("paredit.slurpSexpForward")
+(slurp | slip) (backward | back): user.vscode("paredit.slurpSexpBackward")
 barf [forward]: user.vscode("paredit.barfSexpForward")
 barf (backward | back): user.vscode("paredit.barfSexpBackward")
 
