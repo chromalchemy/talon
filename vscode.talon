@@ -941,3 +941,17 @@ add to git ignore [point]:
 
 change [code] [editor | tab] language [mode]:
     user.vscode("workbench.action.editor.changeLanguageMode") 
+
+ ## ++++++++ vscode notification popups .
+
+(dismiss | clear) (notifications |  alerts): 
+    user.vscode("notifications.clearAll")
+
+show (notifications |  alerts): 
+    user.vscode("notifications.showList")
+
+accept (notification | alert): 
+    user.vscode("notification.acceptPrimaryAction")
+
+toggle dark mode:
+    user.vscode("workbench.action.toggleLightDarkThemes")
