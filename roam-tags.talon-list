@@ -1,16 +1,47 @@
 list: user.roam_tag
 -
 
+#spoken, printed
+
 project: project
-conflict: conflict
 today: today
 week: week
-someday: someday
-urgent: urgent
-roam: roam
-library: lib
-get bit: gb 
-clj: clojure
-talon: talon
-cursorless: cursorles
+deadline: deadline 
+
+test: test
+conflict: conflict
+call: call 
+read: read 
+watch: watch 
+demo: demo
+
 ergonomics: ergonomics
+development: dev
+dev: dev
+schema: schema 
+api : api
+code review: code/review
+review code: code/review
+
+get bit: gb
+big commerce: bc 
+
+
+urgent: urgent
+someday: someday
+roam: roam
+
+clojure: clj
+closure: clj 
+clojure script: cljs
+closure script: cljs
+calva: calva
+
+library: lib
+
+vs code: vscode
+talon: talon
+talon voice: talon
+cursorless: cursorless
+talon command: talon/command
+

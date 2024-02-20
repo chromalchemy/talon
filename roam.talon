@@ -359,15 +359,30 @@ expand block:
 
 ## +++++++++++++ navigate within block .
 
-go block end: 
-    edit.select_all()
-    sleep(100ms)
-    key(right)
+go (block end | post block): 
+    key(shift-end right)
+    # edit.select_all()
+    # sleep(100ms)
+    # key(right)
+
+select (block end | rest of block ):
+    key(shift-end)
+
+(clear | chuck) (block end | rest of block ):
+    key(shift-end delete)
 
 go block start: 
-    edit.select_all()
-    sleep(100ms)
-    key(left)
+    key(shift-home left)
+    # edit.select_all()
+    # sleep(100ms)
+    # key(left)
+
+(select | take) block start:
+    key(shift-home)
+
+(clear | chuck) block start:
+    key(shift-home delete)
+
 
 ## ++++++++++++++++++++++++ kill block .
 
@@ -652,6 +667,24 @@ move [block] [to] (paste | pace):
     edit.paste()
     sleep(300ms)        
     key(enter tab:2 enter)
+    
+move [block] [to] agenda: 
+    key(cmd-alt-m)
+    sleep(1500ms)
+    key(tab right)
+    # sleep(1000ms) 
+    insert("CGDDdKiFq")       
+    sleep(300ms)        
+    key(tab enter)
+
+(send | move) [block] (ref | reference | link) [to] agenda: 
+    key(cmd-alt-ctrl-m)
+    sleep(1500ms)
+    key(tab right)
+    # sleep(1000ms) 
+    insert("CGDDdKiFq")       
+    sleep(300ms)        
+    key(tab enter)
 
 
 move [block] [to] (paste | pace) sidebar: 
@@ -686,58 +719,59 @@ insert tomorrow:
     
 #tagging 
 
-# Hash tagging
+## ++++++++++++++++++++++ Hash tagging .
 
-^tag <user.one_roam_tag>: 
+#add named tag to block
+
+^[(new | now)] tag <user.one_roam_tag>$: 
     insert(" #{one_roam_tag} ")
 
-
-(h tag | hashtag) [that]: 
-    s = edit.selected_text() 
-    sf = "#" + s
-    insert(sf)
-
-(h tag | hashtag) (word | single | 1):
-    user.cut_word()
-    # edit.select_word()
-    # edit.cut()
-    sleep(100ms)
-    insert("#")
-    edit.paste()
-
-(h tag | hashtag) <user.text>:
-    insert("#")
-    user.insert_formatted(text, "SLASH_SEPARATED")
-    sleep(100ms)
-    user.select_last_phrase()
-    key(left)
-    key(delete)
-    edit.line_end()
-
-#why is this short circuiting  before completion
-(h tag | hashtag | hash tag ) (auto | one | use | force) <user.text>:
-    insert("#")
-    user.insert_formatted(text, "SLASH_SEPARATED")
-    sleep(100ms)
-    user.select_last_phrase()
-    key(left delete)
-    #todo use prase.right style fn
-    key(cmd-right space)
-
-kebab (h tag | hashtag) <user.text>:
-    insert("#")
-    user.insert_formatted(text, "DASH_SEPARATED")
-
-
-# explicit hashtags
-
-make project: 
+(make [block] | tag block | add tag) <user.one_roam_tag>: 
     edit.select_all()
-    sleep(100ms)
-    key(right)
-    insert(" #project")
+    s = edit.selected_text()
+    insert("{s} #{one_roam_tag}")
     sleep(300ms)
     key(enter)
+
+#turn local text into tag
+
+^tag [that] | make [into] tag$: 
+    s = edit.selected_text() 
+    insert("#{s} ")
+
+^force tag [that]: 
+    s = edit.selected_text() 
+    insert("#{s} ")
+
+^tag word$:
+    edit.select_word()
+    sleep(200ms)
+    s = edit.selected_text()
+    insert("#{s}")
+
+^force tag word$:
+    edit.select_word()
+    sleep(200ms)
+    s = edit.selected_text()
+    insert("#{s} ")
+
+#format declared text to tag
+
+[slash] tag <user.text>:
+    f= user.formatted_text(text, "NS_SLASH_SEPARATED")
+    insert("#{f}")
+
+^force [slash] tag <user.text>:
+    f= user.formatted_text(text, "NS_SLASH_SEPARATED")
+    insert("#{f} ")
+
+^kebab tag <user.text>:
+    f= user.formatted_text(text, "DASH_SEPARATED")
+    insert("#{f}")
+
+^force kebab tag <user.text>:
+    f= user.formatted_text(text, "DASH_SEPARATED")
+    insert("#{f} ")
     
 ## +++++++++++++++++ # bracket tagging .
 
@@ -772,15 +806,21 @@ make project:
     key(space)
 
 ## +++++++++++++ block reference links .
-    
-[new] (bee | back) link | dub paren: 
-    key((:2)
-    
-((bee | back) link | dub paren) that: 
-    key((:2 right)
-        
 
-[new]  ((bee | back) link | dub paren) <user.text>:
+dub paren: insert("((")
+
+[new] ((([block] (reference | ref) | back) [link]) | backlink): 
+    insert("((")
+    
+((([block] (reference | ref) | back) [link]) | backlink) that: 
+    insert("((")
+
+((([block] (reference | ref) | back) [link]) | backlink) word: 
+    edit.select_word()
+    insert("((")
+
+
+[new] ((([block] (reference | ref) | back) [link]) | backlink) <user.text>:
     insert("((")
     insert(text)
     # sleep(100ms)
@@ -788,7 +828,6 @@ make project:
     # key(left delete)
     # edit.word_right()
     
-
 ## +++++++++++++++++++++++   pasting
 
 (paste | pace) (unformatted | raw): key(shift-cmd-v)
@@ -831,10 +870,18 @@ heading three: key(cmd-alt-3)
 heading none: key(cmd-alt-0)
 
 ## +++++++++++++++++++   inline code  formatting.
-code (line | inline) that: key(` esc:2)
+code (line | inline) that: 
+    key(` esc:2)
     # s = edit.selected_text() 
     # sf = "`" + s
     # insert(sf)
+
+code (line | inline) point:
+    key(shift:down)
+    mouse_click(0)
+    key(`)
+    sleep(200ms)
+    key(esc:2)
  
 
 ## +++++++++++++++++++++++ code blocks .
