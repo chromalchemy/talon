@@ -77,8 +77,6 @@ take back or up: user.vscode("paredit.selectBackwardSexpOrUp")
 take forward or up: user.vscode("paredit.selectForwardSexpOrUp")
 take it: user.vscode("calva.selectCurrentForm")
 
-(tap (that | form) | create tap ): user.vscode("calva.tapSelection")
-
 ###
 
 # wrap [in] (brackets | vector | square): key(ctrl-shift-alt-s)
@@ -159,6 +157,28 @@ evaluate from top: user.vscode("calva.evaluateTopLevelFormToCursor")
 
 toggle send evaluated code to repl [window]: user.vscode("calva.toggleEvaluationSendCodeToOutputWindow")
 toggle repl pretty printing: user.vscode("calva.togglePrettyPrint") 
+
+## ++++++++++++++++++++++++++ tap form (portal) .
+
+tap (that | form | here): 
+    user.vscode("calva.tapSelection")
+
+tap [form] point: 
+    mouse_click(0)
+    user.vscode("calva.tapSelection")
+
+tap (it | top):
+    user.vscode("calva.tapCurrentTopLevelForm") 
+
+
+# tap top: 
+#     user.run_rpc_command("calva.runCustomREPLCommand", "t")
+
+# tap that: 
+#     user.run_rpc_command("calva.runCustomREPLCommand", "f")
+
+
+## +++++++++++++++++++++++++++ joyride .
 
 joyride evaluate selection: user.vscode("joyride.evaluateSelection")
 
@@ -245,12 +265,6 @@ launch portal: user.vscode("extension.portalOpen")
 
 launch portal clearing: 
     user.run_rpc_command("calva.runCustomREPLCommand", "p")
-
-tap top: 
-    user.run_rpc_command("calva.runCustomREPLCommand", "t")
-
-tap that: 
-    user.run_rpc_command("calva.runCustomREPLCommand", "f")
 
 # ---------------------------  settings
 

@@ -3,6 +3,8 @@
 
 (defn hello [] nil)
 :get-price-list-record-collection 
+->>
+->
 
 #_Snip #_ funk world
 
