@@ -118,7 +118,6 @@ pick (win | window) (ray | list):
 
 [pick] app (win | windows) [finder] : key(ctrl-down)
 
-
 # How to invoke more directly come and not have a flash of chooser
 (win | window) (next | last | swap | prev):  
     key(shift-ctrl-f6)
@@ -189,10 +188,11 @@ dell it | deli it | dell that: key(delete)
 #     insert("finder")
 #     key(enter)
     
-# (go | show | open) (ide | code | editor | vscode | vs code):
-#     key(cmd-space)
-#     insert("visual studio code")
-#     key(enter)
+(go | show | open) (ide | code | editor | vscode | vs code):
+    user.switcher_focus("Code")
+    # key(cmd-space)
+    # insert("visual studio code")
+    # key(enter)
     
 
 #cursorless
@@ -390,3 +390,9 @@ menu pick <user.text>:
 menu (touch | punch | hit | press | select) <user.text>: 
     insert(text)
     key(enter)
+
+# paste date template
+date [string] <user.number_string> [plus] <user.number_string>: 
+    insert("{number_string_1}/{number_string_2}")
+    sleep(200ms)
+    key(escape)
