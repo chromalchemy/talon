@@ -1,34 +1,38 @@
 app: chrome
 -
 tag(): browser
+# tag(): user.tabs
+
+
 
 #### inspector
 
-(toggle | hide | show | open | close) (devtools | dev tools | tools): key(cmd-alt-i)
+(toggle | hide | show | open | close) (devtools | dev tools | tools): 
+    key(cmd-alt-i)
 
 (toggle | hide | show | open | close) console: key(cmd-alt-j)
 
 tools [dock] (sidebar | bar | panel | bottom | right | last | next): key(cmd-shift-d)
 
-##
+## ++++++++++++++++++++++++++ bookmarks .
 
-go (bookmarks | marks): browser.bookmarks()
+go (bookmarks | marks) (browser | view): 
+    browser.bookmarks()
+    browser.bookmark()
 
-(toggle | hide | show) bookmarks: browser.bookmarks_bar()
+(toggle | hide | show) (bookmarks | marks) bar: browser.bookmarks_bar()
 
-#Doesn't work in search bar
-(choose | pick | hello) <user.number>: 
-    # key(down:{number})
-    insert("hello")
-
-search (bookmarks | bookmark | marks) [<user.text>]:
+(search | hunt)  (bookmarks | bookmark | marks) [<user.text>]:
     key(cmd-l)
     sleep(100ms)
-    insert("@bookmarks")
-    key(space)
-    sleep(100ms)
-    insert(text)
+    insert("@bookmarks {text or ''}")
 
+(choose | pick) <number_small>: 
+    key("down:{number_small}")
+    sleep(200ms)
+    key(enter)
+
+## +++++++++++++ click to select, then...
 
 copy  (link | address | url) (point | here)$:
     mouse_click(1)
@@ -37,9 +41,13 @@ copy  (link | address | url) (point | here)$:
     # sleep(100ms)
     key(enter)  
 
+## ++++++++++++++++++++++++++++++ zoom .
 
 zoom (default  | normal) | reset zoom: key(cmd-0)
 
+## ++++++++++++++++++++++++++++ search .
+
+# use rango
 search <user.text>: 
     browser.focus_search()
     insert(text)
@@ -49,9 +57,6 @@ search force <user.text>:
     insert(text)
     sleep(100ms)
     key(enter)
-
-    
-
 
 ## ++++++++++ copy web page address to roam .
 
