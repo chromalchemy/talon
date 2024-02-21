@@ -6,8 +6,10 @@ and mode: command
 
 # generic "phrase... over" command for mixed mode
 # phrase interferes with "over" Commands in formatters file
-^<user.text> phrase over: 
+^<user.text> (phrase | text) over: 
     user.add_phrase_to_history(text)
     insert(text)
+
+    
 
 
