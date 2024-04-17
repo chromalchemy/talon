@@ -1,0 +1,2 @@
+Spoken form, Regex
+keyword,":(?:[a-z]+(?:-[a-z]+)*/)?[a-z]+(?:-[a-z]+)*"

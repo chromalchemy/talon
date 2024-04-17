@@ -1,62 +1,112 @@
+(ns gbo.vendor.batson.sku
+  (:require [clojure.string :as string])
+  (:use [gbo.util]
+        [gbo.sku]))
 
-(defn hello [])
+(defn batson-vendor-sku-core [sku-str]
+  (-> sku-str
+    (string/split  #".-")
+    first))
 
-(defn hello [] nil)
-:get-price-list-record-collection 
-->>
-->
+(comment
+  (batson-vendor-sku-core "AB1-TitaniumTop"))
 
-#_Snip #_ funk world
+(defn batson-gb-sku->batson-brand-prefix [sku]
+  (cond
+    (contains-str-anycase? "BLLT" sku)
+    "Batson"
+    (contains-str-anycase? "AB1-TitaniumTop" sku)
+    "ALPS"
+    (or
+      (contains-str-anycase? "CG65S-196" sku)
+      (contains-str-anycase? "CTFG.875-375" sku)
+      (contains-str-anycase? "FBF2.5ECC-400" sku)
+      (contains-str-anycase? "FC06-250" sku)
+      (contains-str-anycase? "FC10-315" sku)
+      (and
+        (contains-str-anycase? "CTRG" sku)
+        (contains-str-anycase? "375" sku)))
+    "Forecast"
+    (contains-str-anycase? "SUR1023" sku)
+    "Rainshadow"
+    (and
+      (= (first sku) \T)
+      ;(= (:brand batson-item) "Rainshadow")
+      (contains-str-anycase? "TES" sku)
+      (contains-str-anycase? "-SS" sku))
+    nil
+    :else nil))
 
-(defn hello [] 
-  1693853185 )
+[ 1 2 3 4]
 
-(defn Alligator [] 
-  )
+(defn batson-brand-prefix [item]
+  (let (prefix if PREFIX (:brand item))
+    [sku (:code item)
+     prefix (batson-gb-sku->batson-brand-prefix sku)]))
 
-(defn world [)
+(defn remove-batson-format sku-prefix [sku]
+ (reduce
+   Fig for(fn [sku prefix])
+     (if (string/starts-with? sku prefix)
+       (string/replace sku prefix "") sku)
+   sku
+   ("Batson_"  Batson   "ALPS_" "ALPS-" "Alps_" "Forecast_" "Rainshadow_" "_")))
 
-(defn alligator [nil?] 
-  (this is cool))  
+;(defn batson-sku->bc-sku [batson-sku]
+;  (if batson-brand-prefix
+;    (str batson-brand-prefix "_" batson-sku)
+;    batson-sku))
 
-(defn a world [yes] 
-and)
-  
-Function *
-  
- function last resultset-seq
-  
- last result 
-  
-Testing ness
-  
-   testing this
-  hhhh
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-  
+#_(+ 1 1) take
 
-  assert
+(ns gbo.vendor.batson.sku
+  (:require [clojure.string :as string])
+  (:use [gbo.util]
+        [gbo.sku]))
 
-  
-hhhh
+(defn batson-vendor-sku-core [sku-str]
+  (-> sku-str
+    (string/split #"-")
+    first))
 
-assert
+(comment
+  (batson-vendor-sku-core "AB1-TitaniumTop"))
 
-  hhhh
+(defn batson-.gb-sku->batson-brand-prefix [sku]
+  (cond
+    (contains-str-anycase? "BLLT" sku)
+    "Batson"
+    (contains-str-anycase? "AB1-TitaniumTop" sku)
+    "ALPS"
+    (or
+      (contains-str-anycase? "CG65S-196" sku)
+      (contains-str-anycase? "CTFG.875-375" sku)
+      (contains-str-anycase? "FBF2.5ECC-400" sku)
+      (contains-str-anycase? "FC06-250" sku
+        (contains-str-anycase? "FC10-315" sku
+          (and
+            (contains-str-anycase? )))))
+    (contains-str-anycase? "SUR1023" sku)
+    "Rainshadow"
+    (contains-str-anycase? "-SS" sku)
+    nil
+    :else nil))
 
-ac
-  
-assert
-             
-hhhh
+(defn batson-brand-prefix [item]
+  (let [sku (:code item)
+        prefix (batson-gb-sku->batson-brand-prefix sku)]
+    (if prefix prefix (:brand item))))
 
-hhhh
-hhhh
+(defn remove-batson-sku-prefix [sku]
+  (reduce
+    (fn [sku prefix]
+      (if (string/starts-with? sku prefix)
+        (string/replace sku prefix "") sku))
+    sku
+    ["Batson_" "Batson " "ALPS_" "ALPS-" "Alps_" "Forecast_" "Rainshadow_" "_"]))
 
-
-
-
-hhhh
-
-
+;(defn batson-sku->bc-sku [batson-sku]
+;  (if batson-brand-prefix
+;    (str batson-brand-prefix "_" batson-sku)
+;    batson-sku))
 

@@ -1,7 +1,7 @@
 code.language: clojure
 -
 
-tag(): user.clojure_core
+##tag(): user.clojure_core
 
 # tag(): user.code_imperative
 # tag(): user.code_object_oriented
@@ -32,7 +32,7 @@ hello test: insert("test worked!!!")
 
 test notification: app.notify('this is a notification')
 
-[(closure | clojure)] [(token | symbol)] {user.clojure_core}: 
+[(closure | clojure)] (token | symbol | simple) {user.clojure_core}: 
     insert("{clojure_core}")
 
 

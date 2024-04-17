@@ -1,6 +1,18 @@
 list: user.clojure_core
 -
 
+playback: #>
+playback trace: #>
+playback trace both: #>>
+playback trace input: #>>
+playback trace intermediate: #>>
+playback reference: #><[]
+playback ref: #><[]
+output var: #><[]
+output ref: #><[]
+trace ref: #><[]
+
+
 breakpoint small: :sm
 breakpoint medium: :md 
 breakpoint large: :lg 
@@ -174,7 +186,21 @@ pred class: class?
 # clojure version: clojure-version
 pred coll: coll?
 pred colletion: coll?
+
 comment: comment
+comment char: #_
+comma char: #_
+comment hash: #_
+com end hash: #_
+comma hash: #_
+comma dash: #_
+comment charachter: #_
+comment literal: #_
+comment lit: #_
+comet lit: #_
+com: #_
+comment symbol: #_
+
 # commute: commute
 comp: comp
 comp: compose
