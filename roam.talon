@@ -7,7 +7,6 @@ tag(): user.line_commands
 ####################
 
 
-    
 # todo: setup defualt timeout
     
 please [<user.text>]: 
@@ -176,16 +175,17 @@ deep nav:key(alt-g)
 
 ###sidebar
 
-(toggle | hide |  show | close | open) (sidebar | side bar) :  key(cmd-/)
+(toggle | hide | show | close | open) (sidebar | side bar) :
+    key(cmd-/)
 
-(swap with sidebar | swap with main):
+swap (sidebar | main) [with (sidebar | main)]:
     key(cmd-p)
     sleep(100ms)
     insert("wb sidebars - swap with main window (swap)")
     sleep(100ms)
     key(enter)  
 
-(expand | collapse | fold) (sidebar | side bar):
+(expand | collapse [all] | fold) (sidebar | side bar):
     key(cmd-p)
     sleep(100ms)
     insert("toggle expand sidebar")
@@ -198,15 +198,24 @@ deep nav:key(alt-g)
     sleep(500ms)
     insert("r:")
 
-open link in sidebar: key(ctrl-shift-o)
-open page in sidebar: 
+open (ref | reference | link) in sidebar: 
+    key(ctrl-shift-o)
+
+open [this] page in sidebar: 
     key(cmd-p)
     sleep(100ms)
     insert("wb open page in sidebar")
     sleep(100ms)
     key(enter)
 
-clear sidebar: key(ctrl-l)
+(clear | kill) sidebar: key(ctrl-l)
+
+open <user.one_roam_tag> in sidebar | bar <user.one_roam_tag>:
+    key(cmd-u)
+    # sleep(100ms)
+    insert("{one_roam_tag}")
+    sleep(500ms)
+    key(shift-enter)
 
 ###roam prefs
 
@@ -359,13 +368,12 @@ expand block:
 
 ## +++++++++++++ navigate within block .
 
-go (block end | post block): 
-    key(shift-end right)
-    # edit.select_all()
-    # sleep(100ms)
-    # key(right)
+[go] (block end | post block): 
+    key(cmd-a)
+    sleep(100ms)
+    key(right)   
 
-select (block end | rest of block ):
+(select | take) (block end | rest of block ):
     key(shift-end)
 
 (clear | chuck) (block end | rest of block ):
@@ -451,42 +459,48 @@ select all blocks: key(cmd-shift-a)
 
 ## +++++++++++++++++++ new block below .
 
-paste [new] block:
-    edit.select_all()
-    sleep(100ms)
-    key(right)
-    key(enter)
+paste [new] (block | blocks):
+    key(cmd-shift-k)
+    sleep(700ms)
     key(cmd-v)
     sleep(100ms)
     key(esc)
 
+paste [new] block raw:
+    key(cmd-shift-k)
+    sleep(700ms)
+    key(shift-cmd-v)
+    sleep(200ms)
+    key(esc)
 
 ## +++++++++++++++++ new child block .
 
-(insert | new | add | put) (child | kid | right) [block] | (child | kid | right) block | nuchal:
-    #todo change to enter command
-    edit.select_all()
+(insert | new | add | put) (child | kid | (right | write) | write) [block] | (child | kid | (right | write) | write) block | nuchal:
+    key(cmd-a)
     sleep(100ms)
     key(right)
+    sleep(100ms)
     key(enter)
+    sleep(100ms)
     key(tab)
 
 # pasting children
 
-(insert | new | add | put) (child | kid | right) [block] (paste | pace) | (paste | pace) (child | kid | right | nuchal) [block]:
-    #todo change to enter command
-    edit.select_all()
+(insert | new | add | put) (child | kid | (right | write) ) [block] (paste | pace) | (paste | pace) (child | kid | (right | write) | nuchal) [block]:
+    key(cmd-a)
     sleep(100ms)
     key(right)
+    sleep(100ms)
     key(enter)
     key(tab)
     sleep(100ms)
     edit.paste()
 
 paste [new] (child | kid) [block]:
-    edit.select_all()
+    key(cmd-a)
     sleep(100ms)
     key(right)
+    sleep(100ms)
     key(enter)
     sleep(100ms)
     key(tab)
@@ -495,9 +509,10 @@ paste [new] (child | kid) [block]:
     key(esc)
 
 paste (child | kid) [block] raw:
-    edit.select_all()
+    key(cmd-a)
     sleep(100ms)
     key(right)
+    sleep(100ms)
     key(enter)
     sleep(100ms)
     key(tab)
@@ -507,9 +522,10 @@ paste (child | kid) [block] raw:
     
 #todo: copy implementation from block all the way back
 new base block:
-    edit.select_all()
+    key(cmd-a)
     sleep(100ms)
     key(right)
+    sleep(100ms)
     key(enter)
     key(shift-tab)
     sleep(100ms)
@@ -559,7 +575,7 @@ nest here:
 # sleep(100ms)
       
 
-(split | break) (child | right | rate | [and] nest) [block] [point]: 
+(split | break) (child | (right | write) | rate | [and] nest) [block] [point]: 
     mouse_click(0)
     user.mouse_drag_end()
     sleep(200ms)
@@ -568,7 +584,7 @@ nest here:
     key(tab)
     key(escape:2)
 
-(split | break) (child | right | rate | [and] nest) [block] here: 
+(split | break) (child | (right | write) | rate | [and] nest) [block] here: 
     key(enter)
     sleep(100ms)
     key(tab)
@@ -589,8 +605,8 @@ nest here:
     key(shift-tab)
     key(escape)
 
+    
 (split | break) [and] (stack | top) [block] [here]: 
-    # edit.paragraph_end()
     key(shift-end)
     sleep(300ms)
     key(cmd-x)
@@ -624,14 +640,14 @@ copy block:
 
 (block | move) up: key(cmd-shift-up)
 (block | move) down: key(cmd-shift-down)
-(block | move) (in | right | forward | fore | four): key(tab)
+(block | move) (in | (right | write) | forward | fore | four): key(tab)
 (block | move) (out | left | back): key(shift-tab)
 
 ## ++++++++++++++++ move block to DNP date (str)
 
 #make versions that leave reference
 
-move [block] [to] tomorrow: 
+move [(block | blocks)] to tomorrow: 
     key(cmd-d)
     sleep(100ms)
     key(tab enter)
@@ -639,7 +655,7 @@ move [block] [to] tomorrow:
     key(tab:2 enter)
 
 #todo: why inserting at bottom
-move [block] [to] today: 
+move [(block | blocks)] to today: 
     key(cmd-d)
     sleep(100ms)
     edit.select_all()
@@ -655,53 +671,138 @@ move [block] [to] today:
 
 # make version that leaves reference
 
-# make take an official roam tag from a list
-
-
-move [block] [to] (paste | pace): 
+move [(block | blocks)] to [top] [of] [page] (paste | pace | clip): 
     key(cmd-alt-m)
-    # todo: why is this taking so long!
-    sleep(2500ms)
+    sleep(1500ms)
     key(right)
     sleep(100ms)        
     edit.paste()
-    sleep(300ms)        
+    sleep(200ms)        
     key(enter tab:2 enter)
-    
-move [block] [to] agenda: 
+
+move [(block | blocks)] to [top] [of] <user.one_roam_tag>: 
+    key(cmd-alt-m)
+    sleep(1500ms)
+    key(right)
+    sleep(100ms)
+    insert("{one_roam_tag}")        
+    sleep(200ms)        
+    key(enter tab:2 enter)
+
+[move] <user.letters> [move] (to | two) [top] [of] <user.one_roam_tag>:
+    insert(letters)
+    sleep(300ms) 
+    key(cmd-alt-m)
+    sleep(1500ms)
+    key(right)
+    sleep(100ms)
+    insert("{one_roam_tag}")        
+    sleep(200ms)        
+    key(enter tab:2 enter)
+
+
+move [(block | blocks)] to [top] [of] <user.one_roam_tag> sidebar:
+    key(cmd-p)
+    sleep(100ms)
+    insert("mbts")
+    sleep(100ms)
+    key(enter) 
+    sleep(1500ms)
+    key(right)
+    sleep(100ms)
+    insert("{one_roam_tag}")        
+    sleep(200ms)        
+    key(enter tab:2 enter)
+
+move [(block | blocks)] to [top] [of] <user.one_roam_tag> [leave] (ref | reference | rough):
+    key(cmd-p)
+    sleep(100ms)
+    insert("mbtr")
+    sleep(100ms)
+    key(enter) 
+    sleep(1500ms)
+    key(right)
+    sleep(100ms)
+    insert("{one_roam_tag}")        
+    sleep(200ms)        
+    key(enter tab:2 enter)
+
+move [(block | blocks)] to [top] [of] <user.one_roam_tag> [and] (zoom | go [there] | focus):
+    key(cmd-p)
+    sleep(100ms)
+    insert("mbtz")
+    sleep(100ms)
+    key(enter) 
+    sleep(1500ms)
+    key(right)
+    sleep(100ms)
+    insert("{one_roam_tag}")        
+    sleep(200ms)        
+    key(enter tab:2 enter)
+
+## +++++++++++ move block to reference .
+
+move [(block | blocks)] to (ref | reference | rough) (paste | pace | clip): 
     key(cmd-alt-m)
     sleep(1500ms)
     key(tab right)
-    # sleep(1000ms) 
-    insert("CGDDdKiFq")       
+    edit.paste()
     sleep(300ms)        
+    key(enter)
+    sleep(100ms)
     key(tab enter)
 
-(send | move) [block] (ref | reference | link) [to] agenda: 
+#move to #tag #inbox combo reference
+move [(block | blocks)] to <user.one_roam_tag> inbox: 
+    key(cmd-alt-m)
+    sleep(1500ms)
+    key(tab right)
+    insert("#{one_roam_tag} #inbox")
+    sleep(200ms)        
+    key(enter)
+    sleep(100ms)
+    key(tab enter)
+
+# ------------- hardcoded reference versions
+
+move [(block | blocks)] to agenda: 
+    key(cmd-alt-m)
+    sleep(1500ms)
+    key(tab right)
+    insert("CGDDdKiFq")
+    sleep(200ms)        
+    key(enter)
+    sleep(100ms)        
+    key(tab enter)
+
+(send | move) [(block | blocks)] (ref | reference | link) to agenda: 
     key(cmd-alt-ctrl-m)
     sleep(1500ms)
     key(tab right)
-    # sleep(1000ms) 
     insert("CGDDdKiFq")       
-    sleep(300ms)        
+    sleep(200ms)
+    key(enter)
+    sleep(100ms)       
     key(tab enter)
 
+## +++++++++++++++++++ move to sidebar .
 
-move [block] [to] (paste | pace) sidebar: 
+move [(block | blocks)] to (paste | pace) sidebar: 
     key(cmd-p)
-    sleep(300ms)
+    sleep(200ms)
     insert("mbts")
-    sleep(300ms)
+    sleep(100ms)
     key(enter)
-    sleep(3000ms)
+    sleep(1500ms)
     key(right)
-    sleep(200ms)        
     edit.paste()
-    sleep(300ms)        
-    key(enter tab:2 enter)
+    sleep(200ms)
+    key(enter)
+    sleep(100ms)       
+    key(tab enter)
     
 
-#insert dates
+## ++++++++++++++++++++++ insert dates .
 
 insert today: 
     insert("/today")
@@ -716,6 +817,12 @@ insert tomorrow:
     key(enter)
     sleep(100ms)
     key(space)
+
+(add | pick) date:
+    insert("/date picker")
+    sleep(300ms)
+    key(enter)
+
     
 #tagging 
 
@@ -726,12 +833,34 @@ insert tomorrow:
 ^[(new | now)] tag <user.one_roam_tag>$: 
     insert(" #{one_roam_tag} ")
 
+^[(new | now)] tag {user.abbreviation}$: 
+    insert(" #{abbreviation} ")
+
 (make [block] | tag block | add tag) <user.one_roam_tag>: 
     edit.select_all()
     s = edit.selected_text()
     insert("{s} #{one_roam_tag}")
     sleep(300ms)
     key(enter)
+
+## +++++++++++++++++++++ multiple tags .
+
+^[(new | now  |  multi )] (tags | tax) <user.one_roam_tag> [and] <user.one_roam_tag>$: 
+    insert(" #{one_roam_tag_1} #{one_roam_tag_2} ")
+
+
+
+^[(new | now  |  multi )] (tags | tax) <user.one_roam_tag> [and] <user.one_roam_tag> [and] <user.one_roam_tag>$: 
+    insert(" #{one_roam_tag_1} #{one_roam_tag_2} #{one_roam_tag_3} ")
+
+^[(new | now | multi )] (tags | tax) <user.one_roam_tag> [and] <user.one_roam_tag> [and] <user.one_roam_tag> [and] <user.one_roam_tag>$: 
+    insert(" #{one_roam_tag_1} #{one_roam_tag_2} #{one_roam_tag_3} #{one_roam_tag_4} ")
+
+^[(new | now | multi )] (tags | tax) <user.one_roam_tag> [and] <user.one_roam_tag>$: 
+    insert(" #{one_roam_tag_1} #{one_roam_tag_2} ")
+
+^[(new | now | multi )] (tags | tax) <user.one_roam_tag> [and] <user.one_roam_tag> [and] <user.one_roam_tag>$: 
+    insert(" #{one_roam_tag_1} #{one_roam_tag_2} #{one_roam_tag_3} ")
 
 #turn local text into tag
 

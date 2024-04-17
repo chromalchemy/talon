@@ -14,34 +14,32 @@ call: call
 read: read 
 watch: watch 
 demo: demo
+inbox: inbox
 
 ergonomics: ergonomics
-development: dev
 dev: dev
 schema: schema 
+bug: bug
 api : api
 code review: code/review
 review code: code/review
 
-get bit: gb
-big commerce: bc 
-
+kevin: kevin
 
 urgent: urgent
 someday: someday
 roam: roam
 
-clojure: clj
-closure: clj 
-clojure script: cljs
-closure script: cljs
 calva: calva
-
-library: lib
 
 vs code: vscode
 talon: talon
-talon voice: talon
 cursorless: cursorless
 talon command: talon/command
+
+roam research: roam
+notes: roam 
+
+code review: code/review
+tea mem: tmem
 
