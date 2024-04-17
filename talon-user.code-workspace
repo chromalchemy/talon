@@ -403,13 +403,39 @@
 			{
 				"filePath": "/Users/ryan/.talon/user/talon-ai-tools",
 				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/community/settings/unix_utilities.csv",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/cursorless-settings/experimental/regex_scope_types.csv",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/cursorless-settings/experimental/wrapper_snippets.csv",
+				"group": "Default"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/cursorless-talon/src/spoken_forms.json",
+				"group": "cursorless delimiters"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/cursorless-settings/paired_delimiters.csv",
+				"group": "cursorless delimiters"
+			},
+			{
+				"filePath": "/Users/ryan/.talon/user/cursorless-talon/src/paired_delimiter.py",
+				"group": "cursorless delimiters"
 			}
 		],
-		"favorites.sortOrder": "ASC",
+		"favorites.sortOrder": "MANUAL",
 		"favorites.groups": [
 			"Default",
 			"accessibility",
-			"test group"
+			"test group",
+			"modified_dense_mouse_grid",
+			"cursorless delimiters"
 		],
 		"favorites.currentGroup": "Default",
 		"saveEditorLayout.list": [
@@ -467,6 +493,18 @@
 		"editor.rulers": [
 			120
 		],
-		"calva.evalOnSave": true
+		"calva.evalOnSave": true,
+		"calva.autoEvaluateCode": {
+			"onConnect": {
+				"clj": "(when-let [requires (resolve 'clojure.main/repl-requires)] (clojure.core/apply clojure.core/require @requires))",
+				"cljs": "(require '[cljs.repl :refer [apropos dir doc find-doc print-doc pst source]])"
+			},
+			"onFileLoaded": {
+				"clj": null,
+				"cljs": null
+			}
+		},
+		"editor.formatOnType": false,
+		"workbench.colorTheme": "Real IntelliJ Light"
 	}
 }

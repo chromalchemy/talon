@@ -11,21 +11,11 @@
 			]
 		},
 		{
-			"path": "vscode.talon",
+			"path": "vscode/vscode.talon",
 			"bookmarks": [
 				{
-					"line": 345,
+					"line": 4,
 					"column": 10,
-					"label": ""
-				},
-				{
-					"line": 354,
-					"column": 12,
-					"label": "testing"
-				},
-				{
-					"line": 395,
-					"column": 4,
 					"label": ""
 				}
 			]
@@ -137,6 +127,16 @@
 					"line": 8,
 					"column": 13,
 					"label": "short circuit over cmd"
+				}
+			]
+		},
+		{
+			"path": "community/core/windows_and_tabs/window_snap.py",
+			"bookmarks": [
+				{
+					"line": 211,
+					"column": 15,
+					"label": "snap_positions"
 				}
 			]
 		}
