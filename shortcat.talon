@@ -16,14 +16,16 @@
     sleep(300ms)
     insert(letter)
 
-#  search menus for phrase    
-(target | shortcat ) <user.text>:
+#  search menus for phrase   
+((target | shortcat ) [(menu | menus)] | (search | hunt) [(short | cat)] (menu | menus)) [<user.text>]:
     key("alt-shift-cmd-ctrl-f12")
     sleep(300ms)
-    insert(text)
+    insert("{text or ''}")
+
+# (search | hunt) [ray] (menu | menus) 
 
 # Search menus for phrase and automatically choose first    
-(target | shortcat ) force <user.text>:
+((target | shortcat ) [(menu | menus)] | (search | hunt) [(short | cat)] (menu | menus)) force <user.text>:
     key("alt-shift-cmd-ctrl-f12")
     sleep(300ms)
     insert(text)
@@ -34,5 +36,5 @@
 (short | target) refresh: key(cmd-r)    
     
 #pick number from popup menu menu
-(short | cat) [pick] <number>:
+(short | cat) [pick] [item] <number>:
     key("cmd-{number}")
