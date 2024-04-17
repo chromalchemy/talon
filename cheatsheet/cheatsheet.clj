@@ -1,8 +1,241 @@
 (ns cheatsheet.cheatsheet
   (:require [clojure.string :as string]
-            [garden.selectors :as gs])
-  (:use [lambdaisland.ornament]))
+            [garden.selectors :as gs]
+            [reaver :refer [parse extract-from text attr]]
+            [hickory.core :as h]
+            [hickory.select :as s]
+            [clojure.walk :as walk]
+            [instaparse.core :as insta]
+            
+            [clojure.zip :as zip])
+  (:use [lambdaisland.ornament]
+        [com.rpl.specter]
+        [com.rpl.specter.zipper]))
 
+(def generated-cheatsheet-html-file
+  (slurp "cheatsheet.html"))
+
+(def talon-command
+  "( hello [world] | here) world |  really nothing that [{user.my.fn} nonce bet (fiasco | charles)] | my third thing")
+  
+(defn parse-talon [s]
+  ((insta/parser
+     "command = elems | separated 
+    multi = <'('> separated <')'> 
+    <separated> = elems (<separator> elems)*
+    optional = <'['> elems <']'> 
+    elems = elem-phrase 
+          | <whitespace> elem-phrase
+          | <whitespace> elem-phrase <whitespace>
+          | elem-phrase <whitespace>
+    <elem-phrase> = elem (<whitespace> elem)*
+    <elem> = token | optional | multi
+    <token> = word | number | fn | capture 
+    fn = <'<'> (word | dotted-word) <'>'>
+    capture = <'{'> (word | dotted-word) <'}'>
+    <dotted-word> = word (<dot> word)*
+    dot = #'\\.'
+    <word> = #'[a-zA-Z]+'
+    <number> = #'[0-9]+'
+    <whitespace> = #'\\s+'
+    <separator> = ' | '"
+    ;;  :output-format :enlive   
+     )
+     s))
+
+(defn h=? [k x]
+  (and
+    (vector? x)
+    (= (first x)
+      k)))
+
+(defn path-str [[left-brack right-brack] x]
+  (->> x
+    (interpose ".")
+    (apply str)
+    (#(string/replace % "user." ""))
+    (#(str left-brack % right-brack))))
+
+(defn only-of-type? [type-pred x]
+  (and
+    (= (count x) 1)
+    (type-pred
+      (first x))))
+
+(defn normalize-command [command]
+  (->> command
+    (walk/postwalk
+      (fn [x]
+        (let [r
+              (when (vector? x)
+                (rest x))]
+          (cond
+            (string? x) x
+  
+            (h=? :fn x)
+            (path-str
+              ["<" ">"]
+              r)
+  
+            (h=? :capture x)
+            (path-str
+              ["{" "}"]
+              r)
+  
+            (h=? :elems x)
+            (cond
+              (only-of-type? string? r)
+              (first r)
+              :else
+              (vec r))
+  
+            (h=? :optional x)
+            (cond
+              (only-of-type? vector? r)
+              (into '() (first r))
+              :else
+              (into '() r))
+  
+            (or
+              (h=? :multi x)
+              (h=? :command x))
+            (into #{} r)
+            :else
+            x))))))
+
+(comment 
+  (let 
+    [original talon-command
+     parsed (parse-talon original)
+     normalized (normalize-command parsed)
+     x (println original)
+     x (println " ")
+    ;;  y (println normalized)
+     ]
+    (->> normalized 
+      (map 
+        (fn [subcommand]
+          (let [a (atom [])]
+            (println with it)
+            (println (walk/prewalk-demo subcommand)))))))
+
+)
+
+;; failed normalization code
+(comment 
+  (select
+    [VECTOR-ZIP
+     (find-first
+       #(= % :multi))
+     UP NODE]
+  
+    #_(recursive-path [] p
+        (if-path
+          [vector? FIRST (pred= :multi)]
+          STAY
+          [(view rest) p])
+  
+        #_[(cond-path
+             [map? :tag (pred= :multi)]
+             STAY
+             #_(stay-then-continue :content p)
+             [:content]
+             [:content ALL p])
+           #_(view type)])
+    #_identity
+    #_(fn [multi]
+        (->> multi
+          #_:content
+          #_(into #{})))))
+
+
+
+(-> generated-cheatsheet-html-file
+  (h/parse)
+  (h/as-hickory)
+  (->> 
+    (s/select
+      (s/or
+        (s/tag :h1)
+        (s/tag :ul)))
+    (drop 9)
+    (partition 2)
+    first
+    last
+    (s/select
+      (s/tag :strong))
+    (map
+      (fn [e]
+        (let 
+          [first-content (:content e )
+           command-str
+           (cond
+             (string? first-content) first-content
+             (vector? first-content)
+             (->> first-content
+               (select [ALL
+                        (recursive-path [] p
+                          (cond-path
+                            map?
+                            [:content p]
+                            vector?
+                            [ALL
+                             (if-path
+                               map?
+                               [:content p]
+                               STAY)]
+                            string?
+                            STAY))])
+               (apply str)
+               #_(interpose " ")))
+           ]
+           (string/replace command-str "\n" " "))))
+    (map 
+      (fn [s]
+        (let [test-cmd 
+              "[toggle] clippy [(show | [now] (hide | real) | toggle)]"
+              bracket-match #"\[(.*?)\]"
+              paren-match #"\(([^\)]+)\)"
+              myparse
+              (insta/parser
+                "word = #'[a-zA-Z]+'")]
+          [test-cmd
+           "------------------------------------------------------------------------"
+           (-> test-cmd 
+             myparse
+             #_(string/split bracket-match )
+             #_(->> 
+               #_(re-find paren-match)
+               (setval (regex-nav paren-match) "!!!")
+               (#(string/split % #"!!!"))
+               (interpose 
+                 (->> test-cmd
+                   (re-find paren-match)
+                   last
+                   (#(string/split % #"\|"))
+                   (map string/trim)
+                   (into #{})))
+               #_(transform []))
+             #_(->> 
+               (setval [ALL (pred= "")] NONE)
+               (transform [FIRST]
+                 #(vector %)))
+              
+             #_(->>
+                 (map
+                   (fn [e]
+                     (cond
+                       (string/starts-with? e "[")
+                       (->> e
+                         (drop-last)
+                         (drop 1)
+                         (apply str))))))
+             )])))
+    first
+    ))
+
+
+;; ___________________________________ .
 
 (def dev-file-names
   ["cursorless"
@@ -73,7 +306,6 @@
    "datetimeinsert"
    "desktops"])
    
-
 (def file-names
   ["user.letter"
    "user.number_key"
@@ -208,7 +440,6 @@
            [(gs/+ id-selector :ul)  :block]])))
     (apply concat)
     vec))
-
 
 (defstyled dev-cheatsheet :body
   [:ul :hidden]

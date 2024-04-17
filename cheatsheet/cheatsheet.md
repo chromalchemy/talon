@@ -5,7 +5,9 @@
 
 > **air** *a*
 >
-> **bat** *b*
+> **brav** *b*
+>
+> **bravo** *b*
 >
 > **cap** *c*
 >
@@ -33,7 +35,7 @@
 >
 > **odd** *o*
 >
-> **pit** *p*
+> **pelt** *p*
 >
 > **quench** *q*
 >
@@ -95,6 +97,8 @@
 >
 > **shift** *shift*
 >
+> **ship** *shift*
+>
 > **super** *super*
 >
 > **command** *cmd*
@@ -126,9 +130,13 @@
 >
 > **tab** *tab*
 >
+> **hinter** *enter*
+>
 > **wipe** *backspace*
 >
 > **delete** *backspace*
+>
+> **chuck** *backspace*
 >
 > **forward delete** *delete*
 >
@@ -157,11 +165,23 @@
 >
 > **left square** *[*
 >
+> **brack** *[*
+>
+> **bracket** *[*
+>
+> **left bracket** *[*
+>
 > **square** *[*
 >
 > **R square** *]*
 >
 > **right square** *]*
+>
+> **r brack** *]*
+>
+> **r bracket** *]*
+>
+> **right bracket** *]*
 >
 > **slash** */*
 >
@@ -191,21 +211,17 @@
 >
 > **left brace** *{*
 >
-> **brack** *{*
+> **curly bracket** *{*
 >
-> **bracket** *{*
->
-> **left bracket** *{*
+> **left curly bracket** *{*
 >
 > **r brace** *}*
 >
 > **right brace** *}*
 >
-> **r brack** *}*
+> **r curly bracket** *}*
 >
-> **r bracket** *}*
->
-> **right bracket** *}*
+> **right curly bracket** *}*
 >
 > **angle** *<*
 >
@@ -258,6 +274,10 @@
 > **semicolon** *;*
 >
 > **colon** *:*
+>
+> **stacked** *:*
+>
+> **void** * *
 >
 > **forward slash** */*
 >
@@ -334,6 +354,10 @@
 > **semicolon** *;*
 >
 > **colon** *:*
+>
+> **stacked** *:*
+>
+> **void** * *
 >
 > **forward slash** */*
 >
@@ -431,6 +455,10 @@
 >
 > **dotted** `example.of.formatting.with.dotted` 
 >
+> **parenthize** `(example of) formatting) with) parenthize)` 
+>
+> **paren string** `(example of) formatting) with) paren) string)` 
+>
 > **dub string** `"example of formatting with dub string"` 
 >
 > **dunder** `__example__offormattingwithdunder` 
@@ -439,11 +467,15 @@
 >
 > **kebab** `example-of-formatting-with-kebab` 
 >
+> **named** `example/of/formatting/with/named` 
+>
 > **packed** `example::of::formatting::with::packed` 
 >
 > **padded** ` example of formatting with padded ` 
 >
 > **slasher** `/example/of/formatting/with/slasher` 
+>
+> **conga** `example/of/formatting/with/conga` 
 >
 > **smash** `exampleofformattingwithsmash` 
 >
@@ -451,305 +483,435 @@
 >
 > **string** `'example of formatting with string'` 
 >
+> **say** `example of formatting with say` 
+>
+> **speak** `example of formatting with speak` 
+>
+> **sentence** `Example of formatting with sentence` 
+>
 > **title** `Example of Formatting With Title` 
 >
 
 
 
-#  cursorless
+#  clipboard manager
 
 
- - **<user.cursorless_action_or_ide_command> <user.cursorless_target>**  `user.cursorless_action_or_ide_command(cursorless_action_or_ide_command, cursorless_target)
+ - **[toggle] clippy [(show | hide | toggle)]**  `user.clipboard_manager_toggle()
 		`
 
- - **{user.cursorless_positional_action} <user.cursorless_positional_target>**  `user.cursorless_single_target_command(cursorless_positional_action, cursorless_positional_target)
+ - **[toggle] clippy [(show | hide)] (pin | pinned | sticky | toggle)**  `user.clipboard_manager_toggle()
+		user.clipboard_manager_toggle_sticky()
 		`
 
- - **{user.cursorless_swap_action} <user.cursorless_swap_targets>**  `user.cursorless_multiple_target_command(cursorless_swap_action, cursorless_swap_targets)
+ - **paste <number_small> [and <number_small>]***  `user.clipboard_manager_paste(number_small_list)
 		`
 
- - **{user.cursorless_move_bring_action} <user.cursorless_move_bring_targets>**  `user.cursorless_multiple_target_command(cursorless_move_bring_action, cursorless_move_bring_targets)
+ - **paste <user.ordinals_small> [and <user.ordinals_small>]***  `user.clipboard_manager_paste(ordinals_small_list)
 		`
 
- - **{user.cursorless_reformat_action} <user.formatters> at <user.cursorless_target>**  `user.cursorless_reformat(cursorless_target, formatters)
-		`
-
- - **<user.cursorless_wrapper> {user.cursorless_wrap_action} <user.cursorless_target>**  `user.cursorless_wrap(cursorless_wrap_action, cursorless_target, cursorless_wrapper)
-		`
-
- - **{user.cursorless_homophone} settings**  `user.cursorless_show_settings_in_ide()`
-
-
-
-#  cursorless global
-
-
- - **{user.cursorless_homophone} (reference | ref | cheatsheet | cheat sheet)**  `user.cursorless_cheat_sheet_show_html()`
-
- - **{user.cursorless_homophone} (instructions | docks | help) | help {user.cursorless_homophone}**  `user.cursorless_open_instructions()`
-
-
-
-#  cursorless snippets
-
-
- - **{user.cursorless_insert_snippet_action} <user.cursorless_insertion_snippet>**  `user.cursorless_implicit_target_command(cursorless_insert_snippet_action, cursorless_insertion_snippet)
-		`
-
- - **{user.cursorless_insert_snippet_action} <user.cursorless_insertion_snippet> <user.cursorless_positional_target>**  `user.cursorless_single_target_command(cursorless_insert_snippet_action, cursorless_positional_target, cursorless_insertion_snippet)
-		`
-
- - **{user.cursorless_insert_snippet_action} {user.cursorless_insertion_snippet_single_phrase} <user.text> [{user.cursorless_phrase_terminator}]**  `user.private_cursorless_insert_snippet_with_phrase(cursorless_insert_snippet_action, cursorless_insertion_snippet_single_phrase, text)`
-
-
-
-#  gb
-
-
- - **(toggle | hide | show) bookmarks**  `key(cmd-shift-b)`
-
- - **(toggle | hide | show | open) (devtools | dev tools | console)**  `key(cmd-alt-i)`
-
- - **search bookmarks [<user.text>]**  `key(cmd-l)
-		sleep(100ms)
-		insert("@bookmarks")
-		key(space)
-		sleep(100ms)
-		insert(text)
-		
-		
-		
-		### gb
-		`
-
- - **(search | open) (products | prods)**  `user.open_url("https://store-7hstasnrjg.mybigcommerce.com/manage/products")`
-
- - **[open] edit product [page]**  `key(cmd-l)
-		sleep(100ms)
-		insert("@bookmarks")
-		key(space)
-		sleep(100ms)
-		insert("edit prod+")
-		sleep(100ms)
-		key(tab enter)
-		`
-
- - **[(open |  go)] (local | localhost) (view | page)**  `key(cmd-l)
-		sleep(100ms)
-		insert("@bookmarks")
-		key(space)
-		sleep(100ms)
-		insert("->Local - j")
-		sleep(100ms)
-		key(tab enter)
-		`
-
- - **[( open |  go)] (live | remote) (view | page)**  `key(cmd-l)
-		sleep(100ms)
-		insert("@bookmarks")
-		key(space)
-		sleep(100ms)
-		insert("->Live - j")
-		sleep(100ms)
-		key(tab enter)
-		
-		`
-
- - **open (cats | categories)**  `user.open_url("https://store-7hstasnrjg.mybigcommerce.com/manage/products/categories")`
-
-
-
-#  general
-
-
- - **(for | fore) (delete | dell)**  `key(delete)`
-
- - **target**  `key(shift-f12)`
-
- - **search target**  `key(cmd-shift-f12)`
-
- - **copy it**  `key(cmd-c)`
-
- - **paste it**  `key(cmd-v)`
-
- - **retarget**  `key(alt-shift-cmd-ctrl-f12)`
-
- - **show (clip | clipboard | image | screengrab) [in] preview**  `key(cmd-space)
-		insert("preview")
-		sleep(100ms)
-		key(enter)
-		sleep(100ms)
-		key(cmd-w)
-		sleep(100ms)
-		key(shift-f12)
-		sleep(700ms)
-		key(d)
-		sleep(100ms)
-		key(a)
-		sleep(600ms)
-		key(cmd-n)
-		
-		
-		
-		#raycast`
-
- - **(raycast | ray cast)**  `key(cmd-space)`
-
- - **search menu**  `key(cmd-alt-shift-ctrl-l)`
-
- - **ray choose window**  `key(cmd-space)
-		insert("switch windows")
-		key(cmd-1)
-		
-		# finder`
-
- - **show hidden folders**  `key(ctr-shift-period)`
-
- - **open file**  `key(cmd-o)`
-
- - **view**  `key(space)`
-
- - **close**  `key(space)`
-
- - **(take screen shot | screen grab)**  `key(ctrl-shift-cmd-4)`
-
- - **(show | hide | toggle) desk**  `key(f11)`
-
- - **open display panel**  `key(cmd-space)
-		sleep(300ms)
-		insert("displays")
-		key(enter)
-		`
-
- - **open sound panel**  `key(cmd-space)
-		sleep(300ms)
-		insert("sound")
-		key(enter)
-		
-		
-		#window Management`
-
- - **(win | window) right**  `key(cmd-alt-shift-ctrl-right)`
-
- - **(win | window) left**  `key(cmd-alt-shift-ctrl-left)`
-
- - **(win | window) (max | maximize)**  `key(cmd-alt-shift-ctrl-up)`
-
- - **pick (win | window)**  `key(ctrl-up)`
-
- - **pick app (win | window)**  `key(ctrl-down)`
-
- - **(window choose | choose window)**  `key(cmd-alt-shift-ctrl-down)`
-
- - **(win | window) (swap | last)**  `key(shift-ctrl-f6)
-		sleep(180ms)
+ - **paste block <number_small> [and <number_small>]***  `user.clipboard_manager_paste(number_small_list)
+		sleep(200ms)
 		key(enter)`
 
- - **(next | last | swap) (app | win | window)**  `key(shift-ctrl-f6)
-		sleep(180ms)
+ - **paste block <user.ordinals_small> [and <user.ordinals_small>]***  `user.clipboard_manager_paste(ordinals_small_list)
+		sleep(200ms)
+		key(enter)
+		`
+
+ - **paste special <number_small> [and <number_small>]***  `user.clipboard_manager_paste(number_small_list, 1)`
+
+ - **paste special <user.ordinals_small> [and <user.ordinals_small>]***  `user.clipboard_manager_paste(ordinals_small_list, 1)`
+
+
+
+#  clipboard manager open
+
+
+ - **clippy (stay | sticky | pin)**  `user.clipboard_manager_toggle_sticky()
+		`
+
+ - **clippy clear**  `user.clipboard_manager_remove()
+		`
+
+ - **clippy chuck <number_small> [and <number_small>]***  `user.clipboard_manager_remove(number_small_list)
+		`
+
+ - **clippy split <number_small> [and <number_small>]***  `user.clipboard_manager_split(number_small_list)
+		`
+
+ - **clippy copy <number_small> [and <number_small>]***  `user.clipboard_manager_copy(number_small_list)`
+
+
+
+#  chrome
+
+
+ - **(toggle | hide | show | open | close) (devtools | dev tools | tools)**  `key(cmd-alt-i)
+		`
+
+ - **(toggle | hide | show | open | close) console**  `key(cmd-alt-j)`
+
+ - **tools [dock] (sidebar | bar | panel | bottom | right | last | next)**  `key(cmd-shift-d)`
+
+ - **[go] (bookmarks | bookmark | marks) (browser | view | page)**  `key(cmd-alt-b)
+		`
+
+ - **(toggle | hide | show) (bookmarks | bookmark | marks) bar**  `key(cmd-shift-b)
+		`
+
+ - **(search | hunt)  (bookmarks | bookmark | marks) [<user.text>]**  `key(cmd-l)
+		sleep(100ms)
+		insert("@bookmarks {text or ''}")
+		`
+
+ - **(choose | pick) <number_small>**  `key("down:{number_small}")
+		sleep(200ms)
 		key(enter)
 		
-		# global app commands`
-
- - **save file**  `key(cmd-s)`
-
- - **quit app**  `key(cmd-q)`
-
- - **exit**  `key(escape)`
-
- - **[toggle] fullscreen**  `key(cmd-alt-shift-ctrl-a)`
-
- - **(override line | over ride line)**  `mimic("clone line")
-		sleep(300ms)
-		# comment line
-		key(up cmd-/)
-		#navigate to place in new line
-		key(down left:2)
-		# mimic("go to line start")
-		# insert("#")
-		
-		#talon stuff
-		# talon log [window]:
-		
-		#right/context click`
-
- - **((right | r | are | part) click | (context | see | sea) (click | touch | that | menu | options))**  `mouse_click(1)
-		# close the mouse grid if open
-		user.grid_close()
-		
+		## +++++++++++++ click to select, then...
 		`
 
-
-
-#  intellij
-
-
- - **[new] text override**  `key(alt-up)
+ - **copy  (link | address | url) (point | here)**  `mouse_click(1)
 		sleep(100ms)
-		key(cmd-c)
-		key([)
-		sleep(100ms)
-		key(alt-right)
-		sleep(100ms)
-		key(space)
-		key(cmd-v)
-		sleep(100ms)
-		key(alt-left)
-		key(right)
+		insert("copy link address")
+		# sleep(100ms)
+		key(enter)
+		
+		## ++++++++++++++++++++++++++++++ zoom .
 		`
 
- - **[new] prefix override [<user.text>]**  `key(alt-up)
-		sleep(100ms)
-		key(cmd-c)
-		key([)
-		sleep(100ms)
-		key(alt-right)
-		sleep(100ms)
-		key(space)
-		key({)
-		insert(":post ")
-		key(")
+ - **zoom (default  | normal) | reset zoom**  `key(cmd-0)`
+
+ - **search <user.text>**  `browser.focus_search()
 		insert(text)
 		`
 
- - **[new] (opt | optional) postfix override**  `key(alt-up)
+ - **search force <user.text>**  `browser.focus_search()
+		insert(text)
 		sleep(100ms)
-		key(cmd-c)
-		key([)
+		key(enter)
+		
+		## ++++++++++ copy web page address to roam .
+		`
+
+ - **(notes | note | no to | not to | don't | roam | rome) capture address | (copy | send) address [to] notes**  `browser.focus_address()
+		sleep(50ms)
+		edit.copy()
+		key(cmd-ctrl-alt-shift-;)
+		sleep(200ms)
+		edit.paste()
 		sleep(100ms)
-		key(alt-right)
+		key(cmd-enter)
 		sleep(100ms)
-		key(space)
-		key({)
-		insert(":post ")
-		key(")
+		key(escape)
+		
+		## ++++++++++++++++++ search open tabs .
+		`
+
+ - **(search | hunt) (tabs | open tabs | open) [<user.text>]**  `key(cmd-shift-a)
+		sleep(300ms)
+		insert("{text}")
+		`
+
+ - **go [(tabs | open tabs | open)] <user.text>**  `key(cmd-shift-a)
+		sleep(200ms)
+		insert("{text}")
 		sleep(100ms)
-		insert("[")
-		insert(text or "")
-		insert("]")
-		key(left)
+		key(enter)
+		`
+
+ - **([go] other | swap) profile [(window | win)]**  `key(cmd-shift-m)
+		sleep(100ms)
+		key(down enter)`
+
+
+
+#  calva
+
+
+ - **disable ((par | pear) infer | parent for)**  `user.vscode("parinfer.disable")`
+
+ - **toggle ((par | pear) infer | parent for) mode**  `user.vscode("parinfer.toggleMode")`
+
+ - **[open] calva settings**  `user.vscode("workbench.action.openSettings2")
+		insert("calva")
+		`
+
+ - **open calva (documentation | docs)**  `user.vscode("calva.openCalvaDocs")
+		
 		
 		`
 
- - **[new] (opt | optional) postfix override  [<user.text>]**  `key(alt-up)
-		sleep(100ms)
-		key(cmd-c)
-		key([)
-		sleep(100ms)
-		key(alt-right)
-		sleep(100ms)
-		key(space)
-		key({)
-		insert(":post ")
-		key(")
-		sleep(100ms)
-		insert("[")
-		insert(text or "")
-		insert("]")
-		key(left)
-		key(alt-up)
+
+
+#  comments
+
+
+ - **[(insert | add)] comment (symbol | mark)**  `insert("#_")
+		`
+
+ - **[(insert | add)] dub comment (symbol | symbols | mark | marks)**  `insert("#_#_")
+		`
+
+ - **(make | add) rich comment**  `user.vscode("paredit.addRichComment")
+		`
+
+ - **(comment |  uncomment) form**  `key(cmd-/)
+		`
+
+ - **(comment |  uncomment) line**  `key(shift-right cmd-/)
+		`
+
+ - **(comment |  uncomment) point**  `key("shift:down")
+		mouse_click(0)
+		user.mouse_drag_end()
+		key(shift-right cmd-/)`
+
+
+
+#  edit
+
+
+ - **dedent [line]**  `user.vscode("calva-fmt.tabDedent")
+		`
+
+ - **indent [line]**  `user.vscode("calva-fmt.tabIndent")
 		
 		
+		# Native vscode move form commands
+		`
+
+ - **native move up**  `key(alt-up)`
+
+ - **native move down**  `key(alt-down)`
+
+ - **move [form] (up | back | left)**  `user.vscode("paredit.dragSexprBackward")
+		`
+
+ - **move [form] (down | forward | right)**  `user.vscode("paredit.dragSexprForward")
+		`
+
+ - **(slurp | slip) [(forward | for it)]**  `user.vscode("paredit.slurpSexpForward")
+		`
+
+ - **(slurp | slip) (backward | back)**  `user.vscode("paredit.slurpSexpBackward")
+		`
+
+ - **barf [forward]**  `user.vscode("paredit.barfSexpForward")
+		`
+
+ - **barf (backward | back)**  `user.vscode("paredit.barfSexpBackward")
+		`
+
+ - **(transpose | swap) (forms | expressions)**  `user.vscode("paredit.transpose")`
+
+
+
+#  eval
+
+
+ - **please calva (evaluate | eval)**  `key(cmd-shift-p)
+		insert("evaluate ")
+		`
+
+ - **[(rep | repl | ripple | rebel)] (load | reload | run) file [in (rep | repl | ripple | rebel)]**  `user.vscode("calva.loadFile")
+		
+		#eval top form`
+
+ - **(rep | repl | ripple | evaluate | eval | compute | comp | run | runt) [it] [(top | top form)]**  `user.vscode("calva.evaluateCurrentTopLevelForm")
+		
+		#eval top fresh`
+
+ - **(rep | repl | ripple | evaluate | eval | compute | run it  | running ) [top] fresh**  `user.vscode("calva.evaluateCurrentTopLevelForm")
+		
+		#eval top form as comment`
+
+ - **(rep | repl | ripple | evaluate | eval | compute | comp | run | runt) [it] [(top | top form)] [as] comment**  `user.vscode("calva.evaluateTopLevelFormAsComment")
+		
+		#eval enclosing form`
+
+ - **(rep | repl | ripple | evaluate | eval | compute | comp | run | runt) (parent | enclosing | wrapping | form | outside) [form]**  `user.vscode("calva.evaluateEnclosingForm")
+		
+		#eval selected text or current form @ caret`
+
+ - **(rep | repl | ripple |  evaluate | eval | compute | comp | run | runt) (here | that | selection)**  `user.vscode("calva.evaluateSelection")
+		
+		## ++++++++++++++++ copy last repl result.
+		`
+
+ - **(copy | take) [last] [repl] (result | output | evaluation | eval)**  `user.vscode("calva.copyLastResults")
+		
+		## ++++++++++++ evaluate chunk of file .
+		`
+
+ - **evaluate from (start of file | file start)**  `user.vscode("calva.evaluateStartOfFileToCursor")
+		`
+
+ - **evaluate from (start of list | list start)**  `user.vscode("calva.evaluateToCursor")
+		`
+
+ - **evaluate from top**  `user.vscode("calva.evaluateTopLevelFormToCursor")
+		
+		## +++ printing eval results to editor .
+		
+		#eval selected text or current form as comment`
+
+ - **(rep | repl | ripple |  evaluate | eval | compute | comp | run | runt) (here | that | selection) [as] comment**  `user.vscode("calva.evaluateSelectionAsComment")
+		`
+
+ - **evaluate and replace [with result]**  `user.vscode("calva.evaluateSelectionReplace")
+		`
+
+ - **(pace | paste) [last] [repl] (result | output | evaluation | eval)**  `user.vscode("calva.copyLastResults")
+		edit.paste()
+		`
+
+ - **(pace | paste) [last] [repl] (result | output | evaluation | eval) [(to | too | two)] new [(file | editor | tab | window)]**  `user.vscode("calva.copyLastResults")
+		# sleep(200ms)
+		user.vscode("workbench.action.files.newUntitledFile")
+		sleep(200ms)
+		user.vscode("workbench.action.moveEditorToRightGroup")
+		# sleep(100ms)
+		user.vscode("workbench.action.editor.changeLanguageMode")
+		sleep(100ms)
+		insert("clojure")
+		sleep(100ms)
+		key(enter)
+		sleep(100ms)
+		key(enter)
+		edit.paste()
+		
+		## ++++++++++++++++++++++++++++++ misc .
+		`
+
+ - **(interrupt | cancel | kill) [(running | current)] repl [(evaluation | evaluations)]**  `user.vscode("calva.interruptAllEvaluations")
+		`
+
+ - **toggle send evaluated code to repl [window]**  `user.vscode("calva.toggleEvaluationSendCodeToOutputWindow")
+		`
+
+ - **toggle repl pretty printing**  `user.vscode("calva.togglePrettyPrint")
+		
+		`
+
+
+
+#  formatting
+
+
+ - **format (form | expression)**  `user.vscode("calva-fmt.formatCurrentForm")
+		`
+
+ - **format [and] align (form | expression)**  `user.vscode("calva-fmt.alignCurrentForm")
+		`
+
+ - **format [and] trim (form | expression)**  `user.vscode("calva-fmt.trimCurrentFormWhiteSpace")
+		`
+
+ - **infer parens**  `user.vscode("calva-fmt.inferParens")
+		`
+
+ - **replace with pretty (print | printed)**  `user.vscode("calva.prettyPrintReplaceCurrentForm")
+		`
+
+
+
+#  paredit
+
+
+ - **please (paredit | pare edit | pear edit)**  `key(cmd-shift-p)
+		insert("calva paredit ")
+		`
+
+ - **open [(paredit | pare edit | pear edit)] list**  `user.vscode("paredit.openList")`
+
+ - **toggle (paredit | pare edit | pear edit) [mode]**  `user.vscode("paredit.togglemode")`
+
+
+
+#  paredit nav
+
+
+ - **go (back | previous | prev) (form | expression)**  `user.vscode("paredit.backwardSexp")`
+
+ - **go (back | previous | prev) down [form]**  `user.vscode("paredit.backwardDownSexp")
+		`
+
+ - **go (back | previous | prev) up [form]**  `user.vscode("paredit.backwardUpSexp")
+		
+		# go back to start:`
+
+ - **go back or up**  `user.vscode("paredit.backwardSexpOrUp")
+		
+		#forward`
+
+ - **go (forward | fore | next) [down] [form]**  `user.vscode("paredit.forwardDownSexp")
+		`
+
+ - **go up [form]**  `user.vscode("paredit.forwardUpSexp")
+		`
+
+ - **go (forward | fore | next) [form]**  `user.vscode("paredit.forwardSexp")
+		`
+
+ - **go forward up**  `user.vscode("paredit.forwardUpSexp")
+		`
+
+ - **Go forward or up**  `user.vscode("paredit.forwardSexpOrUp")
+		`
+
+ - **go to end**  `user.vscode("paredit.closeList")
+		`
+
+
+
+#  paredit select
+
+
+ - **take it**  `user.vscode("calva.selectCurrentForm")
+		`
+
+ - **take back down**  `user.vscode("paredit.selectBackwardDownSexp")
+		`
+
+ - **take back up**  `user.vscode("paredit.selectBackwardUpSexp")
+		`
+
+ - **take back**  `user.vscode("paredit.selectBackwardSexp")
+		`
+
+ - **take back to start**  `user.vscode("paredit.selectOpenList")
+		`
+
+ - **take top level**  `user.vscode("paredit.rangeForDefun")
+		`
+
+ - **take forward down**  `user.vscode("paredit.selectForwardDownSexp")
+		`
+
+ - **take forward up**  `user.vscode("paredit.selectForwardUpSexp")
+		`
+
+ - **take (forward | ahead)**  `user.vscode("paredit.selectForwardSexp")
+		`
+
+ - **take [forward] to end**  `user.vscode("paredit.selectCloseList")
+		`
+
+ - **take right**  `user.vscode("paredit.selectRight")
+		`
+
+ - **expand selection | take more | take expand**  `user.vscode("paredit.sexpRangeExpansion")
+		`
+
+ - **shrink selection | take less**  `user.vscode("paredit.sexpRangeContraction")
+		`
+
+ - **take back or up**  `user.vscode("paredit.selectBackwardSexpOrUp")
+		`
+
+ - **take forward or up**  `user.vscode("paredit.selectForwardSexpOrUp")
 		
 		
 		
@@ -757,51 +919,345 @@
 		
 		`
 
- - **type tool**  `key(t)`
 
- - **move tool**  `key(v)`
 
- - **(standard move | artboard) tool**  `key(shift-v)`
+#  refactor
 
- - **jump to source**  `key(cmd-down)`
 
- - **[repl] load file**  `key(ctrl-enter)`
+ - **thread last**  `user.vscode("clojureLsp.refactor.threadLast")
+		`
 
- - **(show | hide) project**  `key(cmd-1)`
+ - **thread last all**  `user.vscode("clojureLsp.refactor.threadLastAll")
+		`
 
- - **(show | hide) commit**  `key(cmd-0)`
+ - **thread first**  `user.vscode("clojureLsp.refactor.threadFirst")
+		`
 
- - **(show | hide) structure**  `key(cmd-7)`
+ - **thread first all**  `user.vscode("clojureLsp.refactor.threadFirstAll")
+		`
 
- - **(show | hide) bookmarks**  `key(cmd-2)`
+ - **unwind thread**  `user.vscode("clojureLsp.refactor.unwindThread")
+		`
 
- - **(show | hide) git**  `key(cmd-9)`
+ - **unwind all**  `user.vscode("clojureLsp.refactor.unwindAll")
+		
+		## +++++++++++ other lsp refactor commands .
+		`
 
- - **(show | hide) terminal**  `key(alt-f12)`
+ - **introduce let**  `user.vscode("clojureLsp.refactor.introduceLet")
+		`
 
- - **(show | hide) repl**  `key(alt-f11)`
+ - **expand let**  `user.vscode("clojureLsp.refactor.expandLet")
+		`
 
- - **(evaluate | eval)**  `key(cmd-enter)`
+ - **inline symbol**  `user.vscode("clojureLsp.refactor.inlineSymbol")
+		`
 
- - **(rep | repl | eval | compute) top**  `key(cmd-enter)`
+ - **expand to new function**  `user.vscode("clojureLsp.refactor.extractFunction")
+		`
 
- - **(rep | repl | eval | compute) this**  `key(alt-enter)`
+ - **add missing require**  `user.vscode("clojureLsp.refactor.addMissingLibspec")
+		
+		## ++++++++ other refactoring commands .
+		
+		# wrap [in] (brackets | vector | square): key(ctrl-shift-alt-s)
+		
+		# in vscode/eval
+		# evaluate and replace [with result]:`
 
- - **take**  `key(alt-up)`
 
- - **copy that**  `key(cmd-c)`
 
- - **paste that**  `key(cmd-v)`
+#  repl
 
- - **(delete | kill) line**  `key(cmd-backspace)`
 
- - **comment that**  `key(cmd-/)`
+ - **(jack in  |  restart) repl | repl  (jack in  |  restart)**  `user.vscode("calva.jackIn")
+		`
 
- - **comment symbol**  `insert("#" + "_")`
+ - **[new] repl menu**  `user.vscode("calva.startOrConnectRepl")
+		
+		## ++++++++++++++++++++++++++++++ misc .
+		`
 
- - **repl build (templates | theme)**  `key(f1)`
+ - **clear repl history**  `user.vscode("calva.clearReplHistory")
+		
+		# what is this?`
 
- - **(open | search) file**  `key(cmd-shift-o)`
+ - **show [result] output destination**  `user.vscode("calva.showResultOutputDestination")
+		
+		## ++++++++++++++ calva (repl) output channel .
+		`
+
+ - **show [calva] [says] (results | output | repl | ripple) channel**  `user.vscode("calva.showOutputChannel")
+		
+		## +++++++++++++++++++ calva repl output/results terminal .
+		`
+
+ - **show [calva] (output | results | repl | ripple) (term | terminal)**  `user.vscode("calva.showOutputTerminal")
+		
+		## +++++++++++ repl results editor tab window.
+		`
+
+ - **(focus | go) [(repl | ripple)] (results | output) [(window | tab)]**  `user.vscode("calva.showOutputWindow")
+		`
+
+ - **(show | open) [(repl | ripple)] (results | output) [(window | tab)]**  `user.vscode("calva.showOutputWindow")
+		sleep(300ms)
+		user.vscode("workbench.action.navigateBack")
+		`
+
+ - **clear [(repl | ripple)] (results | output) [(window | tab)]**  `user.vscode("calva.showOutputWindow")
+		sleep(200ms)
+		key(cmd-a)
+		key(delete)
+		sleep(200ms)
+		user.vscode("workbench.action.openPreviousRecentlyUsedEditor")
+		# user.vscode("workbench.action.navigateBack")
+		`
+
+ - **(close | hide) [(repl | ripple)] (results | output) [(window | tab)]**  `user.vscode("calva.showOutputWindow")
+		sleep(200ms)
+		user.vscode("workbench.action.closeActiveEditor")
+		`
+
+ - **go [(repl | ripple)] (results | output) [(window | tab)] top**  `user.vscode("calva.showOutputWindow")
+		user.vscode("workbench.action.closeActiveEditor")
+		key(cmd-up)
+		sleep(200ms)
+		user.vscode("workbench.action.navigateBack")
+		
+		## ++++++++++++++++++++ output channel .
+		`
+
+ - **open [(repl  | calva)] output channel**  `user.vscode("calva.showOutputChannel")
+		
+		## ++++++++++++++++++++ inline results .
+		`
+
+ - **(hide | clear) inline (results | eval | evaluations)**  `user.vscode("calva.clearInlineResults")`
+
+ - **print [clojure] [docs] examples**  `user.vscode("calva.printClojureDocsToOutputWindow")`
+
+
+
+#  repl snippets
+
+
+ - **(open | show) (my | workspace) [calva] repl snippets**  `user.cursorless_wrap_with_snippet()
+		user.vscode("calva.customREPLCommandSnippets")
+		`
+
+ - **(open | go) [(user | global)] [calva] (repl snippets | calva config) [eden]**  `user.vscode("calva.openUserConfigEdn")
+		`
+
+ - **(open | go) workspace repl snippets**  `user.vscode("workbench.action.openWorkspaceSettingsFile")
+		key(cmd-f)
+		insert("calva.customREPLCommandSnippets")
+		`
+
+ - **refresh [(user | global)] (repl snippets | calva config) [eden]**  `user.vscode("calva.rereadUserConfigEdn")
+		
+		## +++++++++++++++ choose repl snippet from dropdown
+		
+		# todo: need enumerated versions of this?`
+
+ - **(pick | choose | show | please) [custom] repl (command | commands  | function | functions | funs | snippet | snippets) [<user.text>]**  `user.vscode("calva.runCustomREPLCommand")
+		# sleep(100ms)
+		insert(text or "")
+		
+		## ++++++++++++++++++++++++++++++ test .`
+
+ - **test run repl command**  `user.run_rpc_command("calva.runCustomREPLCommand", "dc")
+		`
+
+ - **curse test  <user.cursorless_target>**  `# user.cursorless_command("setSelection", cursorless_target)
+		t= user.cursorless_get_text(cursorless_target)
+		user.run_rpc_command("calva.runCustomREPLCommand", "(identity {t})")
+		
+		
+		
+		
+		
+		# user.cursorless_ide_command_extra("calva.runCustomREPLCommand", "flow storm", cursorless_target)
+		
+		`
+
+ - **test bird**  `insert("ran repl test")
+		user.run_repl_command("(println \\\"hello-world\\\")", "clj")`
+
+
+
+#  clojure
+
+
+ - **hello test**  `insert("test worked!!!")`
+
+ - **test notification**  `app.notify('this is a notification')`
+
+ - **[(closure | clojure)] (token | symbol | simple) {user.clojure_core}**  `insert("{clojure_core}")
+		
+		`
+
+ - **keyword [<user.text>]**  `insert(":")
+		user.insert_formatted(text, "DASH_SEPARATED")
+		`
+
+ - **(namespace | namespaced) keyword [<user.text>]**  `insert("::")
+		user.insert_formatted(text, "DASH_SEPARATED")
+		`
+
+ - **open keyword <user.format_code>+**  `insert(":")
+		user.insert_many(format_code_list)
+		`
+
+ - **open namespace keyword <user.format_code>+**  `insert("::")
+		user.insert_many(format_code_list)
+		
+		# <user.format_code>+ over: user.insert_many(format_code_list)
+		# <user.formatters> that: user.formatters_reformat_selection(user.formatters)
+		
+		
+		# function <user.clojure_fn>:
+		#     key(delete)
+		#     user.insert_between("({clojure_fn} ", ")")
+		
+		# function <user.word>:
+		#     key(delete)
+		#     user.insert_between("({word} ", ")")
+		
+		
+		# function it:
+		#     selectedText = edit.selected_text()
+		#     key(delete)
+		#     user.insert_between("({selectedText} ", ")")`
+
+
+
+#  flowstorm
+
+
+ - **launch flow storm**  `user.run_rpc_command("calva.runCustomREPLCommand", "launch flow storm")
+		`
+
+ - **(trace | run) flow [top]**  `user.run_rpc_command("calva.runCustomREPLCommand", "trace flow")
+		`
+
+ - **(trace | run) flow [top] <user.cursorless_target>**  `user.cursorless_command("setSelection", cursorless_target)
+		sleep(100ms)
+		user.run_rpc_command("calva.runCustomREPLCommand", "trace flow")`
+
+
+
+#  gbo-code
+
+
+ - **[repl] (build | rebuild) (templates | theme)**  `user.vscode("calva.loadFile")
+		sleep(500ms)
+		user.run_rpc_command("calva.runCustomREPLCommand", "b")`
+
+
+
+#  joyride
+
+
+ - **(joyride | joy) (evaluate | eval | run ) (selection | this)**  `user.vscode("joyride.evaluateSelection")
+		`
+
+ - **Open joyride [user] script**  `user.vscode("joyride.openUserScript")`
+
+ - **Open joyride (workspace | work space | project) script**  `user.vscode("joyride.openWorkspaceScript")`
+
+
+
+#  portal
+
+
+ - **launch portal**  `user.vscode("extension.portalOpen")`
+
+ - **launch portal clearing**  `user.run_rpc_command("calva.runCustomREPLCommand", "p")
+		
+		## ++++++++++++++  portal playback .
+		
+		# (require-resolve 'gbo.playback-preload)
+		
+		`
+
+ - **launch (portal playback | playback portal)**  `user.run_rpc_command("calva.runCustomREPLCommand", "launch playback")
+		`
+
+ - **go portal (tab | window)**  `user.vscode("workbench.action.quickOpenPreviousRecentlyUsedEditor")
+		sleep(300ms)
+		insert("portal")
+		sleep(300ms)
+		key(enter)`
+
+
+
+#  portal ui
+
+
+ - **[(open | show)] portal (commands | [command] pallete | (please | police)) [<user.text>]**  `key(ctrl-j)
+		sleep(200ms)
+		insert(text or "")
+		`
+
+ - **[(open | show)] portal (you eye | ui) (commands | [command] pallete) | portal (please | police) (you eye | ui)**  `key(ctrl-j)
+		sleep(300ms)
+		insert("ui")
+		`
+
+ - **portal clear | clear portal**  `key(ctrl-l)
+		`
+
+ - **portal focus**  `key(ctrl-enter)
+		`
+
+ - **portal expand [(ink  | incremental)]**  `key(shift-e)
+		`
+
+ - **Portal next viewer**  `key(shift-j)`
+
+ - **Portal last viewer**  `key(shift-k)
+		`
+
+ - **portal [select] viewer**  `key(v)
+		`
+
+ - **portal back**  `key(cmd-left)`
+
+ - **portal forward**  `key(cmd-right)
+		`
+
+ - **portal [history] (first | initial | init | start) [val]**  `key(cmd-shift-left)`
+
+ - **portal [history] (last | end | final)**  `key(cmd-shift-right)
+		`
+
+ - **portal (redo | again)**  `key(ctrl-r)
+		`
+
+ - **portal top**  `key(g g)
+		`
+
+ - **portal bottom**  `key(shift-g)
+		`
+
+ - **portal toogle expand**  `key(a z)
+		`
+
+ - **portal ([select] none | deselect)**  `key(shift-esc)
+		`
+
+ - **portal (child | kid | kids | right)**  `key(right)`
+
+ - **portal (parent | left)**  `key(left)`
+
+ - **portal (next | down)**  `key(down)`
+
+ - **portal (last | up)**  `key(up)`
+
+ - **portal pop**  `key(esc)`
+
+ - **portal (focus | go) filter**  `key(/)`
 
 
 
@@ -996,17 +1452,63 @@
 
 
 
+# mac arc mac
+
+
+ - **please [<user.text>]**  `key("cmd-l")
+		sleep(200ms)
+		insert(user.text or "")`
+
+
+
+# mac little-arc mac
+
+
+ - **little arc [<user.text>]**  `key("cmd-alt-n")
+		sleep(200ms)
+		insert(user.text or "")`
+
+
+
 #  chrome
 
 
  - **profile switch**  `user.chrome_mod("shift-m")`
 
- - **tab search**  `user.chrome_mod("shift-a")`
+ - **tab (search | list)**  `user.chrome_mod("shift-a")`
 
- - **tab search <user.text>**  `user.chrome_mod("shift-a")
+ - **tab (search | list) <user.text>**  `user.chrome_mod("shift-a")
 		sleep(200ms)
 		insert("{text}")
-		key(down)`
+		key(down)
+		
+		## +++++++++++++++ inspect in devtools .
+		`
+
+ - **open inspector | inspect page**  `key(cmd-shift-c)
+		`
+
+ - **inspect [here]**  `mouse_click(1)
+		sleep(100ms)
+		insert("inspect")
+		key(enter)
+		
+		
+		## +++ load and search browser history .
+		`
+
+ - **(go  | show | search  | hunt) history [<user.text>]**  `browser.show_history()
+		sleep(300ms)
+		insert(text)
+		`
+
+ - **(go  | show | search  | hunt) history (grouped  | groups) [<user.text>]**  `browser.go("chrome://history/grouped")
+		sleep(300ms)
+		insert(text)
+		
+		## ++++++++++++++++++ open closed tabs .`
+
+ - **(open | reopen) [last] (closed | close) tab | tab reopen**  `key(cmd-shift-t)`
 
 
 
@@ -1207,11 +1709,15 @@
 
  - **sort words**  `user.emacs("sort-words")`
 
+ - **file [loop] continue**  `user.emacs("fileloop-continue")`
+
  - **go directory**  `user.emacs("dired-jump")`
 
  - **other go directory**  `user.emacs("dired-jump-other-window")`
 
  - **[toggle] debug on error**  `user.emacs("toggle-debug-on-error")`
+
+ - **[toggle] debug on quit**  `user.emacs("toggle-debug-on-quit")`
 
  - **[toggle] input method**  `user.emacs("toggle-input-method")`
 
@@ -1452,9 +1958,11 @@
 
  - **highlight lines matching [regex]**  `user.emacs("highlight-lines-matching-regexp")`
 
+ - **highlight phrase**  `user.emacs("highlight-phrase")`
+
  - **highlight regex**  `user.emacs("highlight-regexp")`
 
- - **unhighlight regex**  `user.emacs("unhighlight-regexp")`
+ - **unhighlight (regex | phrase)**  `user.emacs("unhighlight-regexp")`
 
  - **unhighlight all**  `user.emacs_prefix()
 		user.emacs("unhighlight-regexp")
@@ -1566,9 +2074,9 @@
 
  - **project [find] file**  `user.emacs("project-find-file")`
 
- - **project [find] regexp**  `user.emacs("project-find-regexp")`
+ - **project [find] (regex | grep)**  `user.emacs("project-find-regexp")`
 
- - **project [query] replace regexp**  `user.emacs("project-query-replace-regexp")`
+ - **project [query] replace regex**  `user.emacs("project-query-replace-regexp")`
 
  - **project (dired | directory)**  `user.emacs("projectile-dired")`
 
@@ -1588,9 +2096,9 @@
 
  - **project (switch [to buffer] | buffer | buff)**  `user.emacs("projectile-switch-to-buffer")`
 
- - **project kill buffers**  `user.emacs("projectile-kill-buffers")`
+ - **project kill [buffers]**  `user.emacs("projectile-kill-buffers")`
 
- - **project switch project**  `user.emacs("project-switch-project")`
+ - **project switch [project]**  `user.emacs("project-switch-project")`
 
  - **vc (annotate | blame)**  `user.emacs("vc-annotate")`
 
@@ -1681,7 +2189,49 @@
 
  - **options**  `key(cmd-j)`
 
- - **search**  `key(cmd-alt-f)`
+ - **search**  `key(cmd-f)`
+
+ - **search <user.text>**  `key(cmd-f)
+		sleep(600ms)
+		insert(text)
+		`
+
+ - **search (name | names | file names) <user.text>**  `key(cmd-f)
+		sleep(500ms)
+		insert(text)
+		sleep(500ms)
+		key(down enter)
+		
+		# exit search part and go to navigate file list`
+
+ - **go list**  `key(cmd-shift-g)
+		sleep(300ms)
+		key(esc)
+		`
+
+ - **search (photo shop | photo | photoshop) <user.text>**  `key(cmd-f)
+		sleep(600ms)
+		insert(text + " .ps")
+		`
+
+ - **search (feta shot | photo shop | photo | photoshop) (paste | pace)**  `key(cmd-f)
+		sleep(600ms)
+		edit.paste()
+		insert(" .ps")
+		
+		`
+
+ - **search (photo shop | photo | photoshop) (name | names | file names) <user.text>**  `key(cmd-f)
+		sleep(500ms)
+		insert(text)
+		sleep(500ms)
+		key(down enter)
+		insert(".ps")
+		`
+
+ - **go [to] folder**  `key(cmd-shift-g)`
+
+ - **new folder**  `key(cmd-shift-n)`
 
  - **sort by none**  `key(ctrl-alt-cmd-0)`
 
@@ -1707,11 +2257,65 @@
 
  - **copy path**  `key(alt-cmd-c)`
 
+ - **copy file name**  `key(enter)
+		sleep(100ms)
+		edit.copy()
+		key(escape)
+		`
+
+ - **copy file name point**  `mouse_click(1)
+		key(enter)
+		sleep(100ms)
+		edit.copy()
+		key(escape)
+		`
+
+ - **copy (whole | full) file name**  `key(enter)
+		sleep(100ms)
+		edit.select_all()
+		edit.copy()
+		key(escape)
+		`
+
+ - **edit file name**  `key(enter)
+		# buggy`
+
+ - **copy (whole | full) file name point**  `mouse_click(1)
+		sleep(500ms)
+		key(enter)
+		sleep(500ms)
+		key(cmd-a)
+		sleep(500ms)
+		key(cmd-c)
+		sleep(500ms)
+		key(escape)
+		`
+
  - **trash it**  `key(cmd-backspace)`
 
  - **hide [finder]**  `key(cmd-h)`
 
  - **hide others**  `app.window_hide_others()`
+
+ - **show view options**  `key(cmd-j)`
+
+ - **go top**  `key(alt-up)`
+
+ - **go bottom**  `key(alt-down)`
+
+ - **tag [file] <number>**  `key("ctrl-{number}")`
+
+ - **remove [file] tags**  `key(ctrl-0)`
+
+ - **show hidden files**  `key(cmd-shift-.)`
+
+ - **show hidden folders**  `key(ctrl-shift-period)`
+
+ - **open file**  `key(cmd-o)`
+
+ - **close | close**  `key(space)`
+
+ - **get info**  `key(cmd-i)`
 
 
 
@@ -1872,11 +2476,11 @@
 
  - **git commit [<user.git_arguments>] message [<user.prose>]**  `args = git_arguments or ""
 		message = prose or ""
-		user.insert_between("git commit{args} --message '{message}", "'")`
+		user.insert_between('git commit{args} --message "{message}', '"')`
 
  - **git stash [push] [<user.git_arguments>] message [<user.prose>]**  `args = git_arguments or ""
 		message = prose or ""
-		user.insert_between("git stash push{args} --message '{message}", "'")
+		user.insert_between('git stash push{args} --message "{message}', '"')
 		
 		# Optimistic execution for frequently used commands that are harmless (don't
 		# change repository or index state).`
@@ -3415,6 +4019,27 @@
 
 
 
+# win talon debug window
+
+
+ - **tag {user.talon_tags}**  `"{talon_tags}"`
+
+ - **key <user.keys> over**  `"{keys}"`
+
+ - **key <user.modifiers> over**  `"{modifiers}"`
+
+ - **action {user.talon_actions}**  `"{talon_actions}"`
+
+ - **list {user.talon_lists}**  `"{talon_lists}"`
+
+ - **capture {user.talon_captures}**  `"{talon_captures}"`
+
+ - **set {user.talon_settings}**  `"{talon_settings}"`
+
+ - **application {user.talon_apps}**  `"{talon_apps}"`
+
+
+
 #  talon repl
 
 
@@ -4186,7 +4811,7 @@
 		
 		# Sidebar`
 
- - **bar explore**  `user.vscode("workbench.view.explorer")`
+ - **bar explore | [bar] explorer**  `user.vscode("workbench.view.explorer")`
 
  - **bar extensions**  `user.vscode("workbench.view.extensions")`
 
@@ -4221,7 +4846,7 @@
 
  - **panel switch**  `user.vscode("workbench.action.togglePanel")`
 
- - **panel terminal**  `user.vscode("workbench.action.terminal.focus")`
+ - **(panel | go | open | show) (terminal | term)**  `user.vscode("workbench.action.terminal.focus")`
 
  - **focus editor**  `user.vscode("workbench.action.focusActiveEditorGroup")`
 
@@ -4243,11 +4868,15 @@
 
  - **show snippets**  `user.vscode("workbench.action.openSnippets")`
 
+ - **snip (last | previous)**  `user.vscode("jumpToPrevSnippetPlaceholder")`
+
+ - **snip next**  `user.vscode("jumpToNextSnippetPlaceholder")`
+
  - **centered switch**  `user.vscode("workbench.action.toggleCenteredLayout")`
 
  - **fullscreen switch**  `user.vscode("workbench.action.toggleFullScreen")`
 
- - **theme switch**  `user.vscode("workbench.action.selectTheme")`
+ - **theme switch | color theme**  `user.vscode("workbench.action.selectTheme")`
 
  - **wrap switch**  `user.vscode("editor.action.toggleWordWrap")`
 
@@ -4297,11 +4926,11 @@
 
  - **hint show**  `user.vscode("editor.action.triggerParameterHints")`
 
- - **definition show**  `user.vscode("editor.action.revealDefinition")`
+ - **definition show | go (def | deaf | definition)**  `user.vscode("editor.action.revealDefinition")`
 
- - **definition peek**  `user.vscode("editor.action.peekDefinition")`
+ - **(def | deaf | definition) peek**  `user.vscode("editor.action.peekDefinition")`
 
- - **definition side**  `user.vscode("editor.action.revealDefinitionAside")`
+ - **(def | deaf | definition) side**  `user.vscode("editor.action.revealDefinitionAside")`
 
  - **references show**  `user.vscode("editor.action.goToReferences")`
 
@@ -4313,7 +4942,7 @@
 
  - **format selection**  `user.vscode("editor.action.formatSelection")`
 
- - **imports fix**  `user.vscode("editor.action.organizeImports")`
+ - **imports organize**  `user.vscode("editor.action.organizeImports")`
 
  - **problem next**  `user.vscode("editor.action.marker.nextInFiles")`
 
@@ -4352,17 +4981,6 @@
 
  - **go edit**  `user.vscode("workbench.action.navigateToLastEditLocation")`
 
- - **bar marks**  `user.vscode("workbench.view.extension.bookmarks")`
-
- - **go marks**  `user.deprecate_command("2023-06-06", "go marks", "bar marks")
-		user.vscode("workbench.view.extension.bookmarks")`
-
- - **toggle mark**  `user.vscode("bookmarks.toggle")`
-
- - **go next mark**  `user.vscode("bookmarks.jumpToNext")`
-
- - **go last mark**  `user.vscode("bookmarks.jumpToPrevious")`
-
  - **close other tabs**  `user.vscode("workbench.action.closeOtherEditors")`
 
  - **close all tabs**  `user.vscode("workbench.action.closeAllEditors")`
@@ -4375,9 +4993,9 @@
 
  - **unfold that**  `user.vscode("editor.unfold")`
 
- - **fold those**  `user.vscode("editor.foldAllMarkerRegions")`
+ - **fold (those | form)**  `user.vscode("editor.foldAllMarkerRegions")`
 
- - **unfold those**  `user.vscode("editor.unfoldRecursively")`
+ - **unfold (those | form)**  `user.vscode("editor.unfoldRecursively")`
 
  - **fold all**  `user.vscode("editor.foldAll")`
 
@@ -4431,7 +5049,7 @@
 
  - **git push**  `user.vscode("git.push")`
 
- - **git push focus**  `user.vscode("git.pushForce")`
+ - **git push force**  `user.vscode("git.pushForce")`
 
  - **git rebase abort**  `user.vscode("git.rebaseAbort")`
 
@@ -4505,31 +5123,31 @@
 
  - **debug clean**  `user.vscode("workbench.debug.panel.action.clearReplAction")`
 
- - **terminal external**  `user.vscode("workbench.action.terminal.openNativeConsole")`
+ - **(terminal  |  term) external**  `user.vscode("workbench.action.terminal.openNativeConsole")`
 
- - **terminal new**  `user.vscode("workbench.action.terminal.new")`
+ - **(terminal  |  term) new**  `user.vscode("workbench.action.terminal.new")`
 
- - **terminal next**  `user.vscode("workbench.action.terminal.focusNext")`
+ - **(terminal  |  term) next**  `user.vscode("workbench.action.terminal.focusNext")`
 
- - **terminal last**  `user.vscode("workbench.action.terminal.focusPrevious")`
+ - **(terminal  |  term) last**  `user.vscode("workbench.action.terminal.focusPrevious")`
 
- - **terminal split**  `user.vscode("workbench.action.terminal.split")`
+ - **(terminal  |  term) split**  `user.vscode("workbench.action.terminal.split")`
 
- - **terminal zoom**  `user.vscode("workbench.action.toggleMaximizedPanel")`
+ - **(terminal  |  term) zoom**  `user.vscode("workbench.action.toggleMaximizedPanel")`
 
- - **terminal trash**  `user.vscode("workbench.action.terminal.kill")`
+ - **(terminal  |  term) trash | kill (terminal  |  term)**  `user.vscode("workbench.action.terminal.kill")`
 
- - **terminal toggle**  `user.vscode_and_wait("workbench.action.terminal.toggleTerminal")`
+ - **(terminal  |  term) toggle**  `user.vscode_and_wait("workbench.action.terminal.toggleTerminal")`
 
- - **terminal scroll up**  `user.vscode("workbench.action.terminal.scrollUp")`
+ - **(terminal  |  term) scroll up**  `user.vscode("workbench.action.terminal.scrollUp")`
 
- - **terminal scroll down**  `user.vscode("workbench.action.terminal.scrollDown")`
+ - **(terminal  |  term) scroll down**  `user.vscode("workbench.action.terminal.scrollDown")`
 
- - **terminal <number_small>**  `user.vscode_terminal(number_small)`
+ - **(terminal  |  term) <number_small>**  `user.vscode_terminal(number_small)`
 
- - **copy line down**  `user.vscode("editor.action.copyLinesDownAction")`
+ - **(clone | copy) (line | nine) [down]**  `user.vscode("editor.action.copyLinesDownAction")`
 
- - **copy line up**  `user.vscode("editor.action.copyLinesUpAction")`
+ - **(clone | copy) (line | nine) up**  `user.vscode("editor.action.copyLinesUpAction")`
 
  - **select less**  `user.vscode("editor.action.smartSelect.shrink")`
 
@@ -4547,13 +5165,15 @@
 		key(cmd-alt-l)
 		`
 
- - **hover show**  `user.vscode("editor.action.showHover")`
+ - **hover show | (show | pop) (hover | tool tip | tooltip) | (tool tip | tooltip)**  `user.vscode("editor.action.showHover")`
 
  - **join lines**  `user.vscode("editor.action.joinLines")`
 
  - **full screen**  `user.vscode("workbench.action.toggleFullScreen")`
 
  - **curse undo**  `user.vscode("cursorUndo")`
+
+ - **curse redo**  `user.vscode("cursorRedo")`
 
  - **select word**  `user.vscode("editor.action.addSelectionToNextFindMatch")`
 
@@ -4570,6 +5190,14 @@
  - **install local**  `user.vscode("workbench.extensions.action.installVSIX")`
 
  - **preview markdown**  `user.vscode("markdown.showPreview")`
+
+ - **copy command id**  `user.copy_command_id()
+		`
+
+ - **imports fix**  `user.vscode_add_missing_imports()
+		sleep(100ms)
+		user.vscode("editor.action.organizeImports")
+		`
 
 
 
@@ -4669,7 +5297,16 @@
 #  abbreviate
 
 
- - **(abbreviate | abreviate | brief) {user.abbreviation}**  `"{abbreviation}"`
+ - **(abbreviate | abreviate | (brief | breathe) ) {user.abbreviation}**  `"{abbreviation}"`
+
+ - **(go | open) [(talon  | talin | tellin)] [voice] abbreviations**  `key(cmd-p)
+		sleep(100ms)
+		insert("community/settings/abbreviations.csv")
+		sleep(200ms)
+		key(enter)
+		
+		
+		`
 
 
 
@@ -4682,13 +5319,13 @@
 
  - **zoom reset**  `edit.zoom_reset()`
 
- - **find it**  `edit.find()`
+ - **find [it]**  `edit.find()`
 
- - **next one**  `edit.find_next()`
+ - **next (one | result | in page)**  `edit.find_next()`
 
- - **scroll up**  `edit.page_up()`
+ - **page up**  `edit.page_up()`
 
- - **scroll down**  `edit.page_down()`
+ - **page down**  `edit.page_down()`
 
  - **go word left**  `edit.word_left()`
 
@@ -4702,9 +5339,9 @@
 
  - **go down**  `edit.down()`
 
- - **go line start**  `edit.line_start()`
+ - **go [line] (start | head)**  `edit.line_start()`
 
- - **go line end**  `edit.line_end()`
+ - **go [line] (end | tail)**  `edit.line_end()`
 
  - **go way left**  `edit.line_start()
 		edit.line_start()`
@@ -4804,7 +5441,7 @@
 		
 		# Copy`
 
- - **copy that**  `edit.copy()`
+ - **copy [(that | it)]**  `edit.copy()`
 
  - **copy all**  `user.copy_all()`
 
@@ -4820,38 +5457,38 @@
 
  - **copy word right**  `user.copy_word_right()`
 
- - **cut that**  `edit.cut()`
+ - **(carve | cut) [(that | it)]**  `edit.cut()`
 
- - **cut all**  `user.cut_all()`
+ - **(carve | cut) all**  `user.cut_all()`
 
- - **cut line**  `user.cut_line()`
+ - **(carve | cut) line**  `user.cut_line()`
 
- - **cut line start**  `user.cut_line_start()`
+ - **(carve | cut) line start**  `user.cut_line_start()`
 
- - **cut line end**  `user.cut_line_end()`
+ - **(carve | cut) line end**  `user.cut_line_end()`
 
- - **cut word**  `user.cut_word()`
+ - **(carve | cut) word**  `user.cut_word()`
 
- - **cut word left**  `user.cut_word_left()`
+ - **(carve | cut) word left**  `user.cut_word_left()`
 
- - **cut word right**  `user.cut_word_right()`
+ - **(carve | cut) word right**  `user.cut_word_right()`
 
- - **(pace | paste) that**  `edit.paste()`
+ - **(paste | pace | piss) [(that | it)]**  `edit.paste()`
 
- - **(pace | paste) enter**  `edit.paste()
+ - **(paste | pace | piss) enter**  `edit.paste()
 		key(enter)`
 
- - **paste match**  `edit.paste_match_style()`
+ - **(paste | pace | piss) [and] match [style]**  `edit.paste_match_style()`
 
- - **(pace | paste) all**  `user.paste_all()`
+ - **(paste | pace | piss) all**  `user.paste_all()`
 
- - **(pace | paste) line**  `user.paste_line()`
+ - **(paste | pace | piss) line**  `user.paste_line()`
 
- - **(pace | paste) line start**  `user.paste_line_start()`
+ - **(paste | pace | piss) line start**  `user.paste_line_start()`
 
- - **(pace | paste) line end**  `user.paste_line_end()`
+ - **(paste | pace | piss) line end**  `user.paste_line_end()`
 
- - **(pace | paste) word**  `user.paste_word()`
+ - **(paste | pace | piss) word**  `user.paste_word()`
 
  - **clone that**  `edit.selection_clone()`
 
@@ -4869,9 +5506,9 @@
 		
 		# Undo/redo`
 
- - **undo that**  `edit.undo()`
+ - **(undo | nope) [that]**  `edit.undo()`
 
- - **redo that**  `edit.redo()`
+ - **(you do | redo) [that]**  `edit.redo()`
 
  - **file save**  `edit.save()`
 
@@ -4935,11 +5572,11 @@
 
  - **help next**  `user.help_next()`
 
- - **help previous**  `user.help_previous()`
+ - **help (previous | prev | last)**  `user.help_previous()`
 
  - **help <number>**  `user.help_select_index(number - 1)`
 
- - **help return**  `user.help_return()`
+ - **help (return | back)**  `user.help_return()`
 
  - **help refresh**  `user.help_refresh()`
 
@@ -4957,27 +5594,37 @@
 #  homophones
 
 
- - **phones <user.homophones_canonical>**  `user.homophones_show(homophones_canonical)`
+ - **(phones [pick] | (choose | pick) (phones | phone | fun)) <user.homophones_canonical>**  `user.homophones_show(homophones_canonical)
+		`
 
- - **phones that**  `user.homophones_show_auto()`
+ - **(phones [pick] | (choose | pick) (phones | phone | fun)) that**  `user.homophones_show_auto()
+		`
 
- - **phones force <user.homophones_canonical>**  `user.homophones_force_show(homophones_canonical)`
+ - **(phones [pick] | (choose | pick) (phones | phone | fun)) force <user.homophones_canonical>**  `user.homophones_force_show(homophones_canonical)
+		`
 
- - **phones force**  `user.homophones_force_show_selection()`
+ - **(phones [pick] | (choose | pick) (phones | phone | fun)) force**  `user.homophones_force_show_selection()
+		`
 
- - **phones hide**  `user.homophones_hide()`
+ - **(phones [pick] | (choose | pick) (phones | phone | fun)) hide**  `user.homophones_hide()
+		`
 
- - **phones word**  `edit.select_word()
-		user.homophones_show_selection()`
+ - **(phones [pick] | (choose | pick) (phones | phone | fun)) word**  `edit.select_word()
+		sleep(100ms)
+		user.homophones_show_selection()
+		`
 
- - **phones [<user.ordinals>] word left**  `n = ordinals or 1
+ - **(phones [pick] | (choose | pick) (phones | phone | fun)) [<user.ordinals>] word left**  `n = ordinals or 1
 		user.words_left(n - 1)
 		edit.extend_word_left()
-		user.homophones_show_selection()`
+		sleep(100ms)
+		user.homophones_show_selection()
+		`
 
- - **phones [<user.ordinals>] word right**  `n = ordinals or 1
+ - **(phones [pick] | (choose | pick) (phones | phone | fun)) [<user.ordinals>] word right**  `n = ordinals or 1
 		user.words_right(n - 1)
 		edit.extend_word_right()
+		sleep(100ms)
 		user.homophones_show_selection()`
 
 
@@ -4985,11 +5632,12 @@
 #  homophones open
 
 
- - **choose <number_small>**  `result = user.homophones_select(number_small)
+ - **[(phones | phone | fun)] (choose | pick) <number_small>**  `result = user.homophones_select(number_small)
 		insert(result)
-		user.homophones_hide()`
+		user.homophones_hide()
+		`
 
- - **choose <user.formatters> <number_small>**  `result = user.homophones_select(number_small)
+ - **[(phones | phone | fun)] (choose | pick) <user.formatters> <number_small>**  `result = user.homophones_select(number_small)
 		insert(user.formatted_text(result, formatters))
 		user.homophones_hide()`
 
@@ -4998,11 +5646,11 @@
 #  keys
 
 
- - **go <user.arrow_keys>**  `user.move_cursor(arrow_keys)`
+ - **[go] <user.arrow_keys>**  `user.move_cursor(arrow_keys)`
 
  - **<user.letter>**  `key(letter)`
 
- - **(ship | uppercase) <user.letters> [(lowercase | sunk)]**  `user.insert_formatted(letters, "ALL_CAPS")`
+ - **(ship | uppercase) <user.letters>**  `user.insert_formatted(letters, "ALL_CAPS")`
 
  - **<user.symbol_key>**  `key(symbol_key)`
 
@@ -5027,7 +5675,7 @@
 
  - **<user.raw_prose>**  `user.dictation_insert(raw_prose)`
 
- - **cap**  `user.dictation_format_cap()`
+ - **(yes cap | make cap | capitalize)**  `user.dictation_format_cap()`
 
  - **(no cap | no-caps)**  `user.dictation_format_no_cap()`
 
@@ -5095,9 +5743,10 @@
 
  - **select that**  `user.select_last_phrase()`
 
- - **spell that <user.letters>**  `user.dictation_insert(letters)`
+ - **spell [that] <user.letters>**  `user.dictation_insert(letters)
+		`
 
- - **spell that <user.formatters> <user.letters>**  `result = user.formatted_text(letters, formatters)
+ - **spell [that] <user.formatters> <user.letters>**  `result = user.formatted_text(letters, formatters)
 		user.dictation_insert_raw(result)
 		
 		# Escape, type things that would otherwise be commands`
@@ -5143,19 +5792,12 @@
 
 
 
-#  sleep mode wav2letter
+#  modes dragon
 
 
- - **<phrase>**  `skip()`
+ - **talon sleep [<phrase>]**  `speech.disable()`
 
-
-
-#  wake and sleep
-
-
- - **(welcome back)+**  `user.mouse_wake()
-		user.history_enable()
-		user.talon_mode()`
+ - **talon wake [<phrase>]**  `speech.enable()`
 
  - **sleep all [<phrase>]**  `user.switcher_hide_running()
 		user.history_disable()
@@ -5165,18 +5807,42 @@
 		speech.disable()
 		user.engine_sleep()`
 
- - **talon sleep [<phrase>]**  `speech.disable()`
-
- - **(talon wake)+**  `speech.enable()`
 
 
+#  modes not dragon
 
-#  wake and sleep wav2letter
 
+ - **talon wake [<phrase>]**  `speech.enable()`
+
+ - **(wake up)+**  `speech.enable()`
 
  - **go to sleep [<phrase>]**  `speech.disable()`
 
- - **(wake up)+**  `speech.enable()`
+ - **talon sleep [<phrase>]**  `speech.disable()`
+
+ - **sleep all [<phrase>]**  `user.switcher_hide_running()
+		user.history_disable()
+		user.homophones_hide()
+		user.help_hide()
+		user.mouse_sleep()
+		speech.disable()
+		user.engine_sleep()`
+
+
+
+#  sleep mode
+
+
+ - **(welcome back)+**  `user.mouse_wake()
+		user.history_enable()
+		user.talon_mode()`
+
+
+
+#  sleep mode wav2letter
+
+
+ - **<phrase>**  `skip()`
 
 
 
@@ -5214,7 +5880,7 @@
 
  - **<user.number_key>**  `user.grid_narrow(number_key)`
 
- - **grid off**  `user.grid_close()`
+ - **[mouse] grid off**  `user.grid_close()`
 
  - **grid reset**  `user.grid_reset()`
 
@@ -5225,7 +5891,15 @@
 #  numbers
 
 
- - **<user.number_string>**  `"{number_string}"`
+ - **numb <user.number_string>**  `"{number_string}"`
+
+
+
+#  numbers unprefixed
+
+
+ - **[numb] <user.number_string>**  `insert("{number_string}")
+		user.deprecate_command("2024-01-27", "<number>", "numb <number>")`
 
 
 
@@ -5233,6 +5907,15 @@
 
 
  - **screen numbers**  `user.screens_show_numbering()`
+
+
+
+#  snippets
+
+
+ - **snip {user.snippet}**  `user.insert_snippet_by_name(snippet)`
+
+ - **snip {user.snippet_with_phrase} <user.text>**  `user.insert_snippet_by_name_with_phrase(snippet_with_phrase, text)`
 
 
 
@@ -5249,9 +5932,11 @@
 
  - **{user.prose_formatter} <user.prose> over**  `user.insert_formatted(prose, prose_formatter)`
 
- - **<user.format_text>+**  `user.insert_many(format_text_list)`
+ - **force <user.format_code>+**  `user.insert_many(format_code_list)`
 
- - **<user.format_text>+ over**  `user.insert_many(format_text_list)`
+ - **<user.format_code>+**  `user.insert_many(format_code_list)`
+
+ - **<user.format_code>+ over**  `user.insert_many(format_code_list)`
 
  - **<user.formatters> that**  `user.formatters_reformat_selection(user.formatters)`
 
@@ -5286,14 +5971,17 @@
  - **copy to vocab [as <phrase>]**  `user.add_selection_to_vocabulary(phrase or "")`
 
  - **copy name to vocab [as <phrase>]**  `user.add_selection_to_vocabulary(phrase or "", "name")
-		# Automatically adds plural form by simply appending "s".`
+		# Automatically adds plural form by simply appending "s".
+		`
 
- - **copy noun to vocab [as <phrase>]**  `user.add_selection_to_vocabulary(phrase or "", "noun")`
+ - **copy noun to vocab [as <phrase>]**  `user.add_selection_to_vocabulary(phrase or "", "noun")
+		`
 
  - **copy to replacements as <phrase>**  `user.add_selection_to_words_to_replace(phrase)`
 
  - **copy name to replacements as <phrase>**  `user.add_selection_to_words_to_replace(phrase, "name")
-		# Automatically adds plural form by simply appending "s".`
+		# Automatically adds plural form by simply appending "s".
+		`
 
  - **copy noun to replacements as <phrase>**  `user.add_selection_to_words_to_replace(phrase, "noun")`
 
@@ -5302,7 +5990,7 @@
 #  websites and search engines
 
 
- - **open {user.website}**  `user.open_url(website)`
+ - **open [in] [new] [tab] [page] {user.website}**  `user.open_url(website)`
 
  - **open that**  `user.open_url(edit.selected_text())`
 
@@ -5326,7 +6014,7 @@
 
  - **tab next**  `app.tab_next()`
 
- - **tab close**  `user.tab_close_wrapper()`
+ - **tab (close | clothes)**  `user.tab_close_wrapper()`
 
  - **tab (reopen | restore)**  `app.tab_reopen()`
 
@@ -5343,17 +6031,27 @@
 
  - **window (new | open)**  `app.window_open()`
 
- - **window close**  `app.window_close()`
+ - **(new | open) window**  `app.window_open()`
 
- - **window hide**  `app.window_hide()`
+ - **app (window | win) next**  `app.window_next()`
 
- - **focus <user.running_applications>**  `user.switcher_focus(running_applications)`
+ - **app (window | win) last**  `app.window_previous()`
+
+ - **(window | win) close**  `app.window_close()`
+
+ - **(window | win) hide**  `app.window_hide()`
+
+ - **(focus | go) [app] <user.running_applications>**  `user.switcher_focus(running_applications)
+		
+		# following only works on windows. Can't figure out how to make it work for mac. No idea what the equivalent for linux would be.`
 
  - **focus**  `user.switcher_menu()`
 
- - **running list**  `user.switcher_toggle_running()`
+ - **focus last**  `user.switcher_focus_last()`
 
- - **running close**  `user.switcher_hide_running()`
+ - **running (list | open | show) | list [open] apps | open (app | apps) [list] | help show running**  `user.switcher_toggle_running()`
+
+ - **running (close | hide) | close [open] (apps | app) list | help hide**  `user.switcher_hide_running()`
 
  - **launch <user.launch_applications>**  `user.switcher_launch(launch_applications)`
 
@@ -5440,7 +6138,7 @@
 
  - **state default**  `"default:\nbreak;"`
 
- - **push brackets**  `edit.line_end()
+ - **push braces**  `edit.line_end()
 		#insert("{")
 		#key(enter)
 		insert("{}")
@@ -5521,240 +6219,6 @@
  - **[value] current color**  `"currentColor"`
 
  - **op important**  `" !important"`
-
-
-
-#  go
-
-
- - **variadic**  `"..."`
-
- - **logical and**  `" && "`
-
- - **logical or**  `" || "`
-
- - **state comment**  `"// "`
-
- - **[line] comment <user.text>**  `key("cmd-right")
-		insert(" // ")
-		insert(user.formatted_text(text, "sentence"))
-		
-		# "add comment <user.text> [over]:
-		#     key("cmd-right")
-		#     text_with_leading(" // ")
-		# ]
-		# "[state] context: insert("ctx")`
-
- - **state (funk | func | fun)**  `"func "`
-
- - **function (Annette | init) [over]**  `"func init() {\n"`
-
- - **function <user.text> [over]**  `insert("func ")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		insert("(")
-		sleep(100ms)
-		`
-
- - **method <user.text> [over]**  `insert("meth ")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		sleep(100ms)
-		`
-
- - **state var**  `"var "`
-
- - **variable [<user.text>] [over]**  `insert("var ")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		# insert(" ")
-		sleep(100ms)
-		`
-
- - **of type [<user.text>] [over]**  `insert(" ")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		
-		# "set <user.text> [over]:
-		#     insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		#     insert(" := ")
-		#     sleep(100ms)
-		# ]`
-
- - **state break**  `"break"`
-
- - **state (chan | channel)**  `" chan "`
-
- - **state go**  `"go "`
-
- - **state if**  `"if "`
-
- - **if <user.text> [over]**  `insert("if ")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))`
-
- - **spawn <user.text> [over]**  `insert("go ")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))`
-
- - **state else if**  `" else if "`
-
- - **else if <user.text> [over]**  `insert(" else if ")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		`
-
- - **state else**  `" else "`
-
- - **else <user.text> [over]**  `insert(" else {")
-		key("enter")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		`
-
- - **state while**  `"while "`
-
- - **while <user.text> [over]**  `insert("while ")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		`
-
- - **state for**  `"for "`
-
- - **for <user.text> [over]**  `insert("for ")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		`
-
- - **state for range**  `"forr "`
-
- - **range <user.text> [over]**  `insert("forr ")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		`
-
- - **state format**  `"fmt"`
-
- - **format <user.text> [over]**  `insert("fmt.")
-		insert(user.formatted_text(text, "PUBLIC_CAMEL_CASE"))
-		`
-
- - **state switch**  `"switch "`
-
- - **switch <user.text> [over]**  `insert("switch ")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		`
-
- - **state select**  `"select "`
-
- - **state (const | constant)**  `" const "`
-
- - **constant <user.text> [over]**  `insert("const ")
-		insert(user.formatted_text(text, "PUBLIC_CAMEL_CASE"))
-		`
-
- - **state case**  `" case "`
-
- - **state default**  `" default:"`
-
- - **case <user.text> [over]**  `insert("case ")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		`
-
- - **state type**  `" type "`
-
- - **type <user.text> [over]**  `insert("type ")
-		insert(user.formatted_text(text, "PUBLIC_CAMEL_CASE"))`
-
- - **state true**  `" true "`
-
- - **state false**  `" false "`
-
- - **state (start | struct | struck)**  `insert(" struct {")
-		key("enter")`
-
- - **(struct | struck) <user.text> [over]**  `insert(" struct {")
-		key("enter")
-		insert(user.formatted_text(text, "PUBLIC_CAMEL_CASE"))
-		`
-
- - **[state] empty interface**  `" interface{} "`
-
- - **state interface**  `insert(" interface {")
-		key("enter")`
-
- - **interface <user.text> [over]**  `insert(" interface {")
-		key("enter")
-		insert(user.formatted_text(text, "PUBLIC_CAMEL_CASE"))
-		`
-
- - **state string**  `" string "`
-
- - **[state] (int | integer | ant)**  `"int"`
-
- - **state slice**  `" []"`
-
- - **slice of**  `"[]"`
-
- - **[state] (no | nil)**  `"nil"`
-
- - **state (int | integer | ant) sixty four**  `" int64 "`
-
- - **state tag**  `user.insert_between(" `", "`")`
-
- - **field tag <user.text> [over]**  `user.insert_between(" `", "`")
-		sleep(100ms)
-		insert(user.formatted_text(text, "snake"))
-		insert(" ")
-		sleep(100ms)
-		`
-
- - **state return**  `" return "`
-
- - **return <user.text> [over]**  `insert("return ")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		`
-
- - **map of string to string**  `" map[string]string "`
-
- - **map of <user.text> [over]**  `insert("map[")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		key("right")
-		sleep(100ms)
-		`
-
- - **receive**  `" <- "`
-
- - **make**  `"make("`
-
- - **loggers [<user.text>] [over]**  `insert("logrus.")
-		insert(user.formatted_text(text, "PUBLIC_CAMEL_CASE"))
-		`
-
- - **length <user.text> [over]**  `insert("len(")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		`
-
- - **append <user.text> [over]**  `insert("append(")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		`
-
- - **state (air | err)**  `"err"`
-
- - **error**  `" err "`
-
- - **loop over [<user.text>] [over]**  `insert("forr ")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		`
-
- - **item <user.text> [over]**  `insert(", ")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		`
-
- - **value <user.text> [over]**  `insert(": ")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		`
-
- - **address of [<user.text>] [over]**  `insert("&")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		`
-
- - **pointer to [<user.text>] [over]**  `insert("*")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))
-		`
-
- - **swipe [<user.text>] [over]**  `key("right")
-		insert(", ")
-		insert(user.formatted_text(text, "PRIVATE_CAMEL_CASE"))`
 
 
 
@@ -5926,10 +6390,7 @@
 		"                    - "
 		`
 
- - **{user.markdown_code_block_language} block**  `"```{markdown_code_block_language}"
-		key(enter:2)
-		"```"
-		key(up)
+ - **{user.markdown_code_block_language} block**  `user.insert_snippet("```{markdown_code_block_language}\n$0\n```")
 		`
 
  - **link**  `"[]()"
@@ -5955,6 +6416,8 @@
 
 #  proto
 
+
+ - **block**  `user.code_block()`
 
  - **state message**  `"message "`
 
@@ -6130,21 +6593,21 @@
 		
 		## specialist flow control`
 
- - **state if let some**  `user.code_insert_if_let_some()`
+ - **state if let some**  `user.insert_between("if let Some(", ")")`
 
- - **state if let (ok | okay)**  `user.code_insert_if_let_okay()`
+ - **state if let (ok | okay)**  `user.insert_between("if let Ok(", ")")`
 
- - **state if let error**  `user.code_insert_if_let_error()`
+ - **state if let error**  `user.insert_between("if let Err(", ")")`
 
  - **is some**  `user.code_insert_is_not_null()`
 
  - **implement (struct | structure)**  `user.code_state_implements()`
 
- - **is implemented trait {user.code_trait}**  `user.code_insert_trait_annotation(code_trait)`
+ - **is implemented trait {user.code_trait}**  `": impl {code_trait}"`
 
  - **is implemented trait**  `": impl "`
 
- - **returns implemented trait {user.code_trait}**  `user.code_insert_return_trait(code_trait)`
+ - **returns implemented trait {user.code_trait}**  `" -> impl {code_trait}"`
 
  - **returns implemented trait**  `" -> impl "`
 
@@ -6156,7 +6619,7 @@
 
  - **macro {user.code_macros}**  `user.code_insert_macro(code_macros, "")`
 
- - **macro  {user.code_macros}**  `user.code_insert_macro(code_macros, edit.selected_text())
+ - **macro wrap {user.code_macros}**  `user.code_insert_macro(code_macros, edit.selected_text())
 		
 		## rust specific document comments`
 
@@ -6486,6 +6949,8 @@
 
  - **op (equals | assign)**  `user.code_operator_assignment()`
 
+ - **op or equals**  `user.code_or_operator_assignment()`
+
  - **op (minus | subtract) equals**  `user.code_operator_subtraction_assignment()`
 
  - **op (plus | add) equals**  `user.code_operator_addition_assignment()`
@@ -6582,16 +7047,46 @@
 
 
 
+#  talon-list
+
+
+ - **list [require] {user.talon_lists}**  `"list: {talon_lists}"`
+
+ - **list [require]**  `"list: "`
+
+
+
 #  talon
 
 
- - **dot talon**  `insert(".talon")`
-
- - **action block**  `user.insert_between("action(", "):")`
-
  - **setting block**  `insert("settings():\n\t")`
 
- - **setting {user.talon_settings}**  `user.paste("{talon_settings} = ")`
+
+
+#  talon common
+
+
+ - **tag set [{user.talon_tags}]**  `tag = talon_tags or ""
+		user.talon_code_enable_tag(tag)
+		
+		# requires user.talon_populate_lists tag. do not use with dragon`
+
+ - **list {user.talon_lists}**  `"{{{talon_lists}}}"`
+
+ - **capture {user.talon_captures}**  `"<{talon_captures}>"`
+
+ - **setting {user.talon_settings}**  `user.talon_code_enable_setting(talon_settings)`
+
+ - **key <user.keys> over**  `"{keys}"`
+
+ - **key <user.modifiers> over**  `"{modifiers}"`
+
+ - **action {user.talon_actions}**  `user.talon_code_insert_action_call(talon_actions, edit.selected_text())`
+
+
+
+#  talon context
+
 
  - **win require**  `insert("os: windows\n")`
 
@@ -6601,42 +7096,24 @@
 
  - **title require**  `insert("win.title: ")`
 
- - **application [require] [{user.talon_apps}]**  `app = talon_apps or ""
-		user.paste("app: {app}")`
+ - **application [require] [{user.talon_apps}]**  `app = "{talon_apps}\n" or ""
+		insert("app: {app}")`
 
- - **mode require [{user.talon_modes}]**  `mode = talon_modes or ""
-		user.paste("mode: {mode}")`
+ - **mode require [{user.talon_modes}]**  `mode = "{talon_modes}\n" or ""
+		insert("mode: {mode}")`
 
- - **tag require [{user.talon_tags}]**  `tag = talon_tags or ""
-		user.paste("tag: {tag}")`
-
- - **tag set [{user.talon_tags}]**  `tag = talon_tags or ""
-		user.paste("tag(): {tag}")`
+ - **tag require [{user.talon_tags}]**  `tag = "{talon_tags}\n" or ""
+		insert("tag: {tag}")`
 
  - **host require**  `hostname = user.talon_get_hostname()
-		user.paste("hostname: {hostname}\n")
-		# requires user.talon_populate_lists tag. do not use with dragon`
-
- - **list {user.talon_lists}**  `"{{{talon_lists}}}"`
-
- - **capture {user.talon_captures}**  `"<{talon_captures}>"`
-
- - **key <user.keys> over**  `"{keys}"`
-
- - **key <user.modifiers> over**  `"{modifiers}"`
-
- - **funk {user.talon_actions}**  `user.code_insert_function(talon_actions, edit.selected_text())`
-
- - **funk cell <number>**  `user.code_select_function(number - 1, "")`
-
- - **funk wrap <user.code_common_function>**  `user.code_insert_function(code_common_function, edit.selected_text())`
-
- - **funk wrap <number>**  `user.code_select_function(number - 1, edit.selected_text())`
+		insert("hostname: {hostname}\n")`
 
 
 
 #  terraform
 
+
+ - **block**  `user.code_block()`
 
  - **state {user.terraform_module_block}**  `user.code_terraform_module_block(user.terraform_module_block)
 		`
@@ -6650,6 +7127,19 @@
 		`
 
  - **type {user.code_type}**  `insert("{code_type}")`
+
+
+
+#  typescript
+
+
+ - **type union [<user.code_type>]**  `" | {code_type or ''}"`
+
+ - **type intersect [<user.code_type>]**  `" & {code_type or ''}"`
+
+ - **state type**  `user.insert_between("type ", " = ")`
+
+ - **as const**  `" as const"`
 
 
 
@@ -6779,9 +7269,9 @@
 #  dropdown
 
 
- - **drop down <number_small>**  `key("down:{number_small-1} enter")`
+ - **drop down <number_small>**  `key("down:{number_small} enter")`
 
- - **drop down up <number_small>**  `key("up:{number_small} enter")`
+ - **drop up <number_small>**  `key("up:{number_small} enter")`
 
 
 
@@ -6828,11 +7318,15 @@
 #  microphone selection
 
 
- - **microphone show**  `user.microphone_selection_toggle()`
+ - **[(talon | talent)] (microphone | mic | mice) (pick | show | select | list)**  `user.microphone_selection_toggle()`
 
- - **microphone close**  `user.microphone_selection_hide()`
+ - **pick (microphone | mic | mice)**  `user.microphone_selection_toggle()`
 
- - **microphone pick <number_small>**  `user.microphone_select(number_small)`
+ - **(microphone | mic | mice) (close | clothes)**  `user.microphone_selection_hide()`
+
+ - **close mic list**  `user.microphone_selection_hide()`
+
+ - **(microphone | mic | mice) [(choose | pick)] <number_small>**  `user.microphone_select(number_small)`
 
 
 
@@ -6849,7 +7343,9 @@
 
  - **run calibration**  `tracking.calibrate()`
 
- - **touch**  `mouse_click(0)
+ - **touch**  `# close zoom if open
+		user.zoom_close()
+		mouse_click(0)
 		# close the mouse grid if open
 		user.grid_close()
 		# End any open drags
@@ -6857,12 +7353,16 @@
 		user.mouse_drag_end()
 		`
 
- - **righty**  `mouse_click(1)
+ - **righty**  `# close zoom if open
+		user.zoom_close()
+		mouse_click(1)
 		# close the mouse grid if open
 		user.grid_close()
 		`
 
- - **mid click**  `mouse_click(2)
+ - **mid click**  `# close zoom if open
+		user.zoom_close()
+		mouse_click(2)
 		# close the mouse grid
 		user.grid_close()
 		
@@ -6874,103 +7374,79 @@
 		#shift
 		#super = windows key`
 
- - **<user.modifiers> touch**  `key("{modifiers}:down")
+ - **<user.modifiers> touch**  `# close zoom if open
+		user.zoom_close()
+		key("{modifiers}:down")
 		mouse_click(0)
 		key("{modifiers}:up")
 		# close the mouse grid
-		user.grid_close()`
+		user.grid_close()
+		`
 
- - **<user.modifiers> righty**  `key("{modifiers}:down")
+ - **shipped touch**  `key("shift:down")
+		mouse_click(0)
+		key("shift:up")
+		# close the mouse grid
+		user.grid_close()
+		
+		`
+
+ - **<user.modifiers> (righty | right (click | lick | touch))**  `# close zoom if open
+		user.zoom_close()
+		key("{modifiers}:down")
 		mouse_click(1)
 		key("{modifiers}:up")
 		# close the mouse grid
-		user.grid_close()`
+		user.grid_close()
+		`
 
- - **(dub click | duke)**  `mouse_click()
-		mouse_click()
-		# close the mouse grid
-		user.grid_close()`
-
- - **(trip click | trip lick)**  `mouse_click()
+ - **duke | (dub | double) (click | lick | touch)**  `# close zoom if open
+		user.zoom_close()
 		mouse_click()
 		mouse_click()
 		# close the mouse grid
-		user.grid_close()`
+		user.grid_close()
+		`
 
- - **left drag | drag**  `user.mouse_drag(0)
+ - **(trip | triple) (click | lick | touch)**  `# close zoom if open
+		user.zoom_close()
+		mouse_click()
+		mouse_click()
+		mouse_click()
 		# close the mouse grid
-		user.grid_close()`
+		user.grid_close()
+		`
 
- - **right drag | righty drag**  `user.mouse_drag(1)
+ - **[left] drag [(lock | start)]**  `# close zoom if open
+		user.zoom_close()
+		user.mouse_drag(0)
 		# close the mouse grid
-		user.grid_close()`
+		user.grid_close()
+		`
 
- - **end drag | drag end**  `user.mouse_drag_end()`
+ - **(right | righty ) drag [lock]**  `# close zoom if open
+		user.zoom_close()
+		user.mouse_drag(1)
+		# close the mouse grid
+		user.grid_close()
+		`
 
- - **wheel down**  `user.mouse_scroll_down()`
+ - **( end  | drop | release) drag**  `user.mouse_drag_end()`
 
- - **wheel down here**  `user.mouse_move_center_active_window()
-		user.mouse_scroll_down()`
+ - **drag (end | drop | release)**  `user.mouse_drag_end()`
 
- - **wheel tiny [down]**  `user.mouse_scroll_down(0.2)`
+ - **drop**  `user.mouse_drag_end()`
 
- - **wheel tiny [down] here**  `user.mouse_move_center_active_window()
-		user.mouse_scroll_down(0.2)`
-
- - **wheel downer**  `user.mouse_scroll_down_continuous()`
-
- - **wheel downer here**  `user.mouse_move_center_active_window()
-		user.mouse_scroll_down_continuous()`
-
- - **wheel up**  `user.mouse_scroll_up()`
-
- - **wheel up here**  `user.mouse_move_center_active_window()
-		user.mouse_scroll_up()`
-
- - **wheel tiny up**  `user.mouse_scroll_up(0.2)`
-
- - **wheel tiny up here**  `user.mouse_move_center_active_window()
-		user.mouse_scroll_up(0.2)`
-
- - **wheel upper**  `user.mouse_scroll_up_continuous()`
-
- - **wheel upper here**  `user.mouse_move_center_active_window()
-		user.mouse_scroll_up_continuous()`
-
- - **wheel gaze**  `user.mouse_gaze_scroll()`
-
- - **wheel gaze here**  `user.mouse_move_center_active_window()
-		user.mouse_gaze_scroll()`
-
- - **wheel stop**  `user.mouse_scroll_stop()`
-
- - **wheel stop here**  `user.mouse_move_center_active_window()
-		user.mouse_scroll_stop()`
-
- - **wheel left**  `user.mouse_scroll_left()`
-
- - **wheel left here**  `user.mouse_move_center_active_window()
-		user.mouse_scroll_left()`
-
- - **wheel tiny left**  `user.mouse_scroll_left(0.5)`
-
- - **wheel tiny left here**  `user.mouse_move_center_active_window()
-		user.mouse_scroll_left(0.5)`
-
- - **wheel right**  `user.mouse_scroll_right()`
-
- - **wheel right here**  `user.mouse_move_center_active_window()
-		user.mouse_scroll_right()`
-
- - **wheel tiny right**  `user.mouse_scroll_right(0.5)`
-
- - **wheel tiny right here**  `user.mouse_move_center_active_window()
-		user.mouse_scroll_right(0.5)`
-
- - **copy mouse position**  `user.copy_mouse_position()`
+ - **copy mouse (position | location)**  `user.copy_mouse_position()`
 
  - **curse no**  `# Command added 2021-12-13, can remove after 2022-06-01
-		app.notify("Please activate the user.mouse_cursor_commands_enable tag to enable this command")`
+		app.notify("Please activate the user.mouse_cursor_commands_enable tag to enable this command")
+		
+		# To scroll with a hiss sound, set mouse_enable_hiss_scroll to true in settings.talon`
+
+ - **mouse hiss up**  `user.hiss_scroll_up()`
+
+ - **mouse hiss down**  `user.hiss_scroll_down()`
 
 
 
@@ -6983,6 +7459,108 @@
 
 
 
+#  scroll
+
+
+ - **(wheel | we'll) down [<number>]**  `user.mouse_scroll_up(number or 1)
+		`
+
+ - **[(wheel | we'll)] downer [<number>]**  `user.mouse_scroll_up(number or 1)`
+
+ - **(wheel | we'll) up [<number>]**  `user.mouse_scroll_down(number or 1)
+		`
+
+ - **[(wheel | we'll)] upper [<number>]**  `user.mouse_scroll_down(number or 1)
+		`
+
+ - **[(wheel | we'll)] down here**  `user.mouse_move_center_active_window()
+		user.mouse_scroll_up()
+		`
+
+ - **[(wheel | we'll)] up here**  `user.mouse_move_center_active_window()
+		user.mouse_scroll_down()
+		`
+
+ - **[(wheel | we'll)] (tiny | small) down [<number>]**  `n = number or 4
+		na = 0.1 * n
+		user.mouse_scroll_up(na)
+		`
+
+ - **[(wheel | we'll)] (tiny | small) up**  `n = number or 4
+		na = 0.1 * n
+		user.mouse_scroll_down(na)
+		`
+
+ - **[(wheel | we'll)] (tiny | small) down here**  `user.mouse_move_center_active_window()
+		user.mouse_scroll_up(0.2)
+		`
+
+ - **[(wheel | we'll)] (tiny | small) up here**  `user.mouse_move_center_active_window()
+		user.mouse_scroll_down(0.2)
+		
+		## ++++++++++++++++++++++++ continuous .
+		`
+
+ - **[(wheel | we'll)] flow down [<number>]**  `user.mouse_scroll_up_continuous(number or 1)
+		`
+
+ - **[(wheel | we'll)] flow up [<number>]**  `user.mouse_scroll_down_continuous(number or 1)
+		`
+
+ - **[(wheel | we'll)] flow down here**  `user.mouse_move_center_active_window()
+		user.mouse_scroll_up_continuous()
+		`
+
+ - **[(wheel | we'll)] flow up here**  `user.mouse_move_center_active_window()
+		user.mouse_scroll_down_continuous()
+		`
+
+ - **[(wheel | we'll | flow)] (stop  | stopper | stop it) [(wheel | we'll | flow)]**  `user.mouse_scroll_stop()
+		`
+
+ - **[(wheel | we'll | flow)] (stop | stopper | stop it) here**  `user.mouse_move_center_active_window()
+		user.mouse_scroll_stop()
+		
+		## ++++++++++++++++++++++++ right/left .
+		`
+
+ - **(wheel | we'll) left [<number>]**  `user.mouse_scroll_right(number or 1)
+		`
+
+ - **(wheel | we'll) (right | write) [<number>]**  `user.mouse_scroll_left(number or 1)
+		`
+
+ - **[(wheel | we'll)] left here**  `user.mouse_move_center_active_window()
+		user.mouse_scroll_right()
+		`
+
+ - **[(wheel | we'll)] (right | write) here**  `user.mouse_move_center_active_window()
+		user.mouse_scroll_left()
+		`
+
+ - **[(wheel | we'll)] (tiny | small) left**  `user.mouse_scroll_right(0.5)
+		`
+
+ - **[(wheel | we'll)] (tiny | small) (right | write)**  `user.mouse_scroll_left(0.5)
+		`
+
+ - **[(wheel | we'll)] (tiny | small) left here**  `user.mouse_move_center_active_window()
+		user.mouse_scroll_right(0.5)
+		`
+
+ - **[(wheel | we'll)] (tiny | small) (right | write) here**  `user.mouse_move_center_active_window()
+		user.mouse_scroll_left(0.5)
+		
+		## ++++++++++++++++++++++++++++++ gaze .
+		`
+
+ - **[(wheel | we'll)] gaze**  `user.mouse_gaze_scroll()`
+
+ - **[(wheel | we'll)] gaze here**  `user.mouse_move_center_active_window()
+		user.mouse_gaze_scroll()`
+
+
+
 #  repeater
 
 
@@ -6990,11 +7568,11 @@
 
  - **<number_small> times**  `core.repeat_command(number_small - 1)`
 
- - **(repeat that | twice)**  `core.repeat_command(1)`
+ - **repeat that | again | twice**  `core.repeat_command(1)`
 
  - **repeat that <number_small> [times]**  `core.repeat_command(number_small)`
 
- - **(repeat phrase | again) [<number_small> times]**  `core.repeat_partial_phrase(number_small or 1)`
+ - **repeat phrase [<number_small> times]**  `core.repeat_partial_phrase(number_small or 1)`
 
 
 
@@ -7034,7 +7612,7 @@
 
  - **(dot dot | dotdot)**  `".."`
 
- - **ellipses**  `"..."`
+ - **ellipsis**  `"..."`
 
  - **(comma and | spamma)**  `", "`
 
@@ -7050,11 +7628,11 @@
 
  - **empty escaped string**  `user.insert_between("\\'", "\\'")`
 
- - **(inside parens | args)**  `user.insert_between("(", ")")`
+ - **inside (parens | paren | round ) | args**  `user.insert_between("(", ")")`
 
- - **inside (squares | square brackets | list)**  `user.insert_between("[", "]")`
+ - **inside (squares | brackets | square brackets | list)**  `user.insert_between("[", "]")`
 
- - **inside (bracket | braces)**  `user.insert_between("{", "}")`
+ - **inside (braces | curly brackets)**  `user.insert_between("{", "}")`
 
  - **inside percent**  `user.insert_between("%", "%")`
 
@@ -7067,13 +7645,13 @@
  - **angle that**  `text = edit.selected_text()
 		user.paste("<{text}>")`
 
- - **(square | square bracket) that**  `text = edit.selected_text()
+ - **(square | bracket | square bracket) that**  `text = edit.selected_text()
 		user.paste("[{text}]")`
 
- - **(bracket | brace) that**  `text = edit.selected_text()
+ - **(brace | curly bracket) that**  `text = edit.selected_text()
 		user.paste("{{{text}}}")`
 
- - **(parens | args) that**  `text = edit.selected_text()
+ - **(parens | args | round) that**  `text = edit.selected_text()
 		user.paste("({text})")`
 
  - **percent that**  `text = edit.selected_text()
@@ -7086,7 +7664,11 @@
 		user.paste('"{text}"')`
 
  - **(grave | back tick) that**  `text = edit.selected_text()
-		user.paste("`{text}`")`
+		user.paste("`{text}`")
+		
+		`
+
+ - **(symbol | punct | punked) {user.symbol_key}**  `insert("{symbol_key}")`
 
 
 
@@ -7190,73 +7772,117 @@
 #  talon helpers
 
 
- - **talon check updates**  `menu.check_for_updates()`
+ - **(talon | tellin | tell in | tallin | talent) [voice] check [for] updates**  `menu.check_for_updates()
+		`
 
- - **talon open log**  `menu.open_log()`
+ - **[(open | view | show)] (talon | tellin | tell in | tallin | talent) [voice] [show]  log**  `menu.open_log()
+		`
 
- - **talon open rebel**  `menu.open_repl()`
+ - **(talon | tellin | tell in | tallin | talent) [voice] [(show | open)] (rebel | repl)**  `menu.open_repl()
+		`
 
- - **talon home**  `menu.open_talon_home()`
+ - **(talon | tellin | tell in | tallin | talent) [voice] home**  `menu.open_talon_home()
+		`
 
- - **talon copy context pie**  `user.talon_add_context_clipboard_python()`
+ - **(talon | tellin | tell in | tallin | talent) [voice] copy context pie**  `user.talon_add_context_clipboard_python()
+		`
 
- - **talon copy context**  `user.talon_add_context_clipboard()`
+ - **(talon | tellin | tell in | tallin | talent) [voice] copy context**  `user.talon_add_context_clipboard()
+		`
 
- - **talon copy name**  `name = app.name()
-		clip.set_text(name)`
+ - **(talon | tellin | tell in | tallin | talent) [voice] copy name**  `name = app.name()
+		clip.set_text(name)
+		`
 
- - **talon copy executable**  `executable = app.executable()
-		clip.set_text(executable)`
+ - **(talon | tellin | tell in | tallin | talent) [voice] copy executable**  `executable = app.executable()
+		clip.set_text(executable)
+		`
 
- - **talon copy bundle**  `bundle = app.bundle()
-		clip.set_text(bundle)`
+ - **(talon | tellin | tell in | tallin | talent) [voice] copy bundle**  `bundle = app.bundle()
+		clip.set_text(bundle)
+		`
 
- - **talon copy title**  `title = win.title()
-		clip.set_text(title)`
+ - **(talon | tellin | tell in | tallin | talent) [voice] copy title**  `title = win.title()
+		clip.set_text(title)
+		`
 
- - **talon dump version**  `result = user.talon_version_info()
-		print(result)`
+ - **(talon | tellin | tell in | tallin | talent) [voice] dump version**  `result = user.talon_version_info()
+		print(result)
+		`
 
- - **talon insert version**  `result = user.talon_version_info()
-		user.paste(result)`
+ - **(talon | tellin | tell in | tallin | talent) [voice] insert version**  `result = user.talon_version_info()
+		user.paste(result)
+		`
 
- - **talon dump context**  `result = user.talon_get_active_context()
-		print(result)`
+ - **(talon | tellin | tell in | tallin | talent) [voice] dump context**  `result = user.talon_get_active_context()
+		print(result)
+		
+		## +++++++++++++++++++++++++++ Testing .
+		`
 
- - **talon test last**  `phrase = user.history_get(1)
+ - **(talon | tellin | tell in | tallin | talent) [voice] (test | tests) last**  `phrase = user.history_get(1)
 		user.talon_sim_phrase(phrase)`
 
- - **talon test numb <number_small>**  `phrase = user.history_get(number_small)
+ - **(talon | tellin | tell in | tallin | talent) [voice] (test | tests) log last**  `phrase = user.history_get(1)
+		user.talon_sim_phrase(phrase)
+		menu.open_log()
+		
+		# test nth back command`
+
+ - **(talon | tellin | tell in | tallin | talent) [voice] (test | tests) (numb | number) <number_small>**  `phrase = user.history_get(number_small)
 		user.talon_sim_phrase(phrase)`
 
- - **talon test <phrase>**  `user.talon_sim_phrase(phrase)`
+ - **(talon | tellin | tell in | tallin | talent) [voice] (test | tests) log (numb | number) <number_small>**  `phrase = user.history_get(number_small)
+		user.talon_sim_phrase(phrase)
+		menu.open_log()
+		`
 
- - **talon debug action {user.talon_actions}**  `user.talon_action_find("{user.talon_actions}")`
+ - **(talon | tellin | tell in | tallin | talent) [voice] (test | tests) <phrase>**  `user.talon_sim_phrase(phrase)`
 
- - **talon debug list {user.talon_lists}**  `user.talon_debug_list(talon_lists)`
+ - **(talon | tellin | tell in | tallin | talent) [voice] (test | tests) log <phrase>**  `user.talon_sim_phrase(phrase)
+		menu.open_log()
+		
+		## +++++++++++++++++++++++++++++ debug .
+		`
 
- - **talon copy list {user.talon_lists}**  `user.talon_copy_list(talon_lists)`
+ - **(talon | tellin | tell in | tallin | talent) [voice] debug action {user.talon_actions}**  `user.talon_action_find("{user.talon_actions}")
+		`
 
- - **talon debug tags**  `user.talon_debug_tags()`
+ - **(talon | tellin | tell in | tallin | talent) [voice] debug list {user.talon_lists}**  `user.talon_debug_list(talon_lists)`
 
- - **talon debug modes**  `user.talon_debug_modes()`
+ - **(talon | tellin | tell in | tallin | talent) [voice] copy list {user.talon_lists}**  `user.talon_copy_list(talon_lists)`
 
- - **talon debug scope {user.talon_scopes}**  `user.talon_debug_scope(talon_scopes)`
+ - **(talon | tellin | tell in | tallin | talent) [voice] debug tags**  `user.talon_debug_tags()`
 
- - **talon debug setting {user.talon_settings}**  `user.talon_debug_setting(talon_settings)`
+ - **(talon | tellin | tell in | tallin | talent) [voice] debug modes**  `user.talon_debug_modes()`
 
- - **talon debug all settings**  `user.talon_debug_all_settings()`
+ - **(talon | tellin | tell in | tallin | talent) [voice] debug scope {user.talon_scopes}**  `user.talon_debug_scope(talon_scopes)`
 
- - **talon debug active app**  `result = user.talon_get_active_application_info()
+ - **(talon | tellin | tell in | tallin | talent) [voice] debug setting {user.talon_settings}**  `user.talon_debug_setting(talon_settings)`
+
+ - **(talon | tellin | tell in | tallin | talent) [voice] debug all settings**  `user.talon_debug_all_settings()`
+
+ - **(talon | tellin | tell in | tallin | talent) [voice] debug active app**  `result = user.talon_get_active_application_info()
 		print("**** Dumping active application **** ")
 		print(result)
-		print("***********************")`
+		print("***********************")
+		`
 
- - **talon copy active app**  `result = user.talon_get_active_application_info()
+ - **(talon | tellin | tell in | tallin | talent) [voice] copy active app**  `result = user.talon_get_active_application_info()
 		clip.set_text(result)
 		`
 
- - **talon (bug report | report bug)**  `user.open_url("https://github.com/knausj85/knausj_talon/issues")`
+ - **(talon | tellin | tell in | tallin | talent) [voice] create app context**  `user.talon_create_app_context()`
+
+ - **(talon | tellin | tell in | tallin | talent) [voice] create windows app context**  `user.talon_create_app_context("win")`
+
+ - **(talon | tellin | tell in | tallin | talent) [voice] create linux app context**  `user.talon_create_app_context("linux")`
+
+ - **(talon | tellin | tell in | tallin | talent) [voice] create mac app context**  `user.talon_create_app_context("mac")`
+
+ - **(talon | tellin | tell in | tallin | talent) [voice] (bug report | report bug)**  `user.open_url("https://github.com/(talon | tellin | tell in | tallin | talent) [voice]hub/community/issues")
+		
+		`
 
 
 
@@ -7349,7 +7975,7 @@
 #  browser
 
 
- - **address bar | go address | go url**  `browser.focus_address()`
+ - **address bar | go address | go url | [go] search**  `browser.focus_address()`
 
  - **go page | page focus**  `browser.focus_page()`
 
@@ -7359,11 +7985,11 @@
 
  - **go home**  `browser.go_home()`
 
- - **[go] forward**  `browser.go_forward()`
+ - **go forward**  `browser.go_forward()`
 
  - **go (back | backward)**  `browser.go_back()`
 
- - **go to {user.website}**  `browser.go(website)`
+ - **go to [page] {user.website}**  `browser.go(website)`
 
  - **go private**  `browser.open_private_window()`
 
@@ -7574,21 +8200,24 @@
 #  find and replace
 
 
- - **hunt this**  `user.find("")`
+ - **hunt ([in] this | in file)**  `user.find("")`
 
- - **hunt this (pace | paste)**  `user.find("")
+ - **hunt ([in] this | in file) (pace | paste)**  `user.find("")
 		sleep(25ms)
-		edit.paste()`
+		edit.paste()
+		`
 
- - **hunt this <user.text>**  `user.find(text)`
+ - **hunt ([in] this | in file) <user.text>**  `user.find(text)`
 
- - **hunt all**  `user.find_everywhere("")`
+ - **hunt all [<user.text>]**  `user.find_everywhere("{text or ''}")
+		`
 
  - **hunt all (pace | paste)**  `user.find_everywhere("")
 		sleep(25ms)
-		edit.paste()`
-
- - **hunt all <user.text>**  `user.find_everywhere(text)`
+		edit.paste()
+		
+		## ++++++++++++++ search text settings .
+		`
 
  - **hunt case**  `user.find_toggle_match_by_case()`
 
@@ -7598,13 +8227,62 @@
 
  - **hunt next**  `user.find_next()`
 
- - **hunt previous**  `user.find_previous()`
+ - **hunt (previous | last | prev)**  `user.find_previous()`
 
- - **replace this [<user.text>]**  `user.replace(text or "")`
+ - **replace ([in] this | in file) [<user.text>]**  `user.replace(text or "")
+		
+		#paste replacement text`
 
- - **replace all**  `user.replace_everywhere("")`
+ - **replace ([in] this | in file) with (pace | paste) [<user.text>]**  `user.replace(text or "")
+		edit.paste()
+		
+		# multiline working in vscode
+		# replace multi:
+		#     edit.copy()
+		#     user.replace("")
+		#     edit.paste()
+		#     key(tab)
+		#     sleep(200ms)
+		#     insert("hello")
+		#     sleep(200ms)
+		#     user.clipboard_manager_paste(["1"])
+		
+		## +++ replace selected text with same .
+		# (for further editing)
+		
+		#selected text`
 
- - **replace <user.text> all**  `user.replace_everywhere(text)`
+ - **replace ([in] this | in file) [with] (same | clone)**  `s = edit.selected_text()
+		user.replace("")
+		insert(s)
+		
+		#spoken text`
+
+ - **replace ([in] this | in file) [with] (same | clone) <user.text>**  `user.replace(text)
+		key(tab cmd-a delete)
+		insert(text)
+		`
+
+ - **replace ([in] this | in file) point**  `key(shift:down)
+		mouse_click(0)
+		user.replace("")
+		`
+
+ - **replace ([in] this | in file) (pace | paste)**  `user.replace("")
+		sleep(25ms)
+		edit.paste()
+		
+		## ++++++++++++++++ replace everywhere .
+		`
+
+ - **replace [in] all [<user.text>]**  `user.replace_everywhere("{text or ''}")`
+
+ - **replace [in] all (pace | paste)**  `user.replace_everywhere("")
+		sleep(25ms)
+		edit.paste()
+		
+		## +++++++++++++++ confirm replacement .
+		`
 
  - **replace confirm that**  `user.replace_confirm()`
 
@@ -7612,66 +8290,90 @@
 
  - **clear last <user.text> [over]**  `user.select_previous_occurrence(text)
 		sleep(100ms)
-		edit.delete()`
+		edit.delete()
+		`
 
  - **clear next <user.text> [over]**  `user.select_next_occurrence(text)
 		sleep(100ms)
-		edit.delete()`
+		edit.delete()
+		`
 
  - **clear last clip**  `user.select_previous_occurrence(clip.text())
-		edit.delete()`
+		edit.delete()
+		`
 
  - **clear next clip**  `user.select_next_occurrence(clip.text())
 		sleep(100ms)
-		edit.delete()`
+		edit.delete()
+		
+		## +++++++++++++++++++ comment results .
+		`
 
  - **comment last <user.text> [over]**  `user.select_previous_occurrence(text)
 		sleep(100ms)
-		code.toggle_comment()`
+		code.toggle_comment()
+		`
 
  - **comment last clip**  `user.select_previous_occurrence(clip.text())
 		sleep(100ms)
-		code.toggle_comment()`
+		code.toggle_comment()
+		`
 
  - **comment next <user.text> [over]**  `user.select_next_occurrence(text)
 		sleep(100ms)
-		code.toggle_comment()`
+		code.toggle_comment()
+		`
 
  - **comment next clip**  `user.select_next_occurrence(clip.text())
 		sleep(100ms)
-		code.toggle_comment()`
+		code.toggle_comment()
+		
+		## +++++++++++++++++++++ go to results .
+		`
 
  - **go last <user.text> [over]**  `user.select_previous_occurrence(text)
 		sleep(100ms)
-		edit.right()`
+		edit.right()
+		`
 
  - **go last clip**  `user.select_previous_occurrence(clip.text())
 		sleep(100ms)
-		edit.right()`
+		edit.right()
+		`
 
  - **go next <user.text> [over]**  `user.select_next_occurrence(text)
-		edit.right()`
+		edit.right()
+		`
 
  - **go next clip**  `user.select_next_occurrence(clip.text())
-		edit.right()`
+		edit.right()
+		
+		## ++++++++++++++++ paste over results .
+		`
 
  - **paste last <user.text> [over]**  `user.select_previous_occurrence(text)
 		sleep(100ms)
 		edit.right()
-		edit.paste()`
+		edit.paste()
+		`
 
  - **paste next <user.text> [over]**  `user.select_next_occurrence(text)
 		sleep(100ms)
 		edit.right()
-		edit.paste()`
+		edit.paste()
+		`
 
  - **replace last <user.text> [over]**  `user.select_previous_occurrence(text)
 		sleep(100ms)
-		edit.paste()`
+		edit.paste()
+		`
 
  - **replace next <user.text> [over]**  `user.select_next_occurrence(text)
 		sleep(100ms)
-		edit.paste()`
+		edit.paste()
+		
+		## ++++++++++++++++++++ select results .
+		`
 
  - **select last <user.text> [over]**  `user.select_previous_occurrence(text)`
 
@@ -7690,7 +8392,7 @@
 
  - **bend**  `edit.line_start()`
 
- - **go <number>**  `edit.jump_line(number)`
+ - **go line <number>**  `edit.jump_line(number)`
 
  - **go <number> end**  `edit.jump_line(number)
 		edit.line_end()`
@@ -7933,144 +8635,1038 @@
 
 
 
-#  photoshop
+#  cursorless
 
 
- - **new (file | pane)**  `key(cmd-n)`
-
- - **open file**  `key(cmd-o)`
-
- - **close file**  `key(cmd-w)`
-
- - **open folder**  `key(cmd-shift-o)`
-
- - **save as**  `key(cmd-shift-s)`
-
- - **undeform**  `user.menu_select('File|Scripts|[M] Undeform 1.1')`
-
- - **standard screen mode**  `user.menu_select('View|Screen Mode|Standard Screen Mode')`
-
- - **zoom fit [on screen]**  `key(cmd-0)`
-
- - **zoom fit artboard [on screen]**  `user.menu_select('View|Fit Artboard on Screen')`
-
- - **zoom fit layer [on screen]**  `user.menu_select('View|Fit Layer(s) on Screen')`
-
- - **zoom (base | 100)**  `key(cmd-1)`
-
- - **zoom (2 x | 200)**  `user.menu_select('View|200%')`
-
- - **zoom actual [size]**  `user.menu_select('View|Actual Size')`
-
- - **(toggle | hide | show) panels**  `key(tab)`
-
- - **(toggle | hide | show) extras**  `key(cmd-h)`
-
- - **(toggle | hide | show) layer edges**  `user.menu_select('View|Show|Layer Edges')`
-
- - **(toggle | hide | show) artboard names**  `user.menu_select('View|Show|Artboard Names')`
-
- - **(toggle | hide | show) guides**  `user.menu_select('View|Show|Guides')`
-
- - **(toggle | hide | show)  artboard guides**  `user.menu_select('View|Show|Artboard Guides')`
-
- - **(toggle | hide | show)  smart guides**  `user.menu_select('View|Show|Smart Guides')`
-
- - **(toggle | hide | show) grid**  `user.menu_select('View|Show|Grid')`
-
- - **keyboard shortcuts**  `key(alt-shift-cmd-k)`
-
- - **deselect**  `key(cmd-d)`
-
- - **(brush | brushy) [(s | size)] down [<user.number_string>]**  `key("[:{number_string or 1}")`
-
- - **(brush | brushy) [(s | size)] up [<user.number_string>]**  `key("]:{number_string or 1}")`
-
- - **brush [tool]**  `key(b)`
-
- - **[other | next] brush [tool]**  `key(shift-b)`
-
- - **flow <user.number_string>**  `key("ctrl-shift-{number_string}")`
-
- - **flow double <user.number_string> <user.number_string>**  `key(ctrl-shift:down)
-		key("ctrl-shift-{number_string_1}")
-		key("ctrl-shift-{number_string_2}")
+ - **<user.cursorless_action_or_ide_command> <user.cursorless_target>**  `user.private_cursorless_action_or_ide_command(cursorless_action_or_ide_command, cursorless_target)
 		`
 
- - **flow single <digits>**  `key(ctrl-shift:down)
-		key(ctrl-shift-0)
-		key("ctrl-shift-{digits}")
+ - **{user.cursorless_bring_move_action} <user.cursorless_bring_move_targets>**  `user.private_cursorless_bring_move(cursorless_bring_move_action, cursorless_bring_move_targets)
 		`
 
- - **new layer**  `key(shift-cmd-n)`
-
- - **copy layer style**  `key(cmd-ctrl-c)`
-
- - **paste layer style**  `key(cmd-ctrl-v)`
-
- - **move group [tool]**  `key(shift-f19)`
-
- - **move layer [tool]**  `key(shift-cmd-f19)`
-
- - **move [tool]**  `key(v)`
-
- - **Text [tool]**  `key(t)`
-
- - **(show | hide) layer**  `key(cmd-,)`
-
- - **layer (show | hide)**  `key(cmd-,)`
-
- - **toggle layer [visibility]**  `key(cmd-,)`
-
- - **layer (send | move) [to] (back | bottom)**  `key(cmd-shift-[)`
-
- - **layer (send | move) [to] (front | top)**  `key(cmd-shift-])`
-
- - **layer (send | move) (up | for | forward) [<digits>]**  `key(cmd-])
-		repeat(digits - 1)`
-
- - **layer (send | move) (down | back | backwards | backward) [<digits>]**  `key(cmd-[)
-		repeat(digits - 1)
+ - **{user.cursorless_swap_action} <user.cursorless_swap_targets>**  `user.private_cursorless_swap(cursorless_swap_targets)
 		`
 
- - **gradient overlay**  `key(cmd-alt-shift-ctrl-l)
-		sleep(100ms)
-		insert("gradient overlay")
-		sleep(100ms)
-		key(enter)
+ - **{user.cursorless_paste_action} <user.cursorless_destination>**  `user.private_cursorless_paste(cursorless_destination)
+		`
+
+ - **{user.cursorless_reformat_action} <user.formatters> at <user.cursorless_target>**  `user.private_cursorless_reformat(cursorless_target, formatters)
+		`
+
+ - **{user.cursorless_call_action} <user.cursorless_target> on <user.cursorless_target>**  `user.private_cursorless_call(cursorless_target_1, cursorless_target_2)
+		`
+
+ - **<user.cursorless_wrapper_paired_delimiter> {user.cursorless_wrap_action} <user.cursorless_target>**  `user.private_cursorless_wrap_with_paired_delimiter(cursorless_wrap_action, cursorless_target, cursorless_wrapper_paired_delimiter)
+		`
+
+ - **{user.cursorless_insert_snippet_action} <user.cursorless_insertion_snippet>**  `user.private_cursorless_insert_snippet(cursorless_insertion_snippet)
+		`
+
+ - **{user.cursorless_insert_snippet_action} {user.cursorless_insertion_snippet_single_phrase} <user.text> [{user.cursorless_phrase_terminator}]**  `user.private_cursorless_insert_snippet_with_phrase(cursorless_insertion_snippet_single_phrase, text)
+		`
+
+ - **{user.cursorless_wrapper_snippet} {user.cursorless_wrap_action} <user.cursorless_target>**  `user.private_cursorless_wrap_with_snippet(cursorless_wrap_action, cursorless_target, cursorless_wrapper_snippet)
+		`
+
+ - **{user.cursorless_show_scope_visualizer} <user.cursorless_scope_type> [{user.cursorless_visualization_type}]**  `user.private_cursorless_show_scope_visualizer(cursorless_scope_type, cursorless_visualization_type or "content")`
+
+ - **{user.cursorless_hide_scope_visualizer}**  `user.private_cursorless_hide_scope_visualizer()
+		`
+
+ - **{user.cursorless_homophone} settings**  `user.private_cursorless_show_settings_in_ide()
+		`
+
+ - **bar {user.cursorless_homophone}**  `user.private_cursorless_show_sidebar()
+		`
+
+ - **{user.cursorless_homophone} stats**  `user.private_cursorless_show_command_statistics()`
+
+
+
+#  cursorless global
+
+
+ - **{user.cursorless_homophone} (reference | ref | cheatsheet | cheat sheet)**  `user.private_cursorless_cheat_sheet_show_html()`
+
+ - **{user.cursorless_homophone} (instructions | docks | help) | help {user.cursorless_homophone}**  `user.private_cursorless_open_instructions()`
+
+
+
+#  flex mouse grid
+
+
+ - **flex grid**  `user.flex_grid_place_window()`
+
+ - **flex grid screen**  `user.flex_grid_activate()`
+
+ - **flex grid screen <number>**  `user.flex_grid_select_screen(number)`
+
+ - **[flex] grid close**  `user.flex_grid_deactivate()`
+
+ - **grid ^points**  `user.flex_grid_points_toggle(1)`
+
+ - **grid ^points close**  `user.flex_grid_points_toggle(0)`
+
+ - **grid ^point <user.word> [<number>]**  `user.flex_grid_go_to_point(word, number or 1, -1)`
+
+ - **grid ^point <user.word> next**  `user.flex_grid_go_to_point_relative(word, 1)`
+
+ - **grid ^point <user.word> last**  `user.flex_grid_go_to_point_relative(word, -1)`
+
+ - **grid ^point click <user.word> [<number>]**  `user.flex_grid_go_to_point(word, number or 1, 0)`
+
+ - **grid ^point righty <user.word> [<number>]**  `user.flex_grid_go_to_point(word, number or 1, 1)`
+
+ - **remap**  `user.flex_grid_place_window()
+		user.flex_grid_points_toggle(1)`
+
+ - **map <user.word>**  `user.flex_grid_map_point_here(word)`
+
+ - **map <user.word> <user.letter>+**  `user.flex_grid_map_points_by_letter(word, letter_list)`
+
+ - **map <user.word> box <number> [mark <number>]***  `user.flex_grid_map_points_by_box(word, number_list)`
+
+ - **map <user.word> box <number> past <number>**  `user.flex_grid_map_points_by_box_range(word, number_list)`
+
+ - **unmap <user.word>**  `user.flex_grid_unmap_point(word)`
+
+ - **unmap everything**  `user.flex_grid_unmap_point("")`
+
+ - **boxes**  `user.flex_grid_setup_boxes()`
+
+ - **boxes show**  `user.flex_grid_find_boxes()`
+
+ - **box <number>**  `user.flex_grid_go_to_box(number or 1, -1)`
+
+ - **box click <number>**  `user.flex_grid_go_to_box(number or 1, 0)`
+
+ - **box righty <number>**  `user.flex_grid_go_to_box(number or 1, 1)`
+
+ - **boxes close**  `user.flex_grid_boxes_toggle(0)`
+
+ - **boxes upper more**  `user.flex_grid_box_config_change("box_size_upper", 3)`
+
+ - **boxes upper more bump**  `user.flex_grid_box_config_change("box_size_upper", 1)`
+
+ - **boxes upper less**  `user.flex_grid_box_config_change("box_size_upper", -3)`
+
+ - **boxes upper less bump**  `user.flex_grid_box_config_change("box_size_upper", -1)`
+
+ - **boxes lower more**  `user.flex_grid_box_config_change("box_size_lower", 3)`
+
+ - **boxes lower more bump**  `user.flex_grid_box_config_change("box_size_lower", 1)`
+
+ - **boxes lower less**  `user.flex_grid_box_config_change("box_size_lower", -3)`
+
+ - **boxes lower less bump**  `user.flex_grid_box_config_change("box_size_lower", -1)`
+
+ - **boxes threshold more**  `user.flex_grid_box_config_change("threshold", 10)`
+
+ - **boxes threshold more bump**  `user.flex_grid_box_config_change("threshold", 1)`
+
+ - **boxes threshold less**  `user.flex_grid_box_config_change("threshold", -10)`
+
+ - **boxes threshold less bump**  `user.flex_grid_box_config_change("threshold", -1)`
+
+ - **boxes threshold**  `user.flex_grid_boxes_threshold_view_toggle()`
+
+ - **flex info**  `user.flex_grid_info_toggle()`
+
+
+
+#  flex mouse grid active
+
+
+ - **<user.letter> <user.letter> <number>**  `# Say a letter to choose a row, say a second letter to choose a column, and say a number to
+		# choose the numbered block. Example: "air bat 2"
+		user.flex_grid_input_partial(number)
+		user.flex_grid_input_partial(letter_1)
+		user.flex_grid_input_partial(letter_2)
 		
 		`
 
- - **search menu <user.text>**  `key(cmd-alt-shift-ctrl-l)
-		sleep(500ms)
+ - **<user.letter> <user.letter>**  `# Using the currently selected number block, say a letter to choose a row and say a second
+		# letter to choose a column. Example: "bat cap"
+		user.flex_grid_input_partial(letter_1)
+		user.flex_grid_input_partial(letter_2)
+		
+		`
+
+ - **<number> <user.letter> <user.letter>**  `# Say a number to select a number block, say a letter to select a row, and say a second leter to
+		# select a column. Example: "1 bat cap"
+		user.flex_grid_input_partial(number)
+		user.flex_grid_input_partial(letter_1)
+		user.flex_grid_input_partial(letter_2)
+		`
+
+ - **<number> <user.letter>**  `user.flex_grid_input_partial(number)
+		user.flex_grid_input_partial(letter)
+		`
+
+ - **<number>**  `# Say a number to select a number block.
+		user.flex_grid_input_partial(number)
+		`
+
+ - **row <user.letter>**  `# If you already have a row selected, saying 'row' followed by a letter will select a new
+		# horizontal row.
+		user.flex_grid_input_horizontal(letter)
+		`
+
+ - **<user.letter>**  `# Input a single letter. Depending on where you are in the command sequence it will select either
+		# a row or a column.
+		user.flex_grid_input_partial(letter)
+		
+		# Allows typing letters while the flex grid is showing. Example: "press air bat cap"`
+
+ - **press <user.keys>**  `key(keys)
+		
+		# Configuration
+		# Change the overlay pattern to a checkerboard pattern.`
+
+ - **grid checker**  `user.flex_grid_checkers()`
+
+ - **grid frame**  `user.flex_grid_frame()`
+
+ - **grid phonetic**  `user.flex_grid_phonetic()`
+
+ - **grid full**  `user.flex_grid_full()`
+
+ - **grid bigger**  `user.flex_grid_adjust_size(5)`
+
+ - **grid bigger bump**  `user.flex_grid_adjust_size(1)`
+
+ - **grid smaller**  `user.flex_grid_adjust_size(-5)`
+
+ - **grid smaller bump**  `user.flex_grid_adjust_size(-1)`
+
+ - **letters darker**  `user.flex_grid_adjust_label_transparency(50)`
+
+ - **letters darker bump**  `user.flex_grid_adjust_label_transparency(10)`
+
+ - **letters lighter**  `user.flex_grid_adjust_label_transparency(-50)`
+
+ - **letters lighter bump**  `user.flex_grid_adjust_label_transparency(-10)`
+
+ - **background darker**  `user.flex_grid_adjust_bg_transparency(20)`
+
+ - **background darker bump**  `user.flex_grid_adjust_bg_transparency(4)`
+
+ - **background lighter**  `user.flex_grid_adjust_bg_transparency(-20)`
+
+ - **background lighter bump**  `user.flex_grid_adjust_bg_transparency(-4)`
+
+ - **rulers switch**  `user.flex_grid_rulers_toggle()`
+
+
+
+#  gb
+
+
+ - **[open] edit product [page]**  `key(cmd-l)
+		sleep(100ms)
+		insert("@bookmarks")
+		key(space)
+		sleep(100ms)
+		insert("edit prod+")
+		sleep(100ms)
+		key(tab enter)
+		`
+
+ - **[(open |  go)] (local | localhost) (view | page)**  `key(cmd-l)
+		sleep(100ms)
+		insert("@bookmarks")
+		key(space)
+		sleep(100ms)
+		insert("->Local - j")
+		sleep(100ms)
+		key(tab enter)
+		`
+
+ - **[( open |  go)] (live | remote) (view | page)**  `key(cmd-l)
+		sleep(100ms)
+		insert("@bookmarks")
+		key(space)
+		sleep(100ms)
+		insert("->Live - j")
+		sleep(100ms)
+		key(tab enter)
+		
+		# constant contact editor`
+
+ - **email (add block | adblock | insert | paste) link**  `mouse_click(0)
+		sleep(100ms)
+		key(down)
+		key(enter)
+		sleep(100ms)
+		edit.select_all()
+		edit.paste()
+		sleep(30ms)
+		key(enter)
+		`
+
+ - **(paste | pace | insert) get bit address**  `insert("https://getbitoutdoors.com")`
+
+
+
+#  general
+
+
+ - **(for | fore) (delete | dell)**  `key(delete)`
+
+ - **copy it**  `key(cmd-c)`
+
+ - **paste it**  `key(cmd-v)`
+
+ - **show (clip | clipboard | image | screengrab) [in] preview**  `key(cmd-space)
+		insert("preview")
+		sleep(100ms)
+		key(enter)
+		sleep(100ms)
+		key(cmd-w)
+		sleep(100ms)
+		key(shift-f12)
+		sleep(700ms)
+		key(d)
+		sleep(100ms)
+		key(a)
+		sleep(600ms)
+		key(cmd-n)
+		
+		#raycast
+		`
+
+ - **(raycast | ray cast | ray) [<user.text>]**  `key(cmd-space)
+		insert(text)
+		
+		## ++++++ open pasted (path) via raycast .
+		`
+
+ - **(go | open | run) (paste | pace | copied | carved | clipped | clipboard | clip) [(path | (code | line) link)] [in (code | finder | raycast)] | (raycast | cast | run) (paste | pace | copied | carved | clipped | clipboard | clip) [in raycast]**  `key(cmd-space)
+		sleep(100ms)
+		edit.paste()
+		sleep(100ms)
+		key(enter)
+		
+		## ++++++ run selected (path) in raycast .
+		`
+
+ - **(go | open | run) (that | selected) [(path | (code | line) link)] [in (code | finder | raycast)] | (raycast | cast | run) (paste | pace | copied | carved | clipped | clipboard | clip) [in raycast]**  `# selectedText = edit.selected_text()
+		key(cmd-space)
+		# insert(selectedText)
+		# sleep(100ms)
+		# key(enter)
+		
+		
+		## ++++++++++++++++++ open saved finder path folder w raycast
+		
+		
+		
+		#spawns new window : todo make reuse open tab`
+
+ - **open <user.system_path> [folder]**  `key(cmd-space)
+		insert(system_path)
+		sleep(100ms)
+		key(enter)
+		sleep(200ms)
+		key(cmd-o)
+		
+		#open folder and osx File chooser  popup
+		`
+
+ - **(modal | dialog) search [<user.text>]**  `key(cmd-f)
+		sleep(200ms)
 		insert(text)
 		`
 
- - **hit menu <user.text>**  `key(cmd-alt-shift-ctrl-l)
+ - **(modal | dialog) (browse | search) [(file |folder)] path**  `key(cmd-shift-g)
+		`
+
+ - **(modal | dialog) open <user.system_path> [folder]**  `key(cmd-shift-g)
+		sleep(300ms)
+		insert(system_path)
 		sleep(100ms)
-		insert(text)
+		key(enter)
+		
+		
+		## ++++++++++++++++++++++++++++ wooshy .
+		
+		`
+
+ - **((who | will) she | wooshy | wish he) [(hunt | point | search)] [<user.text>]**  `key(cmd-shift-space)
+		sleep(300ms)
+		insert("{text or ''}")
+		`
+
+ - **((who | will) she | wooshy | wish he be) click [<user.text>]**  `key(cmd-shift-space)
+		sleep(300ms)
+		insert("{text or ''}")
+		sleep(300ms)
+		key(enter)
+		
+		
+		## ++++++++++++++++++++ # search menus .
+		`
+
+ - **(search | hunt) ray (menu | menus) [<user.text>]**  `key(cmd-alt-shift-ctrl-l)
+		sleep(200ms)
+		insert("{text or ''}")
+		
+		# finder
+		`
+
+ - **(take screen shot | screen grab)**  `key(ctrl-shift-cmd-4)`
+
+ - **(show | hide | toggle) desk**  `key(f11)`
+
+ - **open display panel**  `key(cmd-space)
+		sleep(300ms)
+		insert("displays")
+		key(enter)
+		`
+
+ - **open sound panel**  `key(cmd-space)
+		sleep(300ms)
+		insert("sound")
+		sleep(200ms)
+		key(enter)
+		
+		## ++++++++++++++++++++++ pick open window
+		`
+
+ - **pick (win | window) [spotlight]**  `key(ctrl-up)`
+
+ - **pick (win | window) grid**  `key(cmd-alt-shift-ctrl-down)`
+
+ - **pick (win | window) (ray | list)**  `key(cmd-space)
+		insert("switch windows")
 		sleep(100ms)
 		key(enter)
 		`
 
- - **outer glow**  `key(cmd-alt-shift-ctrl-l)
+ - **[pick] app (win | windows) [finder]**  `key(ctrl-down)`
+
+ - **save file**  `key(cmd-s)`
+
+ - **quit app**  `key(cmd-q)`
+
+ - **exit**  `key(escape)`
+
+ - **(override line | over ride line)**  `mimic("clone line")
 		sleep(300ms)
-		insert("outer glow")
+		# comment line
+		key(up cmd-/)
+		#navigate to place in new line
+		key(down left:2)
+		# mimic("go to line start")
+		# insert("#")
+		
+		#right/context click`
+
+ - **((right | r | are | part) click | (context | see | sea) (click | touch | that | menu | options))**  `mouse_click(1)
+		# close the mouse grid if open
+		user.grid_close()
+		
+		
+		#--------------- new
+		`
+
+ - **(unindent | un indent) [that]**  `key(shift-tab)`
+
+ - **dell it | deli it | dell that**  `key(delete)`
+
+ - **(go | show | open) (browser | browse)**  `user.switcher_focus("Chrome")
+		
+		`
+
+ - **(cursorless | cursor less) (reference | live (cheatsheet | cheat sheet))**  `user.switcher_focus("Chrome")
+		browser.go("https://www.cursorless.org/cheatsheet")
+		`
+
+ - **select (all | or)**  `key(cmd-a)`
+
+ - **paste there**  `key(cmd-v)`
+
+ - **(toggle | enter | leave | exit) [system] dark mode**  `key(cmd-space)
+		sleep(100ms)
+		insert("toggle system appearance")
+		sleep(100ms)
+		key(enter)
+		
+		
+		
+		#todo: get this working in finder
+		`
+
+ - **option drag**  `user.mouse_drag(0)
 		sleep(300ms)
+		key(alt:down)
+		user.grid_close()
+		`
+
+ - **hold option**  `key(alt:down)`
+
+ - **shift drag**  `key(shift:down)
+		user.mouse_drag(0)
+		user.grid_close()
+		`
+
+ - **command drag**  `key(cmd:down)
+		user.mouse_drag(0)
+		user.grid_close()
+		
+		# repeat command key`
+
+ - **Open linear mouse [panel]**  `key(cmd-space)
+		# sleep(100ms)
+		insert("linearmouse")
+		sleep(100ms)
+		key(enter)
+		
+		
+		#break cursorless commands, to say n in same`
+
+ - **then**  `skip()`
+
+ - **now**  `skip()`
+
+ - **(notes | note | no to | not to | don't | roam | rome) capture**  `key(cmd-ctrl-alt-shift-;)
+		
+		#input focus fails randomly
+		
+		#send copied text to roam`
+
+ - **(notes | note | no to | not to | don't | roam | rome) capture (paste | pace | clip) | (send) (clip | paste) [to] notes**  `key(cmd-ctrl-alt-shift-;)
+		sleep(200ms)
+		edit.paste()
+		
+		# Send selected text to roam`
+
+ - **(notes | note | no to | not to | don't | roam | rome) capture that | send that [to] notes**  `# edit.copy()
+		key(cmd-c)
+		sleep(200ms)
+		key(cmd-ctrl-alt-shift-;)
+		sleep(200ms)
+		edit.paste()
+		sleep(100ms)
+		key(cmd-enter)
+		sleep(100ms)
+		key(escape)
+		
+		# Send selected text with point touch to roam`
+
+ - **(notes | note | no to | not to | don't | roam | rome) capture point | send point [to] notes**  `key(shift:down)
+		mouse_click(1)
+		edit.copy()
+		key(cmd-ctrl-alt-shift-;)
+		sleep(200ms)
+		edit.paste()
+		sleep(100ms)
+		key(cmd-enter)
+		sleep(100ms)
+		key(escape)
+		`
+
+ - **(ok | confirm | send) note**  `key(cmd-enter)
+		sleep(100ms)
+		key(escape)
+		
+		## +++++++++++++++++++++ basic editing .
+		`
+
+ - **dedent**  `key(shift-tab)`
+
+ - **take (Pointer | point)**  `key(shift:down)
+		mouse_click(0)
+		`
+
+ - **(chuck | crop | clear) (Pointer | point)**  `key(shift:down)
+		mouse_click(0)
+		edit.delete()`
+
+ - **(chuck | crop | clear) (Pointer | point) force**  `key(shift:down)
+		mouse_click(0)
+		edit.delete()
+		key(escape)
+		`
+
+ - **(copy) (Pointer | point)**  `key(shift:down)
+		mouse_click(0)
+		edit.copy()`
+
+ - **(copy) (Pointer | point) force**  `key(shift:down)
+		mouse_click(0)
+		edit.copy()
+		key(escape)
+		# cursor go back action
+		`
+
+ - **(cut | carve) (Pointer | point)**  `key(shift:down)
+		mouse_click(0)
+		edit.cut()
+		
+		# Make version that leaves the pasted text selected`
+
+ - **(paste) (Pointer | point)**  `key(shift:down)
+		mouse_click(0)
+		edit.paste()
+		
+		# demo open file: user.file_manager_open_file("~/Documents/ticket reciept.pdf")
+		# user.file_maDemo actionnager_open_directory(system_path)
+		# file = user.file_manager_get_file_by_index(number_small - 1)
+		# insert(file)
+		
+		## ++++++++++++ Navigate osx file menu .
+		`
+
+ - **go menu**  `key(fn-ctrl-f2)
+		`
+
+ - **go menu <user.letter>**  `key(fn-ctrl-f2)
+		insert(letter)
+		key(down)
+		`
+
+ - **go menu <user.letters>**  `key(fn-ctrl-f2)
+		insert(letters)
+		key(down)
+		`
+
+ - **go menu <user.text>**  `key(fn-ctrl-f2)
+		insert(text)
+		key(down)
+		`
+
+ - **menu pick <user.text>**  `insert(text)
+		`
+
+ - **menu (touch | punch | hit | press | select) <user.text>**  `insert(text)
+		key(enter)
+		
+		# paste date template`
+
+ - **date [string] <user.number_string> [plus] <user.number_string>**  `insert("{number_string_1}/{number_string_2}")
+		sleep(200ms)
+		key(escape)
+		
+		## ++++++++++++++++ adjust night shift .
+		
+		`
+
+ - **([make | set] display (temperature | temp) | (nightshift | night shift) ) <user.number_string>**  `user.system_command_nb("nightlight temp {number_string}")
+		`
+
+ - **toggle (nightshift | night shift | night light | [display] (temperature | temp))**  `user.system_command_nb("nightlight toggle")
+		
+		## +++++++++++++++++ adjust brightness .
+		`
+
+ - **[(screen | display)] (brightness | brightens | brighten) up | brighten [up] (screen | display)**  `key(f15)
+		`
+
+ - **[(screen | display)] (brightness | brightens | dim) down | dim [down] (screen | display)**  `key(f14)
+		`
+
+ - **[(screen | display)] (brightness | brightens) single <user.number_string>**  `user.system_command_nb("brightness 0.0{number_string}")
+		`
+
+ - **[(screen | display)] (brightness | brightens) <user.number_string>**  `user.system_command_nb("brightness 0.{number_string}")
+		`
+
+ - **photo new layer**  `user.system_command_nb("open \"/Users/ryan/dev/ps script/scripts/create_layer.psjs\"")
+		
+		`
+
+ - **(screen | display) (brightness | brightens) full**  `user.system_command_nb("brightness 1")
+		`
+
+ - **round (string | rap | wrap | text) <user.prose>**  `insert("({prose})")
+		
+		## ++++++++++ go to open tab In chrome .
+		`
+
+ - **go (browse | page | tab) <user.text>**  `user.switcher_focus("Chrome")
+		key(cmd-shift-a)
+		sleep(200ms)
+		insert("{text}")
+		sleep(100ms)
 		key(enter)
 		`
 
- - **layer (lock | unlock)**  `key(cmd-/)`
+ - **(show | view) (hot keys | hotkeys)**  `key(cmd:down)
+		sleep(1000ms)
+		
+		## ++++ open terminal and run commands .
+		`
 
- - **(make | convert to) smart object**  `key(ctrl-f11)`
+ - **term brew (upgrade | update)**  `user.switcher_focus("Warp")
+		key(cmd-t)
+		sleep(200ms)
+		user.menu_select('Tab|Rename the Current Tab')
+		insert("Brew")
+		key(enter)
+		insert("brew update")
+		sleep(1000ms)
+		key(enter)
+		`
 
- - **transform**  `key(cmd-t)`
+ - **(warp | term) [new] (babashka | b b | be be | bb ) [repl]**  `user.switcher_focus("Warp")
+		key(cmd-t)
+		sleep(300ms)
+		user.menu_select('Tab|Rename the Current Tab')
+		insert("BB")
+		key(enter)
+		sleep(1000ms)
+		insert("bb")
+		key(enter)
+		`
 
- - **camera (raw | module)**  `key(shift-cmd-a)`
+ - **(warp | term) [new] (node (bb | b b) | n b b | nbb | en be be ) [repl]**  `user.switcher_focus("Warp")
+		key(cmd-t)
+		sleep(300ms)
+		user.menu_select('Tab|Rename the Current Tab')
+		insert("NBB")
+		key(enter)
+		sleep(1000ms)
+		insert("nbb")
+		key(enter)
+		`
+
+ - **term (quit | exit) [( repl | command)]**  `key(ctrl-c)
+		# insert(":repl/quit")
+		# key(enter)
+		
+		
+		
+		
+		`
 
 
 
-#  ps-menus
+#  hammerspoon
+
+
+ - **hammerspoon reload [config]**  `user.hammerspoon_menu_select("Reload Config")`
+
+ - **hammerspoon (edit | config)**  `user.hammerspoon_menu_select("Open Config")`
+
+ - **(hammerspoon | spoon) (console | repl | rebel)**  `user.hammerspoon_menu_select("Console...")`
+
+
+
+#  homerow
+
+
+ - **[(home row | home | hat)] (ax | acts | ex | point)**  `key(shift-f12)`
+
+ - **[(home row | home | hat)] (ax | acts | ex | point) [<user.text>]**  `user.homerow_search("{text or ''}")`
+
+
+
+#  homerow dictation
+
+
+ - **[(home row | home | hat)] (ax | acts | ex | point)**  `key(shift-f12)`
+
+ - **[(home row | home | hat)] (ax | acts | ex | point) [<user.text>]**  `user.homerow_search("{text or ''}")
+		`
+
+
+
+#  homerow scroll
+
+
+ - **(roll | rolly | rolling | ruling | rolle) (this | that | window | view | here | win)**  `key(cmd-ctrl-alt-shift-j)
+		
+		#todo: How to only target and limit these to scroll mode
+		`
+
+ - **(roll | rolly | rolling | ruling) downer**  `key(j:down k:up)
+		`
+
+ - **(roll | rolly | rolling | ruling) upper**  `key(k:down j:up)
+		`
+
+ - **(roll | rolly | rolling | ruling) up**  `key(k)
+		`
+
+ - **(roll | rolly | rolling | ruling) down**  `key(j)
+		
+		# [<number_small>]
+		# myNum = number_small - 1
+		# repeat(myNum)
+		# key(j:up)10
+		`
+
+ - **(roll | rolly | rolling | ruling) stop | stop [(roll | rolly | rolling | ruling)]**  `key(j:up k:up)
+		`
+
+ - **(roll | rolly | rolling | ruling) next**  `key(down)
+		`
+
+ - **(roll | rolly | rolling | ruling) last**  `key(up)
+		`
+
+ - **(roll | rolly | rolling | ruling) (pick | choose) <user.number_key>**  `key(number_key)`
+
+
+
+#  homerow search
+
+
+ - **(pick | pic)**  `user.homerow_pick("", false)
+		`
+
+ - **(pick | pic) <user.letters>**  `user.homerow_pick(letters, false)
+		`
+
+ - **(pick | pic) (and | end)**  `user.homerow_pick("", true)
+		`
+
+ - **(pick | pic) <user.letters> (and | end)**  `user.homerow_pick(letters, true)`
+
+
+
+#  intellij
+
+
+ - **[new] text override**  `key(alt-up)
+		sleep(100ms)
+		key(cmd-c)
+		key([)
+		sleep(100ms)
+		key(alt-right)
+		sleep(100ms)
+		key(space)
+		key(cmd-v)
+		sleep(100ms)
+		key(alt-left)
+		key(right)
+		`
+
+ - **[new] prefix override [<user.text>]**  `key(alt-up)
+		sleep(100ms)
+		key(cmd-c)
+		key([)
+		sleep(100ms)
+		key(alt-right)
+		sleep(100ms)
+		key(space)
+		key({)
+		insert(":post ")
+		key(")
+		insert(text)
+		`
+
+ - **[new] (opt | optional) postfix override**  `key(alt-up)
+		sleep(100ms)
+		key(cmd-c)
+		key([)
+		sleep(100ms)
+		key(alt-right)
+		sleep(100ms)
+		key(space)
+		key({)
+		insert(":post ")
+		key(")
+		sleep(100ms)
+		insert("[")
+		insert(text or "")
+		insert("]")
+		key(left)
+		
+		`
+
+ - **[new] (opt | optional) postfix override  [<user.text>]**  `key(alt-up)
+		sleep(100ms)
+		key(cmd-c)
+		key([)
+		sleep(100ms)
+		key(alt-right)
+		sleep(100ms)
+		key(space)
+		key({)
+		insert(":post ")
+		key(")
+		sleep(100ms)
+		insert("[")
+		insert(text or "")
+		insert("]")
+		key(left)
+		key(alt-up)
+		
+		
+		
+		
+		
+		
+		
+		`
+
+ - **type tool**  `key(t)`
+
+ - **move tool**  `key(v)`
+
+ - **(standard move | artboard) tool**  `key(shift-v)`
+
+ - **jump to source**  `key(cmd-down)`
+
+ - **[repl] load file**  `key(ctrl-enter)`
+
+ - **(show | hide) project**  `key(cmd-1)`
+
+ - **(show | hide) commit**  `key(cmd-0)`
+
+ - **(show | hide) structure**  `key(cmd-7)`
+
+ - **(show | hide) bookmarks**  `key(cmd-2)`
+
+ - **(show | hide) git**  `key(cmd-9)`
+
+ - **(show | hide) terminal**  `key(alt-f12)`
+
+ - **(show | hide) repl**  `key(alt-f11)`
+
+ - **(evaluate | eval)**  `key(cmd-enter)`
+
+ - **(rep | repl | eval | compute) top**  `key(cmd-enter)`
+
+ - **(rep | repl | eval | compute) this**  `key(alt-enter)`
+
+ - **take**  `key(alt-up)`
+
+ - **copy that**  `key(cmd-c)`
+
+ - **paste that**  `key(cmd-v)`
+
+ - **(delete | kill) line**  `key(cmd-backspace)`
+
+ - **comment that**  `key(cmd-/)`
+
+ - **comment symbol**  `insert("#" + "_")`
+
+ - **repl build (templates | theme)**  `key(f1)`
+
+ - **(open | search) file**  `key(cmd-shift-o)`
+
+
+
+#  mixed-mode
+
+
+ - **<user.text> (phrase | text) over**  `user.add_phrase_to_history(text)
+		insert(text)
+		
+		
+		
+		`
+
+
+
+#  full mouse grid
+
+
+ - **(full | f) grid**  `user.full_grid_select_screen(1)
+		user.full_grid_activate()
+		`
+
+ - **(full | f) grid screen <number>**  `user.full_grid_select_screen(number)
+		user.full_grid_activate()
+		`
+
+ - **(full | f) grid win**  `user.full_grid_place_window()
+		user.full_grid_activate()
+		
+		`
+
+
+
+#  full mouse grid open
+
+
+ - **<user.letter> <user.letter> <number>**  `user.full_grid_select(letter_1 + letter_2, number, "")
+		user.full_grid_close()
+		`
+
+ - **<user.letter> <user.letter> <number> {user.mg_point_of_compass}**  `user.full_grid_select(letter_1 + letter_2, number, mg_point_of_compass)
+		user.full_grid_close()
+		`
+
+ - **<user.letter> <user.letter> {user.mg_point_of_compass}**  `user.full_grid_select(letter_1 + letter_2, -1, mg_point_of_compass)
+		user.full_grid_close()
+		`
+
+ - **<user.letter> <user.letter>**  `user.full_grid_select(letter_1 + letter_2, -1, "")
+		user.full_grid_close()
+		`
+
+ - **<number> <user.letter> <user.letter>**  `user.full_grid_select(letter_1 + letter_2, number, "")
+		user.full_grid_close()
+		`
+
+ - **<number>**  `user.full_grid_input_partial(number)
+		`
+
+ - **<user.letter>**  `user.full_grid_input_partial(letter)
+		`
+
+ - **([full] (grid | good) (close | clothes) | (close | clothes) [full] (grid | good))**  `user.full_grid_close()
+		`
+
+ - **[(show | toggle | hide)] [grid] (checkers | checker | stacked | full | even)**  `user.full_grid_checkers_toggle()
+		`
+
+ - **[(show | toggle | hide)] [grid] rulers**  `user.full_grid_rulers_toggle()
+		
+		#these break talon somehow, requiring reboot?
+		`
+
+ - **[make] labels more transparent**  `user.full_grid_adjust_label_transparency(50)
+		`
+
+ - **[make] lables less transparent**  `user.full_grid_adjust_label_transparency(-50)
+		`
+
+ - **[make] background more transparent**  `user.full_grid_adjust_bg_transparency(50)
+		`
+
+ - **[make] background less transparent**  `user.full_grid_adjust_bg_transparency(-50)
+		`
+
+ - **how do i close grid**  `app.notify("say alphabet close to get rid of the alphabet soup")`
+
+
+
+#  mouse guide
+
+
+ - **mouse (ruler | guide) [(off | on | show | hide| toggle)]**  `user.mouse_guide_toggle()
+		# for example: mouse 10 up 30 right`
+
+ - **mouse <number> {user.mouse_cardinal} <number> {user.mouse_cardinal}**  `user.mouse_cardinal_move_2d(mouse_cardinal_1, number_1, mouse_cardinal_2, number_2)
+		# for example: mouse 10 up`
+
+ - **mouse <number> {user.mouse_cardinal}**  `user.mouse_cardinal_move_1d(mouse_cardinal_1, number_1)`
+
+
+
+#  numbers
+
+
+ - **<user.arrow_keys>**  `user.move_cursor(arrow_keys)`
+
+ - **gmail**  `insert("gmail.com")`
+
+ - **at gmail**  `insert("@gmail.com")`
+
+ - **at yahoo**  `insert("@yahoo.com")`
+
+ - **dot com**  `insert(".com")`
+
+ - **edit [cell]**  `key(alt-enter)`
+
+
+
+#  photoshop-menus
 
 
  - **New Layer**  `user.menu_select('Layer|New|Layer...')`
@@ -8089,15 +9685,13 @@
 
  - **New Frame from Layers**  `user.menu_select('Layer|New|Frame from Layers...')`
 
- - **Convert to Frame**  `user.menu_select('Layer|New|Convert to Frame')`
+ - **New Layer [via] Copy**  `user.menu_select('Layer|New|Layer Via Copy')`
 
- - **New Layer [via] Copy**  `user.menu_select('Layer|New|Layer [via] Copy')`
+ - **New Layer [Via] Cut**  `user.menu_select('Layer|New|Layer Via Cut')`
 
- - **New Layer [Via] Cut**  `user.menu_select('Layer|New|Layer [Via] Cut')`
+ - **Copy (CSS | C S S | cee es es)**  `user.menu_select('Layer|Copy CSS')`
 
- - **Copy CSS**  `user.menu_select('Layer|Copy CSS')`
-
- - **Copy SVG**  `user.menu_select('Layer|Copy SVG')`
+ - **Copy (S V G | es vee gee)**  `user.menu_select('Layer|Copy SVG')`
 
  - **Duplicate Layer**  `user.menu_select('Layer|Duplicate Layer...')`
 
@@ -8105,15 +9699,15 @@
 
  - **Delete Hidden Layers**  `user.menu_select('Layer|Delete|Hidden Layers')`
 
- - **Quick Export as PNG**  `user.menu_select('Layer|Quick Export as PNG')`
+ - **Export Layer As**  `user.menu_select('Layer|Export As...')`
 
- - **Export As**  `user.menu_select('Layer|Export As...')`
+ - **(Rename Layer | layer rename)**  `user.menu_select('Layer|Rename Layer...')`
 
- - **(Rename Layer | layer rename)**  `user.menu_select('Layer|(Rename Layer | layer rename)')`
+ - **(Rename artboard | artboard rename)**  `user.menu_select('Layer|Rename Artboard...')`
 
- - **[layer] (Blending | blend) (Options | opts)**  `user.menu_select('Layer|Layer Style|[layer] (Blending | blend) (Options | opts)')`
+ - **[layer] (Blending | blend) (Options | opts)**  `user.menu_select('Layer|Layer Style|Blending Options...')`
 
- - **(Bevel | Emboss) [layer] style**  `user.menu_select('Layer|Layer Style|(Bevel | Emboss) [layer] style')`
+ - **(Bevel | Emboss) [layer] style**  `user.menu_select('Layer|Layer Style|Bevel & Emboss...')`
 
  - **Stroke [layer] style**  `user.menu_select('Layer|Layer Style|Stroke...')`
 
@@ -8133,29 +9727,29 @@
 
  - **Drop Shadow [layer] style**  `user.menu_select('Layer|Layer Style|Drop Shadow...')`
 
- - **Copy [Layer] Style**  `user.menu_select('Layer|Layer Style|Copy [Layer] Style')`
+ - **Copy [Layer] Style**  `user.menu_select('Layer|Layer Style|Copy Layer Style')`
 
- - **Paste [Layer] Style**  `user.menu_select('Layer|Layer Style|Paste [Layer] Style')`
+ - **Paste [Layer] Style**  `user.menu_select('Layer|Layer Style|Paste Layer Style')`
 
- - **Clear [Layer] Style**  `user.menu_select('Layer|Layer Style|Clear [Layer] Style')`
+ - **Clear [Layer] Style**  `user.menu_select('Layer|Layer Style|Clear Layer Style')`
 
  - **Global Light**  `user.menu_select('Layer|Layer Style|Global Light...')`
 
  - **Create Layer style**  `user.menu_select('Layer|Layer Style|Create Layer')`
 
- - **Hide All (Effects | styles)**  `user.menu_select('Layer|Layer Style|Hide All (Effects | styles)')`
+ - **Hide All (Effects | styles)**  `user.menu_select('Layer|Layer Style|Hide All Effects')`
 
- - **Scale (Effects | styles | style)**  `user.menu_select('Layer|Layer Style|Scale (Effects | styles | style)')`
+ - **Scale (Effects | styles | style)**  `user.menu_select('Layer|Layer Style|Scale Effects...')`
 
  - **Smart Filter**  `user.menu_select('Layer|Smart Filter')`
 
- - **New Solid Layer**  `user.menu_select('Layer|New  Layer|New Solid Layer')`
+ - **New Solid Layer**  `user.menu_select('Layer|New  Layer|Solid Color...')`
 
- - **New Gradient Layer**  `user.menu_select('Layer|New  Layer|New Gradient Layer')`
+ - **New Gradient Layer**  `user.menu_select('Layer|New  Layer|Gradient...')`
 
- - **New Pattern Layer**  `user.menu_select('Layer|New  Layer|New Pattern Layer')`
+ - **New Pattern Layer**  `user.menu_select('Layer|New  Layer|Pattern...')`
 
- - **new (Brightness | Contrast) layer**  `user.menu_select('Layer|New Adjustment Layer|(Brightness | Contrast)')`
+ - **new (Brightness | Contrast) layer**  `user.menu_select('Layer|New Adjustment Layer|Brightness/Contrast...')`
 
  - **new Levels layer**  `user.menu_select('Layer|New Adjustment Layer|Levels...')`
 
@@ -8165,17 +9759,17 @@
 
  - **new Vibrance layer**  `user.menu_select('Layer|New Adjustment Layer|Vibrance...')`
 
- - **new (Hue | Saturation) layer**  `user.menu_select('Layer|New Adjustment Layer|(Hue | Saturation)')`
+ - **new (Hue | Saturation) layer**  `user.menu_select('Layer|New Adjustment Layer|Hue Saturation...')`
 
  - **new Color Balance layer**  `user.menu_select('Layer|New Adjustment Layer|Color Balance...')`
 
- - **new Black and White layer**  `user.menu_select('Layer|New Adjustment Layer|Black and White')`
+ - **new Black and White layer**  `user.menu_select('Layer|New Adjustment Layer|Black & White...')`
 
  - **new Photo Filter layer**  `user.menu_select('Layer|New Adjustment Layer|Photo Filter...')`
 
  - **new Channel Mixer layer**  `user.menu_select('Layer|New Adjustment Layer|Channel Mixer...')`
 
- - **new (Lookup color | Color Lookup) layer**  `user.menu_select('Layer|New Adjustment Layer|(Lookup color | Color Lookup)')`
+ - **new (Lookup color | Color Lookup) layer**  `user.menu_select('Layer|New Adjustment Layer|Color Lookup...')`
 
  - **new Invert layer**  `user.menu_select('Layer|New Adjustment Layer|Invert')`
 
@@ -8189,33 +9783,43 @@
 
  - **Layer Content Options**  `user.menu_select('Layer|Layer Content Options')`
 
- - **Reveal All**  `user.menu_select('Image|Reveal All')`
+ - **new layer mask Reveal All**  `user.menu_select('Layer|Layer Mask|Reveal All')`
 
- - **Hide All**  `user.menu_select('Layer|Vector Mask|Hide All')`
+ - **new layer mask Hide All**  `user.menu_select('Layer|Layer Mask|Hide All')`
 
- - **Reveal Selection**  `user.menu_select('Layer|Layer Mask|Reveal Selection')`
+ - **new layer mask Reveal Selection**  `user.menu_select('Layer|Layer Mask|Reveal Selection')`
 
- - **Hide Selection**  `user.menu_select('Layer|Layer Mask|Hide Selection')`
+ - **new layer mask Hide Selection**  `user.menu_select('Layer|Layer Mask|Hide Selection')`
 
- - **From Transparency**  `user.menu_select('Layer|Layer Mask|From Transparency')`
+ - **new layer mask From Transparency**  `user.menu_select('Layer|Layer Mask|From Transparency')`
 
- - **Delete**  `user.menu_select('Layer|Vector Mask|Delete')`
+ - **Delete layer mask**  `user.menu_select('Layer|Layer Mask|Delete')`
 
- - **Apply**  `user.menu_select('Layer|Layer Mask|Apply')`
+ - **Apply layer mask**  `user.menu_select('Layer|Layer Mask|Apply')`
 
- - **Enable**  `user.menu_select('Layer|Vector Mask|Enable')`
+ - **(enable | disable) layer mask**  `user.menu_select('Layer|Layer Mask|Enable')`
 
- - **Link**  `user.menu_select('Layer|Vector Mask|Link')`
+ - **(link | unlink) layer mask**  `user.menu_select('Layer|Layer Mask|Link')`
 
- - **Current Path**  `user.menu_select('Layer|Vector Mask|Current Path')`
+ - **New vector mask Reveal All**  `user.menu_select('Layer|Vector Mask|Reveal All')`
 
- - **Create Clipping Mask**  `user.menu_select('Layer|Create Clipping Mask')`
+ - **New vector mask Hide All**  `user.menu_select('Layer|Vector Mask|Hide All')`
+
+ - **New vector mask [from] Current Path**  `user.menu_select('Layer|Vector Mask|Current Path')`
+
+ - **Delete vector mask**  `user.menu_select('Layer|Vector Mask|Delete')`
+
+ - **(enable | disable) vector mask**  `user.menu_select('Layer|Vector Mask|Enable')`
+
+ - **(link | unlink) vector mask**  `user.menu_select('Layer|Vector Mask|Link')`
+
+ - **[(Create | make)] Clipping Mask**  `user.menu_select('Layer|Create Clipping Mask')`
 
  - **Mask All Obiects**  `user.menu_select('Layer|Mask All Obiects')`
 
- - **(Convert to | make) Smart Object**  `user.menu_select('Layer|Smart Objects|(Convert to | make) Smart Object')`
+ - **(Convert to | make) Smart Object**  `user.menu_select('Layer|Smart Objects|Convert to Smart Object')`
 
- - **copy to Smart Object**  `user.menu_select('Layer|Smart Objects|copy to Smart Object')`
+ - **copy to Smart Object**  `user.menu_select('Layer|Smart Objects|New Smart Object via Copy')`
 
  - **Reveal in Finder**  `user.menu_select('Layer|Smart Objects|Reveal in Finder')`
 
@@ -8245,7 +9849,7 @@
 
  - **Stack Mode**  `user.menu_select('Layer|Smart Objects|Stack Mode')`
 
- - **rasterize [layer]**  `user.menu_select('Layer|Smart Objects|rasterize [layer]')`
+ - **rasterize [layer]**  `user.menu_select('Layer|Smart Objects|Rasterize')`
 
  - **Video Layers**  `user.menu_select('Layer|Video Layers')`
 
@@ -8269,7 +9873,7 @@
 
  - **(rasterize | raster | pixelate) All Layers**  `user.menu_select('Layer|Rasterize|All Layers')`
 
- - **new layer slice**  `user.menu_select('Layer|new layer slice')`
+ - **new layer slice**  `user.menu_select('Layer|New Layer Based Slice')`
 
  - **Group Layers**  `user.menu_select('Layer|Group Layers')`
 
@@ -8277,21 +9881,23 @@
 
  - **Hide Layers**  `user.menu_select('Layer|Hide Layers')`
 
- - **(Bring | send) [to] (Front | top)**  `user.menu_select('Layer|Arrange|(Bring | send) [to] (Front | top)')`
+ - **(Bring | send) to (Front | top)**  `user.menu_select('Layer|Arrange|Bring to Front')`
 
- - **send (back | backward)**  `user.menu_select('Layer|Arrange|send (back | backward) ')`
+ - **(Bring | send) (forward | up)**  `user.menu_select('Layer|Arrange|Bring Forward')`
 
- - **send [to] (back | bottom)**  `user.menu_select('Layer|Arrange|send [to] (back | bottom)')`
+ - **send (back | backward | down)**  `user.menu_select('Layer|Arrange|Send Backward')`
 
- - **reverse (layer | layers) [order]**  `user.menu_select('Layer|Arrange|reverse (layer | layers) [order]')`
+ - **send to (back | bottom)**  `user.menu_select('Layer|Arrange|Send to Back')`
+
+ - **reverse (layer | layers) [order]**  `user.menu_select('Layer|Arrange|Reverse')`
 
  - **Unite Shapes**  `user.menu_select('Layer|Combine Shapes|Unite Shapes')`
 
  - **Subtract Front Shape**  `user.menu_select('Layer|Combine Shapes|Subtract Front Shape')`
 
- - **Unite Shapes [at] Overlap**  `user.menu_select('Layer|Combine Shapes|Unite Shapes [at] Overlap')`
+ - **Unite Shapes [at] Overlap**  `user.menu_select('Layer|Combine Shapes|Unite Shapes at Overlap')`
 
- - **Subtract Shapes [at] Overlap**  `user.menu_select('Layer|Combine Shapes|Subtract Shapes [at] Overlap')`
+ - **Subtract Shapes [at] Overlap**  `user.menu_select('Layer|Combine Shapes|Subtract Shapes at Overlap')`
 
  - **Align Top Edges**  `user.menu_select('Layer|Align|Top Edges')`
 
@@ -8343,6 +9949,108 @@
 
  - **Remove White Matte**  `user.menu_select('Layer|Matting|Remove White Matte')`
 
+ - **More from Adobe Fonts**  `user.menu_select('Type|More from Adobe Fonts...')`
+
+ - **Character Panel**  `user.menu_select('Type|Panels|Character Panel')`
+
+ - **Paragraph Panel**  `user.menu_select('Type|Panels|Paragraph Panel')`
+
+ - **Glyphs Panel**  `user.menu_select('Type|Panels|Glyphs Panel')`
+
+ - **Character Styles Panel**  `user.menu_select('Type|Panels|Character Styles Panel')`
+
+ - **Paragraph Styles Panel**  `user.menu_select('Type|Panels|Paragraph Styles Panel')`
+
+ - **[type] anti alias None**  `user.menu_select('Type|Anti-Alias|None')`
+
+ - **[type] anti alias Sharp**  `user.menu_select('Type|Anti-Alias|Sharp')`
+
+ - **[type] anti alias Crisp**  `user.menu_select('Type|Anti-Alias|Crisp')`
+
+ - **[type] anti alias Strong**  `user.menu_select('Type|Anti-Alias|Strong')`
+
+ - **[type] anti alias Smooth**  `user.menu_select('Type|Anti-Alias|Smooth')`
+
+ - **[type] anti alias Mac LCD**  `user.menu_select('Type|Anti-Alias|Mac LCD')`
+
+ - **[type] anti alias Mac**  `user.menu_select('Type|Anti-Alias|Mac')`
+
+ - **type Horizontal**  `user.menu_select('Type|Orientation|Horizontal')`
+
+ - **type Vertical**  `user.menu_select('Type|Orientation|Vertical')`
+
+ - **open type Standard Ligatures**  `user.menu_select('Type|OpenType|Standard Ligatures')`
+
+ - **open type Contextual Alternates**  `user.menu_select('Type|OpenType|Contextual Alternates')`
+
+ - **open type Discretionary Ligatures**  `user.menu_select('Type|OpenType|Discretionary Ligatures')`
+
+ - **open type Swash**  `user.menu_select('Type|OpenType|Swash')`
+
+ - **open type Oldstyle**  `user.menu_select('Type|OpenType|Oldstyle')`
+
+ - **open type Stylistic Alternates**  `user.menu_select('Type|OpenType|Stylistic Alternates')`
+
+ - **open type Titling Alternates**  `user.menu_select('Type|OpenType|Titling Alternates')`
+
+ - **open type Ornaments**  `user.menu_select('Type|OpenType|Ornaments')`
+
+ - **open type Ordinals**  `user.menu_select('Type|OpenType|Ordinals')`
+
+ - **open type Fractions**  `user.menu_select('Type|OpenType|Fractions')`
+
+ - **open type Justification Alternates**  `user.menu_select('Type|OpenType|Justification Alternates')`
+
+ - **open type Japanese 78**  `user.menu_select('Type|OpenType|Japanese 78')`
+
+ - **open type Japanese Expert**  `user.menu_select('Type|OpenType|Japanese Expert')`
+
+ - **open type Japanese Traditional**  `user.menu_select('Type|OpenType|Japanese Traditional')`
+
+ - **open type Proportional Metrics**  `user.menu_select('Type|OpenType|Proportional Metrics')`
+
+ - **open type Kana**  `user.menu_select('Type|OpenType|Kana')`
+
+ - **open type Roman Italics**  `user.menu_select('Type|OpenType|Roman Italics')`
+
+ - **Extrude to 3D**  `user.menu_select('Type|Extrude to 3D')`
+
+ - **type Create Work Path**  `user.menu_select('Type|Create Work Path')`
+
+ - **type Convert to Shape**  `user.menu_select('Type|Convert to Shape')`
+
+ - **Rasterize Type Layer**  `user.menu_select('Type|Rasterize Type Layer')`
+
+ - **Convert to Paragraph Text**  `user.menu_select('Type|Convert to Paragraph Text')`
+
+ - **Warp Text**  `user.menu_select('Type|Warp Text...')`
+
+ - **Match Font**  `user.menu_select('Type|Match Font...')`
+
+ - **font preview None**  `user.menu_select('Type|Font Preview Size|None')`
+
+ - **font preview Small**  `user.menu_select('Type|Font Preview Size|Small')`
+
+ - **font preview Medium**  `user.menu_select('Type|Font Preview Size|Medium')`
+
+ - **font preview Large**  `user.menu_select('Type|Font Preview Size|Large')`
+
+ - **font preview Extra Large**  `user.menu_select('Type|Font Preview Size|Extra Large')`
+
+ - **font preview Huge**  `user.menu_select('Type|Font Preview Size|Huge')`
+
+ - **type Language Options**  `user.menu_select('Type|Language Options')`
+
+ - **Update All Text Layers**  `user.menu_select('Type|Update All Text Layers')`
+
+ - **Manage Missing Fonts**  `user.menu_select('Type|Manage Missing Fonts')`
+
+ - **Paste Lorem Ipsum**  `user.menu_select('Type|Paste Lorem Ipsum')`
+
+ - **Load Default Type Styles**  `user.menu_select('Type|Load Default Type Styles')`
+
+ - **Save Default Type Styles**  `user.menu_select('Type|Save Default Type Styles')`
+
  - **Last Filter**  `user.menu_select('Filter|Last Filter')`
 
  - **Convert for Smart Filters**  `user.menu_select('Filter|Convert for Smart Filters')`
@@ -8351,11 +10059,11 @@
 
  - **Filter Gallery**  `user.menu_select('Filter|Filter Gallery...')`
 
- - **Adaptive Wide Angle.**  `user.menu_select('Filter|Adaptive Wide Angle.')`
+ - **Wide Angle [filter]**  `user.menu_select('Filter|Adaptive Wide Angle...')`
 
  - **Camera Raw Filter**  `user.menu_select('Filter|Camera Raw Filter...')`
 
- - **Lens Correction**  `user.menu_select('File|Automate|Lens Correction...')`
+ - **Lens Correction**  `user.menu_select('Filter|Lens Correction...')`
 
  - **Liquify**  `user.menu_select('Filter|Liquify...')`
 
@@ -8481,11 +10189,11 @@
 
  - **Wind**  `user.menu_select('Filter|Stylize|Wind...')`
 
- - **Custom**  `user.menu_select('Filter|Other|Custom...')`
+ - **Custom filter**  `user.menu_select('Filter|Other|Custom...')`
 
  - **High Pass**  `user.menu_select('Filter|Other|High Pass...')`
 
- - **HSB/HSL**  `user.menu_select('Filter|Other|HSB/HSL')`
+ - **(hsl | hue saturation lightness)**  `user.menu_select('Filter|Other|HSB/HSL')`
 
  - **Maximum**  `user.menu_select('Filter|Other|Maximum...')`
 
@@ -8493,125 +10201,75 @@
 
  - **Offset**  `user.menu_select('Filter|Other|Offset...')`
 
- - **All**  `user.menu_select('Edit|Purge|All')`
+ - **File New**  `user.menu_select('File|New...')`
 
- - **Deselect**  `user.menu_select('Select|Deselect')`
+ - **File Open**  `user.menu_select('File|Open...')`
 
- - **Reselect**  `user.menu_select('Select|Reselect')`
+ - **File Browse in Bridge**  `user.menu_select('File|Browse in Bridge...')`
 
- - **Inverse**  `user.menu_select('Select|Inverse')`
+ - **File Open as Smart Object**  `user.menu_select('File|Open as Smart Object...')`
 
- - **All Layers**  `user.menu_select('Select|All Layers')`
+ - **File Open Recent**  `user.menu_select('File|Open Recent')`
 
- - **Deselect Layers**  `user.menu_select('Select|Deselect Layers')`
+ - **File Close**  `user.menu_select('File|Close')`
 
- - **Find Layers**  `user.menu_select('Select|Find Layers')`
+ - **File Close All**  `user.menu_select('File|Close All')`
 
- - **Isolate Layers**  `user.menu_select('Select|Isolate Layers')`
+ - **File Close Others**  `user.menu_select('File|Close Others')`
 
- - **Color Range**  `user.menu_select('Select|Color Range...')`
+ - **File Close and Go to Bridge**  `user.menu_select('File|Close and Go to Bridge...')`
 
- - **Focus Area**  `user.menu_select('Select|Focus Area...')`
+ - **File Save**  `user.menu_select('File|Save')`
 
- - **Subject**  `user.menu_select('Select|Subject')`
+ - **File Save As**  `user.menu_select('File|Save As...')`
 
- - **Sky**  `user.menu_select('Select|Sky')`
+ - **File Save a Copy**  `user.menu_select('File|Save a Copy...')`
 
- - **Select and Mask**  `user.menu_select('Select|Select and Mask...')`
+ - **File Revert**  `user.menu_select('File|Revert')`
 
- - **Border**  `user.menu_select('Select|Modify|Border...')`
+ - **File Invite to Edit**  `user.menu_select('File|Invite to Edit...')`
 
- - **Smooth**  `user.menu_select('Select|Modify|Smooth...')`
+ - **File Share for Review NEW**  `user.menu_select('File|Share for Review NEW...')`
 
- - **Expand**  `user.menu_select('Select|Modify|Expand...')`
+ - **Quick Export as PNG**  `user.menu_select('File|Export|Quick Export as PNG')`
 
- - **Contract**  `user.menu_select('Select|Modify|Contract...')`
+ - **Export (as | [for] web [file])**  `user.menu_select('File|Export|Export As...')`
 
- - **Feather**  `user.menu_select('Select|Modify|Feather...')`
+ - **Export Preferences**  `user.menu_select('File|Export|Export Preferences...')`
 
- - **Grow**  `user.menu_select('Select|Grow')`
+ - **Save for Web [(legacy | classic)]**  `user.menu_select('File|Export|Save for Web (Legacy)...')`
 
- - **Similar**  `user.menu_select('Select|Similar')`
+ - **export Artboards to Files**  `user.menu_select('File|Export|Artboards to Files...')`
 
- - **Transform Selection**  `user.menu_select('Select|Transform Selection')`
+ - **export Artboards to PDF**  `user.menu_select('File|Export|Artboards to PDF...')`
 
- - **Edit in Quick Mask Mode**  `user.menu_select('Select|Edit in Quick Mask Mode')`
+ - **Export For Aero**  `user.menu_select('File|Export|Export For Aero...')`
 
- - **Load Selection**  `user.menu_select('Select|Load Selection...')`
+ - **Layer Comps to Files**  `user.menu_select('File|Export|Layer Comps to Files...')`
 
- - **Save Selection**  `user.menu_select('Select|Save Selection...')`
+ - **Layer Comps to PDF**  `user.menu_select('File|Export|Layer Comps to PDF...')`
 
- - **New 3D Extrusion**  `user.menu_select('Select|New 3D Extrusion')`
+ - **[export] Layers to Files**  `user.menu_select('File|Export|Layers to Files...')`
 
- - **New**  `user.menu_select('File|New...')`
+ - **export Color Lookup Tables**  `user.menu_select('File|Export|Color Lookup Tables...')`
 
- - **Open**  `user.menu_select('File|Open...')`
+ - **Data Sets as Files**  `user.menu_select('File|Export|Data Sets as Files...')`
 
- - **Browse in Bridge**  `user.menu_select('File|Browse in Bridge...')`
+ - **[export] Paths to Illustrator**  `user.menu_select('File|Export|Paths to Illustrator...')`
 
- - **Open as Smart Object**  `user.menu_select('File|Open as Smart Object...')`
+ - **Render Video**  `user.menu_select('File|Export|Render Video...')`
 
- - **Open Recent**  `user.menu_select('File|Open Recent')`
+ - **generate (images | image assets)**  `user.menu_select('File|Generate|Image Assets')`
 
- - **Close**  `user.menu_select('File|Close')`
+ - **File Search Adobe Stock**  `user.menu_select('File|Search Adobe Stock...')`
 
- - **Close All**  `user.menu_select('File|Close All')`
+ - **File Search Adobe Express Templates**  `user.menu_select('File|Search Adobe Express Templates...')`
 
- - **Close Others**  `user.menu_select('File|Close Others')`
+ - **File Place Embedded**  `user.menu_select('File|Place Embedded...')`
 
- - **Close and Go to Bridge**  `user.menu_select('File|Close and Go to Bridge...')`
+ - **File Place Linked**  `user.menu_select('File|Place Linked...')`
 
- - **Save file**  `user.menu_select('File|Save')`
-
- - **save file as**  `user.menu_select('File|save file as')`
-
- - **Save a Copy**  `user.menu_select('File|Save a Copy...')`
-
- - **Revert**  `user.menu_select('File|Revert')`
-
- - **Invite to Edit**  `user.menu_select('File|Invite to Edit...')`
-
- - **Share for Review NEW**  `user.menu_select('File|Share for Review NEW...')`
-
- - **Export Quick Export as PNG**  `user.menu_select('File|Export|Quick Export as PNG')`
-
- - **Export Export [as]**  `user.menu_select('File|Export|Export [as]')`
-
- - **Export Export Preferences**  `user.menu_select('File|Export|Export Preferences...')`
-
- - **Export Save for Web**  `user.menu_select('File|Export|Save for Web')`
-
- - **Export Artboards to Files**  `user.menu_select('File|Export|Artboards to Files...')`
-
- - **Export Artboards to PDF**  `user.menu_select('File|Export|Artboards to PDF...')`
-
- - **Export Export For Aero**  `user.menu_select('File|Export|Export For Aero...')`
-
- - **Export Layer Comps to Files**  `user.menu_select('File|Export|Layer Comps to Files...')`
-
- - **Export Layer Comps to PDF**  `user.menu_select('File|Export|Layer Comps to PDF...')`
-
- - **Export Layers to Files**  `user.menu_select('File|Export|Layers to Files...')`
-
- - **Export Color Lookup Tables**  `user.menu_select('File|Export|Color Lookup Tables...')`
-
- - **Export Data Sets as Files**  `user.menu_select('File|Export|Data Sets as Files...')`
-
- - **Export Paths to Illustrator**  `user.menu_select('File|Export|Paths to Illustrator...')`
-
- - **Export Render Video**  `user.menu_select('File|Export|Render Video...')`
-
- - **Image Assets**  `user.menu_select('File|Generate|Image Assets')`
-
- - **Search Adobe Stock**  `user.menu_select('File|Search Adobe Stock...')`
-
- - **Search Adobe Express Templates**  `user.menu_select('File|Search Adobe Express Templates...')`
-
- - **Place Embedded**  `user.menu_select('File|Place Embedded...')`
-
- - **Place Linked**  `user.menu_select('File|Place Linked...')`
-
- - **Package**  `user.menu_select('File|Package...')`
+ - **File Package**  `user.menu_select('File|Package...')`
 
  - **Batch**  `user.menu_select('File|Automate|Batch...')`
 
@@ -8626,6 +10284,8 @@
  - **Conditional Mode Change**  `user.menu_select('File|Automate|Conditional Mode Change...')`
 
  - **Fit Image**  `user.menu_select('File|Automate|Fit Image...')`
+
+ - **Lens Correction Script**  `user.menu_select('File|Automate|Lens Correction...')`
 
  - **Merge to HDR Pro**  `user.menu_select('File|Automate|Merge to HDR Pro...')`
 
@@ -8659,31 +10319,19 @@
 
  - **[M] Toggle locks 1.0**  `user.menu_select('File|Scripts|[M] Toggle locks 1.0')`
 
- - **[M] Transform with style 1.1**  `user.menu_select('File|Scripts|[M] Transform with style 1.1')`
+ - **transform with style**  `user.menu_select('File|Scripts|[M] Transform with style 1.1')`
 
- - **[M] Undeform 1.1**  `user.menu_select('File|Scripts|[M] Undeform 1.1')`
+ - **(undeform | un deform | remove transformation)**  `user.menu_select('File|Scripts|[M] Undeform 1.1')`
 
- - **[M] Unsmart 2.1.3**  `user.menu_select('File|Scripts|[M] Unsmart 2.1.3')`
-
- - **Script Events Manager**  `user.menu_select('File|Scripts|Script Events Manager...')`
+ - **unsmart | un smart | remove smart object**  `user.menu_select('File|Scripts|[M] Unsmart 2.1.3')`
 
  - **Load Files into Stack**  `user.menu_select('File|Scripts|Load Files into Stack...')`
 
- - **Load Multiple DICOM Files**  `user.menu_select('File|Scripts|Load Multiple DICOM Files...')`
+ - **Script statistics**  `user.menu_select('File|Scripts|Statistics...')`
 
- - **Statistics**  `user.menu_select('File|Scripts|Statistics...')`
+ - **Browse scripts**  `user.menu_select('File|Scripts|Browse...')`
 
- - **Browse**  `user.menu_select('File|Scripts|Browse...')`
-
- - **Variable Data Sets..**  `user.menu_select('File|Import|Variable Data Sets..')`
-
- - **Video Frames to Layers**  `user.menu_select('File|Import|Video Frames to Layers...')`
-
- - **Images from Device**  `user.menu_select('File|Import|Images from Device...')`
-
- - **Notes**  `user.menu_select('File|Import|Notes...')`
-
- - **insert from iphone from iphone**  `user.menu_select('File|Insert from iPhone|insert from iphone')`
+ - **insert from iphone**  `user.menu_select('File|Insert from iPhone|iPhone (2)')`
 
  - **Take Photo from iphone**  `user.menu_select('File|Insert from iPhone|Take Photo')`
 
@@ -8691,13 +10339,59 @@
 
  - **Add Sketch from iphone**  `user.menu_select('File|Insert from iPhone|Add Sketch')`
 
- - **File Info**  `user.menu_select('File|File Info...')`
+ - **File File Info**  `user.menu_select('File|File Info...')`
 
- - **Version History**  `user.menu_select('File|Version History')`
+ - **File Print One Copy**  `user.menu_select('File|Print One Copy')`
 
- - **Print**  `user.menu_select('File|Print...')`
+ - **Select All**  `user.menu_select('Select|All')`
 
- - **Print One Copy**  `user.menu_select('File|Print One Copy')`
+ - **Deselect**  `user.menu_select('Select|Deselect')`
+
+ - **Reselect**  `user.menu_select('Select|Reselect')`
+
+ - **Inverse**  `user.menu_select('Select|Inverse')`
+
+ - **Select All Layers**  `user.menu_select('Select|All Layers')`
+
+ - **Deselect Layers**  `user.menu_select('Select|Deselect Layers')`
+
+ - **Find Layers**  `user.menu_select('Select|Find Layers')`
+
+ - **Isolate Layers**  `user.menu_select('Select|Isolate Layers')`
+
+ - **Select Color Range**  `user.menu_select('Select|Color Range...')`
+
+ - **Focus Area**  `user.menu_select('Select|Focus Area...')`
+
+ - **Select Subject**  `user.menu_select('Select|Subject')`
+
+ - **Select Sky**  `user.menu_select('Select|Sky')`
+
+ - **Select and Mask**  `user.menu_select('Select|Select and Mask...')`
+
+ - **Border Selection**  `user.menu_select('Select|Modify|Border...')`
+
+ - **Smooth Selection**  `user.menu_select('Select|Modify|Smooth...')`
+
+ - **Expand Selection**  `user.menu_select('Select|Modify|Expand...')`
+
+ - **Contract Selection**  `user.menu_select('Select|Modify|Contract...')`
+
+ - **Feather Selection**  `user.menu_select('Select|Modify|Feather...')`
+
+ - **Grow Selection**  `user.menu_select('Select|Grow')`
+
+ - **Select Similar**  `user.menu_select('Select|Similar')`
+
+ - **Transform Selection**  `user.menu_select('Select|Transform Selection')`
+
+ - **Edit [in] Quick Mask**  `user.menu_select('Select|Edit in Quick Mask Mode')`
+
+ - **Load Selection**  `user.menu_select('Select|Load Selection...')`
+
+ - **Save Selection**  `user.menu_select('Select|Save Selection...')`
+
+ - **New 3D Extrusion**  `user.menu_select('Select|New 3D Extrusion')`
 
  - **Proof Setup**  `user.menu_select('View|Proof Setup')`
 
@@ -8721,13 +10415,15 @@
 
  - **Fit Artboard on Screen**  `user.menu_select('View|Fit Artboard on Screen')`
 
- - **zoom 200**  `user.menu_select('View|zoom 200')`
+ - **(zoom 100 | reset zoom | default zoom | zoom default)**  `user.menu_select('View|100%')`
+
+ - **zoom 200**  `user.menu_select('View|200%')`
 
  - **Print Size**  `user.menu_select('View|Print Size')`
 
  - **Actual Size**  `user.menu_select('View|Actual Size')`
 
- - **Flip Horizontal**  `user.menu_select('View|Flip Horizontal')`
+ - **flip view horizontal**  `user.menu_select('View|Flip Horizontal')`
 
  - **Pattern Preview**  `user.menu_select('View|Pattern Preview')`
 
@@ -8737,57 +10433,57 @@
 
  - **Full Screen Mode**  `user.menu_select('View|Screen Mode|Full Screen Mode')`
 
- - **toggle Extras**  `user.menu_select('View|Extras')`
+ - **(toggle | show | hide) Extras**  `user.menu_select('View|Extras')`
 
- - **toggle Layer Edges**  `user.menu_select('View|Show|Layer Edges')`
+ - **(toggle | show | hide) Layer Edges**  `user.menu_select('View|Show|Layer Edges')`
 
- - **toggle Selection Edges**  `user.menu_select('View|Show|Selection Edges')`
+ - **(toggle | show | hide) Selection Edges**  `user.menu_select('View|Show|Selection Edges')`
 
- - **toggle Target Path**  `user.menu_select('View|Show|Target Path')`
+ - **(toggle | show | hide) Target Path**  `user.menu_select('View|Show|Target Path')`
 
- - **toggle Grid**  `user.menu_select('View|Show|Grid')`
+ - **(toggle | show | hide) Grid**  `user.menu_select('View|Show|Grid')`
 
- - **toggle Guides**  `user.menu_select('View|Show|Guides')`
+ - **(toggle | show | hide) Guides**  `user.menu_select('View|Show|Guides')`
 
- - **toggle Canvas Guides**  `user.menu_select('View|Show|Canvas Guides')`
+ - **(toggle | show | hide) Canvas Guides**  `user.menu_select('View|Show|Canvas Guides')`
 
- - **toggle Artboard Guides**  `user.menu_select('View|Show|Artboard Guides')`
+ - **(toggle | show | hide) Artboard Guides**  `user.menu_select('View|Show|Artboard Guides')`
 
- - **toggle Artboard Names**  `user.menu_select('View|Show|Artboard Names')`
+ - **(toggle | show | hide) Artboard Names**  `user.menu_select('View|Show|Artboard Names')`
 
- - **toggle Count**  `user.menu_select('View|Show|Count')`
+ - **(toggle | show | hide) Count**  `user.menu_select('View|Show|Count')`
 
- - **toggle Smart Guides**  `user.menu_select('View|Show|Smart Guides')`
+ - **(toggle | show | hide) Smart Guides**  `user.menu_select('View|Show|Smart Guides')`
 
- - **toggle Slices**  `user.menu_select('View|Show|Slices')`
+ - **(toggle | show | hide) Slices**  `user.menu_select('View|Show|Slices')`
 
- - **toggle Notes**  `user.menu_select('View|Show|Notes')`
+ - **(toggle | show | hide) Notes**  `user.menu_select('View|Show|Notes')`
 
- - **toggle Pixel Grid**  `user.menu_select('View|Show|Pixel Grid')`
+ - **(toggle | show | hide) Pixel Grid**  `user.menu_select('View|Show|Pixel Grid')`
 
- - **toggle Pattern Preview Tile Bounds**  `user.menu_select('View|Show|Pattern Preview Tile Bounds')`
+ - **(toggle | show | hide) Pattern Preview Tile Bounds**  `user.menu_select('View|Show|Pattern Preview Tile Bounds')`
 
- - **toggle 3D Secondary View**  `user.menu_select('View|Show|3D Secondary View')`
+ - **(toggle | show | hide) 3D Secondary View**  `user.menu_select('View|Show|3D Secondary View')`
 
- - **toggle 3D Ground Plane**  `user.menu_select('View|Show|3D Ground Plane')`
+ - **(toggle | show | hide) 3D Ground Plane**  `user.menu_select('View|Show|3D Ground Plane')`
 
- - **toggle 3D Lights**  `user.menu_select('View|Show|3D Lights')`
+ - **(toggle | show | hide) 3D Lights**  `user.menu_select('View|Show|3D Lights')`
 
- - **toggle 3D Selection**  `user.menu_select('View|Show|3D Selection')`
+ - **(toggle | show | hide) 3D Selection**  `user.menu_select('View|Show|3D Selection')`
 
- - **toggle UV Overlay**  `user.menu_select('View|Show|UV Overlay')`
+ - **(toggle | show | hide) UV Overlay**  `user.menu_select('View|Show|UV Overlay')`
 
- - **toggle 3D Mesh Bounding Box**  `user.menu_select('View|Show|3D Mesh Bounding Box')`
+ - **(toggle | show | hide) 3D Mesh Bounding Box**  `user.menu_select('View|Show|3D Mesh Bounding Box')`
 
- - **toggle Mesh**  `user.menu_select('View|Show|Mesh')`
+ - **(toggle | show | hide) Mesh**  `user.menu_select('View|Show|Mesh')`
 
- - **toggle Edit Pins**  `user.menu_select('View|Show|Edit Pins')`
+ - **(toggle | show | hide) Edit Pins**  `user.menu_select('View|Show|Edit Pins')`
 
- - **toggle All**  `user.menu_select('View|Show|All')`
+ - **(toggle | show | hide) All**  `user.menu_select('View|Show|All')`
 
- - **toggle None**  `user.menu_select('View|Show|None')`
+ - **(toggle | show | hide) None**  `user.menu_select('View|Show|None')`
 
- - **toggle Show Extras Options**  `user.menu_select('View|Show|Show Extras Options...')`
+ - **(toggle | show | hide) Show Extras Options**  `user.menu_select('View|Show|Show Extras Options...')`
 
  - **View Rulers**  `user.menu_select('View|Rulers')`
 
@@ -8835,7 +10531,7 @@
 
  - **Redo**  `user.menu_select('Edit|Redo')`
 
- - **Toggle Last State**  `user.menu_select('Edit|Toggle Last State')`
+ - **[(Toggle | swap)] Last [State]**  `user.menu_select('Edit|Toggle Last State')`
 
  - **Fade**  `user.menu_select('Edit|Fade...')`
 
@@ -8847,7 +10543,7 @@
 
  - **Paste**  `user.menu_select('Edit|Paste')`
 
- - **Paste without Formatting**  `user.menu_select('Edit|Paste Special|Paste without Formatting')`
+ - **Paste raw**  `user.menu_select('Edit|Paste Special|Paste without Formatting')`
 
  - **Paste in Place**  `user.menu_select('Edit|Paste Special|Paste in Place')`
 
@@ -8861,21 +10557,23 @@
 
  - **Check Spelling**  `user.menu_select('Edit|Check Spelling...')`
 
- - **Find and Replace Text**  `user.menu_select('Edit|Find and Replace Text...')`
+ - **[Find and] Replace Text**  `user.menu_select('Edit|Find and Replace Text...')`
 
  - **Stroke**  `user.menu_select('Edit|Stroke...')`
 
- - **Content-Aware**  `user.menu_select('Edit|Content-Aware ...')`
+ - **Content Aware Fill**  `user.menu_select('Edit|Content-Aware Fill...')`
 
- - **Generative**  `user.menu_select('Edit|Generative ...')`
+ - **Generative Fill**  `user.menu_select('Edit|Generative Fill...')`
 
- - **Content-Aware Scale**  `user.menu_select('Edit|Content-Aware Scale')`
+ - **Content Aware Scale**  `user.menu_select('Edit|Content-Aware Scale')`
 
  - **Puppet Warp**  `user.menu_select('Edit|Puppet Warp')`
 
  - **Perspective Warp**  `user.menu_select('Edit|Perspective Warp')`
 
- - **( transform | free transform)**  `user.menu_select('Edit|( transform | free transform)')`
+ - **( transform | free transform)**  `user.menu_select('Edit|Free Transform')`
+
+ - **[free] transform path**  `user.menu_select('Edit|Free Transform Path')`
 
  - **[transform] Again**  `user.menu_select('Edit|Transform|Again')`
 
@@ -8891,9 +10589,9 @@
 
  - **[transform] Warp**  `user.menu_select('Edit|Transform|Warp')`
 
- - **[transform] Split Warp Horizontally**  `user.menu_select('Edit|Transform|Split Warp Horizontally')`
+ - **[transform] Split Warp (Horizontally | horizontal)**  `user.menu_select('Edit|Transform|Split Warp Horizontally')`
 
- - **[transform] Split Warp Vertically**  `user.menu_select('Edit|Transform|Split Warp Vertically')`
+ - **[transform] Split Warp (Vertically | vertical)**  `user.menu_select('Edit|Transform|Split Warp Vertically')`
 
  - **[transform] Split Warp Crosswise**  `user.menu_select('Edit|Transform|Split Warp Crosswise')`
 
@@ -8903,21 +10601,21 @@
 
  - **[transform] Toggle Guides**  `user.menu_select('Edit|Transform|Toggle Guides')`
 
- - **[transform] Rotate 180°**  `user.menu_select('Edit|Transform|Rotate 180°')`
+ - **[transform] Rotate one eighty**  `user.menu_select('Edit|Transform|Rotate 180°')`
 
- - **[transform] Rotate 90**  `user.menu_select('Edit|Transform|Rotate 90')`
+ - **[transform] Rotate Ninety**  `user.menu_select('Edit|Transform|Rotate 90° Clockwise')`
 
- - **[transform] Rotate 90 Counter**  `user.menu_select('Edit|Transform|Rotate 90 Counter')`
+ - **[transform] Rotate Ninety Counter**  `user.menu_select('Edit|Transform|Rotate 90° Counter Clockwise')`
 
- - **[transform] Flip Horizontal**  `user.menu_select('Edit|Transform|Flip Horizontal')`
+ - **[transform] (flip | the) horizontal**  `user.menu_select('Edit|Transform|Flip Horizontal')`
 
  - **[transform] Flip Vertical**  `user.menu_select('Edit|Transform|Flip Vertical')`
 
- - **Auto-Align Layers**  `user.menu_select('Edit|Auto-Align Layers...')`
+ - **Auto Align Layers**  `user.menu_select('Edit|Auto-Align Layers...')`
 
- - **Auto-Blend Layers**  `user.menu_select('Edit|Auto-Blend Layers...')`
+ - **Auto Blend Layers**  `user.menu_select('Edit|Auto-Blend Layers...')`
 
- - **Sky Replacement**  `user.menu_select('Edit|Sky Replacement...')`
+ - **replace sky**  `user.menu_select('Edit|Sky Replacement...')`
 
  - **Define Brush Preset**  `user.menu_select('Edit|Define Brush Preset...')`
 
@@ -8925,11 +10623,13 @@
 
  - **Define Custom Shape**  `user.menu_select('Edit|Define Custom Shape...')`
 
- - **Clipboard**  `user.menu_select('Edit|Purge|Clipboard')`
+ - **Purge Clipboard**  `user.menu_select('Edit|Purge|Clipboard')`
 
- - **Histories**  `user.menu_select('Edit|Purge|Histories')`
+ - **Purge Histories**  `user.menu_select('Edit|Purge|Histories')`
 
- - **Video Cache**  `user.menu_select('Edit|Purge|Video Cache')`
+ - **Purge All**  `user.menu_select('Edit|Purge|All')`
+
+ - **Purge Video Cache**  `user.menu_select('Edit|Purge|Video Cache')`
 
  - **Adobe PDF Presets**  `user.menu_select('Edit|Adobe PDF Presets...')`
 
@@ -8937,19 +10637,19 @@
 
  - **Migrate Presets**  `user.menu_select('Edit|Presets|Migrate Presets')`
 
- - **Export/Import Presets**  `user.menu_select('Edit|Presets|Export/Import Presets...')`
+ - **(Export | Import) Presets**  `user.menu_select('Edit|Presets|Export/Import Presets...')`
 
- - **Remote Connections**  `user.menu_select('Edit|Remote Connections...')`
+ - **Remote Connection settings**  `user.menu_select('Edit|Remote Connections...')`
 
- - **Color Settings**  `user.menu_select('Edit|Color Settings...')`
+ - **[edit] Color Settings**  `user.menu_select('Edit|Color Settings...')`
 
  - **Convert to Profile**  `user.menu_select('Edit|Convert to Profile...')`
 
- - **Keyboard Shortcuts**  `user.menu_select('Edit|Keyboard Shortcuts...')`
+ - **[edit] Keyboard Shortcuts**  `user.menu_select('Edit|Keyboard Shortcuts...')`
 
- - **Menus**  `user.menu_select('Edit|Menus...')`
+ - **edit Menus**  `user.menu_select('Edit|Menus...')`
 
- - **Toolbar**  `user.menu_select('Edit|Toolbar...')`
+ - **edit Toolbar**  `user.menu_select('Edit|Toolbar...')`
 
  - **Start Dictation**  `user.menu_select('Edit|Start Dictation')`
 
@@ -8959,25 +10659,25 @@
 
  - **color mode Duotone**  `user.menu_select('Image|Mode|Duotone')`
 
- - **color mode Indexed**  `user.menu_select('Image|Mode|Indexed')`
+ - **color mode Indexed**  `user.menu_select('Image|Mode|Indexed Color...')`
 
- - **color mode (red green blue | rgb)**  `user.menu_select('Image|Mode|(red green blue | rgb)')`
+ - **color mode (red green blue | rgb)**  `user.menu_select('Image|Mode|RGB Color')`
 
- - **color mode (cmyk | cyan magenta)**  `user.menu_select('Image|Mode|(cmyk | cyan magenta)')`
+ - **color mode (cmyk | cyan magenta)**  `user.menu_select('Image|Mode|CMYK Color')`
 
- - **color mode lab**  `user.menu_select('Image|Mode|lab')`
+ - **color mode lab**  `user.menu_select('Image|Mode|Lab Color')`
 
  - **color mode Multichannel**  `user.menu_select('Image|Mode|Multichannel')`
 
- - **color mode eight bits**  `user.menu_select('Image|Mode|eight bits')`
+ - **color mode eight bits**  `user.menu_select('Image|Mode|8 Bits/Channel')`
 
- - **color mode sixteen bits**  `user.menu_select('Image|Mode|sixteen bits')`
+ - **color mode sixteen bits**  `user.menu_select('Image|Mode|16 Bits Channel')`
 
- - **color mode thirty two bits**  `user.menu_select('Image|Mode|thirty two bits')`
+ - **color mode thirty two bits**  `user.menu_select('Image|Mode|32 Bits/Channel')`
 
  - **Color Table**  `user.menu_select('Image|Mode|Color Table...')`
 
- - **[adjust] (Brightness | Contrast)**  `user.menu_select('Image|Adjustments|(Brightness | Contrast)')`
+ - **[adjust] (Brightness | Contrast)**  `user.menu_select('Image|Adjustments|Brightness/Contrast...')`
 
  - **[adjust] Levels**  `user.menu_select('Image|Adjustments|Levels...')`
 
@@ -8987,17 +10687,17 @@
 
  - **[adjust] Vibrance**  `user.menu_select('Image|Adjustments|Vibrance...')`
 
- - **[adjust] (Hue | Saturation)**  `user.menu_select('Image|Adjustments|(Hue | Saturation)')`
+ - **[adjust] (Hue | Saturation)**  `user.menu_select('Image|Adjustments|Hue Saturation...')`
 
  - **[adjust] Color Balance**  `user.menu_select('Image|Adjustments|Color Balance...')`
 
- - **[adjust] Black and White**  `user.menu_select('Image|Adjustments|Black and White')`
+ - **[adjust] Black and White**  `user.menu_select('Image|Adjustments|Black & White...')`
 
  - **[adjust] Photo Filter**  `user.menu_select('Image|Adjustments|Photo Filter...')`
 
  - **[adjust] Channel Mixer**  `user.menu_select('Image|Adjustments|Channel Mixer...')`
 
- - **[adjust] (Lookup color | Color Lookup)**  `user.menu_select('Image|Adjustments|(Lookup color | Color Lookup)')`
+ - **[adjust] (Lookup color | Color Lookup)**  `user.menu_select('Image|Adjustments|Color Lookup...')`
 
  - **[adjust] Invert**  `user.menu_select('Image|Adjustments|Invert')`
 
@@ -9009,7 +10709,7 @@
 
  - **[adjust] Selective Color**  `user.menu_select('Image|Adjustments|Selective Color...')`
 
- - **[adjust] (Shadows |  Highlights)**  `user.menu_select('Image|Adjustments|(Shadows |  Highlights)')`
+ - **[adjust] (Shadows |  Highlights)**  `user.menu_select('Image|Adjustments|Shadows Highlights...')`
 
  - **[adjust] HDR Toning**  `user.menu_select('Image|Adjustments|HDR Toning...')`
 
@@ -9033,13 +10733,13 @@
 
  - **Canvas Size**  `user.menu_select('Image|Canvas Size...')`
 
- - **rotate image (one eighty [degrees] | half)**  `user.menu_select('Image|Image Rotation|rotate image (one eighty [degrees] | half)')`
+ - **rotate image (one eighty [degrees] | half)**  `user.menu_select('Image|Image Rotation|180°')`
 
- - **rotate image ninety [degrees] [clockwise]**  `user.menu_select('Image|Image Rotation|rotate image ninety [degrees] [clockwise]')`
+ - **rotate image ninety [degrees] [clockwise]**  `user.menu_select('Image|Image Rotation|90° Clockwise')`
 
- - **rotate image ninety [degrees] counter [clockwise]**  `user.menu_select('Image|Image Rotation|rotate image ninety [degrees] counter [clockwise]')`
+ - **rotate image ninety [degrees] counter [clockwise]**  `user.menu_select('Image|Image Rotation|90° Counter Clockwise')`
 
- - **rotate image [ arbitrary]**  `user.menu_select('Image|Image Rotation| rotate image [ arbitrary]')`
+ - **rotate image [ arbitrary]**  `user.menu_select('Image|Image Rotation|Arbitrary...')`
 
  - **Flip Canvas Horizontal**  `user.menu_select('Image|Image Rotation|Flip Canvas Horizontal')`
 
@@ -9049,15 +10749,17 @@
 
  - **Trim**  `user.menu_select('Image|Trim...')`
 
+ - **Reveal All**  `user.menu_select('Image|Reveal All')`
+
  - **Duplicate**  `user.menu_select('Image|Duplicate...')`
 
  - **Apply Image..**  `user.menu_select('Image|Apply Image..')`
 
  - **Calculations**  `user.menu_select('Image|Calculations...')`
 
- - **define variables**  `user.menu_select('Image|Variables|define variables')`
+ - **define variables**  `user.menu_select('Image|Variables|Define...')`
 
- - **[variable] data sets**  `user.menu_select('Image|Variables| [variable] data sets')`
+ - **[variable] data sets**  `user.menu_select('Image|Variables|Data Sets..')`
 
  - **Apply Data Set**  `user.menu_select('Image|Apply Data Set...')`
 
@@ -9075,6 +10777,548 @@
 
  - **Place Scale Marker**  `user.menu_select('Image|Analysis|Place Scale Marker...')`
 
+ - **Workspace ryan1**  `user.menu_select('Window|Workspace|ryan1')`
+
+ - **Workspace rvan2**  `user.menu_select('Window|Workspace|rvan2')`
+
+ - **Workspace Essentials (Default)**  `user.menu_select('Window|Workspace|Essentials (Default)')`
+
+ - **Workspace 3D**  `user.menu_select('Window|Workspace|3D')`
+
+ - **Workspace Motion**  `user.menu_select('Window|Workspace|Motion')`
+
+ - **Workspace Painting**  `user.menu_select('Window|Workspace|Painting')`
+
+ - **Workspace Photography**  `user.menu_select('Window|Workspace|Photography')`
+
+ - **Workspace Graphic and Web**  `user.menu_select('Window|Workspace|Graphic and Web')`
+
+ - **Workspace New Workspace**  `user.menu_select('Window|Workspace|New Workspace...')`
+
+ - **Workspace Delete Workspace**  `user.menu_select('Window|Workspace|Delete Workspace...')`
+
+ - **Workspace Keyboard Shortcuts & Menus**  `user.menu_select('Window|Workspace|Keyboard Shortcuts & Menus...')`
+
+ - **Workspace Lock Workspace**  `user.menu_select('Window|Workspace|Lock Workspace')`
+
+ - **3D**  `user.menu_select('Window|3D')`
+
+ - **Actions [panel]**  `user.menu_select('Window|Actions')`
+
+ - **Adjustments**  `user.menu_select('Window|Adjustments')`
+
+ - **Beta Feedback**  `user.menu_select('Window|Beta Feedback')`
+
+ - **Brush Settings**  `user.menu_select('Window|Brush Settings')`
+
+ - **Brushes [panel]**  `user.menu_select('Window|Brushes')`
+
+ - **Channels**  `user.menu_select('Window|Channels')`
+
+ - **Character**  `user.menu_select('Window|Character')`
+
+ - **Character Styles**  `user.menu_select('Window|Character Styles')`
+
+ - **Clone Source**  `user.menu_select('Window|Clone Source')`
+
+ - **Color [panel]**  `user.menu_select('Window|Color')`
+
+ - **Comments**  `user.menu_select('Window|Comments')`
+
+ - **Content Credentials (Beta)**  `user.menu_select('Window|Content Credentials (Beta)')`
+
+ - **Glyphs**  `user.menu_select('Window|Glyphs')`
+
+ - **Gradients**  `user.menu_select('Window|Gradients')`
+
+ - **Histogram**  `user.menu_select('Window|Histogram')`
+
+ - **History**  `user.menu_select('Window|History')`
+
+ - **Info**  `user.menu_select('Window|Info')`
+
+ - **Layer Comps**  `user.menu_select('Window|Layer Comps')`
+
+ - **Layers**  `user.menu_select('Window|Layers')`
+
+ - **Libraries**  `user.menu_select('Window|Libraries')`
+
+ - **Materials**  `user.menu_select('Window|Materials')`
+
+ - **Measurement Log**  `user.menu_select('Window|Measurement Log')`
+
+ - **Navigator**  `user.menu_select('Window|Navigator')`
+
+ - **Notes**  `user.menu_select('Window|Notes')`
+
+ - **Paragraph**  `user.menu_select('Window|Paragraph')`
+
+ - **Paragraph Styles**  `user.menu_select('Window|Paragraph Styles')`
+
+ - **Paths**  `user.menu_select('Window|Paths')`
+
+ - **Patterns**  `user.menu_select('Window|Patterns')`
+
+ - **Properties**  `user.menu_select('Window|Properties')`
+
+ - **Shapes**  `user.menu_select('Window|Shapes')`
+
+ - **Styles**  `user.menu_select('Window|Styles')`
+
+ - **Swatches**  `user.menu_select('Window|Swatches')`
+
+ - **Timeline**  `user.menu_select('Window|Timeline')`
+
+ - **Tool Presets**  `user.menu_select('Window|Tool Presets')`
+
+ - **Version History**  `user.menu_select('Window|Version History')`
+
+ - **Application Frame**  `user.menu_select('Window|Application Frame')`
+
+ - **Options**  `user.menu_select('Window|Options')`
+
+ - **Tools**  `user.menu_select('Window|Tools')`
+
+ - **Contextual Task Bar**  `user.menu_select('Window|Contextual Task Bar')`
+
+ - **Plugins**  `user.menu_select('Window|Plugins')`
+
+ - **Plugins Panel**  `user.menu_select('Window|Plugins Panel')`
+
+ - **Browse Plugins**  `user.menu_select('Window|Browse Plugins...')`
+
+ - **Manage Plugins..**  `user.menu_select('Window|Manage Plugins..')`
+
+ - **ProStacker**  `user.menu_select('Window|ProStacker|ProStacker')`
+
+
+
+#  photoshop
+
+
+ - **new (file | pane)**  `key(cmd-n)`
+
+ - **open file**  `key(cmd-o)`
+
+ - **close file**  `key(cmd-w)`
+
+ - **open folder**  `key(cmd-shift-o)`
+
+ - **save as**  `key(cmd-shift-s)`
+
+ - **undeform**  `user.menu_select('File|Scripts|[M] Undeform 1.1')`
+
+ - **standard screen mode**  `user.menu_select('View|Screen Mode|Standard Screen Mode')`
+
+ - **zoom fit [on screen]**  `key(cmd-0)`
+
+ - **zoom fit artboard [on screen]**  `user.menu_select('View|Fit Artboard on Screen')`
+
+ - **zoom fit layer [on screen]**  `user.menu_select('View|Fit Layer(s) on Screen')`
+
+ - **zoom (base | 100)**  `key(cmd-1)`
+
+ - **zoom (2 x | 200)**  `user.menu_select('View|200%')`
+
+ - **zoom actual [size]**  `user.menu_select('View|Actual Size')`
+
+ - **(toggle | hide | show) panels**  `key(tab)`
+
+ - **(toggle | hide | show) extras**  `key(cmd-h)`
+
+ - **(toggle | hide | show) layer edges**  `user.menu_select('View|Show|Layer Edges')`
+
+ - **(toggle | hide | show) artboard names**  `user.menu_select('View|Show|Artboard Names')`
+
+ - **(toggle | hide | show) guides**  `user.menu_select('View|Show|Guides')`
+
+ - **(toggle | hide | show)  artboard guides**  `user.menu_select('View|Show|Artboard Guides')`
+
+ - **(toggle | hide | show)  smart guides**  `user.menu_select('View|Show|Smart Guides')`
+
+ - **(toggle | hide | show) grid**  `user.menu_select('View|Show|Grid')`
+
+ - **keyboard shortcuts**  `key(alt-shift-cmd-k)`
+
+ - **deselect**  `key(cmd-d)`
+
+ - **brush [size] down [<user.number_string>]**  `key("[:{number_string or 1}")`
+
+ - **brush [size] up [<user.number_string>]**  `key("]:{number_string or 1}")`
+
+ - **[brush] (hardness | hard) up [<user.number_string>]**  `key("shift-]:{number_string or 1}")
+		`
+
+ - **[brush] (hardness | hard) down [<user.number_string>]**  `key("shift-[:{number_string or 1}")
+		
+		## ++++++++++++++++++++++++++++++ flow .
+		`
+
+ - **[brush] flow <user.number_string> <user.number_string>**  `key("shift-{number_string_1}")
+		key("shift-{number_string_2}")
+		`
+
+ - **[brush] flow single <digits>**  `key(shift:down)
+		key(shift-0)
+		key("shift-{digits}")
+		`
+
+ - **[brush] flow level <user.number_string>**  `key("shift-{number_string}")
+		
+		## +++++++++++++++++++++++++++ opacity .
+		`
+
+ - **[brush] (opacity | transparency | trans | opaque) <user.number_string> <user.number_string>**  `key("{number_string_1}")
+		key("{number_string_2}")
+		`
+
+ - **[brush] (opacity | transparency | trans | opaque) level <user.number_string>**  `key("{number_string}")
+		
+		`
+
+ - **[brush] full (opacity | transparency | trans | opaque)  | brush fully opaque**  `key(0)
+		
+		
+		# ---------------
+		`
+
+ - **new layer**  `key(shift-cmd-n)`
+
+ - **copy layer style**  `key(cmd-ctrl-c)`
+
+ - **paste layer style**  `key(cmd-ctrl-v)`
+
+ - **move [tool]**  `key(v)`
+
+ - **(next | last | prev) move tool**  `key(shift-v)`
+
+ - **move group [tool]**  `key(v)
+		key(shift-f19)
+		`
+
+ - **move layer [tool]**  `key(v)
+		key(shift-cmd-f19)
+		
+		
+		## +++++++++++++++++++++++++ text tool .
+		`
+
+ - **(Text | type) tool**  `key(t:down)`
+
+ - **(show | hide) layer**  `key(cmd-,)`
+
+ - **layer (show | hide)**  `key(cmd-,)`
+
+ - **toggle layer [visibility]**  `key(cmd-,)`
+
+ - **layer (send | move) [to] (back | bottom)**  `key(cmd-shift-[)`
+
+ - **layer (send | move) [to] (front | top)**  `key(cmd-shift-])`
+
+ - **layer (send | move) (up | for | forward) [<digits>]**  `key(cmd-])
+		repeat(digits - 1)`
+
+ - **layer (send | move) (down | back | backwards | backward) [<digits>]**  `key(cmd-[)
+		repeat(digits - 1)
+		
+		## ++++++++++++++++++ gradient overlay .
+		`
+
+ - **gradient overlay**  `key(cmd-alt-shift-ctrl-l)
+		sleep(100ms)
+		insert("gradient overlay")
+		sleep(100ms)
+		key(enter)
+		
+		## +++++++++++++++++++++++ menu search .
+		`
+
+ - **search menu <user.text>**  `key(cmd-alt-shift-ctrl-l)
+		sleep(500ms)
+		insert(text)
+		`
+
+ - **hit menu <user.text>**  `key(cmd-alt-shift-ctrl-l)
+		sleep(100ms)
+		insert(text)
+		sleep(100ms)
+		key(enter)
+		
+		## ++++++++++++++++++++++ layer styles .
+		`
+
+ - **outer glow**  `key(cmd-alt-shift-ctrl-l)
+		sleep(300ms)
+		insert("outer glow")
+		sleep(300ms)
+		key(enter)
+		
+		## +++++++++++++++++++++++ lock layers .
+		`
+
+ - **layer (lock | unlock)**  `key(cmd-/)`
+
+ - **(make | convert to) smart object**  `key(ctrl-f11)`
+
+ - **transform**  `key(cmd-t)`
+
+ - **camera (raw | module)**  `key(shift-cmd-a)`
+
+ - **centered [scale] drag**  `user.mouse_drag(0)
+		# user.grid_close()
+		sleep(2000ms)
+		key("alt:down")
+		`
+
+ - **clone drag**  `key("alt:down")
+		user.mouse_drag(0)
+		# close the mouse grid
+		user.grid_close()
+		`
+
+ - **set [transform] (anchor | origin) [point]**  `key(alt:down)
+		mouse_click(0)
+		
+		## +++++++++++++++++ font manipulation .
+		
+		
+		## ++++++++++++++++++++++++++ tracking .
+		
+		#  # mimic("point tracking")
+		# go tracking:
+		#     mouse_move(914.6171875, 186.5703125)
+		#     sleep(3300ms)
+		#     mouse_click(0)
+		
+		# # mimic("point tracking")
+		# [set] tracking [<user.number_string>]:
+		#     mouse_move(914.6171875, 186.5703125)
+		#     sleep(2500ms)
+		#     mouse_click(0)
+		#     insert(number_string)
+		#     sleep(50ms)
+		#     key(enter)
+		
+		# [set] tracking (negative | neg) [<user.number_string>]:
+		#     mynum = "-" + number_string
+		#     mouse_move(914.6171875, 186.5703125)
+		#     sleep(2500ms)
+		#     mouse_click(0)
+		#     insert(mynum)
+		#     key(enter)
+		
+		## +++++++++++++++++++++++++++++ drags .
+		
+		#doesnt work for dragging transform
+		`
+
+ - **drag copy**  `key(alt:down)
+		user.mouse_drag(0)
+		# # close the mouse grid
+		user.grid_close()
+		`
+
+ - **drag [current] layer**  `key(cmd:down)
+		user.mouse_drag(0)
+		# # close the mouse grid
+		user.grid_close()
+		
+		## +++++++++++++++++++++++ pick colors .
+		`
+
+ - **(modal | mode) color picker**  `key(cmd:down alt:down ctrl:down)
+		# user.mouse_drag(0)
+		`
+
+ - **pick color**  `key(n)`
+
+ - **(choose | take ) color**  `# mouse.click(0)
+		# sleep(100ms)
+		key(enter)
+		`
+
+ - **(default | reset) colors**  `key(d)`
+
+ - **(swap | flip) (colors | color | brush)**  `key(x)`
+
+ - **paint (inside | outside)**  `key(x)`
+
+ - **fill [with] foreground color**  `key(alt-delete)`
+
+ - **fill [with] background color**  `key(cmd-delete)`
+
+ - **invert layer**  `key(cmd-i)`
+
+ - **(swap | flip) masking [brush] [polarity]**  `key(x)`
+
+ - **color black | paint mask | (mask | erase) (pixels | layer)**  `key(d)
+		sleep(100ms)
+		key(x)
+		`
+
+ - **color white | erase mask | (unmask | paint) (pixels | layer)**  `key(d)
+		
+		
+		## +++++++++++++++++++++++++++ confirm .
+		`
+
+ - **okay**  `key(enter)`
+
+ - **(select | go)  layer mask**  `key(cmd-\)`
+
+ - **(toggle | show | hide) quick mask**  `key(q)`
+
+ - **eraser [(tool | to)]**  `key(e)`
+
+ - **zoom [(tool | to)]**  `key(z)`
+
+ - **brush [(tool | to)]**  `key(b)`
+
+ - **(hand | pan) [(tool | to)]**  `key(h)`
+
+ - **hold (hand | pan) | pan mode**  `key(space:down)`
+
+ - **(release | exit) (hand | pan)**  `key(space:up)`
+
+ - **rotate (tool | canvas)**  `key(r)`
+
+ - **(other | next) brush [tool]**  `key(shift-b)`
+
+ - **brush (next | last | prev)**  `key(shift-b)`
+
+ - **rotate [tool]**  `key(r)`
+
+ - **edit text [(here | point)]**  `key(t:down)
+		mouse_click(0)
+		key(t:up)
+		`
+
+ - **take text [(here | point)]**  `key(t:down)
+		sleep(300ms)
+		mouse_click(0)
+		# sleep(300ms)
+		key(t:up)
+		sleep(300ms)
+		key(cmd-a)
+		# edit.select_all()
+		
+		# todo: make past raw`
+
+ - **(paste | pace) text [(here | point)]**  `key(t:down)
+		sleep(300ms)
+		mouse_click(0)
+		# sleep(300ms)
+		key(t:up)
+		sleep(300ms)
+		key(cmd-a)
+		sleep(100ms)
+		key(cmd-v)
+		# edit.select_all()
+		
+		## +++++++++++++++++++++++++++++ inbox .
+		`
+
+ - **Center layer  [on (page | artboard )]**  `key(cmd-a)
+		sleep(100ms)
+		user.menu_select('Layer|Align Layers to Selection|Horizontal Centers')
+		sleep(200ms)
+		key(cmd-d)
+		
+		
+		## ++++++ Clone and rasterize gradient .
+		`
+
+ - **Clone and (raster | rasterize) layer**  `user.menu_select('Layer|Duplicate Layer...')
+		sleep(300ms)
+		key(enter)
+		sleep(300ms)
+		key(cmd-,)
+		sleep(300ms)
+		key(alt-[)
+		user.menu_select('Layer|Rasterize|Layer')
+		
+		## +++++++++++++++++++++ paste helpers .
+		`
+
+ - **[photo] paste color**  `user.zoom_close()
+		mouse_click(0)
+		user.grid_close()
+		user.mouse_drag_end()
+		key(cmd-v enter)
+		`
+
+ - **[photo] copy color**  `user.zoom_close()
+		mouse_click(0)
+		user.grid_close()
+		user.mouse_drag_end()
+		key(cmd-c esc)
+		
+		`
+
+ - **[set] font size <user.number_string>**  `user.ps_command_nb("(set-font-size! {number_string})")
+		`
+
+ - **[set] [font] tracking <user.number_string>**  `user.ps_command_nb("(set-font-tracking! {number_string})")
+		`
+
+ - **(increase [font] tracking  | [font] tracking up) <user.number_string>**  `user.ps_command_nb("(update-font-tracking! {number_string})")
+		`
+
+ - **(decrease [font] tracking  | [font] tracking down) <user.number_string>**  `user.ps_command_nb("(update-font-tracking! -{number_string})")
+		`
+
+ - **rotate clone [<number>]**  `n = number or 1
+		b = n * 4
+		key("alt-shift-.:{b}")
+		
+		`
+
+
+
+#  uxp
+
+
+ - **load plugin**  `key(cmd-l)
+		`
+
+ - **reload plugin**  `key(cmd-alt-r)`
+
+ - **watch plugin**  `key(cmd-alt-w)
+		`
+
+ - **[(run | open)] devtools | debug plugin**  `key(cmd-d)
+		`
+
+ - **(dev | develop) plugin | plugin dev [mode]**  `key(cmd-l)
+		sleep(300ms)
+		key(cmd-alt-w)
+		sleep(300ms)
+		key(cmd-d)
+		sleep(300ms)
+		user.snap_window_to_position("bottom right")
+		`
+
+ - **(dev | develop) plugin zen | plugin dev [mode] zen**  `key(cmd-l)
+		sleep(300ms)
+		key(cmd-alt-w)
+		sleep(300ms)
+		key(cmd-d)
+		sleep(300ms)
+		user.snap_window_to_position("bottom right")
+		key(cmd-ctrl-alt-shift-s)
+		sleep(200ms)
+		insert("adobe uxp developer tools")
+		key(enter)
+		sleep(200ms)
+		user.action_windows("minimize", 1, 0)`
+
+
+
+#  direct clicking
+
+
+ - **<user.rango_target>**  `user.rango_command_with_target("directClickElement", rango_target)`
+
 
 
 #  rango
@@ -9085,13 +11329,20 @@
 		# Focus`
 
  - **focus <user.rango_target>**  `user.rango_command_with_target("focusElement", rango_target)
+		`
+
+ - **go input**  `user.rango_command_without_target("focusFirstInput")
 		
 		# Focus and Enter`
 
  - **flick <user.rango_target>**  `user.rango_command_with_target("focusElement", rango_target)
 		key(enter)
 		
-		# Open in a new tab`
+		# Focus tab`
+
+ - **(go tab | slot) <user.rango_tab_marker>**  `user.rango_command_with_target("activateTab", rango_tab_marker)`
+
+ - **tab marker refresh**  `user.rango_command_without_target("refreshTabMarkers")`
 
  - **blank <user.rango_target>**  `user.rango_command_with_target("openInNewTab", rango_target)`
 
@@ -9108,6 +11359,14 @@
  - **tab split**  `user.rango_command_without_target("moveCurrentTabToNewWindow")`
 
  - **tab back**  `user.rango_command_without_target("focusPreviousTab")`
+
+ - **visit {user.website}**  `user.rango_command_without_target("focusOrCreateTabByUrl", website)`
+
+ - **tab hunt <user.text>**  `user.rango_command_without_target("focusTabByText", text)`
+
+ - **tab ahead**  `user.rango_command_without_target("cycleTabsByText", 1)`
+
+ - **tab behind**  `user.rango_command_without_target("cycleTabsByText", -1)`
 
  - **tab close other**  `user.rango_command_without_target("closeOtherTabsInWindow")`
 
@@ -9214,6 +11473,12 @@
 
  - **center <user.rango_target>**  `user.rango_command_with_target("scrollElementToCenter", rango_target)
 		
+		# Custom scroll positions`
+
+ - **scroll save <user.word>**  `user.rango_command_without_target("storeScrollPosition", word)`
+
+ - **scroll to <user.word>**  `user.rango_command_without_target("scrollToPosition", word)
+		
 		# Copy target information`
 
  - **copy [link] <user.rango_target>**  `user.rango_command_with_target("copyLink", rango_target)`
@@ -9224,23 +11489,13 @@
 		
 		# Paste`
 
- - **paste to <user.rango_target>**  `user.rango_command_with_target("insertToField", rango_target, clip.text())
+ - **paste to <user.rango_target>**  `user.rango_insert_text_to_input(clip.text(), rango_target, 0)
 		
 		# Insert text to field`
 
- - **insert <user.text> to <user.rango_target>**  `user.rango_command_with_target("clickElement", rango_target)
-		sleep(200ms)
-		edit.select_all()
-		edit.delete()
-		insert(text)`
+ - **insert <user.text> to <user.rango_target>**  `user.rango_insert_text_to_input(text, rango_target, 0)`
 
- - **enter <user.text> to <user.rango_target>**  `user.rango_command_with_target("clickElement", rango_target)
-		sleep(200ms)
-		edit.select_all()
-		edit.delete()
-		insert(text)
-		sleep(200ms)
-		key(enter)
+ - **enter <user.text> to <user.rango_target>**  `user.rango_insert_text_to_input(text, rango_target, 1)
 		
 		# Cursor position`
 
@@ -9250,7 +11505,7 @@
 		
 		# Clear field`
 
- - **change <user.rango_target>**  `user.rango_command_with_target("focusAndDeleteContents", rango_target)
+ - **change <user.rango_target>**  `user.rango_clear_input(rango_target)
 		
 		# Copy current url information`
 
@@ -9278,6 +11533,8 @@
 
  - **exclude <user.rango_target>**  `user.rango_command_with_target("excludeExtraSelectors", rango_target)`
 
+ - **exclude all**  `user.rango_command_without_target("excludeAllHints")`
+
  - **some more**  `user.rango_command_without_target("includeOrExcludeMoreSelectors")`
 
  - **some less**  `user.rango_command_without_target("includeOrExcludeLessSelectors")`
@@ -9286,19 +11543,21 @@
 
  - **custom hints reset**  `user.rango_command_without_target("resetCustomSelectors")`
 
- - **hints refresh**  `user.rango_command_without_target("refreshHints")`
+ - **(hints | hence | hats) refresh | refresh hats**  `user.rango_command_without_target("refreshHints")`
 
- - **hints (toggle | switch)**  `user.rango_command_without_target("toggleHints")`
+ - **(hints | hence | hats) (toggle | switch) | toggle hats**  `user.rango_command_without_target("toggleHints")`
 
- - **hints on [{user.rango_hints_toggle_levels}]**  `user.rango_command_without_target("enableHints", rango_hints_toggle_levels or "global")`
+ - **(hints | hence | hats) on | show hats [{user.rango_hints_toggle_levels}]**  `user.rango_command_without_target("enableHints", rango_hints_toggle_levels or "global")`
 
- - **hints off [{user.rango_hints_toggle_levels}]**  `user.rango_command_without_target("disableHints", rango_hints_toggle_levels or "global")`
+ - **(hints | hence | hats) off | hide hats [{user.rango_hints_toggle_levels}]**  `user.rango_command_without_target("disableHints", rango_hints_toggle_levels or "global")`
 
- - **hints reset {user.rango_hints_toggle_levels}**  `user.rango_command_without_target("resetToggleLevel", rango_hints_toggle_levels)`
+ - **(hints | hence | hats) reset {user.rango_hints_toggle_levels}**  `user.rango_command_without_target("resetToggleLevel", rango_hints_toggle_levels)`
 
- - **toggle show**  `user.rango_command_without_target("displayTogglesStatus")
+ - **toggle show | rango status**  `user.rango_command_without_target("displayTogglesStatus")
 		
-		# Toggle keyboard clicking`
+		# Toggle tab markers`
+
+ - **markers (toggle | switch)**  `user.rango_command_without_target("toggleTabMarkers")`
 
  - **keyboard (toggle | switch)**  `user.rango_command_without_target("toggleKeyboardClicking")`
 
@@ -9306,31 +11565,62 @@
 
  - **address in title off**  `user.rango_command_without_target("disableUrlInTitle")`
 
- - **rango explicit**  `user.rango_disable_direct_clicking()`
-
- - **rango direct**  `user.rango_enable_direct_clicking()`
-
  - **rango settings**  `user.rango_command_without_target("openSettingsPage")`
 
  - **rango open {user.rango_page}**  `user.rango_command_without_target("openPageInNewTab", rango_page)`
 
+ - **mark <user.rango_target> as <user.word>**  `user.rango_command_with_target("saveReference", rango_target, word)`
+
+ - **mark show**  `user.rango_command_without_target("showReferences")`
+
+ - **mark clear <user.word>**  `user.rango_command_without_target("removeReference", word)`
+
+ - **click mark <user.word>**  `user.rango_run_action_on_reference("clickElement", word)`
+
+ - **focus mark <user.word>**  `user.rango_run_action_on_reference("focusElement", word)`
+
+ - **hover mark <user.word>**  `user.rango_run_action_on_reference("hoverElement", word)`
+
+ - **rango explicit**  `user.rango_force_explicit_clicking()`
+
+ - **rango direct**  `user.rango_force_direct_clicking()`
 
 
-#  rango direct clicking
+
+#  talon helpers
 
 
- - **<user.rango_target>**  `user.rango_command_with_target("directClickElement", rango_target)`
+ - **click rango mark <user.word>**  `"user.rango_run_action_on_reference(\"clickElement\", \"{word}\")"`
 
- - **<user.rango_hint_double> (twice | second)**  `user.rango_command_with_target("directClickElement", rango_hint_double)`
+ - **focus rango mark <user.word>**  `"user.rango_run_action_on_reference(\"focusElement\", \"{word}\")"`
 
-
-
-#  roam
+ - **hover rango mark <user.word>**  `"user.rango_run_action_on_reference(\"hoverElement\", \"{word}\")"`
 
 
- - **demo open file**  `user.file_manager_open_file("~/Documents/ticket reciept.pdf")`
 
- - **please**  `key(cmd-p)`
+#  roam-web
+
+
+ - **please [<user.text>]**  `key(cmd-p)
+		sleep(200ms)
+		insert(text)
+		
+		## +++++++++++++++++++++ open settings .
+		`
+
+ - **workbench settings**  `key(cmd-p)
+		sleep(200ms)
+		insert("settings workbench")
+		key(enter)
+		`
+
+ - **(tag (icons | icon) | magic (tag | tags)) settings**  `key(cmd-p)
+		sleep(200ms)
+		insert("magic tags")
+		key(enter)
+		
+		#------------------left sidebar
+		`
 
  - **(toggle | hide |  show) ( shortcuts |  (left | l) sidebar | bookmarks)**  `key(cmd-\)`
 
@@ -9339,6 +11629,8 @@
 		insert("wb add shortcut")
 		sleep(100ms)
 		key(enter)
+		
+		#----------------- embed block
 		`
 
  - **embed (block | ref | reference)**  `insert("/embed")
@@ -9349,6 +11641,43 @@
 		edit.paste()
 		sleep(100ms)
 		key(esc)
+		
+		#embed block/page children only
+		
+		#todo: Make versions that queue up we search for the block or or page, rather than pasting it`
+
+ - **embed (block | black | ref | reference) (children | kids)**  `key({:2)
+		insert("embed-children: ")
+		sleep(300ms)
+		edit.paste()
+		sleep(100ms)
+		key(esc)
+		
+		# ----------- block/page mentions
+		`
+
+ - **(paste | embed | insert) (block | black | ref | reference) (mentions | links)**  `key({:2)
+		insert("children-mentions: ")
+		sleep(300ms)
+		edit.paste()
+		sleep(100ms)
+		key(esc)
+		`
+
+ - **(embed | insert) (block | black | ref | reference) (mentions | links) [from] page [<user.text>]**  `key({:2)
+		insert("children-mentions: ")
+		sleep(300ms)
+		key([:2)
+		sleep(100ms)
+		insert(text)
+		`
+
+ - **(embed | insert) (block | black | ref | reference) (mentions | links) [from] block [<user.text>]**  `key({:2)
+		insert("children-mentions: ")
+		sleep(300ms)
+		key((:2)
+		sleep(100ms)
+		insert(text)
 		
 		###-------- alternative implementation
 		# edit.paste()
@@ -9366,25 +11695,22 @@
 		# sleep(300ms)
 		# key(esc)
 		
+		## +++++++++++++++++++++++ Swap blocks .
 		`
 
- - **replace ref with original**  `key(cmd-p)
+ - **(replace | swap) (ref | reference) [with original]**  `key(cmd-p)
 		sleep(100ms)
 		insert("wb replace last reference before cursor with original")
 		sleep(100ms)
-		key(enter)`
+		key(enter)
+		`
 
- - **replace ref with alias**  `key(cmd-p)
+ - **(replace | swap) (ref | reference) [with] alias**  `key(cmd-p)
 		sleep(100ms)
 		insert("wb replace last reference before cursor with text and alias")
 		sleep(100ms)
 		key(enter)
 		
-		`
-
- - **cut block**  `key(esc)
-		sleep(100ms)
-		key(cmd-x)
 		
 		#navigation
 		`
@@ -9412,15 +11738,13 @@
 
  - **go today**  `key(ctrl-shift-d)`
 
+ - **go tomorrow**  `key(ctrl-alt-n)`
+
  - **go next day**  `key(ctrl-alt-n)`
 
- - **go (prev | previous | last) day**  `key(ctrl-alt-p)`
+ - **go (prev | previous | last | yesterday) day**  `key(ctrl-alt-p)`
 
- - **go back**  `key(cmd-[)`
-
- - **go (forward | fore)**  `key(cmd-])`
-
- - **jump link**  `key(ctr-o)`
+ - **jump link**  `key(ctrl-o)`
 
  - **page blocks [panel]**  `key(cmd-shift-p)`
 
@@ -9429,13 +11753,15 @@
 		insert("@")
 		`
 
- - **zoom (block  | down)**  `key(cmd-.)`
+ - **zoom [in] (block  | down)**  `key(cmd-.)`
 
- - **zoom (parent |  up)**  `key(cmd-shift-ctrl-alt-8)`
+ - **zoom  (out block | parent | up)**  `key(cmd-,)`
+
+ - **go parent [block]**  `key(ctrl-alt-u)`
 
  - **deep nav**  `key(alt-g)`
 
- - **(toggle | hide |  show) (sidebar | side bar)**  `key(cmd-/)`
+ - **(toggle | hide |  show | close | open) (sidebar | side bar)**  `key(cmd-/)`
 
  - **(swap with sidebar | swap with main)**  `key(cmd-p)
 		sleep(100ms)
@@ -9466,7 +11792,7 @@
 		key(enter)
 		`
 
- - **clear sidebar**  `key(ctr-l)`
+ - **clear sidebar**  `key(ctrl-l)`
 
  - **open hotkeys**  `key(cmd-p)
 		sleep(100ms)
@@ -9474,10 +11800,20 @@
 		sleep(100ms)
 		key(enter)
 		
-		#search
-		`
+		## +++++++++++++++++++++++++++ roam queries .
+		
+		#native roam query
+		# {{[[query]]: {and: [[ex-A]] {or: [[ex-B]] [[ex-C]]}}}}
+		
+		#query builder`
 
- - **search**  `key(cmd-u)`
+ - **Open query (drawer | builder)**  `key(cmd-shift-ctrl-alt-8)`
+
+ - **search [<user.text>]**  `key(cmd-u)
+		sleep(200ms)
+		insert(text)
+		
+		#traditional page search`
 
  - **search page**  `key(cmd-f)`
 
@@ -9487,48 +11823,73 @@
 
  - **search block refs**  `key(ctrl-shift-9)`
 
- - **Open query builder**  `key(cmd-shift-ctrl-alt-8)`
+ - **search workspace**  `key(ctrl-s)`
 
- - **copy [block] (ref | reference)**  `key (cmd-shift-c)`
+ - **search (whole | entire) graph**  `key(cmd-p)
+		sleep(100ms)
+		insert("wgs")
+		sleep(300ms)
+		key(enter)
+		
+		#search pages block
+		# new search block:
+		#     edit.select_all()
+		#     sleep(100ms)
+		#     key(right)
+		#     key(enter)
+		#     sleep(100ms)
+		#     insert("{{{[[search]]}}}")
+		# sleep(100ms)
+		# key(escape)
+		
+		
+		
+		#roam portal search`
 
- - **(choose | pick) (<digits> | that)**  `key("down:{digits or 1}")
+ - **(go | open | search | toggle | show | hide) portal**  `key(cmd-ctrl-alt-shift-p)`
+
+ - **copy [block] (ref | reference)**  `key(cmd-shift-c)`
+
+ - **(choose | pick) (<number_small> | that)**  `key("down:{number_small or 1}")
+		key(enter)
+		key(space)
+		`
+
+ - **(choose | pick) <user.ordinals>**  `key("down:{ordinals}")
 		key(enter)
 		key(space)
 		
 		
-		
 		#block nav / editing
 		
-		#set up ordinal versions, with defualt sleep timing`
+		#set up ordinal versions, with defualt sleep timing
+		
+		## ++++++++++++++++++++++++  block navigation
+		`
 
  - **next block**  `key(ctrl-n)`
 
- - **(block | move) up**  `key(cmd-shift-up)`
-
- - **(block | move) down**  `key(cmd-shift-down)`
-
- - **(block | move) (in | right | forward | fore | four)**  `key(tab)`
-
- - **(block | move) (out | left | back)**  `key(shift-tab)`
-
- - **(block | move) (all [the way] (out | left | back) | top level | base )**  `key(shift-tab)
+ - **(block | move) (all [(the way | way)] (out | left | back) | top level | base | wayback )**  `key(shift-tab)
 		sleep(100ms)
 		key(shift-tab)
 		sleep(100ms)
 		key(shift-tab)
 		sleep(100ms)
 		key(shift-tab)
+		
+		## +++++++++++++++++++++ block folding .
 		`
 
- - **(fold | close | hide children) block**  `key(cmd-up)`
+ - **(fold | close | hide (children | kids)) block**  `key(cmd-up)`
 
- - **(unfold | open | show children) block**  `key(cmd-down)`
+ - **(unfold | open | show (children | kids)) block**  `key(cmd-down)`
 
  - **(collapse | fold) tree**  `key(cmd-p)
 		sleep(100ms)
 		insert("collapse current block tree")
 		sleep(100ms)
 		key(enter)
+		
 		#only exands one leve deep (not recursive)`
 
  - **expand block**  `key(cmd-p)
@@ -9542,7 +11903,8 @@
 		sleep(100ms)
 		insert("collapse all blocks on page")
 		sleep(100ms)
-		key(enter)`
+		key(enter)
+		`
 
  - **(expand | unfold) all [blocks]**  `key(cmd-p)
 		sleep(100ms)
@@ -9553,7 +11915,7 @@
 		#working kind of inconsistanly
 		#how to take a digit, do math on in, then use as key`
 
- - **(expand | fold) all [blocks] <digits>**  `mynumber = digits + 1
+ - **(expand | fold) all [blocks] <number_small>**  `mynumber = number_small + 1
 		key(cmd-p)
 		sleep(100ms)
 		insert("wb expand/collapse block tree")
@@ -9562,44 +11924,135 @@
 		sleep(500ms)
 		key("{mynumber}")
 		
+		## +++++++++++++ navigate within block .
 		`
 
- - **go block end**  `edit.select_all()
-		sleep(100ms)
-		key(right)
+ - **go (block end | post block)**  `key(shift-end right)
+		# edit.select_all()
+		# sleep(100ms)
+		# key(right)
 		`
 
- - **go block start**  `edit.select_all()
-		sleep(100ms)
-		key(left)
+ - **select (block end | rest of block )**  `key(shift-end)
 		`
 
- - **(delete block | block delete)**  `# key(cmd-backspace)
-		key(esc)
-		key(delete)
+ - **(clear | chuck) (block end | rest of block )**  `key(shift-end delete)
+		`
+
+ - **go block start**  `key(shift-home left)
+		# edit.select_all()
+		# sleep(100ms)
+		# key(left)
+		`
+
+ - **(select | take) block start**  `key(shift-home)
+		`
+
+ - **(clear | chuck) block start**  `key(shift-home delete)
 		
 		
-		#select blocks
+		## ++++++++++++++++++++++++ kill block .
+		
+		# only for use when cursor is inside block`
+
+ - **(delete | kill | remove) [whole] block | block delete**  `key(cmd-backspace)
+		# key(esc)
+		# key(delete)
+		
+		# kill highlighted block(s)`
+
+ - **((delete | kill | remove) [(highlighted | selected | these)] [(multiple | multi)] blocks)| (delete | kill | remove) (highlighted | selected) block**  `key(delete)
+		
+		
+		## ++++++++++++++++++++++++ cut blocks .`
+
+ - **(cut | carve) block**  `key(esc)
+		sleep(100ms)
+		key(cmd-x)
+		
+		## +++++++++++++++++++++ select blocks .
 		`
 
- - **(multi select | multiselect |  select multi | exit multi)**  `key(cmd-m)`
+ - **multi select | multiselect |  select multi | exit multi**  `key(cmd-m)`
 
  - **select all blocks**  `key(cmd-shift-a)`
 
- - **[new] child block**  `#todo change to enter command
+ - **(insert | new) top block**  `key(cmd-p)
+		sleep(200ms)
+		insert("wb jump to top of page")
+		sleep(200ms)
+		key(enter)
+		sleep(200ms)
+		key(esc)
+		sleep(200ms)
+		key(right)
+		sleep(300ms)
+		key(cmd-p)
+		sleep(200ms)
+		insert("Insert block above")
+		sleep(300ms)
+		key(esc)
+		sleep(200ms)
+		key(right)
+		
+		
+		## +++++++++++++++++++ new block below .
+		`
+
+ - **paste [new] block**  `edit.select_all()
+		sleep(100ms)
+		key(right)
+		key(enter)
+		key(cmd-v)
+		sleep(100ms)
+		key(esc)
+		
+		
+		## +++++++++++++++++ new child block .
+		`
+
+ - **(insert | new | add | put) (child | kid | right) [block] | (child | kid | right) block | nuchal**  `#todo change to enter command
 		edit.select_all()
 		sleep(100ms)
 		key(right)
 		key(enter)
 		key(tab)
+		
+		# pasting children
 		`
 
- - **new block**  `edit.select_all()
+ - **(insert | new | add | put) (child | kid | right) [block] (paste | pace) | (paste | pace) (child | kid | right | nuchal) [block]**  `#todo change to enter command
+		edit.select_all()
 		sleep(100ms)
 		key(right)
 		key(enter)
+		key(tab)
+		sleep(100ms)
+		edit.paste()
+		`
+
+ - **paste [new] (child | kid) [block]**  `edit.select_all()
+		sleep(100ms)
+		key(right)
+		key(enter)
+		sleep(100ms)
+		key(tab)
+		key(cmd-v)
+		sleep(100ms)
+		key(esc)
+		`
+
+ - **paste (child | kid) [block] raw**  `edit.select_all()
+		sleep(100ms)
+		key(right)
+		key(enter)
+		sleep(100ms)
+		key(tab)
+		key(cmd-shift-v)
 		
-		#todo: copy imlementation from block all the way back`
+		## ++++++++++++++++++++ new block back .
+		
+		#todo: copy implementation from block all the way back`
 
  - **new base block**  `edit.select_all()
 		sleep(100ms)
@@ -9613,6 +12066,19 @@
 		sleep(100ms)
 		key(shift-tab)
 		
+		## +++++++++++++ # Insert block above, .`
+
+ - **[(new | insert)] block (up | above)**  `key(cmd-shift-i)`
+
+ - **[(new | insert)] block [(down | below)]**  `key(cmd-shift-k)`
+
+ - **new block back**  `key(cmd-shift-k)
+		sleep(500ms)
+		key(shift-tab)
+		
+		#todo use new block down instead of going to end and enter in all of these commends
+		
+		## ++++++++++++++++++++++++++++ split/break block .
 		#todo is this the same as split..?`
 
  - **nest here**  `key(enter)
@@ -9620,52 +12086,57 @@
 		key(tab)
 		key(escape)
 		key(escape)
-		
-		# Insert block above or below, skips children`
-
- - **(new block up | insert block above)**  `key(cmd-shift-i)`
-
- - **(new block down | insert block below)**  `key(cmd-shift-k)`
-
- - **new block back**  `key(cmd-shift-k)
-		sleep(500ms)
-		key(shift-tab)
-		
-		#todo use new block down instead of going to end and enter in all of these commends
 		`
 
- - **(split | break) [new] [block]**  `# mouse_click(0)
-		# close the mouse grid if open
+ - **(split | break) here [block]**  `key(enter)
+		`
+
+ - **(split | break | brick | brack) [point]**  `mouse_click(0)
+		user.mouse_drag_end()
+		sleep(200ms)
+		key(enter)
+		
+		# mouse_click(0)
+		# # close the mouse grid if open
 		# user.grid_close()
-		# End any open drags
-		# Touch automatically ends left drags so this is for right drags specifically
+		# # End any open drags
+		# # Touch automatically ends left drags so this is for right drags specifically
 		# user.mouse_drag_end()
 		# sleep(100ms)
-		key(enter)
+		
 		`
 
- - **(split | break) (child | right) [block]**  `#mouse_click(0)
-		# close the mouse grid if open
-		#user.grid_close()
-		# End any open drags
-		# Touch automatically ends left drags so this is for right drags specifically
-		#user.mouse_drag_end()
-		#sleep(100ms)
+ - **(split | break) (child | right | rate | [and] nest) [block] [point]**  `mouse_click(0)
+		user.mouse_drag_end()
+		sleep(200ms)
 		key(enter)
 		sleep(100ms)
 		key(tab)
-		key(down)
+		key(escape:2)
+		`
+
+ - **(split | break) (child | right | rate | [and] nest) [block] here**  `key(enter)
+		sleep(100ms)
+		key(tab)
+		key(escape)
+		`
+
+ - **(split | break) [block] (back  | left) [point]**  `mouse_click(0)
+		user.mouse_drag_end()
+		sleep(200ms)
+		key(enter)
+		sleep(100ms)
+		key(shift-tab)
+		key(escape:2)
+		`
+
+ - **(split | break) [block] (back  | left)  here**  `key(enter)
+		sleep(100ms)
 		key(shift-tab)
 		key(escape)
 		`
 
- - **(split | break) [and] (stack | top) [block]**  `# mouse_click(0)
-		# close the mouse grid if open
-		# user.grid_close()
-		# End any open drags
-		# Touch automatically ends left drags so this is for right drags specifically
-		# user.mouse_drag_end()
-		# edit.paragraph_end()
+ - **(split | break) [and] (stack | top) [block] [here]**  `# edit.paragraph_end()
 		key(shift-end)
 		sleep(300ms)
 		key(cmd-x)
@@ -9680,101 +12151,184 @@
 		# key(tab)
 		# key(down)
 		# key(shift-tab)
+		
+		## ++++++++++++++++++++++++ copy block
 		`
 
  - **copy block**  `key(esc)
 		sleep(100ms)
 		key(cmd-c)
-		`
-
- - **paste [new] block**  `edit.select_all()
-		sleep(100ms)
-		key(right)
-		key(enter)
-		key(cmd-v)
-		sleep(100ms)
-		key(esc)
-		`
-
- - **paste [new] child [block]**  `edit.select_all()
-		sleep(100ms)
-		key(right)
-		key(enter)
-		sleep(100ms)
-		key(tab)
-		key(cmd-v)
-		sleep(100ms)
-		key(esc)
-		`
-
- - **paste child [block] raw**  `edit.select_all()
-		sleep(100ms)
-		key(right)
-		key(enter)
-		sleep(100ms)
-		key(tab)
-		key(cmd-shift-v)
 		
-		# new parent:
-		#     edit.paragraph_end()
-		
-		#tagging
-		
-		# Hash tagging
-		
+		## ++++++++++++++++++++++ multi select .
 		`
 
- - **(h tag | hashtag) [that]**  `s = edit.selected_text()
-		sf = "#" + s
-		insert(sf)
-		`
+ - **[toggle] (multi select | select blocks) | select (multi | multiple) [blocks]**  `key(cmd-m)`
 
- - **(h tag | hashtag) (word | single | 1)**  `user.cut_word()
-		# edit.select_word()
-		# edit.cut()
+ - **(block | move) up**  `key(cmd-shift-up)`
+
+ - **(block | move) down**  `key(cmd-shift-down)`
+
+ - **(block | move) (in | right | forward | fore | four)**  `key(tab)`
+
+ - **(block | move) (out | left | back)**  `key(shift-tab)`
+
+ - **move [block] [to] tomorrow**  `key(cmd-d)
 		sleep(100ms)
-		insert("#")
-		edit.paste()
-		`
-
- - **(h tag | hashtag) <user.text>**  `insert("#")
-		user.insert_formatted(text, "SLASH_SEPARATED")
+		key(tab enter)
 		sleep(100ms)
-		user.select_last_phrase()
-		key(left)
+		key(tab:2 enter)
+		
+		#todo: why inserting at bottom`
+
+ - **move [block] [to] today**  `key(cmd-d)
+		sleep(100ms)
+		edit.select_all()
+		sleep(100ms)
 		key(delete)
-		edit.line_end()
+		insert("Today")
+		sleep(100ms)
+		key(tab enter)
+		sleep(100ms)
+		key(tab:2 enter)
+		
+		## ++++++++++++++++++++++ Move block to page .
+		
+		# make version that leaves reference
+		
+		# make take an official roam tag from a list
+		
 		`
 
- - **(h tag | hashtag) (auto | one | use | force) <user.text>**  `insert("#")
-		user.insert_formatted(text, "SLASH_SEPARATED")
+ - **move [block] [to] (paste | pace)**  `key(cmd-alt-m)
+		# todo: why is this taking so long!
+		sleep(2500ms)
+		key(right)
 		sleep(100ms)
-		user.select_last_phrase()
-		key(left delete)
-		sleep(100ms)
-		key(down enter)
-		sleep(100ms)
-		edit.word_right()
+		edit.paste()
+		sleep(300ms)
+		key(enter tab:2 enter)
+		`
+
+ - **move [block] [to] agenda**  `key(cmd-alt-m)
+		sleep(1500ms)
+		key(tab right)
+		# sleep(1000ms)
+		insert("CGDDdKiFq")
+		sleep(300ms)
+		key(tab enter)
+		`
+
+ - **(send | move) [block] (ref | reference | link) [to] agenda**  `key(cmd-alt-ctrl-m)
+		sleep(1500ms)
+		key(tab right)
+		# sleep(1000ms)
+		insert("CGDDdKiFq")
+		sleep(300ms)
+		key(tab enter)
+		
+		`
+
+ - **move [block] [to] (paste | pace) sidebar**  `key(cmd-p)
+		sleep(300ms)
+		insert("mbts")
+		sleep(300ms)
+		key(enter)
+		sleep(3000ms)
+		key(right)
+		sleep(200ms)
+		edit.paste()
+		sleep(300ms)
+		key(enter tab:2 enter)
+		
+		
+		#insert dates
+		`
+
+ - **insert today**  `insert("/today")
+		sleep(300ms)
+		key(enter)
 		sleep(100ms)
 		key(space)
 		`
 
- - **kebab (h tag | hashtag) <user.text>**  `insert("#")
-		user.insert_formatted(text, "DASH_SEPARATED")
+ - **insert tomorrow**  `insert("/tomorrow")
+		sleep(300ms)
+		key(enter)
+		sleep(100ms)
+		key(space)
 		
-		# bracket tagging
+		#tagging
+		
+		## ++++++++++++++++++++++ Hash tagging .
+		
+		#add named tag to block
 		`
 
- - **(s tag | dub square) that**  `key([:2 right)
+ - **[(new | now)] tag <user.one_roam_tag>**  `insert(" #{one_roam_tag} ")
 		`
 
- - **(s tag | dub square) (word | single | 1)**  `edit.select_word()
+ - **(make [block] | tag block | add tag) <user.one_roam_tag>**  `edit.select_all()
+		s = edit.selected_text()
+		insert("{s} #{one_roam_tag}")
+		sleep(300ms)
+		key(enter)
+		
+		#turn local text into tag
+		`
+
+ - **tag [that] | make [into] tag**  `s = edit.selected_text()
+		insert("#{s} ")
+		`
+
+ - **force tag [that]**  `s = edit.selected_text()
+		insert("#{s} ")
+		`
+
+ - **tag word**  `edit.select_word()
+		sleep(200ms)
+		s = edit.selected_text()
+		insert("#{s}")
+		`
+
+ - **force tag word**  `edit.select_word()
+		sleep(200ms)
+		s = edit.selected_text()
+		insert("#{s} ")
+		
+		#format declared text to tag
+		`
+
+ - **[slash] tag <user.text>**  `f= user.formatted_text(text, "NS_SLASH_SEPARATED")
+		insert("#{f}")
+		`
+
+ - **force [slash] tag <user.text>**  `f= user.formatted_text(text, "NS_SLASH_SEPARATED")
+		insert("#{f} ")
+		`
+
+ - **kebab tag <user.text>**  `f= user.formatted_text(text, "DASH_SEPARATED")
+		insert("#{f}")
+		`
+
+ - **force kebab tag <user.text>**  `f= user.formatted_text(text, "DASH_SEPARATED")
+		insert("#{f} ")
+		
+		## +++++++++++++++++ # bracket tagging .
+		`
+
+ - **(make | new) tag**  `key([:2)
+		`
+
+ - **(square tag | dub square) [that]**  `key([:2 right)
+		`
+
+ - **(square tag | dub square) (word | single | one)**  `edit.select_word()
 		# insert("[[")
 		# edit.paste()
 		# insert("]]")
 		`
 
- - **(s tag | dub square) <user.text>**  `insert("[[")
+ - **(square tag | dub square) <user.text>**  `insert("[[")
 		user.insert_formatted(text, "SLASH_SEPARATED")
 		sleep(100ms)
 		user.select_last_phrase()
@@ -9782,7 +12336,7 @@
 		edit.word_right()
 		`
 
- - **(s tag | dub square) (auto | one | use) <user.text>**  `insert("[[")
+ - **(square tag | dub square) (auto | one | use) <user.text>**  `insert("[[")
 		user.insert_formatted(text, "SLASH_SEPARATED")
 		sleep(100ms)
 		user.select_last_phrase()
@@ -9791,30 +12345,60 @@
 		edit.word_right()
 		key(space)
 		
+		## +++++++++++++ block reference links .
+		`
+
+ - **dub paren**  `insert("((")`
+
+ - **[new] ((([block] (reference | ref) | back) [link]) | backlink)**  `insert("((")
+		`
+
+ - **((([block] (reference | ref) | back) [link]) | backlink) that**  `insert("((")
+		`
+
+ - **((([block] (reference | ref) | back) [link]) | backlink) word**  `edit.select_word()
+		insert("((")
 		
 		`
 
- - **((bee | back) link | dub paren)**  `key((:2)
-		`
-
- - **((bee | back) link | dub paren) that**  `key((:2 right)
-		
-		`
-
- - **((bee | back) link | dub paren) <user.text>**  `insert("((")
+ - **[new] ((([block] (reference | ref) | back) [link]) | backlink) <user.text>**  `insert("((")
 		insert(text)
 		# sleep(100ms)
 		# user.select_last_phrase()
 		# key(left delete)
 		# edit.word_right()
 		
-		
-		#formatting
+		## +++++++++++++++++++++++   pasting
 		`
 
- - **paste unformatted**  `key(shift-cmd-v)`
+ - **(paste | pace) (unformatted | raw)**  `key(shift-cmd-v)`
 
- - **([make] (todo | action) )**  `key(cmd-return)`
+ - **make (todo | action)**  `key(cmd-return)
+		sleep(100ms)
+		# key(escape)
+		`
+
+ - **mark done**  `key(cmd-return)
+		sleep(100ms)
+		# key(escape)
+		`
+
+ - **make done**  `key(cmd-return:2)
+		sleep(100ms)
+		# key(escape)
+		`
+
+ - **make undone**  `key(cmd-return:2)
+		sleep(100ms)
+		key(escape)
+		`
+
+ - **remove (todo | action)**  `key(cmd-return:2)
+		sleep(100ms)
+		key(escape)
+		
+		## +++++++++++++++ markdown formatting .
+		`
 
  - **bold that**  `key(cmd-b)`
 
@@ -9826,29 +12410,1528 @@
 
  - **heading none**  `key(cmd-alt-0)`
 
- - **code (line | inline) that**  `key(` esc:2)`
+ - **code (line | inline) that**  `key(` esc:2)
+		# s = edit.selected_text()
+		# sf = "`" + s
+		# insert(sf)
+		`
 
- - **exit**  `key(esc)`
+ - **code (line | inline) point**  `key(shift:down)
+		mouse_click(0)
+		key(`)
+		sleep(200ms)
+		key(esc:2)
+		
+		
+		## +++++++++++++++++++++++ code blocks .
+		`
 
  - **new code block**  `key(`:3)`
 
  - **code block that**  `key(`:3 esc)`
 
- - **(make code block | block make code [block])**  `key(cmd-a)
+ - **make code block | block make code [block]**  `key(cmd-a)
 		sleep(100ms)
-		key(`:3 esc)
+		key(`:3)
+		key(esc)
 		
-		#add components
+		
+		## +++++++++++++ enter general utility .
 		`
 
- - **(add | insert) divider**  `key(ctrl-e)
+ - **exit**  `key(esc)`
+
+ - **(insert | (add | ad) | paste) divider**  `insert("---")
+		key(enter)
+		`
+
+ - **new divider [block]**  `key(ctrl-e)
 		key(enter)
 		sleep(100ms)
-		key(-:3 enter)
+		insert("---")
+		key(esc:2)
+		
 		
 		# edit.paragraph_start()
 		# edit.jump_line
-		# edit.sentence_start`
+		# edit.sentence_start
+		
+		
+		
+		#tabs extension
+		`
+
+ - **pick page**  `key(cmd-ctrl-alt-shift-t)`
+
+ - **go page <number_small>**  `spacesDown=number_small - 1
+		key(cmd-ctrl-alt-shift-t)
+		sleep(300ms)
+		key(cmd-a delete)
+		sleep(100ms)
+		key("down:{spacesDown} enter")
+		`
+
+ - **(choose | pick) page <number_small>**  `spacesDown=number_small - 1
+		key("down:{spacesDown} enter")
+		`
+
+ - **go page <user.text>**  `key(cmd-ctrl-alt-shift-t)
+		sleep(300ms)
+		key(cmd-a delete)
+		sleep(100ms)
+		insert(text)
+		sleep(200ms)
+		key(enter)
+		
+		# not canonical bc search is fuzz and filters char in middle of word`
+
+ - **pick page <user.letter>**  `key(cmd-ctrl-alt-shift-t)
+		sleep(300ms)
+		key(cmd-a delete)
+		sleep(100ms)
+		insert(letter)
+		`
+
+ - **open page in tab**  `key(ctrl:down)
+		mouse_click(0)
+		
+		## ++++++++++++++++++++++++++ navigate .
+		# go top and bottom doesnt work, overriden by gener edit cmds?
+		# tail doesnt work either
+		`
+
+ - **go [to] crown [of] [page]**  `key(cmd-alt-shift-t)`
+
+ - **go [to] base [of] [page]**  `key(cmd-shift-enter)`
+
+ - **dedent**  `key(shift-tab)`
+
+ - **indent less**  `key(shift-tab)`
+
+ - **nope**  `key(cmd-z)`
+
+ - **(go | page | scroll) [to] top**  `key(home)`
+
+ - **[toggle] (multi select | select (multi | multiple [blocks])) [(off | on)]**  `key(cmd-m)`
+
+ - **(hat | hats | nav | deep nav [hats] | block point | block hats | show hats)**  `key(cmd-alt-0)`
+
+ - **(deep | do you) grab deep grab | go <user.number_string>**  `insert(number_string)
+		sleep(200ms)
+		key(enter)
+		`
+
+ - **(deep | do you ) grab | go  <user.number_key>**  `key(number_key)
+		sleep(100ms)
+		key(enter)
+		`
+
+ - **(deep | do you ) grab | go <user.number_key> <user.number_key>**  `key(number_key_1 number_key_2)
+		sleep(100ms)
+		key(enter)
+		`
+
+ - **(deep | do you ) grab | go  <user.letter>**  `key("{letter}")
+		sleep(100ms)
+		key(enter)
+		`
+
+ - **(deep | do you ) grab | go  <user.letter> <user.letter>**  `key("{letter_1} {letter_2}")
+		sleep(100ms)
+		key(enter)
+		`
+
+
+
+#  roam
+
+
+ - **please [<user.text>]**  `key(cmd-p)
+		sleep(200ms)
+		insert(text)
+		
+		## +++++++++++++++++++++ open settings .
+		`
+
+ - **workbench settings**  `key(cmd-p)
+		sleep(200ms)
+		insert("settings workbench")
+		key(enter)
+		`
+
+ - **(tag (icons | icon) | magic (tag | tags)) settings**  `key(cmd-p)
+		sleep(200ms)
+		insert("magic tags")
+		key(enter)
+		
+		#------------------left sidebar
+		`
+
+ - **(toggle | hide |  show) ( shortcuts |  (left | l) sidebar | bookmarks)**  `key(cmd-\)`
+
+ - **add (shortcut | bookmark)**  `key(cmd-p)
+		sleep(100ms)
+		insert("wb add shortcut")
+		sleep(100ms)
+		key(enter)
+		
+		#----------------- embed block
+		`
+
+ - **embed (block | ref | reference)**  `insert("/embed")
+		sleep(100ms)
+		key(enter)
+		sleep(100ms)
+		key(right:2 backspace:4)
+		edit.paste()
+		sleep(100ms)
+		key(esc)
+		
+		#embed block/page children only
+		
+		#todo: Make versions that queue up we search for the block or or page, rather than pasting it`
+
+ - **embed (block | black | ref | reference) (children | kids)**  `key({:2)
+		insert("embed-children: ")
+		sleep(300ms)
+		edit.paste()
+		sleep(100ms)
+		key(esc)
+		
+		# ----------- block/page mentions
+		`
+
+ - **(paste | embed | insert) (block | black | ref | reference) (mentions | links)**  `key({:2)
+		insert("children-mentions: ")
+		sleep(300ms)
+		edit.paste()
+		sleep(100ms)
+		key(esc)
+		`
+
+ - **(embed | insert) (block | black | ref | reference) (mentions | links) [from] page [<user.text>]**  `key({:2)
+		insert("children-mentions: ")
+		sleep(300ms)
+		key([:2)
+		sleep(100ms)
+		insert(text)
+		`
+
+ - **(embed | insert) (block | black | ref | reference) (mentions | links) [from] block [<user.text>]**  `key({:2)
+		insert("children-mentions: ")
+		sleep(300ms)
+		key((:2)
+		sleep(100ms)
+		insert(text)
+		
+		###-------- alternative implementation
+		# edit.paste()
+		# sleep(300ms)
+		# key(cmd-a)
+		# sleep(300ms)
+		# refstr = edit.selected_text()
+		# firsthalf = "{{[[embed]]: " + refstr
+		# fullembed = firsthalf + "}}"
+		# insert(fullembed)
+		# sleep(300ms)
+		# key(cmd-a)
+		# sleep(300ms)
+		# key({)
+		# sleep(300ms)
+		# key(esc)
+		
+		## +++++++++++++++++++++++ Swap blocks .
+		`
+
+ - **(replace | swap) (ref | reference) [with original]**  `key(cmd-p)
+		sleep(100ms)
+		insert("wb replace last reference before cursor with original")
+		sleep(100ms)
+		key(enter)
+		`
+
+ - **(replace | swap) (ref | reference) [with] alias**  `key(cmd-p)
+		sleep(100ms)
+		insert("wb replace last reference before cursor with text and alias")
+		sleep(100ms)
+		key(enter)
+		
+		
+		#navigation
+		`
+
+ - **go all pages**  `key(cmd-p)
+		sleep(100ms)
+		insert("wb all pages")
+		sleep(100ms)
+		key(enter)
+		`
+
+ - **go [page] top**  `key(cmd-p)
+		sleep(100ms)
+		insert("jump top")
+		sleep(100ms)
+		key(enter)
+		`
+
+ - **go [page] bottom**  `key(cmd-p)
+		sleep(100ms)
+		insert("jump bottom")
+		sleep(100ms)
+		key(enter)
+		`
+
+ - **go today**  `key(ctrl-shift-d)`
+
+ - **go tomorrow**  `key(ctrl-alt-n)`
+
+ - **go next day**  `key(ctrl-alt-n)`
+
+ - **go (prev | previous | last | yesterday) day**  `key(ctrl-alt-p)`
+
+ - **go back**  `key(cmd-[)`
+
+ - **go (forward | fore)**  `key(cmd-])`
+
+ - **jump link**  `key(ctrl-o)`
+
+ - **page blocks [panel]**  `key(cmd-shift-p)`
+
+ - **page (refs | references) [panel]**  `key(cmd-shift-p)
+		sleep(500ms)
+		insert("@")
+		`
+
+ - **zoom (block  | down)**  `key(cmd-.)`
+
+ - **zoom (parent |  up)**  `key(cmd-shift-ctrl-alt-u)`
+
+ - **go parent [block]**  `key(ctrl-alt-u)`
+
+ - **deep nav**  `key(alt-g)`
+
+ - **(toggle | hide | show | close | open) (sidebar | side bar)**  `key(cmd-/)
+		`
+
+ - **swap (sidebar | main) [with (sidebar | main)]**  `key(cmd-p)
+		sleep(100ms)
+		insert("wb sidebars - swap with main window (swap)")
+		sleep(100ms)
+		key(enter)
+		`
+
+ - **(expand | collapse [all] | fold) (sidebar | side bar)**  `key(cmd-p)
+		sleep(100ms)
+		insert("toggle expand sidebar")
+		sleep(100ms)
+		key(enter)
+		
+		#switch+ sidebar`
+
+ - **(sidebar |  side bar) panel**  `key(cmd-shift-p)
+		sleep(500ms)
+		insert("r:")
+		`
+
+ - **open (ref | reference | link) in sidebar**  `key(ctrl-shift-o)
+		`
+
+ - **open [this] page in sidebar**  `key(cmd-p)
+		sleep(100ms)
+		insert("wb open page in sidebar")
+		sleep(100ms)
+		key(enter)
+		`
+
+ - **(clear | kill) sidebar**  `key(ctrl-l)`
+
+ - **open <user.one_roam_tag> in sidebar | bar <user.one_roam_tag>**  `key(cmd-u)
+		# sleep(100ms)
+		insert("{one_roam_tag}")
+		sleep(500ms)
+		key(shift-enter)
+		
+		###roam prefs
+		`
+
+ - **open hotkeys**  `key(cmd-p)
+		sleep(100ms)
+		insert("hotkeys")
+		sleep(100ms)
+		key(enter)
+		
+		## +++++++++++++++++++++++++++ roam queries .
+		
+		#native roam query
+		# {{[[query]]: {and: [[ex-A]] {or: [[ex-B]] [[ex-C]]}}}}
+		
+		#query builder`
+
+ - **Open query (drawer | builder)**  `key(cmd-shift-ctrl-alt-8)`
+
+ - **search [<user.text>]**  `key(cmd-u)
+		sleep(200ms)
+		insert(text)
+		
+		#traditional page search`
+
+ - **search page**  `key(cmd-f)`
+
+ - **exit search**  `key(cmd-enter)`
+
+ - **search advanced**  `key(ctrl-shift-p)`
+
+ - **search block refs**  `key(ctrl-shift-9)`
+
+ - **search workspace**  `key(ctrl-s)`
+
+ - **search (whole | entire) graph**  `key(cmd-p)
+		sleep(100ms)
+		insert("wgs")
+		sleep(300ms)
+		key(enter)
+		
+		#search pages block
+		# new search block:
+		#     edit.select_all()
+		#     sleep(100ms)
+		#     key(right)
+		#     key(enter)
+		#     sleep(100ms)
+		#     insert("{{{[[search]]}}}")
+		# sleep(100ms)
+		# key(escape)
+		
+		
+		
+		#roam portal search`
+
+ - **(go | open | search | toggle | show | hide) portal**  `key(cmd-ctrl-alt-shift-p)`
+
+ - **copy [block] (ref | reference)**  `key(cmd-shift-c)`
+
+ - **(choose | pick) (<number_small> | that)**  `key("down:{number_small or 1}")
+		key(enter)
+		key(space)
+		`
+
+ - **(choose | pick) <user.ordinals>**  `key("down:{ordinals}")
+		key(enter)
+		key(space)
+		
+		
+		#block nav / editing
+		
+		#set up ordinal versions, with defualt sleep timing
+		
+		## ++++++++++++++++++++++++  block navigation
+		`
+
+ - **next block**  `key(ctrl-n)`
+
+ - **(block | move) (all [(the way | way)] (out | left | back) | top level | base | wayback )**  `key(shift-tab)
+		sleep(100ms)
+		key(shift-tab)
+		sleep(100ms)
+		key(shift-tab)
+		sleep(100ms)
+		key(shift-tab)
+		
+		## +++++++++++++++++++++ block folding .
+		`
+
+ - **(fold | close | hide (children | kids)) block**  `key(cmd-up)`
+
+ - **(unfold | open | show (children | kids)) block**  `key(cmd-down)`
+
+ - **(collapse | fold) tree**  `key(cmd-p)
+		sleep(100ms)
+		insert("collapse current block tree")
+		sleep(100ms)
+		key(enter)
+		
+		#only exands one leve deep (not recursive)`
+
+ - **expand block**  `key(cmd-p)
+		sleep(100ms)
+		insert("Expand current block tree")
+		sleep(100ms)
+		key(enter)
+		`
+
+ - **(collapse | fold) all [blocks]**  `key(cmd-p)
+		sleep(100ms)
+		insert("collapse all blocks on page")
+		sleep(100ms)
+		key(enter)
+		`
+
+ - **(expand | unfold) all [blocks]**  `key(cmd-p)
+		sleep(100ms)
+		insert("expand all blocks on page")
+		sleep(100ms)
+		key(enter)
+		
+		#working kind of inconsistanly
+		#how to take a digit, do math on in, then use as key`
+
+ - **(expand | fold) all [blocks] <number_small>**  `mynumber = number_small + 1
+		key(cmd-p)
+		sleep(100ms)
+		insert("wb expand/collapse block tree")
+		sleep(100ms)
+		key(enter)
+		sleep(500ms)
+		key("{mynumber}")
+		
+		## +++++++++++++ navigate within block .
+		`
+
+ - **[go] (block end | post block)**  `key(cmd-a)
+		sleep(100ms)
+		key(right)
+		`
+
+ - **(select | take) (block end | rest of block )**  `key(shift-end)
+		`
+
+ - **(clear | chuck) (block end | rest of block )**  `key(shift-end delete)
+		`
+
+ - **go block start**  `key(shift-home left)
+		# edit.select_all()
+		# sleep(100ms)
+		# key(left)
+		`
+
+ - **(select | take) block start**  `key(shift-home)
+		`
+
+ - **(clear | chuck) block start**  `key(shift-home delete)
+		
+		
+		## ++++++++++++++++++++++++ kill block .
+		
+		# only for use when cursor is inside block`
+
+ - **(delete | kill | remove) [whole] block | block delete**  `key(cmd-backspace)
+		# key(esc)
+		# key(delete)
+		
+		# kill highlighted block(s)`
+
+ - **((delete | kill | remove) [(highlighted | selected | these)] [(multiple | multi)] blocks)| (delete | kill | remove) (highlighted | selected) block**  `key(delete)
+		
+		
+		## ++++++++++++++++++++++++ cut blocks .`
+
+ - **(cut | carve) block**  `key(esc)
+		sleep(100ms)
+		key(cmd-x)
+		
+		## +++++++++++++++++++++ select blocks .
+		`
+
+ - **multi select | multiselect |  select multi | exit multi**  `key(cmd-m)`
+
+ - **select all blocks**  `key(cmd-shift-a)`
+
+ - **(insert | new) top block**  `key(cmd-p)
+		sleep(200ms)
+		insert("wb jump to top of page")
+		sleep(200ms)
+		key(enter)
+		sleep(200ms)
+		key(esc)
+		sleep(200ms)
+		key(right)
+		sleep(300ms)
+		key(cmd-p)
+		sleep(200ms)
+		insert("Insert block above")
+		sleep(300ms)
+		key(esc)
+		sleep(200ms)
+		key(right)
+		
+		
+		## +++++++++++++++++++ new block below .
+		`
+
+ - **paste [new] (block | blocks)**  `key(cmd-shift-k)
+		sleep(700ms)
+		key(cmd-v)
+		sleep(100ms)
+		key(esc)
+		`
+
+ - **paste [new] block raw**  `key(cmd-shift-k)
+		sleep(700ms)
+		key(shift-cmd-v)
+		sleep(200ms)
+		key(esc)
+		
+		## +++++++++++++++++ new child block .
+		`
+
+ - **(insert | new | add | put) (child | kid | (right | write) | write) [block] | (child | kid | (right | write) | write) block | nuchal**  `key(cmd-a)
+		sleep(100ms)
+		key(right)
+		sleep(100ms)
+		key(enter)
+		sleep(100ms)
+		key(tab)
+		
+		# pasting children
+		`
+
+ - **(insert | new | add | put) (child | kid | (right | write) ) [block] (paste | pace) | (paste | pace) (child | kid | (right | write) | nuchal) [block]**  `key(cmd-a)
+		sleep(100ms)
+		key(right)
+		sleep(100ms)
+		key(enter)
+		key(tab)
+		sleep(100ms)
+		edit.paste()
+		`
+
+ - **paste [new] (child | kid) [block]**  `key(cmd-a)
+		sleep(100ms)
+		key(right)
+		sleep(100ms)
+		key(enter)
+		sleep(100ms)
+		key(tab)
+		key(cmd-v)
+		sleep(100ms)
+		key(esc)
+		`
+
+ - **paste (child | kid) [block] raw**  `key(cmd-a)
+		sleep(100ms)
+		key(right)
+		sleep(100ms)
+		key(enter)
+		sleep(100ms)
+		key(tab)
+		key(cmd-shift-v)
+		
+		## ++++++++++++++++++++ new block back .
+		
+		#todo: copy implementation from block all the way back`
+
+ - **new base block**  `key(cmd-a)
+		sleep(100ms)
+		key(right)
+		sleep(100ms)
+		key(enter)
+		key(shift-tab)
+		sleep(100ms)
+		key(shift-tab)
+		sleep(100ms)
+		key(shift-tab)
+		sleep(100ms)
+		key(shift-tab)
+		
+		## +++++++++++++ # Insert block above, .`
+
+ - **[(new | insert)] block (up | above)**  `key(cmd-shift-i)`
+
+ - **[(new | insert)] block [(down | below)]**  `key(cmd-shift-k)`
+
+ - **new block back**  `key(cmd-shift-k)
+		sleep(500ms)
+		key(shift-tab)
+		
+		#todo use new block down instead of going to end and enter in all of these commends
+		
+		## ++++++++++++++++++++++++++++ split/break block .
+		#todo is this the same as split..?`
+
+ - **nest here**  `key(enter)
+		sleep(100ms)
+		key(tab)
+		key(escape)
+		key(escape)
+		`
+
+ - **(split | break) here [block]**  `key(enter)
+		`
+
+ - **(split | break | brick | brack) [point]**  `mouse_click(0)
+		user.mouse_drag_end()
+		sleep(200ms)
+		key(enter)
+		
+		# mouse_click(0)
+		# # close the mouse grid if open
+		# user.grid_close()
+		# # End any open drags
+		# # Touch automatically ends left drags so this is for right drags specifically
+		# user.mouse_drag_end()
+		# sleep(100ms)
+		
+		`
+
+ - **(split | break) (child | (right | write) | rate | [and] nest) [block] [point]**  `mouse_click(0)
+		user.mouse_drag_end()
+		sleep(200ms)
+		key(enter)
+		sleep(100ms)
+		key(tab)
+		key(escape:2)
+		`
+
+ - **(split | break) (child | (right | write) | rate | [and] nest) [block] here**  `key(enter)
+		sleep(100ms)
+		key(tab)
+		key(escape)
+		`
+
+ - **(split | break) [block] (back  | left) [point]**  `mouse_click(0)
+		user.mouse_drag_end()
+		sleep(200ms)
+		key(enter)
+		sleep(100ms)
+		key(shift-tab)
+		key(escape:2)
+		`
+
+ - **(split | break) [block] (back  | left)  here**  `key(enter)
+		sleep(100ms)
+		key(shift-tab)
+		key(escape)
+		
+		`
+
+ - **(split | break) [and] (stack | top) [block] [here]**  `key(shift-end)
+		sleep(300ms)
+		key(cmd-x)
+		sleep(300ms)
+		key(enter)
+		sleep(300ms)
+		key(shift-cmd-v)
+		sleep(300ms)
+		key(escape)
+		# key(enter)
+		# sleep(100ms)
+		# key(tab)
+		# key(down)
+		# key(shift-tab)
+		
+		## ++++++++++++++++++++++++ copy block
+		`
+
+ - **copy block**  `key(esc)
+		sleep(100ms)
+		key(cmd-c)
+		
+		## ++++++++++++++++++++++ multi select .
+		`
+
+ - **[toggle] (multi select | select blocks) | select (multi | multiple) [blocks]**  `key(cmd-m)`
+
+ - **(block | move) up**  `key(cmd-shift-up)`
+
+ - **(block | move) down**  `key(cmd-shift-down)`
+
+ - **(block | move) (in | (right | write) | forward | fore | four)**  `key(tab)`
+
+ - **(block | move) (out | left | back)**  `key(shift-tab)`
+
+ - **move [(block | blocks)] to tomorrow**  `key(cmd-d)
+		sleep(100ms)
+		key(tab enter)
+		sleep(100ms)
+		key(tab:2 enter)
+		
+		#todo: why inserting at bottom`
+
+ - **move [(block | blocks)] to today**  `key(cmd-d)
+		sleep(100ms)
+		edit.select_all()
+		sleep(100ms)
+		key(delete)
+		insert("Today")
+		sleep(100ms)
+		key(tab enter)
+		sleep(100ms)
+		key(tab:2 enter)
+		
+		## ++++++++++++++++++++++ Move block to page .
+		
+		# make version that leaves reference
+		`
+
+ - **move [(block | blocks)] to [top] [of] [page] (paste | pace | clip)**  `key(cmd-alt-m)
+		sleep(1500ms)
+		key(right)
+		sleep(100ms)
+		edit.paste()
+		sleep(200ms)
+		key(enter tab:2 enter)
+		`
+
+ - **move [(block | blocks)] to [top] [of] <user.one_roam_tag>**  `key(cmd-alt-m)
+		sleep(1500ms)
+		key(right)
+		sleep(100ms)
+		insert("{one_roam_tag}")
+		sleep(200ms)
+		key(enter tab:2 enter)
+		`
+
+ - **[move] <user.letters> [move] (to | two) [top] [of] <user.one_roam_tag>**  `insert(letters)
+		sleep(300ms)
+		key(cmd-alt-m)
+		sleep(1500ms)
+		key(right)
+		sleep(100ms)
+		insert("{one_roam_tag}")
+		sleep(200ms)
+		key(enter tab:2 enter)
+		
+		`
+
+ - **move [(block | blocks)] to [top] [of] <user.one_roam_tag> sidebar**  `key(cmd-p)
+		sleep(100ms)
+		insert("mbts")
+		sleep(100ms)
+		key(enter)
+		sleep(1500ms)
+		key(right)
+		sleep(100ms)
+		insert("{one_roam_tag}")
+		sleep(200ms)
+		key(enter tab:2 enter)
+		`
+
+ - **move [(block | blocks)] to [top] [of] <user.one_roam_tag> [leave] (ref | reference | rough)**  `key(cmd-p)
+		sleep(100ms)
+		insert("mbtr")
+		sleep(100ms)
+		key(enter)
+		sleep(1500ms)
+		key(right)
+		sleep(100ms)
+		insert("{one_roam_tag}")
+		sleep(200ms)
+		key(enter tab:2 enter)
+		`
+
+ - **move [(block | blocks)] to [top] [of] <user.one_roam_tag> [and] (zoom | go [there] | focus)**  `key(cmd-p)
+		sleep(100ms)
+		insert("mbtz")
+		sleep(100ms)
+		key(enter)
+		sleep(1500ms)
+		key(right)
+		sleep(100ms)
+		insert("{one_roam_tag}")
+		sleep(200ms)
+		key(enter tab:2 enter)
+		
+		## +++++++++++ move block to reference .
+		`
+
+ - **move [(block | blocks)] to (ref | reference | rough) (paste | pace | clip)**  `key(cmd-alt-m)
+		sleep(1500ms)
+		key(tab right)
+		edit.paste()
+		sleep(300ms)
+		key(enter)
+		sleep(100ms)
+		key(tab enter)
+		
+		#move to #tag #inbox combo reference`
+
+ - **move [(block | blocks)] to <user.one_roam_tag> inbox**  `key(cmd-alt-m)
+		sleep(1500ms)
+		key(tab right)
+		insert("#{one_roam_tag} #inbox")
+		sleep(200ms)
+		key(enter)
+		sleep(100ms)
+		key(tab enter)
+		
+		# ------------- hardcoded reference versions
+		`
+
+ - **move [(block | blocks)] to agenda**  `key(cmd-alt-m)
+		sleep(1500ms)
+		key(tab right)
+		insert("CGDDdKiFq")
+		sleep(200ms)
+		key(enter)
+		sleep(100ms)
+		key(tab enter)
+		`
+
+ - **(send | move) [(block | blocks)] (ref | reference | link) to agenda**  `key(cmd-alt-ctrl-m)
+		sleep(1500ms)
+		key(tab right)
+		insert("CGDDdKiFq")
+		sleep(200ms)
+		key(enter)
+		sleep(100ms)
+		key(tab enter)
+		
+		## +++++++++++++++++++ move to sidebar .
+		`
+
+ - **move [(block | blocks)] to (paste | pace) sidebar**  `key(cmd-p)
+		sleep(200ms)
+		insert("mbts")
+		sleep(100ms)
+		key(enter)
+		sleep(1500ms)
+		key(right)
+		edit.paste()
+		sleep(200ms)
+		key(enter)
+		sleep(100ms)
+		key(tab enter)
+		
+		
+		## ++++++++++++++++++++++ insert dates .
+		`
+
+ - **insert today**  `insert("/today")
+		sleep(300ms)
+		key(enter)
+		sleep(100ms)
+		key(space)
+		`
+
+ - **insert tomorrow**  `insert("/tomorrow")
+		sleep(300ms)
+		key(enter)
+		sleep(100ms)
+		key(space)
+		`
+
+ - **(add | pick) date**  `insert("/date picker")
+		sleep(300ms)
+		key(enter)
+		
+		
+		#tagging
+		
+		## ++++++++++++++++++++++ Hash tagging .
+		
+		#add named tag to block
+		`
+
+ - **[(new | now)] tag <user.one_roam_tag>**  `insert(" #{one_roam_tag} ")
+		`
+
+ - **[(new | now)] tag {user.abbreviation}**  `insert(" #{abbreviation} ")
+		`
+
+ - **(make [block] | tag block | add tag) <user.one_roam_tag>**  `edit.select_all()
+		s = edit.selected_text()
+		insert("{s} #{one_roam_tag}")
+		sleep(300ms)
+		key(enter)
+		
+		## +++++++++++++++++++++ multiple tags .
+		`
+
+ - **[(new | now  |  multi )] (tags | tax) <user.one_roam_tag> [and] <user.one_roam_tag>**  `insert(" #{one_roam_tag_1} #{one_roam_tag_2} ")
+		
+		
+		`
+
+ - **[(new | now  |  multi )] (tags | tax) <user.one_roam_tag> [and] <user.one_roam_tag> [and] <user.one_roam_tag>**  `insert(" #{one_roam_tag_1} #{one_roam_tag_2} #{one_roam_tag_3} ")
+		`
+
+ - **[(new | now | multi )] (tags | tax) <user.one_roam_tag> [and] <user.one_roam_tag> [and] <user.one_roam_tag> [and] <user.one_roam_tag>**  `insert(" #{one_roam_tag_1} #{one_roam_tag_2} #{one_roam_tag_3} #{one_roam_tag_4} ")
+		`
+
+ - **[(new | now | multi )] (tags | tax) <user.one_roam_tag> [and] <user.one_roam_tag>**  `insert(" #{one_roam_tag_1} #{one_roam_tag_2} ")
+		`
+
+ - **[(new | now | multi )] (tags | tax) <user.one_roam_tag> [and] <user.one_roam_tag> [and] <user.one_roam_tag>**  `insert(" #{one_roam_tag_1} #{one_roam_tag_2} #{one_roam_tag_3} ")
+		
+		#turn local text into tag
+		`
+
+ - **tag [that] | make [into] tag**  `s = edit.selected_text()
+		insert("#{s} ")
+		`
+
+ - **force tag [that]**  `s = edit.selected_text()
+		insert("#{s} ")
+		`
+
+ - **tag word**  `edit.select_word()
+		sleep(200ms)
+		s = edit.selected_text()
+		insert("#{s}")
+		`
+
+ - **force tag word**  `edit.select_word()
+		sleep(200ms)
+		s = edit.selected_text()
+		insert("#{s} ")
+		
+		#format declared text to tag
+		`
+
+ - **[slash] tag <user.text>**  `f= user.formatted_text(text, "NS_SLASH_SEPARATED")
+		insert("#{f}")
+		`
+
+ - **force [slash] tag <user.text>**  `f= user.formatted_text(text, "NS_SLASH_SEPARATED")
+		insert("#{f} ")
+		`
+
+ - **kebab tag <user.text>**  `f= user.formatted_text(text, "DASH_SEPARATED")
+		insert("#{f}")
+		`
+
+ - **force kebab tag <user.text>**  `f= user.formatted_text(text, "DASH_SEPARATED")
+		insert("#{f} ")
+		
+		## +++++++++++++++++ # bracket tagging .
+		`
+
+ - **(make | new) tag**  `key([:2)
+		`
+
+ - **(square tag | dub square) [that]**  `key([:2 right)
+		`
+
+ - **(square tag | dub square) (word | single | one)**  `edit.select_word()
+		# insert("[[")
+		# edit.paste()
+		# insert("]]")
+		`
+
+ - **(square tag | dub square) <user.text>**  `insert("[[")
+		user.insert_formatted(text, "SLASH_SEPARATED")
+		sleep(100ms)
+		user.select_last_phrase()
+		key(left delete)
+		edit.word_right()
+		`
+
+ - **(square tag | dub square) (auto | one | use) <user.text>**  `insert("[[")
+		user.insert_formatted(text, "SLASH_SEPARATED")
+		sleep(100ms)
+		user.select_last_phrase()
+		key(left delete)
+		key(down enter)
+		edit.word_right()
+		key(space)
+		
+		## +++++++++++++ block reference links .
+		`
+
+ - **dub paren**  `insert("((")`
+
+ - **[new] ((([block] (reference | ref) | back) [link]) | backlink)**  `insert("((")
+		`
+
+ - **((([block] (reference | ref) | back) [link]) | backlink) that**  `insert("((")
+		`
+
+ - **((([block] (reference | ref) | back) [link]) | backlink) word**  `edit.select_word()
+		insert("((")
+		
+		`
+
+ - **[new] ((([block] (reference | ref) | back) [link]) | backlink) <user.text>**  `insert("((")
+		insert(text)
+		# sleep(100ms)
+		# user.select_last_phrase()
+		# key(left delete)
+		# edit.word_right()
+		
+		## +++++++++++++++++++++++   pasting
+		`
+
+ - **(paste | pace) (unformatted | raw)**  `key(shift-cmd-v)`
+
+ - **make (todo | action)**  `key(cmd-return)
+		sleep(100ms)
+		# key(escape)
+		`
+
+ - **mark done**  `key(cmd-return)
+		sleep(100ms)
+		# key(escape)
+		`
+
+ - **make done**  `key(cmd-return:2)
+		sleep(100ms)
+		# key(escape)
+		`
+
+ - **make undone**  `key(cmd-return:2)
+		sleep(100ms)
+		key(escape)
+		`
+
+ - **remove (todo | action)**  `key(cmd-return:2)
+		sleep(100ms)
+		key(escape)
+		
+		## +++++++++++++++ markdown formatting .
+		`
+
+ - **bold that**  `key(cmd-b)`
+
+ - **heading one**  `key(cmd-alt-1)`
+
+ - **heading two**  `key(cmd-alt-2)`
+
+ - **heading three**  `key(cmd-alt-3)`
+
+ - **heading none**  `key(cmd-alt-0)`
+
+ - **code (line | inline) that**  `key(` esc:2)
+		# s = edit.selected_text()
+		# sf = "`" + s
+		# insert(sf)
+		`
+
+ - **code (line | inline) point**  `key(shift:down)
+		mouse_click(0)
+		key(`)
+		sleep(200ms)
+		key(esc:2)
+		
+		
+		## +++++++++++++++++++++++ code blocks .
+		`
+
+ - **new code block**  `key(`:3)`
+
+ - **code block that**  `key(`:3 esc)`
+
+ - **make code block | block make code [block]**  `key(cmd-a)
+		sleep(100ms)
+		key(`:3)
+		key(esc)
+		
+		
+		## +++++++++++++ enter general utility .
+		`
+
+ - **exit**  `key(esc)`
+
+ - **(insert | (add | ad) | paste) divider**  `insert("---")
+		key(enter)
+		`
+
+ - **new divider [block]**  `key(ctrl-e)
+		key(enter)
+		sleep(100ms)
+		insert("---")
+		key(esc:2)
+		
+		
+		# edit.paragraph_start()
+		# edit.jump_line
+		# edit.sentence_start
+		
+		
+		
+		#tabs extension
+		`
+
+ - **pick page**  `key(cmd-ctrl-alt-shift-t)`
+
+ - **go page <number_small>**  `spacesDown=number_small - 1
+		key(cmd-ctrl-alt-shift-t)
+		sleep(300ms)
+		key(cmd-a delete)
+		sleep(100ms)
+		key("down:{spacesDown} enter")
+		`
+
+ - **(choose | pick) page <number_small>**  `spacesDown=number_small - 1
+		key("down:{spacesDown} enter")
+		`
+
+ - **go page <user.text>**  `key(cmd-ctrl-alt-shift-t)
+		sleep(300ms)
+		key(cmd-a delete)
+		sleep(100ms)
+		insert(text)
+		sleep(200ms)
+		key(enter)
+		
+		# not canonical bc search is fuzz and filters char in middle of word`
+
+ - **pick page <user.letter>**  `key(cmd-ctrl-alt-shift-t)
+		sleep(300ms)
+		key(cmd-a delete)
+		sleep(100ms)
+		insert(letter)
+		`
+
+ - **open page in tab**  `key(ctrl:down)
+		mouse_click(0)
+		
+		## ++++++++++++++++++++++++++ navigate .
+		# go top and bottom doesnt work, overriden by gener edit cmds?
+		# tail doesnt work either
+		`
+
+ - **go [to] crown [of] [page]**  `key(cmd-alt-shift-t)`
+
+ - **go [to] base [of] [page]**  `key(cmd-shift-enter)`
+
+ - **dedent**  `key(shift-tab)`
+
+ - **indent less**  `key(shift-tab)`
+
+ - **nope**  `key(cmd-z)`
+
+ - **(go | page | scroll) [to] top**  `key(home)`
+
+ - **[toggle] (multi select | select (multi | multiple [blocks])) [(off | on)]**  `key(cmd-m)`
+
+ - **(hat | hats | nav | deep nav [hats] | block point | block hats | show hats)**  `key(cmd-alt-0)`
+
+ - **(deep | do you) grab deep grab | go <user.number_string>**  `insert(number_string)
+		sleep(200ms)
+		key(enter)
+		`
+
+ - **(deep | do you ) grab | go  <user.number_key>**  `key(number_key)
+		sleep(100ms)
+		key(enter)
+		`
+
+ - **(deep | do you ) grab | go <user.number_key> <user.number_key>**  `key(number_key_1 number_key_2)
+		sleep(100ms)
+		key(enter)
+		`
+
+ - **(deep | do you ) grab | go  <user.letter>**  `key("{letter}")
+		sleep(100ms)
+		key(enter)
+		`
+
+ - **(deep | do you ) grab | go  <user.letter> <user.letter>**  `key("{letter_1} {letter_2}")
+		sleep(100ms)
+		key(enter)
+		`
+
+
+
+#  shortcat
+
+
+ - **(target | shortcat )**  `key(alt-shift-cmd-ctrl-f12)`
+
+ - **(short | cat) [(pick | pic)] <user.letters>**  `insert(" {letters}")
+		sleep(200ms)
+		key(enter)
+		`
+
+ - **(short | cat) menu**  `key(cmd)`
+
+ - **(target | shortcat ) <user.letter>**  `key("alt-shift-cmd-ctrl-f12")
+		sleep(300ms)
+		insert(letter)
+		
+		#  search menus for phrase`
+
+ - **((target | shortcat ) [(menu | menus)] | (search | hunt) [(short | cat)] (menu | menus)) [<user.text>]**  `key("alt-shift-cmd-ctrl-f12")
+		sleep(300ms)
+		insert("{text or ''}")
+		
+		# (search | hunt) [ray] (menu | menus)
+		
+		# Search menus for phrase and automatically choose first`
+
+ - **((target | shortcat ) [(menu | menus)] | (search | hunt) [(short | cat)] (menu | menus)) force <user.text>**  `key("alt-shift-cmd-ctrl-f12")
+		sleep(300ms)
+		insert(text)
+		sleep(300ms)
+		key("enter")
+		
+		#refresh menu`
+
+ - **(short | target) refresh**  `key(cmd-r)`
+
+ - **(short | cat) [pick] [item] <number>**  `key("cmd-{number}")`
+
+
+
+#  beta-cursorless
+
+
+ - **model please {user.staticPrompt} <user.cursorless_target> [<user.cursorless_destination>]**  `text_list = user.cursorless_get_text_list(cursorless_target)
+		user.gpt_dynamic_request_cursorless(user.staticPrompt, text_list, cursorless_destination or 0)
+		`
+
+ - **model please <user.text> <user.cursorless_target> [<user.cursorless_destination>]**  `text_list = user.cursorless_get_text_list(cursorless_target)
+		user.gpt_dynamic_request_cursorless(user.text, text_list, cursorless_destination or 0)`
+
+
+
+#  beta-docs
+
+
+ - **model find <user.text>**  `user.gpt_find_talon_commands(user.text)`
+
+
+
+#  beta-func-calling
+
+
+ - **model please <user.text>**  `utterance = user.text
+		txt = edit.selected_text()
+		user.gpt_dynamic_request(utterance, txt)
+		
+		# Runs a model prompt on the selected text and pastes the result.`
+
+ - **model please {user.staticPrompt} [this]**  `text = edit.selected_text()
+		user.gpt_dynamic_request(user.staticPrompt, text)`
+
+
+
+#  continue
+
+
+ - **tin you new**  `user.vscode("continue.newSession")`
+
+ - **tin you file select**  `user.vscode("continue.selectFilesAsContext")`
+
+ - **tin you history**  `user.vscode("continue.viewHistory")`
+
+ - **tin you (accept | yes)**  `user.vscode("continue.acceptDiff")`
+
+ - **tin you reject**  `user.vscode("continue.rejectDiff")`
+
+ - **tin you toggle fullscreen**  `user.vscode("continue.toggleFullScreen")`
+
+ - **tin you cancel**  `key("escape")`
+
+ - **tin you debug terminal**  `user.vscode("continue.debugTerminal")`
+
+ - **tin you add <user.cursorless_target>**  `user.cursorless_command("setSelection", cursorless_target)
+		user.vscode("continue.focusContinueInput")`
+
+ - **tin you edit <user.cursorless_target>**  `user.cursorless_command("setSelection", cursorless_target)
+		user.vscode("continue.quickEdit")
+		`
+
+ - **bar tin you**  `user.vscode("continue.continueGUIView.focus")`
+
+
+
+#  gpt-cursorless
+
+
+ - **model {user.staticPrompt} <user.cursorless_target> [<user.cursorless_destination>]**  `text = user.cursorless_get_text_list(cursorless_target)
+		result = user.gpt_apply_prompt(user.staticPrompt, text)
+		user.cursorless_or_paste_helper(cursorless_destination or 0, result)`
+
+
+
+#  gpt-shell
+
+
+ - **model shell <user.text>**  `result = user.gpt_generate_shell(user.text)
+		user.add_to_confirmation_gui(result)
+		
+		# Confirm and paste the output of the model`
+
+ - **paste model output**  `user.paste_model_confirmation_gui()`
+
+ - **copy model output**  `user.copy_model_confirmation_gui()`
+
+ - **deny model output**  `user.close_model_confirmation_gui()`
+
+
+
+#  gpt
+
+
+ - **model ask <user.text>**  `result = user.gpt_answer_question(text)
+		user.paste(result)
+		`
+
+ - **model ask this**  `text = edit.selected_text()
+		key(right enter:2)
+		result = user.gpt_answer_question(text)
+		user.paste(result)
+		
+		# Runs a model prompt on the selected text and pastes the result.`
+
+ - **model {user.staticPrompt} [this]**  `text = edit.selected_text()
+		result = user.gpt_apply_prompt(user.staticPrompt, text)
+		user.paste(result)
+		
+		# Runs a model prompt on the selected text and sets the result to the clipboard`
+
+ - **model clip {user.staticPrompt} [this]**  `text = edit.selected_text()
+		result = user.gpt_apply_prompt(user.staticPrompt, text)
+		clip.set_text(result)
+		
+		# Say your prompt directly and the AI will apply it to the selected text`
+
+ - **model please <user.text>**  `prompt = user.text
+		txt = edit.selected_text()
+		result = user.gpt_apply_prompt(prompt, txt)
+		user.paste(result)
+		
+		# Applies an arbitrary prompt from the clipboard to selected text and pastes the result.
+		# Useful for applying complex/custom prompts that need to be drafted in a text editor.`
+
+ - **model apply [from] clip**  `prompt = clip.text()
+		text = edit.selected_text()
+		result = user.gpt_apply_prompt(prompt, text)
+		user.paste(result)
+		
+		# Shows the list of available prompts`
+
+ - **model help**  `user.gpt_help()`
+
+ - **model [nope] that was <user.text>**  `result = user.gpt_reformat_last(text)
+		user.paste(result)`
+
+
+
+#  ai-images
+
+
+ - **image describe [{user.descriptionPrompt}]**  `result = user.image_describe_clipboard(descriptionPrompt or "")
+		user.paste(result)
+		`
+
+ - **image describe window [{user.descriptionPrompt}]**  `user.screenshot_window_clipboard()
+		result = user.image_describe_clipboard(descriptionPrompt or "")
+		user.paste(result)
+		`
+
+ - **image describe screen [{user.descriptionPrompt}]**  `user.screenshot_clipboard()
+		result = user.image_describe_clipboard(descriptionPrompt or "")
+		user.paste(result)
+		`
+
+ - **image generate <user.text>**  `user.image_generate(text)`
+
+
+
+#  gpt-tts
+
+
+ - **echo {user.staticPrompt} [this]**  `text = edit.selected_text()
+		result = user.gpt_apply_prompt(user.staticPrompt, text)
+		user.tts(result)
+		`
+
+ - **echo ask <user.text>**  `result = user.gpt_answer_question(text)
+		user.tts(result)`
+
+
+
+#  image-tts
+
+
+ - **echo (describe | image) (image | describe)**  `result = user.image_describe_clipboard("")
+		user.tts(result)
+		`
+
+ - **echo describe [{user.descriptionPrompt}]**  `result = user.image_describe_clipboard(descriptionPrompt or "")
+		user.tts(result)
+		`
+
+ - **echo describe window [{user.descriptionPrompt}]**  `user.screenshot_window_clipboard()
+		result = user.image_describe_clipboard(descriptionPrompt or "")
+		user.tts(result)
+		`
+
+ - **echo describe screen [{user.descriptionPrompt}]**  `user.screenshot_clipboard()
+		result = user.image_describe_clipboard(descriptionPrompt or "")
+		user.tts(result)`
+
+
+
+#  codeium
+
+
+ - **pilot (previous | last)**  `user.vscode("editor.action.inlineSuggest.showPrevious")`
+
+ - **pilot next**  `user.vscode("editor.action.inlineSuggest.showNext")`
+
+ - **pilot yes**  `user.vscode("editor.action.inlineSuggest.commit")`
+
+ - **pilot nope**  `user.vscode("editor.action.inlineSuggest.undo")`
+
+ - **pilot chat [<user.prose>]**  `user.vscode("codeium.openChatView")
+		sleep(2)
+		user.paste(user.prose or "")
+		`
+
+ - **pilot toggle**  `user.vscode("codeium.toggleEnabledForCurrentLanguage")`
+
+ - **pilot submit**  `key(ctrl-shift-enter)`
+
+ - **pilot make [<user.prose>]**  `user.vscode("codeium.openCodeiumCommand")
+		sleep(0.7)
+		user.paste(user.prose or "")
+		`
+
+ - **pilot search**  `user.vscode("codeium.openSearchView")`
+
+ - **pilot explain**  `user.vscode("codeium.explainCodeBlock")`
+
+ - **pilot debug**  `user.vscode("codeium.explainProblem")`
+
+ - **pilot editor**  `user.vscode("codeium.openChatInPane")`
+
+ - **pilot cancel**  `user.vscode("editor.action.inlineSuggest.hide")`
+
+ - **pilot refactor**  `user.vscode("codeium.refactorCodeBlock")`
+
+
+
+#  copilot
+
+
+ - **pilot jest**  `user.vscode("editor.action.inlineSuggest.trigger")`
+
+ - **pilot next**  `user.vscode("editor.action.inlineSuggest.showNext")`
+
+ - **pilot (previous | last)**  `user.vscode("editor.action.inlineSuggest.showPrevious")`
+
+ - **pilot yes**  `user.vscode("editor.action.inlineSuggest.commit")`
+
+ - **pilot yes word**  `user.vscode("editor.action.inlineSuggest.acceptNextWord")`
+
+ - **pilot nope**  `user.vscode("editor.action.inlineSuggest.undo")`
+
+ - **pilot cancel**  `user.vscode("editor.action.inlineSuggest.hide")`
+
+ - **pilot block last**  `user.vscode("workbench.action.chat.previousCodeBlock")`
+
+ - **pilot block next**  `user.vscode("workbench.action.chat.nextCodeBlock")`
+
+ - **pilot new file <user.ordinal_or_last>**  `user.copilot_focus_code_block(ordinal_or_last)
+		user.vscode("workbench.action.chat.insertIntoNewFile")`
+
+ - **pilot copy <user.ordinal_or_last>**  `user.copilot_focus_code_block(ordinal_or_last)
+		edit.copy()`
+
+ - **pilot bring <user.ordinal_or_last>**  `user.copilot_bring_code_block(ordinal_or_last)`
+
+ - **pilot bring <user.ordinal_or_last> {user.makeshift_destination} <user.cursorless_target>**  `user.cursorless_command(makeshift_destination, cursorless_target)
+		user.copilot_bring_code_block(ordinal_or_last)`
+
+ - **pilot chat [<user.prose>]**  `user.copilot_chat(prose or "")`
+
+ - **pilot {user.copilot_slash_command} <user.cursorless_target> [to <user.prose>]**  `user.cursorless_command("setSelection", cursorless_target)
+		user.copilot_inline_chat(copilot_slash_command or "", prose or "")`
+
+ - **pilot make [<user.prose>]**  `user.copilot_inline_chat("", prose or "")`
 
 
 
@@ -9868,7 +13951,8 @@
 		mouse_click(1)`
 
  - **(eye | i) middle (touch | click)**  `user.move_cursor_to_gaze_point()
-		mouse_click(2)`
+		mouse_click(2)
+		# Example: "eye control click" to control-click where you're looking.`
 
  - **(eye | i) <user.modifiers> (touch | click)**  `user.move_cursor_to_gaze_point()
 		key("{modifiers}:down")
@@ -9899,15 +13983,21 @@
 
  - **(eye | i) scroll right half**  `user.move_cursor_to_gaze_point(-40, 0)
 		user.mouse_scroll_right(0.5)
-		`
+		
+		# Debugging commands.`
 
- - **ocr show [text]**  `user.show_ocr_overlay("text", 1)`
+ - **ocr show [text]**  `user.show_ocr_overlay("text")`
 
- - **ocr show boxes**  `user.show_ocr_overlay("boxes", 1)`
+ - **ocr show [text] near <user.timestamped_prose>**  `user.show_ocr_overlay("text", timestamped_prose)`
+
+ - **ocr show boxes**  `user.show_ocr_overlay("boxes")`
 
  - **(hover (seen | scene) | cursor move) <user.timestamped_prose>**  `user.move_cursor_to_word(timestamped_prose)`
 
- - **[left] (touch | click) <user.timestamped_prose>**  `user.click_text(timestamped_prose)`
+ - **[left] (touch | click) <user.timestamped_prose>**  `user.click_text(timestamped_prose)
+		# The following command is mostly for testing/debugging the onscreen_text capture.`
+
+ - **screen [left] (touch | click) <user.onscreen_text>**  `user.click_text(onscreen_text)`
 
  - **[left] double (touch | click) <user.timestamped_prose>**  `user.double_click_text(timestamped_prose)`
 
@@ -9915,15 +14005,21 @@
 
  - **middle (touch | click) <user.timestamped_prose>**  `user.middle_click_text(timestamped_prose)`
 
- - **<user.modifiers> (touch | click) <user.timestamped_prose>**  `user.modifier_click_text(modifiers, timestamped_prose)`
+ - **<user.modifiers> (touch | click) <user.timestamped_prose>**  `user.modifier_click_text(modifiers, timestamped_prose)
+		# Example: "go before apple" to move the text cursor before the word "apple".`
 
  - **(go before | pre (seen | scene)) <user.timestamped_prose>**  `user.move_text_cursor_to_word(timestamped_prose, "before")`
 
  - **(go after | post (seen | scene)) <user.timestamped_prose>**  `user.move_text_cursor_to_word(timestamped_prose, "after")`
 
- - **select <user.prose_range>**  `user.perform_ocr_action("select", "", prose_range)`
+ - **select <user.prose_range>**  `user.perform_ocr_action("select", "", prose_range)
+		# Examples:
+		# "take seen apple" to select the word "apple".
+		# "copy seen apple through banana" to copy the phrase "apple pear banana".
+		# "copy all seen apple" to copy all text from the field containing the word "apple".`
 
- - **{user.ocr_actions} [{user.ocr_modifiers}] (seen | scene) <user.prose_range>**  `user.perform_ocr_action(ocr_actions, ocr_modifiers or "", prose_range)`
+ - **{user.ocr_actions} [{user.ocr_modifiers}] (seen | scene) <user.prose_range>**  `user.perform_ocr_action(ocr_actions, ocr_modifiers or "", prose_range)
+		# Example: "replace apple with banana" to replace the word "apple" with the word "banana".`
 
  - **replace [{user.ocr_modifiers}] [seen | scene] <user.prose_range> with <user.prose>**  `user.replace_text(ocr_modifiers or "", prose_range, prose)`
 
@@ -9931,7 +14027,32 @@
 
  - **[go] after <user.timestamped_prose> say <user.prose>**  `user.insert_adjacent_to_text(timestamped_prose, "after", prose)`
 
- - **phones (seen | scene) <user.timestamped_prose>**  `user.change_text_homophone(timestamped_prose)
+ - **phones [word] (seen | scene) <user.timestamped_prose>**  `user.change_text_homophone(timestamped_prose)
+		
+		# Beta-only commands that offer intuitive text editing. See
+		# https://handsfreecoding.org/2024/03/15/making-writing-and-editing-with-your-voice-feel-natural/
+		# for detailed documentation.
+		# Example: "append with apple pear" to append "pear" after the word "apple".`
+
+ - **append with <user.timestamped_prose_only>**  `user.append_text(timestamped_prose_only)
+		# Example: "prepend with apple pear" to prepend "apple" before the word "pear".`
+
+ - **prepend with <user.timestamped_prose_only>**  `user.prepend_text(timestamped_prose_only)
+		# Example: "insert with apple pear" to either append "pear" after the word "apple" or prepend
+		# "apple" before the word "pear", depending on whether "apple" or "pear" is already onscreen.`
+
+ - **insert with <user.timestamped_prose_only>**  `user.insert_text_difference(timestamped_prose_only)
+		# Example: "revise with apple pear banana" to change "apple orange banana" to "apple pear banana".`
+
+ - **(revise | revised) with <user.timestamped_prose_only>**  `user.revise_text(timestamped_prose_only)
+		# Example: "revise from apple pear banana" to replace all the text from "apple" to the text cursor
+		# with "apple pear banana".`
+
+ - **((revise | revised) from <user.timestamped_prose_only> | (revise | revised) with <user.timestamped_prose_only> cursor)**  `user.revise_text_starting_with(timestamped_prose_only)
+		# Example: "revise through apple pear banana" to replace all the text from the text cursor to
+		# "banana" with "apple pear banana".`
+
+ - **(revise | revised) through <user.timestamped_prose_only>**  `user.revise_text_ending_with(timestamped_prose_only)
 		`
 
  - **ocr tracker on**  `user.connect_ocr_eye_tracker()`
@@ -9944,6 +14065,8 @@
 
 
  - **choose <number_small>**  `user.choose_gaze_ocr_option(number_small)`
+
+ - **choose to**  `user.choose_gaze_ocr_option(2)`
 
  - **numbers hide**  `user.hide_gaze_ocr_options()`
 
@@ -9990,6 +14113,26 @@
 # win window action
 
 
+ - **window {user.window_actions}**  `user.action_windows(user.window_actions, 1, 0)`
+
+ - **window {user.window_actions} other**  `user.action_windows(user.window_actions, 0, 1)`
+
+ - **window {user.window_actions} all**  `user.action_windows(user.window_actions, 1, 1)`
+
+ - **from <user.running_applications> window {user.window_actions}**  `user.action_windows(user.window_actions, 1, 0, user.running_applications)`
+
+ - **from <user.running_applications> window {user.window_actions} other**  `user.action_windows(user.window_actions, 0, 1, user.running_applications)`
+
+ - **from <user.running_applications> window {user.window_actions} all**  `user.action_windows(user.window_actions, 1, 1, user.running_applications)
+		
+		# Entering and exiting fullscreen mode.`
+
+ - **fullscreen enter**  `user.action_windows("fullscreen", 1, 0)`
+
+ - **<user.running_applications> fullscreen enter**  `user.action_windows("fullscreen", 1, 0, user.running_applications)`
+
+ - **fullscreen exit**  `key(cmd-ctrl-f)`
+
  - **{user.window_actions} window**  `user.action_windows(user.window_actions, 1, 0)`
 
  - **{user.window_actions} other windows**  `user.action_windows(user.window_actions, 0, 1)`
@@ -9998,12 +14141,7 @@
 
  - **{user.window_actions} all <user.running_applications> windows**  `user.action_windows(user.window_actions, 1, 1, user.running_applications)`
 
- - **{user.window_actions} other <user.running_applications> windows**  `user.action_windows(user.window_actions, 0, 1, user.running_applications)
-		`
-
- - **fullscreen enter**  `user.action_windows("fullscreen", 1, 0)`
-
- - **fullscreen exit**  `key(cmd-ctrl-f)`
+ - **{user.window_actions} other <user.running_applications> windows**  `user.action_windows(user.window_actions, 0, 1, user.running_applications)`
 
 
 
@@ -10171,145 +14309,1038 @@
 
 
 
-#  vscode
+#  bars
 
 
- - **new sleep action**  `insert("sleep(100ms)")`
+ - **(bar | go) outline**  `user.vscode("outline.focus")`
 
- - **(add | new) key action**  `insert("key()")
-		key(left)
+ - **[(toggle | show | hide | view | focus | go)] (activity | icons) bar [(toggle | show | hide | view)]**  `user.vscode("workbench.action.toggleActivityBarVisibility")
 		
-		
-		#general editor stuff
+		## +++++++++++++++++++ primary sidebar .
 		`
 
- - **choose [color] theme**  `user.menu_select('Code|Settings…|Theme|Color Theme [⌘K ⌘T]')`
+ - **(toggle | show | view) [left] (sidebar | bar)**  `user.vscode("workbench.action.toggleSidebarVisibility")`
 
- - **(show | reveal) file [in] (explore | explorer)**  `key(cmd-shift-p)
-		sleep(100ms)
-		insert("reveal active file")
-		sleep(100ms)
+ - **[left] (bar | sidebar) (toggle | show)**  `user.vscode("workbench.action.toggleSidebarVisibility")`
+
+ - **[left] (sidebar | bar) hide**  `user.vscode("workbench.action.closeSidebar")`
+
+ - **hide [left] (sidebar | bar)**  `user.vscode("workbench.action.closeSidebar")`
+
+ - **(toggle | show | hide | view) right (sidebar | bar)**  `user.vscode("workbench.action.toggleAuxiliaryBar")`
+
+ - **right (sidebar | bar) (toggle | show | hide)**  `user.vscode("workbench.action.toggleAuxiliaryBar")`
+
+ - **(toggle | show | hide | view | close) [bottom] panel**  `user.vscode("workbench.action.togglePanel")`
+
+ - **panel (close | toggle | show | hide | view)**  `user.vscode("workbench.action.togglePanel")`
+
+ - **(go | toggle | enter | exit | leave) (in | then | zen | zend | full) mode**  `user.vscode("workbench.action.toggleZenMode")`
+
+ - **(hide | close) [(both | all)] (bars | sidebars) | wide (view | mode) | (tab | tabs) wide**  `user.vscode("workbench.action.closeSidebar")
+		user.vscode("workbench.action.closeAuxiliaryBar")
+		`
+
+ - **(show | open | toggle) [(both | all)] (bars | sidebars) | stuffed mode**  `user.vscode("workbench.action.toggleSidebarVisibility")
+		user.vscode("workbench.action.toggleAuxiliaryBar")
+		`
+
+ - **(hide | close) [all] views | focused (view | mode) | focus (tab | tabs | file)**  `user.vscode("workbench.action.closeSidebar")
+		user.vscode("workbench.action.closeAuxiliaryBar")
+		user.vscode("workbench.action.closePanel")
+		`
+
+ - **(show | open | toggle) [all] views | kit mode**  `user.vscode("workbench.action.toggleSidebarVisibility")
+		user.vscode("workbench.action.toggleAuxiliaryBar")
+		user.vscode("workbench.action.togglePanel")
+		
+		## ++++++++++++++++++++++++ move panel .
+		`
+
+ - **[move] panel right**  `user.vscode("workbench.action.positionPanelRight")`
+
+ - **[move] panel left**  `user.vscode("workbench.action.positionPanelLeft")`
+
+ - **[move] panel (bottom | down.)**  `user.vscode("workbench.action.positionPanelBottom")`
+
+ - **(panel | term | terminal) (max | min | regular | default)**  `user.vscode("workbench.action.toggleMaximizedPanel")`
+
+ - **bar (extension | extensions | plugins)**  `user.vscode("workbench.view.extensions")`
+
+ - **move (view | widget)**  `user.vscode("workbench.action.moveView")`
+
+ - **reset all view locations**  `user.vscode("workbench.action.resetViewLocations")`
+
+ - **swap (bars | sidebars)**  `user.vscode("workbench.action.toggleSidebarPosition")`
+
+ - **go output [panel]**  `user.vscode("workbench.panel.output.focus")
+		`
+
+ - **show output channels**  `user.vscode("workbench.action.showOutputChannels")
+		`
+
+ - **clear output**  `user.vscode("workbench.output.action.clearOutput")
+		`
+
+ - **toggle output**  `user.vscode("workbench.action.output.toggleOutput")
+		`
+
+ - **toggle output auto scroll**  `user.vscode("workbench.output.action.toggleAutoScroll")`
+
+
+
+#  bookmarks
+
+
+ - **(toggle | create | add) [line] bookmark | bookmark line**  `user.vscode("bookmarks.toggle")`
+
+ - **(remove | delete) bookmark**  `user.vscode("bookmarks.toggle")`
+
+ - **bookmark (that | line) (named | labeled)**  `user.vscode("bookmarks.toggleLabeled")`
+
+ - **bookmark (that | line) [with] [label] <user.text>**  `user.vscode("bookmarks.toggleLabeled")
+		insert(text)
+		sleep(300ms)
 		key(enter)
 		`
 
- - **(toggle | show | hide | view) [left] (sidebar | bar)**  `key(cmd-b)`
-
- - **bar (toggle | show | hide)**  `key(cmd-b)`
-
- - **(toggle | show | hide | view) right (sidebar | bar)**  `key(cmd-alt-b)`
-
- - **(toggle | show | hide | view) [bottom] panel**  `key(cmd-j)`
-
- - **panel (toggle | show | hide | view)**  `key(cmd-j)`
-
- - **(toggle | show | hide) zen mode**  `key(cmd-k z)`
-
- - **(toggle | show | hide) line numbers**  `key(ctrl-shift-l)`
-
- - **wrap words**  `key(alt-z)`
-
- - **kill line**  `key(cmd-shift-k)`
-
- - **find [text]**  `key(cmd-f)`
-
- - **find in files**  `key(shift-cmd-h)`
-
- - **replace [text]**  `key(cmd-alt-f)`
-
- - **(show | focus) (repl | results) (view | window | tab)**  `key(ctrl-alt-o o)`
-
- - **kill process**  `key(ctrl-c)`
-
- - **jack in repl**  `key(alt-ctrl-c alt-ctrl-j)`
-
- - **load file [in repl]**  `key(ctrl-alt-c enter)`
-
- - **(rep | repl | evaluate | eval | compute | run | run it) [top]**  `key(ctrl-alt-o o)
-		sleep(500ms)
-		key(cmd-a)
-		sleep(500ms)
-		key(delete)
-		sleep(500ms)
-		key(ctrl-keypad_minus)
-		sleep(500ms)
-		key(alt-enter)
-		sleep(1000ms)
-		key(ctrl-alt-o o)
-		sleep(2000ms)
-		key(ctrl-g)
-		# sleep(500ms)
-		# key(1)
-		# sleep(500ms)
-		# key(enter)
+ - **bookmark that [(paste | pace)]**  `edit.copy()
+		user.vscode("bookmarks.toggleLabeled")
+		edit.paste()
+		sleep(300ms)
+		key(enter)
 		
-		# key(cmd-up)
-		# sleep(500ms)
-		# key(ctrl-keypad_minus)
-		# sleep(500ms)
-		# key(ctrl-keypad_minus)
-		# sleep(500ms)
-		key(ctrl-keypad_minus:3)
-		
-		
-		
-		
+		## ++++++++++++++++++++++ jump to via bookmark order .
 		`
 
- - **(rep | repl | evaluate | eval | compute | run) (this | here | form)**  `key(ctrl-enter)
+ - **[go] next (bookmark | mark)**  `user.vscode("bookmarks.jumpToNext")`
+
+ - **[go] (previous | prev | last) (bookmark | mark)**  `user.vscode("bookmarks.jumpToPrevious")`
+
+ - **(hunt | search | pick | list) file (bookmark | bookmarks | mark | marks ) [for] [<user.text>]**  `user.vscode("bookmarks.list")
+		# sleep(200ms)
+		insert(text)
+		
+		## ++++++ pick bookmark from all files .`
+
+ - **(hunt | search | pick | list) [all] (bookmark | bookmarks | mark | marks ) [for] [<user.text>]**  `user.vscode("bookmarks.listFromAllFiles")
+		# sleep(100ms)
+		key(enter)
+		sleep(300ms)
+		insert(text)
 		
 		
+		#open copied bookmark from all files`
+
+ - **open (bookmark | mark) [(paste | pace)]**  `user.vscode("bookmarks.listFromAllFiles")
+		# sleep(100ms)
+		key(enter)
+		sleep(300ms)
+		key(cmd-v)
+		sleep(300ms)
+		key(enter)
 		
-		#format`
+		# bookmarks panel .`
 
- - **calva format**  `key(cmd-shift-p)
-		insert("calva format ")
+ - **(focus | show | bar) (bookmarks | marks | links) [(bar | panel | view)]**  `user.vscode("bookmarksExplorer.focus")
 		
-		#navigate`
-
- - **[go] (last |  previous | prev) form**  `key(alt-up)`
-
- - **[go] next form**  `key(alt-down)`
-
- - **(paredit | pare edit | pear edit) commands**  `key(cmd-shift-p)
-		insert("calva paredit ")
+		## ++++++++++++++++++++ hover commands .
 		`
 
- - **wrap [in] (brackets | vector | square)**  `key(ctrl-shift-alt-s)`
+ - **rename bookmark**  `mouse_click(1)
+		sleep(300ms)
+		key(down)
+		key(enter)
+		`
 
- - **slurp forward**  `key(ctrl-alt-right)`
+ - **rename bookmark [<user.text>]**  `mouse_click(1)
+		sleep(300ms)
+		key(down)
+		key(enter)
+		insert(text)
+		sleep(300ms)
+		key(enter)
+		`
 
- - **slurp backward**  `key(shift-ctrl-alt-left)`
+ - **copy bookmark name**  `mouse_click(1)
+		sleep(300ms)
+		key(down)
+		key(enter)
+		key(cmd-c)
+		key(esc)
+		
+		## ++++++++++++++++ line link url .
+		`
 
- - **barf forward**  `key(ctrl-alt-left)`
+ - **copy (line | code) (link | address)**  `user.vscode("extension.linkLine")
+		
+		#go to link (via raycast) is in general.talon
+		
+		## +++++++++++++++++++++++++ favorites (file bookmarks) .
+		`
 
- - **barf backward**  `key(shift-ctrl-alt-right)`
+ - **[(show | view | bar)] favorites**  `user.vscode("workbench.view.extension.favorites-explorer")`
 
- - **swap forms**  `key(ctrl-alt-t)`
+ - **(focus | go | bar) favorites**  `user.vscode("favorites-full-view.focus")`
 
- - **[move] form (up | left | back)**  `key(alt-up)`
+ - **(focus | go | bar) (explore |explorer) favorites**  `user.vscode("favorites.focus")
+		`
 
- - **[move] form (down | right |  forward | for)**  `key(alt-down)`
+ - **file (add | send) [to] (favorite | favorites) | make file favorite | add [file] [to] (favorite | favorites)**  `user.vscode("favorites.addToFavorites")`
+
+ - **[file] remove [file] [from] (favorite | favorites)**  `user.vscode("favorites.deleteFavorite")`
+
+ - **(add | send) (this | that) to favorites | make favorite**  `mouse_click(1)
+		sleep(300ms)
+		insert("add to favorites")
+		key(enter)
+		`
+
+ - **remove (this | that) from favorites**  `mouse_click(1)
+		sleep(300ms)
+		insert("remove")
+		key(enter)`
+
+
+
+#  breadcrumbs
+
+
+ - **(toggle | show | hide) (file context | path | crumb | crumbs | breadcrumb | breadcrumbs)**  `user.vscode("breadcrumbs.toggle")`
+
+ - **file context | path | crumb | crumbs | breadcrumb | breadcrumbs**  `user.vscode("breadcrumbs.focusAndSelect")`
+
+ - **(go | focus) (file context | path | crumb | crumbs | breadcrumb | breadcrumbs)**  `user.vscode("breadcrumbs.focus")`
+
+ - **(crumb | crumbs | level) (left | [level] up | parent)**  `key(alt-left)`
+
+ - **(crumb | crumbs | level) (right | [level] down | child)**  `key(alt-right)`
+
+ - **parent ([(file | level)] context | path | crumb | crumbs | breadcrumb | breadcrumbs)**  `user.vscode("breadcrumbs.focusAndSelect")
+		key(alt-(left)`
+
+
+
+#  edit
+
+
+ - **(number  | numb) <user.number_string>**  `"{number_string}"`
+
+ - **clone string**  `s = edit.selected_text()
+		insert("[{s}")
+		key(delete space)
+		sleep(100ms)
+		insert("{s}")
+		sleep(100ms)
+		# key(delete)
+		`
+
+ - **(add | ad) post**  `s = edit.selected_text()
+		insert("[{s}")
+		key(delete space)
+		sleep(100ms)
+		insert("{:post \"")
+		`
+
+ - **(add | ad) pre**  `s = edit.selected_text()
+		insert("[{s}")
+		key(delete space)
+		sleep(100ms)
+		insert("{:pre \"")
+		
+		
+		
+		##### general edit commands
+		
+		#delete line`
+
+ - **kill (line | lines) | killing | k line | cline**  `user.vscode("editor.action.deleteLines")`
+
+ - **break <user.cursorless_target>**  `user.cursorless_command("setSelectionBefore", cursorless_target)
+		user.vscode("hideSuggestWidget")
+		key("enter")
+		`
+
+ - **break**  `user.vscode("hideSuggestWidget")
+		key("enter")
+		`
+
+ - **complete**  `user.vscode("editor.action.triggerSuggest")`
+
+ - **complete inline**  `user.vscode("editor.action.inlineSuggest.trigger")`
+
+ - **format selection**  `user.vscode("editor.action.formatSelection")
+		`
+
+ - **format document**  `user.vscode("editor.action.formatDocument")
+		`
+
+ - **format modified lines**  `user.vscode("editor.action.formatChanges")
+		
+		
+		## ++++++++++++++++++++++++++ Dividers .
+		`
+
+ - **(insert | add | make) divider line**  `user.vscode("comment-divider.insertSolidLine")`
+
+ - **(insert | add | make) [divider] header [<user.text>]**  `insert("{text or ''}")
+		sleep(100ms)
+		user.vscode("comment-divider.makeSubHeader")
+		`
+
+ - **(talon | talent) (subhead | subheader) pretext**  `insert("## ++++++++++++++++++")`
+
+ - **expand (selection | take)**  `user.vscode("editor.action.smartSelect.expand")`
+
+ - **take more**  `user.vscode("editor.action.smartSelect.expand")`
+
+ - **take form**  `user.vscode("editor.action.selectToBracket")`
 
  - **(comment |  uncomment) that**  `key(cmd-/)`
 
- - **collapse search results**  `key(cmd-shift-p)
+ - **(uncomment | remove comment [from]) <user.cursorless_target>**  `user.cursorless_command("setSelectionBefore", cursorless_target)
+		key(backspace:3)
+		`
+
+
+
+#  editor
+
+
+ - **copy path**  `user.vscode("copyFilePath")`
+
+ - **copy relative path**  `user.vscode("copyRelativeFilePath")`
+
+ - **wrap (words | lines) | toggle (word | line) wrap**  `user.vscode("editor.action.toggleWordWrap")`
+
+ - **reset [(code | app)] zoom**  `user.vscode("workbench.action.zoomReset")
+		`
+
+ - **Zoom out font | font zoom out**  `user.vscode("editor.action.fontZoomOut")
+		`
+
+ - **Zoom in font | font zoom in**  `user.vscode("editor.action.fontZoomIn")
+		`
+
+ - **(reset | default) font (zoom | size) | font zoom (reset | default)**  `user.vscode("editor.action.fontZoomReset")`
+
+ - **(toggle | show | hide ) mini map**  `user.vscode("editor.action.toggleMinimap")`
+
+ - **(change | switch | tab | editor) (font | text) size**  `user.vscode("extension.switchFontSize")`
+
+ - **[(change | switch | tab | editor)] (font | text) [size] <number>**  `user.vscode("extension.switchFontSize")
 		sleep(100ms)
-		insert("search collapse all")
+		insert(number)
 		sleep(100ms)
+		key(enter)
+		
+		## ++++++++++++++++++++++ Line numbers .
+		`
+
+ - **(toggle | show | hide) line numbers**  `user.vscode("lntoggle.toggle")`
+
+ - **copy line number**  `user.vscode("copy-current-line-number.helloWorld")`
+
+ - **(show | hide | view | visualize) [context] (tokens | scopes | scope)**  `user.vscode("editor.action.inspectTMScopes")`
+
+ - **(bar | go) (scope | scopes)**  `user.vscode("cursorless.scopes.focus")
+		
+		# todo: bug, working from command menu, but not talon command (context issue?)`
+
+ - **show (scope | scopes) (visualizer | viz)**  `user.vscode("cursorless.showScopeVisualizer")`
+
+ - **hide (scope | scopes) (visualizer | viz)**  `user.vscode("cursorless.hideScopeVisualizer")
+		
+		#--------------
+		`
+
+ - **(toggle | show | hide ) [cursorless] (hats | decorations)**  `user.vscode("cursorless.toggleDecorations")`
+
+ - **(hats | decorations) (on | off)**  `user.vscode("cursorless.toggleDecorations")`
+
+ - **change [code] [editor | tab] language [mode]**  `user.vscode("workbench.action.editor.changeLanguageMode")`
+
+
+
+#  editor nav
+
+
+ - **(go [to] | pick) symbol**  `user.vscode("workbench.action.gotoSymbol")`
+
+ - **symbol last**  `user.vscode("gotoNextPreviousMember.previousMember")`
+
+ - **symbol next**  `user.vscode("gotoNextPreviousMember.nextMember")`
+
+ - **go back (edit | at it)**  `user.vscode("workbench.action.navigateBackInEditLocations")
+		`
+
+ - **go (forward | for | next) (edit | at it)**  `user.vscode("workbench.action.navigateForwardInEditLocations")
+		`
+
+ - **go (prev | previous) (edit | at it)**  `user.vscode("workbench.action.navigatePreviousInEditLocations")
+		`
+
+ - **go [to] last (edit | at it)**  `user.vscode("workbench.action.navigateToLastEditLocation")
+		
+		## ++++++++++++++ traverse recent nav location
+		`
+
+ - **go back**  `user.vscode("workbench.action.navigateBack")
+		`
+
+ - **go (forward | for | next)**  `user.vscode("workbench.action.navigateForward")
+		
+		# what is defference here?
+		`
+
+ - **go back nav**  `user.vscode("workbench.action.navigateBackInNavigationLocations")
+		`
+
+ - **go (forward | for | next) nav**  `user.vscode("workbench.action.navigateForwardInNavigationLocations")
+		`
+
+ - **go (prev | previous) nav**  `user.vscode("workbench.action.navigatePreviousInNavigationLocations")
+		`
+
+ - **go [to] last nav**  `user.vscode("workbench.action.navigateToLastNavigationLocations")
+		
+		
+		## +++++++++++++++++ Symbol references .
+		`
+
+ - **(find | show) [all] references**  `user.vscode("references-view.findReferences")`
+
+ - **(go | bar) references**  `user.vscode("references-view.tree.focus")`
+
+ - **go to references**  `user.vscode("editor.action.goToReferences")`
+
+ - **(peek | peak) (reference | reference)**  `user.vscode("editor.action.referenceSearch.trigger")`
+
+ - **problem show**  `user.vscode("workbench.panel.markers.view.focus")`
+
+ - **go [to] line**  `user.vscode("workbench.action.gotoLine")`
+
+ - **go [to] line <user.number_string>**  `user.vscode("workbench.action.gotoLine")
+		sleep(100ms)
+		insert("{number_string}")
+		key(enter)
+		`
+
+ - **go [to] line (paste | pace | clip)**  `user.vscode("workbench.action.gotoLine")
+		sleep(100ms)
+		edit.paste()
+		key(enter)`
+
+
+
+#  file tree
+
+
+ - **bar [file] (tree | trees)**  `user.vscode("workbench.view.extension.filetree")`
+
+ - **go [file] (tree | trees)**  `user.vscode("filetree.focus")`
+
+ - **tree <user.letters>**  `user.run_rpc_command("talon-filetree.toggleDirectoryOrOpenFile", letters)
+		`
+
+ - **tree parent <user.letters>**  `user.run_rpc_command("talon-filetree.closeParent", letters)
+		`
+
+ - **tree <user.letters> <number>**  `user.run_rpc_command("talon-filetree.expandDirectory", letters, number)
+		`
+
+ - **tree (collapse | fold) <user.letters>**  `user.run_rpc_command("talon-filetree.expandDirectory", letters, 0)
+		`
+
+ - **tree move <user.letters> to <user.letters>**  `user.run_rpc_command("talon-filetree.moveFile", letters_1, letters_2)
+		`
+
+ - **tree move <user.letters> [to] root**  `user.run_rpc_command("talon-filetree.moveFile", letters_1)
+		
+		# the recommended way to open a file is using the "toggleDirectoryOrOpenFile" command
+		# but this may be useful for people that want to separate the two actions
+		# e.g. to create very distinct commands that are easier for talon to differentiate
+		`
+
+ - **tree open <user.letters>**  `user.run_rpc_command("talon-filetree.openFile", letters)
+		`
+
+ - **tree rename <user.letters>**  `user.run_rpc_command("talon-filetree.renameFile", letters)
+		`
+
+ - **tree create <user.letters>**  `user.run_rpc_command("talon-filetree.createFile", letters)
+		`
+
+ - **tree delete <user.letters>**  `user.run_rpc_command("talon-filetree.deleteFile", letters)
+		`
+
+ - **tree (collapse | fold) (root | all)**  `user.run_rpc_command("talon-filetree.collapseRoot")
+		`
+
+ - **tree (select | pick | choose) <user.letters>**  `user.run_rpc_command("talon-filetree.select", letters)
+		`
+
+ - **tree git**  `user.run_rpc_command("talon-filetree.toggleGitIgnoredFiles")
+		`
+
+ - **tree reveal file**  `user.run_rpc_command("talon-filetree.revealCurrentFile")`
+
+
+
+#  gb
+
+
+ - **stencil [force] push command**  `insert("stencil push -d -a")`
+
+
+
+#  git
+
+
+ - **(bar | hide | show) commits | (arc | bark) emits**  `user.vscode("gitlens.showCommitsView")`
+
+ - **(bar | hide | show) file history**  `user.vscode("gitlens.showFileHistoryView")`
+
+ - **go file history**  `user.vscode("gitlens.views.fileHistory.focus")`
+
+ - **[(show | view | bar)] (sources | git | source control)**  `user.vscode("workbench.view.scm")`
+
+ - **go (sources | git | source control)**  `user.vscode("workbench.scm.focus")`
+
+ - **(show | view | bar | go) remotes**  `user.vscode("gitlens.views.remotes.focus")`
+
+ - **git (commands | menu)**  `user.vscode("gitlens.gitCommands")`
+
+ - **[go] (file | tab | editor) next [diff] change**  `user.vscode("workbench.action.editor.nextChange")`
+
+ - **[go] (file | tab | editor) last [diff] change**  `user.vscode("workbench.action.editor.previousChange")`
+
+ - **[go] next [diff] change**  `user.vscode("workbench.action.compareEditor.nextChange")`
+
+ - **[go] last [diff] change**  `user.vscode("workbench.action.compareEditor.previousChange")`
+
+ - **(open  | go) working file**  `user.vscode("gitlens.openWorkingFile")`
+
+ - **open file at revision**  `user.vscode("gitlens.openFileRevision")`
+
+ - **stage [this] file [changes]**  `user.vscode("git.stage")`
+
+ - **(git fetch all | fetch all git) (remotes | repos | repositories)**  `user.vscode("gitlens.fetchRepositories")
+		`
+
+ - **add to git ignore [point]**  `mouse_click(1)
+		sleep(200ms)
+		insert("Add to .gitgnore")
 		key(enter)
 		
 		`
 
- - **clear search results**  `key(cmd-shift-p)
+
+
+#  layouts
+
+
+ - **[i] please layout**  `key(cmd-shift-p)
+		insert("layout")
+		`
+
+ - **(toggle | flip | next | rotate | vertical | vertico | stacked | horizontal | column) (layout | lea)**  `user.vscode("workbench.action.toggleEditorGroupLayout")`
+
+ - **centered [column] layout**  `user.vscode("workbench.action.toggleCenteredLayout")`
+
+ - **single [column] layout**  `user.vscode("workbench.action.editorLayoutSingle")`
+
+ - **(to | two) (column | columns) layout**  `user.vscode("workbench.action.editorLayoutSingle")`
+
+ - **(to | two) (row | rows) layout**  `user.vscode("workbench.action.editorLayoutTwoRows")`
+
+ - **customize layout**  `usBeer.vscode("workbench.action.customizeLayout")`
+
+ - **(bar | go) [restore] (layout | layouts | lout) [restore]**  `user.vscode("restoreEditors.views.layouts.focus")`
+
+ - **[i] please restore (layout | layouts | lout)**  `key(cmd-shift-p)
+		insert("restore editor")
+		
+		# dynamic layouts
+		`
+
+ - **[i] please dynamic (layout | layouts | lout)**  `key(cmd-shift-p)
+		insert("dynamic layout")`
+
+
+
+#  refactoring
+
+
+ - **rename symbol**  `user.vscode("editor.action.rename")`
+
+
+
+#  search
+
+
+ - **bar search <user.text>**  `user.vscode("workbench.view.search")
 		sleep(100ms)
-		insert("search clear results")
+		insert(text)
+		`
+
+ - **go [bar] search [bar] (list | results) | search bar**  `user.vscode("search.action.focusSearchList")
+		`
+
+ - **bar search tree**  `user.vscode("search.action.viewAsTree")
+		`
+
+ - **bar search list**  `user.vscode("search.action.viewAsList")
+		`
+
+ - **bar search fold | (collapse | clap | fold) search [results]**  `user.vscode("search.action.collapseSearchResults")`
+
+ - **bar search expand | (expand | unfold) search [results]**  `user.vscode("search.action.expandSearchResults")`
+
+ - **bar search (clear | new) | clear search results | new bar search**  `user.vscode("search.action.clearSearchResults")`
+
+ - **new [workspace] search [(editor | tab)]**  `user.vscode("search.action.openNewEditor")`
+
+ - **new [workspace] search (to side | right)**  `user.vscode("search.action.openNewEditorToSide")`
+
+ - **open [workspace] [search] results to side**  `user.vscode("search.action.openInEditor")`
+
+ - **bar search [results] to tab**  `user.vscode("search.action.openInEditor")`
+
+ - **search results to tab**  `user.vscode("search.action.openInEditor")`
+
+ - **move search results to tab**  `user.vscode("search.action.openInEditor")
+		user.vscode("search.action.clearSearchResults")
+		
+		#scrolls to top and focuses new input`
+
+ - **(go) [workspace] search [(editor | tab)]**  `user.vscode("search.action.openEditor")`
+
+ - **(search | find) in files**  `user.vscode("workbench.action.findInFiles")`
+
+ - **(open | find | fine | search) file [<user.text>]**  `key(cmd-p)
+		sleep(100ms)
+		insert("{text}")
+		
+		## ++++++++++++++++++++ find in folder .
+		# must have folder selected and focused in explorer
+		`
+
+ - **(search | find in) folder [<user.text>]**  `key(shift-alt-f)
+		sleep(200ms)
+		insert(text or "")
+		`
+
+ - **(search | find) folder (paste | pace)**  `key(shift-alt-f)
+		sleep(200ms)
+		edit.paste()
+		
+		# key(shift-cmd-e) # not reliable toggles back and forth`
+
+
+
+#  search file
+
+
+ - **(go | open | focus | show) (hunt [this] | scout | find in file) [panel]**  `user.vscode("actions.find")
+		
+		#navigates to replace field only if no text selected, and result is targeted`
+
+ - **(show | toggle | go) replace | replace (text | scout | target)**  `user.vscode("editor.action.startFindReplaceAction")
+		
+		#pastes to replace field only if no text selected, and result is targeted`
+
+ - **replace (paste | pace)**  `user.vscode("editor.action.startFindReplaceAction")
+		sleep(100ms)
+		edit.paste()
+		`
+
+ - **replace (next | that)**  `key(enter)
+		`
+
+ - **replace all**  `key(cmd-enter)
+		`
+
+ - **replace here**  `user.replace("")
+		key(cmd-alt-l)
+		`
+
+ - **[toggle] (hunt | find | replace | scout) [in] (selection | [(whole | full)] page)**  `key(alt-cmd-l)`
+
+
+
+#  tabs
+
+
+ - **pin (editor | tab)**  `user.vscode("workbench.action.pinEditor")
+		`
+
+ - **unpin (editor | tab)**  `user.vscode("workbench.action.unpinEditor")
+		`
+
+ - **close (pinned  |  pin) (editor | tab)**  `user.vscode("workbench.action.closeActivePinnedEditor")
+		`
+
+ - **(isolate | separate | join | flatten) (pinned | pin) (editors | tabs | editor tabs)**  `user.vscode("workbench.action.toggleSeparatePinnedEditorTabs")
+		
+		## ++++++++++++++++++++++ focus editor .
+		`
+
+ - **(focus | go) (editor | tab)**  `user.vscode("workbench.action.focusActiveEditorGroup")
+		`
+
+ - **please (go | focus) (editor | tab)**  `key(cmd-shift-p)
+		sleep(200ms)
+		insert("view focus editor")
+		`
+
+ - **please  (go | focus) [tab] group**  `key(cmd-shift-p)
+		sleep(200ms)
+		insert("view focus group")
+		`
+
+ - **(tab | editor | column) (close | clothes)**  `key(cmd-w)`
+
+ - **pop back | go back used [(editor | tab)]**  `user.vscode("workbench.action.openPreviousRecentlyUsedEditor")
+		`
+
+ - **pop forward | go (next | forward | for) used [(editor | tab)]**  `user.vscode("workbench.action.openNextRecentlyUsedEditor")
+		`
+
+ - **(pop back | go back used [(editor | tab)]) group**  `user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
+		`
+
+ - **(pop forward | go (next | forward | for) used) group**  `user.vscode("workbench.action.openNextRecentlyUsedEditorInGroup")
+		
+		`
+
+ - **(open | pick [open]) [(closed | close)] (tab | editor)**  `user.vscode("workbench.action.quickOpenPreviousRecentlyUsedEditor")
+		
+		
+		## +++++++++++++++++++ merge tab groups .
+		`
+
+ - **(join | merge) [(editor | tab)] groups**  `user.vscode("workbench.action.joinAllGroups")
+		`
+
+ - **(join | merge) [(editor | tab)] group with next**  `user.vscode("workbench.action.joinTwoGroups")
+		
+		
+		## +++++++ expand and minimize editors .
+		`
+
+ - **expand group | group max**  `user.vscode("workbench.action.minimizeOtherEditors")
+		`
+
+ - **expand [(editor | tab)] group [and] hide (bars | sidebars | bar | sidebar) | [(editor | tab)] group full | hide other [(editor | tab)] groups**  `user.vscode("workbench.action.maximizeEditorHideSidebar")
+		`
+
+ - **(toggle | flip | reset) [(editor | tab)] group (size | sizes)**  `user.vscode("workbench.action.toggleEditorWidths")
+		
+		## ++++++++++++++++++++++++ close tabs .
+		`
+
+ - **close (saved | safe) (tabs | editors)**  `user.vscode("workbench.action.closeUnmodifiedEditors")`
+
+ - **close other (tabs | editors) [in] [group]**  `user.vscode("workbench.action.closeOtherEditors")`
+
+ - **(open | reopen) [last] closed (tab | editor)**  `user.vscode("workbench.action.reopenClosedEditor")`
+
+ - **go (next | last) [(editor | tab | tap)] group**  `user.vscode("workbench.action.navigateEditorGroups")`
+
+ - **(bar | show | go | focus | list)  (tabs | taps | editors | [tab] groups | open files) [view]**  `user.vscode("andreas.tabs.focus")
+		`
+
+ - **[(focus | go)] tab {self.letter} [{self.letter}]**  `user.run_rpc_command("andreas.focusTab", "{letter_1}{letter_2 or ''}")
+		`
+
+ - **[(focus | go)] tab <number>**  `myNum = number - 1
+		user.run_rpc_command("andreas.openEditorAtIndex", number)
+		
+		## ++++++++++++++++++++++++ split tab in place.
+		`
+
+ - **split [(editor | tab)] [in group]**  `user.vscode("workbench.action.toggleSplitEditorInGroup")`
+
+ - **split (editor | tab) up**  `user.vscode("workbench.action.splitEditorUp")`
+
+ - **Split [(editor | tab)] left**  `user.vscode("workbench.action.splitEditorLeft")`
+
+ - **split [(editor | tab)] right**  `user.vscode("workbench.action.splitEditorRight")`
+
+ - **split (editor | tab) [(horizontally | horizontal)]**  `user.vscode("workbench.action.splitEditor")`
+
+ - **split (editor | tab) (down  | vertically | vertical)**  `user.vscode("workbench.action.splitEditorDown")`
+
+ - **split [(editor | tab)] (ortho | orthogonal | other)**  `user.vscode("workbench.action.splitEditorOrthogonal")`
+
+ - **split [(editor | tab)] to right [group]**  `user.vscode("workbench.action.splitEditorToRightGroup")`
+
+ - **split [(editor | tab)] to left [group]**  `user.vscode("workbench.action.splitEditorToLeftGroup")`
+
+ - **split [(editor | tab)] [to] next [group]**  `user.vscode("workbench.action.splitEditorToNextGroup")`
+
+ - **split [(editor | tab)] [to] first [group]**  `user.vscode("workbench.action.splitEditorToFirstGroup")`
+
+ - **split [(editor | tab)] [to] last [group]**  `user.vscode("workbench.action.splitEditorToLastGroup")`
+
+ - **split [(editor | tab)] [to] above [group]**  `user.vscode("workbench.action.splitEditorToAboveGroup")`
+
+ - **split [(editor | tab)] [to] below [group]**  `user.vscode("workbench.action.splitEditorToBelowGroup")`
+
+ - **[(shuffle | shift | push)] (editor | tab) (right | rite) [in group]**  `user.vscode("workbench.action.moveEditorRightInGroup")`
+
+ - **[pull] [(shuffle | shift)] (editor | tab) left [in group]**  `user.vscode("workbench.action.moveEditorLeftInGroup")`
+
+ - **(send | move) (editor | tab) group right**  `user.vscode("workbench.action.moveActiveEditorGroupRight")`
+
+ - **(send | move) (editor | tab) group left**  `user.vscode("workbench.action.moveActiveEditorGroupLeft")`
+
+ - **(send | move) (editor | tab) group up**  `user.vscode("workbench.action.moveActiveEditorGroupUp")`
+
+ - **(send | move) (editor | tab) group down**  `user.vscode("workbench.action.moveActiveEditorGroupDown")`
+
+ - **move (editor | tab)**  `key(cmd-shift-p)
+		insert("view move editor")
+		`
+
+ - **(send | move) (editor | tab) [to] right [group]**  `user.vscode("workbench.action.moveEditorToRightGroup")`
+
+ - **(send | move) (editor | tab) [to] left [group]**  `user.vscode("workbench.action.moveEditorToLeftGroup")`
+
+ - **(send | move) (editor | tab) ([to] above | up) [group]**  `user.vscode("workbench.action.moveEditorToAboveGroup")`
+
+ - **(send | move) (editor | tab) ([to]  below | down) [group]**  `user.vscode("workbench.action.moveEditorToBelowGroup")`
+
+ - **(send | move) (editor | tab) [to]  first [group]**  `user.vscode("workbench.action.moveEditorToFirstGroup")`
+
+ - **(send | move) (editor | tab) [to]  last [group]**  `user.vscode("workbench.action.moveEditorToLastGroup")`
+
+ - **(send | move) (editor | tab) [to]  (previous | prev) [group]**  `user.vscode("workbench.action.moveEditorToPreviousGroup")`
+
+ - **(send | move) (editor | tab) [to]  next [group]**  `user.vscode("workbench.action.moveEditorToNextGroup")`
+
+
+
+#  talon helpers
+
+
+ - **sleep action <user.number_string>**  `a = "sleep(" + number_string
+		b = a + "ms)"
+		insert(b)
+		`
+
+ - **[(add | new)] key action**  `insert("key()")
+		key(left)
+		`
+
+ - **[(add | new)] action**  `insert("insert(\"\")")
+		key(left:2)
+		`
+
+ - **[(add | new)] sleep action**  `insert("sleep(ms)")
+		key(left:3)
+		`
+
+ - **[(add | new)] insert action**  `insert("insert(\"\")")
+		key(left:2)
+		`
+
+ - **[(add | new)] code action**  `insert("user.vscode(\"\")")
+		key(left:2)
+		`
+
+ - **paste code action**  `# mimic("take tail")
+		# sleep(500ms)
+		mimic("new code action")
+		sleep(500ms)
+		edit.past()
+		`
+
+ - **[insert] (hyper | meta) key [token]**  `insert("cmd-ctrl-alt-shift-")
+		
+		`
+
+ - **copy action id**  `mouse_click(1)
+		sleep(500ms)
+		key(down:2 enter)
+		`
+
+ - **copy action name**  `mouse_click(1)
+		sleep(100ms)
+		key(down)
+		# sleep(300ms)
+		# key(down)
+		# sleep(300ms)
+		# key(down)
+		# sleep(300ms)
+		# key(enter)
+		`
+
+
+
+#  terminal
+
+
+ - **(terminal | term) font [size] down**  `user.vscode("terminalFontSize.decrease")`
+
+ - **(terminal | term) font [size] up**  `user.vscode("terminalFontSize.increase")
+		`
+
+ - **(go | show) (term | terminal) | term show**  `user.vscode("workbench.action.terminal.focus")
+		`
+
+ - **clear (term | terminal) | clear (term | terminal)**  `user.vscode("workbench.action.terminal.clear")
+		`
+
+ - **restore terminals**  `user.vscode("restore-terminals.restoreTerminals")`
+
+ - **kill process**  `key(ctrl-c)
+		`
+
+ - **(move | send) (term | terminal) (to | too | two) (tab | editor)**  `user.vscode("workbench.action.terminal.moveToEditor")
+		`
+
+ - **(move | send) (term | terminal) (to | too | two) [new] (window | win)**  `user.vscode("workbench.action.terminal.moveIntoNewWindow")
+		`
+
+ - **(move | send) (term | terminal) (to | too | two) panel**  `user.vscode("workbench.action.terminal.moveToTerminalPanel")`
+
+
+
+#  vscode
+
+
+ - **(choose | pick) [color] theme**  `user.menu_select('Code|Settings…|Theme|Color Theme [⌘K ⌘T]')`
+
+ - **restart ( lsp | ell es pee) [server]**  `user.vscode("calva.clojureLsp.restart")`
+
+ - **please  (go | focus)**  `key(cmd-shift-p)
+		insert("view focus")
+		
+		#settings`
+
+ - **open (settings | sitting)**  `user.vscode("workbench.action.openSettings2")`
+
+ - **open [user] (settings | sitting) (json | jay son)**  `user.vscode("workbench.action.openSettingsJson")`
+
+ - **open workspace (settings | sitting) (json | jay son)**  `user.vscode("workbench.action.openWorkspaceSettingsFile")`
+
+ - **browse (json | jason)**  `user.vscode("vscode-json-editor.start")`
+
+ - **(which | witch) key**  `user.vscode("whichkey.show")
+		
+		## +++++++++++++++++++++++++ shortcuts .`
+
+ - **show shortcuts**  `user.vscode("workbench.action.openGlobalKeybindings")`
+
+ - **show shortcuts json**  `user.vscode("workbench.action.openGlobalKeybindingsFile")`
+
+ - **show snippets**  `user.vscode("workbench.action.openSnippets")
+		
+		## ++++++++++++++++++++++++ extensions .
+		`
+
+ - **check [for] extension updates | update extensions**  `user.vscode("workbench.extensions.action.checkForUpdates")`
+
+ - **(show | go) extension updates**  `user.vscode("workbench.extensions.action.extensionUpdates")
+		
+		## ++++++++ vscode notification popups .
+		`
+
+ - **(dismiss | clear | hide) (notifications |  alerts)**  `user.vscode("notifications.clearAll")
+		`
+
+ - **show (notifications |  alerts)**  `user.vscode("notifications.showList")
+		`
+
+ - **accept (notification | alert)**  `user.vscode("notification.acceptPrimaryAction")
+		
+		## +++++++++++++++++++++++++ dark mode .
+		`
+
+ - **[toggle] [code] (dark | light) mode**  `user.vscode("workbench.action.toggleLightDarkThemes")
+		
+		`
+
+ - **close unsaved file | close file without saving**  `user.vscode("workbench.action.closeActiveEditor")
+		key(space)
+		
+		`
+
+
+
+# win windows
+
+
+ - **pick (code | could) (window | winner | win) | pick [open] project**  `user.vscode("workbench.action.switchWindow")`
+
+ - **(code | could) (swap | next | last) (window | winner | win)**  `user.vscode("workbench.action.switchWindow")
+		key(enter)`
+
+ - **(swap | next | last) (code | could) (window | winner | win)**  `user.vscode("workbench.action.switchWindow")
+		key(enter)`
+
+ - **(code | could) (window | winner | win) (swap | next | last)**  `user.vscode("workbench.action.switchWindow")
+		key(enter)
+		
+		
+		## ++++++++++++++++++++++++++ navigate projects.
+		
+		#todo: make projects list
+		`
+
+ - **open project [in]  [new window]**  `user.vscode("projectManager.listProjectsNewWindow")`
+
+ - **[open | go] get bit project [in]  [new window] | project get bit**  `user.vscode("projectManager.listProjectsNewWindow")
+		sleep(300ms)
+		insert("gbo")
 		sleep(100ms)
 		key(enter)
 		`
+
+ - **[open | go] (Talon | talent) project [in]  [new window]  | project (Talon | talent | town)**  `user.vscode("projectManager.listProjectsNewWindow")
+		sleep(300ms)
+		insert("talon-user")
+		sleep(100ms)
+		key(enter)
+		`
+
+ - **[open | go] (ground | grounded | grounded sol | groundedsol | granted sol ) project [in]  [new window] | project (ground | grounded | grounded sol | groundedsol | granted sol )**  `# user.run_rpc_command("projectManager.listProjectsNewWindow", "groundesol w biff")
+		user.vscode("projectManager.listProjectsNewWindow")
+		sleep(300ms)
+		insert("groundesol")
+		sleep(100ms)
+		key(enter)
+		`
+
+ - **change project**  `user.vscode("projectManager.listProjects")`
+
+ - **[(show | view | bar)] projects**  `user.vscode("projectsExplorerFavorites.focus")`
+
+
+
+#  files
+
+
+ - **(hunt |  open | hope and) (file  | filename) [<user.text>]**  `key(cmd-p)
+		sleep(100ms)
+		insert("{text}")
+		
+		## +++++++++++++++++++++++++++++++++ file explorer
+		`
+
+ - **(show | reveal) file [in] [(explore | explorer)] | bar file**  `user.vscode("workbench.files.action.showActiveFileInExplorer")`
+
+ - **(show | reveal) [file] [in] (finder | files)**  `user.vscode("revealFileInOS")`
+
+ - **(fold | collapse) (explore | Explorer) [(bar | view)] [folders]**  `user.vscode("workbench.files.action.collapseExplorerFolders")`
+
+ - **duplicate [current] file**  `user.vscode("andreas.duplicateFile")`
 
 
 
 #  cheatsheet
 
 
- - **print cheatsheet**  `user.cheatsheet()`
+ - **generate (talon | talent) cheatsheet**  `user.cheatsheet()`

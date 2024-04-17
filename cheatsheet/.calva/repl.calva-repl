@@ -1,0 +1,480 @@
+; This is the Calva REPL Window.
+; It's just a file, really, with some special treatment from Calva.
+; Use it as a REPL input prompt if you like. (When the REPL is connected.)
+; TIPS: The keyboard shortcut `ctrl+alt+o r` shows and focuses this window
+; Please see https://calva.io/repl-window/ for more info.
+; Happy coding! ♥️
+
+; TIPS: As with any Clojure file when the REPL is connected:
+; - `alt+enter` evaluates the current top level form.
+; - `ctrl+enter` evaluates the current form.
+; Special for this file:
+; - `alt+up` and `alt+down` traverse up and down the REPL command history
+;    when the cursor is after the last contents at the prompt
+
+clj꞉user꞉> 
+clj꞉cheatsheet.cheatsheet꞉> 
+; Evaluation of file cheatsheet.clj failed: class clojure.lang.Compiler$CompilerException
+clj꞉cheatsheet.cheatsheet꞉> 
+clj꞉user꞉> 
+clj꞉cheatsheet.cheatsheet꞉> 
+; Evaluation of file cheatsheet.clj failed: class clojure.lang.Compiler$CompilerException
+clj꞉cheatsheet.cheatsheet꞉> 
+clj꞉user꞉> 
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (IllegalArgumentException) at hickory.core/eval17779$fn$G (core.clj:20).
+; No implementation of method: :as-hiccup of protocol: #'hickory.core/HiccupRepresentable found for class: java.lang.String
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (IllegalArgumentException) at hickory.core/eval17811$fn$G (core.clj:28).
+; No implementation of method: :as-hickory of protocol: #'hickory.core/HickoryRepresentable found for class: java.lang.String
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (ArityException) at cheatsheet.cheatsheet/eval18378 (REPL:16).
+; Wrong number of args (2) passed to: hickory.select/tag
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (ClassCastException) at hickory.select/select-next-loc (select.cljc:143).
+; class java.lang.String cannot be cast to class clojure.lang.IFn (java.lang.String is in module java.base of loader 'bootstrap'; clojure.lang.IFn is in unnamed module of loader 'app')
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (ArityException) at cheatsheet.cheatsheet/eval18432 (REPL:27).
+; Wrong number of args (2) passed to: hickory.select/tag
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (StackOverflowError) at com.rpl.specter$fn__15589$fn$reify__15591/select_STAR_ (specter.cljc:1391).
+; null
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (StackOverflowError) at com.rpl.specter.impl$reify__13456/select_STAR_ (impl.cljc:180).
+; null
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error macroexpanding clojure.core/let at (cheatsheet.clj:29:9).
+; [first-content (:content e) command-str (cond (string? first-content) first-content (vector? first-content) (->> first-content (select [ALL (recursive-path [] p (cond-path map? [:content p] vector? [ALL (if-path map? [:content p] STAY)] string? STAY))]) (apply str))) (string/replace command-str "\n" " ")] - failed: even-number-of-forms? at: [:bindings] spec: :clojure.core.specs.alpha/bindings
+clj꞉cheatsheet.cheatsheet꞉> 
+; Error printing return value (ClassCastException) at clojure.string/split (string.clj:219).
+; class java.lang.String cannot be cast to class java.util.regex.Pattern (java.lang.String and java.util.regex.Pattern are in module java.base of loader 'bootstrap')
+clj꞉cheatsheet.cheatsheet꞉> 
+; Error printing return value (IllegalArgumentException) at clojure.lang.RT/seqFrom (RT.java:557).
+; Don't know how to create ISeq from: cheatsheet.cheatsheet$eval19845$fn__19846$fn__19847
+clj꞉cheatsheet.cheatsheet꞉> 
+; Error printing return value (IllegalArgumentException) at clojure.lang.RT/seqFrom (RT.java:557).
+; Don't know how to create ISeq from: java.lang.Long
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error reading source at (REPL:57:32).
+; Unclosed character class near index 1
+; []
+;  ^
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error reading source at (REPL:57:31).
+; Unclosed character class near index 0
+; [
+; ^
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error reading source at (REPL:57:31).
+; Unclosed character class near index 0
+; [
+; ^
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error reading source at (REPL:57:33).
+; Unclosed character class near index 0
+; [
+; ^
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error reading source at (REPL:57:31).
+; Unclosed character class near index 0
+; [
+; ^
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error reading source at (REPL:57:31).
+; Unclosed character class near index 0
+; [
+; ^
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error reading source at (REPL:57:31).
+; Unclosed character class near index 0
+; [
+; ^
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (ClassCastException) at cheatsheet.cheatsheet/eval21138$fn (REPL:60).
+; class clojure.lang.PersistentVector cannot be cast to class java.lang.CharSequence (clojure.lang.PersistentVector is in unnamed module of loader 'app'; java.lang.CharSequence is in module java.base of loader 'bootstrap')
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (IllegalArgumentException) at com.rpl.specter.impl/terminal* (impl.cljc:430).
+; Key must be integer
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (ClassCastException) at cheatsheet.cheatsheet/eval21706$fn (REPL:59).
+; class java.lang.String cannot be cast to class java.util.regex.Pattern (java.lang.String and java.util.regex.Pattern are in module java.base of loader 'bootstrap')
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error reading source at (REPL:59:40).
+; Dangling meta character '?' near index 0
+; ?<=\[).+?(?=\]
+; ^
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (ClassCastException) at cheatsheet.cheatsheet/eval21769$fn (REPL:59).
+; class java.lang.String cannot be cast to class java.util.regex.Pattern (java.lang.String and java.util.regex.Pattern are in module java.base of loader 'bootstrap')
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (ClassCastException) at cheatsheet.cheatsheet/eval21832$fn (REPL:59).
+; class java.lang.String cannot be cast to class java.util.regex.Pattern (java.lang.String and java.util.regex.Pattern are in module java.base of loader 'bootstrap')
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (ClassCastException) at cheatsheet.cheatsheet/eval21895$fn (REPL:59).
+; class java.lang.String cannot be cast to class java.util.regex.Pattern (java.lang.String and java.util.regex.Pattern are in module java.base of loader 'bootstrap')
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error macroexpanding clojure.core/let at (cheatsheet.clj:55:9).
+; [test-cmd "[toggle] clippy [(show | hide | toggle)]" _ nil bracket-match #"(?<=\[).+?(?=\])" bracket-] - failed: even-number-of-forms? at: [:bindings] spec: :clojure.core.specs.alpha/bindings
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error (ArityException) compiling at (cheatsheet.clj:64:16).
+; Wrong number of args (2) passed to: com.rpl.specter/transform
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error reading source at (REPL:58:48).
+; Unclosed group near index 18
+; (?<= \) .+? (?= \)
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error reading source at (REPL:58:48).
+; Unclosed group near index 18
+; (?<= \) .+? (?= \)
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error reading source at (REPL:58:48).
+; Unclosed group near index 18
+; (?<= \) .+? (?= \)
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (ClassCastException) at cheatsheet.cheatsheet/eval23417$fn (REPL:69).
+; class java.lang.String cannot be cast to class java.util.regex.Pattern (java.lang.String and java.util.regex.Pattern are in module java.base of loader 'bootstrap')
+clj꞉cheatsheet.cheatsheet꞉> 
+clj꞉user꞉> 
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error compiling at (cheatsheet.clj:15:3).
+; Unable to resolve symbol: generated-cheatsheet-html-file in this context
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (UnsupportedOperationException) at instaparse.gll/text->segment (gll.clj:203).
+; count not supported on this type: Character
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error reading source at (REPL:69:34).
+; Unsupported escape character: \[
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error reading source at (REPL:69:34).
+; Unsupported escape character: \[
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; S occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; elements occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.cfg/wrap-reader$fn (cfg.clj:198).
+; Unsupported escape character: \[
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error reading source at (REPL:18:26).
+; Unsupported escape character: \[
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (ExceptionInfo) at cheatsheet.cheatsheet/eval19847 (REPL:25).
+; hi
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (ExceptionInfo) at cheatsheet.cheatsheet/eval19849 (REPL:25).
+; hi
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (ExceptionInfo) at cheatsheet.cheatsheet/eval19851 (REPL:25).
+; hi
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; sentence-fragment occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; sent occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; sentence occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; sentence occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; sentence occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; angle-word occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error compiling at (cheatsheet.clj:20:3).
+; Unable to resolve symbol: % in this context
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error compiling at (cheatsheet.clj:20:3).
+; Unable to resolve symbol: % in this context
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error compiling at (cheatsheet.clj:20:3).
+; Unable to resolve symbol: % in this context
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (AbstractMethodError) at cheatsheet.cheatsheet/eval20138$fn (REPL:20).
+; Receiver class instaparse.core.Parser does not define or inherit an implementation of the resolved method 'abstract java.lang.Object invoke(java.lang.Object, java.lang.Object)' of interface clojure.lang.IFn.
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error compiling at (cheatsheet.clj:20:3).
+; Unable to resolve symbol: % in this context
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (IllegalArgumentException) at instaparse.gll/-full-parse (gll.clj:163).
+; No matching clause: 
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (IllegalArgumentException) at instaparse.gll/-full-parse (gll.clj:163).
+; No matching clause: 
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (IllegalArgumentException) at instaparse.gll/-full-parse (gll.clj:163).
+; No matching clause: 
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (IllegalArgumentException) at instaparse.gll/-full-parse (gll.clj:163).
+; No matching clause: 
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (IllegalArgumentException) at instaparse.gll/-full-parse (gll.clj:163).
+; No matching clause: 
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; Error parsing grammar specification:
+; Parse error at line 1, column 7:
+; hello world {girl.home} | nonce <hello>
+;       ^
+; Expected one of:
+; =
+; ::=
+; :=
+; :
+; (*
+; 
+; 
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; Error parsing grammar specification:
+; Parse error at line 1, column 7:
+; hello world {girl.home} | nonce <hello>
+;       ^
+; Expected one of:
+; =
+; ::=
+; :=
+; :
+; (*
+; 
+; 
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; Error parsing grammar specification:
+; Parse error at line 4, column 21:
+;     bracket-wrapped = <'['> (word | phrase) <']'> 
+;                     ^
+; Expected one of:
+; ?
+; (*
+; *
+; +
+; .
+; ;
+; <
+; ε
+; eps
+; EPSILON
+; epsilon
+; Epsilon
+; |
+; /
+; !
+; &
+; (
+; {
+; [
+; #"#\"[^\"\\]*(?:\\.[^\"\\]*)*\"(?x) #Double-quoted regexp"
+; #"#'[^'\\]*(?:\\.[^'\\]*)*'(?x) #Single-quoted regexp"
+; #"\"[^\"\\]*(?:\\.[^\"\\]*)*\"(?x) #Double-quoted string"
+; #"'[^'\\]*(?:\\.[^'\\]*)*'(?x) #Single-quoted string"
+; #"[^, \r\t\n<>(){}\[\]+*?:=|'"#&!;./]+(?x) #Non-terminal"
+; 
+; 
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; phrase occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; S occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error compiling at (cheatsheet.clj:20:2).
+; Unable to resolve symbol: aaaabbbb in this context
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (AbstractMethodError) at cheatsheet.cheatsheet/eval20312 (REPL:20).
+; Receiver class instaparse.core.Parser does not define or inherit an implementation of the resolved method 'abstract java.lang.Object invoke()' of interface clojure.lang.IFn.
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; angle-path occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; angle-path occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; element occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; element occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; fn-path occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; elements occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; elements occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; elements occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; elements occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; es occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; es occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; whoochy occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error at instaparse.util/throw-runtime-exception (util.clj:7).
+; really occurs on the right-hand side of your grammar, but not on the left
+clj꞉cheatsheet.cheatsheet꞉> 
+; Error printing return value (ArityException) at clojure.lang.AFn/throwArity (AFn.java:429).
+; Wrong number of args (1) passed to: cheatsheet.cheatsheet/eval21622/fn--21623/fn--21624
+clj꞉cheatsheet.cheatsheet꞉> 
+; Error printing return value (ArityException) at clojure.lang.AFn/throwArity (AFn.java:429).
+; Wrong number of args (1) passed to: cheatsheet.cheatsheet/eval21632/fn--21633/fn--21634
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error reading source at (REPL:43:45).
+; Map literal must contain an even number of forms
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error reading source at (REPL:43:45).
+; Map literal must contain an even number of forms
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error (ArityException) compiling at (cheatsheet.clj:56:13).
+; Wrong number of args (4) passed to: com.rpl.specter/recursive-path
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (StackOverflowError) at com.rpl.specter.impl/compiled-select-any* (impl.cljc:416).
+; null
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (ClassCastException) at com.rpl.specter.navs/do-keypath-transform (navs.cljc:688).
+; class java.lang.String cannot be cast to class clojure.lang.Associative (java.lang.String is in module java.base of loader 'bootstrap'; clojure.lang.Associative is in unnamed module of loader 'app')
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (ClassCastException) at com.rpl.specter.navs/do-keypath-transform (navs.cljc:688).
+; class java.lang.String cannot be cast to class clojure.lang.Associative (java.lang.String is in module java.base of loader 'bootstrap'; clojure.lang.Associative is in unnamed module of loader 'app')
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (ClassCastException) at com.rpl.specter.navs/do-keypath-transform (navs.cljc:688).
+; class java.lang.String cannot be cast to class clojure.lang.Associative (java.lang.String is in module java.base of loader 'bootstrap'; clojure.lang.Associative is in unnamed module of loader 'app')
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (ClassCastException) at com.rpl.specter.navs/do-keypath-transform (navs.cljc:688).
+; class java.lang.String cannot be cast to class clojure.lang.Associative (java.lang.String is in module java.base of loader 'bootstrap'; clojure.lang.Associative is in unnamed module of loader 'app')
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (IllegalArgumentException) at com.rpl.specter.navs/eval15056$fn (navs.cljc:679).
+; Don't know how to create ISeq from: clojure.lang.Keyword
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (IllegalArgumentException) at com.rpl.specter.navs/all-select (navs.cljc:27).
+; Don't know how to create ISeq from: clojure.lang.Keyword
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error (ArityException) compiling at (cheatsheet.clj:57:14).
+; Wrong number of args (1) passed to: com.rpl.specter/select
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (StackOverflowError) at com.rpl.specter.navs/not-selected?* (navs.cljc:18).
+; null
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (StackOverflowError) at com.rpl.specter.impl$combine_two_navs$reify__13834/select_STAR_ (impl.cljc:189).
+; null
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (IllegalArgumentException) at cheatsheet.cheatsheet/eval26125$fn$fn (REPL:63).
+; Don't know how to create ISeq from: clojure.lang.Keyword
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (IllegalArgumentException) at cheatsheet.cheatsheet/eval26170$fn$fn (REPL:64).
+; Don't know how to create ISeq from: clojure.lang.Keyword
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (IllegalArgumentException) at cheatsheet.cheatsheet/eval26201$fn$fn (REPL:63).
+; Don't know how to create ISeq from: clojure.lang.Keyword
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (IllegalArgumentException) at cheatsheet.cheatsheet/eval26292$fn$fn (REPL:63).
+; Don't know how to create ISeq from: clojure.lang.Keyword
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (IllegalArgumentException) at cheatsheet.cheatsheet/eval26324$fn$fn (REPL:63).
+; Don't know how to create ISeq from: clojure.lang.Keyword
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (UnsupportedOperationException) at com.rpl.specter.zipper$mk_zip_nav$reify__25825/select_STAR_ (zipper.cljc:37).
+; nth not supported on this type: Keyword
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error compiling at (cheatsheet.clj:68:24).
+; Unable to resolve symbol: first? in this context
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error compiling at (cheatsheet.clj:62:18).
+; Unable to resolve symbol: x in this context
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (ArityException) at cheatsheet.cheatsheet/eval26842$fn$fn (REPL:71).
+; Wrong number of args (1) passed to: cheatsheet.cheatsheet/eval26842/fn--26843/h=--26844
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error compiling at (cheatsheet.clj:75:26).
+; Unable to resolve symbol: r in this context
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error macroexpanding clojure.core/cond at (cheatsheet.clj:69:17).
+; cond requires an even number of forms
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error reading source at (REPL:133:2).
+; Unmatched delimiter: )
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error reading source at (REPL:133:2).
+; Unmatched delimiter: )
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (IllegalArgumentException) at cheatsheet.cheatsheet/eval27686$fn$fn (REPL:76).
+; Don't know how to create ISeq from: clojure.lang.Keyword
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error macroexpanding cond at (cheatsheet.clj:108:21).
+; cond requires an even number of forms
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (UnsupportedOperationException) at cheatsheet.cheatsheet/eval27936$fn$only-of-type? (REPL:76).
+; count not supported on this type: core$string_QMARK___5475
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (UnsupportedOperationException) at cheatsheet.cheatsheet/eval27969$fn$only-of-type? (REPL:76).
+; count not supported on this type: core$string_QMARK___5475
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (UnsupportedOperationException) at cheatsheet.cheatsheet/eval28010$fn$only-of-type? (REPL:76).
+; count not supported on this type: core$string_QMARK___5475
+clj꞉cheatsheet.cheatsheet꞉> 
+; Execution error (UnsupportedOperationException) at cheatsheet.cheatsheet/eval28047$fn$only-of-type? (REPL:76).
+; count not supported on this type: core$string_QMARK___5475
+clj꞉cheatsheet.cheatsheet꞉> 
+; Evaluation of file cheatsheet.clj failed: class clojure.lang.Compiler$CompilerException
+clj꞉cheatsheet.cheatsheet꞉> 
+; Evaluation of file cheatsheet.clj failed: class clojure.lang.Compiler$CompilerException
+clj꞉cheatsheet.cheatsheet꞉> 
+; Evaluation of file cheatsheet.clj failed: class clojure.lang.Compiler$CompilerException
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error compiling at (cheatsheet.clj:109:6).
+; Unable to resolve symbol: talon-com in this context
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error compiling at (cheatsheet.clj:110:17).
+; Unable to resolve symbol: prsed in this context
+clj꞉cheatsheet.cheatsheet꞉> 
+; Error printing return value (IllegalArgumentException) at clojure.lang.RT/seqFrom (RT.java:557).
+; Don't know how to create ISeq from: cheatsheet.cheatsheet$eval28657$fn__28658
+clj꞉cheatsheet.cheatsheet꞉> 
+; Error printing return value (ArityException) at clojure.lang.AFn/throwArity (AFn.java:429).
+; Wrong number of args (1) passed to: clojure.walk/walk
+clj꞉cheatsheet.cheatsheet꞉> 
+; Error printing return value (ArityException) at clojure.lang.AFn/throwArity (AFn.java:429).
+; Wrong number of args (1) passed to: clojure.walk/walk
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error compiling at (cheatsheet.clj:111:8).
+; Unable to resolve symbol: orginial in this context
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error compiling at (cheatsheet.clj:111:8).
+; Unable to resolve symbol: orginial in this context
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error compiling at (cheatsheet.clj:111:8).
+; Unable to resolve symbol: orginial in this context
+clj꞉cheatsheet.cheatsheet꞉> 
+; Syntax error reading source at (REPL:198:36).
+; Metadata must be Symbol,Keyword,String or Map
+clj꞉cheatsheet.cheatsheet꞉> 
+clj꞉user꞉> 
+; Syntax error compiling at (/Users/ryan/.talon/user/clojure/demo.clj:42:16).
+; Unable to resolve symbol: batson-gb-sku->batson-brand-prefix in this context
+clj꞉gbo.vendor.batson.sku꞉> 
+clj꞉user꞉> 
+; Evaluation of file demo.clj failed: class clojure.lang.Compiler$CompilerException
+clj꞉gbo.vendor.batson.sku꞉> 
+; Evaluation of file demo.clj failed: class clojure.lang.Compiler$CompilerException
+clj꞉gbo.vendor.batson.sku꞉> 
+; Evaluation of file demo.clj failed: class clojure.lang.Compiler$CompilerException
+clj꞉gbo.vendor.batson.sku꞉> 
+; Syntax error compiling at (/Users/ryan/.talon/user/clojure/demo.clj:0:0).
+; Unable to resolve symbol: string in this context
+clj꞉gbo.vendor.batson.sku꞉> 
