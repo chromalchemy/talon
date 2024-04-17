@@ -1,10 +1,10 @@
 {
-  "newFn" : {
+  "bad-name" : {
     "definitions" : [ {
       "scope" : {
         "langIds" : [ "clojure" ]
       },
-      "body" : [ "(defn $fnName [$params]\n  $body)" ]
+      "body" : [ null ]
     } ],
     "description" : "Clj snippet"
   }

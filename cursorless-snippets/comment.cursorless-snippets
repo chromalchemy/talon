@@ -1,10 +1,10 @@
 {
-  "newFn" : {
+  "comment" : {
     "definitions" : [ {
       "scope" : {
         "langIds" : [ "clojure" ]
       },
-      "body" : [ "(defn $fnName [$params]\n  $body)" ]
+      "body" : [ "#_$form" ]
     } ],
     "description" : "Clj snippet"
   }

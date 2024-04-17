@@ -1,10 +1,10 @@
 {
-  "newFn" : {
+  "hash" : {
     "definitions" : [ {
       "scope" : {
         "langIds" : [ "clojure" ]
       },
-      "body" : [ "(defn $fnName [$params]\n  $body)" ]
+      "body" : [ "#$fnBody" ]
     } ],
     "description" : "Clj snippet"
   }

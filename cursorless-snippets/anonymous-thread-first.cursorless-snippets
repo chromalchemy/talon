@@ -1,10 +1,10 @@
 {
-  "newFn" : {
+  "anonymous-thread-first" : {
     "definitions" : [ {
       "scope" : {
         "langIds" : [ "clojure" ]
       },
-      "body" : [ "(defn $fnName [$params]\n  $body)" ]
+      "body" : [ "#(-> %  \n$fnBody)" ]
     } ],
     "description" : "Clj snippet"
   }
