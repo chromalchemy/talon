@@ -8,7 +8,7 @@
 #keys 
 (for | fore) (delete | dell): key(delete)
 
-copy it: key(cmd-c)
+copy it: key(cmd-c)  
 paste it: key(cmd-v)
 
 show (clip | clipboard | image | screengrab) [in] preview:
@@ -54,6 +54,8 @@ show (clip | clipboard | image | screengrab) [in] preview:
 
 ## ++++++++++++++++++ open saved finder path folder w raycast
 
+
+
 #spawns new window : todo make reuse open tab
 open <user.system_path> [folder]:
     key(cmd-space)
@@ -80,15 +82,34 @@ open <user.system_path> [folder]:
     sleep(100ms)
     key(enter) 
 
+
+## ++++++++++++++++++++++++++++ wooshy .
+
+
+^((who | will) she | wooshy | wish he) [(hunt | point | search)] [<user.text>] : 
+    key(cmd-shift-space)
+    sleep(300ms) 
+    insert("{text or ''}")
+
+^((who | will) she | wooshy | wish he be) click [<user.text>] : 
+    key(cmd-shift-space)
+    sleep(300ms) 
+    insert("{text or ''}")
+    sleep(300ms)
+    key(enter)
+
+
 ## ++++++++++++++++++++ # search menus .
-search (menu | menus): key(cmd-alt-shift-ctrl-l)
+
+(search | hunt) ray (menu | menus) [<user.text>]: 
+    key(cmd-alt-shift-ctrl-l)
+    sleep(200ms)
+    insert("{text or ''}")
 
 # finder
-show hidden folders: key(ctrl-shift-period)
-open file: key(cmd-o)
-view: key(space)
-close: key(space)
+
 (take screen shot | screen grab): key(ctrl-shift-cmd-4)
+
 (show | hide | toggle) desk: key(f11)
 
 open display panel: 
@@ -101,12 +122,10 @@ open sound panel:
     key(cmd-space)
     sleep(300ms)
     insert("sound")
+    sleep(200ms)
     key(enter)
 
-#window Management
-(win | window) right: key(cmd-alt-shift-ctrl-right)
-(win | window) left: key(cmd-alt-shift-ctrl-left)
-(win | window) (max | maximize): key(cmd-alt-shift-ctrl-up)
+## ++++++++++++++++++++++ pick open window
 
 pick (win | window) [spotlight]: key(ctrl-up)
 pick (win | window) grid: key(cmd-alt-shift-ctrl-down)
@@ -116,23 +135,12 @@ pick (win | window) (ray | list):
     sleep(100ms)
     key(enter)
 
-[pick] app (win | windows) [finder] : key(ctrl-down)
-
-# How to invoke more directly come and not have a flash of chooser
-(win | window) (next | last | swap | prev):  
-    key(shift-ctrl-f6)
-(next | last | swap) (app | win | window): 
-    key(shift-ctrl-f6)
-   
+[pick] app (win | windows) [finder] : key(ctrl-down)   
 
 # global app commands
 save file: key(cmd-s)
 quit app: key(cmd-q)
 exit: key(escape)
-
-[(toggle | enter | exit | leave)] (fullscreen | full screen): key(cmd-alt-shift-ctrl-a) 
-
-
 
 # already built in
 # open talon repl: 
@@ -170,45 +178,16 @@ exit: key(escape)
 
 dell it | deli it | dell that: key(delete)
 
-# (go | show | open) (photoshop | ps | pee ess | photo ):
-#     key(cmd-space)
-#     insert("photoshop beta")
-#     key(enter)
+# todo:why is this not working in application over rides
+(go | show | open) (browser | browse):
+    user.switcher_focus("Chrome")    
 
-# (go | show | open) (roam | notes | note | rome):
-#     key(cmd-space)
-#     insert("roam research")
-#     key(enter)
-    
-(go | show | open) (chrome | browse | browser):
+
+(cursorless | cursor less) (reference | live (cheatsheet | cheat sheet)): 
     user.switcher_focus("Chrome")
-    
-# (go | show | open) (finder | file manager):
-#     key(cmd-space)
-#     insert("finder")
-#     key(enter)
-    
-(go | show | open) (ide | code | editor | vscode | vs code):
-    user.switcher_focus("Code")
-    # key(cmd-space)
-    # insert("visual studio code")
-    # key(enter)
-    
-
-#cursorless
-
-#bc bookmarks
-
-
-open (cats | categories):   user.open_url("https://store-7hstasnrjg.mybigcommerce.com/manage/products/categories")
-
-
-#other bookmarks
-# open (cursorless | cursor less) (docs | documentation): user.open_url("https://www.cursorless.org/docs/")
+    browser.go("https://www.cursorless.org/cheatsheet")
 
 select (all | or): key(cmd-a)
-
-# [open] (cursorless | cursor less) (reference | cheat sheet | cheatsheet | wacky): user.open_url("file:///Users/ryan/.cursorless/cheatsheet.html")
 
 paste there: key(cmd-v)
 
@@ -228,16 +207,9 @@ option drag:
     sleep(300ms)
     key(alt:down)
     user.grid_close()
-
-option drag:
-    user.mouse_drag(0)
-    sleep(300ms)
-    key(alt:down)
-    user.grid_close()
     
 hold option: key(alt:down)
 
-    
 shift drag:
     key(shift:down)
     user.mouse_drag(0)
@@ -396,3 +368,94 @@ date [string] <user.number_string> [plus] <user.number_string>:
     insert("{number_string_1}/{number_string_2}")
     sleep(200ms)
     key(escape)
+
+## ++++++++++++++++ adjust night shift .
+
+[make | set] ((display | screen) (temperature | temp) | (nightshift | night shift)) <user.number_string>:
+    user.system_command_nb("nightlight temp {number_string}")
+
+toggle (nightshift | night shift | night light | [(display | screen)] (temperature | temp)):
+    user.system_command_nb("nightlight toggle") 
+
+## +++++++++++++++++ adjust brightness .
+
+[(screen | display)] (brightness | brightens | brighten) up | brighten [up] (screen | display):
+    key(f15)
+
+[(screen | display)] (brightness | brighten | brightens | Brighton) down | dim [down] (screen | display):
+    key(f14)
+
+[(screen | display)] (brightness | brighten | brightens | Brighton) single <user.number_string>:
+    user.system_command_nb("brightness 0.0{number_string}")
+
+[(screen | display)] (brightness | brighten | brightens | Brighton) <user.number_string>:
+    user.system_command_nb("brightness 0.{number_string}")
+    
+photo new layer:
+    user.system_command_nb("open \"/Users/ryan/dev/ps script/scripts/create_layer.psjs\"")
+
+
+(screen | display) (brightness | brighten | brightens | Brighton) full:
+    user.system_command_nb("brightness 1")
+        
+round (string | rap | wrap | text) <user.prose>:
+    insert("({prose})")
+
+## ++++++++++ go to open tab In chrome .
+
+go (browse | page | tab) <user.text>:
+    user.switcher_focus("Chrome") 
+    key(cmd-shift-a)
+    sleep(200ms) 
+    insert("{text}")
+    sleep(100ms)
+    key(enter)
+
+(show | view) (hot keys | hotkeys): 
+    key(cmd:down)
+    sleep(1000ms)
+
+## ++++ open terminal and run commands .
+
+term brew (upgrade | update): 
+    user.switcher_focus("Warp")
+    key(cmd-t)
+    sleep(200ms)
+    user.menu_select('Tab|Rename the Current Tab')
+    insert("Brew")
+    key(enter)
+    insert("brew update")
+    sleep(1000ms)
+    key(enter)
+
+(warp | term) [new] (babashka | b b | be be | bb ) [repl]: 
+    user.switcher_focus("Warp")
+    key(cmd-t)
+    sleep(300ms)
+    user.menu_select('Tab|Rename the Current Tab')
+    insert("BB")
+    key(enter)
+    sleep(1000ms)
+    insert("bb")
+    key(enter)
+
+(warp | term) [new] (node (bb | b b) | n b b | nbb | en be be ) [repl]: 
+    user.switcher_focus("Warp")
+    key(cmd-t)
+    sleep(300ms)
+    user.menu_select('Tab|Rename the Current Tab')
+    insert("NBB")
+    key(enter) 
+    sleep(1000ms)
+    insert("nbb")
+    key(enter)
+
+term (quit | exit) [( repl | command)]: 
+    key(ctrl-c)
+    # insert(":repl/quit")
+    # key(enter)
+
+
+
+
+    
