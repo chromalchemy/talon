@@ -831,7 +831,7 @@
   (interpose "\n")
   (apply str)
   (str "app.name: Adobe Photoshop (Beta)\napp.name: Adobe Photoshop 2024\n-\n\n")
-  (spit "photoshop-menus.talon"))
+  (spit "photoshop/photoshop-menus.talon"))
 
 (println "wrote ps menu commands talon file")
 

@@ -213,27 +213,27 @@ set [transform] (anchor | origin) [point]:
  ## ++++++++++++++++++++++++++ tracking .
 
 #  # mimic("point tracking")
-go tracking: 
-    mouse_move(914.6171875, 186.5703125)
-    sleep(3300ms)
-    mouse_click(0)
+# go tracking: 
+#     mouse_move(914.6171875, 186.5703125)
+#     sleep(3300ms)
+#     mouse_click(0)
 
 # # mimic("point tracking")
-[set] tracking [<user.number_string>]: 
-    mouse_move(914.6171875, 186.5703125)
-    sleep(2500ms)
-    mouse_click(0)
-    insert(number_string)
-    sleep(50ms)
-    key(enter)
+# [set] tracking [<user.number_string>]: 
+#     mouse_move(914.6171875, 186.5703125)
+#     sleep(2500ms)
+#     mouse_click(0)
+#     insert(number_string)
+#     sleep(50ms)
+#     key(enter)
 
-[set] tracking (negative | neg) [<user.number_string>]: 
-    mynum = "-" + number_string
-    mouse_move(914.6171875, 186.5703125)
-    sleep(2500ms)
-    mouse_click(0)
-    insert(mynum)
-    key(enter)
+# [set] tracking (negative | neg) [<user.number_string>]: 
+#     mynum = "-" + number_string
+#     mouse_move(914.6171875, 186.5703125)
+#     sleep(2500ms)
+#     mouse_click(0)
+#     insert(mynum)
+#     key(enter)
 
 ## +++++++++++++++++++++++++++++ drags .
 
@@ -336,6 +336,19 @@ take text [(here | point)]:
     key(cmd-a)
     # edit.select_all()
 
+# todo: make past raw
+(paste | pace) text [(here | point)]:
+    key(t:down)
+    sleep(300ms)
+    mouse_click(0)
+    # sleep(300ms)
+    key(t:up)
+    sleep(300ms)
+    key(cmd-a)
+    sleep(100ms)
+    key(cmd-v)
+    # edit.select_all()
+
 ## +++++++++++++++++++++++++++++ inbox .
 
 Center layer  [on (page | artboard )]:
@@ -357,4 +370,39 @@ Clone and (raster | rasterize) layer:
     sleep(300ms)
     key(alt-[)
     user.menu_select('Layer|Rasterize|Layer')
+
+## +++++++++++++++++++++ paste helpers .
+
+[photo] paste color: 
+    user.zoom_close()
+    mouse_click(0)
+    user.grid_close()
+    user.mouse_drag_end() 
+    key(cmd-v enter)
+
+[photo] copy color:
+    user.zoom_close()
+    mouse_click(0)
+    user.grid_close()
+    user.mouse_drag_end() 
+    key(cmd-c esc)
+
+
+[set] font size <user.number_string>:
+    user.ps_command_nb("(set-font-size! {number_string})")
+
+[set] [font] tracking <user.number_string>:
+    user.ps_command_nb("(set-font-tracking! {number_string})")
+
+(increase [font] tracking  | [font] tracking up) <user.number_string>:
+    user.ps_command_nb("(update-font-tracking! {number_string})")
+
+(decrease [font] tracking  | [font] tracking down) <user.number_string>:
+    user.ps_command_nb("(update-font-tracking! -{number_string})")
+
+rotate clone [<number>]:
+    n = number or 1
+    b = n * 4
+    key("alt-shift-.:{b}")
+ 
 
