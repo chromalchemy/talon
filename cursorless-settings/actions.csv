@@ -57,3 +57,7 @@ join, joinLines
 
 # 2023-12-08 12:44:55 - New entries automatically added by cursorless
 break, breakLine
+
+# 2024-02-22 18:50:04 - New entries automatically added by cursorless
+decrement, decrement
+increment, increment
