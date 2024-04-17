@@ -3,8 +3,6 @@ app: chrome
 tag(): browser
 # tag(): user.tabs
 
-
-
 #### inspector
 
 (toggle | hide | show | open | close) (devtools | dev tools | tools): 
@@ -16,11 +14,11 @@ tools [dock] (sidebar | bar | panel | bottom | right | last | next): key(cmd-shi
 
 ## ++++++++++++++++++++++++++ bookmarks .
 
-go (bookmarks | marks) (browser | view): 
-    browser.bookmarks()
-    browser.bookmark()
+[go] (bookmarks | bookmark | marks) (browser | view | page): 
+    key(cmd-alt-b)
 
-(toggle | hide | show) (bookmarks | marks) bar: browser.bookmarks_bar()
+(toggle | hide | show) (bookmarks | bookmark | marks) bar: 
+    key(cmd-shift-b)
 
 (search | hunt)  (bookmarks | bookmark | marks) [<user.text>]:
     key(cmd-l)
@@ -71,3 +69,22 @@ search force <user.text>:
     key(cmd-enter)
     sleep(100ms)
     key(escape)
+
+## ++++++++++++++++++ search open tabs .
+
+(search | hunt) (tabs | open tabs | open) [<user.text>]:
+    key(cmd-shift-a)
+    sleep(300ms) 
+    insert("{text}")
+
+go [(tabs | open tabs | open)] <user.text>:
+    key(cmd-shift-a)
+    sleep(200ms) 
+    insert("{text}")
+    sleep(100ms)
+    key(enter)
+
+([go] other | swap) profile [(window | win)]: 
+    key(cmd-shift-m)
+    sleep(100ms)
+    key(down enter)
