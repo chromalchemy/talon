@@ -160,7 +160,7 @@
 (defn render-set-of-commands [{:keys [fn name]}]
   (let 
     [normal-command
-     (str name " [here]:"
+     (str name " here:"
        new-indented-line
        (code-action fn))
      point-command

@@ -1,6 +1,6 @@
 #------------------:editing
 
-split [here]:
+split here:
 	user.vscode("paredit.splitSexp")
 
 split point:
@@ -10,7 +10,7 @@ split point:
 split <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.splitSexp")
 
-join expressions [here]:
+join expressions here:
 	user.vscode("paredit.joinSexp")
 
 join expressions point:
@@ -22,7 +22,7 @@ join expressions <user.cursorless_target>:
 
 #------------------:deleting
 
-force delete back [here]:
+force delete back here:
 	user.vscode("paredit.forceDeleteBackward")
 
 force delete back point:
@@ -32,7 +32,7 @@ force delete back point:
 force delete back <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.forceDeleteBackward")
 
-force delete forward [here]:
+force delete forward here:
 	user.vscode("paredit.forceDeleteForward")
 
 force delete forward point:
@@ -42,7 +42,7 @@ force delete forward point:
 force delete forward <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.forceDeleteForward")
 
-delete back [here]:
+delete back here:
 	user.vscode("paredit.deleteBackward")
 
 delete back point:
@@ -52,7 +52,7 @@ delete back point:
 delete back <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.deleteBackward")
 
-delete forward [here]:
+delete forward here:
 	user.vscode("paredit.deleteForward")
 
 delete forward point:
@@ -62,7 +62,7 @@ delete forward point:
 delete forward <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.deleteForward")
 
-(kill | chuck) [form] right [here]:
+(kill | chuck) [form] right here:
 	user.vscode("paredit.killRight")
 
 (kill | chuck) [form] right point:
@@ -72,7 +72,7 @@ delete forward <user.cursorless_target>:
 (kill | chuck) [form] right <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.killRight")
 
-(kill | chuck) [form] left [here]:
+(kill | chuck) [form] left here:
 	user.vscode("paredit.killLeft")
 
 (kill | chuck) [form] left point:
@@ -82,7 +82,7 @@ delete forward <user.cursorless_target>:
 (kill | chuck) [form] left <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.killLeft")
 
-(kill | chuck) [form] forward [here]:
+(kill | chuck) [form] forward here:
 	user.vscode("paredit.killSexpForward")
 
 (kill | chuck) [form] forward point:
@@ -92,7 +92,7 @@ delete forward <user.cursorless_target>:
 (kill | chuck) [form] forward <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.killSexpForward")
 
-(kill | chuck) [form] back [here]:
+(kill | chuck) [form] back here:
 	user.vscode("paredit.killSexpBackward")
 
 (kill | chuck) [form] back point:
@@ -102,7 +102,7 @@ delete forward <user.cursorless_target>:
 (kill | chuck) [form] back <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.killSexpBackward")
 
-(kill | chuck) (list | collection | seq | seek | sequence) (forward | end | next) [here]:
+(kill | chuck) (list | collection | seq | seek | sequence) (forward | end | next) here:
 	user.vscode("paredit.killListForward")
 
 (kill | chuck) (list | collection | seq | seek | sequence) (forward | end | next) point:
@@ -112,7 +112,7 @@ delete forward <user.cursorless_target>:
 (kill | chuck) (list | collection | seq | seek | sequence) (forward | end | next) <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.killListForward")
 
-(kill | chuck) (list | collection | seq | seek | sequence) (back | start | last) [here]:
+(kill | chuck) (list | collection | seq | seek | sequence) (back | start | last) here:
 	user.vscode("paredit.killListBackward")
 
 (kill | chuck) (list | collection | seq | seek | sequence) (back | start | last) point:
@@ -122,7 +122,7 @@ delete forward <user.cursorless_target>:
 (kill | chuck) (list | collection | seq | seek | sequence) (back | start | last) <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.killListBackward")
 
-splice | unwrap [here]:
+splice | unwrap here:
 	user.vscode("paredit.spliceSexp")
 
 splice | unwrap point:
@@ -132,7 +132,7 @@ splice | unwrap point:
 splice | unwrap <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.spliceSexp")
 
-(splice | unwrap) [and] kill back [here]:
+(splice | unwrap) [and] kill back here:
 	user.vscode("paredit.spliceSexpKillBackward")
 
 (splice | unwrap) [and] kill back point:
@@ -142,7 +142,7 @@ splice | unwrap <user.cursorless_target>:
 (splice | unwrap) [and] kill back <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.spliceSexpKillBackward")
 
-(splice | unwrap) [and] kill forward [here]:
+(splice | unwrap) [and] kill forward here:
 	user.vscode("paredit.spliceSexpKillForward")
 
 (splice | unwrap) [and] kill forward point:
@@ -152,7 +152,7 @@ splice | unwrap <user.cursorless_target>:
 (splice | unwrap) [and] kill forward <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.spliceSexpKillForward")
 
-raise form [here]:
+raise form here:
 	user.vscode("paredit.raiseSexp")
 
 raise form point:
@@ -164,7 +164,7 @@ raise form <user.cursorless_target>:
 
 #------------------:moving
 
-(indent | push) [(form | line)] [here]:
+(indent | push) [(form | line)] here:
 	user.vscode("calva-fmt.tabIndent")
 
 (indent | push) [(form | line)] point:
@@ -174,7 +174,7 @@ raise form <user.cursorless_target>:
 (indent | push) [(form | line)] <user.cursorless_target>:
 	user.cursorless_ide_command("calva-fmt.tabIndent")
 
-(dedent | pull) [(form | line)] [here]:
+(dedent | pull) [(form | line)] here:
 	user.vscode("calva-fmt.tabDedent")
 
 (dedent | pull) [(form | line)] point:
@@ -184,7 +184,7 @@ raise form <user.cursorless_target>:
 (dedent | pull) [(form | line)] <user.cursorless_target>:
 	user.cursorless_ide_command("calva-fmt.tabDedent")
 
-move [form] (up | back | left) [here]:
+move [form] (up | back | left) here:
 	user.vscode("paredit.dragSexprBackward")
 
 move [form] (up | back | left) point:
@@ -194,7 +194,7 @@ move [form] (up | back | left) point:
 move [form] (up | back | left) <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.dragSexprBackward")
 
-move back down [here]:
+move back down here:
 	user.vscode("paredit.dragSexprBackwardDown")
 
 move back down point:
@@ -204,7 +204,7 @@ move back down point:
 move back down <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.dragSexprBackwardDown")
 
-move back up [here]:
+move back up here:
 	user.vscode("paredit.dragSexprBackwardUp")
 
 move back up point:
@@ -214,7 +214,7 @@ move back up point:
 move back up <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.dragSexprBackwardUp")
 
-move [form] (down | forward | right) [here]:
+move [form] (down | forward | right) here:
 	user.vscode("paredit.dragSexprForward")
 
 move [form] (down | forward | right) point:
@@ -224,7 +224,7 @@ move [form] (down | forward | right) point:
 move [form] (down | forward | right) <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.dragSexprForward")
 
-move forward up [here]:
+move forward up here:
 	user.vscode("paredit.dragSexprForwardUp")
 
 move forward up point:
@@ -234,7 +234,7 @@ move forward up point:
 move forward up <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.dragSexprForwardUp")
 
-move forward down [here]:
+move forward down here:
 	user.vscode("paredit.dragSexprForwardDown")
 
 move forward down point:
@@ -244,7 +244,7 @@ move forward down point:
 move forward down <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.dragSexprForwardDown")
 
-(slurp | slip) [(forward | for it)] [here]:
+(slurp | slip) [(forward | for it)] here:
 	user.vscode("paredit.slurpSexpForward")
 
 (slurp | slip) [(forward | for it)] point:
@@ -254,7 +254,7 @@ move forward down <user.cursorless_target>:
 (slurp | slip) [(forward | for it)] <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.slurpSexpForward")
 
-(slurp | slip) (backward | back) [here]:
+(slurp | slip) (backward | back) here:
 	user.vscode("paredit.slurpSexpBackward")
 
 (slurp | slip) (backward | back) point:
@@ -264,7 +264,7 @@ move forward down <user.cursorless_target>:
 (slurp | slip) (backward | back) <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.slurpSexpBackward")
 
-barf (backward | back) [here]:
+barf (backward | back) here:
 	user.vscode("paredit.barfSexpBackward")
 
 barf (backward | back) point:
@@ -274,7 +274,7 @@ barf (backward | back) point:
 barf (backward | back) <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.barfSexpBackward")
 
-barf [forward] [here]:
+barf [forward] here:
 	user.vscode("paredit.barfSexpForward")
 
 barf [forward] point:
@@ -284,7 +284,7 @@ barf [forward] point:
 barf [forward] <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.barfSexpForward")
 
-(transpose | swap) (forms | expressions) [here]:
+(transpose | swap) (forms | expressions) here:
 	user.vscode("paredit.transpose")
 
 (transpose | swap) (forms | expressions) point:
@@ -294,7 +294,7 @@ barf [forward] <user.cursorless_target>:
 (transpose | swap) (forms | expressions) <user.cursorless_target>:
 	user.cursorless_ide_command("paredit.transpose")
 
-convolute [here]:
+convolute here:
 	user.vscode("paredit.convolute")
 
 convolute point:
