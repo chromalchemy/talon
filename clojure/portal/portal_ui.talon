@@ -26,9 +26,16 @@ focus:
 [Portal] last viewer: 
     key(shift-k)
 
-[portal] pick viewer: 
+[portal] pick [portal] viewer: 
     key(v)
-    
+
+[portal] [pick] [portal] (viewer | view) [as] {user.portal_viewer}: 
+    key(v)
+    sleep(200ms)
+    insert(portal_viewer)
+    sleep(100ms)
+    key(enter)
+
 [portal] back: 
     key(cmd-left)
 [portal] forward: 
@@ -69,7 +76,16 @@ portal [(go | scroll)] bottom:
 
 [portal] (pop | exit): key(esc)
 
-[portal] (focus | go) filter: key(/)
+[portal] ((focus | go) filter | filter [this | that]) [<user.text>]: 
+    key(/)
+    sleep(100ms)
+    insert(text or "")
+
+[portal] ((focus | go) filter | filter [this | that]) (paste | pace): 
+    key(/)
+    sleep(100ms)
+    edit.paste()
+    
 
 (toggle | show | hide) (shell | frame): 
     key(ctrl-j)

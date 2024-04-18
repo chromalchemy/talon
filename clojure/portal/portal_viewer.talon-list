@@ -1,0 +1,45 @@
+list: user.portal_viewer
+app: vscode
+-
+inspector: inspector 
+eden: edn
+eaten: edn
+transit: transit
+pretty print: pprint 
+print: pprint
+print raw: prn 
+network call: http 
+table: table 
+tree: tree 
+hiccup: hiccup 
+hypertext: html
+webpage: html 
+web page: html
+diff: diff 
+difference: diff
+exception: ex 
+log: log
+test report: test-report 
+color: color
+duration nano: duration-ns
+duration milli: duration-ms
+vega lite: vega-lite
+vega: vega 
+print string: pr-str 
+date time: date-time
+program repl: prepl
+markdown: markdown
+mark down: markdown 
+binary: bin 
+image: image 
+text: text 
+jason: json 
+json: json 
+java wet toolkit: jwt 
+comma seperated values: csv 
+comma seperated value: csv 
+csv: csv 
+comma values: csv 
+comma vals: csv
+code: code
+size: size-bytes
