@@ -1,6 +1,9 @@
 app.name: Code
 -
 
+(tab | editor | column) (close | clothes):
+    user.vscode("workbench.action.closeActiveEditor")
+
 ## +++++++++++++++++++++++ pin editors .
 
 pin (editor | tab):
@@ -15,25 +18,8 @@ close (pinned  |  pin) (editor | tab):
 (isolate | separate | join | flatten) (pinned | pin) (editors | tabs | editor tabs):
     user.vscode("workbench.action.toggleSeparatePinnedEditorTabs")
 
-## ++++++++++++++++++++++ focus editor .
 
-(focus | go) (editor | tab): 
-    user.vscode("workbench.action.focusActiveEditorGroup")
-    
-please (go | focus) (editor | tab):
-    key(cmd-shift-p)
-    sleep(200ms)
-    insert("view focus editor")
-
-please  (go | focus) [tab] group:
-    key(cmd-shift-p)
-    sleep(200ms)
-    insert("view focus group")
-
-(tab | editor | column) (close | clothes): key(cmd-w)
-
-
-#------------ traverse recently used editors
+#------------ nav to recently used editors
 
 pop back | go back used [(editor | tab)]: 
     user.vscode("workbench.action.openPreviousRecentlyUsedEditor")
@@ -47,19 +33,21 @@ pop forward | go (next | forward | for) used [(editor | tab)] :
 (pop forward | go (next | forward | for) used) group: 
     user.vscode("workbench.action.openNextRecentlyUsedEditorInGroup")
 
-
 (open | pick [open]) [(closed | close)] (tab | editor):
     user.vscode("workbench.action.quickOpenPreviousRecentlyUsedEditor")
 
 
 ## +++++++++++++++++++ merge tab groups .
 
-(join | merge) [(editor | tab)] groups: 
-    user.vscode("workbench.action.joinAllGroups")
+(join | merge) (editor | tab | tabs | editors) [(in group | inside)]: 
+    user.vscode("workbench.action.joinEditorInGroup")
 
-(join | merge) [(editor | tab)] group with next : 
+(join | merge) [(editor | tab)] (groups | group [with] next) : 
     user.vscode("workbench.action.joinTwoGroups")
 
+(join | merge) [(editor | tab)] all (groups | tabs): 
+    user.vscode("workbench.action.joinAllGroups")
+    
 
 ## +++++++ expand and minimize editors .
 
@@ -69,7 +57,7 @@ expand group | group max:
 expand [(editor | tab)] group [and] hide (bars | sidebars | bar | sidebar) | [(editor | tab)] group full | hide other [(editor | tab)] groups: 
     user.vscode("workbench.action.maximizeEditorHideSidebar")
 
-(toggle | flip | reset) [(editor | tab)] group (size | sizes): 
+(toggle | flip | reset) [(editor | tab)] (group | groups) [(size | sizes)]: 
     user.vscode("workbench.action.toggleEditorWidths")
 
 ## ++++++++++++++++++++++++ close tabs .
@@ -80,16 +68,19 @@ close other (tabs | editors) [in] [group] : user.vscode("workbench.action.closeO
 
 (open | reopen) [last] closed (tab | editor): user.vscode("workbench.action.reopenClosedEditor")
 
+## ++++++++++++++++++++ navigation .
 
-#tab navigation
+## +++++++++++++++++++++++++++ vscode tab nav .
 
-# select tab via sidebar
+please (go | focus) (editor | tab):
+    key(cmd-shift-p)
+    sleep(200ms)
+    insert("view focus editor")
 
-go (next | last) [(editor | tab | tap)] group: user.vscode("workbench.action.navigateEditorGroups")
-
+#prefer andreas panel
 #user.vscode("workbench.files.action.focusOpenEditorsView")
 
-## ++++++++++++++ andreas tab nav commands .
+## ++++++++++++++ andreas tab nav  .
 
 #open editors/tabs sidebar
 (bar | show | go | focus | list)  (tabs | taps | editors | [tab] groups | open files) [view]: 
@@ -98,46 +89,71 @@ go (next | last) [(editor | tab | tap)] group: user.vscode("workbench.action.nav
 [(focus | go)] tab {self.letter} [{self.letter}]:
     user.run_rpc_command("andreas.focusTab", "{letter_1}{letter_2 or ''}")
 
+#being overridden by keys without prefix
 [(focus | go)] tab <number>:
     myNum = number - 1
     user.run_rpc_command("andreas.openEditorAtIndex", number)
 
+## +++++++++++++++++++++++++ vscode group nav .
+
+please (go | focus) [tab] group:
+    key(cmd-shift-p)
+    sleep(200ms)
+    insert("view focus group")
+
+(focus | go) (editor | tab | group): 
+    user.vscode("workbench.action.focusActiveEditorGroup")
+
+[(focus | go)] walk [(editor | tab | tap)] group: user.vscode("workbench.action.navigateEditorGroups")
+
+(focus | go) last [(editor | tab | tap)] group:
+    user.vscode("vscode-dynamic-layouts.focusPreviousGroup")
+    # user.vscode("workbench.action.focusPreviousGroup")
+
+(focus | go) next [(editor | tab | tap)] group:
+    user.vscode("vscode-dynamic-layouts.focusNextGroup")
+    # user.vscode("workbench.action.focusNextGroup")
+
+
 ## ++++++++++++++++++++++++ split tab in place.
 
-split [(editor | tab)] [in group]:      user.vscode("workbench.action.toggleSplitEditorInGroup")
+split (editor | tab) (in group | inside):      
+    user.vscode("workbench.action.toggleSplitEditorInGroup")
 
-split (editor | tab) up:            user.vscode("workbench.action.splitEditorUp")
-Split [(editor | tab)] left:          user.vscode("workbench.action.splitEditorLeft")
-split [(editor | tab)] right:         user.vscode("workbench.action.splitEditorRight")
+#generic splits
 
-split (editor | tab) [(horizontally | horizontal)]:               user.vscode("workbench.action.splitEditor")
-split (editor | tab) (down  | vertically | vertical):          user.vscode("workbench.action.splitEditorDown")
-split [(editor | tab)] (ortho | orthogonal | other) :         user.vscode("workbench.action.splitEditorOrthogonal")
+split (editor | tab) [(ortho | orthogonal | vertically | vertical | vert | tall)] | [(editor | tab)] (ortho | orthogonal | vertically | vertical | vert):         
+    user.vscode("workbench.action.splitEditorOrthogonal")
 
- ## ++++++++ split tab to (another?) group .
+split (editor | tab) (horizontally | horizontal | horizon | lateral | laterally | wide):       
+    user.vscode("workbench.action.splitEditor")
 
-split [(editor | tab)] to right [group]:      user.vscode("workbench.action.splitEditorToRightGroup")
-split [(editor | tab)] to left [group]:      user.vscode("workbench.action.splitEditorToLeftGroup")
-split [(editor | tab)] [to] next [group]:       user.vscode("workbench.action.splitEditorToNextGroup")
+## directional splits
 
-split [(editor | tab)] [to] first [group]:      user.vscode("workbench.action.splitEditorToFirstGroup")
-split [(editor | tab)] [to] last [group]:       user.vscode("workbench.action.splitEditorToLastGroup")
+split [(editor | tab)] up:            
+    user.vscode("workbench.action.splitEditorUp")
 
-split [(editor | tab)] [to] above [group]:      user.vscode("workbench.action.splitEditorToAboveGroup")
-split [(editor | tab)] [to] below [group]:      user.vscode("workbench.action.splitEditorToBelowGroup")
+split [(editor | tab)] down:          
+    user.vscode("workbench.action.splitEditorDown")
+
+Split [(editor | tab)] left:          
+    user.vscode("workbench.action.splitEditorLeft")
+
+split [(editor | tab)] (right | rite):         
+    user.vscode("workbench.action.splitEditorRight")
 
  ## +++++++++++++ shuffle tabs in group .
 
-[(shuffle | shift | push)] (editor | tab) (right | rite) [in group]: user.vscode("workbench.action.moveEditorRightInGroup")
+(editor | tab) ((shuffle | shift) (right | rite) | push) [in group]: user.vscode("workbench.action.moveEditorRightInGroup")
 
-[pull] [(shuffle | shift)] (editor | tab) left [in group]: user.vscode("workbench.action.moveEditorLeftInGroup")
+(editor | tab) ((shuffle | shift) left | pull) [in group]: user.vscode("workbench.action.moveEditorLeftInGroup")
 
  ## +++++++++ move tab group .
 
-(send | move) (editor | tab) group right: user.vscode("workbench.action.moveActiveEditorGroupRight")
-(send | move) (editor | tab) group left: user.vscode("workbench.action.moveActiveEditorGroupLeft")
-(send | move) (editor | tab) group up: user.vscode("workbench.action.moveActiveEditorGroupUp")
-(send | move) (editor | tab) group down: user.vscode("workbench.action.moveActiveEditorGroupDown")
+(send | move) [(editor | tab)] group right: user.vscode("workbench.action.moveActiveEditorGroupRight")
+(send | move) [(editor | tab)] group left: user.vscode("workbench.action.moveActiveEditorGroupLeft")
+(send | move) [(editor | tab)] group up: user.vscode("workbench.action.moveActiveEditorGroupUp")
+(send | move) [(editor | tab)] group down: user.vscode("workbench.action.moveActiveEditorGroupDown")
 
  ## +++++++++ move tab to another group .
 
@@ -145,11 +161,59 @@ move (editor | tab):
     key(cmd-shift-p)
     insert("view move editor") 
 
-(send | move) (editor | tab) [to] right [group]: user.vscode("workbench.action.moveEditorToRightGroup")
-(send | move) (editor | tab) [to] left [group]: user.vscode("workbench.action.moveEditorToLeftGroup")
-(send | move) (editor | tab) ([to] above | up) [group]: user.vscode("workbench.action.moveEditorToAboveGroup")
-(send | move) (editor | tab) ([to]  below | down) [group]: user.vscode("workbench.action.moveEditorToBelowGroup")
-(send | move) (editor | tab) [to]  first [group]: user.vscode("workbench.action.moveEditorToFirstGroup")
-(send | move) (editor | tab) [to]  last [group]: user.vscode("workbench.action.moveEditorToLastGroup")
-(send | move) (editor | tab) [to]  (previous | prev) [group]: user.vscode("workbench.action.moveEditorToPreviousGroup")
-(send | move) (editor | tab) [to]  next [group]: user.vscode("workbench.action.moveEditorToNextGroup")
+[(send | move)] (editor | tab) [to] (right | rite) [group]: 
+    user.vscode("workbench.action.moveEditorToRightGroup")
+
+[(send | move)] (editor | tab) [to] left [group]: 
+    user.vscode("workbench.action.moveEditorToLeftGroup")
+
+[(send | move)] (editor | tab) ([to] above | up) [group]: 
+    user.vscode("workbench.action.moveEditorToAboveGroup")
+
+[(send | move)] (editor | tab) ([to]  below | down) [group]: 
+    user.vscode("workbench.action.moveEditorToBelowGroup")
+
+[(send | move)] (editor | tab) [to]  first [group]: 
+    user.vscode("workbench.action.moveEditorToFirstGroup")
+
+[(send | move)] (editor | tab) [to] end [group]: 
+    user.vscode("workbench.action.moveEditorToLastGroup")
+
+[(send | move)] (editor | tab) [to]  last [group]: 
+    user.vscode("workbench.action.moveEditorToPreviousGroup")
+
+[(send | move)] (editor | tab) [to]  next [group]: 
+    user.vscode("workbench.action.moveEditorToNextGroup")
+
+## ++++++++++++++++++++++++++++ split tab to another group
+
+please split (editor | tab): 
+    key(cmd-shift-p)
+    insert("view split editor") 
+
+split [(editor | tab)] (to | too | two) (right | rite) [group]: 
+    user.vscode("workbench.action.splitEditorToRightGroup")
+
+split [(editor | tab)] (to | too | two) left [group]: 
+    user.vscode("workbench.action.splitEditorToLeftGroup")
+
+split [(editor | tab)] (to | too | two) (above | up | top) [group]: 
+    user.vscode("workbench.action.splitEditorToAboveGroup")
+
+split [(editor | tab)] (to | too | two) (below | down | bottom) [group]: 
+    user.vscode("workbench.action.splitEditorToBelowGroup")
+
+split [(editor | tab)] (to | too | two) first [group]: 
+    user.vscode("workbench.action.splitEditorToFirstGroup")
+
+split [(editor | tab)] (to | too | two) end [group]: 
+    user.vscode("workbench.action.splitEditorToLastGroup")
+
+split [(editor | tab)] (to | too | two) last [group]: 
+    user.vscode("workbench.action.splitEditorToPreviousGroup")
+
+split [(editor | tab)] (to | too | two) next [group]: 
+    user.vscode("workbench.action.splitEditorToNextGroup")
+
+split [(editor | tab)] [to] (right | rite) [group]:
+    user.vscode("workbench.action.splitEditorToNextGroup")

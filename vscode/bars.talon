@@ -27,9 +27,9 @@ panel (close | toggle | show | hide | view): user.vscode("workbench.action.toggl
 
 ## ++++++++++++++++++++++++++ zen mode .
 ## ++++++++++++++++++ toggle bars and panel visibility
+    
 
-
-(go | toggle | enter | exit | leave) (in | then | zen | zend | full) mode: user.vscode("workbench.action.toggleZenMode")
+(go | toggle | enter | exit | leave) (in | then | zen | zend | full) mode | zen mode: user.vscode("workbench.action.toggleZenMode")
 
 (hide | close) [(both | all)] (bars | sidebars) | wide (view | mode) | (tab | tabs) wide: 
     user.vscode("workbench.action.closeSidebar")
