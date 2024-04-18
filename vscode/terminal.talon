@@ -16,11 +16,11 @@ restore terminals: user.vscode("restore-terminals.restoreTerminals")
 kill process:               
     key(ctrl-c)
 
-(move | send) (term | terminal) (to | too | two) (tab | editor):
+[(move | send)] (term | terminal) (to | too | two) (tab | editor):
     user.vscode("workbench.action.terminal.moveToEditor")
 
-(move | send) (term | terminal) (to | too | two) [new] (window | win):
+[(move | send)] (term | terminal) (to | too | two) [new] (window | win):
     user.vscode("workbench.action.terminal.moveIntoNewWindow")
 
-(move | send) (term | terminal) (to | too | two) panel:
+[(move | send)] (term | terminal) (to | too | two) panel:
     user.vscode("workbench.action.terminal.moveToTerminalPanel")

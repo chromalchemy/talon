@@ -71,11 +71,7 @@ close other (tabs | editors) [in] [group] : user.vscode("workbench.action.closeO
 ## ++++++++++++++++++++ navigation .
 
 ## +++++++++++++++++++++++++++ vscode tab nav .
-
-please (go | focus) (editor | tab):
-    key(cmd-shift-p)
-    sleep(200ms)
-    insert("view focus editor")
+# basic tab nav in community core (tab last)
 
 #prefer andreas panel
 #user.vscode("workbench.files.action.focusOpenEditorsView")

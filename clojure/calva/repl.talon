@@ -25,20 +25,31 @@ show [calva] [says] (results | output | repl | ripple) channel:
 
 ## +++++++++++++++++++ calva repl output/results terminal .
 
-show [calva] (output | results | repl | ripple) (term | terminal):
+show [calva] (output | results | repl | ripple) [(term | terminal)]:
     user.vscode("calva.showOutputTerminal")
+
+open [calva] (output | results | repl | ripple) [(term | terminal)] [as] tab:
+    user.vscode("calva.showOutputTerminal")
+    sleep(300ms)
+    user.vscode("workbench.action.terminal.moveToEditor")
+
+open [calva] (output | results | repl | ripple) [(term | terminal)] [as] window:
+    user.vscode("calva.showOutputTerminal")
+    sleep(300ms)
+    user.vscode("workbench.action.terminal.moveIntoNewWindow")
+
 
 ## +++++++++++ repl results editor tab window.
 
-(focus | go) [(repl | ripple)] (results | output) [(window | tab)]: 
+(focus | go) [(repl | ripple)] (results | output) window: 
     user.vscode("calva.showOutputWindow")
 
-(show | open) [(repl | ripple)] (results | output) [(window | tab)]: 
+(show | open) [(repl | ripple)] (results | output) window: 
     user.vscode("calva.showOutputWindow")
     sleep(300ms)
     user.vscode("workbench.action.navigateBack")
 
-clear [(repl | ripple)] (results | output) [(window | tab)]:
+clear [(repl | ripple)] (results | output) window:
     user.vscode("calva.showOutputWindow")
     sleep(200ms)
     key(cmd-a)
@@ -47,12 +58,12 @@ clear [(repl | ripple)] (results | output) [(window | tab)]:
     user.vscode("workbench.action.openPreviousRecentlyUsedEditor")
     # user.vscode("workbench.action.navigateBack")
  
-(close | hide) [(repl | ripple)] (results | output) [(window | tab)]:
+(close | hide) [(repl | ripple)] (results | output) window:
     user.vscode("calva.showOutputWindow")
     sleep(200ms)
     user.vscode("workbench.action.closeActiveEditor")
     
-go [(repl | ripple)] (results | output) [(window | tab)] top:
+go [(repl | ripple)] (results | output) window top:
     user.vscode("calva.showOutputWindow")
     user.vscode("workbench.action.closeActiveEditor")
     key(cmd-up)
