@@ -65,12 +65,12 @@ move search results to tab:
 ## ++++++++++++++++++++ find in folder .
 # must have folder selected and focused in explorer
 
-(search | find in) folder [<user.text>]: 
+(search | find) [in] folder [<user.text>]: 
     key(shift-alt-f)
     sleep(200ms)
     insert(text or "")
     
-(search | find) folder (paste | pace):
+(search | find) [in] folder (paste | pace):
     key(shift-alt-f)
     sleep(200ms)
     edit.paste()
