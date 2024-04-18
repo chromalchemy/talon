@@ -2,15 +2,17 @@ app.name: Code
 -
 ## ++++++++++++++++ nav vscode windows .
 
-pick (code | could) (window | winner | win) | pick [open] project: user.vscode("workbench.action.switchWindow")
+pick (code | could) (window | winner | win | [open] project) | pick [open] project: user.vscode("workbench.action.switchWindow")
 
 (code | could) (swap | next | last) (window | winner | win):
     user.vscode("workbench.action.switchWindow")
     key(enter)
+    
 (swap | next | last) (code | could) (window | winner | win):
     user.vscode("workbench.action.switchWindow")
     key(enter)
-(code | could) (window | winner | win) (swap | next | last):
+    
+(code | could) [(window | winner | win)] (swap | next | last):
     user.vscode("workbench.action.switchWindow")
     key(enter)
 
