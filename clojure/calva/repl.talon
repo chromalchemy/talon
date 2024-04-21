@@ -14,24 +14,31 @@ app: vscode
 clear repl history: 
     user.vscode("calva.clearReplHistory")
 
-# what is this?
-show [result] output destination:
-    user.vscode("calva.showResultOutputDestination")
-
-## ++++++++++++++ calva (repl) output channel .
-    
-show [calva] [says] (results | output | repl | ripple) channel:
-    user.vscode("calva.showOutputChannel")
-
 ## +++++++++++++++++++ calva repl output/results terminal .
 
 clear [(repl | ripple)] (results | output) [(term | terminal)]:
     user.vscode("workbench.action.terminal.clear")
 
-
 show [calva] (output | results | repl | ripple) [(term | terminal)]:
     user.vscode("calva.showOutputTerminal")
     
+go [calva] (output | results | repl | ripple) [(term | terminal)]:
+    user.vscode("opened-editors.openedEditors")
+    insert("Calva Output")
+    key(enter)
+
+[go] [calva] (output | results | repl | ripple) [(term | terminal)] (bottom | end):
+    user.vscode("opened-editors.openedEditors")
+    insert("Calva Output")
+    key(enter)
+    edit.file_end()
+
+[go] [calva] (output | results | repl | ripple) [(term | terminal)] (top | start | beginning):
+    user.vscode("opened-editors.openedEditors")
+    insert("Calva Output")
+    key(enter)
+    edit.file_start()
+
 
 open [calva] (output | results | repl | ripple) [(term | terminal)] [as] tab:
     user.vscode("calva.showOutputTerminal")
@@ -42,6 +49,17 @@ open [calva] (output | results | repl | ripple) [(term | terminal)] [as] window:
     user.vscode("calva.showOutputTerminal")
     sleep(300ms)
     user.vscode("workbench.action.terminal.moveIntoNewWindow")
+
+## ___________________________________ .
+
+# what is this?
+show [result] output destination:
+    user.vscode("calva.showResultOutputDestination")
+
+## ++++++++++++++ calva (repl) output channel .
+    
+show [calva] [says] (results | output | repl | ripple) channel:
+    user.vscode("calva.showOutputChannel")
 
 
 ## +++++++++++ repl results editor tab window.
