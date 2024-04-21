@@ -67,3 +67,8 @@ key(cmd-3):                 mimic("copy action name")
 #     sleep(500ms)
 #     mimic("clippy")
 #     # mimic("paste one")
+
+(pace | paste) (talon | tellin | talin | command):
+    edit.paste()
+    sleep(150ms)
+    edit.undo()
