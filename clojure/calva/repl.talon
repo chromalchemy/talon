@@ -3,7 +3,7 @@ app: vscode
 
 ## +++++++++++++++++++ connect to repl .
 
-(jack in  |  restart) repl | repl  (jack in  |  restart):
+(jack in  |  restart) (repl | ripple) | (repl | ripple)  (jack in | jacket |  restart):
     user.vscode("calva.jackIn")
 
 [new] repl menu:
@@ -25,8 +25,13 @@ show [calva] [says] (results | output | repl | ripple) channel:
 
 ## +++++++++++++++++++ calva repl output/results terminal .
 
+clear [(repl | ripple)] (results | output) [(term | terminal)]:
+    user.vscode("workbench.action.terminal.clear")
+
+
 show [calva] (output | results | repl | ripple) [(term | terminal)]:
     user.vscode("calva.showOutputTerminal")
+    
 
 open [calva] (output | results | repl | ripple) [(term | terminal)] [as] tab:
     user.vscode("calva.showOutputTerminal")
