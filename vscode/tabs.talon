@@ -157,28 +157,28 @@ move (editor | tab):
     key(cmd-shift-p)
     insert("view move editor") 
 
-[(send | move)] (editor | tab) [to] (right | rite) [group]: 
+^[(send | move)] (editor | tab) [to] (right | rite) [group]$: 
     user.vscode("workbench.action.moveEditorToRightGroup")
 
-[(send | move)] (editor | tab) [to] left [group]: 
+^[(send | move)] (editor | tab) [to] left [group]$: 
     user.vscode("workbench.action.moveEditorToLeftGroup")
 
-[(send | move)] (editor | tab) ([to] above | up) [group]: 
+^[(send | move)] (editor | tab) ([to] above | up) [group]$: 
     user.vscode("workbench.action.moveEditorToAboveGroup")
 
-[(send | move)] (editor | tab) ([to]  below | down) [group]: 
+^[(send | move)] (editor | tab) ([to]  below | down) [group]$: 
     user.vscode("workbench.action.moveEditorToBelowGroup")
 
-[(send | move)] (editor | tab) [to]  first [group]: 
+^[(send | move)] (editor | tab) to  first [group]$: 
     user.vscode("workbench.action.moveEditorToFirstGroup")
 
-[(send | move)] (editor | tab) [to] end [group]: 
+^[(send | move)] (editor | tab) to end [group]$: 
     user.vscode("workbench.action.moveEditorToLastGroup")
 
-[(send | move)] (editor | tab) [to]  last [group]: 
+^[(send | move)] (editor | tab) to  last [group]$: 
     user.vscode("workbench.action.moveEditorToPreviousGroup")
 
-[(send | move)] (editor | tab) [to]  next [group]: 
+^[(send | move)] (editor | tab) to  next [group]$: 
     user.vscode("workbench.action.moveEditorToNextGroup")
 
 ## ++++++++++++++++++++++++++++ split tab to another group
