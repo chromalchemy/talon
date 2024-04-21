@@ -30,7 +30,7 @@ bar search (clear | new) | clear search (results | hits) | (new | fresh) [bar] s
 new [workspace] search [(editor | tab)]: 
     user.vscode("search.action.openNewEditor")
 
-new [workspace] search (to side | right): 
+new [workspace] search [(editor | tab)] (to [the] side | right): 
     user.vscode("search.action.openNewEditorToSide")
 
 open [workspace] [search] (results | hits) to side: 

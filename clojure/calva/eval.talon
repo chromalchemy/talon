@@ -115,11 +115,9 @@ evaluate and replace [with result]:
 
 (pace | paste) [last] [repl] (result | output | evaluation | eval) [(to | too | two)] new [(file | editor | tab | window)]: 
     user.vscode("calva.copyLastResults")
-    # sleep(200ms)
     user.vscode("workbench.action.files.newUntitledFile")
     sleep(200ms)
     user.vscode("workbench.action.moveEditorToRightGroup")
-    # sleep(100ms)
     user.vscode("workbench.action.editor.changeLanguageMode")
     sleep(100ms)
     insert("clojure")

@@ -178,11 +178,6 @@ exit: key(escape)
 
 dell it | deli it | dell that: key(delete)
 
-# todo:why is this not working in application over rides
-(go | show | open) (browser | browse):
-    user.switcher_focus("Chrome")    
-
-
 (cursorless | cursor less) (reference | live (cheatsheet | cheat sheet)): 
     user.switcher_focus("Chrome")
     browser.go("https://www.cursorless.org/cheatsheet")

@@ -10,7 +10,7 @@ tag: user.cursorless
      user.cursorless_command("setSelectionBefore", cursorless_target)
      key(backspace:3)
 
-insert (semicolon | semi colon); 
+insert (semicolon | semi colon):
     user.vscode("paredit.insertSemiColon")
 
 [(insert | add)] comment (symbol | mark): 

@@ -8,4 +8,4 @@ please (paredit | pare edit | pear edit):
 open [(paredit | pare edit | pear edit)] list: user.vscode("paredit.openList")
 
 toggle (paredit | pare edit | pear edit) [mode]:
-    user.vscode("paredit.togglemode").
+    user.vscode("paredit.togglemode")
