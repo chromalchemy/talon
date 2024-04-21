@@ -1,6 +1,5 @@
 app.name: Code
 -
-(bar | go) outline: user.vscode("outline.focus")
 
 ## ++++++++++++++++++++++ activity bar .
 
