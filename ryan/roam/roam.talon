@@ -110,8 +110,8 @@ embed (block | black | ref | reference) (children | kids):
 ^(replace | swap) (ref | reference) [with original]: 
     key(cmd-p)
     sleep(100ms)
-    insert("wb replace last reference before cursor with original")
-    sleep(100ms)
+    user.paste("wb replace last reference before cursor with original")
+    sleep(50ms)
     key(enter)
 
 ^(replace | swap) (ref | reference) [with] alias: 
@@ -181,7 +181,7 @@ deep nav:key(alt-g)
 swap (sidebar | main) [with (sidebar | main)]:
     key(cmd-p)
     sleep(100ms)
-    insert("wb sidebars - swap with main window (swap)")
+    user.paste("wb sidebars - swap with main window (swap)")
     sleep(100ms)
     key(enter)  
 
@@ -396,9 +396,11 @@ go block start:
 
 # only for use when cursor is inside block
 (delete | kill | remove) [whole] block | block delete: 
-    key(cmd-backspace)
-    # key(esc)
-    # key(delete)
+    # key(cmd-backspace)
+    key(esc)
+    key(delete)
+    sleep(100ms)
+    key(down)
 
 # kill highlighted block(s)
 ((delete | kill | remove) [(highlighted | selected | these)] [(multiple | multi)] blocks)| (delete | kill | remove) (highlighted | selected) block: 
@@ -965,18 +967,27 @@ dub paren: insert("((")
 
 make (todo | action): 
     key(cmd-return)
-    sleep(100ms)
+    # sleep(100ms)
+    # key(escape)
+
+[new] (todo | action) <user.text>: 
+    key(cmd-return)
+    insert(text)
+    # insert("{{[[TODO]]}}" + text)
+    
+make done: 
+    key(cmd-return)
+    # sleep(100ms)
     # key(escape)
 
 mark done: 
-    key(cmd-return)
-    sleep(100ms)
+    key(cmd-return:2)
+    # sleep(100ms)
     # key(escape)
 
-make done: 
+[new] done <user.text>: 
     key(cmd-return:2)
-    sleep(100ms)
-    # key(escape)
+    insert(text)
 
 make undone: 
     key(cmd-return:2)
@@ -1115,29 +1126,30 @@ nope: key(cmd-z)
 
 #deep nav (cursorless style) hats 
 
-^(hat | hats | nav | deep nav [hats] | block point | block hats | show hats)$: key(cmd-alt-0)
+^(hat | hats | nav | deep nav [hats] | block point | block hats | show hats)$: 
+    key(cmd-alt-0)
 
-(deep | do you) grab deep grab | go <user.number_string>: 
+((deep | do you) grab | go) <user.number_string>: 
     insert(number_string)
     sleep(200ms)
     key(enter)
 
-(deep | do you ) grab | go  <user.number_key>:
+((deep | do you ) grab | go)  <user.number_key>:
     key(number_key)
     sleep(100ms)
     key(enter)
     
-(deep | do you ) grab | go <user.number_key> <user.number_key>:
+((deep | do you ) grab | go) <user.number_key> <user.number_key>:
     key(number_key_1 number_key_2)
     sleep(100ms)
     key(enter)
 
-(deep | do you ) grab | go  <user.letter>:
+((deep | do you ) grab | go)  <user.letter>:
     key("{letter}")
     sleep(100ms)
     key(enter)
     
-(deep | do you ) grab | go  <user.letter> <user.letter>:
+((deep | do you ) grab | go)  <user.letter> <user.letter>:
     key("{letter_1} {letter_2}")
     sleep(100ms)
     key(enter)

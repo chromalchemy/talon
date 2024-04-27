@@ -21,7 +21,7 @@
 			]
 		},
 		{
-			"path": "photoshop/ps_menu_commands.clj",
+			"path": "ryan/photoshop/ps_menu_commands.clj",
 			"bookmarks": [
 				{
 					"line": 3,
@@ -137,6 +137,16 @@
 					"line": 211,
 					"column": 15,
 					"label": "snap_positions"
+				}
+			]
+		},
+		{
+			"path": "community/plugin/screenshot/screenshot.py",
+			"bookmarks": [
+				{
+					"line": 79,
+					"column": 23,
+					"label": "screenshot_rect"
 				}
 			]
 		}

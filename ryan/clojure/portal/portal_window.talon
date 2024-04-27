@@ -5,9 +5,6 @@ app: vscode
 open portal [window]:
     user.run_rpc_command("calva.runCustomREPLCommand", "portal open")
 
-clear portal | portal clear:
-    user.run_rpc_command("calva.runCustomREPLCommand", "pc")
-
 ## +++++++++++++++++++ portal clearing .
 
 launch portal clearing: 

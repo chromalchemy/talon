@@ -3,7 +3,7 @@ app: vscode
 
 ##tag(): user.clojure_core
 
-launch flow storm:
+(launch | open) flow storm:
     user.run_rpc_command("calva.runCustomREPLCommand", "launch flow storm")
     
 (trace | run) flow [top]:

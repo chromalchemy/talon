@@ -224,7 +224,7 @@ set [transform] (anchor | origin) [point]:
 #     sleep(2500ms)
 #     mouse_click(0)
 #     insert(number_string)
-#     sleep(50ms)
+#     sleep(50ms)Bottom
 #     key(enter)
 
 # [set] tracking (negative | neg) [<user.number_string>]: 
@@ -404,5 +404,9 @@ rotate clone [<number>]:
     n = number or 1
     b = n * 4
     key("alt-shift-.:{b}")
+
+photo new layer:
+    user.system_command_nb("open \"/Users/ryan/dev/ps script/scripts/create_layer.psjs\"")
+
  
 
