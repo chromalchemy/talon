@@ -40,3 +40,11 @@ toggle (nightshift | night shift | night light | [(display | screen)] (temperatu
         
 round (string | rap | wrap | text) <user.prose>:
     insert("({prose})")
+
+## ++++++++++++++++++++++++++++++ iris .
+
+(iris | eye | i) (brightness | brighten | brightens | Brighton) <user.number_string>: 
+    user.system_command_nb("open iris://sb-{number_string}")
+
+(iris | eye | i) (temperature | temp) <user.number_string>: 
+    user.system_command_nb("open iris://st-{number_string}")
