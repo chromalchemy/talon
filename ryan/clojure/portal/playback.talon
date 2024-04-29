@@ -2,7 +2,7 @@ app: vscode
 mode: command
 mode: user.cursorless_spoken_form_test
 tag: user.cursorless
-_
+-
 
 # (require-resolve 'gbo.playback-preload)
              
