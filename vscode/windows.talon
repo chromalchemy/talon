@@ -23,7 +23,8 @@ pick (code | could) (window | winner | win | [open] project) | pick [open] proje
 
 ## +++++++++++++++++ open project
 
-open project [in]  [new window]: user.vscode("projectManager.listProjectsNewWindow")
+open project [in]  [new window]: 
+    user.vscode("projectManager.listProjectsNewWindow")
 
 ## old vscode menu implementation to go to project
 # user.vscode("projectManager.listProjectsNewWindow")
@@ -36,6 +37,8 @@ open project [in]  [new window]: user.vscode("projectManager.listProjectsNewWind
 # user.run_rpc_command("projectManager.listProjectsNewWindow", "talon-user") 
 
 
-change project: user.vscode("projectManager.listProjects")
+change project: 
+    user.vscode("projectManager.listProjects")
 
-[(show | view | bar)] projects: user.vscode("projectsExplorerFavorites.focus")
+[(show | view | bar)] projects: 
+    user.vscode("projectsExplorerFavorites.focus")
