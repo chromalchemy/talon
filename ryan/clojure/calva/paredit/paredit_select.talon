@@ -5,7 +5,6 @@ app: vscode
 
 #tag(): user.clojure_core
 
-
 #only works if nothing selected
 # (so no point in cursorless?)
 

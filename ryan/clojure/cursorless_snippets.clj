@@ -6,7 +6,7 @@
             [separator.io :as s]
             [babashka.fs :as fs]
             ))
-(def snippets-path "../cursorless-snippets/")
+(def snippets-path "../../cursorless-snippets/")
 
 (def csv-header-str->kw
   {"Spoken form" :spoken
@@ -144,7 +144,6 @@
       :body ["def $name(self${parameterList:, }):" "\t$body"],
       :variables {:name {:formatter "snakeCase"}}}]}})
 
-
 (defn snippet-config
   [{:keys [description scope template name spoken]
     :or 
@@ -220,10 +219,10 @@
     #{:wrap}}])
 
 
-(comment 
-"(defn $fnName [$params]\n  $CURRENT_SECONDS_UNIX $body)")
+(comment
+  "(defn $fnName [$params]\n  $CURRENT_SECONDS_UNIX $body)"
+  )
 
- 
 (defn clear-snippets-dir! []
   (->>
     (fs/list-dir snippets-path)
@@ -238,7 +237,7 @@
     clj-snippets))
 
 (def cursorless-experimental-settings-path 
-  "../cursorless-settings/experimental/")
+  "../../cursorless-settings/experimental/")
 
 (defn write-snippet-bindings-csv-file [snippet-type]
   (->> all-snippet-declarations
@@ -268,7 +267,7 @@
       (->>
         (spit
           (str
-            "../cursorless-snippets/"
+            snippets-path
             name
             ".cursorless-snippets"))))))
 

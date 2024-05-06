@@ -33,7 +33,7 @@ go [to] last (edit | at it):
 go back: 
     user.vscode("workbench.action.navigateBack")
 
-go (forward | for | next) : 
+go (forward | for | ahead) : 
     user.vscode("workbench.action.navigateForward")
 
 # what is defference here?
@@ -41,7 +41,7 @@ go (forward | for | next) :
 go back nav:  
     user.vscode("workbench.action.navigateBackInNavigationLocations")
 
-go (forward | for | next) nav: 
+go (forward | for | ahead) nav: 
     user.vscode("workbench.action.navigateForwardInNavigationLocations")
 
 go (prev | previous) nav: 

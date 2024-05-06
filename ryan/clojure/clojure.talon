@@ -28,8 +28,6 @@ code.language: clojure
 #     user.code_protected_variable_formatter = "DASH_SEPARATED"
 #     user.code_public_variable_formatter = "DASH_SEPARATED"
 
-hello test: insert("test worked!!!")
-
 test notification: app.notify('this is a notification')
 
 [(closure | clojure)] (token | symbol | simple | sym | sim) {user.clojure_core}: 

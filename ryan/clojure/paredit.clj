@@ -6,7 +6,6 @@
             [separator.io :as s]
             [babashka.fs :as fs]
             ))
-(def snippets-path "../cursorless-snippets/")
 
 ;; read and parse old bindings csv
 (comment

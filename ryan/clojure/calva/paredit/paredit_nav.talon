@@ -7,7 +7,7 @@ app: vscode
 
 ## ++++++++++++++++++++++++++++++ back .
 
-go (back | previous | prev) (form | expression):  
+go (back | previous | prev) form:
     user.vscode("paredit.backwardSexp")
 
 go (back | previous | prev) down [form]: 
@@ -22,10 +22,10 @@ go back or up:
 
  ## +++++++++++++++++++++++++++ forward .
 
-go (forward | fore | next) [down] [form]: 
+go (forward | fore | next) down [form]: 
     user.vscode("paredit.forwardDownSexp")
 
-go (forward | fore | next) [form]: 
+go (next [form] | (forward | fore) form): 
     user.vscode("paredit.forwardSexp")
 
 go forward up | go up [form]: 

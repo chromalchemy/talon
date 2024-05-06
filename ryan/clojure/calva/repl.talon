@@ -12,6 +12,9 @@ app: vscode
     sleep(200ms)
     user.vscode("workbench.action.moveEditorToRightGroup")
 
+(jack in  |  restart) (repl | ripple) | (repl | ripple)  (jack in | jacket |  restart) manual:
+    user.vscode("calva.jackIn")
+    
 [new] repl menu:
     user.vscode("calva.startOrConnectRepl")
 
@@ -48,8 +51,11 @@ go [calva] (output | results | repl | ripple) [(term | terminal)]:
 
 open [calva] (output | results | repl | ripple) [(term | terminal)] [as] tab:
     user.vscode("calva.showOutputTerminal")
-    sleep(300ms)
+    sleep(100ms)
     user.vscode("workbench.action.terminal.moveToEditor")
+    # sleep(300ms)
+    user.vscode("workbench.action.closePanel")
+
 
 open [calva] (output | results | repl | ripple) [(term | terminal)] [as] window:
     user.vscode("calva.showOutputTerminal")
