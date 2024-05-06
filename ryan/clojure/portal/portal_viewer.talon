@@ -8,7 +8,7 @@ tag: user.cursorless
 
 ## ++++++++++++++++++++++++++ tap top form 
 
-
+#  run top level form with portal viewer
 (tap | send) (it | top [form]) {user.portal_viewer}:
     fn = """
     (do 
@@ -18,8 +18,9 @@ tag: user.cursorless
             (pv/{portal_viewer or 'pprint'})
             (tap>)))
         """
-    user.run_rpc_command("calva.runCustomREPLCommand", fn) 
+    user.run_repl_snippet(fn) 
 
+# clear portal, then run current top level form with portal viewer
 clear (tap | send) (it | top [form]) {user.portal_viewer}:
     fn = """
     (do 
@@ -30,10 +31,10 @@ clear (tap | send) (it | top [form]) {user.portal_viewer}:
             (pv/{portal_viewer or 'pprint'})
             (tap>)))
         """
-    user.run_rpc_command("calva.runCustomREPLCommand", fn) 
+    user.run_repl_snippet(fn) 
 
- #target text   
-(tap | send) elephant [form] {user.portal_viewer} <user.cursorless_target>:
+#run cursorless target text with portal viewer
+(tap | send) [form] {user.portal_viewer} text <user.cursorless_target>:
     target_text = user.cursorless_get_text(cursorless_target)
     sleep(500ms)    
     clj_fn = """
@@ -44,9 +45,9 @@ clear (tap | send) (it | top [form]) {user.portal_viewer}:
             (pv/{portal_viewer or 'pprint'})
             (tap>)))
         """
-    user.run_rpc_command("calva.runCustomREPLCommand", clj_fn)
+    user.run_repl_snippet(clj_fn)
 
-#select target first
+#select cursorless target, then run current form with portal viewer
 (tap | send) [form] {user.portal_viewer} <user.cursorless_target>:
     user.cursorless_command("setSelection", cursorless_target)
     sleep(500ms)    
@@ -59,9 +60,9 @@ clear (tap | send) (it | top [form]) {user.portal_viewer}:
             (tap>)
             ))
         """
-    user.run_rpc_command("calva.runCustomREPLCommand", clj_fn)
+    user.run_repl_snippet(clj_fn)
 
-  
+# run top level form at cursor with portal viewer
 (tap | send) (it | top [form]) {user.portal_viewer} point:
     mouse_click(0)
     fn = """
@@ -72,8 +73,9 @@ clear (tap | send) (it | top [form]) {user.portal_viewer}:
             (pv/{portal_viewer or 'pprint'})
             (tap>)))
         """
-    user.run_rpc_command("calva.runCustomREPLCommand", fn) 
+    user.run_repl_snippet(fn) 
 
+# clear portal, then run top level form at cursor with portal viewer
 clear (tap | send) (it | top [form]) {user.portal_viewer} point:
     mouse_click(0)
     fn = """
@@ -85,7 +87,7 @@ clear (tap | send) (it | top [form]) {user.portal_viewer} point:
             (pv/{portal_viewer or 'pprint'})
             (tap>)))
         """
-    user.run_rpc_command("calva.runCustomREPLCommand", fn)
+    user.run_repl_snippet(fn)
   
 ## ++++++++++++++++ tap selected text /caret from .
 
