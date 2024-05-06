@@ -35,25 +35,24 @@ tag: user.cursorless
 
 ## ++++++++++++++++++++++++++++++ test .
 
-test run saved repl command:
-    user.run_rpc_command("calva.runCustomREPLCommand", "dc")
-
+^test named repl snippet$:
+    user.run_repl_snippet("demo")
 
 #works!!
 #still need way to pass a ns or test if it can, w above
-test run [inline] repl command :
-    user.run_rpc_command("calva.runCustomREPLCommand", '(println $top-level-form)')
+^test inline repl snippet$:
+    user.run_repl_snippet('$top-level-form')
 
 
 # run cursorless target in repl
-curse test  <user.cursorless_target>:
+^test (cursorless | curse) repl snippet [on] <user.cursorless_target>$:
     # user.cursorless_command("setSelection", cursorless_target)
     t= user.cursorless_get_text(cursorless_target)
-    user.run_rpc_command("calva.runCustomREPLCommand", "(identity {t})")
+    user.run_repl_snippet("(identity {t})")
 
     # user.cursorless_ide_command_extra("calva.runCustomREPLCommand", "flow storm", cursorless_target)
     
-#use thiss to pass a ns?
-^test bird$: 
+#use this to pass a ns?
+^test  python repl snippet$: 
     insert("ran repl test")
     user.run_repl_command("(println \\\"hello-world\\\")", "clj")
