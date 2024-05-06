@@ -1,7 +1,7 @@
 
-(take screen shot | screen grab): key(ctrl-shift-cmd-4)
+[take] (screen shot | screenshot | screen grab): key(ctrl-shift-cmd-4)
 
-screenshot text:
+[take] (screen shot | screenshot | screen grab) (text | ocr ):
     user.system_command_nb("/Applications/OwlOCR.app/Contents/MacOS/OwlOCR --cli --screenshot | pbcopy")
     # t = user.system_command_nb_get_text("/Applications/OwlOCR.app/Contents/MacOS/OwlOCR --cli --screenshot")
     # user.paste(t)

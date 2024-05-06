@@ -1,4 +1,5 @@
 app.name: Roam Research 
+mode: command
 -
 
 tag(): user.line_commands
