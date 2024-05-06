@@ -8,7 +8,7 @@
             ))
 (def snippets-path "../cursorless-snippets/")
 
-;; read and parse bindings csv
+;; read and parse old bindings csv
 (comment
   (->
     (slurp "actions_custom.csv")
