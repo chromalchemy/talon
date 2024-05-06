@@ -1,7 +1,16 @@
 app.name: Code
+tag: user.cursorless
 -
 
-## ++++++++++++++++++++++++++ bookmarks .
+## ++++++++++++++++ line link url .
+
+copy (line | code) (link | address):           
+    user.vscode("extension.linkLine")
+
+## +++++++++++++++++++ bookmarks panel .
+
+(focus | show | bar) (bookmarks | marks | links) [(bar | panel | view)]:
+    user.vscode("bookmarksExplorer.focus")
 
 #--------------------create bookmarks
 
@@ -24,30 +33,46 @@ bookmark that [(paste | pace)]:
     sleep(300ms)
     key(enter)
     
-## ++++++++++++++++++++++ jump to via bookmark order .
+## ++++++++++++++++++++++ jump to bookmark via bookmark order .
 
 [go] next (bookmark | mark):    user.vscode("bookmarks.jumpToNext")
 [go] (previous | prev | last) (bookmark | mark): user.vscode("bookmarks.jumpToPrevious")
 
-
 ## ++++++ pick bookmark from current file .
 
-(hunt | search | pick | list) file (bookmark | bookmarks | mark | marks ) [for] [<user.text>]:
+(hunt | search | pick | list) [file] (bookmark | bookmarks | mark | marks ) [for] [<user.text>]:
     user.vscode("bookmarks.list")
-    # sleep(200ms)
     insert(text)
 
+[go] (bookmark | mark) [file] <user.text>:
+    user.vscode("bookmarks.list")
+    # sleep(100ms)
+    user.paste(text)
+    sleep(100ms)
+    key(enter)
+
+walk my crown:
+    user.private_cursorless_action_or_ide_command("scrollToTop", "currentSelection")
+
 ## ++++++ pick bookmark from all files .
-(hunt | search | pick | list) [all] (bookmark | bookmarks | mark | marks ) [for] [<user.text>]:
+(hunt | search | pick | list) all (bookmark | bookmarks | mark | marks ) [for] [<user.text>]:
     user.vscode("bookmarks.listFromAllFiles")
     # sleep(100ms)
     key(enter)
     sleep(300ms)
     insert(text)
 
-       
-#open copied bookmark from all files
-open (bookmark | mark) [(paste | pace)]:
+[go] (marks | (bookmark | mark) all) <user.text>:
+    user.vscode("bookmarks.listFromAllFiles")
+    key(enter)
+    sleep(100ms)
+    user.paste(text)
+    sleep(100ms)
+    key(enter)
+
+    
+#open pasted bookmark bookmark name, from all files
+(hunt | search | pick | list) [all] (bookmark | bookmarks | mark | marks ) (paste | pace):
     user.vscode("bookmarks.listFromAllFiles")
     # sleep(100ms)
     key(enter)
@@ -56,11 +81,7 @@ open (bookmark | mark) [(paste | pace)]:
     sleep(300ms)
     key(enter)
 
-# bookmarks panel .
-(focus | show | bar) (bookmarks | marks | links) [(bar | panel | view)]:
-    user.vscode("bookmarksExplorer.focus")
-
- ## ++++++++++++++++++++ hover commands .
+ ## ++++++++++++++++++++ panel bookmark hover .
 
 rename bookmark:
     mouse_click(1)
@@ -85,15 +106,7 @@ copy bookmark name:
     key(cmd-c)
     key(esc)
 
-## ++++++++++++++++ line link url .
-
-copy (line | code) (link | address):           
-    user.vscode("extension.linkLine")
-
-#go to link (via raycast) is in general.talon
-
-## +++++++++++++++++++++++++ favorites (file bookmarks) .
-
+## ============================== favorites (file bookmarks) .
 
 new (favorites | favorite) group:
     user.vscode("favorites.group.newGroup")
@@ -128,10 +141,8 @@ open (favourites | favorites):
 open favorites to side:
     user.vscode("favorites.openToSide")
 
-
 (focus | go | bar) (explore |explorer) favorites: 
     user.vscode("favorites.focus")
-
 
 (toggle | hide | show) [(explore |explorer)] favorites:
     user.vscode("favorites.toggleVisibility")
@@ -157,7 +168,6 @@ file (add | send) [to] (favorite | favorites) | make file favorite | add [(file 
 remove [(file | tab)] from (favorite | favorites): 
     user.vscode("favorites.deleteFavorite")
 
-    
 (add | send) (this | that) to favorites | make favorite:
     mouse_click(1)
     sleep(300ms)
