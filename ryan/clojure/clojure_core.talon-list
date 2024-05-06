@@ -12,6 +12,8 @@ output var: #><[]
 output ref: #><[]
 trace ref: #><[]
 
+arrow: ->
+forward arrow: ->
 
 breakpoint small: :sm
 breakpoint medium: :md 
