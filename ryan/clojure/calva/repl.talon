@@ -5,6 +5,12 @@ app: vscode
 
 (jack in  |  restart) (repl | ripple) | (repl | ripple)  (jack in | jacket |  restart):
     user.vscode("calva.jackIn")
+    sleep(2000ms)
+    user.vscode("calva.showOutputTerminal")
+    sleep(300ms)
+    user.vscode("workbench.action.terminal.moveToEditor")
+    sleep(200ms)
+    user.vscode("workbench.action.moveEditorToRightGroup")
 
 [new] repl menu:
     user.vscode("calva.startOrConnectRepl")
