@@ -1,50 +1,135 @@
+
 open display panel: 
     key(cmd-space)
     sleep(300ms)
     insert("displays")
     key(enter)
 
+## +++++++++++++++++++++++++ dark mode .
 
-(toggle | enter | leave | exit) [system] dark mode:
-    key(cmd-space)
-    sleep(100ms)
-    insert("toggle system appearance")
-    sleep(100ms)
-    key(enter)
+toggle [system] dark mode:
+    user.betterdisplay_toggle("darkMode")
 
-## ++++++++++++++++ adjust night shift .
+dark mode [on] | enter dark mode:
+    user.betterdisplay_set("darkMode=on")
 
-[make | set] ((display | screen) (temperature | temp) | (nightshift | night shift)) <user.number_string>:
-    user.system_command_nb("nightlight temp {number_string}")
+dark mode off | light mode | (exit | leave) dark mode:
+    user.betterdisplay_set("darkMode=off")
 
-toggle (nightshift | night shift | night light | [(display | screen)] (temperature | temp)):
-    user.system_command_nb("nightlight toggle") 
+## ++++++++++++++++  night shift 
 
-## +++++++++++++++++ adjust brightness .
+[make | set] (nightshift | night shift | night light | nat if | system | macbook) [(temperature | temp)] <user.number_string>:
+    user.betterdisplay_set("nightShiftValue=0.{number_string}")
 
-[(screen | display)] (brightness | brightens | brighten) up | brighten [up] (screen | display):
-    key(f15)
+(nightshift | night shift | night light | nat if) [(temperature | temp)] up <user.number_string>:
+    user.betterdisplay_set("nightShiftValue=0.{number_string} --offset")
 
-[(screen | display)] (brightness | brighten | brightens | Brighton) down | dim [down] (screen | display):
-    key(f14)
-
-[(screen | display)] (brightness | brighten | brightens | Brighton) single <user.number_string>:
-    user.system_command_nb("brightness 0.0{number_string}")
-
-[(screen | display)] (brightness | brighten | brightens | Brighton) <user.number_string>:
-    user.system_command_nb("brightness 0.{number_string}")
+(nightshift | night shift | night light | nat if) [(temperature | temp)] down <user.number_string>:
+    user.betterdisplay_set("nightShiftValue=-0.{number_string} --offset")
     
 
-(screen | display) (brightness | brighten | brightens | Brighton) full:
-    user.system_command_nb("brightness 1")
-        
-round (string | rap | wrap | text) <user.prose>:
-    insert("({prose})")
+[make | set] (nightshift | night shift | night light | nat if | system | macbook) [(temperature | temp)] (max | full | [one] hundred | 100):
+    user.betterdisplay_set("nightShiftValue=1")
+
+toggle (nightshift | night shift | night light | nat if | system (temperature | temp)):
+    user.betterdisplay_toggle("nightShift")
+
+(nightshift | night shift | night light | nat if) [(temperature | temp)] on:
+    user.betterdisplay_set("nightShift=on")
+
+(nightshift | night shift | night light | nat if) [(temperature | temp)] off:
+    user.betterdisplay_set("nightShift=off")
+
+# user.system_command_nb("nightlight toggle")
+
+
+## +++++++++++++++ hardware brightness .
+
+# user.system_command_nb("brightness 0.0{number_string}")Brain is five
+
+# [(system | macbook)] (brightness | brightens | brighten) up | brighten [up] (system | macbook):
+#     key(f15)
+
+# [(system | macbook)] (brightness | brighten | brightens | Brighton) down | dim [down] (system | macbook):
+#     key(f14)
+
+(hardware | hard) (brightness | brighten | brightens | Brighton) <user.number_string>:
+    user.betterdisplay_set("hardwareBrightness={number_string}%")
+
+(hardware | hard) (brightness | brighten | brightens | Brighton) (full | max):
+    user.betterdisplay_set("hardwareBrightness=100%")
+
+## ++++++++++++++++ software brightnss .
+
+[(soft | software)] (brightness | brighten | brightens | Brighton) up <user.number_string>:
+    user.betterdisplay_set("softwareBrightness={number_string}% --offset")
+
+[(soft | software)] (brightness | brighten | brightens | Brighton) down <user.number_string>:
+    user.betterdisplay_set("softwareBrightness=-{number_string}% --offset")
+
+[(soft | software)] (brightness | brighten | brightens | Brighton) <user.number_string>:
+    user.betterdisplay_set("softwareBrightness={number_string}%")
+
+[(soft | software)] (brightness | brighten | brightens | Brighton) (full | max):
+    user.betterdisplay_set("softwareBrightness=100%")
+ 
+## ++++++++++++++++++++++++++ contrast .
+
+(screen | display) contrast <user.number_string>:
+    user.betterdisplay_set("contrast={number_string}%")
+    
+(screen | display) contrast negative <user.number_string>:
+    user.betterdisplay_set("contrast=-{number_string}%") 
+    
+(screen | display) contrast max:
+    user.betterdisplay_set("contrast=100%")
+
+## ++++++++++++++++++++++++++ gain .
+
+(screen | display) amp <user.number_string>:
+    user.betterdisplay_set("gain={number_string}%")
+    
+(screen | display) amp negative <user.number_string>:
+    user.betterdisplay_set("gain=-{number_string}%") 
+    
+(screen | display) amp max:
+    user.betterdisplay_set("gain=100%")
+
+## +++++++++++++++++++++++++ inversion .
+
+(screen | display) invert | invert (screen | display) :
+    user.betterdisplay_toggle("inverted")
+
+## ++++++++++++++++++++++++++ gamma .
+
+(screen | display) (gamma | game) <number>:
+    n = number * 0.8
+    user.betterdisplay_set("gamma={n}%")
+    
+(screen | display) (gamma | game) negative <number>:
+    n = number * 0.8
+    user.betterdisplay_set("gamma=-{n}%")
+    
+(screen | display) gamma max:
+    user.betterdisplay_set("gamma=100%")
+
+## ++++++++++++++++++++++++++ temperature .
+
+(screen | display) (temperature | temp) <number>:
+    n = number / 2
+    user.betterdisplay_set("temperature={n}%")
+    
+(screen | display) (temperature | temp) negative <number>:
+    n = number / 2
+    user.betterdisplay_set("temperature=-n%") 
+    
+(screen | display) (temperature | temp) max:
+    user.betterdisplay_set("temperature=100%")
 
 ## ++++++++++++++++++++++++++++++ iris .
 
-(iris | eye | i) (brightness | brighten | brightens | Brighton) <user.number_string>: 
-    user.system_command_nb("open iris://sb-{number_string}")
+# [(iris | eye | i | screen | display)] (brightness | brighten | brightens | Brighton) <user.number_string>: 
+#     user.system_command_nb("open iris://sb-{number_string}")
 
-(iris | eye | i) (temperature | temp) <user.number_string>: 
-    user.system_command_nb("open iris://st-{number_string}")
+# (iris | eye | i | screen | display) (temperature | temp) <user.number_string>: 
+#     user.system_command_nb("open iris://st-{number_string}")
