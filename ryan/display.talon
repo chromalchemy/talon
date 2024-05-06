@@ -61,11 +61,11 @@ toggle (nightshift | night shift | night light | nat if | system (temperature | 
 
 ## ++++++++++++++++ software brightnss .
 
-[(soft | software)] (brightness | brighten | brightens | Brighton) up <user.number_string>:
-    user.betterdisplay_set("softwareBrightness={number_string}% --offset")
+[(soft | software)] (brightness | brighten | brightens | Brighton) up [<user.number_string>]:
+    user.betterdisplay_set("softwareBrightness={number_string or '5'}% --offset")
 
-[(soft | software)] (brightness | brighten | brightens | Brighton) down <user.number_string>:
-    user.betterdisplay_set("softwareBrightness=-{number_string}% --offset")
+[(soft | software)] (brightness | brighten | brightens | Brighton) down [<user.number_string>]:
+    user.betterdisplay_set("softwareBrightness=-{number_string or '5'}% --offset")
 
 [(soft | software)] (brightness | brighten | brightens | Brighton) <user.number_string>:
     user.betterdisplay_set("softwareBrightness={number_string}%")
