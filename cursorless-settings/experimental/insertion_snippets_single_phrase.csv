@@ -6,3 +6,7 @@ def funk, newFn.fnName
 anonymous funk, anonymous-funk.fnBody
 anonymous thread first, anonymous-thread-first.fnBody
 hash funk, hash-funk.fnName
+
+
+# 2024-05-07 17:30:42 - New entries automatically added by cursorless
+funk, functionDeclaration.name

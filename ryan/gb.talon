@@ -1,7 +1,7 @@
 app: chrome
 -
 tag(): browser
-
+    
 #open js bookmarklet links (parses page for input data)
 
 [open] edit product [page]:
@@ -46,4 +46,5 @@ email (add block | adblock | insert | paste) link:
     sleep(30ms)
     key(enter)
     
-(paste | pace | insert) get bit address: insert("https://getbitoutdoors.com")
+(paste | pace | insert) get bit address: 
+    insert("https://getbitoutdoors.com")

@@ -12,8 +12,15 @@ please calva (evaluate | eval):
 
 ## +++++++++++++++++++++++++ load file .
 
-[(rep | repl | ripple | rebel)] (load | reload | run) file [in (rep | repl | ripple | rebel)]: 
+[(rep | repl | ripple | rebel)] (load | reload) file [in (rep | repl | ripple | rebel)]: 
     user.vscode("calva.loadFile")
+
+## +++++++++++++++++++++ eval whole file .
+
+[(rep | repl | ripple | rebel)] (evaluate | eval | compute | comp | run | runt) [(whole | entire)] file:
+    user.vscode("editor.action.selectAll") 
+    user.vscode("calva.evaluateSelection")
+    user.vscode("cursorUndo")
 
 ## +++++++++++++++++++++ eval top form .
 

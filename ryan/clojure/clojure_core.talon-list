@@ -236,6 +236,9 @@ pred decimal: decimal?
 # default data readers: default-data-readers
 # definline: definline
 # definterface: definterface
+def: def 
+deaf: def 
+define: def 
 def macro: defmacro
 def method: defmethod
 def multi: defmulti

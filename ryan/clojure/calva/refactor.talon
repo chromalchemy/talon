@@ -35,7 +35,7 @@ inline symbol:
 expand to new function: 
     user.vscode("clojureLsp.refactor.extractFunction")
 
-add missing require: 
+add [missing] require: 
     user.vscode("clojureLsp.refactor.addMissingLibspec")
 
 ## ++++++++ other refactoring commands .

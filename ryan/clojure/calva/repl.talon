@@ -25,7 +25,7 @@ clear repl history:
 
 ## +++++++++++++++++++ calva repl output/results terminal .
 
-clear [(repl | ripple)] (results | output) [(term | terminal)]:
+(clear [(it | t | tea)] | clarity) | (clear | dump) [(repl | ripple)] (results | output) [(term | terminal)]:
     user.vscode("workbench.action.terminal.clear")
 
 show [calva] (output | results | repl | ripple) [(term | terminal)]:
