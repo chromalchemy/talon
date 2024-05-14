@@ -2,7 +2,7 @@ app.name: Roam Research
 mode: command
 -
 
-tag(): user.line_commands
+
 # tag(): user.roam
 
 ####################
@@ -20,13 +20,13 @@ please [<user.text>]:
 ^workbench settings$: 
     key(cmd-p)
     sleep(200ms)
-    insert("settings workbench")
+    user.paste("settings workbench")
     key(enter)
 
 ^(tag (icons | icon) | magic (tag | tags)) settings$: 
     key(cmd-p)
     sleep(200ms)
-    insert("magic tags")
+    user.paste("magic tags")
     key(enter)
 
 #------------------left sidebar
@@ -37,7 +37,7 @@ please [<user.text>]:
 add (shortcut | bookmark): 
     key(cmd-p)
     sleep(100ms)
-    insert("wb add shortcut")
+    user.paste("wb add shortcut")
     sleep(100ms)
     key(enter)
 
@@ -58,7 +58,7 @@ embed (block | ref | reference):
 #todo: Make versions that queue up we search for the block or or page, rather than pasting it
 embed (block | black | ref | reference) (children | kids):
     key({:2)
-    insert("embed-children: ")
+    user.paste("embed-children: ")
     sleep(300ms)
     edit.paste()
     sleep(100ms)
@@ -118,7 +118,7 @@ embed (block | black | ref | reference) (children | kids):
 ^(replace | swap) (ref | reference) [with] alias: 
     key(cmd-p)
     sleep(100ms)
-    insert("wb replace last reference before cursor with text and alias")
+    user.paste("wb replace last reference before cursor with text and alias")
     sleep(100ms)
     key(enter)
 
@@ -128,21 +128,21 @@ embed (block | black | ref | reference) (children | kids):
 go all pages: 
     key(cmd-p)
     sleep(100ms)
-    insert("wb all pages")
+    user.paste("wb all pages")
     sleep(100ms)
     key(enter)
 
 go [page] top: 
     key(cmd-p)
     sleep(100ms)
-    insert("jump top")
+    user.paste("jump top")
     sleep(100ms)
     key(enter)
 
 go [page] bottom: 
     key(cmd-p)
     sleep(100ms)
-    insert("jump bottom")
+    user.paste("jump bottom")
     sleep(100ms)
     key(enter)
 
@@ -189,7 +189,7 @@ swap (sidebar | main) [with (sidebar | main)]:
 (expand | collapse [all] | fold) (sidebar | side bar):
     key(cmd-p)
     sleep(100ms)
-    insert("toggle expand sidebar")
+    user.paste("toggle expand sidebar")
     sleep(100ms)
     key(enter)  
 
@@ -205,7 +205,7 @@ open (ref | reference | link) in sidebar:
 open [this] page in sidebar: 
     key(cmd-p)
     sleep(100ms)
-    insert("wb open page in sidebar")
+    user.paste("wb open page in sidebar")
     sleep(100ms)
     key(enter)
 
@@ -223,7 +223,7 @@ open <user.one_roam_tag> in sidebar | bar <user.one_roam_tag>:
 open hotkeys: 
     key(cmd-p)
     sleep(100ms)
-    insert("hotkeys")
+    user.paste("hotkeys")
     sleep(100ms)
     key(enter)
 
@@ -247,7 +247,7 @@ Open query (drawer | builder): key(cmd-shift-ctrl-alt-8)
 search [<user.text>]:
     key(cmd-u)
     sleep(200ms)
-    insert(text)
+    user.paste(text)
     
 #traditional page search
 search page: key(cmd-f)
@@ -264,7 +264,7 @@ search workspace: key(ctrl-s)
 search (whole | entire) graph: 
     key(cmd-p)
     sleep(100ms)
-    insert("wgs")
+    user.paste("wgs")
     sleep(300ms)
     key(enter)
 
@@ -323,35 +323,37 @@ next block: key(ctrl-n)
 
  ## +++++++++++++++++++++ block folding .
 
-(fold | close | hide (children | kids)) block: key(cmd-up)
-(unfold | open | show (children | kids)) block: key(cmd-down)
+(fold | close | hide (children | kids)) block: 
+    key(cmd-up)
+(unfold | open | show (children | kids)) block: 
+    key(cmd-down)
 
 (collapse | fold) tree: 
     key(cmd-p)
     sleep(100ms)
-    insert("collapse current block tree")
+    user.paste("collapse current block tree")
     sleep(100ms)
     key(enter)
 
 #only exands one leve deep (not recursive)
-expand block:
+(expand | unfold) block:
     key(cmd-p)
     sleep(100ms)
-    insert("Expand current block tree")
+    user.paste("Expand current block tree")
     sleep(100ms)
     key(enter)
     
 (collapse | fold) all [blocks]: 
     key(cmd-p)
     sleep(100ms)
-    insert("collapse all blocks on page")
+    user.paste("collapse all blocks on page")
     sleep(100ms)
     key(enter)
     
 (expand | unfold) all [blocks]: 
     key(cmd-p)
     sleep(100ms)
-    insert("expand all blocks on page")
+    user.paste("expand all blocks on page")
     sleep(100ms)
     key(enter)
 
@@ -361,7 +363,7 @@ expand block:
     mynumber = number_small + 1
     key(cmd-p)
     sleep(100ms)
-    insert("wb expand/collapse block tree")
+    user.paste("wb expand/collapse block tree")
     sleep(100ms)
     key(enter)
     sleep(500ms)
@@ -443,7 +445,7 @@ select all blocks: key(cmd-shift-a)
 (insert | new) top block:
     key(cmd-p)
     sleep(200ms)
-    insert("wb jump to top of page")
+    user.paste("wb jump to top of page")
     sleep(200ms)
     key(enter)
     sleep(200ms)
@@ -453,7 +455,7 @@ select all blocks: key(cmd-shift-a)
     sleep(300ms)
     key(cmd-p)
     sleep(200ms)
-    insert("Insert block above")
+    user.paste("Insert block above")
     sleep(300ms)
     key(esc)
     sleep(200ms)
@@ -521,6 +523,22 @@ paste (child | kid) [block] raw:
     key(tab)
     key(cmd-shift-v)
 
+## +++++++ making existing block child .
+
+# move block to child of one below
+move to child [block] | block make (child | kid ):
+    key(cmd-shift-down)
+    sleep(200ms)
+    key(tab)
+
+# move block below to child
+(child | kid) [block] below | make [block] below (child | kid ):
+    key(esc)
+    sleep(100ms)
+    key(down)
+    sleep(100ms)
+    key(tab)
+
  ## ++++++++++++++++++++ new block back .
     
 #todo: copy implementation from block all the way back
@@ -542,12 +560,38 @@ new base block:
 [(new | insert)] block (up | above): key(cmd-shift-i)
 
 ## +++++++++++++ # Insert block below, .
-# skips children   
+
+# skips  take here   
 [(new | insert)] block [(down | below)]: key(cmd-shift-k)
+
 new block back: 
     key(cmd-shift-k)
-    sleep(500ms)
+    sleep(300ms)
+    key(down shift-tab)
+
+new block way back: 
+    key(cmd-shift-k)
+    sleep(300ms)
+    key(down)
     key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+
+
+
 
 #todo use new block down instead of going to end and enter in all of these commends
 
@@ -556,9 +600,7 @@ new block back:
 nest here:
     key(enter)
     sleep(100ms)
-    key(tab)
-    key(escape)
-    key(escape)
+    key(tab escape:2)
 
 (split | break) here [block] : 
     key(enter)
@@ -664,7 +706,7 @@ move [(block | blocks)] to today:
     edit.select_all()
     sleep(100ms)
     key(delete)
-    insert("Today")
+    user.paste("Today")
     sleep(100ms)
     key(tab enter)
     sleep(100ms)
@@ -707,7 +749,7 @@ move [(block | blocks)] to [top] [of] <user.one_roam_tag>:
 move [(block | blocks)] to [top] [of] <user.one_roam_tag> sidebar:
     key(cmd-p)
     sleep(100ms)
-    insert("mbts")
+    user.paste("mbts")
     sleep(100ms)
     key(enter) 
     sleep(1500ms)
@@ -720,7 +762,7 @@ move [(block | blocks)] to [top] [of] <user.one_roam_tag> sidebar:
 move [(block | blocks)] to [top] [of] <user.one_roam_tag> [leave] (ref | reference | rough):
     key(cmd-p)
     sleep(100ms)
-    insert("mbtr")
+    user.paste("mbtr")
     sleep(100ms)
     key(enter) 
     sleep(1500ms)
@@ -733,7 +775,7 @@ move [(block | blocks)] to [top] [of] <user.one_roam_tag> [leave] (ref | referen
 move [(block | blocks)] to [top] [of] <user.one_roam_tag> [and] (zoom | go [there] | focus):
     key(cmd-p)
     sleep(100ms)
-    insert("mbtz")
+    user.paste("mbtz")
     sleep(100ms)
     key(enter) 
     sleep(1500ms)
@@ -772,7 +814,7 @@ move [(block | blocks)] to agenda:
     key(cmd-alt-m)
     sleep(1500ms)
     key(tab right)
-    insert("CGDDdKiFq")
+    user.paste("CGDDdKiFq")
     sleep(200ms)        
     key(enter)
     sleep(100ms)        
@@ -782,7 +824,7 @@ move [(block | blocks)] to agenda:
     key(cmd-alt-ctrl-m)
     sleep(1500ms)
     key(tab right)
-    insert("CGDDdKiFq")       
+    user.paste("CGDDdKiFq")       
     sleep(200ms)
     key(enter)
     sleep(100ms)       
@@ -793,7 +835,7 @@ move [(block | blocks)] to agenda:
 move [(block | blocks)] to (paste | pace) sidebar: 
     key(cmd-p)
     sleep(200ms)
-    insert("mbts")
+    user.paste("mbts")
     sleep(100ms)
     key(enter)
     sleep(1500ms)
@@ -839,6 +881,14 @@ insert tomorrow:
 ^[(new | now)] tag {user.abbreviation}$: 
     insert(" #{abbreviation} ")
 
+#keep chooser    
+^[(new | now)] tag ink <user.one_roam_tag>$: 
+    insert(" #{one_roam_tag}")
+
+^[(new | now)] tag ink {user.abbreviation}$: 
+    insert(" #{abbreviation}")
+    
+    
 (make [block] | tag block | add tag) <user.one_roam_tag>: 
     edit.select_all()
     s = edit.selected_text()
@@ -971,10 +1021,14 @@ make (todo | action):
     # sleep(100ms)
     # key(escape)
 
-[new] (todo | action) <user.text>: 
-    key(cmd-return)
-    insert(text)
-    # insert("{{[[TODO]]}}" + text)
+
+    
+
+[new] (todo | to do | action) <user.text> : 
+    insert("{{{{[[TODO]]}}}} {text}")
+    # key(cmd-return)
+    # insert(text)
+    
     
 make done: 
     key(cmd-return)
@@ -987,8 +1041,9 @@ mark done:
     # key(escape)
 
 [new] done <user.text>: 
-    key(cmd-return:2)
-    insert(text)
+    insert("{{{{[[DONE]]}}}} {text}")
+    # key(cmd-return:2)
+    # insert(text)
 
 make undone: 
     key(cmd-return:2)
@@ -1011,33 +1066,70 @@ heading three: key(cmd-alt-3)
 heading none: key(cmd-alt-0)
 
 ## +++++++++++++++++++   inline code  formatting.
+
 code (line | inline) that: 
-    key(` esc:2)
-    # s = edit.selected_text() 
-    # sf = "`" + s
-    # insert(sf)
+    s = edit.selected_text() 
+    user.paste("`{s}`")
+    key(esc:2)
 
 code (line | inline) point:
     key(shift:down)
     mouse_click(0)
-    key(`)
-    sleep(200ms)
+    sleep(100ms)
+    s = edit.selected_text() 
+    user.paste("`{s}`")
+
+code (line | inline) block | make inline code block:
+    edit.select_all()
+    sleep(100ms)
+    s = edit.selected_text() 
+    user.paste("`{s}`")
+    sleep(100ms)
+    key(esc)
+
+code (line | inline) point force:
+    key(shift:down)
+    mouse_click(0)
+    sleep(100ms)
+    s = edit.selected_text() 
+    user.paste("`{s}`")
+    sleep(100ms)
     key(esc:2)
+
+(paste | pace) code inline | code inline (paste | pace):
+    t = clip.text()
+    user.paste("`{t}`")
+    key(esc)
  
 
 ## +++++++++++++++++++++++ code blocks .
 
-new code block: key(`:3)   
+new code block: 
+    insert("```")   
 
-code block that: key(`:3 esc)
+code block that: 
+    x = edit.selected_text() 
+    clip.set_text("```{x}```")
+    user.paste_without_formatting()
+   sleep(100ms)
+    key(esc) 
 
-make code block | block make code [block]: 
-    key(cmd-a)
-    sleep(100ms)
-    key(`:3)
+(paste | pace) code block | code block (paste | pace):
+    t = clip.text()
+    clip.set_text("```{t}```")
+    user.paste_without_formatting()
+    sleep(200ms)
     key(esc)
 
-   
+code block block | make code block | block make:
+    edit.select_all()
+    sleep(400ms)
+    x = edit.selected_text() 
+    clip.set_text("```{x}```")
+    user.paste_without_formatting()
+   sleep(100ms)
+    key(esc)
+
  ## +++++++++++++ enter general utility .
 
 exit: key(esc)
