@@ -1,10 +1,10 @@
 {
-  "anonymous-thread-first" : {
+  "hash-thread-first" : {
     "definitions" : [ {
       "scope" : {
         "langIds" : [ "clojure" ]
       },
-      "body" : [ "#(-> %  \n$fnBody)" ]
+      "body" : [ "#(-> % \n$fnBody)" ]
     } ],
     "description" : "Clj snippet"
   }

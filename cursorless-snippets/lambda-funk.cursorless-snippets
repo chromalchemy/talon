@@ -1,5 +1,5 @@
 {
-  "anonymous-funk" : {
+  "lambda-funk" : {
     "definitions" : [ {
       "scope" : {
         "langIds" : [ "clojure" ]

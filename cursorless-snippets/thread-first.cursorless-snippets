@@ -1,10 +1,10 @@
 {
-  "hash-funk" : {
+  "thread-first" : {
     "definitions" : [ {
       "scope" : {
         "langIds" : [ "clojure" ]
       },
-      "body" : [ "#($fnName $1 % $2)" ]
+      "body" : [ "(-> $form$1)" ]
     } ],
     "description" : "Clj snippet"
   }

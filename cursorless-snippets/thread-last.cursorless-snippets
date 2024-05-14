@@ -1,10 +1,10 @@
 {
-  "bad-name" : {
+  "thread-last" : {
     "definitions" : [ {
       "scope" : {
         "langIds" : [ "clojure" ]
       },
-      "body" : [ null ]
+      "body" : [ "(->> $form$1)" ]
     } ],
     "description" : "Clj snippet"
   }

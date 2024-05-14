@@ -1,10 +1,10 @@
 {
-  "hash-funk" : {
+  "set" : {
     "definitions" : [ {
       "scope" : {
         "langIds" : [ "clojure" ]
       },
-      "body" : [ "#($fnName $1 % $2)" ]
+      "body" : [ "#{$form}" ]
     } ],
     "description" : "Clj snippet"
   }

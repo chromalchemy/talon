@@ -3,10 +3,16 @@ link, link.text
 general funk, functionDeclaration.body
 comment form, comment-form.form
 def funk, newFn.fnName
-anonymous funk, anonymous-funk.fnBody
-anonymous thread first, anonymous-thread-first.fnBody
+funk, use fn.fnName
+lambda funk, lambda-funk.fnBody
+hash funk threaded, hash-funk-threaded.fnBody
+hash thread first, hash-thread-first.fnBody
+hash thread last, hash-thread-last.fnBody
 hash funk, hash-funk.fnName
+thread first, thread-first.form
+thread last, thread-last.form
+set, set.form
 
 
-# 2024-05-07 17:30:42 - New entries automatically added by cursorless
+# 2024-05-13 17:04:11 - New entries automatically added by cursorless
 funk, functionDeclaration.name

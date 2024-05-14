@@ -2,4 +2,12 @@ Spoken form, Cursorless identifier
 if, ifStatement
 if else, ifElseStatement
 try, tryCatchStatement
+comment form, comment-form
+def funk, newFn
+funk, use fn
+hash funk threaded, hash-funk-threaded
+hash thread first, hash-thread-first
 hash, hash
+thread first, thread-first
+thread last, thread-last
+set, set

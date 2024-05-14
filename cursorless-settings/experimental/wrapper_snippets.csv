@@ -7,9 +7,14 @@ try, tryCatchStatement.body
 general funk, functionDeclaration.body
 comment form, comment-form.form
 def funk, newFn.fnName
-anonymous funk, anonymous-funk.fnBody
-anonymous threaded hash funk, anonymous-threaded-hash-funk.fnBody
-anonymous thread first, anonymous-thread-first.fnBody
+funk, use fn.fnName
+lambda funk, lambda-funk.fnBody
+hash funk threaded, hash-funk-threaded.fnBody
+hash thread first, hash-thread-first.fnBody
+hash thread last, hash-thread-last.fnBody
 hash, hash.fnBody
 hash funk, hash-funk.fnName
 comment, comment.form
+thread first, thread-first.form
+thread last, thread-last.form
+set, set.form

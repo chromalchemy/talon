@@ -1,10 +1,10 @@
 {
-  "hash-funk" : {
+  "hash-funk-threaded" : {
     "definitions" : [ {
       "scope" : {
         "langIds" : [ "clojure" ]
       },
-      "body" : [ "#($fnName $1 % $2)" ]
+      "body" : [ "(#($fnBody $1 % $2))" ]
     } ],
     "description" : "Clj snippet"
   }

@@ -1,10 +1,10 @@
 {
-  "anonymous-threaded-hash-funk" : {
+  "hash-thread-last" : {
     "definitions" : [ {
       "scope" : {
         "langIds" : [ "clojure" ]
       },
-      "body" : [ "(#$fnBody)" ]
+      "body" : [ "#(->> % \n$fnBody)" ]
     } ],
     "description" : "Clj snippet"
   }
