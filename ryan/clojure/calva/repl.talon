@@ -11,6 +11,8 @@ app: vscode
     user.vscode("workbench.action.terminal.moveToEditor")
     sleep(200ms)
     user.vscode("workbench.action.moveEditorToRightGroup")
+    sleep(200ms)
+    user.vscode("workbench.action.closePanel")
 
 (jack in  |  restart) (repl | ripple) | (repl | ripple)  (jack in | jacket |  restart) manual:
     user.vscode("calva.jackIn")
