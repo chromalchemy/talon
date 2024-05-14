@@ -1,6 +1,8 @@
 app: chrome
 -
 tag(): browser
+
+
     
 #open js bookmarklet links (parses page for input data)
 
@@ -48,3 +50,21 @@ email (add block | adblock | insert | paste) link:
     
 (paste | pace | insert) get bit address: 
     insert("https://getbitoutdoors.com")
+
+    
+
+
+
+# go (variations | Variance | variants):
+#     user.rango_run_action_on_reference("clickElement", "variations")
+# go (prices | price | pricingBar head):
+#     user.rango_run_action_on_reference("clickElement", "pricing")
+
+
+go {user.bc_cp_mark}:
+    user.rango_run_action_on_reference("clickElement", "{bc_cp_mark}")
+
+view on storefront:
+    user.rango_run_action_on_reference("clickElement", "view")
+
+
