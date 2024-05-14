@@ -3,13 +3,13 @@ app: vscode
 #tag(): user.clojure_core
 
 open portal [window]:
-    user.run_rpc_command("calva.runCustomREPLCommand", "portal open")
+    user.run_repl_snippet("portal open")
 
 ## +++++++++++++++++++ portal clearing .
 
 launch portal clearing: 
-    user.run_rpc_command("calva.runCustomREPLCommand", "p")
-
+    user.run_repl_snippet("p")
+    
 go portal [(tab | window)]:
     user.vscode("opened-editors.openedEditors")
     # user.vscode("workbench.action.quickOpenPreviousRecentlyUsedEditor")
