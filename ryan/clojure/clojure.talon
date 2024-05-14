@@ -35,18 +35,19 @@ test notification: app.notify('this is a notification')
 
 
 keyword [<user.text>]: 
-    insert(":")
-    user.insert_formatted(text, "DASH_SEPARATED")
+    user.insert_formatted(":{text}", "DASH_SEPARATED")
+    
+slashed keyword [<user.text>]: 
+    user.insert_formatted(":{text}", "NS_SLASH_SEPARATED")
     
 (namespace | namespaced) keyword [<user.text>]: 
-    insert("::")
-    user.insert_formatted(text, "DASH_SEPARATED")
+    user.insert_formatted("::{text}", "DASH_SEPARATED")
 
 open keyword <user.format_code>+: 
     insert(":")
     user.insert_many(format_code_list)
 
-open namespace keyword <user.format_code>+: 
+open (namespace | name space) keyword <user.format_code>+: 
     insert("::")
     user.insert_many(format_code_list)
 
