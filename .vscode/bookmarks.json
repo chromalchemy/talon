@@ -149,6 +149,16 @@
 					"label": "screenshot_rect"
 				}
 			]
+		},
+		{
+			"path": "ryan/clojure/cursorless_snippets.clj",
+			"bookmarks": [
+				{
+					"line": 168,
+					"column": 17,
+					"label": "clj-snippets"
+				}
+			]
 		}
 	]
 }
