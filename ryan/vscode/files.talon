@@ -1,6 +1,9 @@
 app.name: Code
 -
 
+kill current file:
+    user.vscode("andreas.removeFile")
+
 (hunt |  open | hope and) (file  | filename) [<user.text>]: 
     key(cmd-p)
     sleep(100ms)
