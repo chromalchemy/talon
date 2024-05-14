@@ -168,35 +168,48 @@
 
 (def clj-snippets 
   [{:description "clj comment fn"
-    :template "(comment \n$form)"
+    :template "(comment \n\t$form)"
     :name "comment-form"
     :spoken  "comment form"
     :var  "form"
     :type
-    #{:wrap :insert+phrase}}
+    #{:wrap :insert+phrase :insert}}
 
    {:spoken  "def funk"
     :name "newFn"
     :var "fnName"
     :template "(defn $fnName [$params]\n  $body)"
     :type
-    #{:wrap :insert+phrase}}
+    #{:wrap :insert+phrase :insert}}
+   
+   {:spoken  "funk"
+    :name "use fn"
+    :var "fnName"
+    :template "($fnName $body)"
+    :type
+    #{:wrap :insert+phrase :insert}}
 
-   {:spoken  "anonymous funk"
+   {:spoken  "lambda funk"
     :var "fnBody"
     :template "(fn [$params]\n  $fnBody)"
     :type
     #{:wrap :insert+phrase}}
 
-   {:spoken  "anonymous threaded hash funk"
+   {:spoken  "hash funk threaded"
     :var "fnBody"
-    :template "(#$fnBody)"
+    :template "(#($fnBody $1 % $2))"
     :type
-    #{:wrap}}
+    #{:wrap :insert+phrase :insert}}
 
-   {:spoken  "anonymous thread first"
+   {:spoken  "hash thread first"
     :var "fnBody"
-    :template "#(-> %  \n$fnBody)"
+    :template "#(-> % \n$fnBody)"
+    :type
+    #{:wrap :insert+phrase :insert}}
+   
+   {:spoken  "hash thread last"
+    :var "fnBody"
+    :template "#(->> % \n$fnBody)"
     :type
     #{:wrap :insert+phrase}}
 
@@ -208,15 +221,34 @@
 
    {:spoken  "hash funk"
     :var "fnName"
-    :template "#($fnName %)"
+    :template "#($fnName $1 % $2)"
     :type
     #{:wrap :insert+phrase}}
-   +
+   
    {:spoken  "comment"
     :var "form"
     :template "#_$form"
     :type
-    #{:wrap}}])
+    #{:wrap}} 
+   
+   {:spoken  "thread first"
+    :var "form"
+    :template "(-> $form$1)"
+    :type
+    #{:wrap  :insert :insert+phrase}} 
+   
+   {:spoken  "thread last"
+    :var "form"
+    :template "(->> $form$1)"
+    :type
+    #{:wrap  :insert :insert+phrase}} 
+   
+   {:spoken  "set"
+    :var "form"
+    :template "#{$form}"
+    :type
+    #{:wrap  :insert :insert+phrase}}])
+
 
 
 (comment

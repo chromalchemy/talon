@@ -38,6 +38,21 @@
     :else nil))
 
 [ 1 2 3 4]
+(comment 
+  hello)
+(comment 
+  hello)
+
+(comment 
+  hello world)
+
+
+
+
+(comment 
+  hello)
+
+
 
 (defn batson-brand-prefix [item]
   (let (prefix if PREFIX (:brand item))
