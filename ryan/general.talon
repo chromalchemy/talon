@@ -14,6 +14,8 @@ quit app: key(cmd-q)
 exit: key(escape)
 
 
+okay | ok: key(enter)
+
 # talon sleep
 key(cmd-ctrl-alt-shift-x): speech.disable()
 
@@ -40,7 +42,7 @@ Open linear mouse [panel]:
 ## ++++++++++ go to open tab In chrome .
 
 go (browse | page | tab) <user.text>:
-    user.switcher_focus("Chrome") 
+    user.switcher_focus("Google Chrome") 
     key(cmd-shift-a)
     sleep(200ms) 
     insert("{text}")
