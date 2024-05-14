@@ -13,3 +13,4 @@ skis, backtickQuotes
 twin, singleQuotes
 void, whitespace
 comment round, commentedParentheses 
+set, cljSet
