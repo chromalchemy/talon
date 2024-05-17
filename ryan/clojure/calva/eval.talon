@@ -14,6 +14,11 @@ please calva (evaluate | eval):
 
 [(rep | repl | ripple | rebel)] (load | reload) file [in (rep | repl | ripple | rebel)]: 
     user.vscode("calva.loadFile")
+    sleep(300ms)
+    user.vscode("notifications.clearAll")
+
+[(rep | repl | ripple | rebel)] (load | reload) file [in (rep | repl | ripple | rebel)] (alert | alerts | raw) : 
+    user.vscode("calva.loadFile")
 
 ## +++++++++++++++++++++ eval whole file .
 
