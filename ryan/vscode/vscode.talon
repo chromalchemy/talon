@@ -37,7 +37,7 @@ check [for] extension updates | update extensions: user.vscode("workbench.extens
 
  ## ++++++++ vscode notification popups .
  
-(dismiss | clear | hide) (notifications |  alerts): 
+(dismiss | clear | hide | kill) (notifications |  alerts): 
     user.vscode("notifications.clearAll")
 
 show (notifications |  alerts): 

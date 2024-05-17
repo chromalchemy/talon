@@ -1,7 +1,6 @@
 app.name: Code
 -
 
-
 # , already in community
 # select breadcrumb: user.vscode("breadcrumbs.focusAndSelect")
 
