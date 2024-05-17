@@ -51,13 +51,19 @@ pop forward | go (next | forward | for) used [(editor | tab)] :
 
 ## +++++++ expand and minimize editors .
 
-expand group | group max: 
+increase group width | group (widen | wider | fatter): 
+    user.vscode("workbench.action.increaseViewWidth")
+
+decrease group width | group (thin | thinner | slimmer): 
+    user.vscode("workbench.action.decreaseViewWidth")
+
+(expand | widen) group | group (max | wide): 
     user.vscode("workbench.action.minimizeOtherEditors")
 
-expand [(editor | tab)] group [and] hide (bars | sidebars | bar | sidebar) | [(editor | tab)] group full | hide other [(editor | tab)] groups: 
+(expand | widen) [(editor | tab)] group [and] hide (bars | sidebars | bar | sidebar) | [(editor | tab)] group full | hide other [(editor | tab)] groups: 
     user.vscode("workbench.action.maximizeEditorHideSidebar")
 
-(toggle | flip | reset) [(editor | tab)] (group | groups) [(size | sizes)]: 
+(toggle | flip | reset) [(editor | tab)] (group | groups) [(size | sizes | width | widths  | with)]: 
     user.vscode("workbench.action.toggleEditorWidths")
 
 ## ++++++++++++++++++++++++ close tabs .
