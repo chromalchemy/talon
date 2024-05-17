@@ -25,7 +25,7 @@ go back or up:
 go (forward | fore | next) down [form]: 
     user.vscode("paredit.forwardDownSexp")
 
-go (next [form] | (forward | fore) form): 
+go ((next | end) [form] | (forward | fore) form): 
     user.vscode("paredit.forwardSexp")
 
 go forward up | go up [form]: 
@@ -34,6 +34,6 @@ go forward up | go up [form]:
 go forward or up: 
     user.vscode("paredit.forwardSexpOrUp")
 
-go to end: 
+go (to | collection | seek) end: 
     user.vscode("paredit.closeList")
 
