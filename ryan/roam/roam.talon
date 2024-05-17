@@ -29,9 +29,6 @@ please [<user.text>]:
     user.paste("magic tags")
     key(enter)
 
-#------------------left sidebar
-
-(toggle | hide |  show) ( shortcuts |  (left | l) sidebar | bookmarks): key(cmd-\)
 
 #------------------not working
 add (shortcut | bookmark): 
@@ -146,13 +143,47 @@ go [page] bottom:
     sleep(100ms)
     key(enter)
 
-go today:  key(ctrl-shift-d)
-go tomorrow: key(ctrl-alt-n)
-go next day:  key(ctrl-alt-n)
-go (prev | previous | last | yesterday) day:  key(ctrl-alt-p)
+go [to] today:  key(ctrl-shift-d)
+
+go tomorrow:
+    key(ctrl-shift-d)
+    sleep(500ms)
+    key(ctrl-alt-n)
+    
+go yesterday:
+    key(ctrl-shift-d)
+    sleep(500ms)
+    key(ctrl-alt-p)
+
+(open | go) [to] today [in] (sidebar | bar):
+    key(cmd-p)
+    sleep(100ms)
+    user.paste("go to today (sidebar)")
+    sleep(100ms)
+    key(enter)
+
+go (next day | day next): 
+    key(ctrl-alt-n)
+
+(open | go) [to] (next day | day next) [in] (sidebar | bar):
+    key(cmd-p)
+    sleep(100ms)
+    user.paste("go to next day (sidebar)")
+    sleep(100ms)
+    key(enter)
+
+go ((prev | previous | last) day | day (prev | previous | last)):  
+    key(ctrl-alt-p)
+
+(open | go) [to] ((prev | previous | last) day | day (prev | previous | last))  [in] (sidebar | bar):
+    key(cmd-p)
+    sleep(100ms)
+    user.paste("go to previous day (sidebar)")
+    sleep(100ms)
+    key(enter)
 
 go back:  key(cmd-[)
-go (forward | fore):  key(cmd-])
+go (forward | fore | ahead):  key(cmd-])
 
 jump link: key(ctrl-o)
 
@@ -174,19 +205,26 @@ go parent [block]: key(ctrl-alt-u)
     
 deep nav:key(alt-g)
 
+
+### left sidebar
+
+(toggle | hide |  show) ( shortcuts |  (left | l) (sidebar | bar) | bookmarks): key(cmd-\)
+
+
 ###sidebar
 
-(toggle | hide | show | close | open) (sidebar | side bar) :
+
+(toggle | hide | show | close | open) ((sidebar | bar) | side bar) :
     key(cmd-/)
 
-swap (sidebar | main) [with (sidebar | main)]:
+swap ((sidebar | bar) | main) [with ((sidebar | bar) | main)]:
     key(cmd-p)
     sleep(100ms)
     user.paste("wb sidebars - swap with main window (swap)")
     sleep(100ms)
     key(enter)  
 
-(expand | collapse [all] | fold) (sidebar | side bar):
+(expand | collapse | fold) [all] ((sidebar | bar) | side bar):
     key(cmd-p)
     sleep(100ms)
     user.paste("toggle expand sidebar")
@@ -194,24 +232,24 @@ swap (sidebar | main) [with (sidebar | main)]:
     key(enter)  
 
 #switch+ sidebar
-(sidebar |  side bar) panel: 
-    key(cmd-shift-p)
-    sleep(500ms)
-    insert("r:")
+# (sidebar |  side bar) panel: 
+#     key(cmd-shift-p)
+#     sleep(500ms)
+#     insert("r:")
 
-open (ref | reference | link) in sidebar: 
+open [(ref | reference | link)] in (sidebar | bar): 
     key(ctrl-shift-o)
 
-open [this] page in sidebar: 
+open [this] page [in] sidebar: 
     key(cmd-p)
     sleep(100ms)
     user.paste("wb open page in sidebar")
     sleep(100ms)
     key(enter)
 
-(clear | kill) sidebar: key(ctrl-l)
+(clear | kill) (sidebar | bar): key(ctrl-l)
 
-open <user.one_roam_tag> in sidebar | bar <user.one_roam_tag>:
+open <user.one_roam_tag> [in] sidebar | bar <user.one_roam_tag>:
     key(cmd-u)
     # sleep(100ms)
     insert("{one_roam_tag}")
@@ -248,6 +286,9 @@ search [<user.text>]:
     key(cmd-u)
     sleep(200ms)
     user.paste(text)
+
+open (search [result] | result) [in] (sidebar | bar) | (sidebar | bar) (search | result):
+    key(shift-enter)
     
 #traditional page search
 search page: key(cmd-f)
@@ -523,16 +564,16 @@ paste (child | kid) [block] raw:
     key(tab)
     key(cmd-shift-v)
 
-## +++++++ making existing block child .
+## +++++++ making existing block a child of other block .
 
 # move block to child of one below
-move to child [block] | block make (child | kid ):
+block [make] (child | kid) [of] below [block] | (kid of below | kiddo bela):
     key(cmd-shift-down)
     sleep(200ms)
     key(tab)
 
 # move block below to child
-(child | kid) [block] below | make [block] below (child | kid ):
+[make] below [block] (child | kid) | kid below:
     key(esc)
     sleep(100ms)
     key(down)
@@ -746,7 +787,7 @@ move [(block | blocks)] to [top] [of] <user.one_roam_tag>:
     key(enter tab:2 enter)
 
 
-move [(block | blocks)] to [top] [of] <user.one_roam_tag> sidebar:
+move [(block | blocks)] to [top] [of] <user.one_roam_tag> (sidebar | bar):
     key(cmd-p)
     sleep(100ms)
     user.paste("mbts")
@@ -832,7 +873,7 @@ move [(block | blocks)] to agenda:
 
 ## +++++++++++++++++++ move to sidebar .
 
-move [(block | blocks)] to (paste | pace) sidebar: 
+move [(block | blocks)] to (paste | pace) (sidebar | bar): 
     key(cmd-p)
     sleep(200ms)
     user.paste("mbts")
@@ -947,11 +988,11 @@ insert tomorrow:
     f= user.formatted_text(text, "NS_SLASH_SEPARATED")
     insert("#{f} ")
 
-^kebab tag <user.text>:
+^(kebab | dash | dashed) tag <user.text>:
     f= user.formatted_text(text, "DASH_SEPARATED")
     insert("#{f}")
 
-^force kebab tag <user.text>:
+^force (kebab | dash | dashed) tag <user.text>:
     f= user.formatted_text(text, "DASH_SEPARATED")
     insert("#{f} ")
     
@@ -1244,6 +1285,11 @@ nope: key(cmd-z)
     
 ((deep | do you ) grab | go)  <user.letter> <user.letter>:
     key("{letter_1} {letter_2}")
+    sleep(100ms)
+    key(enter)
+
+((deep | do you ) grab | go)  <user.letter> <user.number_key>:
+    key("{letter} {number_key}")
     sleep(100ms)
     key(enter)
 
