@@ -72,3 +72,13 @@ key(cmd-3):                 mimic("copy action name")
     edit.paste()
     sleep(150ms)
     edit.undo()
+
+(extra word) <user.text>:
+    user.paste(" | {text}")
+
+((add | head | pad) word | Edward) <user.text>:
+    t = edit.selected_text()
+    user.paste("({t} | {text})")
+    sleep(200ms)
+    key(left)
+
