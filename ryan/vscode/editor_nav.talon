@@ -1,10 +1,30 @@
 app.name: Code
 -
 
-## +++++++++++++++++ back/forward form .
+## ++++++++ go to top (of nested) form .
 
-# [go] (last |  previous | prev) form: key(alt-up)
-# [go] next form: key(alt-down)
+# todo:  vscode and cursorless cops to implement this  
+
+go (top [level] form | form top):
+    user.vscode("breadcrumbs.focusAndSelect")
+    sleep(100ms)
+    key(enter)
+    user.vscode("paredit.forwardSexp")
+
+go top form end | post top form:
+    user.vscode("breadcrumbs.focusAndSelect")
+    sleep(100ms)
+    key(enter)
+    user.vscode("editor.action.jumpToBracket")
+    key(right)
+    
+[go] next top form:
+    user.vscode("breadcrumbs.focusAndSelect")
+    sleep(100ms)
+    key(down enter)
+    user.vscode("paredit.forwardSexp")
+
+## +++++++++++++++++ back/forward form .
 
 #move form defined in calva.talon
 
@@ -19,7 +39,7 @@ symbol next:                user.vscode("gotoNextPreviousMember.nextMember")
 go back (edit | at it): 
     user.vscode("workbench.action.navigateBackInEditLocations")
 
-go (forward | for | next) (edit | at it): 
+go (forward | next) (edit | at it): 
     user.vscode("workbench.action.navigateForwardInEditLocations")
 
 go (prev | previous) (edit | at it): 
@@ -33,7 +53,7 @@ go [to] last (edit | at it):
 go back: 
     user.vscode("workbench.action.navigateBack")
 
-go (forward | for | ahead) : 
+go (forward | ahead) : 
     user.vscode("workbench.action.navigateForward")
 
 # what is defference here?
@@ -41,7 +61,7 @@ go (forward | for | ahead) :
 go back nav:  
     user.vscode("workbench.action.navigateBackInNavigationLocations")
 
-go (forward | for | ahead) nav: 
+go (forward | ahead) nav: 
     user.vscode("workbench.action.navigateForwardInNavigationLocations")
 
 go (prev | previous) nav: 
