@@ -28,22 +28,28 @@ panel (close | toggle | show | hide | view): user.vscode("workbench.action.toggl
 ## ++++++++++++++++++ toggle bars and panel visibility
     
 
-(go | toggle | enter | exit | leave) (in | then | zen | zend | full) mode | zen mode: user.vscode("workbench.action.toggleZenMode")
+(go | toggle | enter | exit | leave) (in | then | zen | zend | full) mode | zen mode: 
+    user.vscode("workbench.action.toggleZenMode")
 
-(hide | close) [(both | all)] (bars | sidebars) | wide (view | mode) | (tab | tabs) wide: 
+(hide | close) [both] (bars | sidebars) | (tab | tabs) wide | wide (view | mode): 
     user.vscode("workbench.action.closeSidebar")
     user.vscode("workbench.action.closeAuxiliaryBar")
 
-(show | open | toggle) [(both | all)] (bars | sidebars) | stuffed mode: 
+#no such commands
+# (show | open) [(both | all)] (bars | sidebars) | stuffed mode: 
+#     user.vscode("workbench.action.openSidebar")Bogus
+#     user.vscode("workbench.action.openAuxiliaryBar")
+
+(toggle | show | open) [both] (bars | sidebars) | (stuffed | thin | narrow) (view | mode): 
     user.vscode("workbench.action.toggleSidebarVisibility")
     user.vscode("workbench.action.toggleAuxiliaryBar")
     
-(hide | close) [all] views | focused (view | mode) | focus (tab | tabs | file): 
+(hide | close) [all] (views | bars | panels) | (focus | only show) (tab | tabs | file) | (focused | focus) (view | mode): 
     user.vscode("workbench.action.closeSidebar")
     user.vscode("workbench.action.closeAuxiliaryBar")
     user.vscode("workbench.action.closePanel")
     
-(show | open | toggle) [all] views | kit mode: 
+(show | open | toggle) [all] (views | bars | panels) | kit (view | mode): 
     user.vscode("workbench.action.toggleSidebarVisibility")
     user.vscode("workbench.action.toggleAuxiliaryBar")
     user.vscode("workbench.action.togglePanel")
