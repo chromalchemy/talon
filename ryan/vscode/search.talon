@@ -1,6 +1,8 @@
 app.name: Code
 -
 
+
+
 ## ++++++++++++++++++++++++ search bar .
 
 bar search <user.text>:
@@ -10,6 +12,25 @@ bar search <user.text>:
 
 go [bar] search [bar] (list | results | hits):
      user.vscode("search.action.focusSearchList")
+
+go search string [from results]: 
+    user.vscode("search.action.focusSearchFromResults")
+    user.vscode("search.action.focusSearchFromResults")
+    user.vscode("search.action.focusSearchFromResults")
+     
+## ++++++++++++++++++++++ query filter .
+
+go search filter:
+key(cmd-down)
+
+clear search filter:
+    key(cmd-down)
+    sleep(100ms)
+    key(delete)
+    sleep(100ms)
+    key(cmd-up)
+
+## ++++++++++++++++ results view style .
 
 bar search tree | search (results | hits) tree:            
     user.vscode("search.action.viewAsTree")
@@ -21,6 +42,8 @@ bar search fold | (collapse | clap | fold) search [(results | hits)]: user.vscod
 
 [bar] search [(results | hits)] expand | (expand | unfold) search [(results | hits)]: 
     user.vscode("search.action.expandSearchResults")
+
+## +++++++++++++++++++++++++++++++++  .
 
 bar search (clear | new) | clear search (results | hits) | (new | fresh) [bar] search: 
     user.vscode("search.action.clearSearchResults")
@@ -36,7 +59,7 @@ new [workspace] search [(editor | tab)] (to [the] side | right):
 open [workspace] [search] (results | hits) to side: 
     user.vscode("search.action.openInEditor")
 
-bar search [(results | hits)] to tab: 
+[bar] search [(results | hits)] to tab: 
     user.vscode("search.action.openInEditor")
 
 search (results | hits) to tab:      
