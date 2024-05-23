@@ -51,8 +51,12 @@ bookmark that [(paste | pace)]:
     sleep(100ms)
     key(enter)
 
-walk my crown:
-    user.private_cursorless_action_or_ide_command("scrollToTop", "currentSelection")
+#doesn't work
+# demo dog <user.cursorless_target>:
+#     user.private_cursorless_action_or_ide_command("showQuickFix", cursorless_target)
+
+# walk my crown:
+#     user.private_cursorless_action_or_ide_command("scrollToTop", "currentSelection")
 
 ## ++++++ pick bookmark from all files .
 (hunt | search | pick | list) all (bookmark | bookmarks | mark | marks ) [for] [<user.text>]:
