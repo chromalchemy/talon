@@ -30,14 +30,20 @@ tools [dock] (sidebar | bar | panel | bottom | right | last | next): key(cmd-shi
     sleep(200ms)
     key(enter)
 
-## +++++++++++++ click to select, then...
+## +++++++++++++ pop context menu, then select command
 
 copy  (link | address | url) (point | here)$:
     mouse_click(1)
     sleep(100ms)
     insert("copy link address")
-    # sleep(100ms)
     key(enter)  
+
+copy  image (point | here)$:
+    mouse_click(1)
+    sleep(100ms)
+    insert("copy image")
+    key(enter)  
+    
 
 ## ++++++++++++++++++++++++++++++ zoom .
 
