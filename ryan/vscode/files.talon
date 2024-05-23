@@ -9,6 +9,13 @@ kill current file:
     sleep(100ms)
     insert("{text}")
 
+(hunt |  open | hope and) (file  | filename) [<user.text>] pop: 
+    key(cmd-p)
+    sleep(100ms)
+    insert("{text}")
+    sleep(200ms)
+    key(enter)
+
 ## +++++++++++++++++++++++++++++++++ file explorer
 
 (show | reveal) file [in] [(explore | explorer)] | bar file: user.vscode("workbench.files.action.showActiveFileInExplorer")
