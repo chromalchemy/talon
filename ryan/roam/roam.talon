@@ -193,8 +193,8 @@ page (refs | references) [panel]:
     sleep(500ms)
     insert("@")
 
-zoom (block  | down): key(cmd-.)
-zoom (parent |  up): key(cmd-shift-ctrl-alt-u)
+(zoom | focus) (block  | down): key(cmd-.)
+(zoom | focus) (parent |  up): key(cmd-shift-ctrl-alt-u)
 
 go parent [block]: key(ctrl-alt-u)
     # key(cmd-p)
@@ -214,7 +214,7 @@ deep nav:key(alt-g)
 ###sidebar
 
 
-(toggle | hide | show | close | open) ((sidebar | bar) | side bar) :
+(toggle | hide | show | close | open | reveal) ((sidebar | bar) | side bar) :
     key(cmd-/)
 
 swap ((sidebar | bar) | main) [with ((sidebar | bar) | main)]:
@@ -281,11 +281,29 @@ Open query (drawer | builder): key(cmd-shift-ctrl-alt-8)
 
 #top bar search
 
+graph hunt [<user.text>]:
+    key(cmd-shift-u)
+    sleep(200ms)
+    user.paste(text)
+
+hunt main: 
+    key(down enter)
+
+open result: key(shift-enter)
+open result pop: key(enter)
+open all results: key(alt-enter)
+
 #top quick search 
 search [<user.text>]:
     key(cmd-u)
     sleep(200ms)
     user.paste(text)
+
+search (paste | pace):
+    key(cmd-u)
+    sleep(200ms)
+    edit.paste()
+    
 
 open (search [result] | result) [in] (sidebar | bar) | (sidebar | bar) (search | result):
     key(shift-enter)
@@ -459,7 +477,6 @@ go block start:
 
 ## +++++++++++++++++++++ select blocks .
 
-multi select | multiselect |  select multi | exit multi:  key(cmd-m)
 
 select all blocks: key(cmd-shift-a)
 
@@ -564,21 +581,39 @@ paste (child | kid) [block] raw:
     key(tab)
     key(cmd-shift-v)
 
+
 ## +++++++ making existing block a child of other block .
 
-# move block to child of one below
-block [make] (child | kid) [of] below [block] | (kid of below | kiddo bela):
+# make current block a child of one below
+block [make] (child | kid) [of] below [block] | kiddo bela:
     key(cmd-shift-down)
     sleep(200ms)
     key(tab)
 
-# move block below to child
-[make] below [block] (child | kid) | kid below:
+# slurp block below to a child of current block
+[make] below [block] (child | kid) | slurp (block | below [block]):
     key(esc)
     sleep(100ms)
     key(down)
     sleep(100ms)
     key(tab)
+    sleep(100ms)
+    key(tab)
+    sleep(100ms)
+    key(tab)
+    sleep(100ms)
+    key(tab)
+
+#only works on top leve
+slurp ([block] | [below] [block]) [left] ([to] peer):
+    key(esc)
+    sleep(100ms)
+    key(down)
+    sleep(100ms)
+    key(tab)
+    sleep(100ms)
+    key(cmd-up)
+
 
  ## ++++++++++++++++++++ new block back .
     
@@ -717,7 +752,11 @@ copy block:
 
 ## ++++++++++++++++++++++ multi select .
 
-[toggle] (multi select | select blocks) | select (multi | multiple) [blocks]: key(cmd-m)
+(toggle | exit | enter) multi [select] | select (blocks | (multi | multiple) [blocks]) | multi select: 
+    key(cmd-m)
+
+[exit] ((multi | multiple) select | multiselect) | select (multi | multiple) [blocks]:  
+    key(cmd-m)
 
 ## +++++++++++++++++++++ #move blocks .
 
@@ -997,36 +1036,41 @@ insert tomorrow:
     insert("#{f} ")
     
 ## +++++++++++++++++ # bracket tagging .
-
-(make | new) tag: 
-    key([:2)
     
-(square tag | dub square) [that]: 
-    key([:2 right)
+(square tag | dub square) that: 
+    s = edit.selected_text() 
+    insert("[[{s}")
     
+#but select word has bug
 (square tag | dub square) (word | single | one):
     edit.select_word()
-    # insert("[[")
-    # edit.paste()
-    # insert("]]")
+    s = edit.selected_text() 
+    insert("[[{s}")
+
+(square tag | dub square):
+    insert("[[")
 
 (square tag | dub square) <user.text>:
-    insert("[[")
-    user.insert_formatted(text, "SLASH_SEPARATED")
-    sleep(100ms)
-    user.select_last_phrase()
-    key(left delete)
-    edit.word_right()
+    t = user.formatted_text(text, "SLASH_SEPARATED")
+    insert("[[{t}")
 
-(square tag | dub square) (auto | one | use) <user.text>:
-    insert("[[")
-    user.insert_formatted(text, "SLASH_SEPARATED")
-    sleep(100ms)
-    user.select_last_phrase()
-    key(left delete)
-    key(down enter)
-    edit.word_right()
-    key(space)
+(square tag | dub square) (auto | one | use | pop) <user.text>:
+    t = user.formatted_text(text, "SLASH_SEPARATED")
+    insert("[[{t}")
+    sleep(300ms)
+    key(enter)
+
+(square tag | dub square) kebab <user.text>:
+    t = user.formatted_text(text, "DASH_SEPARATED")
+    insert("[[{t}")
+
+(square tag | dub square) kebab pop <user.text>:
+    t = user.formatted_text(text, "DASH_SEPARATED")
+    insert("[[{t}")
+    sleep(300ms)
+    key(enter)
+
+
 
 ## +++++++++++++ block reference links .
 
@@ -1263,33 +1307,196 @@ nope: key(cmd-z)
 ^(hat | hats | nav | deep nav [hats] | block point | block hats | show hats)$: 
     key(cmd-alt-0)
 
+hide hats:
+    key(esc)
+
 ((deep | do you) grab | go) <user.number_string>: 
     insert(number_string)
-    sleep(200ms)
-    key(enter)
 
 ((deep | do you ) grab | go)  <user.number_key>:
     key(number_key)
     sleep(100ms)
     key(enter)
+
+((deep | do you ) grab | go) single  <user.number_key>:
+    key(number_key)
     
 ((deep | do you ) grab | go) <user.number_key> <user.number_key>:
     key(number_key_1 number_key_2)
-    sleep(100ms)
-    key(enter)
-
+    
 ((deep | do you ) grab | go)  <user.letter>:
     key("{letter}")
     sleep(100ms)
     key(enter)
+
+((deep | do you ) grab | go) single  <user.letter>:
+    key("{letter}")
     
 ((deep | do you ) grab | go)  <user.letter> <user.letter>:
     key("{letter_1} {letter_2}")
-    sleep(100ms)
-    key(enter)
-
+    
 ((deep | do you ) grab | go)  <user.letter> <user.number_key>:
     key("{letter} {number_key}")
     sleep(100ms)
     key(enter)
+
+
+## ++++++++++++++++++++++++++++++ fold .
+
+(fold | collapse) <user.number_string>: 
+    insert(number_string)
+    sleep(300ms)
+    key(cmd-up)
+    
+(fold | collapse)  <user.number_key>:
+    key(number_key)
+    sleep(100ms)
+    key(enter)
+    sleep(300ms)
+    key(cmd-up)
+
+(fold | collapse) single  <user.number_key>:
+    key(number_key)
+    sleep(300ms)
+    key(cmd-up)
+
+(fold | collapse) <user.number_key> <user.number_key>:
+    key(number_key_1 number_key_2)
+    sleep(100ms)
+    key(enter)
+    sleep(300ms)
+    key(cmd-up)
+    
+(fold | collapse)  <user.letter>:
+    key("{letter}")
+    sleep(100ms)
+    key(enter)
+    sleep(300ms)
+    key(cmd-up)
+
+(fold | collapse) single  <user.letter>:
+    key("{letter}")
+    sleep(300ms)
+    key(cmd-up)
+    
+(fold | collapse)  <user.letter> <user.letter>:
+    key("{letter_1} {letter_2}")
+    sleep(100ms)
+    key(enter)
+    sleep(300ms)
+    key(cmd-up)
+
+(fold | collapse)  <user.letter> <user.number_key>:
+    key("{letter} {number_key}")
+    sleep(100ms)
+    key(enter)
+    sleep(300ms)
+    key(cmd-up)
+
+## ++++++++++++++++++++++++++++ unfold .
+
+(unfold | expand) <user.number_string>: 
+    insert(number_string)
+    sleep(300ms)
+    key(cmd-down)
+    
+(unfold | expand)  <user.number_key>:
+    key(number_key)
+    sleep(100ms)
+    key(enter)
+    sleep(300ms)
+    key(cmd-down)
+
+(unfold | expand) single  <user.number_key>:
+    key(number_key)
+    sleep(300ms)
+    key(cmd-down)
+
+(unfold | expand) <user.number_key> <user.number_key>:
+    key(number_key_1 number_key_2)
+    sleep(100ms)
+    key(enter)
+    sleep(300ms)
+    key(cmd-down)
+    
+(unfold | expand)  <user.letter>:
+    key("{letter}")
+    sleep(100ms)
+    key(enter)
+    sleep(300ms)
+    key(cmd-down)
+
+(unfold | expand) single  <user.letter>:
+    key("{letter}")
+    sleep(300ms)
+    key(cmd-down)
+    
+(unfold | expand)  <user.letter> <user.letter>:
+    key("{letter_1} {letter_2}")
+    sleep(100ms)
+    key(enter)
+    sleep(300ms)
+    key(cmd-down)
+
+(unfold | expand)  <user.letter> <user.number_key>:
+    key("{letter} {number_key}")
+    sleep(100ms)
+    key(enter)
+    sleep(300ms)
+    key(cmd-down)
+    
+
+## +++++++++++++++++ zoom block by hat .
+
+
+(zoom | focus) <user.number_string>: 
+    insert(number_string)
+    sleep(300ms)
+    key(cmd-.)
+    
+    
+(zoom | focus)  <user.number_key>:
+    key(number_key)
+    sleep(100ms)
+    key(enter)
+    sleep(300ms)
+    key(cmd-.)
+
+(zoom | focus) single  <user.number_key>:
+    key(number_key)
+    sleep(300ms)
+    key(cmd-.)
+
+(zoom | focus) <user.number_key> <user.number_key>:
+    key(number_key_1 number_key_2)
+    sleep(100ms)
+    key(enter)
+    sleep(300ms)
+    key(cmd-.)
+    
+(zoom | focus)  <user.letter>:
+    key("{letter}")
+    sleep(100ms)
+    key(enter)
+    sleep(300ms)
+    key(cmd-.)
+
+(zoom | focus) single  <user.letter>:
+    key("{letter}")
+    sleep(300ms)
+    key(cmd-.)
+    
+(zoom | focus)  <user.letter> <user.letter>:
+    key("{letter_1} {letter_2}")
+    sleep(100ms)
+    key(enter)
+    sleep(300ms)
+    key(cmd-.)
+
+(zoom | focus)  <user.letter> <user.number_key>:
+    key("{letter} {number_key}")
+    sleep(100ms)
+    key(enter)
+    sleep(300ms)
+    key(cmd-.)
 
