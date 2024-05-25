@@ -29,7 +29,7 @@ please calva (evaluate | eval):
 
 ## +++++++++++++++++++++ eval top form .
 
-(rep | repl | ripple | evaluate | eval | compute | comp | run | runt) [it] [(top | top form)] [fresh]:
+(rep | repl | ripple | evaluate | eval | compute | comp | run | runt | rennet) [it] [(top | top form)] [fresh]:
     user.vscode("calva.evaluateCurrentTopLevelForm")
 
 (rep | repl | ripple | evaluate | eval | compute | comp | run | runt) [(top | top form)] <user.cursorless_target>:
