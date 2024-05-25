@@ -3,6 +3,11 @@
 
 # tag: user.file_manager
 
+exit: key(esc)
+nope: key(cmd-z)
+
+(paste | pace) (unformatted | raw): key(shift-cmd-v)
+
 #raycast 
 (raycast | ray cast | ray) [<user.text>]: 
     key(cmd-space)
