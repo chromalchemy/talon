@@ -82,20 +82,6 @@ key(cmd-3):                 mimic("copy action name")
     sleep(200ms)
     key(left)
 
-(hunt | hun) (talon | tellin | talin | command | tall and) [<user.text>]:
-    user.system_command_nb("code '/Users/ryan/.talon/user/talon-user.code-workspace'")
-    sleep(400ms)
-    user.vscode("workbench.view.search")
-    sleep(200ms)
-    insert(text or "")
-
-(hunt | hun) (talon | tellin | talin | command | tall and) (paste | pace):
-    user.system_command_nb("code '/Users/ryan/.talon/user/talon-user.code-workspace'")
-    sleep(400ms)
-    user.vscode("workbench.view.search")
-    sleep(200ms)
-    edit.paste()
-
 #from search input 
 (filter | filtered) [dot] (talon | tellin | talin | command | tall and) files:
     key(cmd-down)
