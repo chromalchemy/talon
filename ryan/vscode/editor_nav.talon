@@ -73,15 +73,28 @@ go [to] last nav:
 
 ## +++++++++++++++++ Symbol references .
 
-(find | show) [all] references:   user.vscode("references-view.findReferences")
+(find | show) [all] (references | refs):   
+    user.vscode("references-view.findReferences")
 
-(go | bar) references:      user.vscode("references-view.tree.focus")
+go [first] (reference | ref): 
+    key(ctrl--)
 
-go to references:      user.vscode("editor.action.goToReferences")
+(go | bar) (references | refs):      
+    user.vscode("references-view.tree.focus")
 
-(peek | peak) (reference | reference): user.vscode("editor.action.referenceSearch.trigger")
+# same as below?
+(go to | nav) (references | refs):      
+    user.vscode("editor.action.goToReferences")
 
-problem show:               user.vscode("workbench.panel.markers.view.focus")
+(peek | peak) (reference | references): 
+    user.vscode("editor.action.referenceSearch.trigger")
+
+problem show | show problem:               
+    user.vscode("workbench.panel.markers.view.focus")
+
+[(show | go)] call (hierarchy | stack):
+    key(alt-shift-h)
+    # user.vscode("references-view.showCallHierarchy")
 
 
 ## ++++++++++++++++ jump to line .
