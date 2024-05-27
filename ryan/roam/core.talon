@@ -24,15 +24,23 @@ go all pages:
 
 jump link: key(ctrl-o)
 
-# community dropdown cmd: drop up <number_small>: key("up:{number_small} enter")
+# community dropdown cmd: 
+# (drop [down] | pick | pic) <number_small>: 
+    # key("down:{number_small} enter")
+
 # todo: turn this into proper ordinal
-^(choose | pick) (<number_small> | that): 
-    key("down:{number_small or 1}")
+^(choose | pick | pic) (<number_small> | (that | top)):
+    n = number_small or 1
+    spacesDown= number_small - 1  
+    key("down:{spacesDown}") 
+    sleep(200ms)
     key(enter)
     key(space)
 
-^(choose | pick) <user.ordinals>: 
-    key("down:{ordinals}")
+^(choose | pick) <user.ordinals>:
+    n = ordinals or 1
+    spacesDown= number_small - 1  
+    key("down:{spacesDown}")
     key(enter)
     key(space)
     
