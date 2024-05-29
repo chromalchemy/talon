@@ -229,6 +229,11 @@ new [text]  (editor | draft):
     sleep(200ms)
     key(space)
 
+## +++++++++ hide/show tabs in groups .
 
+show tabs:
+    user.vscode("workbench.action.showMultipleEditorTabs")
+hide tabs:
+    user.vscode("workbench.action.hideEditorTabs")
 
     
