@@ -1,4 +1,4 @@
-app.name: Roam Research 
+# app.name: Roam Research 
 mode: command
 -
 
@@ -6,45 +6,44 @@ mode: command
 
 #add named tag to block
 
-^[(new | now)] tag <user.one_roam_tag>$: 
-    insert(" #{one_roam_tag} ")
+^[(new | now)] tag {user.roam_tag}$: 
+    insert(" #{roam_tag} ")
 
 ^[(new | now)] tag {user.abbreviation}$: 
     insert(" #{abbreviation} ")
 
 #keep chooser    
-^[(new | now)] tag ink <user.one_roam_tag>$: 
-    insert(" #{one_roam_tag}")
+^[(new | now)] tag ink {user.roam_tag}$: 
+    insert(" #{roam_tag}")
 
 ^[(new | now)] tag ink {user.abbreviation}$: 
     insert(" #{abbreviation}")
     
     
-(make [block] | tag block | add tag) <user.one_roam_tag>: 
+(make [block] | tag block | add tag) {user.roam_tag}: 
     edit.select_all()
     s = edit.selected_text()
-    insert("{s} #{one_roam_tag}")
+    insert("{s} #{roam_tag}")
     sleep(300ms)
     key(enter)
 
 ## +++++++++++++++++++++ multiple tags .
 
-^[(new | now  |  multi )] (tags | tax) <user.one_roam_tag> [and] <user.one_roam_tag>$: 
-    insert(" #{one_roam_tag_1} #{one_roam_tag_2} ")
+^[(new | now  |  multi )] (tags | tax) {user.roam_tag} [and] {user.roam_tag}$: 
+    insert(" #{roam_tag_1} #{roam_tag_2} ")
 
 
+^[(new | now  |  multi )] (tags | tax) {user.roam_tag} [and] {user.roam_tag} [and] {user.roam_tag}$: 
+    insert(" #{roam_tag_1} #{roam_tag_2} #{roam_tag_3} ")
 
-^[(new | now  |  multi )] (tags | tax) <user.one_roam_tag> [and] <user.one_roam_tag> [and] <user.one_roam_tag>$: 
-    insert(" #{one_roam_tag_1} #{one_roam_tag_2} #{one_roam_tag_3} ")
+^[(new | now | multi )] (tags | tax) {user.roam_tag} [and] {user.roam_tag} [and] {user.roam_tag} [and] {user.roam_tag}$: 
+    insert(" #{roam_tag_1} #{roam_tag_2} #{roam_tag_3} #{roam_tag_4} ")
 
-^[(new | now | multi )] (tags | tax) <user.one_roam_tag> [and] <user.one_roam_tag> [and] <user.one_roam_tag> [and] <user.one_roam_tag>$: 
-    insert(" #{one_roam_tag_1} #{one_roam_tag_2} #{one_roam_tag_3} #{one_roam_tag_4} ")
+^[(new | now | multi )] (tags | tax) {user.roam_tag} [and] {user.roam_tag}$: 
+    insert(" #{roam_tag_1} #{roam_tag_2} ")
 
-^[(new | now | multi )] (tags | tax) <user.one_roam_tag> [and] <user.one_roam_tag>$: 
-    insert(" #{one_roam_tag_1} #{one_roam_tag_2} ")
-
-^[(new | now | multi )] (tags | tax) <user.one_roam_tag> [and] <user.one_roam_tag> [and] <user.one_roam_tag>$: 
-    insert(" #{one_roam_tag_1} #{one_roam_tag_2} #{one_roam_tag_3} ")
+^[(new | now | multi )] (tags | tax) {user.roam_tag} [and] {user.roam_tag} [and] {user.roam_tag}$: 
+    insert(" #{roam_tag_1} #{roam_tag_2} #{roam_tag_3} ")
 
 #turn local text into tag
 

@@ -724,13 +724,13 @@ insert tomorrow:
 
 #add named tag to block
 
-^[(new | now)] tag <user.one_roam_tag>$: 
-    insert(" #{one_roam_tag} ")
+^[(new | now)] tag {user.roam_tag}$: 
+    insert(" #{roam_tag} ")
 
-(make [block] | tag block | add tag) <user.one_roam_tag>: 
+(make [block] | tag block | add tag) {user.roam_tag}: 
     edit.select_all()
     s = edit.selected_text()
-    insert("{s} #{one_roam_tag}")
+    insert("{s} #{roam_tag}")
     sleep(300ms)
     key(enter)
 

@@ -41,9 +41,9 @@ open [this] page [in] sidebar:
 (clear | kill) (sidebar | bar): key(ctrl-l)
 
 
-open <user.one_roam_tag> [in] sidebar | bar <user.one_roam_tag>:
+open {user.roam_tag} [in] sidebar | bar {user.roam_tag}:
     key(cmd-u)
     # sleep(100ms)
-    insert("{one_roam_tag}")
+    insert("{roam_tag}")
     sleep(500ms)
     key(shift-enter)

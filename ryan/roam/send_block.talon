@@ -49,28 +49,28 @@ move [(block | blocks)] to [top] [of] [page] (paste | pace | clip):
     sleep(200ms)        
     key(enter tab:2 enter)
 
-move [(block | blocks)] to [top] [of] <user.one_roam_tag>: 
+move [(block | blocks)] to [top] [of] {user.roam_tag}: 
     key(cmd-alt-m)
     sleep(1500ms)
     key(right)
     sleep(100ms)
-    insert("{one_roam_tag}")        
+    insert("{roam_tag}")        
     sleep(200ms)        
     key(enter tab:2 enter)
 
-[move] <user.letters> [move] (to | two) [top] [of] <user.one_roam_tag>:
+[move] <user.letters> [move] (to | two) [top] [of] {user.roam_tag}:
     insert(letters)
     sleep(300ms) 
     key(cmd-alt-m)
     sleep(1500ms)
     key(right)
     sleep(100ms)
-    insert("{one_roam_tag}")        
+    insert("{roam_tag}")        
     sleep(200ms)        
     key(enter tab:2 enter)
 
 
-move [(block | blocks)] to [top] [of] <user.one_roam_tag> (sidebar | bar):
+move [(block | blocks)] to [top] [of] {user.roam_tag} (sidebar | bar):
     key(cmd-p)
     sleep(100ms)
     user.paste("mbts")
@@ -79,11 +79,11 @@ move [(block | blocks)] to [top] [of] <user.one_roam_tag> (sidebar | bar):
     sleep(1500ms)
     key(right)
     sleep(100ms)
-    insert("{one_roam_tag}")        
+    insert("{roam_tag}")        
     sleep(200ms)        
     key(enter tab:2 enter)
 
-move [(block | blocks)] to [top] [of] <user.one_roam_tag> [leave] (ref | reference | rough):
+move [(block | blocks)] to [top] [of] {user.roam_tag} [leave] (ref | reference | rough):
     key(cmd-p)
     sleep(100ms)
     user.paste("mbtr")
@@ -92,11 +92,11 @@ move [(block | blocks)] to [top] [of] <user.one_roam_tag> [leave] (ref | referen
     sleep(1500ms)
     key(right)
     sleep(100ms)
-    insert("{one_roam_tag}")        
+    insert("{roam_tag}")        
     sleep(200ms)        
     key(enter tab:2 enter)
 
-move [(block | blocks)] to [top] [of] <user.one_roam_tag> [and] (zoom | go [there] | focus):
+move [(block | blocks)] to [top] [of] {user.roam_tag} [and] (zoom | go [there] | focus):
     key(cmd-p)
     sleep(100ms)
     user.paste("mbtz")
@@ -105,7 +105,7 @@ move [(block | blocks)] to [top] [of] <user.one_roam_tag> [and] (zoom | go [ther
     sleep(1500ms)
     key(right)
     sleep(100ms)
-    insert("{one_roam_tag}")        
+    insert("{roam_tag}")        
     sleep(200ms)        
     key(enter tab:2 enter)
 
@@ -121,39 +121,27 @@ move [(block | blocks)] to (ref | reference | rough) (paste | pace | clip):
     sleep(100ms)
     key(tab enter)
 
-#move to #tag #inbox combo reference
-move [(block | blocks)] to <user.one_roam_tag> inbox: 
+# ------------- reference versions
+
+move [(block | blocks)] (to | too | two) {user.roam_ref}: 
     key(cmd-alt-m)
     sleep(1500ms)
     key(tab right)
-    insert("#{one_roam_tag} #inbox")
-    sleep(200ms)        
-    key(enter)
-    sleep(100ms)
-    key(tab enter)
-
-# ------------- hardcoded reference versions
-
-move [(block | blocks)] to agenda: 
-    key(cmd-alt-m)
-    sleep(1500ms)
-    key(tab right)
-    user.paste("CGDDdKiFq")
+    user.paste("{roam_ref}")
     sleep(200ms)        
     key(enter)
     sleep(100ms)        
     key(tab enter)
 
-(send | move) [(block | blocks)] (ref | reference | link) to agenda: 
+(send | move) [(block | blocks)] (ref | reference | link) (to | too | two) {user.roam_ref}: 
     key(cmd-alt-ctrl-m)
     sleep(1500ms)
     key(tab right)
-    user.paste("CGDDdKiFq")       
+    user.paste("{roam_ref}")       
     sleep(200ms)
     key(enter)
     sleep(100ms)       
     key(tab enter)
-
 
 ## +++++++++++++++++++ move to sidebar .
 
@@ -169,4 +157,17 @@ move [(block | blocks)] to (paste | pace) (sidebar | bar):
     sleep(200ms)
     key(enter)
     sleep(100ms)       
+    key(tab enter)
+
+## +++++++++++++++++++++++++++++ inbox .
+
+#move to #tag #inbox combo reference
+move [(block | blocks)] to {user.roam_tag} inbox: 
+    key(cmd-alt-m)
+    sleep(1500ms)
+    key(tab right)
+    insert("#{roam_tag} #inbox")
+    sleep(200ms)        
+    key(enter)
+    sleep(100ms)
     key(tab enter)
