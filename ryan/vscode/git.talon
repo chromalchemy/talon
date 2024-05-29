@@ -69,7 +69,7 @@ commit graph (max | min | normal | norm):
 ## +++++++++++++++++++++++++++ gitlens .
 
 (open  | go) working file : user.vscode("gitlens.openWorkingFile")
-open file at revision: user.vscode("gitlens.openFileRevision")
+open file [at] revision: user.vscode("gitlens.openFileRevision")
 
 ## +++++++++++++++++++++++++++++++ git .
 stage [this] file [changes]: user.vscode("git.stage")
@@ -85,3 +85,5 @@ add to git ignore [point]:
     key(enter)
 
 
+(open | show) changes [with] [previous] [revision]:
+    user.vscode("gitlens.diffWithPrevious")
