@@ -51,9 +51,6 @@ email (add block | adblock | insert | paste) link:
 (paste | pace | insert) get bit address: 
     insert("https://getbitoutdoors.com")
 
-    
-
-
 
 # go (variations | Variance | variants):
 #     user.rango_run_action_on_reference("clickElement", "variations")
