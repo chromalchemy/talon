@@ -15,6 +15,9 @@ read: read
 watch: watch 
 demo: demo
 inbox: inbox
+clojure inbox: clj/inbox
+closure inbox: clj/inbox
+closure in box: clj/inbox
 
 ergonomics: ergonomics
 dev: dev
