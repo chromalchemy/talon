@@ -11,3 +11,5 @@ hash, hash
 thread first, thread-first
 thread last, thread-last
 set, set
+debug, debug
+debug nest, debug-nest

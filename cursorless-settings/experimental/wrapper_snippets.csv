@@ -18,3 +18,5 @@ comment, comment.form
 thread first, thread-first.form
 thread last, thread-last.form
 set, set.form
+debug, debug.form
+debug nest, debug-nest.form

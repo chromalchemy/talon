@@ -247,7 +247,19 @@
     :var "form"
     :template "#{$form}"
     :type
-    #{:wrap  :insert :insert+phrase}}])
+    #{:wrap  :insert :insert+phrase}} 
+   
+   {:spoken  "debug"
+    :var "form"
+    :template "(dbg $form)"
+    :type
+    #{:wrap :insert :insert+phrase}} 
+   
+   {:spoken  "debug nest"
+    :var "form"
+    :template "(dbgn $form)"
+    :type
+    #{:wrap :insert :insert+phrase}}])
 
 
 

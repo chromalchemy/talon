@@ -12,7 +12,5 @@ hash funk, hash-funk.fnName
 thread first, thread-first.form
 thread last, thread-last.form
 set, set.form
-
-
-# 2024-05-13 17:04:11 - New entries automatically added by cursorless
-funk, functionDeclaration.name
+debug, debug.form
+debug nest, debug-nest.form

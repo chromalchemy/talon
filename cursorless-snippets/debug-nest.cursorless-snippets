@@ -1,0 +1,11 @@
+{
+  "debug-nest" : {
+    "definitions" : [ {
+      "scope" : {
+        "langIds" : [ "clojure" ]
+      },
+      "body" : [ "(dbgn $form)" ]
+    } ],
+    "description" : "Clj snippet"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "debug" : {
+    "definitions" : [ {
+      "scope" : {
+        "langIds" : [ "clojure" ]
+      },
+      "body" : [ "(dbg $form)" ]
+    } ],
+    "description" : "Clj snippet"
+  }
+}

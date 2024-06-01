@@ -1,11 +1,20 @@
 list: user.clojure_core
 -
 
+
+debug: dbg 
+debug nest: dbgn
+debug nested: dbgn
+debug trace: dbg 
+debug trace nest: dbgn
+debug trace nested: dbgn
+
 playback: #>
 playback trace: #>
 playback trace both: #>>
 playback trace input: #>>
 playback trace intermediate: #>>
+playback trace all: #>>
 playback reference: #><[]
 playback ref: #><[]
 output var: #><[]
