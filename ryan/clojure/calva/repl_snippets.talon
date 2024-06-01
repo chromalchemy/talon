@@ -10,14 +10,10 @@ tag: user.cursorless
 
 #### repl snippets config
 
-(open | show) (my | workspace) [calva] repl snippets: 
-    user.cursorless_wrap_with_snippet()
-    user.vscode("calva.customREPLCommandSnippets")
-
-(open | go) [(user | global)] [calva] (repl snippets | calva config) [eden]: 
+(open | go | show) [(user | global)] [calva] (repl snippets | calva config) [eden]: 
     user.vscode("calva.openUserConfigEdn")
 
-(open | go) workspace repl snippets:
+(open | go | show) workspace repl snippets:
     user.vscode("workbench.action.openWorkspaceSettingsFile")
     key(cmd-f)
     insert("calva.customREPLCommandSnippets")
@@ -28,10 +24,17 @@ tag: user.cursorless
 ## +++++++++++++++ choose repl snippet from dropdown
 
 # todo: need enumerated versions of this?
-(pick | choose | show | please) [custom] repl (command | commands  | function | functions | funs | snippet | snippets) [<user.text>]:
+(pick | choose | show | please) [custom] repl (command | commands  | function | functions | funs | fun | snippet | snippets) [<user.text>]:
     user.vscode("calva.runCustomREPLCommand")
     # sleep(100ms)
     insert(text or "")
+
+(pick | choose | show | please) [custom] repl (command | commands  | function | functions | funs | fun | snippet | snippets) pop [<user.text>]:
+    user.vscode("calva.runCustomREPLCommand")
+    # sleep(100ms)
+    insert(text or "")
+    sleep(100ms)
+    key(enter)
 
 ## ++++++++++++++++++++++++++++++ test .
 
