@@ -5,6 +5,9 @@ tag: user.cursorless
 
 -
 
+(close | hide) (search | hunt) bar: 
+    key(esc:2)
+
 ## ++++++++++++++ find/replace helpers .
 
 #navigates to find field only if on empty space/line
