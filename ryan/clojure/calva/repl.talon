@@ -51,7 +51,7 @@ go [calva] (output | results | repl | ripple) [(term | terminal)]:
     edit.file_start()
 
 
-open [calva] (output | results | repl | ripple) [(term | terminal)] [as] tab:
+(open | move) [calva] (output | results | repl | ripple) [(term | terminal)] [(as | to | too | two)] tab:
     user.vscode("calva.showOutputTerminal")
     sleep(100ms)
     user.vscode("workbench.action.terminal.moveToEditor")
