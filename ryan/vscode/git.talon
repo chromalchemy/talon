@@ -87,3 +87,6 @@ add to git ignore [point]:
 
 (open | show) changes [with] [previous] [revision]:
     user.vscode("gitlens.diffWithPrevious")
+
+push (to | too | two):
+    user.vscode("git.pushTo")
