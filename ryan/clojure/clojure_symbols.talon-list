@@ -1,6 +1,5 @@
-list: user.clojure_core
+list: user.clj_symbol
 -
-
 
 debug: dbg 
 debug nest: dbgn
@@ -17,9 +16,16 @@ playback trace intermediate: #>>
 playback trace all: #>>
 playback reference: #><[]
 playback ref: #><[]
+playback var: #<>[]
+playback variable: #<>[]
 output var: #><[]
+output variable: #><[]
 output ref: #><[]
+output reference: #><[]
+trace var: #><[]
+trace variable: #><[]
 trace ref: #><[]
+trace reference: #><[]
 
 arrow: ->
 forward arrow: ->
@@ -536,9 +542,9 @@ print raw string: prn-str
 pred qualified ident: qualified-ident?
 pred qualified keyword: qualified-keyword?
 pred qualified symbol: qualified-symbol?
-quote: '
 random: rand
 random integer: rand-int
+random int: rand-int
 random nth: rand-nth
 random sample: random-sample
 range: range

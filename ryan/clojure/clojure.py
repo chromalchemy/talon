@@ -6,7 +6,7 @@ ctx.matches = r"""
 code.language: clojure
 """
 
-mod.list("clojure_core", "Clojure functions")
+mod.list("clj_symbol", "Clojure Symbols")
 
 # @mod.capture(rule="{self.clojure_core}")
 # def clojure_fn(m) -> str:

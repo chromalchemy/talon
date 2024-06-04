@@ -1,7 +1,7 @@
 code.language: clojure
 -
 
-##tag(): user.clojure_core
+##tag(): user.clj_symbol
 
 # tag(): user.code_imperative
 # tag(): user.code_object_oriented
@@ -26,12 +26,12 @@ code.language: clojure
 #     user.code_public_function_formatter = "DASH_SEPARATED"
 #     user.code_private_variable_formatter = "DASH_SEPARATED"
 #     user.code_protected_variable_formatter = "DASH_SEPARATED"
-#     user.code_public_variable_formatter = "DASH_SEPARATED"
+#     user. testcode_public_variable_formatter = "DASH_SEPARATED"
 
 test notification: app.notify('this is a notification')
 
-[(closure | clojure)] (token | symbol | simple | sym | sim) {user.clojure_core}: 
-    insert("{clojure_core}")
+[(closure | clojure)] (token | symbol | simple | sym | sim) {user.clj_symbol}: 
+    insert("{clj_symbol}")
 
 
 keyword [<user.text>]: 
@@ -47,9 +47,10 @@ open keyword <user.format_code>+:
     insert(":")
     user.insert_many(format_code_list)
 
-open (namespace | name space) keyword <user.format_code>+: 
+open  (namespace | name space) keyword <user.format_code>+: 
     insert("::")
     user.insert_many(format_code_list)
+
 
 # <user.format_code>+ over: user.insert_many(format_code_list)
 # <user.formatters> that: user.formatters_reformat_selection(user.formatters)
