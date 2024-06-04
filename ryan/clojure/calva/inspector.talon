@@ -3,11 +3,11 @@ app: vscode
 
 ## +++++++++++++++++++++++++++++ panel .
 
-(show | bar) inspector: 
+(show | bar) (inspector | inspect): 
     # user.vscode("calva.revealInspector")
     user.run_rpc_command("calva.revealInspector", 5)
 
-(go | focus) inspector: 
+(go | focus) (inspector | inspect): 
     user.vscode("calva.inspector.focus")
 
 # remove inspector:
@@ -17,22 +17,27 @@ app: vscode
     user.vscode("calva.inspector.toggleVisibility")
 
 
-## +++++++++++++++++++++++++++++++ all .
+## +++++++++++++++++++++++++++++++ folding
 
-clear inspector:
-    user.vscode("calva.clearInspector")
+fold: key(left)
+unfold: key(right)
 
-inspector fold all:
+(inspect | inspector | inspections) fold all | fold all (inspect | inspector | inspections):
     user.vscode("workbench.actions.treeView.calva.inspector.collapseAll")
 
-## ++++++++++++++++++++ inspector item .
 
+## +++++++++++++++++++++++++ eval, add item to list
+
+# same effect as eval?
 (add | send | run) [that] (to | in) inspector [here]:
     user.vscode("calva.addToInspector")
 
-inspect (item | this):
-    user.vscode("calva.inspectItem")
-    
+## ++++++++++++++++++++ inspector item .
+
+inspect (it | here):
+    user.vscode("calva.inspectItem")    
+
+## +++++++++ copy / paste
 
 (copy | cannot the) inspector item:
     user.vscode("calva.copyInspectorItem")
@@ -40,6 +45,12 @@ inspect (item | this):
 paste [as] inspector item:
     user.vscode("calva.pasteAsInspectorItem")
 
+## ++++++++++++++++++++++++++++ remove .
+
 (clear | kill | remove) inspector item: 
     user.vscode("calva.clearInspectorItem")
+
+clear (inspect | inspector | inspections):
+    user.vscode("calva.clearInspector")
+    
     
