@@ -16,8 +16,6 @@ nope: key(cmd-z)
 # global app commands
 save file: key(cmd-s)
 quit app: key(cmd-q)
-exit: key(escape)
-
 
 okay | ok: key(enter)
 

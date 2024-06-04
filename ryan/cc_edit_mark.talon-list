@@ -9,3 +9,6 @@ build: built
 components: built
 design: design
 global settings: design
+delete: delete
+kill: kill 
+kill block: kill
