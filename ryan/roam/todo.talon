@@ -3,7 +3,7 @@ mode: command
 -
 ## +++++++++++++++++++ edit checkboxes .
 
-make (todo | action): 
+(make | mark) (todo | action): 
     key(cmd-return)
     # sleep(100ms)
     # key(escape)
@@ -13,12 +13,12 @@ make (todo | action):
     # key(cmd-return)
     # insert(text)
     
-make done: 
+mark done: 
     key(cmd-return)
     # sleep(100ms)
     # key(escape)
 
-mark done: 
+make done: 
     key(cmd-return:2)
     # sleep(100ms)
     # key(escape)

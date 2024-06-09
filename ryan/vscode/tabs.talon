@@ -36,7 +36,7 @@ pop forward | go (next | forward | for) used [(editor | tab)] :
 (open | pick [open]) [(closed | close)] (tab | editor):
     user.vscode("workbench.action.quickOpenPreviousRecentlyUsedEditor")
 
-
+    
 ## +++++++++++++++++++ merge tab groups .
 
 (join | merge) (editor | tab | tabs | editors) [(in group | inside)]: 
