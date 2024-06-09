@@ -101,3 +101,18 @@ go [(tabs | open tabs | open)] <user.text>:
     key(cmd-shift-m)
     sleep(100ms)
     key(down enter)
+
+(hunt | search) (this | that | text):
+    mouse_click(1)
+    insert("Search Google for")
+    sleep(200ms)
+    key(enter)
+
+(hunt | search) point:
+    key(shift:down)
+    mouse_click(0)
+    mouse_click(1)
+    insert("Search Google for")
+    sleep(200ms)
+    key(enter)
+
