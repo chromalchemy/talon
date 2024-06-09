@@ -76,6 +76,13 @@ search force <user.text>:
     sleep(100ms)
     key(escape)
 
+## +++++++++++++++++++++++++ move (rearrange) tabs . 
+
+tab left: 
+    key(shift-ctrl-pageup)
+tab right: 
+    key(fn-shift-ctrl-pagedown)
+
 ## ++++++++++++++++++ search open tabs .
 
 (search | hunt) (tabs | open tabs | open) [<user.text>]:
