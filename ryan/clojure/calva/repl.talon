@@ -16,6 +16,9 @@ app: vscode
 
 (jack in  |  restart) (repl | ripple) | (repl | ripple)  (jack in | jacket |  restart) manual:
     user.vscode("calva.jackIn")
+
+(jack out  | kill | stop) (repl | ripple) | (repl | ripple) (jack out  | kill | stop)   :
+    user.vscode("calva.jackOut")
     
 [new] repl menu:
     user.vscode("calva.startOrConnectRepl")
