@@ -3,3 +3,4 @@ Spoken form, VSCode command
 refactor, editor.action.refactor
 go to reference, editor.action.goToReferences
 peak reference, editor.action.referenceSearch.trigger
+split define, editor.action.revealDefinitionAside
