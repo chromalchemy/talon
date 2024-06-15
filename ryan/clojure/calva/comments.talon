@@ -4,6 +4,9 @@ mode: user.cursorless_spoken_form_test
 tag: user.cursorless
 -
 
+[new] [(line | text)] comment [<user.prose>]:
+    user.paste(";; {prose or ''}")
+
 (comment |  uncomment) that: key(cmd-/)
 
 (uncomment | remove comment [from]) <user.cursorless_target>:
