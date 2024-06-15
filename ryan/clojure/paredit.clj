@@ -147,7 +147,10 @@
   (str "\"" s "\"")) 
 
 (defn talon-fn [c v]
-  (str c "(" (dub-quotes v) ")"))
+  (str c "(" (dub-quotes v) ")")) 
+
+(defn talon-double-fn [c v1 v2]
+  (str c "(" (dub-quotes v1) ", " v2 ")"))
 
 (defn code-action [s]
   (talon-fn "user.vscode" s ))
@@ -170,7 +173,7 @@
      cursorless-command
      (str name " <user.cursorless_target>:" 
        (subcommands->str
-         (talon-fn "user.cursorless_ide_command" fn) )) ]
+         (talon-double-fn "user.cursorless_ide_command" fn "cursorless_target") )) ]
     (->> [normal-command
          point-command
          cursorless-command]

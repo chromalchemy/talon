@@ -9,6 +9,8 @@
     (string/split  #".-")
     first))
 
+;; <user.cursorless_action_or_ide_command> <user.cursorless_target>
+
 (comment
   (batson-vendor-sku-core "AB1-TitaniumTop"))
 
