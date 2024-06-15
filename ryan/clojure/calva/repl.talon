@@ -3,7 +3,7 @@ app: vscode
 
 ## +++++++++++++++++++ connect to repl .
 
-(jack in  |  restart) (repl | ripple) | (repl | ripple)  (jack in | jacket |  restart):
+(jack in  |  restart) (repl | ripple) | (repl | ripple | grapple)  (jack in | jacket):
     user.vscode("calva.jackIn")
     sleep(2000ms)
     user.vscode("calva.showOutputTerminal")
@@ -13,8 +13,17 @@ app: vscode
     user.vscode("workbench.action.moveEditorToRightGroup")
     sleep(200ms)
     user.vscode("workbench.action.closePanel")
+    sleep(1000ms)
+    user.vscode("calva.showOutputTerminal")
+    
 
-(jack in  |  restart) (repl | ripple) | (repl | ripple)  (jack in | jacket |  restart) manual:
+(repl | ripple | grapple)  ((jack in | jacket) again | restart):
+    user.vscode("calva.jackIn")
+    sleep(2000ms)
+    user.vscode("calva.showOutputTerminal")
+
+
+(jack in  |  restart) (repl | ripple) | (repl | ripple)  (jack in | jacket) manual:
     user.vscode("calva.jackIn")
 
 (jack out  | kill | stop) (repl | ripple) | (repl | ripple) (jack out  | kill | stop)   :
