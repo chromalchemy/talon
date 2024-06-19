@@ -1,0 +1,60 @@
+{
+  "type": "group",
+  "name": "",
+  "color": "",
+  "uri": "",
+  "children": [
+    {
+      "type": "group",
+      "name": "newie",
+      "color": "#CBE3F6",
+      "uri": "",
+      "children": [
+        {
+          "type": "bookmark",
+          "fsPath": "/Users/ryan/.talon/user/ryan/vscode/bookmarks/bookmark_x.talon",
+          "line": 70,
+          "col": 14,
+          "name": "e2eb2e",
+          "lineText": "save (bookmarks | all marks):",
+          "uri": "newie"
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "name": "test group",
+      "color": "#0DBF21",
+      "uri": "",
+      "children": [
+        {
+          "type": "bookmark",
+          "fsPath": "/Users/ryan/.talon/user/ryan/vscode/bookmarks/bookmark_x.talon",
+          "line": 12,
+          "col": 27,
+          "name": "hello",
+          "lineText": "(toggle | create | add) [line] bookmark | bookmark line:",
+          "uri": "test group"
+        }
+      ]
+    },
+    {
+      "type": "bookmark",
+      "fsPath": "/Users/ryan/.talon/user/ryan/vscode/bookmarks/bookmark_x.talon",
+      "line": 15,
+      "col": 9,
+      "name": "(that | line)",
+      "lineText": "bookmark (that | line) (named | labeled):",
+      "uri": ""
+    },
+    {
+      "type": "bookmark",
+      "fsPath": "/Users/ryan/.talon/user/ryan/vscode/bookmarks/bookmark_x.talon",
+      "line": 19,
+      "col": 9,
+      "name": "hello world",
+      "lineText": "user.vscode(\"bookmark_x.toggleLabeledBookmark\")",
+      "uri": ""
+    }
+  ]
+}
