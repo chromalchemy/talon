@@ -14,15 +14,6 @@ mode: command
 
 ## ++++++++++++++++ move block to DNP date (str)
 
-#make versions that leave reference
-
-move [(block | blocks)] to tomorrow: 
-    key(cmd-d)
-    sleep(100ms)
-    key(tab enter)
-    sleep(100ms)
-    key(tab:2 enter)
-
 #todo: why inserting at bottom
 move [(block | blocks)] to today: 
     key(cmd-d)
@@ -35,6 +26,24 @@ move [(block | blocks)] to today:
     key(tab enter)
     sleep(100ms)
     key(tab:2 enter)
+
+
+teleport [(todo | block)]:
+    key(cmd-alt-shift-t)
+
+teleport [(todo | to do)] [and] [leave] (ref | reference):
+    user.run_roam_command("teleport todos and leave blockref behind")
+
+
+#make versions that leave reference
+
+move [(block | blocks)] to tomorrow: 
+    key(cmd-d)
+    sleep(100ms)
+    key(tab enter)
+    sleep(100ms)
+    key(tab:2 enter)
+
 
 ## ++++++++++++++++++++++ Move block to page .
 
@@ -71,11 +80,7 @@ move [(block | blocks)] to [top] [of] {user.roam_tag}:
 
 
 move [(block | blocks)] to [top] [of] {user.roam_tag} (sidebar | bar):
-    key(cmd-p)
-    sleep(100ms)
-    user.paste("mbts")
-    sleep(100ms)
-    key(enter) 
+    user.run_roam_command("mbts")
     sleep(1500ms)
     key(right)
     sleep(100ms)
@@ -84,11 +89,7 @@ move [(block | blocks)] to [top] [of] {user.roam_tag} (sidebar | bar):
     key(enter tab:2 enter)
 
 move [(block | blocks)] to [top] [of] {user.roam_tag} [leave] (ref | reference | rough):
-    key(cmd-p)
-    sleep(100ms)
-    user.paste("mbtr")
-    sleep(100ms)
-    key(enter) 
+    user.run_roam_command("mbts")
     sleep(1500ms)
     key(right)
     sleep(100ms)
@@ -97,11 +98,7 @@ move [(block | blocks)] to [top] [of] {user.roam_tag} [leave] (ref | reference |
     key(enter tab:2 enter)
 
 move [(block | blocks)] to [top] [of] {user.roam_tag} [and] (zoom | go [there] | focus):
-    key(cmd-p)
-    sleep(100ms)
-    user.paste("mbtz")
-    sleep(100ms)
-    key(enter) 
+    user.run_roam_command("mbts")
     sleep(1500ms)
     key(right)
     sleep(100ms)
@@ -146,11 +143,7 @@ move [(block | blocks)] (to | too | two) {user.roam_ref}:
 ## +++++++++++++++++++ move to sidebar .
 
 move [(block | blocks)] to (paste | pace) (sidebar | bar): 
-    key(cmd-p)
-    sleep(200ms)
-    user.paste("mbts")
-    sleep(100ms)
-    key(enter)
+    user.run_roam_command("mbts")
     sleep(1500ms)
     key(right)
     edit.paste()
