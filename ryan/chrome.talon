@@ -49,7 +49,7 @@ copy  image (point | here)$:
 
 zoom (default  | normal) | reset zoom: key(cmd-0)
 
-## ++++++++++++++++++++++++++++ search .
+## ++++++++++++++++++++++++++++ search (google).
 
 # use rango
 search <user.text>: 
@@ -61,6 +61,23 @@ search force <user.text>:
     insert(text)
     sleep(100ms)
     key(enter)
+
+### search using text on page
+
+(hunt | search) (this | that | text):
+    mouse_click(1)
+    insert("Search Google for")
+    sleep(200ms)
+    key(enter)
+
+(hunt | search) point:
+    key(shift:down)
+    mouse_click(0)
+    mouse_click(1)
+    insert("Search Google for")
+    sleep(200ms)
+    key(enter)
+    
 
 ## ++++++++++ copy web page address to roam .
 
@@ -102,17 +119,21 @@ go [(tabs | open tabs | open)] <user.text>:
     sleep(100ms)
     key(down enter)
 
-(hunt | search) (this | that | text):
-    mouse_click(1)
-    insert("Search Google for")
-    sleep(200ms)
-    key(enter)
+## +++++++++++++++++ find text on page .
 
-(hunt | search) point:
-    key(shift:down)
-    mouse_click(0)
-    mouse_click(1)
-    insert("Search Google for")
+(search | hunt) page [<user.text>]: 
+    key(cmd-f)
     sleep(200ms)
+    insert(text or "")
+
+hunt next: 
     key(enter)
+    
+hunt last: 
+    key(shift-enter)
+
+exit hunt | hunt exit:
+    key(esc)
+    
+
 
