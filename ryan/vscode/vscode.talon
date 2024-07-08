@@ -59,4 +59,13 @@ close unsaved file | close file without saving:
 open file in browser:
     user.vscode("openInDefaultBrowser.openInDefaultBrowser")
 
+## ++++++++++ select quick open option .
 
+# select Previous in Quick Open
+(choose | pick) (previous | prev | last): 
+    user.vscode("workbench.action.quickOpenSelectPrevious")
+    
+# Navigate Previous in Quick Open
+please go (previous | prev | last): 
+    user.vscode(workbench.action.quickOpenNavigatePrevious)
+    

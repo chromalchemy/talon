@@ -1,9 +1,76 @@
 app.name: Code
 -
 
+## +++++++++++++++++++++++++++ vscode tab nav .
+# basic tab nav in community core (tab last)
+
+## +++++++++++++++++++++++++ open tabs .
+
+# open last closed tab
+(open | reopen) [last] (closed | close) (tab | editor): 
+    user.vscode("workbench.action.reopenClosedEditor")
+
+##### open recently used tab
+
+# go last recently used tab
+pop back | go back used [(editor | tab)]: 
+    user.vscode("workbench.action.openPreviousRecentlyUsedEditor")
+
+# go next recently used tab 
+pop (forward | fore | four) | go (next | forward | for) used [(editor | tab)] : 
+    user.vscode("workbench.action.openNextRecentlyUsedEditor")
+
+##### in group
+
+# go last recently used tab in group
+(pop back | go back used [(editor | tab)]) [in] group: 
+    user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
+
+# go next recently used tab in group
+(pop (forward | fore | four) | go (next | forward | for) used [(editor | tab)]) [in] group: 
+    user.vscode("workbench.action.openNextRecentlyUsedEditorInGroup")
+
+######## pick to open
+
+# pick from recently used (open) tabs
+(open | pick [open]) [(used | recent)] (tab | editor):
+    user.vscode("workbench.action.quickOpenPreviousRecentlyUsedEditor")
+
+# pick from history of tabs (open or closed)
+(open | pick) ((history | closed | close) (tab | tabs | editor) | (tab | editor) history): 
+    user.vscode("workbench.action.openPreviousEditorFromHistory")
+
+# pick from least used (open) tab in group
+(pop | go) (least | last) (used | use) (tab | editor) [in] group: 
+    user.vscode("workbench.action.quickOpenLeastRecentlyUsedEditorInGroup")
+
+
+############## toggle btw current and last used 
+
+pop tab:
+    user.vscode("workbench.action.quickOpenPreviousRecentlyUsedEditor")
+    sleep(100ms) 
+    key(enter)
+
+pop tab [in] group:
+    user.vscode("workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup")
+    sleep(100ms) 
+    key(enter)
+    
+## +++++++++++++++++++++++++ close tab(s) .
+
 (tab | editor | column) (close | clothes):
     user.vscode("workbench.action.closeActiveEditor")
 
+close (pinned  |  pin) (editor | tab):
+    user.vscode("workbench.action.closeActivePinnedEditor")
+
+close (saved | safe) (tabs | editors): 
+    user.vscode("workbench.action.closeUnmodifiedEditors")
+
+close other (tabs | editors) [in] [group] : 
+    user.vscode("workbench.action.closeOtherEditors")
+     
 ## +++++++++++++++++++++++ pin editors .
 
 pin (editor | tab):
@@ -12,31 +79,9 @@ pin (editor | tab):
 unpin (editor | tab):
     user.vscode("workbench.action.unpinEditor")
 
-close (pinned  |  pin) (editor | tab):
-    user.vscode("workbench.action.closeActivePinnedEditor")
- 
 (isolate | separate | join | flatten) (pinned | pin) (editors | tabs | editor tabs):
     user.vscode("workbench.action.toggleSeparatePinnedEditorTabs")
 
-
-#------------ nav to recently used editors
-
-pop back | go back used [(editor | tab)]: 
-    user.vscode("workbench.action.openPreviousRecentlyUsedEditor")
-
-pop forward | go (next | forward | for) used [(editor | tab)] : 
-    user.vscode("workbench.action.openNextRecentlyUsedEditor")
-
-(pop back | go back used [(editor | tab)]) group: 
-    user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
-
-(pop forward | go (next | forward | for) used) group: 
-    user.vscode("workbench.action.openNextRecentlyUsedEditorInGroup")
-
-(open | pick [open]) [(closed | close)] (tab | editor):
-    user.vscode("workbench.action.quickOpenPreviousRecentlyUsedEditor")
-
-    
 ## +++++++++++++++++++ merge tab groups .
 
 (join | merge) (editor | tab | tabs | editors) [(in group | inside)]: 
@@ -66,23 +111,11 @@ decrease group width | group (thin | thinner | slimmer):
 (toggle | flip | reset) [(editor | tab)] (group | groups) [(size | sizes | width | widths  | with)]: 
     user.vscode("workbench.action.toggleEditorWidths")
 
-## ++++++++++++++++++++++++ close tabs .
 
-close (saved | safe) (tabs | editors): user.vscode("workbench.action.closeUnmodifiedEditors")
-
-close other (tabs | editors) [in] [group] : user.vscode("workbench.action.closeOtherEditors")
-
-(open | reopen) [last] closed (tab | editor): user.vscode("workbench.action.reopenClosedEditor")
-
-## ++++++++++++++++++++ navigation .
-
-## +++++++++++++++++++++++++++ vscode tab nav .
-# basic tab nav in community core (tab last)
+## ++++++++++++++ andreas tab nav  .
 
 #prefer andreas panel
 #user.vscode("workbench.files.action.focusOpenEditorsView")
-
-## ++++++++++++++ andreas tab nav  .
 
 #open editors/tabs sidebar
 (bar | show | go | focus | list)  (tabs | taps | editors | [tab] groups | open files) [view]: 
@@ -231,9 +264,10 @@ new [text]  (editor | draft):
 
 ## +++++++++ hide/show tabs in groups .
 
-show tabs:
+(show | multiple) tabs:
     user.vscode("workbench.action.showMultipleEditorTabs")
-hide tabs:
+    
+(fold | hide | single) tabs | single tab:
     user.vscode("workbench.action.hideEditorTabs")
 
     
