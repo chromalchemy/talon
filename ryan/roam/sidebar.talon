@@ -2,9 +2,6 @@ app.name: Roam Research
 mode: command
 -
 
-###sidebar
-
-
 (toggle | hide | show | close | open | reveal) ((sidebar | bar) | side bar) :
     key(cmd-/)
 
@@ -47,3 +44,8 @@ open {user.roam_tag} [in] sidebar | bar {user.roam_tag}:
     insert("{roam_tag}")
     sleep(500ms)
     key(shift-enter)
+
+(close | kill | chuck) (pinned sidebar | sidebar force) :
+    mouse_click(0)
+    sleep(100ms)
+    key(enter)
