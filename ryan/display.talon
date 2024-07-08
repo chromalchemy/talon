@@ -18,7 +18,7 @@ dark mode off | light mode | (exit | leave) dark mode:
 
 ## ++++++++++++++++  night shift 
 
-[make | set] (nightshift | night shift | night light | nat if | system | macbook) [(temperature | temp)] <user.number_string>:
+[make | set] (nightshift | (night | nat) (shift | if | light) | system | macbook) [(temperature | temp)] <user.number_string>:
     user.betterdisplay_set("nightShiftValue=0.{number_string}")
 
 (nightshift | night shift | night light | nat if) [(temperature | temp)] up <user.number_string>:
