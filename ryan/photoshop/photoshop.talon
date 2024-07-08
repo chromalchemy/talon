@@ -349,6 +349,21 @@ take text [(here | point)]:
     key(cmd-v)
     # edit.select_all()
 
+(paste | pace) (no |  without) (formatting | format): 
+    user.menu_select('Edit|Paste Special|Paste without Formatting')
+
+(paste | pace) [text] raw [(here | point)]:
+    key(t:down)
+    sleep(300ms)
+    mouse_click(0)
+    # sleep(300ms)
+    key(t:up)
+    sleep(300ms)
+    key(cmd-a)
+    sleep(500ms)
+    user.menu_select('Edit|Paste Special|Paste without Formatting')
+    # edit.select_all()
+
 ## +++++++++++++++++++++++++++++ inbox .
 
 Center layer  [on (page | artboard )]:
