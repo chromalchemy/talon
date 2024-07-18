@@ -1,6 +1,7 @@
 list: user.clj_symbol
 -
 
+###  debux
 debug: dbg 
 debug nest: dbgn
 debug nested: dbgn
@@ -8,6 +9,7 @@ debug trace: dbg
 debug trace nest: dbgn
 debug trace nested: dbgn
 
+###  playback 
 playback: #>
 playback trace: #>
 playback trace both: #>>
@@ -27,15 +29,21 @@ trace variable: #><[]
 trace ref: #><[]
 trace reference: #><[]
 
+###  specter
+sub map items: submap-items 
+
 arrow: ->
 forward arrow: ->
 
+### ornament, girouette, tailwind
 breakpoint small: :sm
 breakpoint medium: :md 
 breakpoint large: :lg 
 breakpoint extra large: :xl 
 
+###  hiccup 
 hiccup container:  :<>
+
 # asterisk: *
 # asterisk quote: *' gives error
 last result: *1
