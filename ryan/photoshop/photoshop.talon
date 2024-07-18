@@ -376,7 +376,7 @@ Center layer  [on (page | artboard )]:
 
 ## ++++++ Clone and rasterize gradient .
 
-Clone and (raster | rasterize) layer:
+Clone [and] (raster | rasterize) (layer | gradient):
     user.menu_select('Layer|Duplicate Layer...')
     sleep(300ms)
     key(enter)

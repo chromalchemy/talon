@@ -21,7 +21,7 @@ go search string [from results]:
 ## ++++++++++++++++++++++ query filter .
 
 go search filter:
-key(cmd-down)
+    key(cmd-down)
 
 clear search filter:
     key(cmd-down)
