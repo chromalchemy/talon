@@ -37,14 +37,18 @@ app: vscode
 clear repl history: 
     user.vscode("calva.clearReplHistory")
 
-## +++++++++++++++++++ calva repl output/results terminal .
 
-(clear [(it | t | tea)] | clarity) | (clear | dump) [(repl | ripple)] (results | output) [(term | terminal)]:
-    user.vscode("workbench.action.terminal.clear")
+## +++++++++++++++++++ calva repl output/results terminal (tab) .
 
-show [calva] (output | results | repl | ripple) [(term | terminal)]:
+#generic?
+(show | open) [results] output destination:
+    user.vscode("calva.showResultOutputDestination")
+
+(show | open) [(calva | repl | ripple )] (output | results) [(term | terminal)]:
     user.vscode("calva.showOutputTerminal")
-    
+
+#navigate open editors
+
 go [calva] (output | results | repl | ripple) [(term | terminal)]:
     user.vscode("opened-editors.openedEditors")
     insert("Calva Output")
@@ -62,6 +66,12 @@ go [calva] (output | results | repl | ripple) [(term | terminal)]:
     key(enter)
     edit.file_start()
 
+# clear output terminal
+
+(clear [(it | t | tea)] | clarity) | (clear | dump) [(repl | ripple)] (results | output) [(term | terminal)]:
+    user.vscode("workbench.action.terminal.clear")
+
+## +++++++++++++ move terminal output to tab .
 
 (open | move) [calva] (output | results | repl | ripple) [(term | terminal)] [(as | to | too | two)] tab:
     user.vscode("calva.showOutputTerminal")
@@ -71,22 +81,10 @@ go [calva] (output | results | repl | ripple) [(term | terminal)]:
     user.vscode("workbench.action.closePanel")
 
 
-open [calva] (output | results | repl | ripple) [(term | terminal)] [as] window:
+(open | show | move) [calva] (output | results | repl | ripple) [(term | terminal)] [(as | to | too | two)] window:
     user.vscode("calva.showOutputTerminal")
     sleep(300ms)
     user.vscode("workbench.action.terminal.moveIntoNewWindow")
-
-## ___________________________________ .
-
-# what is this?
-show [result] output destination:
-    user.vscode("calva.showResultOutputDestination")
-
-## ++++++++++++++ calva (repl) output channel .
-    
-show [calva] [says] (results | output | repl | ripple) channel:
-    user.vscode("calva.showOutputChannel")
-
 
 ## +++++++++++ repl results editor tab window.
 
@@ -121,7 +119,7 @@ go [(repl | ripple)] (results | output) window top:
 
 ## ++++++++++++++++++++ output channel .
 
-open [(repl  | calva)] output channel:
+(show | open | go) [calva] [says] (results | output | repl | ripple) channel:
     user.vscode("calva.showOutputChannel")
     
 ## ++++++++++++++++++++ inline results .
