@@ -150,4 +150,5 @@ toggle send evaluated code to repl [window]:
 toggle repl pretty printing: 
     user.vscode("calva.togglePrettyPrint") 
 
-
+print [(clojure | closure)] (docs [examples] | examples):
+    calva.printClojureDocsToOutputWindow() 
