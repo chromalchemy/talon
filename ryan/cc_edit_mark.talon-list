@@ -12,3 +12,7 @@ global settings: design
 delete: delete
 kill: kill 
 kill block: kill
+link: link
+vert: vertical
+vertical: vertical
+vertical padding: vertical
