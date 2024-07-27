@@ -51,15 +51,16 @@ open (in | and) commit graph:
 (bar | panel | go) commit graph: 
     user.vscode("gitlens.showGraph")
 
-go commit graph details:
-    user.vscode("gitlens.views.graphDetails.focus")
-
-(toggle  | show | hide) commit [graph] details:
-    user.vscode("gitlens.views.graphDetails.toggleVisibility")
-
 commit graph (max | min | normal | norm):
     user.vscode("gitlens.toggleMaximizedGraph")
 
+## ++++++++++++++ commit graph details .
+
+go commit [(graph | craft)] details:
+    user.vscode("gitlens.views.graphDetails.focus")
+
+[(toggle  | show | hide)] commit [(graph | craft)] details:
+    user.vscode("gitlens.views.graphDetails.toggleVisibility")
 
 ## +++++++++++++++++++++ Navigate diff 
 

@@ -253,6 +253,7 @@ split [(editor | tab)] (to | too | two) next [group]:
 split [(editor | tab)] [to] (right | rite) [group]:
     user.vscode("workbench.action.splitEditorToNextGroup")
 
+## +++++++++++++++++++++++++++++ draft .
 
 new [text]  (editor | draft):
     user.vscode("workbench.action.files.newUntitledFile")
