@@ -505,6 +505,8 @@
 			}
 		},
 		"editor.formatOnType": false,
-		"workbench.colorTheme": "Real IntelliJ Light"
+		"workbench.colorTheme": "Real IntelliJ Light",
+		"bookmark-manager.createJsonFile": true,
+		"bookmark-manager.alwaysIgnore": false
 	}
 }
