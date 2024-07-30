@@ -658,30 +658,37 @@
       "Count Tool"
       "Place Scale Marker..."]}]})
 
+(def plugins-menu
+  {"Plugins"
+     ["Plugins Panel"
+     "Browse Plugins..."
+     "Manage Plugins.."
+     {"ProStacker" ["ProStacker"]}]})
+
 (def window-menu
   {"Window"
    [{"Arrange"
-     [[["Tile All Vertically" "Tile (all | windows) Vertically"]
-       ["Tile All Horizontally" "Tile (all | windows) Horizontally"]
-       ["2-up Horizontal" "[windows] 2 up Horizontal"]
-       ["2-up Vertical" "[windows] 2 up Vertical"]
-       ["3-up Horizontal" "[windows] 3 up Horizontal"]
-       ["3-up Vertical" "[windows] 3 up Vertical"]
-       ["3-up Stacked" "[windows] 3 up Stacked"]
-       ["4-uр" "[windows] 4 uр"]
-       "6-up"
-       ["Consolidate All to Tabs" "(consolidate | windows) to Tabs"]
-       ["Cascade" "cascade windows"]
-       ["Tile" "Tile windows"]
-       "Float in Window"
-       "Float All in Windows"
-       "Match Zoom"
-       "Match Location"
-       "Match Rotation"
-       "Match All"
-           ;"New Window for catfish build 3.psb"
-       "Minimize [window]"
-       ["Bring All to Front" "windows to Front"]]]}
+     [["Tile All Vertically" "Tile (all | windows) Vertically"]
+      ["Tile All Horizontally" "Tile (all | windows) Horizontally"]
+      ["2-up Horizontal" "[windows] 2 up Horizontal"]
+      ["2-up Vertical" "[windows] 2 up Vertical"]
+      ["3-up Horizontal" "[windows] 3 up Horizontal"]
+      ["3-up Vertical" "[windows] 3 up Vertical"]
+      ["3-up Stacked" "[windows] 3 up Stacked"]
+      ["4-uр" "[windows] 4 uр"]
+      "6-up"
+      ["Consolidate All to Tabs" "(consolidate | windows) to Tabs"]
+      ["Cascade" "cascade windows"]
+      ["Tile" "Tile windows"]
+      "Float in Window"
+      "Float All in Windows"
+      "Match Zoom"
+      "Match Location"
+      "Match Rotation"
+      "Match All"
+                ;"New Window for catfish build 3.psb"
+      "Minimize [window]"
+      ["Bring All to Front" "windows to Front"]]}
     {:pre true
      "Workspace"
      ["ryan1"
@@ -697,52 +704,65 @@
       "Delete Workspace..."
       "Keyboard Shortcuts & Menus..."
       "Lock Workspace"]}
-    "3D"
-    ["Actions" {:post "[panel]"}]
-    "Adjustments"
-    "Beta Feedback"
-    "Brush Settings"
-    ["Brushes" {:post "[panel]"}]
-    "Channels"
-    "Character"
-    "Character Styles"
-    "Clone Source"
-    ["Color" {:post "[panel]"}]
-    "Comments"
-    "Content Credentials (Beta)"
-    "Glyphs"
-    "Gradients"
-    "Histogram"
-    "History"
-    "Info"
-    "Layer Comps"
-    "Layers"
-    "Libraries"
-    "Materials"
-    "Measurement Log"
-    "Navigator"
-    "Notes"
-    "Paragraph"
-    "Paragraph Styles"
-    "Paths"
-    "Patterns"
-    "Properties"
-    "Shapes"
-    "Styles"
-    "Swatches"
-    "Timeline"
-    "Tool Presets"
-    "Version History"
-    "Application Frame"
-    "Options"
-    "Tools"
-    "Contextual Task Bar"
+    (for [menu-item
+          [#_"3D"
+            "Actions" 
+           "Adjustments"
+           "Beta Feedback"
+           "Brush Settings"
+            "Brushes" 
+           "Channels"
+           "Character"
+           "Character Styles"
+           "Clone Source"
+           ["Color" {:post "panel"}]
+           "Comments"
+           "Content Credentials (Beta)"
+           "Glyphs"
+           "Gradients"
+           "Histogram"
+           "History"
+            "Info" 
+           ["Layer Comps" "Layer (Comps | compositions)"]
+           ["Layers" {:post "panel"}]
+           "Libraries"
+           "Materials"
+           "Measurement Log"
+           "Navigator"
+           "Notes"
+           "Paragraph"
+           "Paragraph Styles"
+           "Paths"
+           "Patterns"
+           "Properties"
+           "Shapes"
+           "Styles"
+           "Swatches"
+           "Timeline"
+           "Tool Presets"
+           "Version History"
+           "Application Frame"
+           "Options"
+           "Tools"
+           "Contextual Task Bar"]]
+      (let
+        [text-to-add "[panel]"
+         item-config
+         (when (map? (second menu-item))
+           (second menu-item))]
+        (cond
+          (string? menu-item)
+          [menu-item {:post text-to-add}]
 
-    "Plugins"
-    "Plugins Panel"
-    "Browse Plugins..."
-    "Manage Plugins.."
-    {"ProStacker" ["ProStacker"]}]})
+          (and (vector? menu-item) item-config)
+          [(first menu-item)
+           (update item-config :post 
+             (fn [existing-post]
+               (if (string? existing-post)
+                 (str existing-post " " text-to-add)
+                 text-to-add)))]
+
+          :else menu-item)))]})
 
 (def menu-commands
   [layer-menu
@@ -753,6 +773,7 @@
    view-menu
    edit-menu
    image-menu
+   plugins-menu
    window-menu])
 
 (defn parse-talon-token [t]
@@ -791,38 +812,69 @@
        "')")]
     (str command ": " action)))
 
-(defn process-menu
-  [{:keys [pre post top-menu]
-    :as menu}]
-  (let [menu
-        (-> menu
-          (dissoc :post :pre)
-          first)
-        [menu-name menu-items] menu
-        [pre post] (mapv parse-talon-token [pre post])]
-    (->> menu-items
-      (mapv
-        (fn [item]
-          (cond
-          
-            (vector? item)
-            (let [[item-name override] item]
-              (cond
-                (map? override)
-                (let
-                  [{:keys [pre post]} override
-                   [pre post] (mapv parse-talon-token [pre post])]
-                  (talon-command item-name top-menu menu-name pre item-name post))
-                
-                (string? override)
-                (talon-command item-name top-menu menu-name pre override post)))
-          
-            (string? item)
-            (talon-command item top-menu menu-name pre item post)
-          
-            (map? item)
-            (process-menu (assoc item :top-menu menu-name)))
-          )))))
+
+
+(defn flatten-only-lists [coll]
+  (mapcat 
+    (fn [x]
+      (if (list? x)
+        x [x]))
+    coll))
+
+(do
+  (defn process-menu
+    [{:keys [pre post top-menu]
+      :as menu}]
+    (let [menu
+          (-> menu
+            (dissoc :post :pre)
+            first)
+          [menu-name menu-items] menu
+          [pre post] (mapv parse-talon-token [pre post])
+          process-menu-item
+          (fn [menu-item]
+            (cond
+              (vector? menu-item)
+              (let [[item-name override] menu-item]
+                (cond
+                  (map? override)
+                  (let
+                    [{:keys [pre post]} override
+                     [pre post] (mapv parse-talon-token [pre post])]
+                    (talon-command item-name top-menu menu-name pre item-name post))
+                  
+                  (string? override)
+                  (talon-command item-name top-menu menu-name pre override post)))
+              
+              (string? menu-item)
+              (talon-command menu-item top-menu menu-name pre menu-item post)
+              
+              (map? menu-item)
+              (process-menu (assoc menu-item :top-menu menu-name))))]
+      (->> menu-items
+        ;; flatten lists of menu items
+        (mapcat
+          (fn [x]
+            (if (= (type x) clojure.lang.LazySeq)
+              x [x])))
+        (mapv process-menu-item))))
+        
+        
+        (process-menu window-menu))
+
+
+
+
+
+(comment 
+  (->>  
+    (list 
+          {:menu [1 2 3]}
+          ["2" {:a nil
+                :b nil}]
+          (list "3" "4")
+          ["5" "5.5"])
+    flatten-only-lists))
 
 (->> menu-commands
   (map process-menu)
@@ -831,7 +883,7 @@
   (interpose "\n")
   (apply str)
   (str "app.name: Adobe Photoshop (Beta)\napp.name: Adobe Photoshop 2024\n-\n\n")
-  (spit "photoshop/photoshop-menus.talon"))
+  (spit "../photoshop/photoshop-menus.talon"))
 
 (println "wrote ps menu commands talon file")
 
