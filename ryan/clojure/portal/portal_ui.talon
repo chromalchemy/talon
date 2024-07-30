@@ -1,7 +1,7 @@
-title: /portal/
+title: /jvm/
 -
 
-[(open | show)] portal (commands | [command] pallete | [portal] (please | police) [portal]) [<user.text>]:
+([(open | show)] portal (commands | [command] pallete) | [portal] (please | police) [portal] ) [<user.text>]:
     key(ctrl-j)
     sleep(200ms)
     insert(text or "")
@@ -14,7 +14,7 @@ title: /portal/
 [portal] clear | clear portal:
     key(ctrl-l)
 
-focus: 
+portal focus | focus (val | value) : 
     key(ctrl-enter)
 
 [portal] (expand | expanding | unfold) (ink | incremental | inc | next | again): 
