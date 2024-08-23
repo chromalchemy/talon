@@ -1,8 +1,10 @@
 ## ++++++++++++++++++++++ pick open window
 
-pick (win | window) [spotlight]: key(ctrl-up)
-pick (win | window) grid: key(cmd-alt-shift-ctrl-down)
-pick (win | window) (ray | list): 
+pick (win | window | spotlight) [spotlight] | [pick] all (win | windows): key(ctrl-up)
+
+[pick] (win | window) grid: key(cmd-alt-shift-ctrl-down)
+
+[pick] (win | window) (ray | list): 
     key(cmd-space)
     insert("switch windows")
     sleep(100ms)
@@ -12,5 +14,5 @@ pick (win | window) (ray | list):
 
 ## ++++++++++++++++++++++ show desktop .
 
-(show | hide | toggle) desk: key(f11)
+(show | hide | toggle) (desk | desktop): key(f11)
 

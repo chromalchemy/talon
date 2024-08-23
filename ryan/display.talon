@@ -110,7 +110,7 @@ toggle (nightshift | night shift | night light | nat if | system (temperature | 
     n = number * 0.8
     user.betterdisplay_set("gamma=-{n}%")
     
-(screen | display) gamma max:
+(screen | display) (gamma | game) max:
     user.betterdisplay_set("gamma=100%")
 
 ## ++++++++++++++++++++++++++ temperature .

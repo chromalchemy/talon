@@ -12,7 +12,7 @@ pick (code | could) (window | winner | win | [open] project) | pick [open] proje
     user.vscode("workbench.action.switchWindow")
     key(enter)
     
-^(code | could) [(window | winner | win)] (swap | next | last)$:
+^(code | could) [(window | winner | win)] [(swap | next | last)]$:
     user.vscode("workbench.action.switchWindow")
     key(enter)
 
