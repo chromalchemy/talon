@@ -38,10 +38,16 @@ copy  (link | address | url) (point | here)$:
     insert("copy link address")
     key(enter)  
 
-copy  image (point | here)$:
+copy image (point | here)$:
     mouse_click(1)
     sleep(100ms)
     insert("copy image")
+    key(enter)  
+
+copy image address [(point | here)]:
+    mouse_click(1)
+    sleep(100ms)
+    insert("copy image address")
     key(enter)  
     
 
