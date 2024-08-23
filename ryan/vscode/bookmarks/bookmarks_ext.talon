@@ -7,19 +7,38 @@ tag: user.cursorless
 
 #--------------------create bookmarks
 
-(toggle | create | add) [line] bookmark | bookmark line: user.vscode("bookmarks.toggle")
+(toggle | create | add) [line] (bookmark | mark) | (bookmark | mark) line: 
+    user.vscode("bookmarks.toggle")
 
-(remove | delete) bookmark: user.vscode("bookmarks.toggle")
+(remove | delete) (bookmark | mark): 
+    user.vscode("bookmarks.toggle")
 
-bookmark (that | line) (named | labeled): user.vscode("bookmarks.toggleLabeled")
+(bookmark | mark) (that | line) (named | labelled): 
+    user.vscode("bookmarks.toggleLabeled")
 
-bookmark (that | line) [with] [label] <user.text>:
+(bookmark | mark) that$:
+    t= edit.selected_text()
+    user.vscode("bookmarks.toggleLabeled")
+    user.paste(t)
+    sleep(300ms)
+    key(enter)
+
+(bookmark | mark) <user.cursorless_target>:
+    t = user.cursorless_get_text(cursorless_target)
+    user.cursorless_command("setSelection", cursorless_target)
+    sleep(300ms)
+    user.vscode("bookmarks.toggleLabeled")
+    user.paste(t)
+    sleep(300ms)
+    key(enter)
+    
+(bookmark | mark) (that | line) [with] (label | labelled) <user.text>:
     user.vscode("bookmarks.toggleLabeled")
     insert(text)
     sleep(300ms)
     key(enter)
 
-bookmark that [(paste | pace)]:
+(bookmark | mark) that [(paste | pace)]:
     edit.copy()
     user.vscode("bookmarks.toggleLabeled")
     edit.paste()
@@ -37,7 +56,8 @@ bookmark that [(paste | pace)]:
     user.vscode("bookmarks.list")
     insert(text)
 
-[go] (bookmark | mark) [file] <user.text>:
+
+go [file] (bookmark | mark) <user.text>:
     user.vscode("bookmarks.list")
     # sleep(100ms)
     user.paste(text)
@@ -80,13 +100,13 @@ bookmark that [(paste | pace)]:
 
  ## ++++++++++++++++++++ panel bookmark hover .
 
-rename bookmark:
+rename (bookmark | mark):
     mouse_click(1)
     sleep(300ms)
     key(down)
     key(enter)
 
-rename bookmark [<user.text>]:
+rename (bookmark | mark) [<user.text>]:
     mouse_click(1)
     sleep(300ms)
     key(down)
@@ -95,7 +115,7 @@ rename bookmark [<user.text>]:
     sleep(300ms)
     key(enter)
 
-copy bookmark name:
+copy (bookmark | mark) name:
     mouse_click(1)
     sleep(300ms)
     key(down)
