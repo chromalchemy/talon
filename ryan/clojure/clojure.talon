@@ -28,20 +28,39 @@ code.language: clojure
 #     user.code_protected_variable_formatter = "DASH_SEPARATED"
 #     user. testcode_public_variable_formatter = "DASH_SEPARATED"
 
-test notification: app.notify('this is a notification')
+
+test (closure | clojure) [scope]: 
+    # app.notify('hello from clojure code')
+    insert("printing clojure!")
+
+
+## +++++++++++ clear calva repl output .
+
+# todo: not working... 
+# key(cmd-ctrl-alt-shift-k): user.vscode("workbench.action.terminal.clear")
+
+## ___________________________________ .
+
 
 [(closure | clojure)] (token | symbol | simple | sym | sim) {user.clj_symbol}: 
     insert("{clj_symbol}")
 
+## ++++++++++++++++++++ insert keyword .
 
 keyword [<user.text>]: 
-    user.insert_formatted(":{text}", "DASH_SEPARATED")
+    kw = user.formatted_text("{text or ''}", "DASH_SEPARATED")
+    fullkw = ":" + kw
+    insert(fullkw)
     
-slashed keyword [<user.text>]: 
-    user.insert_formatted(":{text}", "NS_SLASH_SEPARATED")
+(slashed | conga) keyword [<user.text>]:
+    kw = user.formatted_text("{text or ''}", "SLASH_SEPARATED")
+    fullkw = ":" + kw
+    insert(fullkw) 
     
-(namespace | namespaced) keyword [<user.text>]: 
-    user.insert_formatted("::{text}", "DASH_SEPARATED")
+(namespace | namespaced | name space) keyword [<user.text>]:
+    kw = user.formatted_text("{text or ''}", "DASH_SEPARATED")
+    fullkw = "::" + kw
+    insert(fullkw)  
 
 open keyword <user.format_code>+: 
     insert(":")
