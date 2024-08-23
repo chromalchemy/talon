@@ -71,14 +71,14 @@ copy block:
 
 ## +++++++++++++++++++ new block below .
 
-paste [new] (block | blocks):
+(paste | pace) [new] (block | blocks) [below]:
     key(cmd-shift-k)
     sleep(700ms)
     key(cmd-v)
     sleep(100ms)
     key(esc)
 
-paste [new] block raw:
+(paste | pace) [new] block [below] raw:
     key(cmd-shift-k)
     sleep(700ms)
     key(shift-cmd-v)

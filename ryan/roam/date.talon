@@ -59,11 +59,13 @@ go yesterday:
 go (next day | day next): 
     key(ctrl-alt-n)
 
-(open | go) [to] (next day | day next) [in] (sidebar | bar):
+# tomorrow not always accurate
+(open | go [to]) (next day | day next | tomorrow) [in] (sidebar | bar):
     user.run_roam_command("go to next day (sidebar)")
-
+# yesterday not always accurate
 go ((prev | previous | last) day | day (prev | previous | last)):  
     key(ctrl-alt-p)
 
-(open | go) [to] ((prev | previous | last) day | day (prev | previous | last))  [in] (sidebar | bar):
+# yesterday not always accurate
+(open | go) [to] ((prev | previous | last) day | day (prev | previous | last) | yesterday)  [in] (sidebar | bar):
     user.run_roam_command("go to previous day (sidebar)")
