@@ -20,3 +20,5 @@ thread last, thread-last.form
 set, set.form
 debug, debug.form
 debug nest, debug-nest.form
+map destructure, map-destructure.mapName
+map destructure no keys, map-destructure-no-keys.mapName

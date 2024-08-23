@@ -13,3 +13,5 @@ thread last, thread-last
 set, set
 debug, debug
 debug nest, debug-nest
+map destructure, map-destructure
+map destructure no keys, map-destructure-no-keys

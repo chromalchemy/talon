@@ -1,10 +1,10 @@
 {
-  "lambda-funk" : {
+  "map-destructure" : {
     "definitions" : [ {
       "scope" : {
         "langIds" : [ "clojure" ]
       },
-      "body" : [ "(fn [$params]\n\t$fnBody)" ]
+      "body" : [ "{:keys [$1] :as $mapName$2}" ]
     } ],
     "description" : "Clj snippet"
   }

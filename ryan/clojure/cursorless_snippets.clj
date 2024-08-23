@@ -191,7 +191,7 @@
 
    {:spoken  "lambda funk"
     :var "fnBody"
-    :template "(fn [$params]\n  $fnBody)"
+    :template "(fn [$params]\n\t$fnBody)"
     :type
     #{:wrap :insert+phrase}}
 
@@ -259,8 +259,19 @@
     :var "form"
     :template "(dbgn $form)"
     :type
+    #{:wrap :insert :insert+phrase}}
+   
+   {:spoken  "map destructure"
+    :var "mapName"
+    :template "{:keys [$1] :as $mapName$2}"
+    :type
+    #{:wrap :insert :insert+phrase}} 
+   
+   {:spoken  "map destructure no keys"
+    :var "mapName"
+    :template "{$1 :as $mapName}"
+    :type
     #{:wrap :insert :insert+phrase}}])
-
 
 
 (comment
