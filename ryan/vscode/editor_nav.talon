@@ -73,21 +73,31 @@ go [to] last nav:
 
 ## +++++++++++++++++ Symbol references .
 
-(find | show) [all] (references | refs):   
+## ++++++++++in left bar .
+
+(find | show | reveal) [all] (references | refs) [in] [left] [bar]:   
     user.vscode("references-view.findReferences")
 
-go [first] (reference | ref): 
-    key(ctrl--)
-
-(go | bar) (references | refs):      
+(go | bar) (references | refs) [bar]:      
     user.vscode("references-view.tree.focus")
 
+## +++++++++++++ inline popup .
+
 # same as below?
-(go to | nav) (references | refs):      
+(go [to] inline | nav [inline]) (reference | references | refs):
     user.vscode("editor.action.goToReferences")
 
-(peek | peak) (reference | references): 
+(peek | peak) [inline] (reference | references | refs):
     user.vscode("editor.action.referenceSearch.trigger")
+
+hide [inline] (reference | references | refs): key(esc)
+
+## ++++++++++ jump to Symbol reference .
+
+(go | jump to) [first] (reference | ref): 
+    key(ctrl--)
+
+## ___________________________________ .
 
 problem show | show problem:               
     user.vscode("workbench.panel.markers.view.focus")
