@@ -423,5 +423,12 @@ rotate clone [<number>]:
 photo new layer:
     user.system_command_nb("open \"/Users/ryan/dev/ps script/scripts/create_layer.psjs\"")
 
- 
+^jpeg <number_small>: 
+    insert(".jpg{number_small}")
 
+^jpeg <number_small> [(file name | filename)] <user.text> :
+    insert("{text}.jpg{number_small}")
+
+^jpeg <number_small> [(file name | filename)] (pace | paste):
+    t = clip.text()
+    insert("{t}.jpg{number_small}")
