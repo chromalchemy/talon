@@ -16,3 +16,10 @@ pick (win | window | spotlight) [spotlight] | [pick] all (win | windows): key(ct
 
 (show | hide | toggle) (desk | desktop): key(f11)
 
+## +++++++ move window to other screen .
+
+move [(win | window)] to (macbook  | laptop | small) [screen]:
+    user.menu_select('Window|Move to Built-in Retina Display')
+
+move [(win | window)] to (acer | main  | large) [screen]:
+    user.menu_select('Window|Move to Acer XF270H B')
