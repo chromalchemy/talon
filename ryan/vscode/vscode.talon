@@ -17,7 +17,7 @@ open workspace (settings | sitting) (json | jay son): user.vscode("workbench.act
 browse (json | jason): user.vscode("vscode-json-editor.start")
 
 ## ++++++++++++++++++++++++ which key menu
-(which | witch) key:        
+(which | witch | please) key:        
     user.vscode("whichkey.show")
 
 ## +++++++++++++++++++++++++ shortcuts .
