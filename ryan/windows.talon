@@ -18,8 +18,8 @@ pick (win | window | spotlight) [spotlight] | [pick] all (win | windows): key(ct
 
 ## +++++++ move window to other screen .
 
-move [(win | window)] to (macbook  | laptop | small) [screen]:
+move [(win | window)] to (macbook  | laptop | small | mac) [(screen | display)]:
     user.menu_select('Window|Move to Built-in Retina Display')
 
-move [(win | window)] to (acer | main  | large) [screen]:
-    user.menu_select('Window|Move to Acer XF270H B')
+move [(win | window)] to (other | big | main  | large | luna) [(screen | display)]:
+    user.menu_select('Window|Move to HP ALL-in-One')
