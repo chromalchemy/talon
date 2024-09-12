@@ -8,21 +8,27 @@ app.name: Code
 
 ## +++++++++++++++++++ primary sidebar .
 
-(toggle | show | view) [left] (sidebar | bar): user.vscode("workbench.action.toggleSidebarVisibility")   
-[left] (bar | sidebar) (toggle | show): user.vscode("workbench.action.toggleSidebarVisibility")
-[left] (sidebar | bar) hide: user.vscode("workbench.action.closeSidebar")
-hide [left] (sidebar | bar): user.vscode("workbench.action.closeSidebar")
+(toggle | show | view) [left] (sidebar | bar) | [left] (bar | sidebar) (toggle | show) | bar left | left bar: 
+    user.vscode("workbench.action.toggleSidebarVisibility")   
+
+(close | hide) [left] (sidebar | bar) | bar [left] hide | left bar hide: 
+    user.vscode("workbench.action.closeSidebar")
 
 ## ++++++++++ left / secondary sidebar .
 
-(toggle | show | hide | view) right (sidebar | bar): user.vscode("workbench.action.toggleAuxiliaryBar")
-
-right (sidebar | bar) (toggle | show | hide): user.vscode("workbench.action.toggleAuxiliaryBar")
-
+right (sidebar | bar) | bar right | (toggle | show) right (sidebar | bar) : 
+    user.vscode("workbench.action.toggleAuxiliaryBar")
+    
+(close | hide) right (sidebar | bar) | bar right hide | right bar hide: 
+    user.vscode("workbench.action.closeAuxiliaryBar")
+ 
 ## +++++++++++++++++++++++++++++ bottom panel .
 
-(toggle | show | hide | view | close) [bottom] panel: user.vscode("workbench.action.togglePanel")
-panel (close | toggle | show | hide | view): user.vscode("workbench.action.togglePanel")
+[(toggle | show | view )] [bottom] panel [view]: 
+    user.vscode("workbench.action.togglePanel")
+    
+panel (close | hide) | (close | hide) panel [view]: 
+    user.vscode("workbench.action.closePanel")
 
 ## ++++++++++++++++++++++++++ zen mode .
 ## ++++++++++++++++++ toggle bars and panel visibility
@@ -44,7 +50,7 @@ panel (close | toggle | show | hide | view): user.vscode("workbench.action.toggl
     user.vscode("workbench.action.toggleSidebarVisibility")
     user.vscode("workbench.action.toggleAuxiliaryBar")
     
-(hide | close) [all] (views | bars | panels) | (focus | only show) (tab | tabs | file) | (focused | focus) (view | mode): 
+(hide | close) [all] (views | bars | panels) | (focus | show) [only] (tab | tabs | file) | (focused | focus) (view | mode): 
     user.vscode("workbench.action.closeSidebar")
     user.vscode("workbench.action.closeAuxiliaryBar")
     user.vscode("workbench.action.closePanel")
@@ -56,25 +62,35 @@ panel (close | toggle | show | hide | view): user.vscode("workbench.action.toggl
 
 ## ++++++++++++++++++++++++ move panel .
 
-[move] panel right: user.vscode("workbench.action.positionPanelRight")
-[move] panel left: user.vscode("workbench.action.positionPanelLeft")
-[move] panel (bottom | down.): user.vscode("workbench.action.positionPanelBottom")
+[move] panel right: 
+    user.vscode("workbench.action.positionPanelRight")
+
+[move] panel left: 
+    user.vscode("workbench.action.positionPanelLeft")
+
+[move] panel (bottom | down | base): 
+    user.vscode("workbench.action.positionPanelBottom")
 
 ## +++++++++++++++ resize  panels .
 
-(panel | term | terminal) (max | min | regular | default): user.vscode("workbench.action.toggleMaximizedPanel")
+(panel | term | terminal) (max | min | regular | default): 
+    user.vscode("workbench.action.toggleMaximizedPanel")
 
  ## +++++++++++++++++ vscode extensions .
 
-bar (extension | extensions | plugins): user.vscode("workbench.view.extensions")
+bar (extension | extensions | plugins): 
+    user.vscode("workbench.view.extensions")
 
-move (view | widget): user.vscode("workbench.action.moveView")
+move (view | widget): 
+    user.vscode("workbench.action.moveView")
 
-reset all view locations: user.vscode("workbench.action.resetViewLocations")
+reset all view locations: 
+    user.vscode("workbench.action.resetViewLocations")
 
 ## +++++++++++++++++++++ swap sidebars .
 
-swap (bars | sidebars) :  user.vscode("workbench.action.toggleSidebarPosition")
+swap (bars | sidebars) :  
+    user.vscode("workbench.action.toggleSidebarPosition")
 
 ## ++++++++++++++++++++++ output panel .
 

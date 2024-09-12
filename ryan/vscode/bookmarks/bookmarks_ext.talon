@@ -7,7 +7,7 @@ tag: user.cursorless
 
 #--------------------create bookmarks
 
-(toggle | create | add) [line] (bookmark | mark) | (bookmark | mark) line: 
+(toggle | create | add | new) [line] (bookmark | mark) | (bookmark | mark) line: 
     user.vscode("bookmarks.toggle")
 
 (remove | delete) (bookmark | mark): 
