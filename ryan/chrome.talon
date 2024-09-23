@@ -113,7 +113,7 @@ tab right:
     sleep(300ms) 
     insert("{text}")
 
-go [(tabs | open tabs | open)] <user.text>:
+go (tabs | open tabs | open) <user.text>:
     key(cmd-shift-a)
     sleep(200ms) 
     insert("{text}")

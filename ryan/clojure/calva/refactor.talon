@@ -15,7 +15,7 @@ thread first:
 thread first all: 
     user.vscode("clojureLsp.refactor.threadFirstAll")
 
-unwind thread: 
+unwind thread | thread unwind: 
     user.vscode("clojureLsp.refactor.unwindThread")
 
 unwind all: 

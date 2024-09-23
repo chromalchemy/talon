@@ -266,6 +266,7 @@ def macro: defmacro
 def method: defmethod
 def multi: defmulti
 def n : defn
+defun: defn
 def once: defonce
 # defprotocol: defprotocol
 # defrecord: defrecord

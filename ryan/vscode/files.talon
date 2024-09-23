@@ -4,12 +4,12 @@ app.name: Code
 kill current file:
     user.vscode("andreas.removeFile")
 
-(hunt |  open | hope and) (file  | filename) [<user.text>]: 
+(hunt |  (open | hope and)) (file  | filename) [<user.text>]: 
     key(cmd-p)
     sleep(100ms)
     insert("{text}")
 
-(hunt |  open | hope and) (file  | filename) [<user.text>] pop: 
+(hunt |  (open | hope and)) (file  | filename) [<user.text>] pop: 
     key(cmd-p)
     sleep(100ms)
     insert("{text}")
