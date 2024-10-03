@@ -6,6 +6,7 @@ list: user.roam_tag
 project: project
 today: today
 week: week
+weak: week
 deadline: deadline 
 
 test: test

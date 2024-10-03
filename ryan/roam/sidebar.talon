@@ -38,7 +38,7 @@ open [this] page [in] sidebar:
 (clear | kill) (sidebar | bar): key(ctrl-l)
 
 
-open {user.roam_tag} [in] sidebar | bar {user.roam_tag}:
+open {user.roam_tag} [in] (sidebar | bar ) | bar {user.roam_tag}:
     key(cmd-u)
     # sleep(100ms)
     insert("{roam_tag}")
