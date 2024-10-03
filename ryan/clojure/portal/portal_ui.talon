@@ -1,6 +1,9 @@
 title: /jvm/
 -
 
+testing portal: 
+    print("test command from portal ui successful")
+
 ([(open | show)] portal (commands | [command] pallete) | [portal] (please | police) [portal] ) [<user.text>]:
     key(ctrl-j)
     sleep(200ms)
@@ -85,7 +88,6 @@ portal [(go | scroll)] bottom:
     key(/)
     sleep(100ms)
     edit.paste()
-    
 
 (toggle | show | hide) (shell | frame): 
     key(ctrl-j)
@@ -94,5 +96,6 @@ portal [(go | scroll)] bottom:
     sleep(100ms)
     key(enter)
 
-
+copy (text | inside):
+    key(shift-c)
 
