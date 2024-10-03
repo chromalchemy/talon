@@ -30,12 +30,12 @@ right (sidebar | bar) | bar right | (toggle | show) right (sidebar | bar) :
 panel (close | hide) | (close | hide) panel [view]: 
     user.vscode("workbench.action.closePanel")
 
-## ++++++++++++++++++++++++++ zen mode .
-## ++++++++++++++++++ toggle bars and panel visibility
-    
+## ++++++++++++++++++++++++++ full screen "zen" mode .
 
 (go | toggle | enter | exit | leave) (in | then | zen | zend | full) mode | zen mode: 
     user.vscode("workbench.action.toggleZenMode")
+
+## ++++++++++++++++++ toggle both left and right bars and panel visibility
 
 (hide | close) [both] (bars | sidebars) | (tab | tabs) wide | wide (view | mode): 
     user.vscode("workbench.action.closeSidebar")
@@ -43,22 +43,24 @@ panel (close | hide) | (close | hide) panel [view]:
 
 #no such commands
 # (show | open) [(both | all)] (bars | sidebars) | stuffed mode: 
-#     user.vscode("workbench.action.openSidebar")Bogus
+#     user.vscode("workbench.action.openSidebar")
 #     user.vscode("workbench.action.openAuxiliaryBar")
 
 (toggle | show | open) [both] (bars | sidebars) | (stuffed | thin | narrow) (view | mode): 
     user.vscode("workbench.action.toggleSidebarVisibility")
     user.vscode("workbench.action.toggleAuxiliaryBar")
-    
-(hide | close) [all] (views | bars | panels) | (focus | show) [only] (tab | tabs | file) | (focused | focus) (view | mode): 
-    user.vscode("workbench.action.closeSidebar")
-    user.vscode("workbench.action.closeAuxiliaryBar")
-    user.vscode("workbench.action.closePanel")
-    
+
+## ++++++++++++++++++ toggle bars and panel visibility
+
 (show | open | toggle) [all] (views | bars | panels) | kit (view | mode): 
     user.vscode("workbench.action.toggleSidebarVisibility")
     user.vscode("workbench.action.toggleAuxiliaryBar")
     user.vscode("workbench.action.togglePanel")
+
+(hide | close) [all] (views | bars | panels) | (focus | show) [only] (tab | tabs | editor | editors) | (focused | focus) (view | mode): 
+    user.vscode("workbench.action.closeSidebar")
+    user.vscode("workbench.action.closeAuxiliaryBar")
+    user.vscode("workbench.action.closePanel")
 
 ## ++++++++++++++++++++++++ move panel .
 
