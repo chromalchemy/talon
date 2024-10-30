@@ -73,6 +73,15 @@ toggle (nightshift | night shift | night light | nat if | system (temperature | 
 [(soft | software)] (brightness | brighten | brightens | Brighton) (full | max):
     user.betterdisplay_set("softwareBrightness=100%")
  
+
+## +++++++++++++++++++++++ adjustments .
+
+(suspend | pause | disable) display [image] adjustments:
+    user.betterdisplay_set("suspendImageAdjustments=on")
+
+(resume | un pause | enable) display [image] adjustments:
+    user.betterdisplay_set("suspendImageAdjustments=off")
+
 ## ++++++++++++++++++++++++++ contrast .
 
 (screen | display) contrast <user.number_string>:
