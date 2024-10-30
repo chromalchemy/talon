@@ -16,33 +16,52 @@ go [to] crown [of] [page]: key(cmd-alt-shift-t)
 # sleep(100ms)
 # key(enter)    
 
-go [to] base [of] [page]: key(cmd-shift-enter)   
 
-next block: key(ctrl-n)
 
-go [page] top: 
-    key(cmd-p)
+next block: 
+    # key(ctrl-n) # doesnt work reliably on broken paragraphs
+    key(esc)
     sleep(100ms)
-    user.paste("jump top")
-    sleep(100ms)
-    key(enter)
+    key(down)
 
-go [page] bottom: 
-    key(cmd-p)
-    sleep(100ms)
-    user.paste("jump bottom")
-    sleep(100ms)
-    key(enter)
+go [to] ([page] top | top [of] [page] | first block [on page]): 
+    key(cmd-shift-t) 
+    # key(cmd-p)
+    # sleep(100ms)
+    # user.paste("jump top")
+    # sleep(100ms)
+    # key(enter)
 
-go back:  key(cmd-[)
-go (forward | fore | ahead):  key(cmd-])
+go [to] ([page] bottom | base [of] [page] | last block [on page]): 
+    key(cmd-shift-enter)
+    # key(cmd-p)
+    # sleep(100ms)
+    # user.paste("jump bottom")
+    # sleep(100ms)
+    # key(enter)       
 
-(zoom | focus) (block  | down): key(cmd-.)
-(zoom | focus) (parent |  up): key(cmd-shift-ctrl-alt-u)
+go back:  
+    key(cmd-[)
 
-go parent [block]: key(ctrl-alt-u)
+go (forward | fore | ahead):  
+    key(cmd-])
+
+go parent [block]: 
+    key(ctrl-alt-u)
     # key(cmd-p)
     # sleep(200ms)
     # insert("go to parent block")
     # sleep(200ms)
     # key(enter)
+
+## ++++++++++++++++++++++++++ node nav .
+
+(zoom | focus) (block  | down): 
+    key(cmd-.)
+
+(zoom | focus) (parent |  up) [block]: 
+    key(cmd-shift-ctrl-alt-u)
+
+(go | jump) next [top] [level] block: 
+    key(ctrl-c)
+    key(ctrl-m)
