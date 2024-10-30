@@ -1,4 +1,4 @@
-app.name: Code
+app: vscode
 -
 
 (choose | pick) [color] theme:       user.menu_select('Code|Settings…|Theme|Color Theme [⌘K ⌘T]')

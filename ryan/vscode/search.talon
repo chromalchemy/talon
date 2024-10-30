@@ -1,4 +1,4 @@
-app.name: Code
+app: vscode
 -
 
 
@@ -43,7 +43,12 @@ bar search fold | (collapse | clap | fold) search [(results | hits)]: user.vscod
 [bar] search [(results | hits)] expand | (expand | unfold) search [(results | hits)]: 
     user.vscode("search.action.expandSearchResults")
 
-## +++++++++++++++++++++++++++++++++  .
+## ++++++++++++++++++++ filter results .
+
+(restrict | filter) [search] results (to | by) folder | (focus | filter) [search] results here:
+    key(alt-shift-f)
+
+## +++++++++++++++++++++++++++++++++  .clear results
 
 bar search (clear | new) | clear search (results | hits) | (new | fresh) [bar] search: 
     user.vscode("search.action.clearSearchResults")

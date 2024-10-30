@@ -1,4 +1,4 @@
-app.name: Code
+app: vscode
 -
 
 kill current file:

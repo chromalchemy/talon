@@ -1,4 +1,4 @@
-app.name: Code
+app: vscode
 -
 
 #todo make this hard prefix operational in vscode

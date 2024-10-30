@@ -1,4 +1,4 @@
-app.name: Code
+app: vscode
 -
 
 (insert | add | make | new) divider [line]: 

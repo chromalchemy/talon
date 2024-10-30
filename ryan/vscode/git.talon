@@ -1,4 +1,4 @@
-app.name: Code
+app: vscode
 -
 
 [pick] git (commands | command | [command] palette | menu): 
@@ -34,9 +34,17 @@ reveal repo:
 
 (bar | hide | show) commits | (arc | bark) emits: 
     user.vscode("gitlens.showCommitsView")
+    
+
 
 fold [all] commits:
     user.vscode("workbench.actions.treeView.gitlens.views.commits.collapseAll")
+
+
+## ++++++++++++++++++++++++++ branches .
+
+(bar | hide | show) branches: 
+    user.vscode("gitlens.showBranchesView")
 
 ## ++++++++++++++++++++++ commit graph .
 

@@ -1,4 +1,4 @@
-app.name: Code
+app: vscode
 -
 
 next (stop | placeholder | place [holder]): 

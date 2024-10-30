@@ -1,4 +1,4 @@
-app.name: Code
+app: vscode
 -
 
 ## +++++++++++++++++++++++++ copy path .
@@ -21,20 +21,30 @@ wrap (words | lines) | toggle (word | line) wrap: user.vscode("editor.action.tog
 reset [(code | app)] zoom:  
     user.vscode("workbench.action.zoomReset")
 
+## ++++++++++++++++++++++++++ mini map 
+
+(toggle | show | hide ) mini map: 
+    user.vscode("editor.action.toggleMinimap")
+
+
+## ++++++++++++++++++ editor font zoom .
+# breaks cursorless hats
+
 Zoom out font | font zoom out:              
     user.vscode("editor.action.fontZoomOut")
 
 Zoom in font | font zoom in:               
     user.vscode("editor.action.fontZoomIn")
 
-(reset | default) font (zoom | size) | font zoom (reset | default): user.vscode("editor.action.fontZoomReset")
-
-(toggle | show | hide ) mini map: user.vscode("editor.action.toggleMinimap")
+(reset | default) font (zoom | size) | font zoom (reset | default): 
+    user.vscode("editor.action.fontZoomReset")
 
 
 ## ++++++++++++++++++++++ font sizes .
 
-(change | switch | tab | editor) (font | text) size: user.vscode("extension.switchFontSize")
+(change | switch | tab | editor) (font | text) size: 
+    user.vscode("extension.switchFontSize")
+
 [(change | switch | tab | editor)] (font | text) [size] <number>: 
     user.vscode("extension.switchFontSize")
     sleep(100ms)

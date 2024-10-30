@@ -1,4 +1,4 @@
-app.name: Code
+app: vscode
 -
 
 expand (selection | take): user.vscode("editor.action.smartSelect.expand")

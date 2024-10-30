@@ -1,4 +1,4 @@
-app.name: Code
+app: vscode
 -
 
 (bar | go | focus) outline$: 

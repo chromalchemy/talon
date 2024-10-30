@@ -1,4 +1,4 @@
-app.name: Code
+app: vscode
 -
 ## ++++++++++++++++ nav vscode windows .
 

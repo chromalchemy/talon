@@ -1,4 +1,4 @@
-app.name: Code
+app: vscode
 -
 
 copy (line | code) (link | address):           

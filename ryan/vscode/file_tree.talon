@@ -1,4 +1,4 @@
-app.name: Code
+app: vscode
 -
 
 ## ++++++++++++++++++ talon-ready file explorer tree
