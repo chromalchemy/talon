@@ -3,7 +3,7 @@ app: vscode
 
 ## +++++++++++++++++++ connect to repl .
 
-(jack in  |  restart) (repl | ripple) | (repl | ripple | grapple)  (jack in | jacket):
+(jack in | jacket) (repl | ripple | grapple) | (repl | ripple | grapple)  (jack in | jacket):
     user.vscode("calva.jackIn")
     sleep(2000ms)
     user.vscode("calva.showOutputTerminal")
