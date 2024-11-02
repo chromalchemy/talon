@@ -16,7 +16,7 @@ app: vscode
 
 ## ++++++++++ left / secondary sidebar .
 
-right (sidebar | bar) | bar right | (toggle | show) right (sidebar | bar) : 
+(right | chat) (sidebar | bar) | bar (right | chat) | (toggle | show) (right | chat) (sidebar | bar) : 
     user.vscode("workbench.action.toggleAuxiliaryBar")
     
 (close | hide) right (sidebar | bar) | bar right hide | right bar hide: 
