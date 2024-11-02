@@ -42,7 +42,8 @@ clear repl history:
 
 #generic?
 (show | open) (output | results) destination:
-    user.vscode("calva.showResultOutputDestination")
+    # user.vscode("calva.showResultOutputDestination")
+    user.run_rpc_command("calva.showResultOutputDestination", "true")
 
 (show | open) [(calva | repl | ripple )] (output | results) [(term | terminal)]:
     user.vscode("calva.showOutputTerminal")
