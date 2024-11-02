@@ -33,11 +33,14 @@ code (line | inline) block | make inline code block:
     sleep(100ms)
     key(esc)
 
-(paste | pace) code [(line | inline)] | code [(line | inline)] (paste | pace):
+(paste | pace) (code [(line | inline)] | [(line | inline)] code ) | code [(line | inline)] (paste | pace):
+    t = clip.text()
+    user.paste("`{t}` ")
+
+(paste | pace) (code [(line | inline)] | [(line | inline)] code ) | code [(line | inline)] (paste | pace) force:
     t = clip.text()
     user.paste("`{t}`")
     key(esc)
- 
 
 ## +++++++++++++++++++++++ code blocks .
 
