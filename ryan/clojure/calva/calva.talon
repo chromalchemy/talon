@@ -21,5 +21,11 @@ tag(): user.tabs
 open calva (documentation | docs):
     user.vscode("calva.openCalvaDocs")
 
-
-
+new [empty] (clojure | closure) file | you close your file: 
+    user.vscode("workbench.action.files.newUntitledFile")
+    sleep(100ms)
+    user.vscode("workbench.action.editor.changeLanguageMode")
+    sleep(100ms)
+    insert("clojure")
+    sleep(100ms)
+    key(enter)
