@@ -121,22 +121,23 @@ evaluate and replace [with result]:
 
 ## +++++++++++++++++ paste last result .
 
-(pace | paste) [last] [repl] (result | output | evaluation | eval): 
+(pace | paste | print) [last] [repl] (result | output | evaluation | eval): 
     user.vscode("calva.copyLastResults")
     edit.paste()
 
-(pace | paste) [last] [repl] (result | output | evaluation | eval) [(to | too | two)] new [(file | editor | tab | window)]: 
+(pace | paste | print) [last] [repl] (result | output | evaluation | eval) [(to | too | two)] new [(file | editor | tab | window | win)]: 
     user.vscode("calva.copyLastResults")
     user.vscode("workbench.action.files.newUntitledFile")
-    sleep(200ms)
-    user.vscode("workbench.action.moveEditorToRightGroup")
+    sleep(100ms)
     user.vscode("workbench.action.editor.changeLanguageMode")
     sleep(100ms)
     insert("clojure")
     sleep(100ms)
     key(enter)
     sleep(100ms)
-    key(enter)
+    # user.vscode("workbench.action.moveEditorToRightGroup")
+    # user.vscode("workbench.action.moveEditorToNextGroup")
+    # sleep(100ms)
     edit.paste()
 
 ## ++++++++++++++++++++++++++++++ misc .
