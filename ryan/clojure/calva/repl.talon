@@ -41,11 +41,14 @@ clear repl history:
 ## +++++++++++++++++++ calva repl output/results terminal (tab) .
 
 #generic?
-(show | open) [results] output destination:
+(show | open) (output | results) destination:
     user.vscode("calva.showResultOutputDestination")
 
 (show | open) [(calva | repl | ripple )] (output | results) [(term | terminal)]:
     user.vscode("calva.showOutputTerminal")
+
+(show | open) [(calva | repl | ripple )] (output | results) (window generic | generic window):
+    user.vscode("calva.showOutputWindow")
 
 #navigate open editors
 
@@ -71,7 +74,7 @@ go [calva] (output | results | repl | ripple) [(term | terminal)]:
 (clear [(it | t | tea)] | clarity) | (clear | dump) [(repl | ripple)] (results | output) [(term | terminal)]:
     user.vscode("workbench.action.terminal.clear")
 
-## +++++++++++++ move terminal output to tab .
+## +++++++++++++ move terminal output to tab or new window .
 
 (open | move) [calva] (output | results | repl | ripple) [(term | terminal)] [(as | to | too | two)] tab:
     user.vscode("calva.showOutputTerminal")
@@ -80,25 +83,28 @@ go [calva] (output | results | repl | ripple) [(term | terminal)]:
     # sleep(300ms)
     user.vscode("workbench.action.closePanel")
 
-
-(open | show | move) [calva] (output | results | repl | ripple) [(term | terminal)] [(as | to | too | two)] window:
+(open | show | move) [calva] (output | results | repl | ripple) [(term | terminal)] (as | to | too | two) [new] window:
     user.vscode("calva.showOutputTerminal")
     sleep(300ms)
     user.vscode("workbench.action.terminal.moveIntoNewWindow")
 
-## +++++++++++ repl results editor tab window.
-
-(focus | go) [(repl | ripple)] (results | output) window: 
-    user.vscode("calva.showOutputWindow")
+## +++++++++++ repl output window (not terminal)    
 
 (show | open) [(repl | ripple)] (results | output) window: 
-    user.vscode("calva.showOutputWindow")
-    sleep(300ms)
-    user.vscode("workbench.action.navigateBack")
+    user.vscode("calva.showReplWindow")
 
+(focus | go) [(repl | ripple)] (results | output) window: 
+    user.vscode("opened-editors.openedEditors")
+    insert("repl.calva-repl")
+    sleep(50ms)
+    key(enter)
+    
 clear [(repl | ripple)] (results | output) window:
-    user.vscode("calva.showOutputWindow")
-    sleep(200ms)
+    user.vscode("opened-editors.openedEditors")
+    insert("repl.calva-repl")
+    sleep(50ms)
+    key(enter)
+    sleep(100ms)
     key(cmd-a)
     key(delete)
     sleep(200ms)
@@ -106,13 +112,20 @@ clear [(repl | ripple)] (results | output) window:
     # user.vscode("workbench.action.navigateBack")
  
 (close | hide) [(repl | ripple)] (results | output) window:
-    user.vscode("calva.showOutputWindow")
-    sleep(200ms)
+    user.vscode("opened-editors.openedEditors")
+    insert("repl.calva-repl")
+    sleep(50ms)
+    key(enter)
+    sleep(100ms)
     user.vscode("workbench.action.closeActiveEditor")
     
 go [(repl | ripple)] (results | output) window top:
-    user.vscode("calva.showOutputWindow")
-    user.vscode("workbench.action.closeActiveEditor")
+    # user.vscode("workbench.action.closeActiveEditor")
+    user.vscode("opened-editors.openedEditors")
+    insert("repl.calva-repl")
+    sleep(50ms)
+    key(enter)
+    sleep(100ms)
     key(cmd-up)
     sleep(200ms)
     user.vscode("workbench.action.navigateBack")
