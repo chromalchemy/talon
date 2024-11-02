@@ -24,62 +24,62 @@
 			"path": "ryan/photoshop/ps_menu_commands.clj",
 			"bookmarks": [
 				{
-					"line": 3,
+					"line": 7,
 					"column": 15,
 					"label": ""
 				},
 				{
-					"line": 169,
+					"line": 173,
 					"column": 14,
 					"label": "type-menu"
 				},
 				{
-					"line": 232,
+					"line": 236,
 					"column": 16,
 					"label": "filter-menu"
 				},
 				{
-					"line": 321,
+					"line": 325,
 					"column": 14,
 					"label": "file-menu"
 				},
 				{
-					"line": 411,
+					"line": 415,
 					"column": 16,
 					"label": "select-menu"
 				},
 				{
-					"line": 441,
+					"line": 445,
 					"column": 14,
 					"label": "view-menu"
 				},
 				{
-					"line": 517,
+					"line": 521,
 					"column": 14,
 					"label": "edit-menu"
 				},
 				{
-					"line": 589,
+					"line": 593,
 					"column": 15,
 					"label": "image-menu"
 				},
 				{
-					"line": 660,
+					"line": 664,
 					"column": 16,
 					"label": "window-menu"
 				},
 				{
-					"line": 746,
+					"line": 750,
 					"column": 18,
 					"label": "menu-commands"
 				},
 				{
-					"line": 765,
+					"line": 769,
 					"column": 19,
 					"label": "talon-command"
 				},
 				{
-					"line": 825,
+					"line": 830,
 					"column": 18,
 					"label": "process-menu"
 				}

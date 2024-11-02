@@ -7,12 +7,12 @@ kill current file:
 (hunt |  (open | hope and)) (file  | filename) [<user.text>]: 
     key(cmd-p)
     sleep(100ms)
-    insert("{text}")
+    insert(text)
 
 (hunt |  (open | hope and)) (file  | filename) [<user.text>] pop: 
     key(cmd-p)
     sleep(100ms)
-    insert("{text}")
+    insert(text)
     sleep(200ms)
     key(enter)
 
