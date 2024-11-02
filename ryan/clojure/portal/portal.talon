@@ -4,5 +4,5 @@ app: vscode
 clear portal | portal clear:
     user.run_repl_snippet("pc")
 
-portal (toggle | hide | show) shell:
+(toggle | hide | show) portal shell:
     user.run_repl_snippet("pts")

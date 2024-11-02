@@ -4,7 +4,7 @@ title: /jvm/
 testing portal: 
     print("test command from portal ui successful")
 
-([(open | show)] portal (commands | [command] pallete) | [portal] (please | police) [portal] ) [<user.text>]:
+([(open | show)] [(portal | port)] (commands | [command] pallete | menu | command) | (portal | port) (please | police)) [<user.text>]$:
     key(ctrl-j)
     sleep(200ms)
     insert(text or "")
