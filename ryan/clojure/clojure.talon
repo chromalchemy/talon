@@ -1,5 +1,9 @@
-code.language: clojure
--
+# code.language: clojure
+# -
+
+cat <user.system_path>:
+    user.run_basilisp(system_path)
+    # insert(system_path)
 
 ##tag(): user.clj_symbol
 

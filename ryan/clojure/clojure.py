@@ -1,3 +1,4 @@
+import subprocess
 from talon import Context, Module, actions, settings
 
 mod = Module()
@@ -40,8 +41,13 @@ mod.list("clj_symbol", "Clojure Symbols")
 #     	"upper case": "upper-case"
 # }
 
-# @ctx.action_class("user")
-# class UserActions:
+@mod.action_class
+class Actions:
+    def run_basilisp(text: str):
+        "demo basilisp fn"
+        print("hello basilisp")
+        # result = subprocess.run(["basilisp", file_path], capture_output=True, text=True)
+        # print(result.stdout)
 
     #uses Andreas snippets fn
     # Function declaration
