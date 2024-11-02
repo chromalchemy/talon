@@ -1,10 +1,36 @@
 app: vscode
 -
 
+# please tab: key(cmd-p)
+# please tab <user.text>:
+#     key(cmd-p)
+#     sleep(100ms)
+#     insert(text) 
+
 ## +++++++++++++++++++++++++++ vscode tab nav .
 # basic tab nav in community core (tab last)
 
 ## +++++++++++++++++++++++++ open tabs .
+
+quick open tab: 
+    user.vscode("workbench.action.quickOpenPreviousRecentlyUsedEditor")
+    
+(pic| pick) open [(tab | tabs | editor | editors)] [<user.text>]:
+    user.vscode("opened-editors.openedEditors")
+    sleep(100ms)
+    insert(text)
+
+(pic| pick) [open] (tab | tabs | editor) [<user.text>]:
+    user.vscode("opened-editors.openedEditors")
+    sleep(100ms)
+    insert(text)
+
+(pic| pick) [open] (tab | editor) [<user.text>] pop:
+    user.vscode("opened-editors.openedEditors")
+    sleep(100ms)
+    insert(text)
+    sleep(100ms)
+    key(enter)
 
 # open last closed tab
 (open | reopen) [last] (closed | close) (tab | editor): 
@@ -30,37 +56,42 @@ pop (forward | fore | four) | go (next | forward | for) used [(editor | tab)] :
 (pop (forward | fore | four) | go (next | forward | for) used [(editor | tab)]) [in] group: 
     user.vscode("workbench.action.openNextRecentlyUsedEditorInGroup")
 
-######## pick to open
+######## pick to open, 
 
-# pick from recently used (open) tabs
-(open | pick [open]) [(used | recent)] (tab | editor):
+# cannot fuzzy filter quickOpen panels
+
+# pick from recently used (open) tabs; 
+(pick | choose) [open] [(used | recent)] (tab | editor):
     user.vscode("workbench.action.quickOpenPreviousRecentlyUsedEditor")
 
 # pick from history of tabs (open or closed)
-(open | pick) ((history | closed | close) (tab | tabs | editor) | (tab | editor) history): 
+(pick | choose) ((closed | close) (tab | tabs | editor) | [from] (tab | editor) history): 
     user.vscode("workbench.action.openPreviousEditorFromHistory")
 
 # pick from least used (open) tab in group
-(pop | go) (least | last) (used | use) (tab | editor) [in] group: 
+(pop | go) least (used | use) (tab | editor) [in] group: 
     user.vscode("workbench.action.quickOpenLeastRecentlyUsedEditorInGroup")
-
 
 ############## toggle btw current and last used 
 
 pop tab:
     user.vscode("workbench.action.quickOpenPreviousRecentlyUsedEditor")
-    sleep(100ms) 
+    sleep(50ms) 
     key(enter)
 
 pop tab [in] group:
     user.vscode("workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup")
-    sleep(100ms) 
+    sleep(50ms) 
     key(enter)
     
 ## +++++++++++++++++++++++++ close tab(s) .
-
 (tab | editor | column) (close | clothes):
     user.vscode("workbench.action.closeActiveEditor")
+
+(tab | editor | column) (close | clothes) (force | without saving) | (chuck | discard) (tab | editor) :
+    user.vscode("workbench.action.closeActiveEditor")
+    sleep(100ms)
+    key(space)
 
 close (pinned  |  pin) (editor | tab):
     user.vscode("workbench.action.closeActivePinnedEditor")
@@ -265,10 +296,14 @@ new [text]  (editor | draft):
 
 ## +++++++++ hide/show tabs in groups .
 
-(show | multiple) tabs:
+show tabs | [show] (multiple | multi) tabs:
     user.vscode("workbench.action.showMultipleEditorTabs")
-    
-(fold | hide | single) tabs | single tab:
+
+# bug?  does the same as hide
+[show] single tab:
+    user.vscode("workbench.action.showEditorTab")
+
+(fold | hide) tabs | single tab:
     user.vscode("workbench.action.hideEditorTabs")
 
     
