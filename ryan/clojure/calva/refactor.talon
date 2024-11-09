@@ -1,6 +1,9 @@
 app: vscode
 -
 
+pick refactor [(function | action)] [here]: 
+    key (cmd-.)
+
 ## +++++++++++ threading refactor cmds .
 
 thread last: 

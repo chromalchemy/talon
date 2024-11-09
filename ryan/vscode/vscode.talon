@@ -1,36 +1,49 @@
 app: vscode
 -
 
-(choose | pick) [color] theme:       user.menu_select('Code|Settings…|Theme|Color Theme [⌘K ⌘T]')
+(choose | pick) [color] theme:
+    user.menu_select('Code|Settings…|Theme|Color Theme [⌘K ⌘T]')
 
-restart ( lsp | ell es pee) [server]: user.vscode("calva.clojureLsp.restart") 
+restart ( lsp | ell es pee) [server]: 
+    user.vscode("calva.clojureLsp.restart") 
     
 please  (go | focus):
     key(cmd-shift-p)
     insert("view focus")
 
 #settings
-open (settings | sitting):  user.vscode("workbench.action.openSettings2")
-open [user] (settings | sitting) (json | jay son): user.vscode("workbench.action.openSettingsJson")
-open workspace (settings | sitting) (json | jay son): user.vscode("workbench.action.openWorkspaceSettingsFile")
+open (settings | sitting):  
+    user.vscode("workbench.action.openSettings2")
 
-browse (json | jason): user.vscode("vscode-json-editor.start")
+open [user] (settings | sitting) (json | jay son): 
+    user.vscode("workbench.action.openSettingsJson")
+
+open workspace (settings | sitting) (json | jay son): 
+    user.vscode("workbench.action.openWorkspaceSettingsFile")
+
+browse (json | jason): 
+    user.vscode("vscode-json-editor.start")
 
 ## ++++++++++++++++++++++++ which key menu
 (which | witch | please) key:        
     user.vscode("whichkey.show")
 
 ## +++++++++++++++++++++++++ shortcuts .
-show shortcuts:             
+(show | (open | hope in)) shortcuts:             
     user.vscode("workbench.action.openGlobalKeybindings")
+
 show shortcuts json:        
     user.vscode("workbench.action.openGlobalKeybindingsFile")
+
+## ++++++++++++++++++++++++++ snippets .
+
 show snippets:              
     user.vscode("workbench.action.openSnippets")
 
 ## ++++++++++++++++++++++++ extensions .
 
-check [for] extension updates | update extensions: user.vscode("workbench.extensions.action.checkForUpdates")
+check [for] extension updates | update extensions: 
+    user.vscode("workbench.extensions.action.checkForUpdates")
 
 (show | go) extension updates:
     user.vscode("workbench.extensions.action.extensionUpdates")
