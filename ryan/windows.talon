@@ -1,20 +1,37 @@
 ## ++++++++++++++++++++++ pick open window
 
-pick (win | window | spotlight) [spotlight] | [pick] all (win | windows): key(ctrl-up)
+## ++++++++++++++++++++++ apple native .
 
-[pick] (win | window) grid: key(cmd-alt-shift-ctrl-down)
+# pick app by modal icon bar
+# bug: not working
+(pick app | pickup) icons:
+    key(cmd:down)
+    key(tab:down)
+
+# app window chooser
+[pick] (app | up) (win | windows) [finder] : 
+    key(ctrl-down)   
+
+## spotlight .
+pick (win | window | spotlight) [(all | spotlight)] | [pick] all (win | windows) | spotlight: 
+    key(ctrl-upPickup)
+
+(show | hide | toggle) (desk | desktop):
+     key(f11)
+
+
+## +++++++++++++++++++ alt-tab utility .
+
+[pick] (win | window) grid: 
+    key(cmd-alt-shift-ctrl-down)
+
+## +++++++++++++++++++++++++++ raycast .
 
 [pick] (win | window) (ray | list): 
     key(cmd-space)
     insert("switch windows")
     sleep(100ms)
     key(enter)
-
-[pick] app (win | windows) [finder] : key(ctrl-down)   
-
-## ++++++++++++++++++++++ show desktop .
-
-(show | hide | toggle) (desk | desktop): key(f11)
 
 ## +++++++ move window to other screen .
 
