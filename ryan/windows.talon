@@ -14,7 +14,7 @@
 
 ## spotlight .
 pick (win | window | spotlight) [(all | spotlight)] | [pick] all (win | windows) | spotlight: 
-    key(ctrl-upPickup)
+    key(ctrl-up)
 
 (show | hide | toggle) (desk | desktop):
      key(f11)
