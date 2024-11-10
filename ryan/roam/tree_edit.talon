@@ -131,16 +131,16 @@ paste (child | kid) [block] raw:
     key(cmd-shift-v)
 
 
-## +++++++ making existing block a child of other block .
+## +++++++ making a block a child of another block .
 
-# make current block a child of one below
+# make current block a child of block below
 block [make] (child | kid) [of] below [block] | kiddo bela:
     key(cmd-shift-down)
     sleep(200ms)
     key(tab)
 
-# slurp block below to a child of current block
-[make] below [block] (child | kid) | slurp (block | below [block]):
+# make block below a child of current block
+[make] below [block] (child | kid) | (slurp | slur) (block | below [block]):
     key(esc)
     sleep(100ms)
     key(down)
@@ -154,7 +154,8 @@ block [make] (child | kid) [of] below [block] | kiddo bela:
     key(tab)
 
 #only works on top level
-slurp ([block] | [below] [block]) [left] ([to] peer):
+# move block below (outside for current nesting level) below current (nested) block... (match indentation)
+slurp [( block | below block )] [left] ([to] peer):
     key(esc)
     sleep(100ms)
     key(down)
