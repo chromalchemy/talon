@@ -1,5 +1,4 @@
-list: user.clj_symbol
--
+# list: clj_symbol
 
 ###  debux
 debug: dbg 

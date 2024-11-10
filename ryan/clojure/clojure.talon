@@ -46,8 +46,8 @@ test (closure | clojure) [scope]:
 ## ___________________________________ .
 
 
-[(closure | clojure)] (token | symbol | simple | sym | sim) {user.clj_symbol}: 
-    insert("{clj_symbol}")
+[(closure | clojure)] (token | symbol | simple | sym | sim) {user.ryan.clojure.symbols.list}: 
+    insert(user.ryan.clojure.symbols.list)
 
 ## ++++++++++++++++++++ insert keyword .
 
