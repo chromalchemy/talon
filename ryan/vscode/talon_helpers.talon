@@ -90,7 +90,8 @@ key(cmd-3):                 mimic("copy action name")
     sleep(100ms)
     key(cmd-up)
 
-
+copy command id: 
+    user.copy_command_id()
 
 
 
