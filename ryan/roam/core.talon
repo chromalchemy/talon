@@ -22,8 +22,6 @@ go all pages:
     sleep(1000ms)
     key(enter) 
 
-jump link: key(ctrl-o)
-
 # community dropdown cmd: 
 # (drop [down] | pick | pic) <number_small>: 
     # key("down:{number_small} enter")

@@ -724,10 +724,10 @@ insert tomorrow:
 
 #add named tag to block
 
-^[(new | now)] tag {user.roam_tag}$: 
-    insert(" #{roam_tag} ")
+^[(new | now)] tag {user.ryan.roam.tags.list}$: 
+    insert(" #{user.ryan.roam.tags.list} ")
 
-(make [block] | tag block | add tag) {user.roam_tag}: 
+(make [block] | tag block | add tag) {user.ryan.roam.tags.list}: 
     edit.select_all()
     s = edit.selected_text()
     insert("{s} #{roam_tag}")

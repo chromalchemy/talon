@@ -5,14 +5,14 @@ mod = Module()
 
 #tag: user.roam
 
-mod.list("roam_tag", desc="Declared Roam tag names")
+# mod.list("roam_tag", desc="Declared Roam tag names")
 
 # @mod.capture(rule="{self.roam_tag}")
 # def one_roam_tag(m) -> str:
 #     "One Roam Tag"
 #     return str(m)
 
-mod.list("roam_ref", desc="Declared Roam reference ids")
+# mod.list("user.ryan.roam.refs.list", desc="Declared Roam reference ids")
 
 # @ctx.action_class("user")
 # class UserActions:

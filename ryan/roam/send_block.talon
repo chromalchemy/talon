@@ -58,51 +58,51 @@ move [(block | blocks)] to [top] [of] [page] (paste | pace | clip):
     sleep(200ms)        
     key(enter tab:2 enter)
 
-move [(block | blocks)] to [top] [of] {user.roam_tag}: 
+move [(block | blocks)] to [top] [of] {user.ryan.roam.tags.list}: 
     key(cmd-alt-m)
     sleep(1500ms)
     key(right)
     sleep(100ms)
-    insert("{roam_tag}")        
+    insert("{user.ryan.roam.tags.list}")        
     sleep(200ms)        
     key(enter tab:2 enter)
 
-[move] <user.letters> [move] (to | two) [top] [of] {user.roam_tag}:
+[move] <user.letters> [move] (to | two) [top] [of] {user.ryan.roam.tags.list}:
     insert(letters)
     sleep(300ms) 
     key(cmd-alt-m)
     sleep(1500ms)
     key(right)
     sleep(100ms)
-    insert("{roam_tag}")        
+    insert("{user.ryan.roam.tags.list}")        
     sleep(200ms)        
     key(enter tab:2 enter)
 
 
-move [(block | blocks)] to [top] [of] {user.roam_tag} (sidebar | bar):
+move [(block | blocks)] to [top] [of] {user.ryan.roam.tags.list} (sidebar | bar):
     user.run_roam_command("mbts")
     sleep(1500ms)
     key(right)
     sleep(100ms)
-    insert("{roam_tag}")        
+    insert("{user.ryan.roam.tags.list}")        
     sleep(200ms)        
     key(enter tab:2 enter)
 
-move [(block | blocks)] to [top] [of] {user.roam_tag} [leave] (ref | reference | rough):
+move [(block | blocks)] to [top] [of] {user.ryan.roam.tags.list} [leave] (ref | reference | rough):
     user.run_roam_command("mbts")
     sleep(1500ms)
     key(right)
     sleep(100ms)
-    insert("{roam_tag}")        
+    insert("{user.ryan.roam.tags.list}")        
     sleep(200ms)        
     key(enter tab:2 enter)
 
-move [(block | blocks)] to [top] [of] {user.roam_tag} [and] (zoom | go [there] | focus):
+move [(block | blocks)] to [top] [of] {user.ryan.roam.tags.list} [and] (zoom | go [there] | focus):
     user.run_roam_command("mbts")
     sleep(1500ms)
     key(right)
     sleep(100ms)
-    insert("{roam_tag}")        
+    insert("{user.ryan.roam.tags.list}")        
     sleep(200ms)        
     key(enter tab:2 enter)
 
@@ -120,21 +120,21 @@ move [(block | blocks)] to (ref | reference | rough) (paste | pace | clip):
 
 # ------------- reference versions
 
-move [(block | blocks)] (to | too | two) {user.roam_ref}: 
+move [(block | blocks)] (to | too | two) {user.ryan.roam.refs.list}: 
     key(cmd-alt-m)
     sleep(1500ms)
     key(tab right)
-    user.paste("{roam_ref}")
+    user.paste("{user.ryan.roam.refs.list}")
     sleep(200ms)        
     key(enter)
     sleep(100ms)        
     key(tab enter)
 
-(send | move) [(block | blocks)] (ref | reference | link) (to | too | two) {user.roam_ref}: 
+(send | move) [(block | blocks)] (ref | reference | link) (to | too | two) {user.ryan.roam.refs.list}: 
     key(cmd-alt-ctrl-m)
     sleep(1500ms)
     key(tab right)
-    user.paste("{roam_ref}")       
+    user.paste("{user.ryan.roam.refs.list}")       
     sleep(200ms)
     key(enter)
     sleep(100ms)       
@@ -155,11 +155,11 @@ move [(block | blocks)] to (paste | pace) (sidebar | bar):
 ## +++++++++++++++++++++++++++++ inbox .
 
 #move to #tag #inbox combo reference
-move [(block | blocks)] to {user.roam_tag} inbox: 
+move [(block | blocks)] to {user.ryan.roam.tags.list} inbox: 
     key(cmd-alt-m)
     sleep(1500ms)
     key(tab right)
-    insert("#{roam_tag} #inbox")
+    insert("#{user.ryan.roam.tags.list} #inbox")
     sleep(200ms)        
     key(enter)
     sleep(100ms)

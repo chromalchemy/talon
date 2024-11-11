@@ -6,44 +6,44 @@ mode: command
 
 #add named tag to block
 
-^[(new | now)] tag {user.roam_tag}$: 
-    insert(" #{roam_tag} ")
+^[(new | now)] tag {user.ryan.roam.tags.list}$: 
+    insert(" #{user.ryan.roam.tags.list} ")
 
 ^[(new | now)] tag {user.abbreviation}$: 
     insert(" #{abbreviation} ")
 
 #keep chooser    
-^[(new | now)] tag ink {user.roam_tag}$: 
-    insert(" #{roam_tag}")
+^[(new | now)] tag ink {user.ryan.roam.tags.list}$: 
+    insert(" #{user.ryan.roam.tags.list}")
 
 ^[(new | now)] tag ink {user.abbreviation}$: 
     insert(" #{abbreviation}")
     
     
-(make [block] | tag block | add tag) {user.roam_tag}: 
+(make [block] | tag block | add tag) {user.ryan.roam.tags.list}: 
     edit.select_all()
     s = edit.selected_text()
-    insert("{s} #{roam_tag}")
+    insert("{s} #{user.ryan.roam.tags.list}")
     sleep(300ms)
     key(enter)
 
 ## +++++++++++++++++++++ multiple tags .
 
-^[(new | now  |  multi )] (tags | tax) {user.roam_tag} [and] {user.roam_tag}$: 
-    insert(" #{roam_tag_1} #{roam_tag_2} ")
+^[(new | now  |  multi )] (tags | tax) {user.ryan.roam.tags.list} [and] {user.ryan.roam.tags.list}$: 
+    insert(" #{user.ryan.roam.tags.list_1} #{user.ryan.roam.tags.list_2} ")
 
 
-^[(new | now  |  multi )] (tags | tax) {user.roam_tag} [and] {user.roam_tag} [and] {user.roam_tag}$: 
-    insert(" #{roam_tag_1} #{roam_tag_2} #{roam_tag_3} ")
+^[(new | now  |  multi )] (tags | tax) {user.ryan.roam.tags.list} [and] {user.ryan.roam.tags.list} [and] {user.ryan.roam.tags.list}$: 
+    insert(" #{user.ryan.roam.tags.list_1} #{user.ryan.roam.tags.list_2} #{user.ryan.roam.tags.list_3} ")
 
-^[(new | now | multi )] (tags | tax) {user.roam_tag} [and] {user.roam_tag} [and] {user.roam_tag} [and] {user.roam_tag}$: 
-    insert(" #{roam_tag_1} #{roam_tag_2} #{roam_tag_3} #{roam_tag_4} ")
+^[(new | now | multi )] (tags | tax) {user.ryan.roam.tags.list} [and] {user.ryan.roam.tags.list} [and] {user.ryan.roam.tags.list} [and] {user.ryan.roam.tags.list}$: 
+    insert(" #{user.ryan.roam.tags.list_1} #{user.ryan.roam.tags.list_2} #{user.ryan.roam.tags.list_3} #{user.ryan.roam.tags.list_4} ")
 
-^[(new | now | multi )] (tags | tax) {user.roam_tag} [and] {user.roam_tag}$: 
-    insert(" #{roam_tag_1} #{roam_tag_2} ")
+^[(new | now | multi )] (tags | tax) {user.ryan.roam.tags.list} [and] {user.ryan.roam.tags.list}$: 
+    insert(" #{user.ryan.roam.tags.list_1} #{user.ryan.roam.tags.list_2} ")
 
-^[(new | now | multi )] (tags | tax) {user.roam_tag} [and] {user.roam_tag} [and] {user.roam_tag}$: 
-    insert(" #{roam_tag_1} #{roam_tag_2} #{roam_tag_3} ")
+^[(new | now | multi )] (tags | tax) {user.ryan.roam.tags.list} [and] {user.ryan.roam.tags.list} [and] {user.ryan.roam.tags.list}$: 
+    insert(" #{user.ryan.roam.tags.list_1} #{user.ryan.roam.tags.list_2} #{user.ryan.roam.tags.list_3} ")
 
 #turn local text into tag
 
@@ -119,28 +119,3 @@ mode: command
     insert("[[{t}")
     sleep(300ms)
     key(enter)
-
-
-
-## +++++++++++++ block reference links .
-
-dub paren: insert("((")
-
-[new] ((([block] (reference | ref) | back) [link]) | backlink): 
-    insert("((")
-    
-((([block] (reference | ref) | back) [link]) | backlink) that: 
-    insert("((")
-
-((([block] (reference | ref) | back) [link]) | backlink) word: 
-    edit.select_word()
-    insert("((")
-
-
-[new] ((([block] (reference | ref) | back) [link]) | backlink) <user.text>:
-    insert("((")
-    insert(text)
-    # sleep(100ms)
-    # user.select_last_phrase()
-    # key(left delete)
-    # edit.word_right()

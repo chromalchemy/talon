@@ -38,10 +38,10 @@ open [this] page [in] sidebar:
 (clear | kill) (sidebar | bar): key(ctrl-l)
 
 
-open {user.roam_tag} [in] (sidebar | bar ) | bar {user.roam_tag}:
+open {user.ryan.roam.tags.list} [in] (sidebar | bar ) | bar {user.ryan.roam.tags.list}:
     key(cmd-u)
     # sleep(100ms)
-    insert("{roam_tag}")
+    insert("{user.ryan.roam.tags.list}")
     sleep(500ms)
     key(shift-enter)
 
