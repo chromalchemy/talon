@@ -27,7 +27,7 @@ go [first] child [block]:
 
 ## +++++++++++ page top/bottom
 
-go [to] ([page] top | top [of] [page] | first block [on page]): 
+go [to] ([page] (top | crown) | (top | crown) [of] [page] | first block [on page]): 
     key(cmd-shift-t) 
     # user.run_roam_command("jump top")
 

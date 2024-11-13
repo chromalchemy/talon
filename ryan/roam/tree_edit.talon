@@ -15,7 +15,7 @@ copy block:
 ## ++++++++++++++++++++++++ kill block .
 
 # only for use when cursor is inside block
-(delete | kill | remove) [whole] block | block delete: 
+(delete | kill | remove | chuck) [whole] block | block delete: 
     # key(cmd-backspace)
     key(esc)
     key(delete)
@@ -23,7 +23,7 @@ copy block:
     key(down)
 
 # kill highlighted block(s)
-((delete | kill | remove) [(highlighted | selected | these)] [(multiple | multi)] blocks)| (delete | kill | remove) (highlighted | selected) block: 
+((delete | kill | remove | chuck) [(highlighted | selected | these)] [(multiple | multi)] blocks)| (delete | kill | remove | chuck) (highlighted | selected) block: 
     key(delete)
 
 

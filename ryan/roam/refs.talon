@@ -44,7 +44,6 @@ dub paren | [new] ((([block] (reference | ref) | back) [link]) | backlink) [that
     key(enter)
 
 
-
 ## +++++++++++++++++++++++ replace reference (swap)
 
 ^(replace | swap) (ref | reference) [with original]: 

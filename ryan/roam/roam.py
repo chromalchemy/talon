@@ -16,12 +16,12 @@ mod = Module()
 
 # @ctx.action_class("user")
 # class UserActions:
-@mod.action_class
+@mod.action_class   
 class Actions:
     def run_roam_command(text: str):
         """Run Command from command palette"""
         actions.key("cmd-p")
-        actions.sleep("100ms")
+        actions.sleep("50ms")
         actions.user.paste(text)
-        actions.sleep("100ms")
+        actions.sleep("50ms")
         actions.key("enter")
