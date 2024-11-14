@@ -4,41 +4,59 @@ app: vscode
 #todo make this hard prefix operational in vscode
 (number  | numb) <user.number_string>: "{number_string}"
 
-######## clone lines
-clone string:
-    s = edit.selected_text()
-    insert("[{s}")
-    key(delete space)
-    sleep(100ms)
-    insert("{s}")
-    sleep(100ms)
+## clone string,  for ps config edn?
+# clone string photo:
+#     s = edit.selected_text()
+#     insert("[{s}")
+#     key(delete space)
+#     sleep(100ms)
+#     insert("{s}")
+#     sleep(100ms)
     # key(delete)
 
-# Native vscode move form commands
+## +++++++++++ Native vscode move form .
+#move form defined in calva.talon
 
 code move up: key(alt-up)
 code move down: key(alt-down)
 
-##### general edit commands
-
-[(show | go)] (context menu [(here | curse | cursor)]) | menu (curse | cursor):
-    user.vscode("editor.action.showContextMenu")
-
-menu point: 
-    mouse_click(1)
+ ## +++++++++++++ general edit commands .
 
 #delete line
 kill (line | lines) | killing | k line | cline: user.vscode("editor.action.deleteLines")
+
+## ++++++++++++++++++++++++ break line .
 
 break <user.cursorless_target>:
     user.cursorless_command("setSelectionBefore", cursorless_target)
     user.vscode("hideSuggestWidget")
     key("enter")
     
-break:
+break [line]:
     user.vscode("hideSuggestWidget")
     key("enter")
 
-^complete: user.vscode("editor.action.triggerSuggest")
-^complete inline: user.vscode("editor.action.inlineSuggest.trigger")
+
+## +++++++++++++ inline context popups .
+
+show ([(code | token)] hint | (function | fun) (signature | parameters | params)):
+    user.vscode("editor.action.triggerParameterHints")
+
+## +++++++++++++++++++++++ completions .
+
+^complete: 
+    user.vscode("editor.action.triggerSuggest")
+
+^complete inline: 
+    user.vscode("editor.action.inlineSuggest.trigger")
  
+trim [line] (whitespace | white | space):
+    user.vscode("editor.action.trimTrailingWhitespace")
+
+## +++++++++++++++++ refactor commands .
+
+refactor that | pick refactor [action]:
+    user.vscode("editor.action.refactor")
+
+refactor rename:
+    user.vscode("editor.action.rename")

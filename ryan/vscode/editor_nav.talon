@@ -1,7 +1,15 @@
 app: vscode
 -
 
-## ++++++++ go to top (of nested) form .
+## ++++++++++++++++++ pop context menu .
+
+[(show | go)] (context menu [(here | curse | cursor)]) | menu (curse | cursor):
+    user.vscode("editor.action.showContextMenu")
+
+[context] menu (point | here): 
+    mouse_click(1)
+
+## ++++++++ nav top level (of nested) forms .
 
 # todo:  vscode and cursorless cops to implement this  
 
@@ -23,16 +31,6 @@ go top form end | post top form:
     sleep(100ms)
     key(down enter)
     user.vscode("paredit.forwardSexp")
-
-## +++++++++++++++++ back/forward form .
-
-#move form defined in calva.talon
-
-(go [to] | pick) symbol:    user.vscode("workbench.action.gotoSymbol")
-
-symbol last:                user.vscode("gotoNextPreviousMember.previousMember")
-symbol next:                user.vscode("gotoNextPreviousMember.nextMember")
-
 
 ## ++++++++++++++++++ traverse recent edit location
 
@@ -71,41 +69,90 @@ go [to] last nav:
     user.vscode("workbench.action.navigateToLastNavigationLocations")
 
 
+## +++++++++++++++++++++++ nav tli symbols .
+
+(go [to] | pick) symbol:    
+    user.vscode("workbench.action.gotoSymbol")
+
+symbol last:                
+    user.vscode("gotoNextPreviousMember.previousMember")
+    
+symbol next:                
+    user.vscode("gotoNextPreviousMember.nextMember")
+
+
 ## +++++++++++++++++ Symbol references .
 
-## ++++++++++in left bar .
+## ++++++++++ symbol refs in left bar .
 
-(find | show | reveal) [all] (references | refs) [in] [left] [bar]:   
-    user.vscode("references-view.findReferences")
 
-(go | bar) (references | refs) [bar]:      
+(find | show | reveal | list) [all] (references | refs) [in] [left] [bar]:   
+    user.vscode("references-view.find")
+    # user.vscode("references-view.findReferences")
+
+bar (references | refs) | (go | focus) (references | refs) bar:      
     user.vscode("references-view.tree.focus")
 
-## +++++++++++++ inline popup .
+#works in search and references bars
 
-# same as below?
-(go [to] inline | nav [inline]) (reference | references | refs):
+[go] next (bar | list) (referenc | ref): 
+    user.vscode("references-view.next")
+
+[go] last (bar | list) (referenc | ref): 
+    user.vscode("references-view.prev")
+
+# ++++ symbol refs call stack, in left bar
+
+[(show | go)] [symbol] call (hierarchy | stack):
+    user.vscode("references-view.showCallHierarchy")
+    # key(alt-shift-h)
+
+## +++++++++++++  symbol refs nav, and inline  popup .
+
+## jumps  to first ref of current symbol if there is only one same file, otherwise pops inline peek refs view
+(go | jump) [to] (reference | ref) | (go | nav) [to] [inline] (references | refs):
     user.vscode("editor.action.goToReferences")
+
+(go | jump) [to] first (reference | ref):
+    user.vscode("editor.action.goToReferences")
+    sleep(50ms)
+    key(down enter)
 
 (peek | peak) [inline] (reference | references | refs):
     user.vscode("editor.action.referenceSearch.trigger")
 
-hide [inline] (reference | references | refs): key(esc)
+[go] next (reference | ref): 
+    user.vscode("goToNextReference")
 
-## ++++++++++ jump to Symbol reference .
+[go] last (reference | ref): 
+    user.vscode("goToPreviousReference")
 
-(go | jump to) [first] (reference | ref): 
-    key(ctrl--)
+(hide | close) [inline] (reference | references | refs): key(esc)
 
-## ___________________________________ .
+## +++++++++++++++++ symbol definition .
+
+(go | jump to) (def | deaf | definition | depth) :
+    user.vscode("editor.action.revealDefinition")
+
+(def | deaf | definition | depth) (peek | peak) | (peek | peak) (def | deaf | definition | depth) :
+    user.vscode("editor.action.peekDefinition")
+
+[(show | reveal)] (def | deaf | definition | depth) [(to | in)] (new | side | other) [(editor | tab | group)]:
+    user.vscode("editor.action.revealDefinitionAside")
+
+## ___________________________________ problems .
 
 problem show | show problem:               
     user.vscode("workbench.panel.markers.view.focus")
 
-[(show | go)] call (hierarchy | stack):
-    key(alt-shift-h)
-    # user.vscode("references-view.showCallHierarchy")
+next problem :
+    user.vscode("editor.action.marker.nextInFiles")
 
+last problem:
+    user.vscode("editor.action.marker.prevInFiles")
+
+fix problem:
+    user.vscode("problems.action.showQuickFixes")
 
 ## ++++++++++++++++ jump to line .
 

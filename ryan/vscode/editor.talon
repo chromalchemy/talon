@@ -1,5 +1,7 @@
 app: vscode
 -
+#  editor display options
+# not actually editing code
 
 ## +++++++++++++++++++++++++ copy path .
 
@@ -79,7 +81,6 @@ hide (scope | scopes) (visualizer | viz):
 
 change [code] [editor | tab] language [mode]:
     user.vscode("workbench.action.editor.changeLanguageMode") 
-
 
 (toggle | show | hide ) (whitespace | white space):
     user.vscode("editor.action.toggleRenderWhitespace")
