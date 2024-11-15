@@ -2,50 +2,28 @@ app.name: Roam Research
 mode: command
 -
 
-## +++++++++++++++++++++ block folding .
-
 (fold | close | hide (children | kids)) block: 
     key(cmd-up)
 (unfold | open | show (children | kids)) block: 
     key(cmd-down)
 
-(collapse | fold) tree: 
-    key(cmd-p)
-    sleep(100ms)
-    user.paste("collapse current block tree")
-    sleep(100ms)
-    key(enter)
+(collapse | fold) tree:
+    user.run_roam_command("collapse current block tree") 
 
 #only exands one leve deep (not recursive)
 (expand | unfold) block:
-    key(cmd-p)
-    sleep(100ms)
-    user.paste("Expand current block tree")
-    sleep(100ms)
-    key(enter)
+    user.run_roam_command("Expand current block tree")
     
 (collapse | fold) all [blocks]: 
-    key(cmd-p)
-    sleep(100ms)
-    user.paste("collapse all blocks on page")
-    sleep(100ms)
-    key(enter)
+    user.run_roam_command("collapse all blocks on page")
     
-(expand | unfold) all [blocks]: 
-    key(cmd-p)
-    sleep(100ms)
-    user.paste("expand all blocks on page")
-    sleep(100ms)
-    key(enter)
+(expand | unfold) all [blocks]:
+    user.run_roam_command("expand all blocks on page") 
 
 #working kind of inconsistanly
 #how to take a digit, do math on in, then use as key
 (expand | fold) all [blocks] <number_small>: 
     mynumber = number_small + 1
-    key(cmd-p)
-    sleep(100ms)
-    user.paste("wb expand/collapse block tree")
-    sleep(100ms)
-    key(enter)
+    user.run_roam_command("wb expand/collapse block tree")
     sleep(500ms)
     key("{mynumber}")
