@@ -14,6 +14,8 @@ app: vscode
 #     sleep(100ms)
     # key(delete)
 
+
+
 ## +++++++++++ Native vscode move form .
 #move form defined in calva.talon
 
@@ -23,7 +25,13 @@ code move down: key(alt-down)
  ## +++++++++++++ general edit commands .
 
 #delete line
-kill (line | lines) | killing | k line | cline: user.vscode("editor.action.deleteLines")
+(chuck | kill) lines | (kill line | killing | k line | cline): 
+    user.vscode("editor.action.deleteLines")
+
+(chuck | kill) lines point | (kill line | killing | k line | cline) point:
+    key(shift:down)
+    mouse_click(0) 
+    user.vscode("editor.action.deleteLines")
 
 ## ++++++++++++++++++++++++ break line .
 
