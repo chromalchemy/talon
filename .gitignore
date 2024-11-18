@@ -10,3 +10,4 @@ py.env
 env.py
 clojure/.lsp/
 .calva/
+ryan/clojure/string-fns/.lsp/
