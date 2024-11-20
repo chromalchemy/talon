@@ -37,30 +37,88 @@ panel (close | hide) | (close | hide) panel [view]:
 
 ## ++++++++++++++++++ toggle both left and right bars and panel visibility
 
-(hide | close) [both] (bars | sidebars) | (tab | tabs) wide | wide (view | mode): 
-    user.vscode("workbench.action.closeSidebar")
-    user.vscode("workbench.action.closeAuxiliaryBar")
-
 #no such commands
 # (show | open) [(both | all)] (bars | sidebars) | stuffed mode: 
 #     user.vscode("workbench.action.openSidebar")
 #     user.vscode("workbench.action.openAuxiliaryBar")
 
-(toggle | show | open) [both] (bars | sidebars) | (stuffed | thin | narrow) (view | mode): 
+# (toggle | show | open) [left] (bars | sidebars) | (stuffed | thin | narrow) (view | mode): 
+#     user.vscode("workbench.action.toggleSidebarVisibility")
+#     user.vscode("workbench.action.toggleAuxiliaryBar")
+
+
+(toggle | show | open) [both] (bars | sidebars) | (stuffed | thin | narrow | bar | bars ) (view | mode): 
     user.vscode("workbench.action.toggleSidebarVisibility")
     user.vscode("workbench.action.toggleAuxiliaryBar")
 
+(hide | close) [both] (bars | sidebars) | (tab | tabs) wide | wide (view | mode): 
+    user.vscode("workbench.action.closeSidebar")
+    user.vscode("workbench.action.closeAuxiliaryBar")
+
 ## ++++++++++++++++++ toggle bars and panel visibility
 
-(show | open | toggle) [all] (views | bars | panels) | kit (view | mode): 
+(show | open | toggle) [all] (views | bars | panels) | kit (view | mode):
+    user.vscode("workbench.action.closeSidebar")
+    user.vscode("workbench.action.closeAuxiliaryBar")
+    user.vscode("workbench.action.closePanel") 
+    sleep(200ms)
     user.vscode("workbench.action.toggleSidebarVisibility")
     user.vscode("workbench.action.toggleAuxiliaryBar")
     user.vscode("workbench.action.togglePanel")
 
-(hide | close) [all] (views | bars | panels) | (focus | show) [only] (tab | tabs | editor | editors) | (focused | focus) (view | mode): 
+(hide | close) [all] (views | bars | panels) | (focus | show) [only] [on] (tab | tabs | editor | editors) | (focus | show) [only] on code | (focused | focus) (view | mode | win | window ): 
     user.vscode("workbench.action.closeSidebar")
     user.vscode("workbench.action.closeAuxiliaryBar")
     user.vscode("workbench.action.closePanel")
+
+## ++++++++++++++++++++ focus and snap .
+
+focus [and] [snap] [(win | window)] <user.window_snap_position>:
+    user.vscode("workbench.action.closeSidebar")
+    user.vscode("workbench.action.closeAuxiliaryBar")
+    user.vscode("workbench.action.closePanel")
+    user.snap_window(window_snap_position)
+
+## ++++++++++++ only left or right bar or panel .
+
+only show left bar | left bar only | left mode:
+    user.vscode("workbench.action.closeSidebar")
+    user.vscode("workbench.action.closeAuxiliaryBar")
+    user.vscode("workbench.action.closePanel")
+    user.vscode("workbench.action.toggleSidebarVisibility")
+
+only show right bar | right bar only | right mode:
+    user.vscode("workbench.action.closeSidebar")
+    user.vscode("workbench.action.closeAuxiliaryBar")
+    user.vscode("workbench.action.closePanel")
+    user.vscode("workbench.action.toggleAuxiliaryBar")
+
+only show panel | panel only | panel mode:
+    user.vscode("workbench.action.closeSidebar")
+    user.vscode("workbench.action.closeAuxiliaryBar")
+    user.vscode("workbench.action.closePanel")
+    user.vscode("workbench.action.togglePanel")
+
+## ++++++++++++ only left or right bar .
+
+(left bar | bar left) and panel [only] | left panel (mode | view):
+    user.vscode("workbench.action.closeSidebar")
+    user.vscode("workbench.action.closeAuxiliaryBar")
+    user.vscode("workbench.action.closePanel")
+    user.vscode("workbench.action.toggleSidebarVisibility")
+    user.vscode("workbench.action.togglePanel")
+
+(right bar | bar right) [and] panel [only] | right panel (mode | view):
+    user.vscode("workbench.action.closeSidebar")
+    user.vscode("workbench.action.closeAuxiliaryBar")
+    user.vscode("workbench.action.closePanel")
+    user.vscode("workbench.action.toggleAuxiliaryBar")
+    user.vscode("workbench.action.togglePanel")
+
+
+## ++++++++++ open panels and snap max .
+#just use command composition
+
 
 ## ++++++++++++++++++++++++ move panel .
 
