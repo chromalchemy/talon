@@ -33,10 +33,11 @@ pick (win | window | spotlight) [(all | spotlight)] | [pick] all (win | windows)
     sleep(100ms)
     key(enter)
 
-## +++++++ move window to other screen .
+## +++++++ move windows to/from displays .
+    
+# (other | big | main | (ext | external) | large)
+move [(win | window)] to  {user.ryan.display_name.list}  [(screen | display)]:
+    user.menu_select("Window|Move to {user.ryan.display_name.list}")
 
 move [(win | window)] to (macbook  | laptop | small | mac) [(screen | display)]:
     user.menu_select('Window|Move to Built-in Retina Display')
-
-move [(win | window)] to (other | big | main  | large | luna) [(screen | display)]:
-    user.menu_select('Window|Move to HP ALL-in-One')
