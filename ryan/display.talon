@@ -76,6 +76,28 @@ toggle (nightshift | night shift | night light | nat if | system (temperature | 
 [{user.ryan.display_name.list}] [(soft | software)] (brightness | brighten | brightens | Brighton) (full | max):
     user.betterdisplay_set("softwareBrightness=100%", "{user.ryan.display_name.list or 'default'}")
  
+
+## +++++++++++++++ brightness defaults .
+
+[macbook] [(display | screen)] (brightness | brightens) default [library]:
+    user.betterdisplay_set("hardwareBrightness=100%", "default")
+    sleep(700ms)
+    user.betterdisplay_set("softwareBrightness=51%", "default")
+
+[(lib | library | hp)] [(display | screen)] (brightness | brightens) default library: 
+    user.betterdisplay_set("hardwareBrightness=100%", "HP ALL-in-One")
+    sleep(700ms)
+    user.betterdisplay_set("softwareBrightness=66%", "HP ALL-in-One")
+
+both (screen | screens | display | displays) (brightness | brightens) (default | defaults) library: 
+    user.betterdisplay_set("hardwareBrightness=100%", "default")
+    sleep(800ms)
+    user.betterdisplay_set("softwareBrightness=51%", "default")
+    sleep(800ms)
+    user.betterdisplay_set("hardwareBrightness=100%", "HP ALL-in-One")
+    sleep(800ms)
+    user.betterdisplay_set("softwareBrightness=66%", "HP ALL-in-One")
+
 ## +++++++++++++++++++++++ adjustments .
 
 [{user.ryan.display_name.list}] (suspend | pause | disable) (screen | display) [image] adjustments:
