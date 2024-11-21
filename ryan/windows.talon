@@ -34,10 +34,11 @@ pick (win | window | spotlight) [(all | spotlight)] | [pick] all (win | windows)
     key(enter)
 
 ## +++++++ move windows to/from displays .
+
+move [(win | window)] to (macbook | laptop | small | mac [book]) [(screen | display)]:
+    user.menu_select('Window|Move to Built-in Retina Display')
     
 # (other | big | main | (ext | external) | large)
 move [(win | window)] to  {user.ryan.display_name.list}  [(screen | display)]:
     user.menu_select("Window|Move to {user.ryan.display_name.list}")
-
-move [(win | window)] to (macbook  | laptop | small | mac) [(screen | display)]:
-    user.menu_select('Window|Move to Built-in Retina Display')
+    
