@@ -1,6 +1,10 @@
 app: vscode
 -
 
+
+bar (repos | repositories): 
+    user.vscode("gitlens.showRepositoriesView")
+
 [pick] git (commands | command | [command] palette | menu): 
     user.vscode("gitlens.gitCommands")
 
@@ -23,22 +27,36 @@ fold [all] sources:
 reveal repo:
     user.vscode("gitlens.views.revealRepositoryInExplorer")
 
-
 ## +++++++++++++++++++++++++++ remotes .
 
 (show | view | bar | go) remotes: 
     user.vscode("gitlens.views.remotes.focus")
 
+toggle remotes:
+    user.vscode("gitlens.views.remotes.toggleVisibility")
 
 ## +++++++++++++++++++++++++++ commits .
 
 (bar | hide | show) commits | (arc | bark) emits: 
     user.vscode("gitlens.showCommitsView")
     
-
-
+reveal commit:
+    user.vscode("gitlens.revealCommitInView")
+        
 fold [all] commits:
     user.vscode("workbench.actions.treeView.gitlens.views.commits.collapseAll")
+
+(search | find) (commits | commit): 
+    user.vscode("gitlens.showCommitSearch")
+
+show [git lens] commit graph:
+    user.vscode("gitlens.showGraph")
+
+(bar commit | (arc | bark) emit) graph: 
+    user.vscode("workbench.scm.history.focus")
+
+show search [and] compare commits [view]:
+    user.vscode("gitlens.showSearchAndCompareView")
 
 
 ## ++++++++++++++++++++++++++ branches .
