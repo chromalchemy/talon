@@ -1,3 +1,3 @@
 app.name: Adobe Photoshop (Beta)
-app.name: Adobe Photoshop 2024
+app.name: Adobe Photoshop 2025
 -

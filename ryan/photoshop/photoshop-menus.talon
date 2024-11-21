@@ -1,5 +1,5 @@
 app.name: Adobe Photoshop (Beta)
-app.name: Adobe Photoshop 2024
+app.name: Adobe Photoshop 2025
 -
 
 New Layer: user.menu_select('Layer|New|Layer...')
