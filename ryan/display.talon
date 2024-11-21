@@ -84,12 +84,12 @@ toggle (nightshift | night shift | night light | nat if | system (temperature | 
     sleep(700ms)
     user.betterdisplay_set("softwareBrightness=51%", "default")
 
-[(lib | library | hp)] [(display | screen)] (brightness | brightens) default library: 
+[(lib | library | hp)] [(display | screen)] (brightness | brightens) default: 
     user.betterdisplay_set("hardwareBrightness=100%", "HP ALL-in-One")
     sleep(700ms)
     user.betterdisplay_set("softwareBrightness=66%", "HP ALL-in-One")
 
-both (screen | screens | display | displays) (brightness | brightens) (default | defaults) library: 
+library (all | both) [(screen | screens | display | displays)] (brightness | brightens) (default | defaults): 
     user.betterdisplay_set("hardwareBrightness=100%", "default")
     sleep(800ms)
     user.betterdisplay_set("softwareBrightness=51%", "default")
