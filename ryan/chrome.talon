@@ -120,10 +120,21 @@ go (tabs | open tabs | open) <user.text>:
     sleep(100ms)
     key(enter)
 
-([go] other | swap) profile [(window | win)]: 
-    key(cmd-shift-m)
-    sleep(100ms)
-    key(down enter)
+## ++++++++++++++++++++ change profile .
+
+go (my | ryan | personal) (profile | browser | browse | brass): 
+    user.menu_select('Profiles|ryan')
+    
+go (get bit | gb | getbit | work ) (profile | browser | browse | brass):
+    user.menu_select('Profiles|Ryan (ryan@getbitoutdoors.com)')
+
+pick profile: 
+    user.chrome_mod("shift-m")
+
+# ([go] other | swap) profile [(window | win)]:
+#     user.chrome_mod("shift-m") 
+#     sleep(100ms)
+#     key(down enter)
 
 ## +++++++++++++++++ find text on page .
 
