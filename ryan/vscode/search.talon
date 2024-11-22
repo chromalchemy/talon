@@ -1,8 +1,6 @@
 app: vscode
 -
 
-
-
 ## ++++++++++++++++++++++++ search bar .
 
 bar search <user.text>:
@@ -38,7 +36,13 @@ bar search tree | search (results | hits) tree:
 bar search list | search (results | hits) list:            
     user.vscode("search.action.viewAsList")
 
-bar search fold | (collapse | clap | fold) search [(results | hits)]: user.vscode("search.action.collapseSearchResults")
+[bar] search fold | (collapse | clap | fold) search [(results | result | hits)]: 
+    user.vscode("search.action.collapseSearchResults")
+
+([bar] search fold | (collapse | clap | fold) search [(results | result | hits)]) (top [level] [items] | max): 
+    user.vscode("search.action.collapseSearchResults") 
+    user.vscode("search.action.collapseSearchResults")
+    user.vscode("search.action.collapseSearchResults")
 
 [bar] search [(results | hits)] expand | (expand | unfold) search [(results | hits)]: 
     user.vscode("search.action.expandSearchResults")
