@@ -18,11 +18,18 @@ kill current file:
 
 ## +++++++++++++++++++++++++++++++++ file explorer
 
-(show | reveal) file [in] [(explore | explorer)] | bar file: user.vscode("workbench.files.action.showActiveFileInExplorer")
+(show | reveal) file [in] [(explore | explorer)] | bar (file | files): 
+    user.vscode("workbench.files.action.showActiveFileInExplorer")
 
-(show | reveal) [file] [in] (finder | files): user.vscode("revealFileInOS")
+(fold | collapse) ((explore | Explorer) [folders] | [bar] files): 
+    user.vscode("workbench.files.action.collapseExplorerFolders")
 
-(fold | collapse) (explore | Explorer) [(bar | view)] [folders]: user.vscode("workbench.files.action.collapseExplorerFolders")
+(fold | collapse) ((explore | Explorer) [folders] | [bar] files) [to] top [level] [folders]: 
+    user.vscode("workbench.files.action.collapseExplorerFolders")
+    user.vscode("workbench.files.action.collapseExplorerFolders")
+
+(show | reveal) [file] [in] (finder | files): 
+    user.vscode("revealFileInOS")
 
 #use axkit command
 # (show | reveal) file [in] finder:
