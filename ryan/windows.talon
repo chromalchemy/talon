@@ -35,10 +35,20 @@ pick (win | window | spotlight) [(all | spotlight)] | [pick] all (win | windows)
 
 ## +++++++ move windows to/from displays .
 
-move [(win | window)] to (macbook | laptop | small | mac [book]) [(screen | display)]:
-    user.menu_select('Window|Move to Built-in Retina Display')
+show screen (numbers | number):
+    user.screens_show_numbering()
+
+# deprecated these applescript menue commands for community snap versions
+
+# move [(win | window)] to (macbook | laptop | small | mac [book]) [(screen | display)]:
+#     user.menu_select('Window|Move to Built-in Retina Display')
     
-# (other | big | main | (ext | external) | large)
-move [(win | window)] to  {user.ryan.display_name.list}  [(screen | display)]:
-    user.menu_select("Window|Move to {user.ryan.display_name.list}")
+# # (other | big | main | (ext | external) | large)
+# move [(win | window)] to  {user.ryan.display_name.list}  [(screen | display)]:
+#     user.menu_select("Window|Move to {user.ryan.display_name.list}")
     
+# move [(win | window)] to {user.ryan.display_name.list}  [(screen | display)] <user.window_snap_position>:
+#     user.menu_select("Window|Move to {user.ryan.display_name.list}")
+#     sleep(300ms)
+#     user.snap_window(user.window_snap_position)
+
