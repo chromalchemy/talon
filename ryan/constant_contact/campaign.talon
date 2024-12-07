@@ -1,10 +1,8 @@
 app: chrome
 title: /app.constantcontact.com/pages/campaign/
 -
-
-(go | click) [mark] {user.cc_edit_mark}:
-    # insert("{cc_edit_mark}")
-    user.rango_run_action_on_reference("clickElement", "{cc_edit_mark}")
+(go | click) [mark] {user.ryan.constant_contact.edit_mark.list}:
+    user.rango_run_action_on_reference("clickElement", "{user.ryan.constant_contact.edit_mark.list}")
 
 
 paste link:

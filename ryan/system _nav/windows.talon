@@ -19,7 +19,6 @@ pick (win | window | spotlight) [(all | spotlight)] | [pick] all (win | windows)
 (show | hide | toggle) (desk | desktop):
      key(f11)
 
-
 ## +++++++++++++++++++ alt-tab utility .
 
 [pick] (win | window) grid: 
@@ -44,11 +43,11 @@ show screen (numbers | number):
 #     user.menu_select('Window|Move to Built-in Retina Display')
     
 # # (other | big | main | (ext | external) | large)
-# move [(win | window)] to  {user.ryan.display_name.list}  [(screen | display)]:
-#     user.menu_select("Window|Move to {user.ryan.display_name.list}")
+# move [(win | window)] to  {user.ryan.display.display_name.list}  [(screen | display)]:
+#     user.menu_select("Window|Move to {user.ryan.display.display_name.list}")
     
-# move [(win | window)] to {user.ryan.display_name.list}  [(screen | display)] <user.window_snap_position>:
-#     user.menu_select("Window|Move to {user.ryan.display_name.list}")
+# move [(win | window)] to {user.ryan.display.display_name.list}  [(screen | display)] <user.window_snap_position>:
+#     user.menu_select("Window|Move to {user.ryan.display.display_name.list}")
 #     sleep(300ms)
 #     user.snap_window(user.window_snap_position)
 

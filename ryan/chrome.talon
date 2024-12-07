@@ -122,10 +122,10 @@ go (tabs | open tabs | open) <user.text>:
 
 ## ++++++++++++++++++++ change profile .
 
-go (my | ryan | personal) (profile | browser | browse | brass): 
+go (my | ryan | personal) (profile | browser | browse | brass) | browse (ryan | personal): 
     user.menu_select('Profiles|ryan')
     
-go (get bit | gb | getbit | work ) (profile | browser | browse | brass):
+go (get bit | gb | getbit | work ) (profile | browser | browse | brass) | browse (get bit | gb | getbit | work ):
     user.menu_select('Profiles|Ryan (ryan@getbitoutdoors.com)')
 
 pick profile: 

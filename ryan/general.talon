@@ -29,6 +29,7 @@ then: skip()
 #no op prefix commant to prime dictation to recieve next text without Clipping first  syllable
 ^now: skip()
 
+
 # paste date template
 date [string] <user.number_string> [plus] <user.number_string>: 
     insert("{number_string_1}/{number_string_2}")
