@@ -1,7 +1,6 @@
 app.name: Adobe Photoshop (Beta)
 app.name: Adobe Photoshop 2025
 -
-
 New Layer: user.menu_select('Layer|New|Layer...')
 New Background from Layer: user.menu_select('Layer|New|Background from Layer')
 New Group: user.menu_select('Layer|New|Group...')
@@ -493,7 +492,7 @@ Migrate Presets: user.menu_select('Edit|Presets|Migrate Presets')
 Remote Connection settings: user.menu_select('Edit|Remote Connections...')
 [edit] Color Settings: user.menu_select('Edit|Color Settings...')
 Convert to Profile: user.menu_select('Edit|Convert to Profile...')
-[edit] Keyboard Shortcuts: user.menu_select('Edit|Keyboard Shortcuts...')
+[go] [edit] [keyboard] shortcuts: user.menu_select('Edit|Keyboard Shortcuts...')
 edit Menus: user.menu_select('Edit|Menus...')
 edit Toolbar: user.menu_select('Edit|Toolbar...')
 Start Dictation: user.menu_select('Edit|Start Dictation')

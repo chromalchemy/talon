@@ -3,5 +3,6 @@
  :deps {cheshire/cheshire                   {:mvn/version "5.11.0"}
         com.amperity/separator              {:mvn/version "0.2.0"}
         camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.3"} 
-        babashka/fs {:mvn/version "0.5.20"}}
+        babashka/fs {:mvn/version "0.5.20"}
+        org.clojure/data.xml {:mvn/version "0.0.8"}}
  :aliases {}}

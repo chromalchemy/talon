@@ -1,5 +1,61 @@
 (ns ps-menu-commands
-  (:require [clojure.string :as string]))
+  (:require [clojure.string :as string]
+            [clojure.data.xml :as xml]
+            [clojure.edn :as edn]
+            [clojure.java.io :as io]
+            ))
+
+(defn read-edn-file [file-path]
+  (with-open [reader (io/reader file-path)]
+    (edn/read {:eof nil} 
+      (java.io.PushbackReader. reader))))
+
+(comment 
+  (read-edn-file "../photoshop/ps_keys.edn" ))
+
+(defn xml-to-edn [xml-file #_output-file]
+  (let [parsed-xml (xml/parse (io/input-stream xml-file))]
+    parsed-xml
+    #_(spit output-file (pr-str parsed-xml))))
+
+(comment 
+  (let 
+    [parse-thing
+     (fn [x]
+       (let [{:keys [content attrs]}
+             (into {} x)
+             inner-thing
+             (->> content
+               (map
+                 (fn [y]
+                   (if (string? y)
+                     {:keys y}
+                     (let [{:keys [attrs content]}
+                           (into {} y)]
+                       {
+                        ;; :attrs2 attrs ;; all empty
+                        :keys (first content)})))))]
+         (merge 
+           attrs
+           (first inner-thing)
+           )))]
+    (->>
+      (xml-to-edn "../photoshop/ps keys.xml")
+      :content
+      (take 102)
+      (map parse-thing)
+      #_(map count)
+      #_(map :cmd)
+      #_(map 
+        #(map count %))
+      flatten
+      ;; (map :attrs2)
+     #_(distinct)
+      (filter 
+        #(string/includes? (:name %) "Others"))
+      
+      )))
+
 
 (def layer-menu
   {"Layer"
@@ -582,7 +638,7 @@
     ["Remote Connections..." "Remote Connection settings"]
     ["Color Settings..." {:pre "[edit]"}]
     "Convert to Profile..."
-    ["Keyboard Shortcuts..." {:pre "[edit]"}]
+    ["Keyboard Shortcuts..." "[go] [edit] [keyboard] shortcuts"]
     ["Menus..." {:pre "edit"}]
     ["Toolbar..." {:pre "edit"}]
     "Start Dictation"]})
@@ -876,16 +932,50 @@
           ["5" "5.5"])
     flatten-only-lists))
 
+
+ 
+(def nl "\n")
+
+(defn strs->lines [& line-strs]
+  (apply str (interpose nl line-strs)))
+
+(defn strs->lines-padded [& line-strs]
+  (str (apply strs->lines line-strs) nl))
+
+(comment
+  [(strs->lines "hello" "world")
+   (->> (strs->lines-padded "hello" "world")
+     #_(println))]
+  )
+
+(def ps-beta-app-name
+  "Adobe Photoshop (Beta)")
+(def ps-app-name
+  "Adobe Photoshop 2025")
+
+(def ps-path "../photoshop/")
+
+(defn write-ps-menu-file! [text]
+  (spit (str ps-path "photoshop-menus.talon") text)
+  (println "wrote ps menu commands talon file"))
+
+(def header
+     (strs->lines-padded
+       (str "app.name: " ps-beta-app-name)
+       (str "app.name: " ps-app-name)
+       "-"))
+
+(defn composite-talon-text [talon-line-strings]
+  (let [body
+        (apply strs->lines talon-line-strings)]
+    (str header body)))
+
 (->> menu-commands
   (map process-menu)
-  #_(repeat 5)
-  flatten
-  (interpose "\n")
-  (apply str)
-  (str "app.name: Adobe Photoshop (Beta)\napp.name: Adobe Photoshop 2024\n-\n\n")
-  (spit "../photoshop/photoshop-menus.talon"))
+  (flatten)
+  (composite-talon-text)
+  (write-ps-menu-file!))
 
-(println "wrote ps menu commands talon file")
 
 ;; How many commands !?
 (comment
