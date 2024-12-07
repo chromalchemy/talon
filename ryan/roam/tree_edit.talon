@@ -165,8 +165,55 @@ slurp [( block | below block )] [left] ([to] peer):
     key(cmd-up)
 
 
- ## ++++++++++++++++++++ new block back .
-    
+ ## ++++++++++++++++++++ new block .
+
+## +++++++++++++ # Insert block above, .
+[(new | insert)] block (up | above): key(cmd-shift-i)
+
+## +++++++++++++ # Insert block below, .
+
+# skips  take here   
+[(new | insert)] block [(down | below)]: key(cmd-shift-k)
+
+## ++++++++++++ block back .
+
+new block back: 
+    # key(cmd-shift-k)
+    # sleep(300ms)
+    # key(down)
+    key(cmd-a)
+    sleep(50ms)
+    key(right)
+    key(enter)
+    sleep(50ms)
+    key(shift-tab)
+
+new block way back: 
+    # key(cmd-shift-k)
+    # sleep(300ms)
+    # key(down)
+    key(cmd-a)
+    sleep(50ms)
+    key(right)
+    key(enter)
+    sleep(50ms)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+    key(shift-tab)
+    sleep(100ms)
+
 #todo: copy implementation from block all the way back
 new base block:
     key(cmd-a)
@@ -182,40 +229,7 @@ new base block:
     sleep(100ms)
     key(shift-tab)
 
-## +++++++++++++ # Insert block above, .
-[(new | insert)] block (up | above): key(cmd-shift-i)
-
-## +++++++++++++ # Insert block below, .
-
-# skips  take here   
-[(new | insert)] block [(down | below)]: key(cmd-shift-k)
-
-new block back: 
-    key(cmd-shift-k)
-    sleep(300ms)
-    key(down shift-tab)
-
-new block way back: 
-    key(cmd-shift-k)
-    sleep(300ms)
-    key(down)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-
+    
 #todo use new block down instead of going to end and enter in all of these commends
 
 ## ++++++++++++++++++++++++++++ split/break block .

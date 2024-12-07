@@ -35,3 +35,7 @@ go block start:
 (clear | chuck) (block end | rest of block ):
     key(shift-end delete)
 
+clear block | (clear | chuck) [block] all [block] [text]:
+    key(cmd-a)
+    sleep(100ms)
+    key(delete)

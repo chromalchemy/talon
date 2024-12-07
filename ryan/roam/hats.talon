@@ -18,10 +18,10 @@ hide hats:
 
 ((deep | do you ) grab | go)  <user.number_key>:
     key(number_key)
-    sleep(100ms)
-    key(enter)
+    # sleep(100ms)
+    # key(enter)
 
-((deep | do you ) grab | go) single  <user.number_key>:
+((deep | do you ) grab | go) (single | small)  <user.number_key>:
     key(number_key)
     
 ((deep | do you ) grab | go) <user.number_key> <user.number_key>:
@@ -32,8 +32,9 @@ hide hats:
     sleep(100ms)
     key(enter)
 
-((deep | do you ) grab | go) single  <user.letter>:
-    key("{letter}")
+
+((deep | do you ) grab | go) (single | small)  <user.letter>:
+    key(user.letter)
     
 ((deep | do you ) grab | go)  <user.letter> <user.letter>:
     key("{letter_1} {letter_2}")
@@ -58,7 +59,7 @@ hide hats:
     sleep(300ms)
     key(cmd-up)
 
-(fold | collapse) single  <user.number_key>:
+(fold | collapse) (single | small)  <user.number_key>:
     key(number_key)
     sleep(300ms)
     key(cmd-up)
@@ -77,7 +78,7 @@ hide hats:
     sleep(300ms)
     key(cmd-up)
 
-(fold | collapse) single  <user.letter>:
+(fold | collapse) (single | small)  <user.letter>:
     key("{letter}")
     sleep(300ms)
     key(cmd-up)
@@ -110,7 +111,7 @@ hide hats:
     sleep(300ms)
     key(cmd-down)
 
-(unfold | expand) single  <user.number_key>:
+(unfold | expand) (single | small)  <user.number_key>:
     key(number_key)
     sleep(300ms)
     key(cmd-down)
@@ -129,7 +130,7 @@ hide hats:
     sleep(300ms)
     key(cmd-down)
 
-(unfold | expand) single  <user.letter>:
+(unfold | expand) (single | small)  <user.letter>:
     key("{letter}")
     sleep(300ms)
     key(cmd-down)
@@ -165,7 +166,7 @@ hide hats:
     sleep(300ms)
     key(cmd-.)
 
-(zoom | focus) single  <user.number_key>:
+(zoom | focus) (single | small)  <user.number_key>:
     key(number_key)
     sleep(300ms)
     key(cmd-.)
@@ -184,7 +185,7 @@ hide hats:
     sleep(300ms)
     key(cmd-.)
 
-(zoom | focus) single  <user.letter>:
+(zoom | focus) (single | small)  <user.letter>:
     key("{letter}")
     sleep(300ms)
     key(cmd-.)
