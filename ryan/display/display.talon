@@ -2,7 +2,7 @@
 (print display [name] | prentice play name) [{user.ryan.display.display_name.list}]:
     user.betterdisplay_print_display_name("{user.ryan.display.display_name.list or 'default'}")
 
-open display panel: 
+open (display | displays) panel: 
     key(cmd-space)
     sleep(300ms)
     insert("displays")
@@ -24,24 +24,28 @@ dark mode off | light mode | (exit | leave) dark mode:
 [make | set] (nightshift | (night | nat) (shift | if | light) | system | macbook) [(temperature | temp)] <user.number_string>:
     user.betterdisplay_set("nightShiftValue=0.{number_string}", "default")
 
-(nightshift | night shift | night light | nat if) [(temperature | temp)] up <user.number_string>:
+(nightshift | (night | nat) (shift | if | light) | system | macbook) [(temperature | temp)] up <user.number_string>:
     user.betterdisplay_set("nightShiftValue=0.{number_string} --offset", "default")
 
-(nightshift | night shift | night light | nat if) [(temperature | temp)] down <user.number_string>:
+(nightshift | (night | nat) (shift | if | light) | system | macbook) [(temperature | temp)] down <user.number_string>:
     user.betterdisplay_set("nightShiftValue=-0.{number_string} --offset", "default")
-    
 
-[make | set] (nightshift | night shift | night light | nat if | system | macbook) [(temperature | temp)] (max | full | [one] hundred | 100):
+
+
+[make | set] (nightshift | (night | nat) (shift | if | light) | system | macbook) [(temperature | temp)] (max | full | [one] hundred | 100):
     user.betterdisplay_set("nightShiftValue=1", "default")
 
-toggle (nightshift | night shift | night light | nat if | system (temperature | temp)):
-    user.betterdisplay_toggle("nightShift", "default")
+[make | set] (nightshift | (night | nat) (shift | if | light) | system | macbook) [(temperature | temp)] default:
+    user.betterdisplay_set("nightShiftValue=0.50", "default")
 
-(nightshift | night shift | night light | nat if) [(temperature | temp)] on:
-    user.betterdisplay_set("nightShift=on", "default")
+# toggle (nightshift | night (shift  |  ship) | night light | nat if | system (temperature | temp)):
+#     user.betterdisplay_toggle("nightShift", "default")
 
-(nightshift | night shift | night light | nat if) [(temperature | temp)] off:
-    user.betterdisplay_set("nightShift=off", "default")
+# (nightshift | night (shift  |  ship) | night light | nat if) [(temperature | temp)] on:
+#     user.betterdisplay_set("nightShift=on", "default")
+
+# (nightshift | night (shift  |  ship) | night light | nat if) [(temperature | temp)] off:
+#     user.betterdisplay_set("nightShift=off", "default")
 
 # user.system_command_nb("nightlight toggle")
 
@@ -100,10 +104,10 @@ library (all | both) [(screen | screens | display | displays)] (brightness | bri
 
 ## +++++++++++++++++++++++ adjustments .
 
-[{user.ryan.display.display_name.list}] (suspend | pause | disable) (screen | display) [image] adjustments:
+[{user.ryan.display.display_name.list}] (suspend | pause | disable | turn off) (screen | display) [image] adjustments:
     user.betterdisplay_set("suspendImageAdjustments=on", "{user.ryan.display.display_name.list or 'default'}")
 
-[{user.ryan.display.display_name.list}] (resume | un pause | enable) (screen | display) [image] adjustments:
+[{user.ryan.display.display_name.list}] (resume | un pause | enable | turn on) (screen | display) [image] adjustments:
     user.betterdisplay_set("suspendImageAdjustments=off", "{user.ryan.display.display_name.list or 'default'}")
 
 ## ++++++++++++++++++++++++++ contrast .
