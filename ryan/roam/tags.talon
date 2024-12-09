@@ -1,4 +1,4 @@
-# app.name: Roam Research 
+app.name: Roam Research 
 mode: command
 -
 
