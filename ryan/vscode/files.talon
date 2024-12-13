@@ -18,7 +18,10 @@ kill current file:
 
 ## +++++++++++++++++++++++++++++++++ file explorer
 
-(show | reveal) file [in] [(explore | explorer)] | bar (file | files): 
+bar (file | files): 
+    user.vscode("workbench.files.action.focusFilesExplorer")
+
+(show | reveal) file [in] [(explore | explorer)]: 
     user.vscode("workbench.files.action.showActiveFileInExplorer")
 
 (fold | collapse) ((explore | Explorer) [folders] | [bar] files): 
