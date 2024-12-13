@@ -1,6 +1,9 @@
 app.name: Adobe Photoshop (Beta)
 app.name: Adobe Photoshop 2025
 -
+generate images:
+    user.menu_select('File|Automate|Generator Plugins|Image Assets')
+
 
 ## +++++++++++++++ open and save files .
 

@@ -408,15 +408,16 @@
       "Data Sets as Files..."
       ["Paths to Illustrator..." {:pre "[export]"}]
       "Render Video..."]}
-    {"Generate"
-     [["Image Assets" "generate (images | image assets)"]]}
+
     "Search Adobe Stock..."
     "Search Adobe Express Templates..."
     "Place Embedded..."
     "Place Linked..."
     "Package..."
     {"Automate"
-     ["Batch..."
+     [#_{"Generator Plugins"
+       [["Image Assets" "generate (images | image assets)"]]}
+      "Batch..."
       "PDF Presentation..."
       "Create Droplet..."
       "Crop and Straighten Photos"

@@ -297,7 +297,6 @@ export Color Lookup Tables: user.menu_select('File|Export|Color Lookup Tables...
 Data Sets as Files: user.menu_select('File|Export|Data Sets as Files...')
 [export] Paths to Illustrator: user.menu_select('File|Export|Paths to Illustrator...')
 Render Video: user.menu_select('File|Export|Render Video...')
-generate (images | image assets): user.menu_select('File|Generate|Image Assets')
 File Search Adobe Stock: user.menu_select('File|Search Adobe Stock...')
 File Search Adobe Express Templates: user.menu_select('File|Search Adobe Express Templates...')
 File Place Embedded: user.menu_select('File|Place Embedded...')
