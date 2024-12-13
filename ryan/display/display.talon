@@ -38,14 +38,14 @@ dark mode off | light mode | (exit | leave) dark mode:
 [make | set] (nightshift | (night | nat) (shift | if | light) | system | macbook) [(temperature | temp)] default:
     user.betterdisplay_set("nightShiftValue=0.50", "default")
 
-# toggle (nightshift | night (shift  |  ship) | night light | nat if | system (temperature | temp)):
-#     user.betterdisplay_toggle("nightShift", "default")
+toggle (nightshift | night (shift  |  ship) | night light | nat if | system (temperature | temp)):
+    user.betterdisplay_toggle("nightShift", "default")
 
-# (nightshift | night (shift  |  ship) | night light | nat if) [(temperature | temp)] on:
-#     user.betterdisplay_set("nightShift=on", "default")
+(nightshift | night (shift  |  ship) | night light | nat if) [(temperature | temp)] on:
+    user.betterdisplay_set("nightShift=on", "default")
 
-# (nightshift | night (shift  |  ship) | night light | nat if) [(temperature | temp)] off:
-#     user.betterdisplay_set("nightShift=off", "default")
+(nightshift | night (shift  |  ship) | night light | nat if) [(temperature | temp)] off:
+    user.betterdisplay_set("nightShift=off", "default")
 
 # user.system_command_nb("nightlight toggle")
 
@@ -102,6 +102,9 @@ library (all | both) [(screen | screens | display | displays)] (brightness | bri
     sleep(800ms)
     user.betterdisplay_set("softwareBrightness=66%", "HP ALL-in-One")
 
+[(ace | acer)] [(display | screen)] [(brightness | brightens)] default: 
+    user.betterdisplay_set("softwareBrightness=50%", "Acer XF270H B")
+
 ## +++++++++++++++++++++++ adjustments .
 
 [{user.ryan.display.display_name.list}] (suspend | pause | disable | turn off) (screen | display) [image] adjustments:
@@ -117,7 +120,6 @@ library (all | both) [(screen | screens | display | displays)] (brightness | bri
 
 [{user.ryan.display.display_name.list}] (screen | display) contrast negative <user.number_string>:
     user.betterdisplay_set("contrast=-{number_string}%", "{user.ryan.display.display_name.list or 'default'}") 
-
 
 [{user.ryan.display.display_name.list}] (screen | display) contrast max:
     user.betterdisplay_set("contrast=90%", "{user.ryan.display.display_name.list or 'default'}")
