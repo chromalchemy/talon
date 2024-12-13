@@ -1,8 +1,6 @@
 app: chrome
 -
 tag(): browser
-
-
     
 #open js bookmarklet links (parses page for input data)
 
@@ -36,21 +34,9 @@ tag(): browser
     sleep(100ms)
     key(tab enter)
 
-# constant contact editor
-email (add block | adblock | insert | paste) link: 
-    mouse_click(0)
-    sleep(100ms)
-    key(down)
-    key(enter)
-    sleep(100ms)
-    edit.select_all()
-    edit.paste()
-    sleep(30ms)
-    key(enter)
     
 (paste | pace | insert) get bit address: 
     insert("https://getbitoutdoors.com")
-
 
 # go (variations | Variance | variants):
 #     user.rango_run_action_on_reference("clickElement", "variations")

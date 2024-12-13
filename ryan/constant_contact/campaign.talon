@@ -4,6 +4,16 @@ title: /app.constantcontact.com/pages/campaign/
 (go | click) [mark] {user.ryan.constant_contact.edit_mark.list}:
     user.rango_run_action_on_reference("clickElement", "{user.ryan.constant_contact.edit_mark.list}")
 
+# email (add block | adblock | insert | paste) link: 
+#     mouse_click(0)
+#     sleep(100ms)
+#     key(down)
+#     key(enter)
+#     sleep(100ms)
+#     edit.select_all()
+#     edit.paste()
+#     sleep(30ms)
+#     key(enter)
 
 paste link:
     user.rango_run_action_on_reference("clickElement", "link")
