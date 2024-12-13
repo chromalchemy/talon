@@ -10,7 +10,7 @@ mode: command
 (block | move) up: key(cmd-shift-up)
 (block | move) down: key(cmd-shift-down)
 (block | move) (in | (right | write) | forward | fore | four): key(tab)
-(block | move) (out | left | back): key(shift-tab)
+(block | move) (out | left | back): user.roam_block_back(1)
 
 ## ++++++++++++++++ move block to DNP date (str)
 
@@ -114,8 +114,7 @@ move [(block | blocks)] to (ref | reference | rough) (paste | pace | clip):
     key(tab right)
     edit.paste()
     sleep(300ms)        
-    key(enter)
-    sleep(100ms)
+    user.roam_break_block()
     key(tab enter)
 
 # ------------- reference versions
@@ -126,8 +125,7 @@ move [(block | blocks)] (to | too | two) {user.ryan.roam.refs.list}:
     key(tab right)
     user.paste("{user.ryan.roam.refs.list}")
     sleep(200ms)        
-    key(enter)
-    sleep(100ms)        
+    user.roam_break_block()        
     key(tab enter)
 
 (send | move) [(block | blocks)] (ref | reference | link) (to | too | two) {user.ryan.roam.refs.list}: 
@@ -136,8 +134,7 @@ move [(block | blocks)] (to | too | two) {user.ryan.roam.refs.list}:
     key(tab right)
     user.paste("{user.ryan.roam.refs.list}")       
     sleep(200ms)
-    key(enter)
-    sleep(100ms)       
+    user.roam_break_block()       
     key(tab enter)
 
 ## +++++++++++++++++++ move to sidebar .
@@ -148,8 +145,7 @@ move [(block | blocks)] to (paste | pace) (sidebar | bar):
     key(right)
     edit.paste()
     sleep(200ms)
-    key(enter)
-    sleep(100ms)       
+    user.roam_break_block()       
     key(tab enter)
 
 ## +++++++++++++++++++++++++++++ inbox .
@@ -161,6 +157,5 @@ move [(block | blocks)] to {user.ryan.roam.tags.list} inbox:
     key(tab right)
     insert("#{user.ryan.roam.tags.list} #inbox")
     sleep(200ms)        
-    key(enter)
-    sleep(100ms)
+    user.roam_break_block()
     key(tab enter)

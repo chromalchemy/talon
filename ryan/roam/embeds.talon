@@ -4,8 +4,7 @@
 embed (block | ref | reference):
     insert("/embed")
     sleep(100ms)
-    key(enter)
-    sleep(100ms)
+    user.roam_break_block()
     key(right:2 backspace:4)
     edit.paste()
     sleep(100ms)

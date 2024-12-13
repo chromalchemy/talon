@@ -9,33 +9,29 @@ mode: command
 ## +++++++++++++ navigate within block .
 
 [go] (block end | post block): 
-    key(cmd-a)
-    sleep(100ms)
-    key(right)   
+    user.roam_go_block_end()
 
 go block start: 
-    key(shift-home left)
-    # edit.select_all()
-    # sleep(100ms)
-    # key(left)
+    user.roam_go_block_start()
 
 ## ++++++++++++ select block start/end .
 
 (select | take) block start:
-    key(shift-home)
+    user.roam_select_block_start()
 
 (select | take) (block end | rest of block ):
-        key(shift-end)
+    user.roam_select_block_end()
 
 ## ++++++++++++ clear block start/end .
 
 (clear | chuck) block start:
-    key(shift-home delete)
+    user.roam_select_block_start()
+    key(delete)
 
 (clear | chuck) (block end | rest of block ):
-    key(shift-end delete)
+    user.roam_select_block_start()
+    key(delete)
 
 clear block | (clear | chuck) [block] all [block] [text]:
-    key(cmd-a)
-    sleep(100ms)
+    user.roam_select_block_text()
     key(delete)

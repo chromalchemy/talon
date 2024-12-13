@@ -2,8 +2,8 @@ app.name: Roam Research
 mode: command
 -
 
-dedent: key(shift-tab)
-indent less: key(shift-tab)
+dedent: user.roam_block_back(1)
+indent less: user.roam_block_back(1)
 
 ## ++++++++++++++++++++++++ copy block 
 
@@ -36,13 +36,10 @@ copy block:
 
 #make unlimited todo
 (block | move) (all [(the way | way)] (out | left | back) | top level | base | wayback ): 
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
+    user.roam_block_back()
+    user.roam_block_back()
+    user.roam_block_back()
+    user.roam_block_back(1)
 
 ## ++++++++++++++++++++++++ new blocks .
 
@@ -50,26 +47,13 @@ copy block:
 
 #not behaving consistently, assign keyboard shortcuts    
 (insert | new) top block:
-    key(cmd-p)
-    sleep(200ms)
-    user.paste("wb jump to top of page")
-    sleep(200ms)
-    key(enter)
-    sleep(200ms)
-    key(esc)
-    sleep(200ms)
-    key(right)
-    sleep(300ms)
-    key(cmd-p)
-    sleep(200ms)
-    user.paste("Insert block above")
-    sleep(300ms)
-    key(esc)
-    sleep(200ms)
-    key(right)
-    
+    # user.run_roam_command("wb jump to top of page")
+    key(cmd-shift-t)
+    sleep(700ms)
+    key(cmd-shift-i)
+   
 
-## +++++++++++++++++++ new block below .
+## +++++++++++++++++++ paste block below .
 
 (paste | pace) [new] (block | blocks) [below]:
     key(cmd-shift-k)
@@ -88,46 +72,28 @@ copy block:
 ## +++++++++++++++++ new child block .
 
 (insert | new | add | put) (child | kid | (right | write) | write) [block] | (child | kid | (right | write) | write) block | nuchal:
-    key(cmd-a)
-    sleep(100ms)
-    key(right)
-    sleep(100ms)
-    key(enter)
-    sleep(100ms)
+    user.roam_new_child_block()
+
+(insert | new | add | put) (child | kid | (right | write) | write) [block] | (child | kid | (right | write) | write) block | nuchal <user.text>:
+    use.roam_go_block_end()
+    user.roam_break_block()
+    insert(text) 
     key(tab)
 
 # pasting children
 
 (insert | new | add | put) (child | kid | (right | write) ) [block] (paste | pace) | (paste | pace) (child | kid | (right | write) | nuchal) [block]:
-    key(cmd-a)
-    sleep(100ms)
-    key(right)
-    sleep(100ms)
-    key(enter)
-    key(tab)
-    sleep(100ms)
+    user.roam_new_child_block()
     edit.paste()
 
-paste [new] (child | kid) [block]:
-    key(cmd-a)
-    sleep(100ms)
-    key(right)
-    sleep(100ms)
-    key(enter)
-    sleep(100ms)
-    key(tab)
-    key(cmd-v)
-    sleep(100ms)
-    key(esc)
+# paste [new] (child | kid) [block]:
+#     user.roam_new_child_block()
+#     key(cmd-v)
+#     sleep(100ms)
+#     key(esc)
 
 paste (child | kid) [block] raw:
-    key(cmd-a)
-    sleep(100ms)
-    key(right)
-    sleep(100ms)
-    key(enter)
-    sleep(100ms)
-    key(tab)
+    user.roam_new_child_block()
     key(cmd-shift-v)
 
 
@@ -141,10 +107,7 @@ block [make] (child | kid) [of] below [block] | kiddo bela:
 
 # make block below a child of current block
 [make] below [block] (child | kid) | (slurp | slur) (block | below [block]):
-    key(esc)
-    sleep(100ms)
-    key(down)
-    sleep(100ms)
+    user.roam_select_block_below()
     key(tab)
     sleep(100ms)
     key(tab)
@@ -156,10 +119,7 @@ block [make] (child | kid) [of] below [block] | kiddo bela:
 #only works on top level
 # move block below (outside for current nesting level) below current (nested) block... (match indentation)
 slurp [( block | below block )] [left] ([to] peer):
-    key(esc)
-    sleep(100ms)
-    key(down)
-    sleep(100ms)
+    user.roam_select_block_below()
     key(tab)
     sleep(100ms)
     key(cmd-up)
@@ -168,12 +128,27 @@ slurp [( block | below block )] [left] ([to] peer):
  ## ++++++++++++++++++++ new block .
 
 ## +++++++++++++ # Insert block above, .
-[(new | insert)] block (up | above): key(cmd-shift-i)
+
+[(new | insert)] block (up | above): 
+    key(cmd-shift-i)
+
+[(new | insert)] block (up | above) <user.text>: 
+    key(cmd-shift-i)
+    sleep(700ms)
+    insert(text)
+
+
 
 ## +++++++++++++ # Insert block below, .
 
 # skips  take here   
-[(new | insert)] block [(down | below)]: key(cmd-shift-k)
+[(new | insert)] block [(down | below)]: 
+    key(cmd-shift-k)
+
+[(new | insert)] [block] [(down | below)] <user.text>: 
+    key(cmd-shift-k)
+    sleep(700ms)
+    insert(text)
 
 ## ++++++++++++ block back .
 
@@ -186,66 +161,35 @@ new block back:
     key(right)
     key(enter)
     sleep(50ms)
-    key(shift-tab)
+    user.roam_block_back(1)
 
 new block way back: 
     # key(cmd-shift-k)
     # sleep(300ms)
     # key(down)
-    key(cmd-a)
-    sleep(50ms)
-    key(right)
-    key(enter)
-    sleep(50ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
+    user.roam_new_child_block()
+    user.roam_block_back(8)
 
 #todo: copy implementation from block all the way back
 new base block:
-    key(cmd-a)
-    sleep(100ms)
-    key(right)
-    sleep(100ms)
+    use.roam_go_block_end()
     key(enter)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-
+    user.roam_block_back(3)
+    user.roam_block_back(1)
     
 #todo use new block down instead of going to end and enter in all of these commends
 
 ## ++++++++++++++++++++++++++++ split/break block .
 #todo is this the same as split..?
 nest here:
-    key(enter)
-    sleep(100ms)
+    user.roam_break_block()
     key(tab escape:2)
 
 (split | break) here [block] : 
     key(enter)
 
 (split | break | brick | brack) [point] : 
-    mouse_click(0)
-    user.mouse_drag_end()
-    sleep(200ms)
+    user.roam_click_block()
     key(enter)
 
 # mouse_click(0)
@@ -261,8 +205,7 @@ nest here:
     mouse_click(0)
     user.mouse_drag_end()
     sleep(500ms)
-    key(enter)
-    sleep(100ms)
+    user.roam_break_block()
     key(tab)
     key(escape:2)
 
@@ -273,23 +216,19 @@ nest here:
     key(escape)
 
 (split | break) [block] (back  | left) [point]: 
-    mouse_click(0)
-    user.mouse_drag_end()
-    sleep(200ms)
-    key(enter)
-    sleep(100ms)
-    key(shift-tab)
+    user.roam_click_block()
+    user.roam_break_block()
+    user.roam_block_back(1)
     key(escape:2)
 
 (split | break) [block] (back  | left)  here: 
-    key(enter)
-    sleep(100ms)
-    key(shift-tab)
+    user.roam_break_block()
+    user.roam_block_back(1)
     key(escape)
 
     
 (split | break) [and] (stack | top) [block] [here]: 
-    key(shift-end)
+    user.roam_select_block_end()
     sleep(300ms)
     key(cmd-x)
     sleep(300ms)
@@ -302,4 +241,4 @@ nest here:
     # sleep(100ms)
     # key(tab)
     # key(down)
-    # key(shift-tab)
+    # user.roam_block_back(1)

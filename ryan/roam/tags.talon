@@ -1,9 +1,6 @@
 app.name: Roam Research 
 mode: command
 -
-
-## ++++++++++++++++++++++ Hash tagging .
-
 #add named tag to block
 
 ^[(new | now)] tag {user.ryan.roam.tags.list}$: 
@@ -51,9 +48,19 @@ mode: command
     s = edit.selected_text() 
     insert("#{s} ")
 
-^force tag [that]: 
-    s = edit.selected_text() 
-    insert("#{s} ")
+^tag [point] here:
+    key(shift:down)
+    mouse_click(0) 
+    s = edit.selected_text()
+    y = user.roam_lower(s)
+    insert("#{y}")
+
+^pad tag [point] here:
+    key(shift:down)
+    mouse_click(0) 
+    s = edit.selected_text()
+    y = user.roam_lower(s)
+    insert(" #{y} ")
 
 ^tag word$:
     edit.select_word()
@@ -77,11 +84,11 @@ mode: command
     f= user.formatted_text(text, "NS_SLASH_SEPARATED")
     insert("#{f} ")
 
-^(kebab | dash | dashed) tag <user.text>:
+^(kebab | dash | dashed | dashy) tag <user.text>:
     f= user.formatted_text(text, "DASH_SEPARATED")
     insert("#{f}")
 
-^force (kebab | dash | dashed) tag <user.text>:
+^force (kebab | dash | dashed | dashy) tag <user.text>:
     f= user.formatted_text(text, "DASH_SEPARATED")
     insert("#{f} ")
     
@@ -110,11 +117,11 @@ mode: command
     sleep(300ms)
     key(enter)
 
-(square tag | dub square) kebab <user.text>:
+(square tag | dub square) (kebab | dashy) <user.text>:
     t = user.formatted_text(text, "DASH_SEPARATED")
     insert("[[{t}")
 
-(square tag | dub square) kebab pop <user.text>:
+(square tag | dub square) (kebab | dashy) pop <user.text>:
     t = user.formatted_text(text, "DASH_SEPARATED")
     insert("[[{t}")
     sleep(300ms)

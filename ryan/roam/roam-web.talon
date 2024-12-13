@@ -47,8 +47,7 @@ add (shortcut | bookmark):
 embed (block | ref | reference):
     insert("/embed")
     sleep(100ms)
-    key(enter)
-    sleep(100ms)
+    user.roam_break_block()
     key(right:2 backspace:4)
     edit.paste()
     sleep(100ms)
@@ -304,13 +303,7 @@ next block: key(ctrl-n)
 
 #make unlimited todo
 (block | move) (all [(the way | way)] (out | left | back) | top level | base | wayback ): 
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
+    user.roam_block_back(4)
 
  ## +++++++++++++++++++++ block folding .
 
@@ -367,7 +360,7 @@ go (block end | post block):
     # key(right)
 
 select (block end | rest of block ):
-    key(shift-end)
+    user.roam_select_block_end()
 
 (clear | chuck) (block end | rest of block ):
     key(shift-end delete)
@@ -453,10 +446,7 @@ select all blocks: key(cmd-shift-a)
 ## +++++++++++++++++++ new block below .
 
 paste [new] block:
-    edit.select_all()
-    sleep(100ms)
-    key(right)
-    key(enter)
+    user.roam_new_child_block()
     key(cmd-v)
     sleep(100ms)
     key(esc)
@@ -466,29 +456,20 @@ paste [new] block:
 
 (insert | new | add | put) (child | kid | right) [block] | (child | kid | right) block | nuchal:
     #todo change to enter command
-    edit.select_all()
-    sleep(100ms)
-    key(right)
-    key(enter)
+    user.roam_new_child_block()
     key(tab)
 
 # pasting children
 
 (insert | new | add | put) (child | kid | right) [block] (paste | pace) | (paste | pace) (child | kid | right | nuchal) [block]:
     #todo change to enter command
-    edit.select_all()
-    sleep(100ms)
-    key(right)
-    key(enter)
+    user.roam_new_child_block()
     key(tab)
     sleep(100ms)
     edit.paste()
 
 paste [new] (child | kid) [block]:
-    edit.select_all()
-    sleep(100ms)
-    key(right)
-    key(enter)
+    user.roam_new_child_block()
     sleep(100ms)
     key(tab)
     key(cmd-v)
@@ -496,10 +477,7 @@ paste [new] (child | kid) [block]:
     key(esc)
 
 paste (child | kid) [block] raw:
-    edit.select_all()
-    sleep(100ms)
-    key(right)
-    key(enter)
+    user.roam_new_child_block()
     sleep(100ms)
     key(tab)
     key(cmd-shift-v)
@@ -508,17 +486,9 @@ paste (child | kid) [block] raw:
     
 #todo: copy implementation from block all the way back
 new base block:
-    edit.select_all()
-    sleep(100ms)
-    key(right)
-    key(enter)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
-    sleep(100ms)
-    key(shift-tab)
+    user.roam_new_child_block()
+    user.roam_block_back(4)
+
 
 ## +++++++++++++ # Insert block above, .
 [(new | insert)] block (up | above): key(cmd-shift-i)
@@ -529,26 +499,22 @@ new base block:
 new block back: 
     key(cmd-shift-k)
     sleep(500ms)
-    key(shift-tab)
+    user.roam_block_back(1)
 
 #todo use new block down instead of going to end and enter in all of these commends
 
 ## ++++++++++++++++++++++++++++ split/break block .
 #todo is this the same as split..?
 nest here:
-    key(enter)
-    sleep(100ms)
+    user.roam_break_block()
     key(tab)
-    key(escape)
-    key(escape)
+    key(escape:2)
 
 (split | break) here [block] : 
     key(enter)
 
 (split | break | brick | brack) [point] : 
-    mouse_click(0)
-    user.mouse_drag_end()
-    sleep(200ms)
+    user.roam_click_block()
     key(enter)
 
 # mouse_click(0)
@@ -561,38 +527,30 @@ nest here:
       
 
 (split | break) (child | right | rate | [and] nest) [block] [point]: 
-    mouse_click(0)
-    user.mouse_drag_end()
-    sleep(200ms)
-    key(enter)
-    sleep(100ms)
+    user.roam_click_block()
+    user.roam_break_block()
     key(tab)
     key(escape:2)
 
 (split | break) (child | right | rate | [and] nest) [block] here: 
-    key(enter)
-    sleep(100ms)
+    user.roam_break_block()
     key(tab)
     key(escape)
 
 (split | break) [block] (back  | left) [point]: 
-    mouse_click(0)
-    user.mouse_drag_end()
-    sleep(200ms)
-    key(enter)
-    sleep(100ms)
-    key(shift-tab)
+    user.roam_click_block()
+    user.roam_break_block()
+    user.roam_block_back(1)
     key(escape:2)
 
 (split | break) [block] (back  | left)  here: 
-    key(enter)
-    sleep(100ms)
-    key(shift-tab)
+    user.roam_break_block()
+    user.roam_block_back(1)
     key(escape)
 
 (split | break) [and] (stack | top) [block] [here]: 
     # edit.paragraph_end()
-    key(shift-end)
+    user.roam_select_block_end()
     sleep(300ms)
     key(cmd-x)
     sleep(300ms)
@@ -616,7 +574,8 @@ copy block:
 
 ## ++++++++++++++++++++++ multi select .
 
-[toggle] (multi select | select blocks) | select (multi | multiple) [blocks]: key(cmd-m)
+[toggle] (multi select | select blocks) | select (multi | multiple) [blocks]: 
+    key(cmd-m)
 
 ## +++++++++++++++++++++ #move blocks .
 
@@ -626,7 +585,7 @@ copy block:
 (block | move) up: key(cmd-shift-up)
 (block | move) down: key(cmd-shift-down)
 (block | move) (in | right | forward | fore | four): key(tab)
-(block | move) (out | left | back): key(shift-tab)
+(block | move) (out | left | back): user.roam_block_back(1)
 
 ## ++++++++++++++++ move block to DNP date (str)
 
@@ -671,7 +630,7 @@ move [block] [to] (paste | pace):
     
 move [block] [to] agenda: 
     key(cmd-alt-m)
-    sleep(1500ms)
+    sleep(2500ms)
     key(tab right)
     # sleep(1000ms) 
     insert("CGDDdKiFq")       
@@ -680,7 +639,7 @@ move [block] [to] agenda:
 
 (send | move) [block] (ref | reference | link) [to] agenda: 
     key(cmd-alt-ctrl-m)
-    sleep(1500ms)
+    sleep(2500ms)
     key(tab right)
     # sleep(1000ms) 
     insert("CGDDdKiFq")       
@@ -707,15 +666,13 @@ move [block] [to] (paste | pace) sidebar:
 insert today: 
     insert("/today")
     sleep(300ms)
-    key(enter)
-    sleep(100ms)
+    user.roam_break_block()
     key(space)
 
 insert tomorrow: 
     insert("/tomorrow")
     sleep(300ms)
-    key(enter)
-    sleep(100ms)
+    user.roam_break_block()
     key(space)
     
 #tagging 
@@ -746,14 +703,14 @@ insert tomorrow:
 
 ^tag word$:
     edit.select_word()
-    sleep(200ms)
     s = edit.selected_text()
+    sleep(200ms)
     insert("#{s}")
 
 ^force tag word$:
     edit.select_word()
-    sleep(200ms)
     s = edit.selected_text()
+    sleep(200ms)
     insert("#{s} ")
 
 #format declared text to tag
@@ -766,11 +723,11 @@ insert tomorrow:
     f= user.formatted_text(text, "NS_SLASH_SEPARATED")
     insert("#{f} ")
 
-^kebab tag <user.text>:
+^(kebab | dashy) tag <user.text>:
     f= user.formatted_text(text, "DASH_SEPARATED")
     insert("#{f}")
 
-^force kebab tag <user.text>:
+^force (kebab | dashy) tag <user.text>:
     f= user.formatted_text(text, "DASH_SEPARATED")
     insert("#{f} ")
     
@@ -892,9 +849,7 @@ new code block: key(`:3)
 code block that: key(`:3 esc)
 
 make code block | block make code [block]: 
-    key(cmd-a)
-    sleep(100ms)
-    key(`:3)
+    user.roam_select_block_text()key(`:3)
     key(esc)
 
    
@@ -912,8 +867,7 @@ exit: key(esc)
 
 new divider [block]:
     key(ctrl-e) 
-    key(enter)
-    sleep(100ms)
+    user.roam_break_block()
     insert("---")
     key(esc:2) 
 
@@ -974,8 +928,8 @@ go [to] crown [of] [page]: key(cmd-alt-shift-t)
 
 go [to] base [of] [page]: key(cmd-shift-enter)   
 
-dedent: key(shift-tab)
-indent less: key(shift-tab)
+dedent: user.roam_block_back(1)
+indent less: user.roam_block_back(1)
 
 nope: key(cmd-z)
 

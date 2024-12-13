@@ -8,7 +8,6 @@ mode: command
 
 new divider [block]:
     key(ctrl-e) 
-    key(enter)
-    sleep(100ms)
+    user.roam_break_block()
     insert("---")
     key(esc:2) 

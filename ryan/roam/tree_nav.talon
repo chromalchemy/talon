@@ -17,9 +17,7 @@ go parent [block]:
     # user.run_roam_command("go to parent block")
 
 go [first] child [block]:
-    key(cmd-a)
-    sleep(100ms)
-    key(right)
+    user.roam_select_block_text()key(right)
     key(down)  
 
 #todo 

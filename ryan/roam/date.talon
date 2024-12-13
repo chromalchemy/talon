@@ -7,15 +7,13 @@ mode: command
 insert today: 
     insert("/today")
     sleep(300ms)
-    key(enter)
-    sleep(100ms)
+    user.roam_break_block()
     key(space)
 
 insert tomorrow: 
     insert("/tomorrow")
     sleep(300ms)
-    key(enter)
-    sleep(100ms)
+    user.roam_break_block()
     key(space)
 
 (add) date [link]:
