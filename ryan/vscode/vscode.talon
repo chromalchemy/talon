@@ -44,6 +44,7 @@ show snippets:
 
 check [for] extension updates | update extensions: 
     user.vscode("workbench.extensions.action.checkForUpdates")
+    user.vscode("workbench.view.extensions")
 
 (show | go) extension updates:
     user.vscode("workbench.extensions.action.extensionUpdates")
