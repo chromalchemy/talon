@@ -847,7 +847,8 @@ new code block: key(`:3)
 code block that: key(`:3 esc)
 
 make code block | block make code [block]: 
-    user.roam_select_block_text()key(`:3)
+    user.roam_select_block_text()
+    key(`:3)
     key(esc)
 
    
