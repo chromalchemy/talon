@@ -48,6 +48,16 @@ class Actions:
         actions.key("tab")
         actions.sleep("100ms")
 
+    def roam_select_block():
+        """ """
+        actions.key("esc")
+        actions.sleep("100ms")
+
+    def roam_select_none():
+        """ """
+        actions.key("esc:2")
+        actions.sleep("100ms")
+    
     def roam_select_block_below():
         """select block below"""
         actions.key("esc")
@@ -63,11 +73,20 @@ class Actions:
             for _ in range(n):
                 actions.key("shift-tab")
                 actions.sleep("100ms")
+
+    def roam_block_forward(n: int):
+        """ block back with timeout"""
+        if n == 1:
+            actions.key("tab")
+        else:
+            for _ in range(n):
+                actions.key("tab")
+                actions.sleep("100ms")
     
     def roam_break_block():
         "break block"
         actions.key("enter")
-        actions.sleep("100ms")
+        actions.sleep("300ms")
 
     def roam_click_block():
         """click inside block and wait to settle"""
@@ -79,6 +98,12 @@ class Actions:
         """select block text"""
         actions.edit.select_all()
         actions.sleep("100ms")
+    
+    def roam_cut_block_text():
+        """select block text"""
+        actions.edit.select_all()
+        actions.sleep("100ms")
+        actions.edit.cut()
 
     def roam_go_block_start():
         """select block text"""

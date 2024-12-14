@@ -32,6 +32,11 @@ go block start:
     user.roam_select_block_start()
     key(delete)
 
-clear block | (clear | chuck) [block] all [block] [text]:
+## +++++++++++++++++++++++++++++++ all .
+
+(select | take) block [text]: 
+    user.roam_select_block_text()
+
+clear block | (clear | chuck) [block] text:
     user.roam_select_block_text()
     key(delete)

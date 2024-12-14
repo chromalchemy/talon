@@ -6,8 +6,7 @@ mode: command
 #same as block below?
 [go] next block: 
     # key(ctrl-n) # doesnt work reliably on broken paragraphs
-    key(esc)
-    sleep(100ms)
+    user.roam_select_block()
     key(down)   
 
 ## ___________________________________ .

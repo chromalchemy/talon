@@ -393,8 +393,7 @@ go block start:
 
 ## ++++++++++++++++++++++++ cut blocks .
 (cut | carve) block: 
-    key(esc)
-    sleep(100ms)
+    user.roam_select_block()
     key(cmd-x)
 
 ## +++++++++++++++++++++ select blocks .
@@ -568,8 +567,7 @@ nest here:
 ## ++++++++++++++++++++++++ copy block 
 
 copy block:
-    key(esc)
-    sleep(100ms)
+    user.roam_select_block()
     key(cmd-c)
 
 ## ++++++++++++++++++++++ multi select .

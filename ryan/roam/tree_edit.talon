@@ -1,36 +1,44 @@
 app.name: Roam Research 
 mode: command
 -
+# settings():
+#     speech.timeout = 1.550  
+
+timout test: 
+    # user.setting()
+    print("one")
+    print("two")
 
 dedent: user.roam_block_back(1)
 indent less: user.roam_block_back(1)
 
+select block: 
+    user.roam_select_block()
+
 ## ++++++++++++++++++++++++ copy block 
 
 copy block:
-    key(esc)
-    sleep(100ms)
+    user.roam_select_block()
     key(cmd-c)
 
 ## ++++++++++++++++++++++++ kill block .
 
 # only for use when cursor is inside block
 (delete | kill | remove | chuck) [whole] block | block delete: 
-    # key(cmd-backspace)
-    key(esc)
+    # doesnt keep focus
+    # key(cmd-backspace) 
+    user.roam_select_block()
     key(delete)
-    sleep(100ms)
     key(down)
 
 # kill highlighted block(s)
-((delete | kill | remove | chuck) [(highlighted | selected | these)] [(multiple | multi)] blocks)| (delete | kill | remove | chuck) (highlighted | selected) block: 
+((delete | kill | remove | chuck) [(highlighted | selected | these)] [(multiple | multi)] blocks): 
     key(delete)
 
 
 ## ++++++++++++++++++++++++ cut blocks .
 (cut | carve) block: 
-    key(esc)
-    sleep(100ms)
+    user.roam_select_block()
     key(cmd-x)
 
 
@@ -78,7 +86,7 @@ copy block:
     use.roam_go_block_end()
     user.roam_break_block()
     insert(text) 
-    key(tab)
+    user.roam_block_forward(1)
 
 # pasting children
 
@@ -103,31 +111,23 @@ paste (child | kid) [block] raw:
 block [make] (child | kid) [of] below [block] | kiddo bela:
     key(cmd-shift-down)
     sleep(200ms)
-    key(tab)
+    user.roam_block_forward(1)
 
 # make block below a child of current block
 [make] below [block] (child | kid) | (slurp | slur) (block | below [block]):
     user.roam_select_block_below()
-    key(tab)
-    sleep(100ms)
-    key(tab)
-    sleep(100ms)
-    key(tab)
-    sleep(100ms)
-    key(tab)
-
+    user.roam_block_forward(4)
 #only works on top level
 # move block below (outside for current nesting level) below current (nested) block... (match indentation)
 slurp [( block | below block )] [left] ([to] peer):
     user.roam_select_block_below()
-    key(tab)
-    sleep(100ms)
+    user.roam_block_forward(1)
     key(cmd-up)
 
 
  ## ++++++++++++++++++++ new block .
 
-## +++++++++++++ # Insert block above, .
+## +++++++++++++ # new block above, .
 
 [(new | insert)] block (up | above): 
     key(cmd-shift-i)
@@ -137,9 +137,7 @@ slurp [( block | below block )] [left] ([to] peer):
     sleep(700ms)
     insert(text)
 
-
-
-## +++++++++++++ # Insert block below, .
+## +++++++++++++ # new block below, .
 
 # skips  take here   
 [(new | insert)] block [(down | below)]: 
@@ -150,7 +148,7 @@ slurp [( block | below block )] [left] ([to] peer):
     sleep(700ms)
     insert(text)
 
-## ++++++++++++ block back .
+## ++++++++++++ new block back .
 
 new block back: 
     # key(cmd-shift-k)
@@ -174,8 +172,7 @@ new block way back:
 new base block:
     use.roam_go_block_end()
     key(enter)
-    user.roam_block_back(3)
-    user.roam_block_back(1)
+    user.roam_block_back(4)
     
 #todo use new block down instead of going to end and enter in all of these commends
 
@@ -183,7 +180,8 @@ new base block:
 #todo is this the same as split..?
 nest here:
     user.roam_break_block()
-    key(tab escape:2)
+    user.roam_block_forward(1)
+    key(escape:2)
 
 (split | break) here [block] : 
     key(enter)
@@ -200,19 +198,15 @@ nest here:
 # user.mouse_drag_end()
 # sleep(100ms)
       
-
 (split | break) (child | (right | write) | rate | [and] nest) [block] [point]: 
-    mouse_click(0)
-    user.mouse_drag_end()
-    sleep(500ms)
+    roam_click_block()
     user.roam_break_block()
-    key(tab)
+    user.roam_block_forward(1)
     key(escape:2)
 
 (split | break) (child | (right | write) | rate | [and] nest) [block] here: 
-    key(enter)
-    sleep(300ms)
-    key(tab)
+    roam_break_block()
+    user.roam_block_forward()
     key(escape)
 
 (split | break) [block] (back  | left) [point]: 
@@ -226,14 +220,12 @@ nest here:
     user.roam_block_back(1)
     key(escape)
 
-    
 (split | break) [and] (stack | top) [block] [here]: 
     user.roam_select_block_end()
     sleep(300ms)
-    key(cmd-x)
+    edit.cut()
     sleep(300ms)
-    key(enter)
-    sleep(300ms)
+    user.roam_break_block()
     key(shift-cmd-v)
     sleep(300ms)
     key(escape)
