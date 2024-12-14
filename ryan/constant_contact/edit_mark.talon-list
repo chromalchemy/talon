@@ -1,5 +1,6 @@
 
 options: options 
+block options: options
 drag: drag 
 images: images
 upload: upload
@@ -7,6 +8,8 @@ build: built
 components: built
 design: design
 global settings: design
+clone block: duplicate
+duplicate block: duplicate
 delete: delete
 kill: kill 
 kill block: kill
@@ -14,3 +17,4 @@ link: link
 vert: vertical
 vertical: vertical
 vertical padding: vertical
+background color: background

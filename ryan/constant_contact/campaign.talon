@@ -1,7 +1,8 @@
 app: chrome
 title: /app.constantcontact.com/pages/campaign/
 -
-(go | click) [mark] {user.ryan.constant_contact.edit_mark.list}:
+
+[(go | click)] [mark] {user.ryan.constant_contact.edit_mark.list}:
     user.rango_run_action_on_reference("clickElement", "{user.ryan.constant_contact.edit_mark.list}")
 
 # email (add block | adblock | insert | paste) link: 
@@ -30,3 +31,12 @@ remove link:
     user.rango_run_action_on_reference("clickElement", "link")
     sleep(100ms)
     key(down:2 enter)
+
+background color:
+    user.rango_run_action_on_reference("clickElement", "options")
+    # sleep(100ms)
+    user.rango_run_action_on_reference("clickElement", "background")
+
+clone block:
+    user.rango_run_action_on_reference("clickElement", "options")
+    user.rango_run_action_on_reference("clickElement", "duplicate")
