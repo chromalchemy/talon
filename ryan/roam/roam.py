@@ -37,6 +37,24 @@ class Actions:
         actions.key("right")
         actions.sleep("100ms")
 
+    def roam_new_block_direct_below():
+        """ccc"""
+        actions.key("cmd-a")
+        actions.sleep("100ms")
+        actions.key("right")
+        actions.sleep("100ms")
+        actions.key(enter)
+
+    def roam_new_block_below():
+        """ccc"""
+        actions.key("cmd-shift-k")
+        actions.sleep("700ms")
+
+    def roam_new_block_above():
+        """ccc"""
+        actions.key("cmd-shift-i")
+        actions.sleep("700ms")
+
     def roam_new_child_block():
         """new child block"""
         actions.key("cmd-a")
@@ -82,6 +100,24 @@ class Actions:
             for _ in range(n):
                 actions.key("tab")
                 actions.sleep("100ms")
+
+    def roam_block_down(n: int):
+        """ block back with timeout"""
+        if n == 1:
+            actions.key("tab")
+        else:
+            for _ in range(n):
+                actions.key("cmd-shift-down")
+                actions.sleep("100ms")
+
+    def roam_block_up(n: int):
+        """ block back with timeout"""
+        if n == 1:
+            actions.key("tab")
+        else:
+            for _ in range(n):
+                actions.key("cmd-shift-up")
+                actions.sleep("100ms")
     
     def roam_break_block():
         "break block"
@@ -98,6 +134,15 @@ class Actions:
         """select block text"""
         actions.edit.select_all()
         actions.sleep("100ms")
+
+    def roam_strip_block_text_whitespace_padding():
+        """select block text"""
+        actions.edit.select_all()
+        actions.sleep("100ms")
+        block_str = actions.edit.selected_text()
+        stripped_text = "\n".join(line.rstrip() for line in block_str.splitlines()).strip()
+        actions.print(stripped_text)
+        actions.user.paste(stripped_text)
     
     def roam_cut_block_text():
         """select block text"""
@@ -120,6 +165,14 @@ class Actions:
     def roam_select_block_end():
         """select block text"""
         actions.key("shift-end")
+
+    def roam_cut_block_end():
+        """select block text"""
+        actions.key("shift-end")
+        actions.sleep("300ms")
+        actions.edit.cut()
+        actions.sleep("300ms")
+
     
     def roam_tag(formatter: str, text: str, abbreviation: str, specified_tag: str):
         """"""

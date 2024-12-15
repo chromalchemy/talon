@@ -39,15 +39,12 @@ copy block:
 ## ++++++++++++++++++++++++ cut blocks .
 (cut | carve) block: 
     user.roam_select_block()
-    key(cmd-x)
+    edit.cut()
 
 
 #make unlimited todo
 (block | move) (all [(the way | way)] (out | left | back) | top level | base | wayback ): 
-    user.roam_block_back()
-    user.roam_block_back()
-    user.roam_block_back()
-    user.roam_block_back(1)
+    user.roam_block_back(4)
 
 ## ++++++++++++++++++++++++ new blocks .
 
@@ -58,24 +55,67 @@ copy block:
     # user.run_roam_command("wb jump to top of page")
     key(cmd-shift-t)
     sleep(700ms)
-    key(cmd-shift-i)
-   
+    user.roam_new_block_above()
+
+ ## ++++++++++++++++++++ new block .
 
 ## +++++++++++++++++++ paste block below .
 
 (paste | pace) [new] (block | blocks) [below]:
-    key(cmd-shift-k)
-    sleep(700ms)
-    key(cmd-v)
+    user.roam_new_block_below()
+    edit.paste()
     sleep(100ms)
     key(esc)
 
 (paste | pace) [new] block [below] raw:
-    key(cmd-shift-k)
-    sleep(700ms)
-    key(shift-cmd-v)
+    user.roam_new_block_below()
+    user.paste_without_formatting()
     sleep(200ms)
     key(esc)
+
+## +++++++++++++ # new block above, .
+
+(new | insert) block [(up | above)] | block above: 
+    user.roam_new_block_above()
+
+((new | insert) block [(up | above)] | block above) <user.text>: 
+    user.roam_new_block_above()
+    insert(text)
+
+(paste | paste) block [(up | above)]: 
+    user.roam_new_block_above()
+    edit.paste()
+
+(paste | paste) block [(up | above)] raw: 
+    user.roam_new_block_above()
+    user.paste_without_formatting()
+
+
+## +++++++++++++ # new block below, .
+
+# skips  take here   
+(new | insert) block [(down | below)] | block below: 
+    user.roam_new_block_below()
+
+((new | insert) block [(down | below)] | block below) <user.text>: 
+    user.roam_new_block_below()
+    insert(text)
+
+## ++++++++++++ new block back .
+
+new block back: 
+    user.roam_new_block_direct_below()
+    user.roam_block_back(1)
+
+new block way back: 
+    user.roam_new_block_direct_below()
+    user.roam_block_back(8)
+
+new base block:
+    user.roam_new_block_direct_below()
+    user.roam_block_back(4)
+    
+#todo use new block down instead of going to end and enter in all of these commends
 
 ## +++++++++++++++++ new child block .
 
@@ -83,7 +123,7 @@ copy block:
     user.roam_new_child_block()
 
 (insert | new | add | put) (child | kid | (right | write) | write) [block] | (child | kid | (right | write) | write) block | nuchal <user.text>:
-    use.roam_go_block_end()
+    user.roam_go_block_end()
     user.roam_break_block()
     insert(text) 
     user.roam_block_forward(1)
@@ -102,14 +142,13 @@ copy block:
 
 paste (child | kid) [block] raw:
     user.roam_new_child_block()
-    key(cmd-shift-v)
-
+    user.paste_without_formatting()
 
 ## +++++++ making a block a child of another block .
 
 # make current block a child of block below
 block [make] (child | kid) [of] below [block] | kiddo bela:
-    key(cmd-shift-down)
+    user.roam_block_down(1)
     sleep(200ms)
     user.roam_block_forward(1)
 
@@ -125,57 +164,6 @@ slurp [( block | below block )] [left] ([to] peer):
     key(cmd-up)
 
 
- ## ++++++++++++++++++++ new block .
-
-## +++++++++++++ # new block above, .
-
-(new | insert) block [(up | above)] | block above: 
-    key(cmd-shift-i)
-
-((new | insert) block [(up | above)] | block above) <user.text>: 
-    key(cmd-shift-i)
-    sleep(700ms)
-    insert(text)
-
-## +++++++++++++ # new block below, .
-
-# skips  take here   
-(new | insert) block [(down | below)] | block below: 
-    key(cmd-shift-k)
-
-((new | insert) block [(down | below)] | block below) <user.text>: 
-    key(cmd-shift-k)
-    sleep(700ms)
-    insert(text)
-
-## ++++++++++++ new block back .
-
-new block back: 
-    # key(cmd-shift-k)
-    # sleep(300ms)
-    # key(down)
-    key(cmd-a)
-    sleep(50ms)
-    key(right)
-    key(enter)
-    sleep(50ms)
-    user.roam_block_back(1)
-
-new block way back: 
-    # key(cmd-shift-k)
-    # sleep(300ms)
-    # key(down)
-    user.roam_new_child_block()
-    user.roam_block_back(8)
-
-#todo: copy implementation from block all the way back
-new base block:
-    use.roam_go_block_end()
-    key(enter)
-    user.roam_block_back(4)
-    
-#todo use new block down instead of going to end and enter in all of these commends
-
 ## ++++++++++++++++++++++++++++ split/break block .
 #todo is this the same as split..?
 nest here:
@@ -184,10 +172,12 @@ nest here:
     key(escape:2)
 
 (split | break) here [block] : 
+    #user.roam_break_block()
     key(enter)
 
 (split | break | brick | brack) [point] : 
     user.roam_click_block()
+    #user.roam_break_block()
     key(enter)
 
 # mouse_click(0)
@@ -199,14 +189,14 @@ nest here:
 # sleep(100ms)
       
 (split | break) (child | (right | write) | rate | [and] nest) [block] [point]: 
-    roam_click_block()
+    user.roam_click_block()
     user.roam_break_block()
     user.roam_block_forward(1)
     key(escape:2)
 
 (split | break) (child | (right | write) | rate | [and] nest) [block] here: 
-    roam_break_block()
-    user.roam_block_forward()
+    user.roam_break_block()
+    user.roam_block_forward(1)
     key(escape)
 
 (split | break) [block] (back  | left) [point]: 
@@ -221,16 +211,8 @@ nest here:
     key(escape)
 
 (split | break) [and] (stack | top) [block] [here]: 
-    user.roam_select_block_end()
-    sleep(300ms)
-    edit.cut()
-    sleep(300ms)
+    user.roam_cut_block_end()
     user.roam_break_block()
-    key(shift-cmd-v)
+    user.paste_without_formatting()
     sleep(300ms)
     key(escape)
-    # key(enter)
-    # sleep(100ms)
-    # key(tab)
-    # key(down)
-    # user.roam_block_back(1)

@@ -40,3 +40,9 @@ go block start:
 clear block | (clear | chuck) [block] text:
     user.roam_select_block_text()
     key(delete)
+
+
+## +++++++++++++++++ strip empty space . 
+
+strip (block | (whitespace | white [space]) ): 
+    user.roam_strip_block_text_whitespace_padding()
