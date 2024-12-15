@@ -7,10 +7,14 @@ mode: command
 
 ## ++++++++++++++++++++++++ move block on page 
 
-(block | move) up: key(cmd-shift-up)
-(block | move) down: key(cmd-shift-down)
-(block | move) (in | (right | write) | forward | fore | four): key(tab)
-(block | move) (out | left | back): user.roam_block_back(1)
+(block | move) up: 
+    user.roam_block_up(1)
+(block | move) down: 
+    user.roam_block_down(1)
+(block | move) (in | (right | write) | forward | fore | four): 
+    user.roam_block_forward(1)
+(block | move) (out | left | back): 
+    user.roam_block_back(1)
 
 ## ++++++++++++++++ move block to DNP date (str)
 

@@ -479,7 +479,7 @@ paste (child | kid) [block] raw:
     user.roam_new_child_block()
     sleep(100ms)
     key(tab)
-    key(cmd-shift-v)
+    user.paste_without_formatting()
 
  ## ++++++++++++++++++++ new block back .
     
@@ -581,7 +581,8 @@ copy block:
 ## ++++++++++++++++++++++++ move block on page 
 
 (block | move) up: key(cmd-shift-up)
-(block | move) down: key(cmd-shift-down)
+(block | move) down: 
+    user.roam_block_down(1)
 (block | move) (in | right | forward | fore | four): key(tab)
 (block | move) (out | left | back): user.roam_block_back(1)
 
