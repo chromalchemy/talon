@@ -129,10 +129,10 @@ slurp [( block | below block )] [left] ([to] peer):
 
 ## +++++++++++++ # new block above, .
 
-[(new | insert)] block (up | above): 
+(new | insert) block [(up | above)] | block above: 
     key(cmd-shift-i)
 
-[(new | insert)] block (up | above) <user.text>: 
+((new | insert) block [(up | above)] | block above) <user.text>: 
     key(cmd-shift-i)
     sleep(700ms)
     insert(text)
@@ -140,10 +140,10 @@ slurp [( block | below block )] [left] ([to] peer):
 ## +++++++++++++ # new block below, .
 
 # skips  take here   
-[(new | insert)] block [(down | below)]: 
+(new | insert) block [(down | below)] | block below: 
     key(cmd-shift-k)
 
-[(new | insert)] [block] [(down | below)] <user.text>: 
+((new | insert) block [(down | below)] | block below) <user.text>: 
     key(cmd-shift-k)
     sleep(700ms)
     insert(text)

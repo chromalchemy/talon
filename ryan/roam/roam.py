@@ -120,6 +120,21 @@ class Actions:
     def roam_select_block_end():
         """select block text"""
         actions.key("shift-end")
+    
+    def roam_tag(formatter: str, text: str, abbreviation: str, specified_tag: str):
+        """"""
+        # print(f"Formatter: {formatter}")
+        # print(f"Text: {text}")
+        # print(f"Abbreviation: {abbreviation}")
+        # print(f"specified-tag: {specified_tag}")
+        if bool(formatter) and bool(text):
+            txt = actions.user.formatted_text(text, formatter)
+        else:
+            txt = text
+        s = abbreviation + specified_tag + txt
+        # print(f"final: {s}")
+        return s
+
             
                 
         

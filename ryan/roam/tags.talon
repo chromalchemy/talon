@@ -1,26 +1,23 @@
 app.name: Roam Research 
 mode: command
 -
-#add named tag to block
 
-^[(new | now)] tag {user.ryan.roam.tags.list}$: 
-    insert(" #{user.ryan.roam.tags.list} ")
+## ++++++++++++++++++++++++++ has tags .
 
-^[(new | now)] tag {user.abbreviation}$: 
-    insert(" #{abbreviation} ")
+^[(new | now)] tag ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) $:
+    tag_text = user.roam_tag("{formatters or 'SLASH_SEPARATED'}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
+    insert(" #{tag_text} ")
 
-#keep chooser    
-^[(new | now)] tag ink {user.ryan.roam.tags.list}$: 
-    insert(" #{user.ryan.roam.tags.list}")
-
-^[(new | now)] tag ink {user.abbreviation}$: 
-    insert(" #{abbreviation}")
+#keep chooser open    
+^[(new | now)] tag ink ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) $:
+    tag_text = user.roam_tag("{formatters or 'SLASH_SEPARATED'}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
+    insert(" #{tag_text}")
     
-    
-(make [block] | tag block | add tag) {user.ryan.roam.tags.list}: 
+(make [block] | tag block | add tag) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>):
+    tag_text = user.roam_tag("{formatters or 'SLASH_SEPARATED'}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
     edit.select_all()
     s = edit.selected_text()
-    insert("{s} #{user.ryan.roam.tags.list}")
+    insert("{s} #{tag_text}")
     sleep(300ms)
     key(enter)
 
@@ -73,56 +70,35 @@ mode: command
     sleep(200ms)
     s = edit.selected_text()
     insert("#{s} ")
-
-#format declared text to tag
-
-[slash] tag <user.text>:
-    f= user.formatted_text(text, "NS_SLASH_SEPARATED")
-    insert("#{f}")
-
-^force [slash] tag <user.text>:
-    f= user.formatted_text(text, "NS_SLASH_SEPARATED")
-    insert("#{f} ")
-
-^(kebab | dash | dashed | dashy) tag <user.text>:
-    f= user.formatted_text(text, "DASH_SEPARATED")
-    insert("#{f}")
-
-^force (kebab | dash | dashed | dashy) tag <user.text>:
-    f= user.formatted_text(text, "DASH_SEPARATED")
-    insert("#{f} ")
     
-## +++++++++++++++++ # bracket tagging .
+## +++++++++++++++++ # square bracket tagging .
     
 (square tag | dub square) that: 
     s = edit.selected_text() 
-    insert("[[{s}")
+    insert("[[{s}]]")
     
 #but select word has bug
 (square tag | dub square) (word | single | one):
     edit.select_word()
     s = edit.selected_text() 
-    insert("[[{s}")
+    insert("[[{s}]]")
 
 (square tag | dub square):
     insert("[[")
 
-(square tag | dub square) <user.text>:
-    t = user.formatted_text(text, "SLASH_SEPARATED")
-    insert("[[{t}")
+# test brief {user.abbreviation}:
+#     print(abbreviation)
 
-(square tag | dub square) (auto | one | use | pop) <user.text>:
-    t = user.formatted_text(text, "SLASH_SEPARATED")
-    insert("[[{t}")
-    sleep(300ms)
-    key(enter)
+(square tag | dub square) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>):
+    tag_text = user.roam_tag("{formatters or ''}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
+    insert("[[{tag_text}]] ")
 
-(square tag | dub square) (kebab | dashy) <user.text>:
-    t = user.formatted_text(text, "DASH_SEPARATED")
-    insert("[[{t}")
+(square tag | dub square) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) ink :
+    tag_text = user.roam_tag("{formatters or ''}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
+    insert("[[{tag_text}]]")
 
-(square tag | dub square) (kebab | dashy) pop <user.text>:
-    t = user.formatted_text(text, "DASH_SEPARATED")
-    insert("[[{t}")
+(square tag | dub square) (auto | one | use | pop) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) :
+    tag_text = user.roam_tag("{formatters or ''}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
+    insert("[[{tag_text}]]")
     sleep(300ms)
     key(enter)
