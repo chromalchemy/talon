@@ -78,7 +78,7 @@ mode: command
     insert("[[{s}]]")
     
 #but select word has bug
-(square tag | dub square) (word | single | one):
+(square tag | dub square) (word | single):
     edit.select_word()
     s = edit.selected_text() 
     insert("[[{s}]]")
@@ -95,10 +95,16 @@ mode: command
 
 (square tag | dub square) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) ink :
     tag_text = user.roam_tag("{formatters or ''}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
-    insert("[[{tag_text}]]")
+    insert("[[{tag_text}")
+    # sleep(500ms)
+    # key(left left)
+    # # sleep(200ms)
+    # key(space)
+    # # sleep(200ms)
+    # key(backspace)
 
-(square tag | dub square) (auto | one | use | pop) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) :
+(square tag | dub square) (auto | use | pop) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) :
     tag_text = user.roam_tag("{formatters or ''}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
-    insert("[[{tag_text}]]")
+    insert("[[{tag_text}")
     sleep(300ms)
     key(enter)
