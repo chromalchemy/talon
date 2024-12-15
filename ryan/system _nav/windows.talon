@@ -4,9 +4,10 @@
 
 # pick app by modal icon bar
 # bug: not working
-(pick app | pickup) icons:
-    key(cmd:down)
-    key(tab:down)
+# (pick app | pickup) icons:
+#     key(cmd:down)
+#     sleep(50ms) 
+#     key(tab:down)
 
 # app window chooser
 [pick] (app | up) (win | windows) [finder] : 
@@ -15,14 +16,19 @@
 ## spotlight .
 pick (win | window | spotlight) [(all | spotlight)] | [pick] all (win | windows) | spotlight: 
     key(ctrl-up)
-
-(show | hide | toggle) (desk | desktop):
+`
+(show | hide | toggle | reaveal) (desk | desktop):
      key(f11)
 
 ## +++++++++++++++++++ alt-tab utility .
 
-[pick] (win | window) grid: 
-    key(cmd-alt-shift-ctrl-down)
+#can change in alt-tap display settings
+# [pick] (win | window) grid: 
+(pick app | pickup) [icons | icon]:
+     key(alt-`)
+
+(ok | choose | go) app [icon]:
+    key(space)
 
 ## +++++++++++++++++++++++++++ raycast .
 
