@@ -2,16 +2,19 @@
   (:require [clojure.string :as string]
             [clojure.data.xml :as xml]
             [clojure.edn :as edn]
+            [babashka.fs :as fs]
             [clojure.java.io :as io]
             ))
 
+(def root-path (fs/cwd))
+
 (defn read-edn-file [file-path]
   (with-open [reader (io/reader file-path)]
-    (edn/read {:eof nil} 
-      (java.io.PushbackReader. reader))))
+    (edn/read reader)))
 
 (comment 
-  (read-edn-file "../photoshop/ps_keys.edn" ))
+  (fs/file-name ".")
+  (read-edn-file "deps.edn" ))
 
 (defn xml-to-edn [xml-file #_output-file]
   (let [parsed-xml (xml/parse (io/input-stream xml-file))]
@@ -56,6 +59,46 @@
       
       )))
 
+
+(defn add-text-to-menu-item
+  [menu-item 
+   {:keys [pre post] 
+    :as additions}]
+  (cond
+    (string? menu-item)
+    [menu-item additions]
+  
+    (vector? menu-item)
+    (let [[menu-item-command-str 
+           {menu-item-pre :pre 
+            menu-item-post :post 
+            :as menu-item-config}]
+          menu-item]
+      (cond 
+        
+        (string? menu-item-config)
+        (let [custom-command-str menu-item-config]
+          [ menu-item-command-str 
+           (str pre " " custom-command-str " " post)])
+        
+        (map? menu-item-config)
+        [menu-item-command-str
+         (cond-> menu-item-config
+           (and post menu-item-post)
+           (assoc :post (str menu-item-post " " post))
+
+           (and post (nil? menu-item-post))
+           (assoc :post menu-item-post)
+
+           (and pre menu-item-pre)
+           (assoc :pre (str menu-item-pre " " pre))
+
+           (and pre (nil? menu-item-pre))
+           (assoc :pre menu-item-pre))]
+        
+        :else menu-item) )
+  
+    :else menu-item))
 
 (def layer-menu
   {"Layer"
@@ -138,13 +181,13 @@
       ["Enable" "(enable | disable) layer mask"]
       ["Link" "(link | unlink) layer mask"]]}
     {"Vector Mask"
-     [["Reveal All" {:pre "New vector mask"}]
+     [["Reveal All" "New vector mask reveal [all]"]
       ["Hide All" {:pre "New vector mask"}]
       ["Current Path" {:pre "New vector mask [from]"}]
       ["Delete" {:post "vector mask"}]
       ["Enable" "(enable | disable) vector mask"]
       ["Link" "(link | unlink) vector mask"]]}
-    ["Create Clipping Mask" "[(Create | make)] Clipping Mask"]
+    ["Create Clipping Mask" "([(Create | make)] (Clipping | clip) Mask)"]
     "Mask All Obiects"
     {"Smart Objects"
      [["Convert to Smart Object" "(Convert to | make) Smart Object"]
@@ -725,15 +768,23 @@
 (def window-menu
   {"Window"
    [{"Arrange"
-     [["Tile All Vertically" "Tile (all | windows) Vertically"]
-      ["Tile All Horizontally" "Tile (all | windows) Horizontally"]
-      ["2-up Horizontal" "[windows] 2 up Horizontal"]
-      ["2-up Vertical" "[windows] 2 up Vertical"]
-      ["3-up Horizontal" "[windows] 3 up Horizontal"]
-      ["3-up Vertical" "[windows] 3 up Vertical"]
-      ["3-up Stacked" "[windows] 3 up Stacked"]
-      ["4-uр" "[windows] 4 uр"]
-      "6-up"
+     [
+      (->> 
+        [["Tile All Vertically" 
+          "Tile (all | windows) (Vertical | vert)"]
+         ["Tile All Horizontally" 
+          "Tile (all | windows) (Horizontal | horz)"]
+         ["2-up Horizontal" "2 up (Horizontal | horz)"]
+         ["2-up Vertical" "2 up (Vertical | vert)"]
+         ["3-up Horizontal" "3 up (Horizontal | horz)"]
+         ["3-up Vertical" "3 up (Vertical | vert)"]
+         ["3-up Stacked" "3 up Stacked"]
+         ["4-uр" "[windows] 4 uр"]
+         "6-up"]
+        (map 
+          #(add-text-to-menu-item 
+             % {:pre "[(windows | tabs)]"} )))
+      
       ["Consolidate All to Tabs" "(consolidate | windows) to Tabs"]
       ["Cascade" "cascade windows"]
       ["Tile" "Tile windows"]
@@ -761,65 +812,49 @@
       "Delete Workspace..."
       "Keyboard Shortcuts & Menus..."
       "Lock Workspace"]}
-    (for [menu-item
-          [#_"3D"
-            "Actions" 
-           "Adjustments"
-           "Beta Feedback"
-           "Brush Settings"
-            "Brushes" 
-           "Channels"
-           "Character"
-           "Character Styles"
-           "Clone Source"
-           ["Color" {:post "panel"}]
-           "Comments"
-           "Content Credentials (Beta)"
-           "Glyphs"
-           "Gradients"
-           "Histogram"
-           "History"
-            "Info" 
-           ["Layer Comps" "Layer (Comps | compositions)"]
-           ["Layers" {:post "panel"}]
-           "Libraries"
-           "Materials"
-           "Measurement Log"
-           "Navigator"
-           "Notes"
-           "Paragraph"
-           "Paragraph Styles"
-           "Paths"
-           "Patterns"
-           "Properties"
-           "Shapes"
-           "Styles"
-           "Swatches"
-           "Timeline"
-           "Tool Presets"
-           "Version History"
-           "Application Frame"
-           "Options"
-           "Tools"
-           "Contextual Task Bar"]]
-      (let
-        [text-to-add "[panel]"
-         item-config
-         (when (map? (second menu-item))
-           (second menu-item))]
-        (cond
-          (string? menu-item)
-          [menu-item {:post text-to-add}]
-
-          (and (vector? menu-item) item-config)
-          [(first menu-item)
-           (update item-config :post 
-             (fn [existing-post]
-               (if (string? existing-post)
-                 (str existing-post " " text-to-add)
-                 text-to-add)))]
-
-          :else menu-item)))]})
+    (map 
+      (fn [menu-item] 
+        (add-text-to-menu-item menu-item {:pre "bar"}))
+      [#_"3D"
+       "Actions"
+       "Adjustments"
+       "Beta Feedback"
+       "Brush Settings"
+       "Brushes"
+       "Channels"
+       "Character"
+       ["Character Styles" "(character | char) (styles | style)"] 
+       ["Clone Source" "(clone source | clone | cloning)"] 
+       "Color"
+       "Comments"
+       "Content Credentials (Beta)"
+       "Glyphs"
+       ["Gradients" "(gradients | grads)"]
+       "Histogram"
+       "History"
+       "Info"
+       ["Layer Comps" "Layer (Comps | compositions)"]
+       ["Layers" "(layer | layers)"]
+       "Libraries"
+       "Materials"
+       "Measurement Log"
+       "Navigator"
+       "Notes"
+       "Paragraph"
+       "Paragraph Styles"
+       "Paths"
+       "Patterns"
+       ["Properties" "(properties | props)"]
+       "Shapes"
+       "Styles"
+       "Swatches"
+       "Timeline"
+       ["Tool Presets" "[tool] presets"]
+       "Version History"
+       "Application Frame"
+       "Options"
+       "Tools"
+       "Contextual Task Bar"])]})
 
 (def menu-commands
   [layer-menu
@@ -841,15 +876,20 @@
       "(toggle | show | hide)")
     :else t))
 
-(defn talon-command [original-item-name top-menu menu-name pre command-item-name post]
-  (let 
+(defn talon-command
+  [{:keys
+    [original-item-name
+     top-menu menu-name
+     pre command-item-name post]
+    :as ctx}]
+  (let
     [normalized-item-name
      (-> command-item-name
        (string/replace "..." ""))
-     
+
      pre (cond (= pre true)
            menu-name :else pre)
-     
+
      command
      (->>
        [#_#_menu-name ">"
@@ -857,7 +897,7 @@
        (interpose " ")
        (apply str)
        (string/trim))
-    
+
      action
      (str
        "user.menu_select('"
@@ -867,7 +907,7 @@
        "|"
        original-item-name
        "')")]
-    (str command ": " action)))
+    (str command ":\n    " action "\n")))
 
 
 
@@ -897,17 +937,37 @@
                   (map? override)
                   (let
                     [{:keys [pre post]} override
-                     [pre post] (mapv parse-talon-token [pre post])]
-                    (talon-command item-name top-menu menu-name pre item-name post))
+                     [pre post] 
+                     (mapv parse-talon-token [pre post])]
+                    (talon-command
+                      {:top-menu           top-menu
+                       :menu-name          menu-name
+                       :original-item-name item-name
+                       :command-item-name  item-name
+                       :pre                pre
+                       :post               post }))
                   
                   (string? override)
-                  (talon-command item-name top-menu menu-name pre override post)))
+                  (talon-command 
+                    {:top-menu           top-menu
+                     :menu-name          menu-name
+                     :original-item-name item-name
+                     :command-item-name  override
+                     :pre                pre
+                     :post               post})))
               
               (string? menu-item)
-              (talon-command menu-item top-menu menu-name pre menu-item post)
+              (talon-command 
+                {:top-menu           top-menu
+                 :menu-name          menu-name
+                 :original-item-name menu-item
+                 :command-item-name  menu-item
+                 :pre                pre
+                 :post               post} )
               
               (map? menu-item)
-              (process-menu (assoc menu-item :top-menu menu-name))))]
+              (process-menu 
+                (assoc menu-item :top-menu menu-name))))]
       (->> menu-items
         ;; flatten lists of menu items
         (mapcat
@@ -918,8 +978,6 @@
         
         
         (process-menu window-menu))
-
-
 
 
 
@@ -954,28 +1012,43 @@
 (def ps-app-name
   "Adobe Photoshop 2025")
 
-(def ps-path "../photoshop/")
+(def header
+  (strs->lines-padded
+    (str "app.name: " ps-beta-app-name)
+    (str "app.name: " ps-app-name)
+    "-"))
+
+(comment 
+  (spit (str "../hello.txt") "hello" ))
+
+(comment 
+  (fs/update-file))
+;; ryan/photoshop/ps_menu_commands.clj
+
+
+(def target-dir 
+  (fs/path (fs/parent root-path) "photoshop"))
+
+(def file-name "photoshop-menus.talon")
+
+(def target-file-path
+  (fs/path target-dir file-name))
 
 (defn write-ps-menu-file! [text]
-  (spit (str ps-path "photoshop-menus.talon") text)
-  (println "wrote ps menu commands talon file"))
-
-(def header
-     (strs->lines-padded
-       (str "app.name: " ps-beta-app-name)
-       (str "app.name: " ps-app-name)
-       "-"))
+  (println "wrote ps menu commands talon file")
+  (spit (str target-file-path) text))
 
 (defn composite-talon-text [talon-line-strings]
   (let [body
         (apply strs->lines talon-line-strings)]
     (str header body)))
 
-(->> menu-commands
+(do 
+  (->> menu-commands
   (map process-menu)
   (flatten)
   (composite-talon-text)
-  (write-ps-menu-file!))
+  (write-ps-menu-file!)))
 
 
 ;; How many commands !?
@@ -986,14 +1059,3 @@
     flatten
     count)
   )
-    
-
-
-
-
-
-
-
-
-
-
