@@ -494,6 +494,14 @@
 			120
 		],
 		"calva.evalOnSave": true,
+		"calva.replConnectSequences": [
+			{
+				"name": "bb talon",
+				"projectType": "babashka",
+				"autoSelectForJackIn": false,
+				"projectRootPath": "user/ryan/clojure" 
+			},
+  ],
 		"calva.autoEvaluateCode": {
 			"onConnect": {
 				"clj": "(when-let [requires (resolve 'clojure.main/repl-requires)] (clojure.core/apply clojure.core/require @requires))",
@@ -507,6 +515,7 @@
 		"editor.formatOnType": false,
 		"workbench.colorTheme": "Real IntelliJ Light",
 		"bookmark-manager.createJsonFile": true,
-		"bookmark-manager.alwaysIgnore": false
+		"bookmark-manager.alwaysIgnore": false,
+		"calva.autoStartRepl": false
 	}
 }
