@@ -16,3 +16,7 @@ debug, debug.form
 debug nest, debug-nest.form
 map destructure, map-destructure.mapName
 map destructure no keys, map-destructure-no-keys.mapName
+
+
+# 2024-12-15 12:34:16 - New entries automatically added by cursorless
+funk, functionDeclaration.name

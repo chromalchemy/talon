@@ -276,12 +276,15 @@ pick color: key(n)
 
 paint (inside | outside): key(x)
 
-fill [with] foreground color: key(alt-delete)
-fill [with] background color: key(cmd-delete)
+fill [with] foreground color: 
+    key(alt-delete)
+fill [with] background color: 
+    key(cmd-delete)
 
 invert layer: key(cmd-i)
 
-(swap | flip) masking [brush] [polarity]: key(x)
+(swap | flip) masking [brush] [polarity]: 
+    key(x)
 
 
 color black | paint mask | (mask | erase) (pixels | layer): 
@@ -292,6 +295,11 @@ color black | paint mask | (mask | erase) (pixels | layer):
 color white | erase mask | (unmask | paint) (pixels | layer): 
     key(d)
     
+go mask:
+    key(cmd-shift-\)
+
+go layer:
+    key(cmd-shift-2)
 
  ## +++++++++++++++++++++++++++ confirm .
 
