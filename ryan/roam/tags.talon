@@ -111,7 +111,15 @@ test paste:
     # key(space)
     # # sleep(200ms)
     # key(backspace)
+    insert("[[{tag_text}")
+    # sleep(500ms)
+    # key(left left)
+    # # sleep(200ms)
+    # key(space)
+    # # sleep(200ms)
+    # key(backspace)
 
+(square tag | dub square) (auto | use | pop) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) :
 (square tag | dub square) (auto | use | pop) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) :
     tag_text = user.roam_tag("{formatters or ''}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
     insert("[[{tag_text}")
