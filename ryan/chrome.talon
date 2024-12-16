@@ -34,7 +34,7 @@ tools [dock] (sidebar | bar | panel | bottom | right | last | next): key(cmd-shi
 
 copy  (link | address | url) (point | here)$:
     mouse_click(1)
-    sleep(100ms)
+    sleep(200ms)
     insert("copy link address")
     key(enter)  
 
