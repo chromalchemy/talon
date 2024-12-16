@@ -413,6 +413,8 @@ Clone [and] (raster | rasterize) (layer | gradient):
     user.mouse_drag_end() 
     key(cmd-c esc)
 
+photo test trace:
+    user.ps_command_nb("(test-trace)")
 
 [set] font size <user.number_string>:
     user.ps_command_nb("(set-font-size! {number_string})")
