@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "../../.config/joyride/scripts"
+		},
+		{
+			"path": "../../dev/ps script/plugins/ps-scittle-repl"
 		}
 	],
 	"settings": {
@@ -499,7 +502,7 @@
 				"name": "bb talon",
 				"projectType": "babashka",
 				"autoSelectForJackIn": false,
-				"projectRootPath": "user/ryan/clojure" 
+				"projectRootPath": [".", "ryan", "clojure"]
 			},
   ],
 		"calva.autoEvaluateCode": {
