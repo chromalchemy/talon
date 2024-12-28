@@ -35,12 +35,24 @@ zoom actual [size]: user.menu_select('View|Actual Size')
 (toggle | hide | show) panels:  key(tab)
 
 (toggle | hide | show) extras:  key(cmd-h)
-(toggle | hide | show) layer edges:  user.menu_select('View|Show|Layer Edges')
-(toggle | hide | show) artboard names:  user.menu_select('View|Show|Artboard Names')
-(toggle | hide | show) guides: user.menu_select('View|Show|Guides')
-(toggle | hide | show)  artboard guides: user.menu_select('View|Show|Artboard Guides')
-(toggle | hide | show)  smart guides: user.menu_select('View|Show|Smart Guides')
-(toggle | hide | show) grid: user.menu_select('View|Show|Grid')
+
+(toggle | hide | show) layer edges:  
+    user.menu_select('View|Show|Layer Edges')
+
+(toggle | hide | show) artboard names:  
+    user.menu_select('View|Show|Artboard Names')
+
+(toggle | hide | show) guides: 
+    user.menu_select('View|Show|Guides')
+
+(toggle | hide | show) artboard guides: 
+    user.menu_select('View|Show|Artboard Guides')
+
+(toggle | hide | show)  smart guides: 
+    user.menu_select('View|Show|Smart Guides')
+
+(toggle | hide | show) grid: 
+    user.menu_select('View|Show|Grid')
 
 ## +++++++++++ keyboard shortcuts
 
@@ -105,13 +117,22 @@ new layer: key(shift-cmd-n)
 copy layer style:  key(cmd-ctrl-c)
 paste layer style: key(cmd-ctrl-v)
 
+crop tool: 
+    key(c)
 
+lasso tool: key(l)
+
+(next | last | prev) lasso tool:
+    key(shift-l)
+
+(Ungroup | release) (artboards | artboard):
+    user.menu_select('Layer|Ungroup Artboards')
 
 ## ++++++++++++++++++++++++ Move tool .
 
 move [tool]: key(v)
-(next | last | prev) move tool :key(shift-v)
 
+(next | last | prev) move tool :key(shift-v)
 
 move group [tool]: 
     key(v)
