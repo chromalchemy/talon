@@ -46,16 +46,28 @@ panel (close | hide) | (close | hide) panel [view]:
 #     user.vscode("workbench.action.toggleSidebarVisibility")
 #     user.vscode("workbench.action.toggleAuxiliaryBar")
 
+## +++++++++++ show / toggle both bars .
 
 (toggle | show | open) [both] (bars | sidebars) | (stuffed | thin | narrow | bar | bars ) (view | mode): 
     user.vscode("workbench.action.toggleSidebarVisibility")
     user.vscode("workbench.action.toggleAuxiliaryBar")
 
+## ++++++++++++++++++++ hide both bars .
+
 (hide | close) [both] (bars | sidebars) | (tab | tabs) wide | wide (view | mode): 
     user.vscode("workbench.action.closeSidebar")
     user.vscode("workbench.action.closeAuxiliaryBar")
 
-## ++++++++++++++++++ toggle bars and panel visibility
+# maximizes one group and minimizes others
+group (expand | wide ) no bars | expand wide mode:
+    user.vscode("workbench.action.minimizeOtherEditorsHideSidebar")
+
+# toggles into current group shown, others hidden state
+group full no bars | full wide mode: 
+    user.vscode("workbench.action.maximizeEditorHideSidebar")
+    
+
+## ++++++++++++++++++ show bars and panel 
 
 (show | open | toggle) [all] (views | bars | panels) | kit (view | mode):
     user.vscode("workbench.action.closeSidebar")
@@ -66,10 +78,12 @@ panel (close | hide) | (close | hide) panel [view]:
     user.vscode("workbench.action.toggleAuxiliaryBar")
     user.vscode("workbench.action.togglePanel")
 
+## +++++++++++++++ hide bars and panel .
+
 (hide | close) [all] (views | bars | panels) | (focus | show) [only] [on] (tab | tabs | editor | editors) | (focus | show) [only] on code | (focused | focus) (view | mode | win | window ): 
     user.vscode("workbench.action.closeSidebar")
     user.vscode("workbench.action.closeAuxiliaryBar")
-    user.vscode("workbench.action.closePanel")
+    user.vscode("workbench.action.closePanel")    
 
 ## ++++++++++++++++++++ focus and snap .
 
@@ -154,7 +168,7 @@ swap (bars | sidebars) :
 
 ## ++++++++++++++++++++++ output panel .
 
-go output [panel]: 
+go output [panel]:  
     user.vscode("workbench.panel.output.focus")
 
 show output channels:

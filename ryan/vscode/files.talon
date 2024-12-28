@@ -4,7 +4,7 @@ app: vscode
 kill current file:
     user.vscode("andreas.removeFile")
 
-(hunt |  (open | hope and)) (file  | filename) [<user.text>]: 
+(hunt |  (open | hope (and | in))) (file  | filename) [<user.text>]: 
     key(cmd-p)
     sleep(100ms)
     insert(text)

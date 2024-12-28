@@ -133,15 +133,17 @@ increase group width | group (widen | wider | fatter):
 decrease group width | group (thin | thinner | slimmer): 
     user.vscode("workbench.action.decreaseViewWidth")
 
-(expand | widen) group | group (max | wide): 
+(expand | widen) group | group (max | wide | expand): 
     user.vscode("workbench.action.minimizeOtherEditors")
 
-(expand | widen) [(editor | tab)] group [and] hide (bars | sidebars | bar | sidebar) | [(editor | tab)] group full | hide other [(editor | tab)] groups: 
-    user.vscode("workbench.action.maximizeEditorHideSidebar")
+[toggle] (group full | grateful) | exit (group full | grateful): 
+    user.vscode("workbench.action.toggleMaximizeEditorGroup")
 
 (toggle | flip | reset) [(editor | tab)] (group | groups) [(size | sizes | width | widths  | with)]: 
     user.vscode("workbench.action.toggleEditorWidths")
 
+(reset | restore) (group | groups) (size | sizes | width | widths  | with):
+    user.vscode("workbench.action.evenEditorWidths")
 
 ## ++++++++++++++ andreas tab nav  .
 
