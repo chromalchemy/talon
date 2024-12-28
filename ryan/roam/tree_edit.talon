@@ -61,17 +61,17 @@ copy block:
 
 ## +++++++++++++++++++ paste block below .
 
-(paste | pace) [new] (block | blocks) [below]:
+(paste | pace) [new] [(block | blocks)] below:
     user.roam_new_block_below()
     edit.paste()
-    sleep(100ms)
-    key(esc)
+    # sleep(100ms)
+    # key(esc)
 
-(paste | pace) [new] block [below] raw:
+(paste | pace) [new] [(block | blocks)] below raw:
     user.roam_new_block_below()
     user.paste_without_formatting()
-    sleep(200ms)
-    key(esc)
+    # sleep(200ms)
+    # key(esc)
 
 ## +++++++++++++ # new block above, .
 
