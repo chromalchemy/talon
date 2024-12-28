@@ -44,5 +44,11 @@ clear block | (clear | chuck) [block] text:
 
 ## +++++++++++++++++ strip empty space . 
 
-strip (block | (whitespace | white [space]) ): 
-    user.roam_strip_block_text_whitespace_padding()
+trim (block | (whitespace | white [space])): 
+    edit.select_all()
+    sleep(200ms)
+    block_str = edit.selected_text()
+    # edit.delete()
+    sleep(300ms)
+    print(user.bb_transform_text(block_str, "string-transforms/trim-block"))
+    # user.roam_strip_block_text_whitespace_padding()

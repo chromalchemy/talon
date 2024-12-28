@@ -43,7 +43,8 @@ class Actions:
         actions.sleep("100ms")
         actions.key("right")
         actions.sleep("100ms")
-        actions.key(enter)
+        actions.key("enter")
+        actions.sleep("100ms")
 
     def roam_new_block_below():
         """ccc"""
@@ -138,11 +139,20 @@ class Actions:
     def roam_strip_block_text_whitespace_padding():
         """select block text"""
         actions.edit.select_all()
-        actions.sleep("100ms")
+        actions.sleep("200ms")
         block_str = actions.edit.selected_text()
-        stripped_text = "\n".join(line.rstrip() for line in block_str.splitlines()).strip()
-        actions.print(stripped_text)
-        actions.user.paste(stripped_text)
+        actions.edit.delete()
+        actions.sleep("300ms")
+        x = actions.user.bb_run_fn(block_str, "string-transforms/trim-block", "ryan/clojure/string-fns/")
+        actions.sleep("300ms")
+        print(x)
+        # block_lines = block_str.splitlines()
+        # stripped_lines=  [line.rstrip() for line in block_lines]
+        # print(stripped_lines)
+        # stripped_text = "\n".join(stripped_lines).strip()
+        # print("this is striped: ")
+        # print(stripped_text)
+        # actions.insert(stripped_text)
     
     def roam_cut_block_text():
         """select block text"""

@@ -31,3 +31,22 @@
 
 (comment 
   (remove-url-params url-w-params*))
+
+(def multiline-block-string
+  "kdjfoie
+  zxczxzxczx       
+  xzcz
+  dxcx
+  (str/trim)c
+  dfdfhefe
+  
+  
+  
+  
+  ")
+
+(defn trim-block [s]
+  (str "hello")
+  #_(string/trim s))
+
+(trim-block "skdjfoei \n")
