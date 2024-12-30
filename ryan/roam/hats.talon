@@ -18,8 +18,8 @@ hide hats:
 
 ((deep | do you ) grab | go)  <user.number_key>:
     key(number_key)
-    # sleep(100ms)
-    # key(enter)
+    sleep(100ms)
+    key(enter)
 
 ((deep | do you ) grab | go) (single | small)  <user.number_key>:
     key(number_key)
