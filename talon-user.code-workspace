@@ -519,6 +519,7 @@
 		"workbench.colorTheme": "Real IntelliJ Light",
 		"bookmark-manager.createJsonFile": true,
 		"bookmark-manager.alwaysIgnore": false,
-		"calva.autoStartRepl": false
+		"calva.autoStartRepl": false,
+		"python.terminal.activateEnvironment": false
 	}
 }
