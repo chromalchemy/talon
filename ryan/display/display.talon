@@ -3,10 +3,7 @@
     user.betterdisplay_print_display_name("{user.ryan.display.display_name.list or 'default'}")
 
 open (display | displays) panel: 
-    key(cmd-space)
-    sleep(300ms)
-    insert("displays")
-    key(enter)
+    user.run_raycast_command("displays")
 
 ## +++++++++++++++++++++++++ dark mode .
 
