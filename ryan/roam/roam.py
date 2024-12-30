@@ -104,22 +104,16 @@ class Actions:
 
     def roam_block_down(n: int):
         """ block back with timeout"""
-        if n == 1:
-            actions.key("tab")
-        else:
-            for _ in range(n):
-                actions.key("cmd-shift-down")
-                actions.sleep("100ms")
+        for _ in range(n):
+            actions.key("cmd-shift-down")
+            actions.sleep("100ms")
 
     def roam_block_up(n: int):
         """ block back with timeout"""
-        if n == 1:
-            actions.key("tab")
-        else:
-            for _ in range(n):
-                actions.key("cmd-shift-up")
-                actions.sleep("100ms")
-    
+        for _ in range(n): 
+            actions.key("cmd-shift-up")
+            actions.sleep("100ms")
+            
     def roam_break_block():
         "break block"
         actions.key("enter")
