@@ -161,7 +161,7 @@ block [make] (child | kid) [of] below [block] | kiddo bela:
 # move block below (outside for current nesting level) below current (nested) block... (match indentation)
 slurp [( block | below block )] [left] ([to] peer):
     user.roam_select_block_below()
-    Go hatsuser.roam_block_forward(1)
+    user.roam_block_forward(1)
     # user.roam_block_up(1)
 
 
