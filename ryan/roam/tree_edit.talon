@@ -155,13 +155,14 @@ block [make] (child | kid) [of] below [block] | kiddo bela:
 # make block below a child of current block
 [make] below [block] (child | kid) | (slurp | slur) (block | below [block]):
     user.roam_select_block_below()
-    user.roam_block_forward(4)
+    user.roam_block_forward(5)
+
 #only works on top level
 # move block below (outside for current nesting level) below current (nested) block... (match indentation)
 slurp [( block | below block )] [left] ([to] peer):
     user.roam_select_block_below()
-    user.roam_block_forward(1)
-    key(cmd-up)
+    Go hatsuser.roam_block_forward(1)
+    # user.roam_block_up(1)
 
 
 ## ++++++++++++++++++++++++++++ split/break block .
