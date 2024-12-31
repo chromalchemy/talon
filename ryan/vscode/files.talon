@@ -46,3 +46,6 @@ bar (file | files):
 
 duplicate [current] file:
     user.vscode("andreas.duplicateFile")
+
+new text file:
+    user.vscode("workbench.action.files.newUntitledFile")
