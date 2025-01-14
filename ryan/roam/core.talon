@@ -37,7 +37,7 @@ go all pages:
 
 ^(choose | pick) <user.ordinals>:
     n = ordinals or 1
-    spacesDown= number_small - 1  
+    spacesDown= n - 1
     key("down:{spacesDown}")
     key(enter)
     key(space)

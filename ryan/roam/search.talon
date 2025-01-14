@@ -2,6 +2,8 @@ app.name: Roam Research
 mode: command
 -
 
+# todo: currently disabled, extension not loaded?
+
 page blocks [panel]: key(cmd-shift-p)
 
 page (refs | references) [panel]: 
@@ -9,11 +11,8 @@ page (refs | references) [panel]:
     sleep(500ms)
     insert("@")
 
-## +++++++++++++++++++ Searching 
 
-#search
-
-#top bar search
+## +++++++ pop up (cross graph) search .
 
 ((globe | global) hunt | hunt (graph | graphs | (globe | global))) [<user.text>]:
     key(cmd-shift-u)
@@ -24,7 +23,8 @@ open result: key(shift-enter)
 open result pop: key(enter)
 open all results: key(alt-enter)
 
-#top quick search 
+## ++++++++++++++ top bar quick search .
+
 (hunt | search) [<user.text>]:
     key(cmd-u)
     sleep(300ms)
