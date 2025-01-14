@@ -1,6 +1,11 @@
 app: vscode
 -
 
+## +++++++++++++++++ py talon edit fns .
+
+actions class:
+    insert("actions.")
+
 ###################### talon edit fns
 
 sleep action <user.number_string>:
