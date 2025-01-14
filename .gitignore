@@ -11,3 +11,4 @@ env.py
 clojure/.lsp/
 .calva/
 ryan/clojure/string-fns/.lsp/
+cheatsheet/.calva/repl.calva-repl

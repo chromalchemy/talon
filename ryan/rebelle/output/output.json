@@ -1,0 +1,15 @@
+{
+    "color": {
+        "r": 64,
+        "g": 127,
+        "b": 200
+    },
+    "paint-type": "PAINT",
+    "tool": "WATERCOLOR",
+    "glaze-mode": "OPAQUE",
+    "size": 40,
+    "preset": "Gouache/Gouache Filbert",
+    "opacity": 10,
+    "water": 55,
+    "event-type": "SET_BRUSH"
+}
