@@ -11,7 +11,7 @@ class Actions:
         actions.key("cmd-space")
         actions.sleep("300ms")
         actions.user.paste(text)
-        actions.sleep("200ms")
+        actions.sleep("400ms")
         actions.key("enter")
 
    
