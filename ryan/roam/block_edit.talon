@@ -19,8 +19,16 @@ go block start:
 (select | take) block start:
     user.roam_select_block_start()
 
+copy block start:
+    user.roam_select_block_start()
+    edit.copy()
+
 (select | take) (block end | rest of block ):
     user.roam_select_block_end()
+
+copy (block end | rest of block ):
+    user.roam_select_block_end()
+    edit.copy()
 
 ## ++++++++++++ clear block start/end .
 
@@ -32,10 +40,14 @@ go block start:
     user.roam_select_block_start()
     key(delete)
 
-## +++++++++++++++++++++++++++++++ all .
+## +++++++++++++++++++++++++++++++ all block text .
 
-(select | take) block [text]: 
+(select | take) (block [inside] text | inside block [text]): 
     user.roam_select_block_text()
+
+copy (block [inside] text | inside block [text]): 
+    user.roam_select_block_text()
+    edit.copy()
 
 clear block | (clear | chuck) [block] text:
     user.roam_select_block_text()
