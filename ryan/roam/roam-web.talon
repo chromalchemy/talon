@@ -258,18 +258,6 @@ search (whole | entire) graph:
     sleep(300ms)
     key(enter)
 
-    #search pages block
-# new search block:
-#     edit.select_all()
-#     sleep(100ms)
-#     key(right)
-#     key(enter)
-#     sleep(100ms)
-#     insert("{{{[[search]]}}}")
-    # sleep(100ms)
-    # key(escape)
-
-
 
 #roam portal search
 (go | open | search | toggle | show | hide) portal: key(cmd-ctrl-alt-shift-p)
