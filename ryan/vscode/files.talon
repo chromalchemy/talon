@@ -6,12 +6,12 @@ kill current file:
 
 (hunt |  (open | hope (and | in))) (file  | filename) [<user.text>]: 
     key(cmd-p)
-    sleep(100ms)
-    insert(text)
+    sleep(300ms)
+    insert(text or "")
 
 (hunt |  (open | hope and)) (file  | filename) [<user.text>] pop: 
     key(cmd-p)
-    sleep(100ms)
+    sleep(300ms)
     insert(text)
     sleep(200ms)
     key(enter)
@@ -47,5 +47,5 @@ bar (file | files):
 duplicate [current] file:
     user.vscode("andreas.duplicateFile")
 
-new text file:
+new (text | untitled) (file | document | doc | tab):
     user.vscode("workbench.action.files.newUntitledFile")
