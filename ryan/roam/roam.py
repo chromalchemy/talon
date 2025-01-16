@@ -25,6 +25,7 @@ class Actions:
         actions.user.paste(text)
         actions.sleep("50ms")
         actions.key("enter")
+        actions.sleep("100ms")
 
     def roam_lower(text: str):
         """Lowercases text"""
@@ -176,6 +177,12 @@ class Actions:
         actions.sleep("300ms")
         actions.edit.cut()
         actions.sleep("300ms")
+
+    def roam_insert_tag(s: str):
+        """inserts a formal tag reference string"""
+        x = "{{[[" + s + "]]}}"
+        actions.insert(x)
+
 
     
     def roam_tag(formatter: str, text: str, abbreviation: str, specified_tag: str):

@@ -4,7 +4,8 @@ mode: command
 
 # todo: currently disabled, extension not loaded?
 
-page blocks [panel]: key(cmd-shift-p)
+page blocks [panel]: 
+    key(cmd-shift-p)
 
 page (refs | references) [panel]: 
     key(cmd-shift-p)
@@ -19,9 +20,14 @@ page (refs | references) [panel]:
     sleep(200ms)
     user.paste(text or "")
 
-open result: key(shift-enter)
-open result pop: key(enter)
-open all results: key(alt-enter)
+open result: 
+    key(shift-enter)
+
+open result pop: 
+    key(enter)
+
+open all results: 
+    key(alt-enter)
 
 ## ++++++++++++++ top bar quick search .
 
@@ -45,36 +51,33 @@ open (search [result] | result) [in] (sidebar | bar) | (sidebar | bar) (search |
     sleep(400ms)
     insert(text or "")
 
-exit [page] (hunt | search): key(cmd-enter)
+exit [page] (hunt | search): 
+    key(cmd-enter)
 
 #search+
-(hunt | search) advanced: key(ctrl-shift-p)
+(hunt | search) advanced: 
+    key(ctrl-shift-p)
 
 #native block ref search
-(hunt | search) block refs: key(ctrl-shift-9)
+(hunt | search) block refs: 
+    key(ctrl-shift-9)
 
 #find and replace extension search page or workspace
-search workspace: key(ctrl-s)
-search (whole | entire) graph: 
-    key(cmd-p)
-    sleep(100ms)
-    user.paste("wgs")
-    sleep(300ms)
-    key(enter)
+search workspace: 
+    key(ctrl-s)
 
-    #search pages block
-# new search block:
-#     edit.select_all()
-#     sleep(100ms)
-#     key(right)
-#     key(enter)
-#     sleep(100ms)
-#     insert("{{{[[search]]}}}")
-    # sleep(100ms)
-    # key(escape)
+search (whole | entire) graph: 
+    user.run_roam_command("wgs")
+
+#search pages block
+^new search block$:
+    user.roam_insert_tag("search")
+    sleep(100ms)
+    key(escape)
 
 
 #roam portal search
-(go | open | search | toggle | show | hide) portal: key(cmd-ctrl-alt-shift-p)
+(go | open | search | toggle | show | hide) portal: 
+    key(cmd-ctrl-alt-shift-p)
 
 #search roam graph visualization
