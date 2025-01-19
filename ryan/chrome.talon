@@ -68,7 +68,7 @@ search force <user.text>:
     sleep(100ms)
     key(enter)
 
-### search using text on page
+### search web using text on page
 
 (hunt | search) (this | that | text):
     mouse_click(1)
@@ -138,7 +138,7 @@ pick profile:
 
 ## +++++++++++++++++ find text on page .
 
-(search | hunt) page [<user.text>]: 
+(search | hunt | find) [on] page [<user.text>]: 
     key(cmd-f)
     sleep(200ms)
     insert(text or "")
@@ -149,8 +149,6 @@ hunt next:
 hunt last: 
     key(shift-enter)
 
-exit hunt | hunt exit:
+exit hunt | hunt (exit | close):
     key(esc)
-    
-
 
