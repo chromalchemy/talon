@@ -1,4 +1,6 @@
-app: vscode
+app.name: Code
+app.name: Cursor
+app.name: Windsurf
 -
 
 please (paredit | pare edit | pear edit):

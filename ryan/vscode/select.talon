@@ -1,4 +1,6 @@
-app: vscode
+app.name: Code
+app.name: Cursor
+app.name: Windsurf
 -
 
 expand (selection | take): user.vscode("editor.action.smartSelect.expand")

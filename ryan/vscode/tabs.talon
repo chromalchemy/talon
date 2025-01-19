@@ -1,4 +1,6 @@
-app: vscode
+app.name: Code
+app.name: Cursor
+app.name: Windsurf
 -
 
 # please tab: key(cmd-p)

@@ -1,5 +1,7 @@
 list: user.portal_viewer
-app: vscode
+app.name: Code
+app.name: Cursor
+app.name: Windsurf
 -
 inspector: inspector 
 eden: edn

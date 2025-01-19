@@ -1,4 +1,6 @@
-app: vscode
+app.name: Code
+app.name: Cursor
+app.name: Windsurf
 -
 
 kill current file:
@@ -15,11 +17,11 @@ kill current file:
     insert(text)
     sleep(200ms)
     key(enter)
-
+    
 ## +++++++++++++++++++++++++++++++++ file explorer
 
 bar (file | files): 
-    user.vscode("workbench.files.action.focusFilesExplorer")
+    user.run_rpc_command("workbench.files.action.focusFilesExplorer")
 
 (show | reveal) file [in] [(explore | explorer)]: 
     user.vscode("workbench.files.action.showActiveFileInExplorer")

@@ -1,4 +1,6 @@
-app: vscode
+app.name: Code
+app.name: Cursor
+app.name: Windsurf
 -
 
 ## ++++++++++++++++++++++++ search bar .
@@ -9,7 +11,7 @@ bar search <user.text>:
     insert(text)
 
 go [bar] search [bar] (list | results | hits):
-     user.vscode("search.action.focusSearchList")
+     user.run_rpc_command("search.action.focusSearchList")
 
 go search string [from results]: 
     user.vscode("search.action.focusSearchFromResults")

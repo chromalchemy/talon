@@ -1,4 +1,6 @@
-app: vscode
+app.name: Code
+app.name: Cursor
+app.name: Windsurf
 -
 
 # Use `alt-left` and `alt-right` to navigate the bread crumb
