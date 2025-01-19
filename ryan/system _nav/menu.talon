@@ -27,7 +27,7 @@ menu (touch | punch | hit | press | select) <user.text>:
 
 ## ++++++++++++++++++++ # search menus .
 
-(search | hunt) ray (menu | menus) [<user.text>]: 
+ray (search | hunt) (menu | menus) [<user.text>]: 
     key(cmd-alt-shift-ctrl-l)
     sleep(200ms)
     insert("{text or ''}")
