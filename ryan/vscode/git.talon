@@ -1,7 +1,12 @@
 app.name: Code
 app.name: Cursor
 app.name: Windsurf
+
 -
+
+tag(): user.address
+tag(): user.file_manager
+tag(): user.navigation
 
 
 bar (repos | repositories): 
@@ -179,3 +184,14 @@ view line history:
 
 push (to | too | two):
     user.vscode("git.pushTo")
+
+[git] open [(talon | talent)] (repository | repo | repos):
+    user.run_rpc_command("git.openRepository") 
+    sleep(500ms)
+    user.finder_modal_open_directory("/Users/ryan/.talon/user")
+
+[git] open (pure | reference) [(talon | talent)] (repository | repo | repos):
+    user.run_rpc_command("git.openRepository") 
+    sleep(500ms)
+    user.finder_modal_open_directory("/Users/ryan/.talon/repos")
+
