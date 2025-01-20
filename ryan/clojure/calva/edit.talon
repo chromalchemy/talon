@@ -8,9 +8,9 @@ tag: user.cursorless
 
 ## ++++++++++++++++++++++++++ parinfer .
 
-disable ((par | pear) infer | parent for): user.vscode("parinfer.disable")
+disable ((par | pear) infer | parent for): user.run_rpc_command("parinfer.disable")
 
-toggle ((par | pear) infer | parent for) mode: user.vscode("parinfer.toggleMode") 
+toggle ((par | pear) infer | parent for) mode: user.run_rpc_command("parinfer.toggleMode") 
 
 # run actions defined in cursorless settings
 # {user.cursorless_custom_action}:

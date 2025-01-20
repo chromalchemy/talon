@@ -10,32 +10,32 @@ app.name: Windsurf
 ## ++++++++++++++++++++++++++++++ back .
 
 go (back | previous | prev) form:
-    user.vscode("paredit.backwardSexp")
+    user.run_rpc_command("paredit.backwardSexp")
 
 go (back | previous | prev) down [form]: 
-    user.vscode("paredit.backwardDownSexp")
+    user.run_rpc_command("paredit.backwardDownSexp")
 
 go (back | previous | prev) up [form]: 
-    user.vscode("paredit.backwardUpSexp")
+    user.run_rpc_command("paredit.backwardUpSexp")
 
 # go back to start: 
 go back or up: 
-    user.vscode("paredit.backwardSexpOrUp")
+    user.run_rpc_command("paredit.backwardSexpOrUp")
 
  ## +++++++++++++++++++++++++++ forward .
 
 go (forward | fore | next) down [form]: 
-    user.vscode("paredit.forwardDownSexp")
+    user.run_rpc_command("paredit.forwardDownSexp")
 
 go ((next | end) [form] | (forward | fore) form): 
-    user.vscode("paredit.forwardSexp")
+    user.run_rpc_command("paredit.forwardSexp")
 
 go forward up | go up [form]: 
-    user.vscode("paredit.forwardUpSexp")
+    user.run_rpc_command("paredit.forwardUpSexp")
 
 go forward or up: 
-    user.vscode("paredit.forwardSexpOrUp")
+    user.run_rpc_command("paredit.forwardSexpOrUp")
 
 go (to | collection | seek) end: 
-    user.vscode("paredit.closeList")
+    user.run_rpc_command("paredit.closeList")
 

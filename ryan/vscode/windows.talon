@@ -4,18 +4,18 @@ app.name: Windsurf
 -
 ## ++++++++++++++++ nav vscode windows .
 
-pick (code | could) (window | winner | win | [open] project) | pick [open] project: user.vscode("workbench.action.switchWindow")
+pick (code | could) (window | winner | win | [open] project) | pick [open] project: user.run_rpc_command("workbench.action.switchWindow")
 
 ^(code | could) (swap | next | last) (window | winner | win)$:
-    user.vscode("workbench.action.switchWindow")
+    user.run_rpc_command("workbench.action.switchWindow")
     key(enter)
     
 ^(swap | next | last) (code | could) (window | winner | win)$:
-    user.vscode("workbench.action.switchWindow")
+    user.run_rpc_command("workbench.action.switchWindow")
     key(enter)
     
 ^(code | could) [(window | winner | win)] [(swap | next | last)]$:
-    user.vscode("workbench.action.switchWindow")
+    user.run_rpc_command("workbench.action.switchWindow")
     key(enter)
 
 
@@ -26,10 +26,10 @@ pick (code | could) (window | winner | win | [open] project) | pick [open] proje
 ## +++++++++++++++++ open project
 
 open project [in]  [new window]: 
-    user.vscode("projectManager.listProjectsNewWindow")
+    user.run_rpc_command("projectManager.listProjectsNewWindow")
 
 ## old vscode menu implementation to go to project
-# user.vscode("projectManager.listProjectsNewWindow")
+# user.run_rpc_command("projectManager.listProjectsNewWindow")
 # sleep(300ms)
 # insert("talon-user")
 # sleep(100ms)
@@ -40,7 +40,7 @@ open project [in]  [new window]:
 
 
 change project: 
-    user.vscode("projectManager.listProjects")
+    user.run_rpc_command("projectManager.listProjects")
 
 [(show | view | bar)] projects: 
-    user.vscode("projectsExplorerFavorites.focus")
+    user.run_rpc_command("projectsExplorerFavorites.focus")

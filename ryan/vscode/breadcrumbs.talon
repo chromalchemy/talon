@@ -6,16 +6,16 @@ app.name: Windsurf
 # Use `alt-left` and `alt-right` to navigate the bread crumb
 # from community
 select breadcrumb: 
-    user.vscode("breadcrumbs.focusAndSelect")
+    user.run_rpc_command("breadcrumbs.focusAndSelect")
 
 (toggle | show | hide) (file context | path | crumb | crumbs | breadcrumb | breadcrumbs): 
-    user.vscode("breadcrumbs.toggle")
+    user.run_rpc_command("breadcrumbs.toggle")
 
 file context | path | crumb | crumbs | breadcrumb | breadcrumbs: 
-    user.vscode("breadcrumbs.focusAndSelect")
+    user.run_rpc_command("breadcrumbs.focusAndSelect")
 
 (go | focus) (file context | path | crumb | crumbs | breadcrumb | breadcrumbs): 
-    user.vscode("breadcrumbs.focus")
+    user.run_rpc_command("breadcrumbs.focus")
 
 (crumb | crumbs | level) (left | [level] up | parent): key(alt-left)
 
@@ -23,5 +23,5 @@ file context | path | crumb | crumbs | breadcrumb | breadcrumbs:
 
 # todo: (crumb | crumbs) parent ... doesnt work
 parent ([(file | level)] context | path | crumb | crumbs | breadcrumb | breadcrumbs): 
-    user.vscode("breadcrumbs.focusAndSelect")
+    user.run_rpc_command("breadcrumbs.focusAndSelect")
     key(alt-(left)  

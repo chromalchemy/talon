@@ -5,22 +5,22 @@ tag: user.cursorless
 -
 
 (focus | show | bar) (bookmarks | marks | links) [(bar | panel | view)]:
-    user.vscode("bookmarksExplorer.focus")
+    user.run_rpc_command("bookmarksExplorer.focus")
 
 #--------------------create bookmarks
 
 (toggle | create | add | new) [line] (bookmark | mark) | (bookmark | mark) line: 
-    user.vscode("bookmarks.toggle")
+    user.run_rpc_command("bookmarks.toggle")
 
 (remove | delete) (bookmark | mark): 
-    user.vscode("bookmarks.toggle")
+    user.run_rpc_command("bookmarks.toggle")
 
 (bookmark | mark) (that | line) (named | labelled): 
-    user.vscode("bookmarks.toggleLabeled")
+    user.run_rpc_command("bookmarks.toggleLabeled")
 
 (bookmark | mark) that$:
     t= edit.selected_text()
-    user.vscode("bookmarks.toggleLabeled")
+    user.run_rpc_command("bookmarks.toggleLabeled")
     user.paste(t)
     sleep(300ms)
     key(enter)
@@ -29,38 +29,38 @@ tag: user.cursorless
     t = user.cursorless_get_text(cursorless_target)
     user.cursorless_command("setSelection", cursorless_target)
     sleep(300ms)
-    user.vscode("bookmarks.toggleLabeled")
+    user.run_rpc_command("bookmarks.toggleLabeled")
     user.paste(t)
     sleep(300ms)
     key(enter)
     
 (bookmark | mark) (that | line) [with] (label | labelled) <user.text>:
-    user.vscode("bookmarks.toggleLabeled")
+    user.run_rpc_command("bookmarks.toggleLabeled")
     insert(text)
     sleep(300ms)
     key(enter)
 
 (bookmark | mark) that [(paste | pace)]:
     edit.copy()
-    user.vscode("bookmarks.toggleLabeled")
+    user.run_rpc_command("bookmarks.toggleLabeled")
     edit.paste()
     sleep(300ms)
     key(enter)
     
 ## ++++++++++++++++++++++ jump to bookmark via bookmark order .
 
-[go] next (bookmark | mark):    user.vscode("bookmarks.jumpToNext")
-[go] (previous | prev | last) (bookmark | mark): user.vscode("bookmarks.jumpToPrevious")
+[go] next (bookmark | mark):    user.run_rpc_command("bookmarks.jumpToNext")
+[go] (previous | prev | last) (bookmark | mark): user.run_rpc_command("bookmarks.jumpToPrevious")
 
 ## ++++++ pick bookmark from current file .
 
 (hunt | search | pick | list) [file] (bookmark | bookmarks | mark | marks ) [for] [<user.text>]:
-    user.vscode("bookmarks.list")
+    user.run_rpc_command("bookmarks.list")
     insert(text)
 
 
 go [file] (bookmark | mark) <user.text>:
-    user.vscode("bookmarks.list")
+    user.run_rpc_command("bookmarks.list")
     # sleep(100ms)
     user.paste(text)
     sleep(100ms)
@@ -75,14 +75,14 @@ go [file] (bookmark | mark) <user.text>:
 
 ## ++++++ pick bookmark from all files .
 (hunt | search | pick | list) all (bookmark | bookmarks | mark | marks ) [for] [<user.text>]:
-    user.vscode("bookmarks.listFromAllFiles")
+    user.run_rpc_command("bookmarks.listFromAllFiles")
     # sleep(100ms)
     key(enter)
     sleep(300ms)
     insert(text)
 
 [go] (marks | (bookmark | mark) all) <user.text>:
-    user.vscode("bookmarks.listFromAllFiles")
+    user.run_rpc_command("bookmarks.listFromAllFiles")
     key(enter)
     sleep(100ms)
     user.paste(text)
@@ -92,7 +92,7 @@ go [file] (bookmark | mark) <user.text>:
     
 #open pasted bookmark bookmark name, from all files
 (hunt | search | pick | list) [all] (bookmark | bookmarks | mark | marks ) (paste | pace):
-    user.vscode("bookmarks.listFromAllFiles")
+    user.run_rpc_command("bookmarks.listFromAllFiles")
     # sleep(100ms)
     key(enter)
     sleep(300ms)

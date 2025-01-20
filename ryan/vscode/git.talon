@@ -10,121 +10,121 @@ tag(): user.navigation
 
 
 bar (repos | repositories): 
-    user.vscode("gitlens.showRepositoriesView")
+    user.run_rpc_command("gitlens.showRepositoriesView")
 
 [pick] git (commands | command | [command] palette | menu): 
-    user.vscode("gitlens.gitCommands")
+    user.run_rpc_command("gitlens.gitCommands")
 
  ## +++++++++++++++++++++++++++ sources .
 
 [(show | view | bar)] (sources | git | source control): 
-    user.vscode("workbench.view.scm")
+    user.run_rpc_command("workbench.view.scm")
 
 go (sources | git | source control): 
-    user.vscode("workbench.scm.focus")
+    user.run_rpc_command("workbench.scm.focus")
 
  #not working
 open repo: 
-    user.vscode("gitlens.views.workspaces.repo.open")
+    user.run_rpc_command("gitlens.views.workspaces.repo.open")
 
 fold [all] sources:
-    user.vscode("workbench.scm.action.collapseAllRepositories")
+    user.run_rpc_command("workbench.scm.action.collapseAllRepositories")
 
 #not working   
 reveal repo:
-    user.vscode("gitlens.views.revealRepositoryInExplorer")
+    user.run_rpc_command("gitlens.views.revealRepositoryInExplorer")
 
 ## +++++++++++++++++++++++++++ remotes .
 
 (show | view | bar | go) remotes: 
-    user.vscode("gitlens.views.remotes.focus")
+    user.run_rpc_command("gitlens.views.remotes.focus")
 
 toggle remotes:
-    user.vscode("gitlens.views.remotes.toggleVisibility")
+    user.run_rpc_command("gitlens.views.remotes.toggleVisibility")
 
 ## +++++++++++++++++++++++++++ commits .
 
 (bar | hide | show) commits | (arc | bark) emits: 
-    user.vscode("gitlens.showCommitsView")
+    user.run_rpc_command("gitlens.showCommitsView")
     
 reveal commit:
-    user.vscode("gitlens.revealCommitInView")
+    user.run_rpc_command("gitlens.revealCommitInView")
         
 fold [all] commits:
-    user.vscode("workbench.actions.treeView.gitlens.views.commits.collapseAll")
+    user.run_rpc_command("workbench.actions.treeView.gitlens.views.commits.collapseAll")
 
 (search | find) (commits | commit): 
-    user.vscode("gitlens.showCommitSearch")
+    user.run_rpc_command("gitlens.showCommitSearch")
 
 show [git lens] commit graph:
-    user.vscode("gitlens.showGraph")
+    user.run_rpc_command("gitlens.showGraph")
 
 (bar commit | (arc | bark) emit) graph: 
-    user.vscode("workbench.scm.history.focus")
+    user.run_rpc_command("workbench.scm.history.focus")
 
 show search [and] compare commits [view]:
-    user.vscode("gitlens.showSearchAndCompareView")
+    user.run_rpc_command("gitlens.showSearchAndCompareView")
 
 
 ## ++++++++++++++++++++++++++ branches .
 
 (bar | hide | show) branches: 
-    user.vscode("gitlens.showBranchesView")
+    user.run_rpc_command("gitlens.showBranchesView")
 
 ## ++++++++++++++++++++++ commit graph .
 
 #not working
 open (in | and) commit graph:
-    user.vscode("gitlens.showInCommitGraphView") 
-    # user.vscode("gitlens.showInCommitGraph")
+    user.run_rpc_command("gitlens.showInCommitGraphView") 
+    # user.run_rpc_command("gitlens.showInCommitGraph")
 
 [(new | go)] commit graph tab: 
-    user.vscode("gitlens.showGraphPage")
+    user.run_rpc_command("gitlens.showGraphPage")
 
 (bar | panel | go) commit graph: 
-    user.vscode("gitlens.showGraph")
+    user.run_rpc_command("gitlens.showGraph")
 
 commit graph (max | min | normal | norm):
-    user.vscode("gitlens.toggleMaximizedGraph")
+    user.run_rpc_command("gitlens.toggleMaximizedGraph")
 
 ## ++++++++++++++ commit graph details .
 
 go commit [(graph | craft)] details:
-    user.vscode("gitlens.views.graphDetails.focus")
+    user.run_rpc_command("gitlens.views.graphDetails.focus")
 
 [(toggle  | show | hide)] commit [(graph | craft)] details:
-    user.vscode("gitlens.views.graphDetails.toggleVisibility")
+    user.run_rpc_command("gitlens.views.graphDetails.toggleVisibility")
 
 ## +++++++++++++++++++++ Navigate diff 
 
 #in regular editor
 [go] (file | tab | editor) next [diff] change: 
-    user.vscode("workbench.action.editor.nextChange")
+    user.run_rpc_command("workbench.action.editor.nextChange")
 
 [go] (file | tab | editor) last [diff] change: 
-    user.vscode("workbench.action.editor.previousChange")
+    user.run_rpc_command("workbench.action.editor.previousChange")
 
 #in compare view
 [go] next [diff] change: 
-    user.vscode("workbench.action.compareEditor.nextChange")
+    user.run_rpc_command("workbench.action.compareEditor.nextChange")
 
 [go] last [diff] change: 
-    user.vscode("workbench.action.compareEditor.previousChange")
+    user.run_rpc_command("workbench.action.compareEditor.previousChange")
 
 ## ___________________________________ .
 
-(open  | go) working file : user.vscode("gitlens.openWorkingFile")
+(open  | go) working file : user.run_rpc_command("gitlens.openWorkingFile")
 
-open file [at] revision: user.vscode("gitlens.openFileRevision")
+open file [at] revision: user.run_rpc_command("gitlens.openFileRevision")
 
 ## +++++++++++++++++++++++++++++ stage .
 
-stage [this] file [changes]: user.vscode("git.stage")
+stage [this] file [changes]: user.run_rpc_command("git.stage")
 
 ## +++++++++++++++++++++++++++++ fetch .
 
 (git fetch all | fetch all git) (remotes | repos | repositories): 
-    user.vscode("gitlens.fetchRepositories")
+    user.run_rpc_command("gitlens.fetchRepositories")
 
 ## ++++++++++++++++++++++++++++ ignore .
 
@@ -137,7 +137,7 @@ add to git ignore [point]:
 ## ++++++++++++++++++++++ file changes .
 
 (open | show) changes [with] [previous] [revision]:
-    user.vscode("gitlens.diffWithPrevious")
+    user.run_rpc_command("gitlens.diffWithPrevious")
 
 
 ## ++++++++++++++++++++++ file history .
@@ -145,45 +145,45 @@ add to git ignore [point]:
 # gitlens file history bar 
 
 (bar | hide | show) file history | show file history view:
-    user.vscode("gitlens.showFileHistoryView")
+    user.run_rpc_command("gitlens.showFileHistoryView")
 
 go file history: 
-    user.vscode("gitlens.views.fileHistory.focus")
+    user.run_rpc_command("gitlens.views.fileHistory.focus")
 
 show file history:
-    user.vscode("gitlens.showQuickFileHistory")
+    user.run_rpc_command("gitlens.showQuickFileHistory")
 
 (open | get) file history:
-    user.vscode("gitlens.openFileHistory")
+    user.run_rpc_command("gitlens.openFileHistory")
 
 (quick open | pick) file history: 
-    user.vscode("gitlens.quickOpenFileHistory")
+    user.run_rpc_command("gitlens.quickOpenFileHistory")
 
 #git HD
 view file history:    
-    user.vscode("githd.viewFileHistory")
+    user.run_rpc_command("githd.viewFileHistory")
 
 ## ++++++++++++++++++++++ line history .
 
 show line history:
-    user.vscode("gitlens.showLineHistoryView")
+    user.run_rpc_command("gitlens.showLineHistoryView")
 
 go line history:
-    user.vscode("gitlens.views.lineHistory.focus")
+    user.run_rpc_command("gitlens.views.lineHistory.focus")
 
 (toggle | hide) line history: 
-    user.vscode("gitlens.views.lineHistory.toggleVisibility")
+    user.run_rpc_command("gitlens.views.lineHistory.toggleVisibility")
 
 line history fold all | fold line history: 
-    user.vscode("workbench.actions.treeView.gitlens.views.lineHistory.collapseAll")
+    user.run_rpc_command("workbench.actions.treeView.gitlens.views.lineHistory.collapseAll")
 
 view line history: 
-    user.vscode("githd.viewLineHistory")
+    user.run_rpc_command("githd.viewLineHistory")
 
 ## ++++++++++++++++++++++++++++++ push .
 
 push (to | too | two):
-    user.vscode("git.pushTo")
+    user.run_rpc_command("git.pushTo")
 
 [git] open [(talon | talent)] (repository | repo | repos):
     user.run_rpc_command("git.openRepository") 

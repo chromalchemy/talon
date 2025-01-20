@@ -4,36 +4,36 @@ app.name: Windsurf
 -
 
 (bar | go | focus) outline$: 
-    user.vscode("outline.focus")
+    user.run_rpc_command("outline.focus")
 
 
 (bar | go | focus | hunt) outline <user.text>: 
-    user.vscode("outline.focus")
+    user.run_rpc_command("outline.focus")
     sleep(100ms)
     insert(text)
 
 (bar | go | focus | hunt) outline <user.format_code>+$: 
-    user.vscode("outline.focus")
+    user.run_rpc_command("outline.focus")
     sleep(100ms)
     user.insert_many(format_code_list)
 
 [toggle] outline follow:
-    user.vscode("outline.followCursor")
+    user.run_rpc_command("outline.followCursor")
 
 [toggle] outline filter [on] type:
-    user.vscode("outline.filterOnType")
+    user.run_rpc_command("outline.filterOnType")
 
 unfold outline | outline unfold:
-    user.vscode("outline.expand")
+    user.run_rpc_command("outline.expand")
 
 fold outline | outline fold:
-    user.vscode("outline.collapse")
+    user.run_rpc_command("outline.collapse")
 
 outline sort [by] position:
-    user.vscode("outline.sortByPosition")
+    user.run_rpc_command("outline.sortByPosition")
 outline sort [by] name:
-    user.vscode("outline.sortByName")
+    user.run_rpc_command("outline.sortByName")
 outline sort [by] (kind | category):
-    user.vscode("outline.sortByKind")
+    user.run_rpc_command("outline.sortByKind")
 
     

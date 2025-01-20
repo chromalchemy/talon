@@ -3,4 +3,4 @@ app.name: Cursor
 app.name: Windsurf
 -
 
-rename symbol: user.vscode("editor.action.rename")
+rename symbol: user.run_rpc_command("editor.action.rename")

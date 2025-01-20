@@ -13,26 +13,26 @@ tag: user.cursorless
 #### repl snippets config
 
 (open | go | show) [(user | global)] [calva] (repl snippets | calva config) [eden]: 
-    user.vscode("calva.openUserConfigEdn")
+    user.run_rpc_command("calva.openUserConfigEdn")
 
 (open | go | show) workspace repl snippets:
-    user.vscode("workbench.action.openWorkspaceSettingsFile")
+    user.run_rpc_command("workbench.action.openWorkspaceSettingsFile")
     key(cmd-f)
     insert("calva.customREPLCommandSnippets")
 
 (refresh | reload) [(user | global)] (repl snippets | calva config) [eden]: 
-    user.vscode("calva.rereadUserConfigEdn")
+    user.run_rpc_command("calva.rereadUserConfigEdn")
 
 ## +++++++++++++++ choose repl snippet from dropdown
 
 # todo: need enumerated versions of this?
 (pick | choose | show | please) [custom] repl (command | commands  | function | functions | funs | fun | snippet | snippets) [<user.text>]:
-    user.vscode("calva.runCustomREPLCommand")
+    user.run_rpc_command("calva.runCustomREPLCommand")
     # sleep(100ms)
     insert(text or "")
 
 (pick | choose | show | please) [custom] repl (command | commands  | function | functions | funs | fun | snippet | snippets) pop [<user.text>]:
-    user.vscode("calva.runCustomREPLCommand")
+    user.run_rpc_command("calva.runCustomREPLCommand")
     # sleep(100ms)
     insert(text or "")
     sleep(100ms)

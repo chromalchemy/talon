@@ -5,6 +5,6 @@ app.name: Windsurf
 
 # build bc templates 
 [repl] (build | rebuild) (templates | theme | home [page]): 
-    user.vscode("calva.loadFile")
+    user.run_rpc_command("calva.loadFile")
     sleep(500ms)
     user.run_rpc_command("calva.runCustomREPLCommand", "b")

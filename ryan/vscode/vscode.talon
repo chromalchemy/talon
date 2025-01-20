@@ -7,7 +7,7 @@ app.name: Windsurf
     user.menu_select('Code|Settings…|Theme|Color Theme [⌘K ⌘T]')
 
 restart ( lsp | ell es pee) [server]: 
-    user.vscode("calva.clojureLsp.restart") 
+    user.run_rpc_command("calva.clojureLsp.restart") 
     
 please  (go | focus):
     key(cmd-shift-p)
@@ -15,71 +15,71 @@ please  (go | focus):
 
 #settings
 open (settings | sitting):  
-    user.vscode("workbench.action.openSettings2")
+    user.run_rpc_command("workbench.action.openSettings2")
 
 open [user] (settings | sitting) (json | jay son): 
-    user.vscode("workbench.action.openSettingsJson")
+    user.run_rpc_command("workbench.action.openSettingsJson")
 
 open workspace (settings | sitting) (json | jay son): 
-    user.vscode("workbench.action.openWorkspaceSettingsFile")
+    user.run_rpc_command("workbench.action.openWorkspaceSettingsFile")
 
 browse (json | jason): 
-    user.vscode("vscode-json-editor.start")
+    user.run_rpc_command("vscode-json-editor.start")
 
 ## ++++++++++++++++++++++++ which key menu
 (which | witch | please) key:        
-    user.vscode("whichkey.show")
+    user.run_rpc_command("whichkey.show")
 
 ## +++++++++++++++++++++++++ shortcuts .
 (show | (open | hope in)) shortcuts:             
-    user.vscode("workbench.action.openGlobalKeybindings")
+    user.run_rpc_command("workbench.action.openGlobalKeybindings")
 
 show shortcuts json:        
-    user.vscode("workbench.action.openGlobalKeybindingsFile")
+    user.run_rpc_command("workbench.action.openGlobalKeybindingsFile")
 
 ## ++++++++++++++++++++++++++ snippets .
 
 show snippets:              
-    user.vscode("workbench.action.openSnippets")
+    user.run_rpc_command("workbench.action.openSnippets")
 
 ## ++++++++++++++++++++++++ extensions .
 
 check [for] extension updates | update extensions: 
-    user.vscode("workbench.extensions.action.checkForUpdates")
-    user.vscode("workbench.view.extensions")
+    user.run_rpc_command("workbench.extensions.action.checkForUpdates")
+    user.run_rpc_command("workbench.view.extensions")
 
 (show | go) extension updates:
-    user.vscode("workbench.extensions.action.extensionUpdates")
+    user.run_rpc_command("workbench.extensions.action.extensionUpdates")
 
  ## ++++++++ vscode notification popups .
  
 (dismiss | clear | hide | kill) (notifications |  alerts): 
-    user.vscode("notifications.clearAll")
+    user.run_rpc_command("notifications.clearAll")
 
 show (notifications |  alerts): 
-    user.vscode("notifications.showList")
+    user.run_rpc_command("notifications.showList")
 
 accept (notification | alert): 
-    user.vscode("notification.acceptPrimaryAction")
+    user.run_rpc_command("notification.acceptPrimaryAction")
 
 ## +++++++++++++++++++++++++ dark mode .
 
 [toggle] [code] (dark | light) mode:
-    user.vscode("workbench.action.toggleLightDarkThemes")
+    user.run_rpc_command("workbench.action.toggleLightDarkThemes")
  
 
 close unsaved file | close file without saving:
-    user.vscode("workbench.action.closeActiveEditor")
+    user.run_rpc_command("workbench.action.closeActiveEditor")
     key(space)
 
 open file in browser:
-    user.vscode("openInDefaultBrowser.openInDefaultBrowser")
+    user.run_rpc_command("openInDefaultBrowser.openInDefaultBrowser")
 
 ## ++++++++++ select quick open option .
 
 # select Previous in Quick Open
 (choose | pick) (previous | prev | last): 
-    user.vscode("workbench.action.quickOpenSelectPrevious")
+    user.run_rpc_command("workbench.action.quickOpenSelectPrevious")
     
 # Navigate Previous in Quick Open
 please go (previous | prev | last): 

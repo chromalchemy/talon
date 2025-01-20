@@ -4,4 +4,4 @@ app.name: Windsurf
 -
 
 copy (line | code) (link | address):           
-    user.vscode("extension.linkLine")
+    user.run_rpc_command("extension.linkLine")

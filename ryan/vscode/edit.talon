@@ -28,45 +28,45 @@ code move down: key(alt-down)
 
 #delete line
 (chuck | kill) lines | (kill line | killing | k line | cline): 
-    user.vscode("editor.action.deleteLines")
+    user.run_rpc_command("editor.action.deleteLines")
 
 (chuck | kill) lines point | (kill line | killing | k line | cline) point:
     key(shift:down)
     mouse_click(0) 
-    user.vscode("editor.action.deleteLines")
+    user.run_rpc_command("editor.action.deleteLines")
 
 ## ++++++++++++++++++++++++ break line .
 
 break <user.cursorless_target>:
     user.cursorless_command("setSelectionBefore", cursorless_target)
-    user.vscode("hideSuggestWidget")
+    user.run_rpc_command("hideSuggestWidget")
     key("enter")
     
 break [line]:
-    user.vscode("hideSuggestWidget")
+    user.run_rpc_command("hideSuggestWidget")
     key("enter")
 
 
 ## +++++++++++++ inline context popups .
 
 show ([(code | token)] hint | (function | fun) (signature | parameters | params)):
-    user.vscode("editor.action.triggerParameterHints")
+    user.run_rpc_command("editor.action.triggerParameterHints")
 
 ## +++++++++++++++++++++++ completions .
 
 ^complete: 
-    user.vscode("editor.action.triggerSuggest")
+    user.run_rpc_command("editor.action.triggerSuggest")
 
 ^complete inline: 
-    user.vscode("editor.action.inlineSuggest.trigger")
+    user.run_rpc_command("editor.action.inlineSuggest.trigger")
  
 trim [line] (whitespace | white | space):
-    user.vscode("editor.action.trimTrailingWhitespace")
+    user.run_rpc_command("editor.action.trimTrailingWhitespace")
 
 ## +++++++++++++++++ refactor commands .
 
 refactor that | pick refactor [action]:
-    user.vscode("editor.action.refactor")
+    user.run_rpc_command("editor.action.refactor")
 
 refactor rename:
-    user.vscode("editor.action.rename")
+    user.run_rpc_command("editor.action.rename")

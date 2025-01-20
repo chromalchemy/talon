@@ -3,7 +3,7 @@ app.name: Cursor
 app.name: Windsurf
 -
 
-expand (selection | take): user.vscode("editor.action.smartSelect.expand")
-^take more$: user.vscode("editor.action.smartSelect.expand")
+expand (selection | take): user.run_rpc_command("editor.action.smartSelect.expand")
+^take more$: user.run_rpc_command("editor.action.smartSelect.expand")
 
-take bracket: user.vscode("editor.action.selectToBracket")
+take bracket: user.run_rpc_command("editor.action.selectToBracket")

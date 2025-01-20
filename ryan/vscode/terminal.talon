@@ -6,17 +6,17 @@ app.name: Windsurf
 ## +++++++++++++++++++++++++ font size .
 
 (terminal | term) font [size] down: 
-    user.vscode("terminalFontSize.decrease")
+    user.run_rpc_command("terminalFontSize.decrease")
 
 (terminal | term) font [size] up: 
-    user.vscode("terminalFontSize.increase")
+    user.run_rpc_command("terminalFontSize.increase")
 
 (terminal | term) font [size] reset: 
-    user.vscode("workbench.action.terminal.fontZoomReset")
+    user.run_rpc_command("workbench.action.terminal.fontZoomReset")
 
 #only goes up to 26
 (terminal | term) font [size] <number>:
-    user.vscode("terminalFontSize.openQuickPick")
+    user.run_rpc_command("terminalFontSize.openQuickPick")
     sleep(200ms)
     insert(number)
     key(enter)
@@ -24,20 +24,20 @@ app.name: Windsurf
 ## +++++++++++++++++++++++++++++ stage
 
 go warp (terminal | term):  
-    user.vscode("workbench.action.terminal.openNativeConsole")
+    user.run_rpc_command("workbench.action.terminal.openNativeConsole")
 
 restore terminals: 
-    user.vscode("restore-terminals.restoreTerminals")
+    user.run_rpc_command("restore-terminals.restoreTerminals")
 
 ## ++++++++++++++++++++++++++++++ show .
 
 (go | show) (term | terminal) | term show: 
-    user.vscode("workbench.action.terminal.focus")
+    user.run_rpc_command("workbench.action.terminal.focus")
 
 ## +++++++++++++++++++++++++++++ state .
 
 clear (term | terminal) | clear (term | terminal) : 
-    user.vscode("workbench.action.terminal.clear")   
+    user.run_rpc_command("workbench.action.terminal.clear")   
     
 kill process:               
     key(ctrl-c)
@@ -45,10 +45,10 @@ kill process:
 ## ++++++++++++++++++++++++++++++ move .
 
 [(move | send)] (term | terminal) (to | too | two) (tab | editor):
-    user.vscode("workbench.action.terminal.moveToEditor")
+    user.run_rpc_command("workbench.action.terminal.moveToEditor")
 
 [(move | send)] (term | terminal) (to | too | two) [new] (window | win):
-    user.vscode("workbench.action.terminal.moveIntoNewWindow")
+    user.run_rpc_command("workbench.action.terminal.moveIntoNewWindow")
 
 [(move | send)] (term | terminal) (to | too | two) panel:
-    user.vscode("workbench.action.terminal.moveToTerminalPanel")
+    user.run_rpc_command("workbench.action.terminal.moveToTerminalPanel")

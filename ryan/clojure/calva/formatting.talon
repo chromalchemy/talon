@@ -4,28 +4,28 @@ app.name: Windsurf
 -
 
 format selection: 
-    user.vscode("editor.action.formatSelection")
+    user.run_rpc_command("editor.action.formatSelection")
 
 format document: 
-    user.vscode("editor.action.formatDocument")
+    user.run_rpc_command("editor.action.formatDocument")
 
 format modified lines: 
-    user.vscode("editor.action.formatChanges")
+    user.run_rpc_command("editor.action.formatChanges")
 
 ## ++++++++++++++++++ calva formatting .
 
 format (form | expression): 
-    user.vscode("calva-fmt.formatCurrentForm")
+    user.run_rpc_command("calva-fmt.formatCurrentForm")
 
 format [and] align (form | expression): 
-    user.vscode("calva-fmt.alignCurrentForm")
+    user.run_rpc_command("calva-fmt.alignCurrentForm")
  
 format [and] trim (form | expression): 
-    user.vscode("calva-fmt.trimCurrentFormWhiteSpace")
+    user.run_rpc_command("calva-fmt.trimCurrentFormWhiteSpace")
  
 infer parens: 
-    user.vscode("calva-fmt.inferParens")
+    user.run_rpc_command("calva-fmt.inferParens")
 
 replace with pretty (print | printed): 
-    user.vscode("calva.prettyPrintReplaceCurrentForm")
+    user.run_rpc_command("calva.prettyPrintReplaceCurrentForm")
     

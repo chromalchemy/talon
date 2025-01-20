@@ -17,16 +17,16 @@ tag(): user.tabs
 # ++++++++++++++++ calva  settings
 
 [open] calva settings: 
-    user.vscode("workbench.action.openSettings2")
+    user.run_rpc_command("workbench.action.openSettings2")
     insert("calva")
 
 open calva (documentation | docs):
-    user.vscode("calva.openCalvaDocs")
+    user.run_rpc_command("calva.openCalvaDocs")
 
 new [empty] (clojure | closure) file | you close your file: 
-    user.vscode("workbench.action.files.newUntitledFile")
+    user.run_rpc_command("workbench.action.files.newUntitledFile")
     sleep(100ms)
-    user.vscode("workbench.action.editor.changeLanguageMode")
+    user.run_rpc_command("workbench.action.editor.changeLanguageMode")
     sleep(100ms)
     insert("clojure")
     sleep(100ms)

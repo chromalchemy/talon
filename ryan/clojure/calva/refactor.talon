@@ -9,39 +9,39 @@ pick refactor [(function | action)] [here]:
 ## +++++++++++ threading refactor cmds .
 
 thread last: 
-    user.vscode("clojureLsp.refactor.threadLast")
+    user.run_rpc_command("clojureLsp.refactor.threadLast")
     
 thread last all: 
-    user.vscode("clojureLsp.refactor.threadLastAll")
+    user.run_rpc_command("clojureLsp.refactor.threadLastAll")
 
 thread first: 
-    user.vscode("clojureLsp.refactor.threadFirst")
+    user.run_rpc_command("clojureLsp.refactor.threadFirst")
 
 thread first all: 
-    user.vscode("clojureLsp.refactor.threadFirstAll")
+    user.run_rpc_command("clojureLsp.refactor.threadFirstAll")
 
 unwind thread | thread unwind: 
-    user.vscode("clojureLsp.refactor.unwindThread")
+    user.run_rpc_command("clojureLsp.refactor.unwindThread")
 
 unwind all: 
-    user.vscode("clojureLsp.refactor.unwindAll")
+    user.run_rpc_command("clojureLsp.refactor.unwindAll")
 
 ## +++++++++++ other lsp refactor commands .
 
 introduce let: 
-    user.vscode("clojureLsp.refactor.introduceLet")
+    user.run_rpc_command("clojureLsp.refactor.introduceLet")
 
 expand let: 
-    user.vscode("clojureLsp.refactor.expandLet")
+    user.run_rpc_command("clojureLsp.refactor.expandLet")
 
 inline symbol: 
-    user.vscode("clojureLsp.refactor.inlineSymbol")
+    user.run_rpc_command("clojureLsp.refactor.inlineSymbol")
     
 expand to new function: 
-    user.vscode("clojureLsp.refactor.extractFunction")
+    user.run_rpc_command("clojureLsp.refactor.extractFunction")
 
 add [missing] require: 
-    user.vscode("clojureLsp.refactor.addMissingLibspec")
+    user.run_rpc_command("clojureLsp.refactor.addMissingLibspec")
 
 ## ++++++++ other refactoring commands .
 

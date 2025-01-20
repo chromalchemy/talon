@@ -8,49 +8,49 @@ app.name: Windsurf
 ## +++++++++++++++++++++++++ copy path .
 
 copy [(tab | current | active)] (filename | file name) [of] [(tab | current | active)]:
-    user.vscode("andreas.copyFilename")
+    user.run_rpc_command("andreas.copyFilename")
 
 copy [(tab | current | active)] [file] path [of] [(tab | current | active)] [file] :
-     user.vscode("copyFilePath")
+     user.run_rpc_command("copyFilePath")
  
 copy [(tab | current | active)] [file] relative path [of] [(tab | current | active)] [file]:
-    user.vscode("copyRelativeFilePath")
+    user.run_rpc_command("copyRelativeFilePath")
 
 ## ++++++++++++++++++++++++++++++ wrap lines .
 
-wrap (words | lines) | toggle (word | line) wrap: user.vscode("editor.action.toggleWordWrap")
+wrap (words | lines) | toggle (word | line) wrap: user.run_rpc_command("editor.action.toggleWordWrap")
 
 ## +++++++++++++++++  zoom level .
 
 reset [(code | app)] zoom:  
-    user.vscode("workbench.action.zoomReset")
+    user.run_rpc_command("workbench.action.zoomReset")
 
 ## ++++++++++++++++++++++++++ mini map 
 
 (toggle | show | hide ) mini map: 
-    user.vscode("editor.action.toggleMinimap")
+    user.run_rpc_command("editor.action.toggleMinimap")
 
 
 ## ++++++++++++++++++ editor font zoom .
 # breaks cursorless hats
 
 Zoom out font | font zoom out:              
-    user.vscode("editor.action.fontZoomOut")
+    user.run_rpc_command("editor.action.fontZoomOut")
 
 Zoom in font | font zoom in:               
-    user.vscode("editor.action.fontZoomIn")
+    user.run_rpc_command("editor.action.fontZoomIn")
 
 (reset | default) font (zoom | size) | font zoom (reset | default): 
-    user.vscode("editor.action.fontZoomReset")
+    user.run_rpc_command("editor.action.fontZoomReset")
 
 
 ## ++++++++++++++++++++++ font sizes .
 
 (change | switch | tab | editor) (font | text) size: 
-    user.vscode("extension.switchFontSize")
+    user.run_rpc_command("extension.switchFontSize")
 
 [(change | switch | tab | editor)] (font | text) [size] <number>: 
-    user.vscode("extension.switchFontSize")
+    user.run_rpc_command("extension.switchFontSize")
     sleep(100ms)
     insert(number)
     sleep(100ms)
@@ -58,31 +58,31 @@ Zoom in font | font zoom in:
 
 ## ++++++++++++++++++++++ Line numbers .
 
-(toggle | show | hide) line numbers: user.vscode("lntoggle.toggle")
+(toggle | show | hide) line numbers: user.run_rpc_command("lntoggle.toggle")
 
-copy line number: user.vscode("copy-current-line-number.helloWorld")
+copy line number: user.run_rpc_command("copy-current-line-number.helloWorld")
 
 
 #-------------- scopes
 
-(show | hide | view | visualize) [context] (tokens | scopes | scope): user.vscode("editor.action.inspectTMScopes")
+(show | hide | view | visualize) [context] (tokens | scopes | scope): user.run_rpc_command("editor.action.inspectTMScopes")
 
 (bar | go) (scope | scopes): 
-    user.vscode("cursorless.scopes.focus")
+    user.run_rpc_command("cursorless.scopes.focus")
     
 # todo: bug, working from command menu, but not talon command (context issue?)
 show (scope | scopes) (visualizer | viz): 
-    user.vscode("cursorless.showScopeVisualizer")
+    user.run_rpc_command("cursorless.showScopeVisualizer")
 hide (scope | scopes) (visualizer | viz): 
-    user.vscode("cursorless.hideScopeVisualizer")
+    user.run_rpc_command("cursorless.hideScopeVisualizer")
 
 #--------------
 
-(toggle | show | hide ) [cursorless] (hats | decorations): user.vscode("cursorless.toggleDecorations")
-(hats | decorations) (on | off): user.vscode("cursorless.toggleDecorations")
+(toggle | show | hide ) [cursorless] (hats | decorations): user.run_rpc_command("cursorless.toggleDecorations")
+(hats | decorations) (on | off): user.run_rpc_command("cursorless.toggleDecorations")
 
 change [code] [editor | tab] language [mode]:
-    user.vscode("workbench.action.editor.changeLanguageMode") 
+    user.run_rpc_command("workbench.action.editor.changeLanguageMode") 
 
 (toggle | show | hide ) (whitespace | white space):
-    user.vscode("editor.action.toggleRenderWhitespace")
+    user.run_rpc_command("editor.action.toggleRenderWhitespace")

@@ -11,62 +11,62 @@ app.name: Windsurf
 # (so no point in cursorless?)
 
 take (form | here): 
-    user.vscode("calva.selectCurrentForm")
+    user.run_rpc_command("calva.selectCurrentForm")
 
 take (form | at) point: 
     mouse_click(0)
-    user.vscode("calva.selectCurrentForm")
+    user.run_rpc_command("calva.selectCurrentForm")
     
 
 take top level: 
-    user.vscode("paredit.rangeForDefun")
+    user.run_rpc_command("paredit.rangeForDefun")
 
 ## ++++++++++++++++++++++++++++++ back .
     
 take back: 
-    user.vscode("paredit.selectBackwardSexp")
+    user.run_rpc_command("paredit.selectBackwardSexp")
 
 take back (down | inside): 
-    user.vscode("paredit.selectBackwardDownSexp")
+    user.run_rpc_command("paredit.selectBackwardDownSexp")
 
 take [back] up:
-    user.vscode("paredit.selectBackwardUpSexp")
+    user.run_rpc_command("paredit.selectBackwardUpSexp")
 
 take back (or up | out): 
-    user.vscode("paredit.selectBackwardSexpOrUp")
+    user.run_rpc_command("paredit.selectBackwardSexpOrUp")
     
 take [back] [to] [form] start: 
-        user.vscode("paredit.selectOpenList")
+        user.run_rpc_command("paredit.selectOpenList")
 
 ## +++++++++++++++++++++++++++ forward .
 
 take (forward | fore | four | ahead): 
-    user.vscode("paredit.selectForwardSexp")
+    user.run_rpc_command("paredit.selectForwardSexp")
 
 take (forward | fore | four | ahead) (down | inside): 
-    user.vscode("paredit.selectForwardDownSexp")
+    user.run_rpc_command("paredit.selectForwardDownSexp")
 
 take (forward | fore | four | ahead) up: 
-    user.vscode("paredit.selectForwardUpSexp")
+    user.run_rpc_command("paredit.selectForwardUpSexp")
 
 take [(forward | fore | four | ahead)] [(to | two)] end: 
-    user.vscode("paredit.selectCloseList")
+    user.run_rpc_command("paredit.selectCloseList")
 
 take (forward | fore | four | ahead) (or up | out): 
-    user.vscode("paredit.selectForwardSexpOrUp")
+    user.run_rpc_command("paredit.selectForwardSexpOrUp")
 
 ## +++++++++++++++++++++++++++++ right .
 
 take right: 
-    user.vscode("paredit.selectRight")
+    user.run_rpc_command("paredit.selectRight")
 
 ## +++++++++++++++++++++ shrink/expand .
 
 expand selection | take more | take expand: 
-    user.vscode("paredit.sexpRangeExpansion")
+    user.run_rpc_command("paredit.sexpRangeExpansion")
 
 shrink selection | take less: 
-    user.vscode("paredit.sexpRangeContraction")
+    user.run_rpc_command("paredit.sexpRangeContraction")
 
 
 

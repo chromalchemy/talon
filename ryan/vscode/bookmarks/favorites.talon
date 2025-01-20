@@ -5,64 +5,64 @@ tag: user.cursorless
 -
 
 new (favorites | favorite) group:
-    user.vscode("favorites.group.newGroup")
+    user.run_rpc_command("favorites.group.newGroup")
 
 pick (favorites | favorite) group:
-    user.vscode("favorites.group.changeGroup")
+    user.run_rpc_command("favorites.group.changeGroup")
 
 refresh favorites:
-    user.vscode("favorites.nav.refresh")
+    user.run_rpc_command("favorites.nav.refresh")
 
 (remove | delete) favorite:
-    user.vscode("favorites.deleteFavorite")
+    user.run_rpc_command("favorites.deleteFavorite")
 
 reveal favorite [in] (files | finder):
-    user.vscode("favorites.revealInOS.mac")
+    user.run_rpc_command("favorites.revealInOS.mac")
 
 reveal favorite: 
-    user.vscode("favorites.revealInSideBar")
+    user.run_rpc_command("favorites.revealInSideBar")
 
 ## +++++++++++++++++++++++ show panels .
 
 open (favourites | favorites):
-    user.vscode("favorites.open")
+    user.run_rpc_command("favorites.open")
 
 # [show] favorites: 
-#     user.vscode("workbench.view.extension.favorites-explorer")
+#     user.run_rpc_command("workbench.view.extension.favorites-explorer")
 
 (focus | go | bar) favorites: 
-    user.vscode("favorites-full-view.focus")
+    user.run_rpc_command("favorites-full-view.focus")
 
 # not doing anything
 open favorites to side:
-    user.vscode("favorites.openToSide")
+    user.run_rpc_command("favorites.openToSide")
 
 (focus | go | bar) (explore |explorer) favorites: 
-    user.vscode("favorites.focus")
+    user.run_rpc_command("favorites.focus")
 
 (toggle | hide | show) [(explore |explorer)] favorites:
-    user.vscode("favorites.toggleVisibility")
+    user.run_rpc_command("favorites.toggleVisibility")
 
 
 ## +++++++++++++++++++++++++++ pickers .
 
 pick favorite <user.text>:
-    user.vscode("favorites-full-view.focus")
+    user.run_rpc_command("favorites-full-view.focus")
     sleep(100ms)
     insert(text)
 
 go favorite <user.text>:
-    user.vscode("favorites-full-view.focus")
+    user.run_rpc_command("favorites-full-view.focus")
     sleep(100ms)
     insert(text)
     key(enter)
-    user.vscode("workbench.action.keepEditor")
+    user.run_rpc_command("workbench.action.keepEditor")
 
 file (add | send) [to] (favorite | favorites) | make file favorite | add [(file | tab)] [to] (favorite | favorites): 
-    user.vscode("favorites.addToFavorites")
+    user.run_rpc_command("favorites.addToFavorites")
 
 remove [(file | tab)] from (favorite | favorites): 
-    user.vscode("favorites.deleteFavorite")
+    user.run_rpc_command("favorites.deleteFavorite")
 
 (add | send) (this | that) to favorites | make favorite:
     mouse_click(1)

@@ -5,9 +5,9 @@ app.name: Windsurf
 
 ## ++++++++++++++++++ talon-ready file explorer tree
 
-bar [file] (tree | trees):            user.vscode("workbench.view.extension.filetree")
+bar [file] (tree | trees):            user.run_rpc_command("workbench.view.extension.filetree")
 
-go [file] (tree | trees):             user.vscode("filetree.focus")
+go [file] (tree | trees):             user.run_rpc_command("filetree.focus")
 
 ## ++++++++++++++++++ File tree commands
 tree <user.letters>:

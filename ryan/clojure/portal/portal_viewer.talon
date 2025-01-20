@@ -94,14 +94,14 @@ clear (tap | send) (it | top [form]) {user.portal_viewer} point:
 ## ++++++++++++++++ tap selected text /caret from .
 
 # (tap | send) (that | form | here): 
-#     user.vscode("calva.tapSelection")
+#     user.run_rpc_command("calva.tapSelection")
 
 # (tap | send) <user.cursorless_target>:
 #     user.cursorless_ide_command("calva.tapSelection", cursorless_target)
     
 # (tap | send) [(that | form | here)] point: 
 #     mouse_click(0)
-#     user.vscode("calva.tapSelection")
+#     user.run_rpc_command("calva.tapSelection")
 
 
  

@@ -7,7 +7,7 @@ please (paredit | pare edit | pear edit):
     key(cmd-shift-p)
     insert("calva paredit ")
 
-open [(paredit | pare edit | pear edit)] list: user.vscode("paredit.openList")
+open [(paredit | pare edit | pear edit)] list: user.run_rpc_command("paredit.openList")
 
 toggle (paredit | pare edit | pear edit) [mode]:
-    user.vscode("paredit.togglemode")
+    user.run_rpc_command("paredit.togglemode")

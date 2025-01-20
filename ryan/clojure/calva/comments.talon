@@ -16,7 +16,7 @@ tag: user.cursorless
      key(backspace:3)
 
 insert (semicolon | semi colon):
-    user.vscode("paredit.insertSemiColon")
+    user.run_rpc_command("paredit.insertSemiColon")
 
 [(insert | add)] comment (symbol | mark): 
     insert("#_")
@@ -25,7 +25,7 @@ insert (semicolon | semi colon):
     insert("#_#_")
 
 (make | add) rich comment: 
-    user.vscode("paredit.addRichComment")
+    user.run_rpc_command("paredit.addRichComment")
 
 (comment |  uncomment) form: 
     key(cmd-/)

@@ -41,7 +41,7 @@ test (closure | clojure) [scope]:
 ## +++++++++++ clear calva repl output .
 
 # todo: not working... 
-# key(cmd-ctrl-alt-shift-k): user.vscode("workbench.action.terminal.clear")
+# key(cmd-ctrl-alt-shift-k): user.run_rpc_command("workbench.action.terminal.clear")
 
 ## ___________________________________ .
 

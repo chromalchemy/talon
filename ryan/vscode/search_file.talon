@@ -14,15 +14,15 @@ tag: user.cursorless
 
 #navigates to find field only if on empty space/line
 (go | open | focus | show) (hunt [this] | scout | find in file) [panel]: 
-    user.vscode("actions.find")
+    user.run_rpc_command("actions.find")
 
 #navigates to replace field only if no text selected, and result is targeted 
 (show | toggle | go) replace | replace (text | scout | target):    
-    user.vscode("editor.action.startFindReplaceAction")
+    user.run_rpc_command("editor.action.startFindReplaceAction")
 
 #pastes to replace field only if no text selected, and result is targeted 
 replace (paste | pace):    
-    user.vscode("editor.action.startFindReplaceAction") 
+    user.run_rpc_command("editor.action.startFindReplaceAction") 
     sleep(100ms) 
     edit.paste()
 
@@ -59,16 +59,16 @@ replace in <user.cursorless_target>:
 swap replace: 
     edit.select_all()
     edit.copy()
-    user.vscode("actions.find")
+    user.run_rpc_command("actions.find")
     edit.paste()
-    user.vscode("editor.action.startFindReplaceAction")
+    user.run_rpc_command("editor.action.startFindReplaceAction")
 
 toggle find (regex | rejects | regular expressions):
-     user.vscode("toggleFindRegex")
+     user.run_rpc_command("toggleFindRegex")
 
 [toggle] find [match] case [(sensitive | sensitivity | sense)]:
-     user.vscode("toggleFindCaseSensitive")
+     user.run_rpc_command("toggleFindCaseSensitive")
 
 toggle find [whole] word:
-     user.vscode("toggleFindWholeWord")
+     user.run_rpc_command("toggleFindWholeWord")
 

@@ -4,7 +4,7 @@ app.name: Windsurf
 -
 
 kill current file:
-    user.vscode("andreas.removeFile")
+    user.run_rpc_command("andreas.removeFile")
 
 (hunt |  (open | hope (and | in))) (file  | filename) [<user.text>]: 
     key(cmd-p)
@@ -24,17 +24,17 @@ bar (file | files):
     user.run_rpc_command("workbench.files.action.focusFilesExplorer")
 
 (show | reveal) file [in] [(explore | explorer)]: 
-    user.vscode("workbench.files.action.showActiveFileInExplorer")
+    user.run_rpc_command("workbench.files.action.showActiveFileInExplorer")
 
 (fold | collapse) ((explore | Explorer) [folders] | [bar] files): 
-    user.vscode("workbench.files.action.collapseExplorerFolders")
+    user.run_rpc_command("workbench.files.action.collapseExplorerFolders")
 
 (fold | collapse) ((explore | Explorer) [folders] | [bar] files) [to] top [level] [folders]: 
-    user.vscode("workbench.files.action.collapseExplorerFolders")
-    user.vscode("workbench.files.action.collapseExplorerFolders")
+    user.run_rpc_command("workbench.files.action.collapseExplorerFolders")
+    user.run_rpc_command("workbench.files.action.collapseExplorerFolders")
 
 (show | reveal) [file] [in] (finder | files): 
-    user.vscode("revealFileInOS")
+    user.run_rpc_command("revealFileInOS")
 
 #use axkit command
 # (show | reveal) file [in] finder:
@@ -47,7 +47,7 @@ bar (file | files):
 #     key(enter)
 
 duplicate [current] file:
-    user.vscode("andreas.duplicateFile")
+    user.run_rpc_command("andreas.duplicateFile")
 
 new (text | untitled) (file | document | doc | tab):
-    user.vscode("workbench.action.files.newUntitledFile")
+    user.run_rpc_command("workbench.action.files.newUntitledFile")

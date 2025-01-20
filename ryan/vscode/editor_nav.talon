@@ -6,7 +6,7 @@ app.name: Windsurf
 ## ++++++++++++++++++ pop context menu .
 
 [(show | go)] (context menu [(here | curse | cursor)]) | menu (curse | cursor):
-    user.vscode("editor.action.showContextMenu")
+    user.run_rpc_command("editor.action.showContextMenu")
 
 [context] menu (point | here): 
     mouse_click(1)
@@ -16,71 +16,71 @@ app.name: Windsurf
 # todo:  vscode and cursorless cops to implement this  
 
 go (top [level] form | form top):
-    user.vscode("breadcrumbs.focusAndSelect")
+    user.run_rpc_command("breadcrumbs.focusAndSelect")
     sleep(100ms)
     key(enter)
-    user.vscode("paredit.forwardSexp")
+    user.run_rpc_command("paredit.forwardSexp")
 
 go top form end | post top form:
-    user.vscode("breadcrumbs.focusAndSelect")
+    user.run_rpc_command("breadcrumbs.focusAndSelect")
     sleep(100ms)
     key(enter)
-    user.vscode("editor.action.jumpToBracket")
+    user.run_rpc_command("editor.action.jumpToBracket")
     key(right)
     
 [go] next top form:
-    user.vscode("breadcrumbs.focusAndSelect")
+    user.run_rpc_command("breadcrumbs.focusAndSelect")
     sleep(100ms)
     key(down enter)
-    user.vscode("paredit.forwardSexp")
+    user.run_rpc_command("paredit.forwardSexp")
 
 ## ++++++++++++++++++ traverse recent edit location
 
 go back (edit | at it): 
-    user.vscode("workbench.action.navigateBackInEditLocations")
+    user.run_rpc_command("workbench.action.navigateBackInEditLocations")
 
 go (forward | next) (edit | at it): 
-    user.vscode("workbench.action.navigateForwardInEditLocations")
+    user.run_rpc_command("workbench.action.navigateForwardInEditLocations")
 
 go (prev | previous) (edit | at it): 
-    user.vscode("workbench.action.navigatePreviousInEditLocations")
+    user.run_rpc_command("workbench.action.navigatePreviousInEditLocations")
 
 go [to] last (edit | at it): 
-    user.vscode("workbench.action.navigateToLastEditLocation")
+    user.run_rpc_command("workbench.action.navigateToLastEditLocation")
 
 ## ++++++++++++++ traverse recent nav location
 
 go back: 
-    user.vscode("workbench.action.navigateBack")
+    user.run_rpc_command("workbench.action.navigateBack")
 
 go (forward | ahead) : 
-    user.vscode("workbench.action.navigateForward")
+    user.run_rpc_command("workbench.action.navigateForward")
 
 # what is defference here?
 
 go back nav:  
-    user.vscode("workbench.action.navigateBackInNavigationLocations")
+    user.run_rpc_command("workbench.action.navigateBackInNavigationLocations")
 
 go (forward | ahead) nav: 
-    user.vscode("workbench.action.navigateForwardInNavigationLocations")
+    user.run_rpc_command("workbench.action.navigateForwardInNavigationLocations")
 
 go (prev | previous) nav: 
-    user.vscode("workbench.action.navigatePreviousInNavigationLocations")
+    user.run_rpc_command("workbench.action.navigatePreviousInNavigationLocations")
 
 go [to] last nav: 
-    user.vscode("workbench.action.navigateToLastNavigationLocations")
+    user.run_rpc_command("workbench.action.navigateToLastNavigationLocations")
 
 
 ## +++++++++++++++++++++++ nav tli symbols .
 
 (go [to] | pick) symbol:    
-    user.vscode("workbench.action.gotoSymbol")
+    user.run_rpc_command("workbench.action.gotoSymbol")
 
 symbol last:                
-    user.vscode("gotoNextPreviousMember.previousMember")
+    user.run_rpc_command("gotoNextPreviousMember.previousMember")
     
 symbol next:                
-    user.vscode("gotoNextPreviousMember.nextMember")
+    user.run_rpc_command("gotoNextPreviousMember.nextMember")
 
 
 ## +++++++++++++++++ Symbol references .
@@ -89,85 +89,85 @@ symbol next:
 
 
 (find | show | reveal | list) [all] (references | refs) [in] [left] [bar]:   
-    user.vscode("references-view.find")
-    # user.vscode("references-view.findReferences")
+    user.run_rpc_command("references-view.find")
+    # user.run_rpc_command("references-view.findReferences")
 
 bar (references | refs) | (go | focus) (references | refs) bar:      
-    user.vscode("references-view.tree.focus")
+    user.run_rpc_command("references-view.tree.focus")
 
 #works in search and references bars
 
 [go] next (bar | list) (referenc | ref): 
-    user.vscode("references-view.next")
+    user.run_rpc_command("references-view.next")
 
 [go] last (bar | list) (referenc | ref): 
-    user.vscode("references-view.prev")
+    user.run_rpc_command("references-view.prev")
 
 # ++++ symbol refs call stack, in left bar
 
 [(show | go)] [symbol] call (hierarchy | stack):
-    user.vscode("references-view.showCallHierarchy")
+    user.run_rpc_command("references-view.showCallHierarchy")
     # key(alt-shift-h)
 
 ## +++++++++++++  symbol refs nav, and inline  popup .
 
 ## jumps  to first ref of current symbol if there is only one same file, otherwise pops inline peek refs view
 (go | jump) [to] (reference | ref) | (go | nav) [to] [inline] (references | refs):
-    user.vscode("editor.action.goToReferences")
+    user.run_rpc_command("editor.action.goToReferences")
 
 (go | jump) [to] first (reference | ref):
-    user.vscode("editor.action.goToReferences")
+    user.run_rpc_command("editor.action.goToReferences")
     sleep(50ms)
     key(down enter)
 
 (peek | peak) [inline] (reference | references | refs):
-    user.vscode("editor.action.referenceSearch.trigger")
+    user.run_rpc_command("editor.action.referenceSearch.trigger")
 
 [go] next (reference | ref): 
-    user.vscode("goToNextReference")
+    user.run_rpc_command("goToNextReference")
 
 [go] last (reference | ref): 
-    user.vscode("goToPreviousReference")
+    user.run_rpc_command("goToPreviousReference")
 
 (hide | close) [inline] (reference | references | refs): key(esc)
 
 ## +++++++++++++++++ symbol definition .
 
 (go | jump to) (def | deaf | definition | depth) :
-    user.vscode("editor.action.revealDefinition")
+    user.run_rpc_command("editor.action.revealDefinition")
 
 (def | deaf | definition | depth) (peek | peak) | (peek | peak) (def | deaf | definition | depth) :
-    user.vscode("editor.action.peekDefinition")
+    user.run_rpc_command("editor.action.peekDefinition")
 
 [(show | reveal)] (def | deaf | definition | depth) [(to | in)] (new | side | other) [(editor | tab | group)]:
-    user.vscode("editor.action.revealDefinitionAside")
+    user.run_rpc_command("editor.action.revealDefinitionAside")
 
 ## ___________________________________ problems .
 
 problem show | show problem:               
-    user.vscode("workbench.panel.markers.view.focus")
+    user.run_rpc_command("workbench.panel.markers.view.focus")
 
 next problem :
-    user.vscode("editor.action.marker.nextInFiles")
+    user.run_rpc_command("editor.action.marker.nextInFiles")
 
 last problem:
-    user.vscode("editor.action.marker.prevInFiles")
+    user.run_rpc_command("editor.action.marker.prevInFiles")
 
 fix problem:
-    user.vscode("problems.action.showQuickFixes")
+    user.run_rpc_command("problems.action.showQuickFixes")
 
 ## ++++++++++++++++ jump to line .
 
-go [to] line: user.vscode("workbench.action.gotoLine")
+go [to] line: user.run_rpc_command("workbench.action.gotoLine")
 
 go [to] line <user.number_string>: 
-    user.vscode("workbench.action.gotoLine")
+    user.run_rpc_command("workbench.action.gotoLine")
     sleep(100ms)
     insert("{number_string}")
     key(enter)
 
 go [to] line (paste | pace | clip): 
-    user.vscode("workbench.action.gotoLine")
+    user.run_rpc_command("workbench.action.gotoLine")
     sleep(100ms)
     edit.paste()
     key(enter)
