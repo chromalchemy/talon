@@ -1,5 +1,5 @@
 
-^[((who | will) she | wooshy | wish he)] (hunt [screen] | point (at | out)) [<user.text>] : 
+^[((who | will) she | wooshy | wish he)] (hunt ( [screen] text | screen) | point (at | out)) [<user.text>] : 
     key(cmd-shift-space)
     sleep(300ms) 
     user.paste("{text or ''}")
