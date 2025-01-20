@@ -87,6 +87,7 @@ pop tab [in] group:
     key(enter)
     
 ## +++++++++++++++++++++++++ close tab(s) .
+
 (tab | editor | column) (close | clothes):
     user.vscode("workbench.action.closeActiveEditor")
 
@@ -103,6 +104,9 @@ close (saved | safe) (tabs | editors):
 
 close other (tabs | editors) [in] [group] : 
     user.vscode("workbench.action.closeOtherEditors")
+
+close all [group] (tabs | editors) [in] [group] : 
+    user.vscode("workbench.action.closeEditorsInGroup")
      
 ## +++++++++++++++++++++++ pin editors .
 
