@@ -1,6 +1,5 @@
-import subprocess
 
-from talon import Module
+from talon import Module, actions
 
 mod = Module()
 
@@ -12,7 +11,7 @@ def display_cmd(command_type: str, display_fn: str, display_name: str = "default
         id_cmd = " --UUID=" + macbook_display_uuid
     else:
         id_cmd = ' --name="' + display_name + '"'
-    cmd = 'betterdisplaycli ' + command_type + id_cmd + ' --' + display_fn + '; exit 0'
+    cmd = '/usr/local/bin/betterdisplaycli ' + command_type + id_cmd + ' --' + display_fn + '; exit 0'
     return cmd
 
 @mod.action_class
@@ -24,9 +23,9 @@ class Actions:
     def betterdisplay_set(display_fn: str, display_name: str):
         """execute a set betterdisplay command"""
         cmd = display_cmd("set", display_fn, display_name) 
-        subprocess.Popen(cmd, shell=True)
+        actions.user.system_command_nb(cmd)
 
     def betterdisplay_toggle(display_fn: str, display_name: str):
         """execute a toggle betterdisplay command"""
         cmd = display_cmd("toggle", display_fn, display_name)
-        subprocess.Popen(cmd, shell=True)
+        actions.user.system_command_nb(cmd)
