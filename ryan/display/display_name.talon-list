@@ -7,7 +7,9 @@ ace: Acer XF270H B
 
 luna: Luna Display
 lunar: Luna Display
-iMac: Luna Display
+# iMac: Luna Display
+
+iMac: Mary's iMac
 
 # built in: Color LCD
 # macbook: Color LCD
