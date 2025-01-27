@@ -3,6 +3,12 @@ app: chrome
 tag(): browser
 # tag(): user.tabs
 
+settings():
+    user.mouse_continuous_scroll_amount = 10
+
+settings():
+    user.mouse_continuous_scroll_frequency = 16
+
 #### inspector
 
 (toggle | hide | show | open | close) (devtools | dev tools | tools): 

@@ -89,22 +89,22 @@
 			"path": "community/settings.talon",
 			"bookmarks": [
 				{
-					"line": 14,
+					"line": 16,
 					"column": 39,
 					"label": "continuous_scroll_amount"
 				},
 				{
-					"line": 26,
+					"line": 31,
 					"column": 33,
 					"label": "enable_hiss_scroll"
 				},
 				{
-					"line": 35,
+					"line": 40,
 					"column": 32,
 					"label": "wheel_down_amount"
 				},
 				{
-					"line": 54,
+					"line": 59,
 					"column": 1,
 					"label": ""
 				}
