@@ -55,7 +55,7 @@ class Actions:
     def roam_new_block_above():
         """ccc"""
         actions.key("cmd-shift-i")
-        actions.sleep("700ms")
+        actions.sleep("1000ms")
 
     def roam_new_child_block():
         """new child block"""
