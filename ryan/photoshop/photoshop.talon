@@ -149,20 +149,23 @@ move layer [tool]:
 
  ## ++++++++++++++++++ layer visibility .
 
-(show | hide) layer:  key(cmd-,)
-layer (show | hide):  key(cmd-,)
-toggle layer [visibility]: key(cmd-,)
+(show | hide) layer: user.ps_toggle_layer_visibility()
+layer (show | hide): user.ps_toggle_layer_visibility()
+toggle layer [visibility]:user.ps_toggle_layer_visibility()
 
  ## ++++++++++++ layer stack navigation .
 
-layer (send | move) [to] (back | bottom):  key(cmd-shift-[)
-layer (send | move) [to] (front | top):  key(cmd-shift-])
+layer (send | move) [to] (back | bottom) | layer center back:
+   user.ps_move_layer_bottom()
+
+layer (send | move) [to] (front | top):
+   user.ps_move_layer_top()
+
 layer (send | move) (up | for | forward) [<digits>]:  
-    key(cmd-])
-    repeat(digits - 1)
+   user.ps_move_layer_up(digits or 1)
+
 layer (send | move) (down | back | backwards | backward) [<digits>]:
-    key(cmd-[)
-    repeat(digits - 1)
+   user.ps_move_layer_down(digits or 1)
 
  ## ++++++++++++++++++ gradient overlay .
 
@@ -190,11 +193,7 @@ hit menu <user.text>:
  ## ++++++++++++++++++++++ layer styles .
 
 outer glow: 
-    key(cmd-alt-shift-ctrl-l)
-    sleep(300ms)
-    insert("outer glow")
-    sleep(300ms)
-    key(enter)
+    user.menu_select('Layer|Layer Style|Color Overlay...')
 
  ## +++++++++++++++++++++++ lock layers .
 
@@ -289,24 +288,11 @@ pick color: key(n)
     # sleep(100ms)
     key(enter)
 
+## ++++++++++ primary /secondary color .
+
 (default | reset) colors: key(d)
 
 (swap | flip) (colors | color | brush): key(x)
-
-## ++++++++++++++++++ Masking commands .
-
-paint (inside | outside): key(x)
-
-fill [with] foreground color: 
-    key(alt-delete)
-fill [with] background color: 
-    key(cmd-delete)
-
-invert layer: key(cmd-i)
-
-(swap | flip) masking [brush] [polarity]: 
-    key(x)
-
 
 color black | paint mask | (mask | erase) (pixels | layer): 
     key(d)
@@ -315,12 +301,35 @@ color black | paint mask | (mask | erase) (pixels | layer):
 
 color white | erase mask | (unmask | paint) (pixels | layer): 
     key(d)
+
+
+## ++++++++++++++++++ Masking commands .
+
+paint (inside | outside) | (swap | flip) masking [brush] [polarity]: 
+    key(x)
+
+## ++++++++++++++++++++++++ quick mask .
+
+(toggle | show | hide) quick mask:
+    key(q)
+
+## ++++++++++++++++++++++++++++ 
+
+invert (layer | mask): key(cmd-i)
     
 go mask:
     key(cmd-shift-\)
 
 go layer:
     key(cmd-shift-2)
+
+## +++++++++++++++++++++++++++++++ fil .
+
+fill [with] foreground color: 
+    key(alt-delete)
+
+fill [with] background color: 
+    key(cmd-delete)
 
  ## +++++++++++++++++++++++++++ confirm .
 
@@ -330,71 +339,24 @@ go layer:
 
 (select | go)  layer mask: key(cmd-\)
 
- ## ++++++++++++++++++++++++ quick mask .
-
-(toggle | show | hide) quick mask: key(q)
-
- ## +++++++++++++++++++++++++++++ tools .
-
-eraser [(tool | to)]: key(e)
-zoom [(tool | to)]: key(z)
-brush [(tool | to)]: key(b)
-
-(hand | pan) [(tool | to)]: key(h)
-hold (hand | pan) | pan mode: key(space:down)
-(release | exit) (hand | pan): key(space:up)
-
-rotate (tool | canvas): key(r)
-(other | next) brush [tool]: key(shift-b)
-brush (next | last | prev): key(shift-b)
-
-rotate [tool]: key(r)
-
-
  ## +++++++++++++++++++++++++ edit text .
 
-edit text [(here | point)]: 
-    key(t:down)
-    mouse_click(0)
-    key(t:up)
+edit text [(here | point)]:
+    user.ps_place_cursor_in_text() 
 
 take text [(here | point)]:
-    key(t:down)
-    sleep(300ms)
-    mouse_click(0)
-    # sleep(300ms)
-    key(t:up)
-    sleep(300ms)
-    key(cmd-a)
-    # edit.select_all()
+    user.ps_select_text()
 
-# todo: make past raw
 (paste | pace) text [(here | point)]:
-    key(t:down)
-    sleep(300ms)
-    mouse_click(0)
-    # sleep(300ms)
-    key(t:up)
-    sleep(300ms)
-    key(cmd-a)
-    sleep(100ms)
+    user.ps_select_text()
     key(cmd-v)
-    # edit.select_all()
 
 (paste | pace) (no |  without) (formatting | format): 
     user.menu_select('Edit|Paste Special|Paste without Formatting')
 
 (paste | pace) [text] raw [(here | point)]:
-    key(t:down)
-    sleep(300ms)
-    mouse_click(0)
-    # sleep(300ms)
-    key(t:up)
-    sleep(300ms)
-    key(cmd-a)
-    sleep(500ms)
+    user.ps_select_text()
     user.menu_select('Edit|Paste Special|Paste without Formatting')
-    # edit.select_all()
 
 ## +++++++++++++++++++++++++++++ inbox .
 
@@ -408,30 +370,22 @@ Center layer  [on (page | artboard )]:
 
 ## ++++++ Clone and rasterize gradient .
 
-Clone [and] (raster | rasterize) (layer | gradient):
-    user.menu_select('Layer|Duplicate Layer...')
+Clone [and] (raster | rasterize) (layer | gradient) [<user.text>]:
+    user.ps_duplicate_layer(text or "cloned layer")
+    user.ps_toggle_layer_visibility()
     sleep(300ms)
-    key(enter)
+    user.ps_go_layer_down()
     sleep(300ms)
-    key(cmd-,)
-    sleep(300ms)
-    key(alt-[)
-    user.menu_select('Layer|Rasterize|Layer')
+    user.ps_rasterize_layer()
 
 ## +++++++++++++++++++++ paste helpers .
 
-[photo] paste color: 
-    user.zoom_close()
-    mouse_click(0)
-    user.grid_close()
-    user.mouse_drag_end() 
+[photo] paste color:
+    user.ps_click() 
     key(cmd-v enter)
 
 [photo] copy color:
-    user.zoom_close()
-    mouse_click(0)
-    user.grid_close()
-    user.mouse_drag_end() 
+    user.ps_click() 
     key(cmd-c esc)
 
 photo test trace:
@@ -450,10 +404,9 @@ photo test trace:
     user.ps_command_nb("(update-font-tracking! -{number_string})")
 
 rotate clone [<number>]:
-    n = number or 1
-    b = n * 4
-    key("alt-shift-.:{b}")
+    user.ps_rotate_clone(number or 1)
 
+#test invoke squint js script
 photo new layer:
     user.system_command_nb("open \"/Users/ryan/dev/ps script/scripts/create_layer.psjs\"")
 
@@ -466,3 +419,40 @@ photo new layer:
 ^jpeg <number_small> [(file name | filename)] (pace | paste):
     t = clip.text()
     insert("{t}.jpg{number_small}")
+
+
+## ++++++++++++++++++++++ rename layer .
+
+[custom] rename layer [<user.text>]:
+    user.ps_rename_layer(text or "")
+
+
+ ## +++++++++++++++++++++++++++++ tools .
+
+eraser [(tool | to)]: key(e)
+zoom [(tool | to)]: key(z)
+brush [(tool | to)]: key(b)
+
+(hand | pan) [(tool | to)]: key(h)
+hold (hand | pan) | pan mode: key(space:down)
+(release | exit) (hand | pan): key(space:up)
+
+rotate (tool | canvas): key(r)
+(other | next) brush [tool]: key(shift-b)
+brush (next | last | prev): key(shift-b)
+
+rotate [tool]: key(r)
+
+
+## ++++++++++++++++++ background color .
+
+# this .talon list reference points to this relative path: ryan/photoshop/backdrop_color.talon-list 
+[canvas] backdrop [color] {user.ryan.photoshop.backdrop_color.list}:
+    mouse_click(1)
+    sleep(400ms)
+    insert(user.ryan.photoshop.backdrop_color.list)
+    sleep(400ms)
+    key(enter)
+
+
+    
