@@ -101,3 +101,13 @@ class Actions:
         print(b)
         actions.print("alt-shift-.")
         actions.core.repeat_command(b)
+
+    def ps_select_move_group_tool():
+        """Activate move tool and select group mode"""
+        actions.key("v")
+        actions.key("shift-f19")
+
+    def ps_select_move_layer_tool():
+        """Activate move tool and select group mode"""
+        actions.key("v")
+        actions.key("shift-cmd-f19")

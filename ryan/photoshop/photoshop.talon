@@ -109,49 +109,41 @@ brush [size] up [<user.number_string>]: key("]:{number_string or 1}")
 [brush] full (opacity | transparency | trans | opaque)  | brush fully opaque: 
     key(0)    
 
-
 # ---------------
 
 new layer: key(shift-cmd-n)
 
-copy layer style:  key(cmd-ctrl-c)
-paste layer style: key(cmd-ctrl-v)
+## +++++++++++++++++++++++ layer style .
 
-crop tool: 
-    key(c)
+copy layer style:  
+    key(cmd-ctrl-c)
 
-lasso tool: key(l)
+paste layer style: 
+    key(cmd-ctrl-v)
 
-(next | last | prev) lasso tool:
-    key(shift-l)
+## +++++++++++++++++++++++++ artboards .
 
 (Ungroup | release) (artboards | artboard):
     user.menu_select('Layer|Ungroup Artboards')
 
 ## ++++++++++++++++++++++++ Move tool .
 
-move [tool]: key(v)
-
-(next | last | prev) move tool :key(shift-v)
-
 move group [tool]: 
-    key(v)
-    key(shift-f19)
+    user.ps_select_move_group_tool()
 
-move layer [tool]: 
-    key(v)
-    key(shift-cmd-f19)
-
-
-## +++++++++++++++++++++++++ text tool .
-
-(Text | type) tool: key(t:down)
-
+move layer [tool]:
+    user.ps_select_move_layer_tool()
+    
  ## ++++++++++++++++++ layer visibility .
 
-(show | hide) layer: user.ps_toggle_layer_visibility()
-layer (show | hide): user.ps_toggle_layer_visibility()
-toggle layer [visibility]:user.ps_toggle_layer_visibility()
+(show | hide) layer: 
+    user.ps_toggle_layer_visibility()
+
+layer (show | hide): 
+    user.ps_toggle_layer_visibility()
+
+toggle layer [visibility]:
+    user.ps_toggle_layer_visibility()
 
  ## ++++++++++++ layer stack navigation .
 
@@ -176,19 +168,6 @@ gradient overlay:
     sleep(100ms)
     key(enter)
 
- ## +++++++++++++++++++++++ menu search .
-
-search menu <user.text>:
-    key(cmd-alt-shift-ctrl-l)
-    sleep(500ms)
-    insert(text)
-
-hit menu <user.text>:
-    key(cmd-alt-shift-ctrl-l)
-    sleep(100ms)
-    insert(text)
-    sleep(100ms)
-    key(enter)
 
  ## ++++++++++++++++++++++ layer styles .
 
@@ -197,19 +176,23 @@ outer glow:
 
  ## +++++++++++++++++++++++ lock layers .
 
-layer (lock | unlock):  key(cmd-/)
+layer (lock | unlock):  
+    key(cmd-/)
 
  ## +++++++++++++++++++++ smart objects .
 
-(make | convert to) smart object: key(ctrl-f11)
+(make | convert to) smart object: 
+    key(ctrl-f11)
 
  ## +++++++++++++++++++++++++ transform .
 
-transform: key(cmd-t)
+transform: 
+    key(cmd-t)
 
  ## +++++++++++++++++++++++++++ filters .
 
-camera (raw | module): key(shift-cmd-a)
+camera (raw | module): 
+    key(shift-cmd-a)
 
 
 ## +++++++++++++++++++++++++++++ transform draggging .
@@ -429,19 +412,17 @@ photo new layer:
 
  ## +++++++++++++++++++++++++++++ tools .
 
-eraser [(tool | to)]: key(e)
-zoom [(tool | to)]: key(z)
-brush [(tool | to)]: key(b)
+{user.ryan.photoshop.tool_key.list} [(tool | to)]:
+    key(user.ryan.photoshop.tool_key.list)
 
-(hand | pan) [(tool | to)]: key(h)
-hold (hand | pan) | pan mode: key(space:down)
-(release | exit) (hand | pan): key(space:up)
+hold {user.ryan.photoshop.tool_key.list} |  {user.ryan.photoshop.tool_key.list} (mode | hold):
+    key("{user.ryan.photoshop.tool_key.list}:down")
 
-rotate (tool | canvas): key(r)
-(other | next) brush [tool]: key(shift-b)
-brush (next | last | prev): key(shift-b)
+(release | exit) {user.ryan.photoshop.tool_key.list} |  {user.ryan.photoshop.tool_key.list} (release | exit):
+    key("{user.ryan.photoshop.tool_key.list}:up")
 
-rotate [tool]: key(r)
+(other | next | last | prev) {user.ryan.photoshop.tool_key.list} [(tool | to) | {user.ryan.photoshop.tool_key.list} (next | last | prev)]:
+    key("shift-{user.ryan.photoshop.tool_key.list}")
 
 
 ## ++++++++++++++++++ background color .

@@ -31,3 +31,10 @@ ray (search | hunt) (menu | menus) [<user.text>]:
     key(cmd-alt-shift-ctrl-l)
     sleep(200ms)
     insert("{text or ''}")
+
+hit menu [item] <user.text>:
+    key(cmd-alt-shift-ctrl-l)
+    sleep(100ms)
+    insert(text)
+    sleep(100ms)
+    key(enter)

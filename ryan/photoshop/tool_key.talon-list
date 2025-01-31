@@ -1,0 +1,23 @@
+# brush tools
+eraser: e
+brush: b
+
+# moving
+move: v
+
+# transform view
+zoom: z
+hand: h
+pan: h
+rotate: r
+rotate canvas: r
+
+# text
+text: t
+type: t
+
+crop: c 
+
+# selection
+lasso: l
+
