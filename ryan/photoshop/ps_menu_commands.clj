@@ -876,7 +876,35 @@
       "(toggle | show | hide)")
     :else t))
 
-(defn talon-command
+(do 
+  (defn reformat-menu-item [command-str]
+    (-> command-str
+      (string/split #"\|")
+      (->>
+        (map
+          #(-> %
+             (string/lower-case)
+             (string/replace "-" "_")
+             (string/replace "..." "")
+             (string/replace ".." "")
+             (string/replace "." "_")
+             (string/replace "°" "")
+             (string/replace "" "")
+             (string/replace "(" "")
+             (string/replace ")" "")
+             (string/replace "[" "")
+             (string/replace "]" "")
+             (string/replace "/" "_")
+             (string/replace "&" "and")
+             (string/split #"\s")
+             (->>
+               (interpose "_")
+               (apply str))))
+        (interpose "_")
+        (apply str))))
+  (reformat-menu-item "Window why"))
+
+(defn generate-command-strings
   [{:keys
     [original-item-name
      top-menu menu-name
@@ -898,16 +926,35 @@
        (apply str)
        (string/trim))
 
-     action
+     menu-string
      (str
-       "user.menu_select('"
        (when top-menu
          (str top-menu "|"))
-       menu-name
-       "|"
-       original-item-name
-       "')")]
-    (str command ":\n    " action "\n")))
+       menu-name "|" original-item-name)
+     
+     action
+     (str
+       "user.menu_select(\"" menu-string "\")")
+
+     python-fn-name
+     (str "ps_" (reformat-menu-item menu-string))
+
+     
+     tab "    "
+     new-line "\n"
+     triple-quotes "\"\"\""
+
+     python-fn
+     (str tab "def " python-fn-name "():" new-line  
+       tab tab triple-quotes 
+       (string/replace python-fn-name "_" " ")
+       triple-quotes new-line
+       tab tab "actions." action)]
+     
+    {:talon-command 
+     (str command ":" new-line 
+       tab "user." python-fn-name "()" )
+     :python-fn python-fn}))
 
 
 
@@ -939,7 +986,7 @@
                     [{:keys [pre post]} override
                      [pre post] 
                      (mapv parse-talon-token [pre post])]
-                    (talon-command
+                    (generate-command-strings
                       {:top-menu           top-menu
                        :menu-name          menu-name
                        :original-item-name item-name
@@ -948,7 +995,7 @@
                        :post               post }))
                   
                   (string? override)
-                  (talon-command 
+                  (generate-command-strings 
                     {:top-menu           top-menu
                      :menu-name          menu-name
                      :original-item-name item-name
@@ -957,7 +1004,7 @@
                      :post               post})))
               
               (string? menu-item)
-              (talon-command 
+              (generate-command-strings 
                 {:top-menu           top-menu
                  :menu-name          menu-name
                  :original-item-name menu-item
@@ -996,7 +1043,7 @@
 (def nl "\n")
 
 (defn strs->lines [& line-strs]
-  (apply str (interpose nl line-strs)))
+  (apply str (interpose (str nl nl) line-strs)))
 
 (defn strs->lines-padded [& line-strs]
   (str (apply strs->lines line-strs) nl))
@@ -1012,7 +1059,7 @@
 (def ps-app-name
   "Adobe Photoshop 2025")
 
-(def header
+(def talon-header
   (strs->lines-padded
     (str "app.name: " ps-beta-app-name)
     (str "app.name: " ps-app-name)
@@ -1029,26 +1076,41 @@
 (def target-dir 
   (fs/path (fs/parent root-path) "photoshop"))
 
-(def file-name "photoshop-menus.talon")
+(def talon-file-name "menu_actions.talon") 
+(def python-file-name "actions.py")
 
-(def target-file-path
+(defn target-file-path [file-name]
   (fs/path target-dir file-name))
 
-(defn write-ps-menu-file! [text]
-  (println "wrote ps menu commands talon file")
-  (spit (str target-file-path) text))
+(defn write-ps-talon-files! [talon-text python-text]
+  (spit (str (target-file-path talon-file-name)) talon-text)
+  (spit (str (target-file-path python-file-name)) python-text)
+  (println "wrote ps menu commands talon files")
+  )
 
-(defn composite-talon-text [talon-line-strings]
+(defn compose-text [header line-strings]
   (let [body
-        (apply strs->lines talon-line-strings)]
+        (apply strs->lines-padded line-strings)]
     (str header body)))
 
-(do 
+(def command-data
   (->> menu-commands
-  (map process-menu)
-  (flatten)
-  (composite-talon-text)
-  (write-ps-menu-file!)))
+     (map process-menu)
+     (flatten)))
+
+(let 
+  [talon-text
+   (compose-text talon-header 
+     (mapv :talon-command command-data))
+
+   python-text
+   (compose-text 
+     "import os\n\nfrom talon import Module, actions\n\nmod = Module()\n\n@mod.action_class\n\n\nclass Actions:\n"
+     (mapv :python-fn command-data))
+   ]
+  #_(println talon-text)
+  #_(println python-text)
+  #_(write-ps-talon-files! talon-text python-text))
 
 
 ;; How many commands !?

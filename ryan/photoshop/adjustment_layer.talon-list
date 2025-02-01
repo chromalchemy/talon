@@ -1,0 +1,35 @@
+
+brightness: Brightness/Contrast
+contrast: Brightness/Contrast
+brightness contrast: Brightness/Contrast
+
+levels: Levels
+curves: Curves
+exposure: Exposure
+vibrance: Vibrance
+
+hue saturation: Hue Saturation
+hue: Hue Saturation
+saturation: Hue Saturation
+
+color balance: Color Balance
+
+black and white: Black & White
+greyscale: Black & White
+
+photo filter: Photo Filter
+channel mixer: Channel Mixer
+
+color lookup: Color Lookup
+invert: Invert
+posterize: Posterize
+threshold: Threshold
+gradient map: Gradient Map
+
+selective color: Selective Color
+select color: Selective Color
+
+solid color: Solid Color
+color: Solid Color
+gradient: Gradient
+pattern: Pattern

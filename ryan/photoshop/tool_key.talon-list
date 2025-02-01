@@ -1,14 +1,33 @@
 # brush tools
 eraser: e
+background eraser: e
+magic eraser: e
+
 brush: b
+
+marquis: m
+select: m
+murky: m
+ants: m
+
+object select: w
+object selection: w 
+quick selection: w
+selection brush: w
+magic wand: w
+wand: w
+
 
 # moving
 move: v
+artboard: v
 
 # transform view
 zoom: z
+
 hand: h
 pan: h
+
 rotate: r
 rotate canvas: r
 
@@ -17,7 +36,83 @@ text: t
 type: t
 
 crop: c 
+slice: c
+perspective crop: c
+slice select: c
 
 # selection
 lasso: l
 
+
+frame: k
+
+
+dropper: i
+color sampler: i
+ruler: i
+note: i
+count: i
+
+spot healing: j
+remove: j
+healing brush: j
+patch: j
+content aware move: j
+red eye: j
+
+brush: b
+pencil: b
+color replacement: b
+mixer brush: b
+
+stamp: s
+clone: s
+clone stamp: s
+pattern stamp: s
+pattern brush: s
+
+history brush: y
+history: y
+art history brush: y
+art history: y
+
+gradient: g
+paint bucket: g
+bucket: g
+flat fill: g
+
+dodge: o
+burn: o
+sponge: o
+
+pen: p
+bezier: p
+freeform pen: p
+content aware tracing: p
+tracing pen: p
+curvature pen: p
+add point: p
+delete point: p
+chuck point: p
+remove point: p
+convert point: p
+swith point: p
+
+type: t
+vertical type: t
+vertical type mask: t
+horizontal type mask: t
+
+path selection: a
+select path: a
+direct selection: a
+select direct: a
+select points: a
+
+shape: u
+rectangle: u
+ellipse: u
+triangle: u
+polygon: u
+line: u
+custom shape: u

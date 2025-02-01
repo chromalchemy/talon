@@ -48,7 +48,7 @@ class Actions:
         actions.sleep("300ms")
 
     def ps_rasterize_layer():
-        """kdjojif"""
+        """rasterize the current layer"""
         actions.user.menu_select('Layer|Rasterize|Layer')
     
     def ps_go_layer_up():
@@ -95,7 +95,7 @@ class Actions:
 
     # bug repeat not working, try other implementation
     def ps_rotate_clone(n: int):
-        """fsfsfd"""
+        """fn description"""
         multiplier = 4
         b = n * multiplier
         print(b)
@@ -111,3 +111,7 @@ class Actions:
         """Activate move tool and select group mode"""
         actions.key("v")
         actions.key("shift-cmd-f19")
+
+    def ps_new_layer():
+        """New Layer"""
+        actions.user.menu_select('Layer|New|Layer...')
