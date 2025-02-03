@@ -1,6 +1,7 @@
 import os
 
 from talon import Module, actions
+from typing import Optional
 
 mod = Module()
 
@@ -8,10 +9,6 @@ mod = Module()
 
 
 class Actions:
-    def ps_new_layer():
-        """new layer"""
-        actions.user.menu_select("Layer|New|Layer...")
-
     def ps_new_background_from_layer():
         """new background from layer"""
         actions.user.menu_select("Layer|New|Background from Layer...")
@@ -44,7 +41,6 @@ class Actions:
         """convert to frame"""
         actions.user.menu_select("Layer|New|Convert to Frame")
 
-
     def ps_new_layer_via_copy():
         """new layer via copy"""
         actions.user.menu_select("Layer|New|Layer Via Copy")
@@ -65,9 +61,24 @@ class Actions:
         """layer duplicate layer"""
         actions.user.menu_select("Layer|Duplicate Layer...")
 
+    def ps_duplicate_layers():
+        """duplicate layers"""
+        actions.user.menu_select('Layer|Duplicate Layers...')
+
     def ps_delete_layer():
-        """layer delete layer"""
-        actions.user.menu_select("Layer|Delete|Layer")
+        """delete layer"""
+        actions.key("delete")
+        # actions.user.menu_select("Layer|Delete|Layer")
+
+    def ps_delete_layers():
+        """delete layers"""
+        actions.user.ps_delete_layer()
+        # actions.user.menu_select("Layer|Delete|Layers")
+
+    def ps_delete_group():
+        """delete group"""
+        actions.user.ps_delete_layer()
+        # actions.user.menu_select("Layer|Delete|Group")
 
     def ps_delete_hidden_layers():
         """layer delete hidden layers"""
@@ -132,10 +143,12 @@ class Actions:
     def ps_layer_style_copy_layer_style():
         """layer layer style copy layer style"""
         actions.user.menu_select("Layer|Layer Style|Copy Layer Style")
+        # actions.key("cmd-ctrl-c")
 
     def ps_layer_style_paste_layer_style():
         """layer layer style paste layer style"""
         actions.user.menu_select("Layer|Layer Style|Paste Layer Style")
+        # actions.key("cmd-ctrl-v")
 
     def ps_layer_style_clear_layer_style():
         """layer layer style clear layer style"""
@@ -161,17 +174,6 @@ class Actions:
         """layer smart filter"""
         actions.user.menu_select("Layer|Smart Filter")
 
-    # def ps_new_fill_layer_solid_color():
-    #     """layer New Fill Layer solid color"""
-    #     actions.user.menu_select("Layer|New Fill Layer|Solid Color...")
-
-    # def ps_new_fill_layer_gradient():
-    #     """layer new layer gradient"""
-    #     actions.user.menu_select("Layer|New Fill Layer|Gradient...")
-
-    # def ps_new_fill_layer_pattern():
-    #     """layer New Fill Layer pattern"""
-    #     actions.user.menu_select("Layer|New Fill Layer|Pattern...")
 
     ## Adjustment Layers
 
@@ -182,70 +184,6 @@ class Actions:
             actions.user.menu_select(f"Layer|New Fill Layer|{adjustment_name}...")
         else:
             actions.user.menu_select(f"Layer|New Adjustment Layer|{adjustment_name}...")
-
-    # def ps_adjustment_layer_brightness_contrast():
-    #     """layer new adjustment layer brightness contrast"""
-    #     actions.user.menu_select("Layer|New Adjustment Layer|Brightness/Contrast...")
-
-    # def ps_adjustment_layer_levels():
-    #     """layer new adjustment layer levels"""
-    #     actions.user.menu_select("Layer|New Adjustment Layer|Levels...")
-
-    # def ps_adjustment_layer_curves():
-    #     """layer new adjustment layer curves"""
-    #     actions.user.menu_select("Layer|New Adjustment Layer|Curves...")
-
-    # def ps_adjustment_layer_exposure():
-    #     """layer new adjustment layer exposure"""
-    #     actions.user.menu_select("Layer|New Adjustment Layer|Exposure...")
-
-    # def ps_adjustment_layer_vibrance():
-    #     """layer new adjustment layer vibrance"""
-    #     actions.user.menu_select("Layer|New Adjustment Layer|Vibrance...")
-
-    # def ps_adjustment_layer_hue_saturation():
-    #     """layer new adjustment layer hue saturation"""
-    #     actions.user.menu_select("Layer|New Adjustment Layer|Hue Saturation...")
-
-    # def ps_adjustment_layer_color_balance():
-    #     """layer new adjustment layer color balance"""
-    #     actions.user.menu_select("Layer|New Adjustment Layer|Color Balance...")
-
-    # def ps_adjustment_layer_black_and_white():
-    #     """layer new adjustment layer black and white"""
-    #     actions.user.menu_select("Layer|New Adjustment Layer|Black & White...")
-
-    # def ps_adjustment_layer_photo_filter():
-    #     """layer new adjustment layer photo filter"""
-    #     actions.user.menu_select("Layer|New Adjustment Layer|Photo Filter...")
-
-    # def ps_adjustment_layer_channel_mixer():
-    #     """layer new adjustment layer channel mixer"""
-    #     actions.user.menu_select("Layer|New Adjustment Layer|Channel Mixer...")
-
-    # def ps_adjustment_layer_color_lookup():
-    #     """layer new adjustment layer color lookup"""
-    #     actions.user.menu_select("Layer|New Adjustment Layer|Color Lookup...")
-
-    # def ps_adjustment_layer_invert():
-    #     """layer new adjustment layer invert"""
-    #     actions.user.menu_select("Layer|New Adjustment Layer|Invert")
-
-    # def ps_adjustment_layer_posterize():
-    #     """layer new adjustment layer posterize"""
-    #     actions.user.menu_select("Layer|New Adjustment Layer|Posterize...")
-
-    # def ps_adjustment_layer_threshold():
-    #     """layer new adjustment layer threshold"""
-    #     actions.user.menu_select("Layer|New Adjustment Layer|Threshold...")
-
-    # def ps_adjustment_layer_gradient_map():
-    #     """layer new adjustment layer gradient map"""
-    #     actions.user.menu_select("Layer|New Adjustment Layer|Gradient Map...")
-
-    # def ps_adjustment_layer_selective_color():
-    #     """layer new adjustment layer selective color"""
-    #     actions.user.menu_select("Layer|New Adjustment Layer|Selective Color...")
 
     def ps_layer_content_options():
         """layer layer content options"""
@@ -322,6 +260,7 @@ class Actions:
     def ps_smart_objects_convert_to_smart_object():
         """layer smart objects convert to smart object"""
         actions.user.menu_select("Layer|Smart Objects|Convert to Smart Object")
+        actions.key("ctrl-f11")
 
     def ps_smart_objects_new_smart_object_via_copy():
         """layer smart objects new smart object via copy"""
@@ -550,6 +489,7 @@ class Actions:
     def ps_lock_layers():
         """layer lock layers"""
         actions.user.menu_select("Layer|Lock Layers...")
+        # actions.key(cmd-/)
 
     def ps_link_layers():
         """layer link layers"""
@@ -828,71 +768,72 @@ class Actions:
         actions.user.menu_select("Filter|Vanishing Point...")
 
     def ps_filter_blur_average():
-        """filter blur average"""
+        """blur average"""
         actions.user.menu_select("Filter|Blur|Average")
 
     def ps_filter_blur_blur():
-        """filter blur blur"""
+        """blur"""
         actions.user.menu_select("Filter|Blur|Blur")
 
     def ps_filter_blur_blur_more():
-        """filter blur blur more"""
+        """blur more"""
         actions.user.menu_select("Filter|Blur|Blur More")
 
     def ps_filter_blur_box_blur():
-        """filter blur box blur"""
+        """box blur"""
         actions.user.menu_select("Filter|Blur|Box Blur...")
 
-    def ps_filter_blur_live_gaussian_blur():
-        """filter blur live gaussian blur"""
-        actions.user.menu_select("Filter|Blur|Live Gaussian Blur...")
+    # def ps_filter_blur_live_gaussian_blur():
+    #     """live gaussian blur"""
+    #     actions.user.menu_select("Filter|Blur|Live Gaussian Blur...")
 
     def ps_filter_blur_gaussian_blur():
-        """filter blur gaussian blur"""
+        """gaussian blur"""
+        print("gaussian blur from python")
         actions.user.menu_select("Filter|Blur|Gaussian Blur...")
 
     def ps_filter_blur_lens_blur():
-        """filter blur lens blur"""
+        """lens blur"""
         actions.user.menu_select("Filter|Blur|Lens Blur...")
 
     def ps_filter_blur_motion_blur():
-        """filter blur motion blur"""
+        """motion blur"""
         actions.user.menu_select("Filter|Blur|Motion Blur...")
 
     def ps_filter_blur_radial_blur():
-        """filter blur radial blur"""
+        """radial blur"""
         actions.user.menu_select("Filter|Blur|Radial Blur...")
 
     def ps_filter_blur_shape_blur():
-        """filter blur shape blur"""
+        """shape blur"""
         actions.user.menu_select("Filter|Blur|Shape Blur...")
 
     def ps_filter_blur_smart_blur():
-        """filter blur smart blur"""
+        """smart blur"""
         actions.user.menu_select("Filter|Blur|Smart Blur...")
 
     def ps_filter_blur_surface_blur():
-        """filter blur surface blur"""
+        """surface blur"""
         actions.user.menu_select("Filter|Blur|Surface Blur...")
 
     def ps_filter_blur_gallery_field_blur():
-        """filter blur gallery field blur"""
+        """gallery field blur"""
         actions.user.menu_select("Filter|Blur Gallery|Field Blur..")
 
     def ps_filter_blur_gallery_iris_blur():
-        """filter blur gallery iris blur"""
+        """blur gallery iris blur"""
         actions.user.menu_select("Filter|Blur Gallery|Iris Blur...")
 
     def ps_filter_blur_gallery_tilt_shift():
-        """filter blur gallery tilt shift"""
+        """blur gallery tilt shift"""
         actions.user.menu_select("Filter|Blur Gallery|Tilt-Shift...")
 
     def ps_filter_blur_gallery_path_blur():
-        """filter blur gallery path blur"""
+        """blur gallery path blur"""
         actions.user.menu_select("Filter|Blur Gallery|Path Blur...")
 
     def ps_filter_blur_gallery_spin_blur():
-        """filter blur gallery spin blur"""
+        """blur gallery spin blur"""
         actions.user.menu_select("Filter|Blur Gallery|Spin Blur...")
 
     def ps_filter_distort_displace():
@@ -1380,6 +1321,7 @@ class Actions:
     def ps_select_deselect():
         """select deselect"""
         actions.user.menu_select("Select|Deselect")
+        # actions.key(cmd-d)
 
     def ps_select_reselect():
         """select reselect"""
@@ -1425,10 +1367,15 @@ class Actions:
         """select select and mask"""
         actions.user.menu_select("Select|Select and Mask...")
 
-    def ps_select_modify_border():
+    def ps_select_modify_border(border_amount: Optional[str] = None):
         """select modify border"""
+        print(f"border_amount: {border_amount}" )
         actions.user.menu_select("Select|Modify|Border...")
-
+        if border_amount is not None:
+            actions.insert(border_amount)
+            actions.sleep("200ms")
+            actions.key("enter")
+        
     def ps_select_modify_smooth():
         """select modify smooth"""
         actions.user.menu_select("Select|Modify|Smooth...")
@@ -1460,6 +1407,7 @@ class Actions:
     def ps_select_edit_in_quick_mask_mode():
         """select edit in quick mask mode"""
         actions.user.menu_select("Select|Edit in Quick Mask Mode")
+        # actions.user.key("q")
 
     def ps_select_load_selection():
         """select load selection"""
@@ -1805,6 +1753,10 @@ class Actions:
         """edit find and replace text"""
         actions.user.menu_select("Edit|Find and Replace Text...")
 
+    def ps_fill():
+        """edit fill"""
+        actions.user.menu_select("Edit|Fill...")
+
     def ps_stroke():
         """edit stroke"""
         actions.user.menu_select("Edit|Stroke...")
@@ -1831,11 +1783,13 @@ class Actions:
 
     def ps_free_transform():
         """edit free transform"""
-        actions.user.menu_select("Edit|Free Transform")
+        # actions.user.menu_select("Edit|Free Transform")
+        actions.key("cmd-t")
 
     def ps_free_transform_path():
         """edit free transform path"""
-        actions.user.menu_select("Edit|Free Transform Path")
+        # actions.user.menu_select("Edit|Free Transform Path")
+        actions.user.ps_free_transform()
 
     def ps_transform_again():
         """edit transform again"""
@@ -2540,3 +2494,11 @@ class Actions:
     def ps_window_contextual_task_bar():
         """window contextual task bar"""
         actions.user.menu_select("Window|Contextual Task Bar")
+    
+    def ps_set_backdrop_color(color_name: str):
+        """window contextual task bar"""
+        actions.mouse_click(1)
+        actions.sleep("200ms")
+        actions.insert(color_name)
+        actions.sleep("200ms")
+        actions.key("enter")

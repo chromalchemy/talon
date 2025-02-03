@@ -3,8 +3,28 @@ app.name: Adobe Photoshop (Beta)
 app.name: Adobe Photoshop 2025
 
 -
-New Layer:
-    user.ps_new_layer()
+
+## +++++++++++++++++++++++++++ confirm changes (to exit modal)
+
+^okay$: key(enter)
+
+## ++++++++++++++++++ image generation .
+
+generate (images | Image assets | assets):
+    user.menu_select('File|Automate|Generator Plugins|Image Assets')
+
+
+(new | add [new]) Layer [<user.text>]:
+    user.ps_new_layer(text or "")
+
+(new | add [new]) Layer (down | below) [<user.text>]:
+    user.ps_new_layer(text or "")
+    sleep(500ms)
+    user.ps_move_layer_down()
+
+#test invoke squint js script
+squint test | new custom layer:
+    user.system_command_nb("open \"/Users/ryan/dev/ps script/scripts/create_layer.psjs\"")
 
 New Background from Layer:
     user.ps_new_background_from_layer()
@@ -45,17 +65,23 @@ Copy (S V G | es vee gee):
 Duplicate Layer:
     user.ps_duplicate_layer()
 
-Delete Layer:
-    user.ps_delete_layer()
+Duplicate layers:
+    user.ps_duplicate_layers()
 
-Delete Hidden Layers:
+(Delete | chuck) layer:
+    user.ps_delete_layer()
+    
+(Delete | chuck) group:
+    user.ps_delete_group()
+
+(Delete | chuck) Hidden Layers:
     user.ps_delete_hidden_layers()
 
 Export Layer As:
     user.ps_export_as()
 
-(Rename Layer | layer rename):
-    user.ps_rename_layer()
+rename layer [<user.text>]:
+    user.ps_rename_layer(text or "")
 
 (Rename artboard | artboard rename):
     user.ps_rename_artboard()
@@ -117,67 +143,15 @@ Scale (Effects | styles | style):
 Smart Filter:
     user.ps_smart_filter()
 
-New [Solid] Color [Fill] Layer:
-    user.ps_new_fill_layer_solid_color()
 
-New Gradient [Fill] Layer:
-    user.ps_new_fill_layer_gradient()
-
-New Pattern [Fill] Layer:
-    user.ps_new_fill_layer_pattern()
+## ++++++++++++++++++++++++++++ new adjustment layer .
 
 new {user.ryan.photoshop.adjustment_layer.list} [adjustment] layer:
     user.ps_new_adjustment_layer(user.ryan.photoshop.adjustment_layer.list)
     sleep(200ms)
     key(enter)
 
-# new (Brightness | Contrast) layer:
-#     user.ps_adjustment_layer_brightness_contrast()
-
-# new Levels layer:
-#     user.ps_adjustment_layer_levels()
-
-# new Curves layer:
-#     user.ps_adjustment_layer_curves()
-
-# new Exposure layer:
-#     user.ps_adjustment_layer_exposure()
-
-# new Vibrance layer:
-#     user.ps_adjustment_layer_vibrance()
-
-# new (Hue | Saturation) layer:
-#     user.ps_adjustment_layer_hue_saturation()
-
-# new Color Balance layer:
-#     user.ps_adjustment_layer_color_balance()
-
-# new Black and White layer:
-#     user.ps_adjustment_layer_black_and_white()
-
-# new Photo Filter layer:
-#     user.ps_adjustment_layer_photo_filter()
-
-# new Channel Mixer layer:
-#     user.ps_adjustment_layer_channel_mixer()
-
-# new (Lookup color | Color Lookup) layer:
-#     user.ps_adjustment_layer_color_lookup()
-
-# new Invert layer:
-#     user.ps_adjustment_layer_invert()
-
-# new Posterize layer:
-#     user.ps_adjustment_layer_posterize()
-
-# new Threshold layer:
-#     user.ps_adjustment_layer_threshold()
-
-# new Gradient Map layer:
-#     user.ps_adjustment_layer_gradient_map()
-
-# new Selective Color layer:
-#     user.ps_adjustment_layer_selective_color()
+## +++++++++++++++++++++ layer options .
 
 Layer Content Options:
     user.ps_layer_content_options()
@@ -211,6 +185,15 @@ Apply layer mask:
 (link | unlink) layer mask:
     user.ps_layer_mask_link()
 
+go  layer mask: 
+    key(cmd-\)
+
+go layer:
+    key(cmd-shift-2)
+
+invert (layer | mask): 
+    user.ps_adjustments_invert()
+    
 ## +++++++++++++++++++++++ vector mask .
 
 New vector mask reveal [all]:
@@ -241,7 +224,7 @@ mask all objects:
 
 ## ++++++++++++++++++++++ smart object .
 
-(Convert to | make) Smart Object:
+(Convert to | make) [Smart] Object:
     user.ps_smart_objects_convert_to_smart_object()
 
 copy to Smart Object:
@@ -337,14 +320,46 @@ Video Layers:
 new layer slice:
     user.ps_new_layer_based_slice()
 
+## ++++++++++++++++++++ layer grouping .
+
 Group Layers:
     user.ps_group_layers()
 
 Ungroup Layers:
     user.ps_ungroup_layers()
 
+(Ungroup | release) (artboards | artboard):
+    user.menu_select('Layer|Ungroup Artboards')
+
+
+## ++++++++++++ layer stack navigation .
+
+layer (send | move) [to] (back | bottom) | layer center back:
+    user.ps_move_layer_bottom()
+ 
+layer (send | move) [to] (front | top):
+    user.ps_move_layer_top()
+ 
+layer (send | move) (up | for | forward) [<digits>]:  
+    user.ps_move_layer_up(digits or 1)
+ 
+layer (send | move) (down | back | backwards | backward) [<digits>]:
+    user.ps_move_layer_down(digits or 1)
+   
+## ++++++++++++++++++ layer visibility .
+
+(show | hide) layer | layer (show | hide) | toggle layer [visibility]: 
+    user.ps_toggle_layer_visibility()
+
 Hide Layers:
     user.ps_hide_layers()
+
+## +++++++++++++++++++++++ lock layers .
+
+Lock Layers:
+    user.ps_lock_layers()
+
+## +++++++++++++++++++ arrange layers .
 
 (Bring | send) to (Front | top):
     user.ps_arrange_bring_to_front()
@@ -361,6 +376,8 @@ send to (back | bottom):
 reverse (layer | layers) [order]:
     user.ps_arrange_reverse()
 
+## +++++++++++++++++++++ shape algebra .
+
 Unite Shapes:
     user.ps_combine_shapes_unite_shapes()
 
@@ -372,6 +389,11 @@ Unite Shapes [at] Overlap:
 
 Subtract Shapes [at] Overlap:
     user.ps_combine_shapes_subtract_shapes_at_overlap()
+
+## +++++++++++++++++++++++++++++ align .
+
+Auto Align Layers:
+    user.ps_auto_align_layers()
 
 Align Top Edges:
     user.ps_align_top_edges()
@@ -393,6 +415,15 @@ Align Right Edges:
 
 Align Layers to Artboard:
     user.ps_align_layers_to_artboard()
+
+Center layer  [on (page | artboard )]:
+    key(cmd-a)
+    sleep(100ms)
+    user.menu_select('Layer|Align Layers to Selection|Horizontal Centers')
+    sleep(200ms)
+    key(cmd-d)
+
+## ++++++++++++++++++++++++ distribute .
 
 (spread | distribute) Top Edges:
     user.ps_distribute_top_edges()
@@ -418,14 +449,15 @@ Align Layers to Artboard:
 (spread | distribute) Vertically:
     user.ps_distribute_vertically()
 
-Lock Layers:
-    user.ps_lock_layers()
+## +++++++++++++++++++++ linked layers .
 
 Link Layers:
     user.ps_link_layers()
 
 Select Linked Layers:
     user.ps_select_linked_layers()
+
+## ++++++++++++++++++++++++++++++ merge layers .
 
 Merge Layers:
     user.ps_merge_layers()
@@ -435,6 +467,8 @@ Merge Visible [layers]:
 
 Flatten Image:
     user.ps_flatten_image()
+
+## +++++++++++++++ matte.
 
 Color Decontaminate matte:
     user.ps_matting_color_decontaminate()
@@ -448,8 +482,12 @@ Remove Black Matte:
 Remove White Matte:
     user.ps_matting_remove_white_matte()
 
+## +++++++++++++++++++++++ adobe fonts .
+
 More from Adobe Fonts:
     user.ps_type_more_from_adobe_fonts()
+
+## ++++++++++++++++++++++++++++ type panels .
 
 Character Panel:
     user.ps_type_panels_character_panel()
@@ -465,6 +503,8 @@ Character Styles Panel:
 
 Paragraph Styles Panel:
     user.ps_type_panels_paragraph_styles_panel()
+
+## +++++++++++++++++++++ anti-aliasing .
 
 [type] anti alias None:
     user.ps_type_anti_alias_none()
@@ -487,11 +527,15 @@ Paragraph Styles Panel:
 [type] anti alias Mac:
     user.ps_type_anti_alias_mac()
 
+## ++++++++++++++++++ type orientation .
+
 type Horizontal:
     user.ps_type_orientation_horizontal()
 
 type Vertical:
     user.ps_type_orientation_vertical()
+
+## +++++++++++++++++++++++++ open type .
 
 open type Standard Ligatures:
     user.ps_type_opentype_standard_ligatures()
@@ -544,8 +588,12 @@ open type Kana:
 open type Roman Italics:
     user.ps_type_opentype_roman_italics()
 
+## +++++++++++++++++++++++++++ 3d type .
+
 Extrude to 3D:
     user.ps_type_extrude_to_3d()
+
+## ++++++++++++++++++++++++++ type fns .
 
 type Create Work Path:
     user.ps_type_create_work_path()
@@ -565,6 +613,8 @@ Warp Text:
 Match Font:
     user.ps_type_match_font()
 
+## ++++++++++++++++++++++ font preview .
+
 font preview None:
     user.ps_type_font_preview_size_none()
 
@@ -583,6 +633,9 @@ font preview Extra Large:
 font preview Huge:
     user.ps_type_font_preview_size_huge()
 
+
+## ++++++++++++++++++++++++++ type misc .
+
 type Language Options:
     user.ps_type_language_options()
 
@@ -595,11 +648,15 @@ Manage Missing Fonts:
 Paste Lorem Ipsum:
     user.ps_type_paste_lorem_ipsum()
 
+## +++++++++++++++++++++++ type styles .
+
 Load Default Type Styles:
     user.ps_type_load_default_type_styles()
 
 Save Default Type Styles:
     user.ps_type_save_default_type_styles()
+
+## +++++++++++++++++++++++++++ filters .
 
 Last Filter:
     user.ps_filter_last_filter()
@@ -616,7 +673,7 @@ Filter Gallery:
 Wide Angle [filter]:
     user.ps_filter_adaptive_wide_angle()
 
-Camera Raw Filter:
+camera [raw] (filter | module):
     user.ps_filter_camera_raw_filter()
 
 Lens Correction:
@@ -631,7 +688,7 @@ Vanishing Point:
 Average:
     user.ps_filter_blur_average()
 
-Blur:
+Blur (one | once | simple) | simple blur:
     user.ps_filter_blur_blur()
 
 Blur More:
@@ -640,11 +697,21 @@ Blur More:
 Box Blur:
     user.ps_filter_blur_box_blur()
 
-Live Gaussian Blur:
-    user.ps_filter_blur_live_gaussian_blur()
+# Live [(Gaussian | gauss | power)] Blur | [(Gaussian | gauss | power)] Blur live:
+#     print("live gaussian blur")
+#     user.ps_filter_blur_live_gaussian_blur()
 
-Gaussian Blur:
+[(gaussian | gauss | power)] Blur:
+    print("gaussian blur")
     user.ps_filter_blur_gaussian_blur()
+
+[(gaussian | gauss | power)] Blur <user.number_string> [(pix | pixels)]:
+    print("gaussian blur")
+    user.ps_filter_blur_gaussian_blur()
+    sleep(200ms)
+    insert(number_string)
+    key(enter)
+
 
 Lens Blur:
     user.ps_filter_blur_lens_blur()
@@ -739,7 +806,7 @@ Mezzotint:
 Mosaic:
     user.ps_filter_pixelate_mosaic()
 
-Pointillize:
+Pointillize | make [into] points:
     user.ps_filter_pixelate_pointillize()
 
 Flame:
@@ -826,37 +893,37 @@ Minimum:
 Offset:
     user.ps_filter_other_offset()
 
-File New:
+File New | new (file | pane):
     user.ps_file_new()
 
-File Open:
+File Open | open file:
     user.ps_file_open()
 
-File Browse in Bridge:
+File Browse in Bridge | browse [in] bridge:
     user.ps_file_browse_in_bridge()
 
-File Open as Smart Object:
+File Open [as] Smart Object | open file as smart object:
     user.ps_file_open_as_smart_object()
 
-File Open Recent:
+File Open Recent | open recent file:
     user.ps_file_open_recent()
 
-File Close:
+File Close | close file:
     user.ps_file_close()
 
-File Close All:
+File Close All | close all files:
     user.ps_file_close_all()
 
-File Close Others:
+File Close Others | close other files:
     user.ps_file_close_others()
 
 File Close and Go to Bridge:
     user.ps_file_close_and_go_to_bridge()
 
-File Save:
+File Save | save file:
     user.ps_file_save()
 
-File Save As:
+[File] Save As:
     user.ps_file_save_as()
 
 File Save a Copy:
@@ -1003,7 +1070,7 @@ Toggle locks:
 transform with style:
     user.ps_scripts_transform_with_style()
 
-(undeform | un deform | remove transformation):
+undeform | un deform | remove transformation:
     user.ps_scripts_undeform()
 
 unsmart | un smart | remove smart object:
@@ -1043,31 +1110,39 @@ File File Info:
 File Print One Copy:
     user.ps_file_print_one_copy()
 
-## ___________________________________ . selectionl
+## ___________________________________ . selection
 
-Select All:
-    user.ps_select_all()
-
-Deselect:
+Deselect [all] | select none:
     user.ps_select_deselect()
 
-Reselect:
+Reselect | restore (selection | select | ants):
     user.ps_select_reselect()
 
-Inverse:
-    user.ps_select_inverse()
+## +++++++++++++++++++++ select layers .
 
 Select All Layers:
     user.ps_select_all_layers()
 
-Deselect Layers:
+Deselect Layers | (layer | layers) [select] none:
     user.ps_select_deselect_layers()
 
-Find Layers:
+(Find | search | hunt) Layers:
     user.ps_select_find_layers()
 
-Isolate Layers:
+## ++++++++++++++++++ mutate selection .
+
+select (Inverse | opposite) | (invert | inverts | swap) (selection | select | ants):
+    user.ps_select_inverse()
+
+## ++++++++++++++++++++ focus layer(s) .
+
+(Isolate | focus) (layer | Layers):
     user.ps_select_isolate_layers()
+
+## ++++++++++++++++++++++++++++ select fns .
+
+Select All:
+    user.ps_select_all()
 
 Select Color Range:
     user.ps_select_color_range()
@@ -1081,22 +1156,25 @@ Select Subject:
 Select Sky:
     user.ps_select_sky()
 
-Select and Mask:
+## ++++++++++++++++++ mutate selection .
+
+Select and Mask | modify selection:
     user.ps_select_select_and_mask()
 
-Border Selection:
-    user.ps_select_modify_border()
+[add] Border [to] (Selection | ants) [<user.number_string>]:
+    none = types.none()
+    user.ps_select_modify_border(number_string or none)
 
-Smooth Selection:
+Smooth (Selection | ants):
     user.ps_select_modify_smooth()
 
-Expand Selection:
+Expand (Selection | ants):
     user.ps_select_modify_expand()
 
-Contract Selection:
+Contract (Selection | ants):
     user.ps_select_modify_contract()
 
-Feather Selection:
+Feather (Selection | ants):
     user.ps_select_modify_feather()
 
 Grow Selection:
@@ -1108,8 +1186,13 @@ Select Similar:
 Transform Selection:
     user.ps_select_transform_selection()
 
-Edit [in] Quick Mask:
+## ++++++++++++++++++++++++ quick (paint) mask mode .
+
+[(Edit [in] | (toggle | show | hide))] Quick Mask:
     user.ps_select_edit_in_quick_mask_mode()
+
+
+## ++++++++++++++++++ saved selections .
 
 Load Selection:
     user.ps_select_load_selection()
@@ -1117,8 +1200,13 @@ Load Selection:
 Save Selection:
     user.ps_select_save_selection()
 
+
+## ++++++++++++++++++++++ 3d extrusion .
+
 New 3D Extrusion:
     user.ps_select_new_3d_extrusion()
+
+## ++++++++++++++++++++ color proofing .
 
 Proof Setup:
     user.ps_view_proof_setup()
@@ -1129,14 +1217,20 @@ Proof Colors:
 Gamut Warning:
     user.ps_view_gamut_warning()
 
+## ++++++++++++++++ pixel aspect ratio .
+
 Pixel Aspect Ratio:
     user.ps_view_pixel_aspect_ratio()
 
 Pixel Aspect Ratio Correction:
     user.ps_view_pixel_aspect_ratio_correction()
 
+## +++++++++++++++ bid depth preview ? .
+
 32-bit Preview Options:
     user.ps_view_32_bit_preview_options()
+
+## ++++++++++++++++++++++++++++++ zoom .
 
 Zoom In:
     user.ps_view_zoom_in()
@@ -1144,32 +1238,38 @@ Zoom In:
 Zoom Out:
     user.ps_view_zoom_out()
 
-Fit on Screen:
+zoom fit [on screen]:
     user.ps_view_fit_on_screen()
 
-Fit Layers on Screen:
+zoom fit layer [on screen]:
     user.ps_view_fit_layers_on_screen()
 
-Fit Artboard on Screen:
+zoom fit artboard [on screen]:
     user.ps_view_fit_artboard_on_screen()
 
-(zoom 100 | reset zoom | default zoom | zoom default):
+zoom (100 | base) | reset zoom | default zoom | zoom default:
     user.ps_view_100()
 
-zoom 200:
+zoom (200 | 2 x | two ex):
     user.ps_view_200()
 
 Print Size:
     user.ps_view_print_size()
 
-Actual Size:
+zoom actual [size]:
     user.ps_view_actual_size()
+
+## +++++++++++++++++++++++++ flip view .
 
 flip view horizontal:
     user.ps_view_flip_horizontal()
 
+## ++++++++++++++++++++++++++++++ pattern preview .
+
 Pattern Preview:
     user.ps_view_pattern_preview()
+
+## ++++++++++++++++++++++++++++++ screen mode .
 
 Standard Screen Mode:
     user.ps_view_screen_mode_standard_screen_mode()
@@ -1179,6 +1279,8 @@ Full Screen Mode With Menu Bar:
 
 Full Screen Mode:
     user.ps_view_screen_mode_full_screen_mode()
+
+## ++++++++++++++++++++++++++++ show / hide features .
 
 (toggle | show | hide) Extras:
     user.ps_view_extras()
@@ -1264,6 +1366,8 @@ View Rulers:
 View Snap:
     user.ps_view_snap()
 
+## ++++++++++++++++++++++++++++++ snap .
+
 Snap To Guides:
     user.ps_view_snap_to_guides()
 
@@ -1284,6 +1388,8 @@ Snap To All:
 
 Snap To None:
     user.ps_view_snap_to_none()
+
+## ++++++++++++++++++++++++++++ guides .
 
 Edit Selected Guides:
     user.ps_view_guides_edit_selected_guides()
@@ -1312,14 +1418,22 @@ New Guide Layout..:
 New Guides From Shape:
     user.ps_view_guides_new_guides_from_shape()
 
+## ++++++++++++++++++++++++++++ slices .
+
 Lock Slices:
     user.ps_view_lock_slices()
 
 Clear Slices:
     user.ps_view_clear_slices()
 
+
+## +++++++++++++++++++++++++ touch bar .
+
 Customize Touch Bar:
     user.ps_view_customize_touch_bar()
+
+
+## +++++++++++++++++++++++++++ history state
 
 Undo:
     user.ps_undo()
@@ -1332,6 +1446,8 @@ Redo:
 
 Fade:
     user.ps_fade()
+
+## +++++++++++++++++++++++ cut / paste .
 
 Cut:
     user.ps_cut()
@@ -1357,8 +1473,12 @@ Paste Into:
 Paste Outside:
     user.ps_paste_outside()
 
+## +++++++++++++++++++++++++++++ clear .
+
 Clear:
     user.ps_clear()
+
+## ++++++++++++++++++++++++++++ search .
 
 Search:
     user.ps_search()
@@ -1368,9 +1488,22 @@ Check Spelling:
 
 [Find and] Replace Text:
     user.ps_find_and_replace_text()
+    
+## ++++++++++++++++++++++++++++ stroke .
 
-Stroke:
+Stroke (select | selection | ants):
     user.ps_stroke()
+
+## ++++++++++++++++++++++++++++++ fill .
+
+custom fill | fill custom:
+    user.ps_fill()
+
+(fill | bill | fil) [that] [with] [(foreground | primary | first)]  [color]: 
+    key(alt-delete)
+
+fill [that] [with] (background | second | secondary) [color]: 
+    key(cmd-delete)
 
 Content Aware Fill:
     user.ps_content_aware_fill()
@@ -1380,6 +1513,8 @@ Generative Fill:
 
 Content Aware Scale:
     user.ps_content_aware_scale()
+
+## +++++++++++++++++++++++++ transform .
 
 Puppet Warp:
     user.ps_puppet_warp()
@@ -1396,7 +1531,7 @@ Perspective Warp:
 [transform] Again:
     user.ps_transform_again()
 
-[transform] Scale:
+[transform] (Scale | skill) [that]:
     user.ps_scale()
 
 [transform] Rotate:
@@ -1447,8 +1582,6 @@ Perspective Warp:
 [transform] Flip Vertical:
     user.ps_flip_vertical()
 
-Auto Align Layers:
-    user.ps_auto_align_layers()
 
 Auto Blend Layers:
     user.ps_auto_blend_layers()
@@ -1456,14 +1589,7 @@ Auto Blend Layers:
 replace sky:
     user.ps_sky_replacement()
 
-Define Brush Preset:
-    user.ps_define_brush_preset()
-
-Define Pattern:
-    user.ps_define_pattern()
-
-Define Custom Shape:
-    user.ps_define_custom_shape()
+## +++++++++++++++++++++++++++++ purge state
 
 Purge Clipboard:
     user.ps_purge_clipboard()
@@ -1477,6 +1603,18 @@ Purge All:
 Purge Video Cache:
     user.ps_purge_video_cache()
 
+## ++++++++++++++++++++++++++++ manage presets
+
+Define Brush Preset:
+    user.ps_define_brush_preset()
+
+Define Pattern:
+    user.ps_define_pattern()
+
+Define Custom Shape:
+    user.ps_define_custom_shape()
+
+
 Adobe PDF Presets:
     user.ps_adobe_pdf_presets()
 
@@ -1488,6 +1626,8 @@ Migrate Presets:
 
 (Export | Import) Presets:
     user.ps_export_import_presets()
+
+## +++++++++++++++++++++++++ ps config .
 
 Remote Connection settings:
     user.ps_remote_connections()
@@ -1509,6 +1649,8 @@ edit Toolbar:
 
 Start Dictation:
     user.ps_start_dictation()
+
+## ++++++++++++++++++++++++ color mode .
 
 color mode Bitmap:
     user.ps_mode_bitmap()
@@ -1545,6 +1687,8 @@ color mode thirty two bits:
 
 Color Table:
     user.ps_mode_color_table()
+
+## +++++++++++++++++++++++ image adjustments .
 
 [adjust] (Brightness | Contrast):
     user.ps_adjustments_brightness_contrast()
@@ -1615,6 +1759,8 @@ Color Table:
 Equalize [color]:
     user.ps_adjustments_equalize()
 
+## +++++++++++++++++++++++++++ auto adjustments
+
 Auto Tone:
     user.ps_auto_tone()
 
@@ -1624,11 +1770,15 @@ Auto Contrast:
 Auto Color:
     user.ps_auto_color()
 
+## +++++++++++++++++++++ document size .
+
 Image Size:
     user.ps_image_size()
 
 Canvas Size:
     user.ps_canvas_size()
+
+## ++++++++++++++++++++++ rotate image .
 
 rotate image (one eighty [degrees] | half):
     user.ps_rotate_180()
@@ -1642,11 +1792,16 @@ rotate image ninety [degrees] counter [clockwise]:
 rotate image [ arbitrary]:
     user.ps_rotate_arbitrary()
 
+## ++++++++++++++++++++++++ flip canvas
+
 Flip Canvas Horizontal:
     user.ps_flip_canvas_horizontal()
 
 Flip Canvas Vertical:
     user.ps_flip_canvas_vertical()
+
+
+## ++++++++++++++++++++++++++++ crop .
 
 Crop:
     user.ps_crop()
@@ -1657,14 +1812,19 @@ Trim:
 Reveal All:
     user.ps_reveal_all()
 
-Duplicate:
+
+## ++++++++++++++++++++ spawn new imagee .
+
+Duplicate Image:
     user.ps_duplicate_image()
 
 Apply Image..:
     user.ps_apply_image()
 
-Calculations:
+image Calculations:
     user.ps_calculations()
+
+## +++++++++++++++++++++++++ variable data
 
 define variables:
     user.ps_variables_define()
@@ -1920,3 +2080,227 @@ bar Tools:
 
 bar (floating | context | task) | [(toggle | show | hide)] [contextual] task bar:
     user.ps_window_contextual_task_bar()
+
+# ++++++ brush  manipulation .
+
+## ++++++++++++++++++++++++ brush size .
+
+brush [size] down [<user.number_string>]: key("[:{number_string or 1}")
+brush [size] up [<user.number_string>]: key("]:{number_string or 1}")
+ 
+## ++++++++++++++++++++ Brush hardness .
+ 
+[brush] (hardness | hard) up [<user.number_string>]: 
+     key("shift-]:{number_string or 1}")
+ 
+[brush] (hardness | hard) down [<user.number_string>]: 
+     key("shift-[:{number_string or 1}")
+ 
+  ## ++++++++++++++++++++++++++++++ flow .
+ 
+[brush] flow <user.number_string> <user.number_string> : 
+     key("shift-{number_string_1}")
+     key("shift-{number_string_2}")
+ 
+[brush] flow single <digits> : 
+     key(shift:down)
+     key(shift-0)
+     key("shift-{digits}")
+ 
+[brush] flow level <user.number_string>: 
+     key("shift-{number_string}")
+ 
+## +++++++++++++++++++++++++++ opacity .
+ 
+[brush] (opacity | transparency | trans | opaque) <user.number_string> <user.number_string> : 
+     key("{number_string_1}")
+     key("{number_string_2}")
+ 
+[brush] (opacity | transparency | trans | opaque) level <user.number_string>: 
+     key("{number_string}") 
+ 
+[brush] full (opacity | transparency | trans | opaque)  | brush fully opaque: 
+     key(0)    
+ 
+
+## +++++++++++++++++++++++++++++ tools .
+
+move group [tool]: 
+    user.ps_select_move_group_tool()
+
+move layer [tool]:
+    user.ps_select_move_layer_tool()
+
+{user.ryan.photoshop.tool_key.list} [(tool | to)]:
+    key(user.ryan.photoshop.tool_key.list)
+
+hold {user.ryan.photoshop.tool_key.list} |  {user.ryan.photoshop.tool_key.list} (mode | hold):
+    key("{user.ryan.photoshop.tool_key.list}:down")
+
+(release | exit) {user.ryan.photoshop.tool_key.list} |  {user.ryan.photoshop.tool_key.list} (release | exit):
+    key("{user.ryan.photoshop.tool_key.list}:up")
+
+(other | next | last | prev) {user.ryan.photoshop.tool_key.list} [(tool | to) | {user.ryan.photoshop.tool_key.list} (next | last | prev)]:
+    key("shift-{user.ryan.photoshop.tool_key.list}")
+
+
+## ++++++++++++++++++++++ jpeg filename helpers
+
+
+^jpeg <number_small>: 
+    insert(".jpg{number_small}")
+
+^jpeg <number_small> [(file name | filename)] <user.text> :
+    insert("{text}.jpg{number_small}")
+
+^jpeg <number_small> [(file name | filename)] (pace | paste):
+    t = clip.text()
+    insert("{t}.jpg{number_small}") 
+
+## +++++++++++++++++++++++ clone stamp .
+
+rotate clone [<number>]:
+    user.ps_rotate_clone(number or 1)
+
+
+## ++++++++++++++++++ background color .
+
+# this .talon list reference points to this relative path: ryan/photoshop/backdrop_color.talon-list 
+[canvas] backdrop [color] {user.ryan.photoshop.backdrop_color.list}:
+    user.ps_set_backdrop_color(user.ryan.photoshop.backdrop_color.list)
+
+## +++++++++++++++++++++ copy/past color
+[photo] paste color:
+    user.ps_click() 
+    key(cmd-v enter)
+
+[photo] copy color:
+    user.ps_click() 
+    key(cmd-c esc)
+
+## +++++++++++++++++++++++++++ testing .
+
+photo test trace:
+    user.ps_command_nb("(test-trace)")
+
+
+## ++++++ Clone and rasterize gradient .
+
+Clone [and] (raster | rasterize) (layer | gradient) [<user.text>]:
+    user.ps_duplicate_layer(text or "cloned layer")
+    user.ps_toggle_layer_visibility()
+    sleep(300ms)
+    user.ps_go_layer_down()
+    sleep(300ms)
+    user.ps_rasterize_layer()
+
+## ++++++++++++++++++++ set font / character state . 
+
+[set] font size <user.number_string>:
+    user.ps_command_nb("(set-font-size! {number_string})")
+
+[set] [font] tracking <user.number_string>:
+    user.ps_command_nb("(set-font-tracking! {number_string})")
+
+(increase [font] tracking  | [font] tracking up) <user.number_string>:
+    user.ps_command_nb("(update-font-tracking! {number_string})")
+
+(decrease [font] tracking  | [font] tracking down) <user.number_string>:
+    user.ps_command_nb("(update-font-tracking! -{number_string})")
+
+
+## +++++++++++++++++++++++++++++ transform draggging .
+
+centered [scale] drag:
+    user.mouse_drag(0)
+    # user.grid_close()
+    sleep(2000ms)
+    key("alt:down")
+    
+clone drag | drag copy:
+    key("alt:down")
+    user.mouse_drag(0)
+    # close the mouse grid
+    user.grid_close()
+
+set [transform] (anchor | origin) [point]:
+    key(alt:down)
+    mouse_click(0)
+
+
+drag [current] layer:
+    key(cmd:down)
+    user.mouse_drag(0)
+    # # close the mouse grid
+    user.grid_close()
+
+#doesnt work for dragging transform
+
+## ++++++++++++++++++++++++++ tracking .
+
+#  # mimic("point tracking")
+# go tracking: 
+#     mouse_move(914.6171875, 186.5703125)
+#     sleep(3300ms)
+#     mouse_click(0)
+
+# # mimic("point tracking")
+# [set] tracking [<user.number_string>]: 
+#     mouse_move(914.6171875, 186.5703125)
+#     sleep(2500ms)
+#     mouse_click(0)
+#     insert(number_string)
+#     sleep(50ms)Bottom
+#     key(enter)
+
+# [set] tracking (negative | neg) [<user.number_string>]: 
+#     mynum = "-" + number_string
+#     mouse_move(914.6171875, 186.5703125)
+#     sleep(2500ms)
+#     mouse_click(0)
+#     insert(mynum)
+#     key(enter)
+
+## ++++++++++++++++ history navigation .
+
+# step backwards [<user.n20>]: key("cmd-alt-z:{n20 or 1}")
+# step forwards [<user.n20>]: key("cmd-shift-z:{n20 or 1}")
+
+
+## ++++++++++ primary /secondary color .
+
+(default | reset) colors: key(d)
+
+(swap | flip) (colors | color | brush): key(x)
+
+## +++++++++ toggle colors for masking .
+
+color black | paint mask | (mask | erase) (pixels | layer): 
+    key(d)
+    sleep(100ms)
+    key(x)
+
+color white | erase mask | (unmask | paint) (pixels | layer): 
+    key(d)
+
+paint (inside | outside) | (swap | flip) masking [brush] [polarity]: 
+    key(x)
+
+## +++++++++++++++++++++++++ edit text .
+
+edit text [(here | point)]:
+    user.ps_place_cursor_in_text() 
+
+take text [(here | point)]:
+    user.ps_select_text()
+
+(paste | pace) text [(here | point)]:
+    user.ps_select_text()
+    key(cmd-v)
+
+(paste | pace) (no |  without) (formatting | format): 
+    user.menu_select('Edit|Paste Special|Paste without Formatting')
+
+(paste | pace) [text] raw [(here | point)]:
+    user.ps_select_text()
+    user.menu_select('Edit|Paste Special|Paste without Formatting')

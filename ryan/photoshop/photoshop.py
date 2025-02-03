@@ -112,6 +112,12 @@ class Actions:
         actions.key("v")
         actions.key("shift-cmd-f19")
 
-    def ps_new_layer():
-        """New Layer"""
+    def ps_new_layer(layer_name: str = ""):
+        """Create a new layer with the specified name"""
         actions.user.menu_select('Layer|New|Layer...')
+        # actions.key(shift-cmd-n)
+        if layer_name and layer_name != "":
+            actions.user.paste(layer_name)
+            actions.sleep("200ms")
+        actions.key("enter")
+        
