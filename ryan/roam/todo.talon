@@ -3,37 +3,31 @@ mode: command
 -
 ## +++++++++++++++++++ edit checkboxes .
 
-(make | mark) (todo | action): 
+(make | mark) (todo | to do | task | action): 
     key(cmd-return)
-    # sleep(100ms)
-    # key(escape)
-
-[new] (todo | to do | action) <user.text> : 
+    
+[new] (todo | to do | task | action) <user.text> : 
     insert("{{{{[[TODO]]}}}} {text}")
     # key(cmd-return)
     # insert(text)
     
-mark done: 
+mark [(task | action)] done: 
     key(cmd-return)
-    # sleep(100ms)
-    # key(escape)
-
-make done: 
+    
+make [(task | action)] done: 
     key(cmd-return:2)
-    # sleep(100ms)
-    # key(escape)
-
-[new] done <user.text>: 
+    
+[new] done [(task | action)] <user.text>: 
     insert("{{{{[[DONE]]}}}} {text}")
     # key(cmd-return:2)
     # insert(text)
 
-make undone: 
+make undone | reactivate task: 
     key(cmd-return:2)
     sleep(100ms)
     key(escape)
 
-remove (todo | action): 
+remove (todo | action | task) | make text block: 
     key(cmd-return:2)
     sleep(100ms)
     key(escape)
