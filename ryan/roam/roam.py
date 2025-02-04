@@ -1,3 +1,4 @@
+from pickle import BINSTRING
 from talon import Module, actions
 import re
 
@@ -252,28 +253,41 @@ class Actions:
 
     #general
 
-    def roam_start_send_block_to_location_top():
-        """start send block to location top"""
-        actions.key("cmd-alt-m")
-        actions.sleep("2500ms")
-
     def roam_select_send_block_to_reference_field():
         """send block to reference"""
+        print("trying to select field")
         actions.key("left")
-        actions.sleep("200ms")
-        actions.key("tab")
-        actions.sleep("200ms")
-        actions.key("right")
         actions.sleep("500ms")
+        actions.key("tab")
+        actions.sleep("500ms")
+        actions.key("right")
+        actions.sleep("700ms")
 
-    def roam_close_out_send_block_modal():
+    def roam_select_send_block_to_page_field():
+        """send block to page"""
+        print("trying to select page field")
+        actions.key("right")
+        actions.sleep("100ms")
+
+    def roam_close_out_send_block_modal_from_ref_field():
         """close out send block modal"""
         actions.sleep("1600ms")     
         actions.key("tab")
         actions.sleep("200ms")
         actions.key("enter")
 
-    ## send block to top of reference
+    def roam_close_out_send_block_modal_from_page_field():
+        """close out send block modal"""
+        actions.sleep("1600ms")     
+        actions.key("enter tab:2 enter")
+    
+    
+    ## send block to location top
+
+    def roam_start_send_block_to_location_top():
+        """start send block to location top"""
+        actions.key("cmd-alt-m")
+        actions.sleep("2500ms")
     
     def roam_start_send_block_to_reference_top():
         """start send block to reference"""
@@ -283,33 +297,113 @@ class Actions:
     def roam_send_block_to_reference_top(reference: str):
         """send block to reference"""
         actions.user.roam_start_send_block_to_reference_top()
-        actions.sleep("500ms")
         actions.insert(reference)
-        actions.user.roam_close_out_send_block_modal()
+        actions.user.roam_close_out_send_block_modal_from_ref_field()
+
+    ## send block to page 
+
+    def roam_start_send_block_to_page_top():
+        """start send block to page"""
+        actions.user.roam_start_send_block_to_location_top()
+        actions.user.roam_select_send_block_to_page_field()
+
+    def roam_send_block_to_page_top(page_string: str):
+        """send block to page"""
+        actions.user.roam_start_send_block_to_page_top()
+        actions.insert(page_string)
+        actions.user.roam_close_out_send_block_modal_from_page_field()
+
 
     ## send block to top of reference and leave reference
-
+    
     def roam_start_send_block_to_location_top_leave_reference():
         """start send block to location"""
-        actions.key("cmd-alt-shift-m")
-        actions.sleep("1500ms")
-
-    def start_roam_send_block_to_reference_top_leave_reference():
-        """send block to location"""
+        actions.key("cmd-alt-ctrl-m")
+        actions.sleep("2500ms")
+        
+    def roam_start_send_block_to_reference_top_leave_reference():
+        """start send block to reference"""
         actions.user.roam_start_send_block_to_location_top_leave_reference()
         actions.user.roam_select_send_block_to_reference_field()
-        
-        
+
     def roam_send_block_to_reference_top_leave_reference(reference: str):
+        """send block to ref and leave ref"""
+        actions.user.roam_start_send_block_to_reference_top_leave_reference()
+        actions.insert(reference)
+        actions.user.roam_close_out_send_block_modal_from_ref_field()
+
+    def roam_start_send_block_to_page_top_and_leave_reference():
+        """start send block to page"""
+        actions.user.roam_start_send_block_to_location_top_leave_reference()
+        actions.user.roam_select_send_block_to_page_field()
+
+    def roam_send_block_to_page_top_and_leave_reference(page_string: str):
+        """send block to page and leave ref"""
+        actions.user.roam_start_send_block_to_page_top_and_leave_reference()
+        actions.insert(page_string)
+        actions.user.roam_close_out_send_block_modal_from_page_field()
+
+    ### move to top and sidebar
+
+    def roam_start_send_block_to_location_top_and_sidebar():
+        """start send block to top and sidebar"""
+        actions.user.run_roam_command("mbts")
+        actions.sleep("2500ms")
+
+    def roam_start_send_block_to_reference_top_and_sidebar():
+        """start send block to reference"""
+        actions.user.roam_start_send_block_to_location_top_and_sidebar()
+        actions.user.roam_select_send_block_to_reference_field()
+
+    def roam_send_block_to_reference_top_and_sidebar(reference: str):
         """send block to reference"""
-        actions.user.start_roam_send_block_to_reference_top_leave_reference()
-        actions.user.paste(reference)
-        actions.sleep("200ms")
-        actions.user.roam_close_out_send_block_modal()
-        
-    
+        actions.user.roam_start_send_block_to_reference_top_and_sidebar()
+        actions.insert(reference)
+        actions.user.roam_close_out_send_block_modal_from_ref_field()
 
-            
-                
-        
+    def roam_start_send_block_to_page_top_and_sidebar():
+        """start send block to page"""
+        actions.user.roam_start_send_block_to_location_top_and_sidebar()
+        actions.user.roam_select_send_block_to_page_field()
 
+    def roam_send_block_to_page_top_and_sidebar(page_string: str):
+        """send block to page"""
+        actions.user.roam_start_send_block_to_page_top_and_sidebar()
+        actions.insert(page_string)
+        actions.user.roam_close_out_send_block_modal_from_page_field()
+
+    ### move and zoom
+
+    def roam_start_send_block_to_location_top_and_zoom():
+        """start send block to top and sidebar"""
+        actions.user.run_roam_command("mbtz")
+        actions.sleep("2500ms")
+
+    def roam_start_send_block_to_reference_top_and_zoom():
+        """start send block to reference"""
+        actions.user.roam_start_send_block_to_location_top_and_zoom()
+        actions.user.roam_select_send_block_to_reference_field()
+
+    def roam_send_block_to_reference_top_and_zoom(reference: str):
+        """send block to reference"""
+        actions.user.roam_start_send_block_to_reference_top_and_zoom()
+        actions.insert(reference)
+        actions.user.roam_close_out_send_block_modal_from_ref_field()
+
+    def roam_start_send_block_to_page_top_and_zoom():
+        """start send block to page"""
+        actions.user.roam_start_send_block_to_location_top_and_zoom()
+        actions.user.roam_select_send_block_to_page_field()
+
+    def roam_send_block_to_page_top_and_zoom(page_string: str):
+        """send block to page"""
+        actions.user.roam_start_send_block_to_page_top_and_zoom()
+        actions.insert(page_string)
+        actions.user.roam_close_out_send_block_modal_from_page_field()
+
+    def roam_select_block_hat(target: str):
+        """select block hat"""
+        actions.insert(target)
+        actions.sleep("300ms")
+
+        

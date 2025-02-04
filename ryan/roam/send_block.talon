@@ -2,7 +2,6 @@ app.name: Roam Research
 mode: command
 -
 
-
 ## ++++++++++++++++ move block to date (str)
 
 
@@ -31,104 +30,61 @@ teleport [(todo | to do)] [and] leave (ref | reference):
 
 ## ++++++++++++++++++++++ Move block to page .
 
+(move | send) [(block | blocks)] to [top] [of] [page] (paste | pace | clip):
+    page_name = clip.text()
+    user.roam_send_block_to_page_top(page_name)
 
-# make version that leaves reference
-
-move [(block | blocks)] to [top] [of] [page] (paste | pace | clip): 
-    key(cmd-alt-m)
-    sleep(1500ms)
-    key(right)
-    sleep(100ms)        
-    edit.paste()
-    sleep(200ms)        
-    key(enter tab:2 enter)
-
-move [(block | blocks)] to [top] [of] {user.ryan.roam.tags.list}: 
-    key(cmd-alt-m)
-    sleep(1500ms)
-    key(right)
-    sleep(100ms)
-    insert("{user.ryan.roam.tags.list}")        
-    sleep(200ms)        
-    key(enter tab:2 enter)
+move [(block | blocks)] to [top] [of] {user.ryan.roam.tags.list}:
+    user.roam_send_block_to_page_top("{user.ryan.roam.tags.list or ''}") 
 
 [move] <user.letters> [move] (to | two) [top] [of] {user.ryan.roam.tags.list}:
-    insert(letters)
-    sleep(300ms) 
-    key(cmd-alt-m)
-    sleep(1500ms)
-    key(right)
-    sleep(100ms)
-    insert("{user.ryan.roam.tags.list}")        
-    sleep(200ms)        
-    key(enter tab:2 enter)
+    user.roam_select_block_hat(letters)
+    user.roam_send_block_to_page_top("{user.ryan.roam.tags.list or ''}")
 
+
+[move] <user.number_string> [move] (to | two) [top] [of] {user.ryan.roam.tags.list}:
+    user.roam_select_block_hat(number_string)
+    user.roam_send_block_to_page_top("{user.ryan.roam.tags.list or ''}")
+
+## +++++++++++++ move to page and sidebar .
 
 move [(block | blocks)] to [top] [of] {user.ryan.roam.tags.list} (sidebar | bar):
-    user.run_roam_command("mbts")
-    sleep(1500ms)
-    key(right)
-    sleep(100ms)
-    insert("{user.ryan.roam.tags.list}")        
-    sleep(200ms)        
-    key(enter tab:2 enter)
+    user.roam_send_block_to_page_top_and_sidebar("{user.ryan.roam.tags.list or ''}")
+
+
+move [(block | blocks)] to (paste | pace) [and] (sidebar | bar):
+    page_name = clip.text()
+    user.roam_send_block_to_page_top_and_sidebar(page_name)
+
+## +++++++++++++move to ref and leave ref
 
 move [(block | blocks)] to [top] [of] {user.ryan.roam.tags.list} [leave] (ref | reference | rough):
-    user.run_roam_command("mbts")
-    sleep(1500ms)
-    key(right)
-    sleep(100ms)
-    insert("{user.ryan.roam.tags.list}")        
-    sleep(200ms)        
-    key(enter tab:2 enter)
+    user.roam_send_block_to_page_top_leave_reference("{user.ryan.roam.tags.list or ''}")
+
+## +++++++++++++++ move to page and zoom .
 
 move [(block | blocks)] to [top] [of] {user.ryan.roam.tags.list} [and] (zoom | go [there] | focus):
-    user.run_roam_command("mbts")
-    sleep(1500ms)
-    key(right)
-    sleep(100ms)
-    insert("{user.ryan.roam.tags.list}")        
-    sleep(200ms)        
-    key(enter tab:2 enter)
+    user.roam_send_block_to_page_top_and_zoom("{user.ryan.roam.tags.list or ''}")
 
-## +++++++++++ move block to reference .
 
-move [(block | blocks)] to (ref | reference | rough) (paste | pace | clip): 
-    key(cmd-alt-m)
-    sleep(1500ms)
-    key(tab right)
-    edit.paste()
-    sleep(300ms)        
-    user.roam_break_block()
-    key(tab enter)
+## +++++++++++ move to reference .
 
-# ------------- leave reference versions
+move [(block | blocks)] to (ref | reference | rough) (paste | pace | clip):
+    reference_string = clip.text()
+    user.roam_send_block_to_reference_top(reference_string) 
 
 (move | send) [(block | blocks)] (to | too | two) {user.ryan.roam.refs.list}: 
     user.roam_send_block_to_reference_top("{user.ryan.roam.refs.list}")
 
-(send | move) [(block | blocks)] (sticky | stick) (to | too | two) {user.ryan.roam.refs.list}: 
-    user.roam_send_block_to_reference_top_leave_reference(user.ryan.roam.refs.list)
 
-## +++++++++++++++++++ move to sidebar .
-
-move [(block | blocks)] to (paste | pace) [and] (sidebar | bar): 
-    user.run_roam_command("mbts")
-    sleep(1500ms)
-    key(right)
-    edit.paste()
-    sleep(200ms)
-    user.roam_break_block()       
-    key(tab enter)
-
-## +++++++++++++++++++++++++++++ inbox .
+## ++++++++ move to inbox refs
 
 #move to #tag #inbox combo reference
 move [(block | blocks)] to {user.ryan.roam.tags.list} inbox: 
-    key(cmd-alt-m)
-    sleep(1500ms)
-    key(tab right)
-    insert("#{user.ryan.roam.tags.list} #inbox")
-    sleep(200ms)        
-    user.roam_break_block()
-    key(tab enter)
+    user.roam_send_block_to_reference_top("#{user.ryan.roam.tags.list} #inbox")
+
+## +++++++++ move to ref and leave ref .
+
+(sticky | stick | ticky | tick) (send | move) [(block | blocks)] (to | too | two) {user.ryan.roam.refs.list}: 
+    user.roam_send_block_to_reference_top_leave_reference("{user.ryan.roam.refs.list}")
+
