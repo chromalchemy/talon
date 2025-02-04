@@ -15,11 +15,7 @@ mode: command
     
 (make [block] | tag block | add tag) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>):
     tag_text = user.roam_tag("{formatters or 'SLASH_SEPARATED'}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
-    edit.select_all()
-    s = edit.selected_text()
-    insert("{s} #{tag_text}")
-    sleep(300ms)
-    key(enter)
+    user.roam_insert_text_at_beginning_of_block(tag_text)
 
 ## +++++++++++++++++++++ multiple tags .
 

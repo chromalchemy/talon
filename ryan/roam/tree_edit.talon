@@ -9,8 +9,22 @@ timout test:
     print("one")
     print("two")
 
+
+## ++++++++++++++++++++++++ move block on page 
+
+(block | move) up: 
+    user.roam_block_up(1)
+(block | move) down: 
+    user.roam_block_down(1)
+(block | move) (in | (right | write) | forward | fore | four): 
+    user.roam_block_forward(1)
+(block | move) (out | left | back): 
+    user.roam_block_back(1)
+
 dedent: user.roam_block_back(1)
 indent less: user.roam_block_back(1)
+
+## ++++++++++++++++++++++ select block .
 
 select block: 
     user.roam_select_block()

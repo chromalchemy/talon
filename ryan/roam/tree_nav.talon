@@ -38,7 +38,7 @@ go [to] ([page] bottom | base [of] [page] | last block [on page]):
 
 (go | page | scroll) [to] top: key(home) 
 
-go [to] crown [of] [page]: 
+go [to] (crown | top) [of] [page] | go page top: 
     key(cmd-alt-shift-t)
     # user.run_roam_command("wb jump to top of page")
 
