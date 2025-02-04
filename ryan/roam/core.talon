@@ -16,12 +16,8 @@ please [<user.text>]:
 
 #bug not working
 go all pages: 
-    key(cmd-p)
-    sleep(500ms)
-    user.paste("(wb) all pages")
-    sleep(1000ms)
-    key(enter) 
-
+    user.run_roam_command("(wb) all pages")
+    
 # community dropdown cmd: 
 # (drop [down] | pick | pic) <number_small>: 
     # key("down:{number_small} enter")
@@ -45,3 +41,4 @@ go all pages:
 # do I need these overrides?
 exit: key(esc)
 nope: key(cmd-z)
+

@@ -2,54 +2,35 @@ app.name: Roam Research
 mode: command
 -
 
-## +++++++++++++++++++++ #move blocks .
 
-
-## ++++++++++++++++++++++++ move block on page 
-
-(block | move) up: 
-    user.roam_block_up(1)
-(block | move) down: 
-    user.roam_block_down(1)
-(block | move) (in | (right | write) | forward | fore | four): 
-    user.roam_block_forward(1)
-(block | move) (out | left | back): 
-    user.roam_block_back(1)
-
-## ++++++++++++++++ move block to DNP date (str)
-
-#todo: why inserting at bottom
-move [(block | blocks)] to today: 
-    key(cmd-d)
-    sleep(100ms)
-    edit.select_all()
-    sleep(100ms)
-    key(delete)
-    user.paste("Today")
-    sleep(100ms)
-    key(tab enter)
-    sleep(100ms)
-    key(tab:2 enter)
-
-
-teleport [(todo | block)]:
-    key(cmd-alt-shift-t)
-
-teleport [(todo | to do)] [and] [leave] (ref | reference):
-    user.run_roam_command("teleport todos and leave blockref behind")
+## ++++++++++++++++ move block to date (str)
 
 
 #make versions that leave reference
 
-move [(block | blocks)] to tomorrow: 
-    key(cmd-d)
-    sleep(100ms)
-    key(tab enter)
-    sleep(100ms)
-    key(tab:2 enter)
+#todo: why inserting at bottom
+
+move [(block | blocks)] [to] yesterday:
+    user.roam_send_block_to_date_text("Yesterday")
+
+move [(block | blocks)] [to] today:
+    user.roam_send_block_to_date_text("Today") 
+
+move [(block | blocks)] [to] tomorrow: 
+    user.roam_send_block_to_date_text("Tomorrow")
+
+    
+## ++++++++++++++++++++++++++ teleport to date (with calendar popup)
+
+teleport [(todo | block)] [to (date | cal | calendar)] [and] [leave] (ref | reference):
+    user.roam_send_block_to_date_by_calendar()
+
+teleport [(todo | to do)] [and] leave (ref | reference):
+    user.run_roam_command("teleport todos and leave blockref behind")
 
 
 ## ++++++++++++++++++++++ Move block to page .
+
 
 # make version that leaves reference
 
@@ -121,29 +102,17 @@ move [(block | blocks)] to (ref | reference | rough) (paste | pace | clip):
     user.roam_break_block()
     key(tab enter)
 
-# ------------- reference versions
+# ------------- leave reference versions
 
-move [(block | blocks)] (to | too | two) {user.ryan.roam.refs.list}: 
-    key(cmd-alt-m)
-    sleep(1500ms)
-    key(tab right)
-    user.paste("{user.ryan.roam.refs.list}")
-    sleep(200ms)        
-    user.roam_break_block()        
-    key(tab enter)
+(move | send) [(block | blocks)] (to | too | two) {user.ryan.roam.refs.list}: 
+    user.roam_send_block_to_reference_top("{user.ryan.roam.refs.list}")
 
-(send | move) [(block | blocks)] (ref | reference | link) (to | too | two) {user.ryan.roam.refs.list}: 
-    key(cmd-alt-ctrl-m)
-    sleep(1500ms)
-    key(tab right)
-    user.paste("{user.ryan.roam.refs.list}")       
-    sleep(200ms)
-    user.roam_break_block()       
-    key(tab enter)
+(send | move) [(block | blocks)] (sticky | stick) (to | too | two) {user.ryan.roam.refs.list}: 
+    user.roam_send_block_to_reference_top_leave_reference(user.ryan.roam.refs.list)
 
 ## +++++++++++++++++++ move to sidebar .
 
-move [(block | blocks)] to (paste | pace) (sidebar | bar): 
+move [(block | blocks)] to (paste | pace) [and] (sidebar | bar): 
     user.run_roam_command("mbts")
     sleep(1500ms)
     key(right)
