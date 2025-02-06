@@ -6,12 +6,12 @@ app.name: Windsurf
 kill current file:
     user.run_rpc_command("andreas.removeFile")
 
-(hunt |  (open | hope (and | in))) (file  | filename) [<user.text>]: 
+((hunt |  (open | hope (and | in))) (file  | filename) | file (open | hope in)) [<user.text>]: 
     key(cmd-p)
     sleep(300ms)
     insert(text or "")
 
-(hunt |  (open | hope and)) (file  | filename) [<user.text>] pop: 
+((hunt |  (open | hope and)) (file  | filename) | file (open | hope in)) [<user.text>] pop: 
     key(cmd-p)
     sleep(300ms)
     insert(text)
