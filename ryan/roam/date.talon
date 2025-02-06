@@ -34,15 +34,18 @@ change date point:
 
 ## +++++ to to absolute date .
 
-(pick | go to) date: 
-    key(alt-shift-j)
+#teleport extension
+(pick | go [to]) date: 
+    key(cmd-alt-shift-j) 
+    #telport extension
 
-go [to] today:  key(ctrl-shift-d)
+go [to] today:  
+    key(ctrl-shift-d)
 
 (open | go) [to] today [in] (sidebar | bar):
     user.run_roam_command("go to today (sidebar)")
 
-## +++++++++++++++++++++ relative date .
+## +++++++++++++++++++++ go relative date .
 
 go tomorrow:
     key(ctrl-shift-d)
@@ -67,3 +70,12 @@ go ((prev | previous | last) day | day (prev | previous | last)):
 # yesterday not always accurate
 (open | go) [to] ((prev | previous | last) day | day (prev | previous | last) | yesterday)  [in] (sidebar | bar):
     user.run_roam_command("go to previous day (sidebar)")
+
+
+## ++++++++++++++++++++++ add date to block 
+
+
+add date [stamp] [to block]: 
+    insert("{{{{date}}}} ")
+    key(esc)
+   
