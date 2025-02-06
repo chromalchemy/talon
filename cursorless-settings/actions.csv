@@ -72,3 +72,9 @@ append pre, addSelectionBefore
 
 # 2025-01-27 09:39:20 - New entries automatically added by cursorless
 flash, flashTargets
+
+# 2025-02-06 17:45:55 - New entries automatically added by cursorless
+git accept, gitAccept
+git revert, gitRevert
+git stage, gitStage
+git unstage, gitUnstage
