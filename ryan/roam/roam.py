@@ -240,9 +240,9 @@ class Actions:
         """primary search"""
         actions.key("cmd-u")
         if text != "":
-            actions.sleep("100ms")
-            actions.insert(text)
             actions.sleep("200ms")
+            actions.insert(f"{text}")
+            actions.sleep("500ms")
             actions.key("enter")
 
     def roam_send_block_to_date_by_calendar():
