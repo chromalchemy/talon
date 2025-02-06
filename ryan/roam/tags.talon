@@ -2,6 +2,15 @@ app.name: Roam Research
 mode: command
 -
 
+# open talon lists helpers
+
+(open | hope in) (tags | tag) file:
+    user.system_command_nb('open -a "Windsurf" /Users/ryan/.talon/user/ryan/roam/tags.talon-list')
+
+(open | hope in) (refs | ref | references) file:
+    user.system_command_nb('open -a "Windsurf" /Users/ryan/.talon/user/ryan/roam/refs.talon-list')
+
+
 ## ++++++++++++++++++++++++++ hash tags .
 
 ^[(new | now)] tag ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) $:

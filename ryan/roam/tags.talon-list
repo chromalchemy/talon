@@ -4,6 +4,7 @@ project: project
 today: today
 week: week
 weak: week
+weekly: week
 deadline: deadline 
 
 test: test
