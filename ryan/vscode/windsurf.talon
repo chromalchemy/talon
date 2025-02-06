@@ -8,12 +8,6 @@ tag: user.cursorless
 (cascade | add context) <user.cursorless_target>:
     user.cursorless_ide_command("windsurf.prioritized.chat.open", cursorless_target)
 
-(send [to] | reference [in]  | (add | had) context [to] ) [chat | chatbot]  | cascade [that]:
-    user.run_rpc_command("windsurf.prioritized.chat.open")   
-
-(cascade | add context) <user.cursorless_target>:
-    user.cursorless_ide_command("windsurf.prioritized.chat.open", cursorless_target)
-
 ## +++++++++++++++++++++++ edit inline .
 
 (surf | windsurf) [edit] [that] [(inline | in place)]:
