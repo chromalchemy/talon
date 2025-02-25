@@ -62,13 +62,12 @@ take right:
 
 ## +++++++++++++++++++++ shrink/expand .
 
-expand selection | take more | take expand: 
+take more | (expand | grow) (take | selection): 
     user.run_rpc_command("paredit.sexpRangeExpansion")
 
-shrink selection | take less: 
+
+take less | shrink [selection]: 
     user.run_rpc_command("paredit.sexpRangeContraction")
-
-
 
 
 
