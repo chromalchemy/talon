@@ -104,10 +104,10 @@ library (all | both) [(screen | screens | display | displays)] (brightness | bri
 
 ## +++++++++++++++++++++++ adjustments .
 
-[{user.ryan.display.display_name.list}] (suspend | pause | disable | turn off) (screen | display) [image] adjustments:
+[{user.ryan.display.display_name.list}] (suspend | pause | disable | turn off) (screen | display) [(image | color)] adjustments:
     user.betterdisplay_set("suspendImageAdjustments=on", "{user.ryan.display.display_name.list or 'default'}")
 
-[{user.ryan.display.display_name.list}] (resume | un pause | enable | turn on) (screen | display) [image] adjustments:
+[{user.ryan.display.display_name.list}] (resume | un pause | enable | turn on) (screen | display) [(image | color)] adjustments:
     user.betterdisplay_set("suspendImageAdjustments=off", "{user.ryan.display.display_name.list or 'default'}")
 
 ## ++++++++++++++++++++++++++ contrast .
@@ -152,15 +152,15 @@ library (all | both) [(screen | screens | display | displays)] (brightness | bri
 
 ## ++++++++++++++++++++++++++ temperature .
 
-[{user.ryan.display.display_name.list}] (screen | display) (temperature | temp) <number>:
+[{user.ryan.display.display_name.list}] (screen | display) (temperature | temp | warmth) <number>:
     n = number / 2
     user.betterdisplay_set("temperature={n}%", "{user.ryan.display.display_name.list or 'default'}")
     
-[{user.ryan.display.display_name.list}] (screen | display) (temperature | temp) negative <number>:
+[{user.ryan.display.display_name.list}] (screen | display) (temperature | temp | warmth) negative <number>:
     n = number / 2
-    user.betterdisplay_set("temperature=-n%", "{user.ryan.display.display_name.list or 'default'}") 
+    user.betterdisplay_set("temperature=-{n}%", "{user.ryan.display.display_name.list or 'default'}") 
     
-[{user.ryan.display.display_name.list}] (screen | display) (temperature | temp) max:
+[{user.ryan.display.display_name.list}] (screen | display) (temperature | temp | warmth) max:
     user.betterdisplay_set("temperature=50%", "{user.ryan.display.display_name.list or 'default'}")
 
 ## ++++++++++++++++++++++++++++++ iris .
