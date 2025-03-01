@@ -1,7 +1,10 @@
 ## ++++++++++++ Navigate osx file menu .
 
+
 go menu: 
     key(fn-ctrl-f2)
+
+#match menu by letters or text
 
 go menu <user.letter>: 
     key(fn-ctrl-f2)
@@ -18,6 +21,8 @@ go menu <user.text>:
     insert(text)
     key(down)
 
+# ++++++++++ start typing in to match .
+
 menu pick <user.text>: 
     insert(text)
     
@@ -27,14 +32,10 @@ menu (touch | punch | hit | press | select) <user.text>:
 
 ## ++++++++++++++++++++ # search menus .
 
-ray (search | hunt) (menu | menus) [<user.text>]: 
-    key(cmd-alt-shift-ctrl-l)
-    sleep(200ms)
-    insert("{text or ''}")
+(search | hunt) (ray | raycast) [app] (menu | menus) [(item | items)] [<user.text>]: 
+    user.raycast_select_app_menu_command(text or "")
 
-hit menu [item] <user.text>:
-    key(cmd-alt-shift-ctrl-l)
-    sleep(100ms)
-    insert(text)
-    sleep(100ms)
-    key(enter)
+## +++++++++++++++++++++ run menu item .
+
+(run | hit | do) [app] (menu | menus) [item] <user.text>:
+    user.raycast_run_app_menu_command(text)
