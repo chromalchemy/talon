@@ -1,6 +1,8 @@
 app: chrome
+browser.host: store-7hstasnrjg.mybigcommerce.com
 -
 tag(): browser
+
 
 view on storefront:
     user.rango_run_action_on_reference("clickElement", "view")

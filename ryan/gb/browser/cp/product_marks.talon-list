@@ -1,29 +1,5 @@
 prices: pricing
-price: pricing
-pricing: pricing
-
-basic: basic 
-
-view: view
 front end: view
-
 cats: categories
-categories: categories
-
-description: description
-inventory: inventory
-custom field: fields
-images: images
-identity: identity
-store front: store
-dimensions: dimensions
-shipping: shipping
-availability: availability
-gift: gift
-
 url: address
-product address: address
-
-graph: graph
-
-variants: variants
+graff: graph
