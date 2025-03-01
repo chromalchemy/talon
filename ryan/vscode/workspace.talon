@@ -15,7 +15,7 @@
 #     user.system_command_nb(cmd)
 #     print("open surf project completed")
 
-[open | go] {user.code_workspace} (project | projects | workspace | work space) [in] surf | surf project {user.code_workspace}:
+[open | go] {user.code_workspace} (project | projects | workspace | work space) [in] surf | surf {user.code_workspace} project:
     ide_app = "windsurf" 
     cmd =  """{ide_app} '/Users/ryan{code_workspace}'"""
     key(cmd-ctrl-alt-shift-c)
