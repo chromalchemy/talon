@@ -3,8 +3,9 @@
 
 # tag: user.file_manager
 
-exit: key(esc)
+exit | leave: key(esc)
 nope: key(cmd-z)
+yes: key(return)
 
 (paste | pace) (unformatted | raw): key(shift-cmd-v)
 
@@ -22,12 +23,9 @@ okay | ok: key(enter)
 # talon sleep
 key(cmd-ctrl-alt-shift-x): speech.disable()
 
-
-#break cursorless commands, to say n in same
-then: skip()
-
-#no op prefix commant to prime dictation to recieve next text without Clipping first  syllable
+# no-op prefix command. Prime dictation to recieve following text command, without Clipping first  syllable.
 ^now: skip()
+
 
 
 # paste date template
