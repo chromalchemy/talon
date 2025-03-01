@@ -2,8 +2,8 @@ app: chrome
 title: /app.constantcontact.com/pages/campaign/
 -
 
-[(go | click)] [mark] {user.ryan.constant_contact.edit_mark.list}:
-    user.rango_run_action_on_reference("clickElement", "{user.ryan.constant_contact.edit_mark.list}")
+# [(go | click)] [mark] {user.ryan.constant_contact.edit_mark.list}:
+#     user.rango_run_action_on_reference("clickElement", "{user.ryan.constant_contact.edit_mark.list}")
 
 # email (add block | adblock | insert | paste) link: 
 #     mouse_click(0)
