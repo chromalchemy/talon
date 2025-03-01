@@ -13,9 +13,12 @@ transform tool:
 canvas size | crop canvas:
     key(cmd-alt-c)
 
+brush [tool]: 
+    key(b)
+
 ## +++++++++++++++ sponge tool
 
-(sponge | dry) tool: 
+(sponge | dry) [tool]: 
     key(y)
 
 temp (sponge | dry) [tool]: 
