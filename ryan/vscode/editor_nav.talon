@@ -133,11 +133,11 @@ bar (references | refs) | (go | focus) (references | refs) bar:
 
 ## +++++++++++++++++ symbol definition .
 
-(go | jump to) (def | deaf | definition | depth) :
-    user.run_rpc_command("editor.action.revealDefinition")
-
 (def | deaf | definition | depth) (peek | peak) | (peek | peak) (def | deaf | definition | depth) :
     user.run_rpc_command("editor.action.peekDefinition")
+
+(go [to] | jump to) (def | deaf | definition | depth) :
+    user.run_rpc_command("editor.action.revealDefinition")
 
 [(show | reveal)] (def | deaf | definition | depth) [(to | in)] (new | side | other) [(editor | tab | group)]:
     user.run_rpc_command("editor.action.revealDefinitionAside")
