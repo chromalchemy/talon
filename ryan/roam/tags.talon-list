@@ -1,45 +1,47 @@
-test tag: x-test-tag
+# test tag: x-test-tag
 
-project: project
-today: today
-week: week
+project
+
+week
 weak: week
 weekly: week
-deadline: deadline 
 
-test: test
-conflict: conflict
-call: call 
-read: read 
-watch: watch 
-demo: demo
-inbox: inbox
+deadline
+
+test
+conflict
+call
+read
+watch
+demo
+
+inbox
 clojure inbox: clj/inbox
 closure inbox: clj/inbox
 closure in box: clj/inbox
 
-ergonomics: ergonomics
-dev: dev
-schema: schema 
-bug: bug
-api : api
+ergonomics
+schema
+bug
+api
+
+dev
+deb: dev
+
 code review: code/review
 review code: code/review
 
-kevin: kevin
+kevin
 
-urgent: urgent
-someday: someday
-roam: roam
+urgent
+someday
+roam
 
+calva
 
-calva: calva
-
-
-
-vs code: vscode
-talon: talon
-cursorless: cursorless
+vs code
+talon
+cursorless
 talon command: talon/command
 
 roam research: roam

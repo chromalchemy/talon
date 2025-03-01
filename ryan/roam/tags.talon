@@ -2,6 +2,9 @@ app.name: Roam Research
 mode: command
 -
 
+test [insert] tag {user.ryan.roam.tags.list}:
+    insert("{user.ryan.roam.tags.list}")
+
 # open talon lists helpers
 
 (open | hope in) (tags | tag) file:

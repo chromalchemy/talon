@@ -59,6 +59,7 @@ move [(block | blocks)] to [top] [of] {user.ryan.roam.tags.list} [and] (zoom | g
 
 (sticky | stick | ticky | tick | pin [block] [and]) (send | move) [(block | blocks)] to [top] [of] {user.ryan.roam.tags.list} | (send | move) [(block | blocks)] to {user.ryan.roam.tags.list} [and] [leave] [(ref | reference | rough)]:
     user.roam_send_block_to_page_top_and_leave_reference("{user.ryan.roam.tags.list or ''}")
+    # print("moved block to page and left reference")
 
 ## +++++++++ move to ref + ref
 
