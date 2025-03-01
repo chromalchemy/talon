@@ -2202,10 +2202,10 @@ Clone [and] (raster | rasterize) (layer | gradient) [<user.text>]:
 [set] [font] tracking <user.number_string>:
     user.ps_command_nb("(set-font-tracking! {number_string})")
 
-(increase [font] tracking  | [font] tracking up) <user.number_string>:
+((increase | raise | boost) [font] tracking  | [font] tracking (up | raise | boost | add)) <user.number_string>:
     user.ps_command_nb("(update-font-tracking! {number_string})")
 
-(decrease [font] tracking  | [font] tracking down) <user.number_string>:
+((decrease  | lower | reduce) [font] tracking  | [font] tracking (down | remove | subtract)) <user.number_string>:
     user.ps_command_nb("(update-font-tracking! -{number_string})")
 
 
