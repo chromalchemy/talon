@@ -34,7 +34,7 @@ tools [dock] (sidebar | bar | panel | bottom | right | last | next): key(cmd-shi
 (choose | pick) <number_small>: 
     key("down:{number_small}")
     sleep(200ms)
-    key(enter)
+    # key(enter)
 
 ## +++++++++++++ pop context menu, then select command
 
@@ -56,6 +56,9 @@ copy image address [(point | here)]:
     insert("copy image address")
     key(enter)  
     
+
+[(toggle | start | stop | turn on | turn off | turnoff)] page (dark | light) (mode | mod): 
+    key(alt-shift-d)
 
 ## ++++++++++++++++++++++++++++++ zoom .
 
