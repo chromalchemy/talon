@@ -1,4 +1,5 @@
 app: chrome
+browser.host: getbitoutdoors.com
 -
 tag(): browser
 
@@ -9,3 +10,12 @@ tag(): browser
 
 [( open |  go)] (live | remote) (view | page):
     user.load_bookmark("->Live - j")
+
+## ++++++++++++++++++++++ edit product .
+
+edit product:
+    user.load_bookmark("edit prod+")
+
+
+
+    
