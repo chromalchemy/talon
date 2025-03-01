@@ -4,12 +4,13 @@ mode: command
 
 #----------- picking targets
 
-[(home row | home | hat)] point  [(at screen | screen)]: 
+[(home row | home | hat)] (point | click)  [(at screen | screen)]: 
     key(shift-f12)
 
-# search target: key(cmd-shift-f12)
+# search target: key(cmd-shift-f12) 
 
-# Homerow (with search + labels enabled)
+# Homerow search text 
+# Use arrow keys to choose from results
 
 [(home row | home)] point [screen] [<user.text>]: 
     user.homerow_search("{text or ''}")
