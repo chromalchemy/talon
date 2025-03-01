@@ -1,7 +1,8 @@
 app.name: Code
 app.name: Cursor
 app.name: Windsurf
--
+code.language: Talon
+- 
 
 ## +++++++++++++++++ py talon edit fns .
 
