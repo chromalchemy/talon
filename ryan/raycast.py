@@ -14,4 +14,16 @@ class Actions:
         actions.sleep("400ms")
         actions.key("enter")
 
+    def raycast_select_app_menu_command(text: str):
+        """select a menu command from raycast"""
+        actions.key("cmd-alt-shift-ctrl-l")
+        actions.sleep("100ms")
+        actions.insert(text)
+        actions.sleep("100ms")
+
+    def raycast_run_app_menu_command(text: str):
+        """run a menu command from raycast"""
+        actions.user.raycast_select_app_menu_command(text)
+        actions.key("enter")
+
    
