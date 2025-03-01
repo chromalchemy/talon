@@ -185,6 +185,13 @@
   println)
 
 
+(def file-header
+  "app.name: Code
+  app.name: Cursor
+  app.name: Windsurf
+  code.language: clojure
+  -\n")
+
 (-> commands
   (dissoc :eval :wrapping)
   (->>
@@ -199,4 +206,5 @@
           empty-line
           )))
     (apply str)
+    (str file-header)
     (spit "calva/paredit/paredit-gen.talon")))
