@@ -1,28 +1,10 @@
 app.name: Code
 app.name: Cursor
 app.name: Windsurf
+code.language: Talon
 - 
 
-## +++++++++++++++++++++ command panel .
-
-copy command id: 
-    user.copy_command_id()
-
- ## ++++++++++++++++++++++ search input .
-
-(filter | filtered) [dot] (talon | tellin | talin | command | tall and) files:
-    key(cmd-down)
-    sleep(100ms)
-    insert(".talon")
-    sleep(100ms)
-    key(cmd-up)
-
-## +++++++++++++++++ py talon edit fns .
-
-actions class:
-    insert("actions.")
-
-## +++++++++++++++++ .talon file edit fns
+###################### talon edit fns
 
 sleep action <user.number_string>:
     a = "sleep(" + number_string
@@ -72,4 +54,6 @@ paste code action:
     user.paste("({t} | {text})")
     sleep(200ms)
     key(left)
+
+
 
