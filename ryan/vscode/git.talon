@@ -195,3 +195,20 @@ push (to | too | two):
     sleep(500ms)
     user.finder_modal_open_directory("/Users/ryan/.talon/repos")
 
+## +++++++++++++++++++++++++++ staging from changes diff
+
+stage [all] changes:
+    user.run_rpc_command("git.stage")
+
+stage selected changes:
+    user.run_rpc_command("git.stageSelectedRanges")
+
+## +++++++++++++++++++++++++++ staging staging panel
+
+stage [selected] files:
+    mouse_click(1)
+    sleep(200ms)
+    insert("Stage Changes")
+    sleep(200ms)
+    key(enter)
+
