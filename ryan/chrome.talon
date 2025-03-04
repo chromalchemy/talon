@@ -11,7 +11,7 @@ settings():
 
 #### inspector
 
-(toggle | hide | show | open | close) (devtools | dev tools | tools): 
+(toggle | hide | show | open | close) (devtools | dev tools | tools | inspector): 
     key(cmd-alt-i)
 
 (toggle | hide | show | open | close) console: key(cmd-alt-j)
