@@ -186,11 +186,7 @@
 
 
 (def file-header
-  "app.name: Code
-  app.name: Cursor
-  app.name: Windsurf
-  code.language: clojure
-  -\n")
+  "app.name: Code\napp.name: Cursor\napp.name: Windsurf\ncode.language: clojure\n-\n")
 
 (-> commands
   (dissoc :eval :wrapping)

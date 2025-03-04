@@ -1,8 +1,8 @@
 app.name: Code
-  app.name: Cursor
-  app.name: Windsurf
-  code.language: clojure
-  -
+app.name: Cursor
+app.name: Windsurf
+code.language: clojure
+-
 #------------------:editing
 
 split here:
