@@ -6,14 +6,14 @@ copy [block] (ref | reference): key(cmd-shift-c)
 
 ## +++++++++++++ write out a reference .
 
-dub paren | [new] ((([block] (reference | ref) | back) [link]) | backlink) [that]: 
+dub paren | [new] ([block] (reference | ref)  [link]  | backlink) [that]: 
     insert("((")
 
-((([block] (reference | ref) | back) [link]) | backlink) word: 
+([block] (reference | ref)  [link]  | backlink) word: 
     edit.select_word()
     insert("((")
 
-[new] ((([block] (reference | ref) | back) [link]) | backlink) <user.text>:
+[new] ([block] (reference | ref)  [link]  | backlink) <user.text>:
     insert("((")
     insert(text)
     # sleep(100ms)
