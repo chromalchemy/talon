@@ -50,12 +50,12 @@ class Actions:
 
     def roam_new_block_below():
         """ccc"""
-        actions.key("cmd-shift-k")
+        actions.key("ctrl-shift-k")
         actions.sleep("700ms")
 
     def roam_new_block_above():
         """ccc"""
-        actions.key("cmd-shift-i")
+        actions.key("ctrl-shift-l")
         actions.sleep("1000ms")
 
     def roam_new_child_block():
