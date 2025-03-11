@@ -673,7 +673,7 @@ Filter Gallery:
 Wide Angle [filter]:
     user.ps_filter_adaptive_wide_angle()
 
-camera [raw] (filter | module):
+camera (raw | ra) [(filter | module)]:
     user.ps_filter_camera_raw_filter()
 
 Lens Correction:
@@ -950,7 +950,7 @@ Export Preferences:
 Save for Web [(legacy | classic)]:
     user.ps_file_export_save_for_web_legacy()
 
-export Artboards to Files:
+export (artboards | art boards | artboard | art board) to (files | file):
     user.ps_file_export_artboards_to_files()
 
 export Artboards to PDF:
