@@ -23,3 +23,19 @@ edit [cell]: key(alt-enter)
     insert("delete column")
     sleep(200ms)
     key(enter)
+
+export new [(comma | csv)] sheet:
+    user.menu_select('File|Export To|CSV…')
+    sleep(200ms)
+    key(enter)
+
+export [(comma | csv)] sheet:
+    user.menu_select('File|Export To|CSV…')
+    sleep(200ms)
+    key(enter)
+    sleep(1800ms)
+    key(enter)
+    sleep(200ms)
+    key(tab)
+    sleep(200ms)
+    key(space)
