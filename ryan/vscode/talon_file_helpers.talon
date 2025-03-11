@@ -1,7 +1,7 @@
 app.name: Code
 app.name: Cursor
 app.name: Windsurf
-code.language: Talon
+code.language: talon
 - 
 
 ###################### talon edit fns
@@ -32,13 +32,12 @@ sleep action <user.number_string>:
     key(left:2)
 
 paste code action:
-    # mimic("take tail")
-    # sleep(500ms)
-    mimic("new code action")
+    insert("user.vscode(\"\")")
+    key(left:2)
     sleep(500ms)
     edit.past()
 
-[insert] (hyper | meta) key [token]:   
+[insert] (hyper | meta) key [token]:
     insert("cmd-ctrl-alt-shift-")
 
 (pace | paste) (talon | tellin | talin | command | tall and):
@@ -49,11 +48,9 @@ paste code action:
 (extra word) <user.text>:
     user.paste(" | {text}")
 
-((add | head | pad) word | Edward) <user.text>:
+((add | head) word | Edward) <user.text>:
     t = edit.selected_text()
     user.paste("({t} | {text})")
     sleep(200ms)
     key(left)
-
-
 
