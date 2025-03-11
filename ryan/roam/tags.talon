@@ -21,7 +21,7 @@ test [insert] tag {user.ryan.roam.tags.list}:
     insert(" #{tag_text} ")
 
 #keep chooser open    
-^[(new | now)] tag ink ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) $:
+^[(new | now)] tag (ink | parcel | partial) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) $:
     tag_text = user.roam_tag("{formatters or 'SLASH_SEPARATED'}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
     insert(" #{tag_text}")
     
@@ -110,7 +110,7 @@ test paste:
     tag_text = user.roam_tag("{formatters or ''}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
     insert("[[{tag_text}]] ")
 
-(square tag | dub square) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) ink :
+(square tag | dub square) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) (ink | parcel | partial) :
     tag_text = user.roam_tag("{formatters or ''}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
     insert("[[{tag_text}")
     # sleep(500ms)
