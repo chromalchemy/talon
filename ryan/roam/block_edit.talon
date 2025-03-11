@@ -37,7 +37,7 @@ copy (block end | rest of block ):
     key(delete)
 
 (clear | chuck) (block end | rest of block ):
-    user.roam_select_block_start()
+    user.roam_select_block_end()
     key(delete)
 
 ## +++++++++++++++++++++++++++++++ all block text .
