@@ -1,6 +1,7 @@
 app.name: Code
 app.name: Cursor
 app.name: Windsurf
+app.name: Windsurf - Next
 -
 
 #todo make this hard prefix operational in vscode

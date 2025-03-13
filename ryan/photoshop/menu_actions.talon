@@ -938,8 +938,8 @@ File Invite to Edit:
 File Share for Review NEW:
     user.ps_file_share_for_review_new()
 
-Quick Export as PNG:
-    user.ps_file_export_quick_export_as_png()
+Quick Export [as] [(file | jpg | jpeg | png)]:
+    user.ps_file_export_quick_export_as("JPG")
 
 Export (as | [for] web [file]):
     user.ps_file_export_export_as()
@@ -2085,8 +2085,11 @@ bar (floating | context | task) | [(toggle | show | hide)] [contextual] task bar
 
 ## ++++++++++++++++++++++++ brush size .
 
-brush [size] down [<user.number_string>]: key("[:{number_string or 1}")
-brush [size] up [<user.number_string>]: key("]:{number_string or 1}")
+brush [size] down [<user.number_string>]: 
+    key("[:{number_string or 1}")
+
+brush [size] up [<user.number_string>]: 
+    key("]:{number_string or 1}")
  
 ## ++++++++++++++++++++ Brush hardness .
  

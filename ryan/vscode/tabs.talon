@@ -1,6 +1,7 @@
 app.name: Code
 app.name: Cursor
 app.name: Windsurf
+app.name: Windsurf - Next
 -
 
 # please tab: key(cmd-p)

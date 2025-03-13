@@ -1,6 +1,7 @@
 app.name: Code
 app.name: Cursor
 app.name: Windsurf
+app.name: Windsurf - Next
 -
 #  editor display options
 # not actually editing code

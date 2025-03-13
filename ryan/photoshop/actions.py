@@ -1092,9 +1092,9 @@ class Actions:
         """file share for review new"""
         actions.user.menu_select("File|Share for Review NEW...")
 
-    def ps_file_export_quick_export_as_png():
-        """file export quick export as png"""
-        actions.user.menu_select("File|Export|Quick Export as PNG")
+    def ps_file_export_quick_export_as(file_extension: str):
+        """file export quick export as <file_extension>"""
+        actions.user.menu_select(f"File|Export|Quick Export as {file_extension}")
 
     def ps_file_export_export_as():
         """file export export as"""

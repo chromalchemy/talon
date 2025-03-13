@@ -1,6 +1,7 @@
 app.name: Code
 app.name: Cursor
 app.name: Windsurf
+app.name: Windsurf - Next
 -
 
 please (paredit | pare edit | pear edit):
