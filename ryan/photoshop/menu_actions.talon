@@ -227,46 +227,56 @@ mask all objects:
 (Convert to | make) [Smart] Object:
     user.ps_smart_objects_convert_to_smart_object()
 
-copy to Smart Object:
+copy to [Smart] Object:
     user.ps_smart_objects_new_smart_object_via_copy()
 
-Reveal in Finder:
+Reveal [smart] [object] [in Finder]:
     user.ps_smart_objects_reveal_in_finder()
 
-Update Modified Content:
+Update Modified (object | [object] (Contents | content)):
     user.ps_smart_objects_update_modified_content()
 
-Update All Modified Content:
+Update All Modified (objects | [object] (Contents | content)):
     user.ps_smart_objects_update_all_modified_content()
 
-Edit Contents:
+Edit [object] (Contents | content):
     user.ps_smart_objects_edit_contents()
 
-Reset Transform:
+Reset [object] Transform:
     user.ps_smart_objects_reset_transform()
 
-Relink to File:
+(unsmart | un smart | remove smart) object:
+    user.ps_scripts_unsmart()
+
+## ++++++++++++++++++++ linked objects .
+
+Relink (object | [object] to File):
     user.ps_smart_objects_relink_to_file()
 
-Relink to Library Graphic:
+Relink (layer | claire | clare) (to | with) File | replace layer with linked [file]:
+    user.ps_smart_objects_convert_to_smart_object()
+    sleep(800ms)
+    user.ps_smart_objects_relink_to_file()
+
+Relink [object] to (Library | lib) (Graphic | item):
     user.ps_smart_objects_relink_to_library_graphic()
 
-Replace Contents:
+Replace (object | [object] (Contents | content)):
     user.ps_smart_objects_replace_contents()
 
-Export Contents:
+Export [object] (Contents | content):
     user.ps_smart_objects_export_contents()
 
-Embed Linked:
+Embed Linked [object]:
     user.ps_smart_objects_embed_linked()
 
-Embed All Linked:
+Embed All Linked [objects]:
     user.ps_smart_objects_embed_all_linked()
 
-Convert to Linked:
+Convert [object] to Linked [file]:
     user.ps_smart_objects_convert_to_linked()
 
-Convert to Layers:
+Convert [object] (to | two) (Layers | layer):
     user.ps_smart_objects_convert_to_layers()
 
 ## ___________________________________ .
@@ -356,8 +366,11 @@ Hide Layers:
 
 ## +++++++++++++++++++++++ lock layers .
 
-Lock Layers:
+Lock Layers [popup]:
     user.ps_lock_layers()
+
+(Toggle | disable | enable | flip) [layer] locks:
+    user.ps_scripts_toggle_locks()
 
 ## +++++++++++++++++++ arrange layers .
 
@@ -893,13 +906,15 @@ Minimum:
 Offset:
     user.ps_filter_other_offset()
 
-File New | new (file | pane):
+## ++++++++++++++++++++++++ open file.
+
+File New | new (file | pane | tab):
     user.ps_file_new()
 
 File Open | open file:
     user.ps_file_open()
 
-File Browse in Bridge | browse [in] bridge:
+File Browse in Bridge | browse [files] [in] bridge:
     user.ps_file_browse_in_bridge()
 
 File Open [as] Smart Object | open file as smart object:
@@ -908,35 +923,41 @@ File Open [as] Smart Object | open file as smart object:
 File Open Recent | open recent file:
     user.ps_file_open_recent()
 
-File Close | close file:
+File Close | close (file | tab):
     user.ps_file_close()
 
-File Close All | close all files:
+File Close All | close all (files | tabs):
     user.ps_file_close_all()
 
 File Close Others | close other files:
     user.ps_file_close_others()
 
-File Close and Go to Bridge:
+Close file and Go [to] Bridge:
     user.ps_file_close_and_go_to_bridge()
+
+## +++++++++++++++++++++++++ save file .
 
 File Save | save file:
     user.ps_file_save()
 
-[File] Save As:
+[(File | fil)] Save As:
     user.ps_file_save_as()
 
-File Save a Copy:
+[File | fil] Save a Copy:
     user.ps_file_save_a_copy()
 
-File Revert:
+File Revert | revert file:
     user.ps_file_revert()
 
-File Invite to Edit:
+## +++++++++++++++++++++++ multiplayer .
+
+Invite [to] Edit [file]:
     user.ps_file_invite_to_edit()
 
-File Share for Review NEW:
+Share [file] for Review:
     user.ps_file_share_for_review_new()
+
+## ++++++++++++++++++++++++++++ export .
 
 Quick Export [as] [(file | jpg | jpeg | png)]:
     user.ps_file_export_quick_export_as("JPG")
@@ -944,61 +965,65 @@ Quick Export [as] [(file | jpg | jpeg | png)]:
 Export (as | [for] web [file]):
     user.ps_file_export_export_as()
 
-Export Preferences:
+quick Export (Preferences | prefs | settings):
     user.ps_file_export_export_preferences()
 
 Save for Web [(legacy | classic)]:
     user.ps_file_export_save_for_web_legacy()
 
-export (artboards | art boards | artboard | art board) to (files | file):
+export (artboards | art boards | artboard | art board) [to (files | file)]:
     user.ps_file_export_artboards_to_files()
 
-export Artboards to PDF:
+export (artboards | art boards | artboard | art board) to PDF:
     user.ps_file_export_artboards_to_pdf()
 
-Export For Aero:
+Export [For] Aero:
     user.ps_file_export_export_for_aero()
 
-Layer Comps to Files:
+export Layer Comps [to Files]:
     user.ps_file_export_layer_comps_to_files()
 
-Layer Comps to PDF:
+export Layer Comps to PDF:
     user.ps_file_export_layer_comps_to_pdf()
 
-[export] Layers to Files:
+export Layers [to Files]:
     user.ps_file_export_layers_to_files()
 
-export Color Lookup Tables:
+export Color Lookup [(Tables | table)]:
     user.ps_file_export_color_lookup_tables()
 
-Data Sets as Files:
+export Data Sets [as Files]:
     user.ps_file_export_data_sets_as_files()
 
-[export] Paths to Illustrator:
+export Paths [to] Illustrator:
     user.ps_file_export_paths_to_illustrator()
 
-Render Video:
+(export | Render) Video:
     user.ps_file_export_render_video()
 
-File Search Adobe Stock:
+Search Adobe Stock:
     user.ps_file_search_adobe_stock()
 
-File Search Adobe Express Templates:
+Search [Adobe] Express Templates:
     user.ps_file_search_adobe_express_templates()
 
-File Place Embedded:
+## ++++++++++++++++++++ insert objects .
+
+[File] Place [file] [as] [smart] (object | embedded):
     user.ps_file_place_embedded()
 
-File Place Linked:
+[File] Place [file] [as] Linked [(file | object)]:
     user.ps_file_place_linked()
 
-File Package:
+[File] Package [file]:
     user.ps_file_package()
 
-Batch:
+## +++++++++++++++++++++++ automations .
+
+Batch process:
     user.ps_file_automate_batch()
 
-PDF Presentation:
+create PDF Presentation:
     user.ps_file_automate_pdf_presentation()
 
 Create Droplet:
@@ -1007,7 +1032,7 @@ Create Droplet:
 Crop and Straighten Photos:
     user.ps_file_automate_crop_and_straighten_photos()
 
-Contact Sheet II:
+Contact Sheet two:
     user.ps_file_automate_contact_sheet_ii()
 
 Conditional Mode Change:
@@ -1016,19 +1041,21 @@ Conditional Mode Change:
 Fit Image:
     user.ps_file_automate_fit_image()
 
-Lens Correction Script:
+Lens Correction:
     user.ps_file_automate_lens_correction()
 
-Merge to HDR Pro:
+Merge to HDR [Pro]:
     user.ps_file_automate_merge_to_hdr_pro()
 
-Photomerge:
+Photomerge | merge photos:
     user.ps_file_automate_photomerge()
 
-Image Processor:
+## +++++++++++++++++++++++++++ scripts .
+
+Image Processor | process images:
     user.ps_scripts_image_processor()
 
-Delete All Empty Layers:
+(Delete | chuck) [All] Empty Layers:
     user.ps_scripts_delete_all_empty_layers()
 
 Flatten All Layer Effects:
@@ -1037,7 +1064,10 @@ Flatten All Layer Effects:
 Flatten All Masks:
     user.ps_scripts_flatten_all_masks()
 
-Advanced Font Remapping:
+
+## ++++++++++++++++++++++++++++ custom scripts
+
+Advanced Font Remapping | remap font:
     user.ps_scripts_advanced_font_remapping()
 
 Align [to] (baseline | baselines):
@@ -1046,35 +1076,29 @@ Align [to] (baseline | baselines):
 Clear hidden effects:
     user.ps_scripts_clear_hidden_effects()
 
-Delete all empty layers faster:
+(Delete | chuck) [all] empty layers [faster]:
     user.ps_scripts_delete_all_empty_layers_faster()
 
-Delete unused layers:
+(Delete | chuck) [all] unused layers:
     user.ps_scripts_delete_unused_layers()
 
 Fix Font Weight:
     user.ps_scripts_fix_font_weight()
 
-Live shape resurrection:
+Live shape resurrection | resurrect live shape:
     user.ps_scripts_live_shape_resurrection()
 
-Remove unused filters:
+(Delete | chuck | remove) unused filters:
     user.ps_scripts_remove_unused_filters()
 
 Text columns:
     user.ps_scripts_text_columns()
 
-Toggle locks:
-    user.ps_scripts_toggle_locks()
-
 transform with style:
     user.ps_scripts_transform_with_style()
 
-undeform | un deform | remove transformation:
+undeform | un deform | (remove | chuck) transformation:
     user.ps_scripts_undeform()
-
-unsmart | un smart | remove smart object:
-    user.ps_scripts_unsmart()
 
 Load Files into Stack:
     user.ps_scripts_load_files_into_stack()
@@ -1280,10 +1304,7 @@ Full Screen Mode With Menu Bar:
 Full Screen Mode:
     user.ps_view_screen_mode_full_screen_mode()
 
-## ++++++++++++++++++++++++++++ show / hide features .
-
-(toggle | show | hide) Extras:
-    user.ps_view_extras()
+## ++++++++++++++++++++++++++++ show / hide extras.
 
 (toggle | show | hide) Layer Edges:
     user.ps_view_show_layer_edges()
@@ -1351,22 +1372,30 @@ Full Screen Mode:
 (toggle | show | hide) Edit Pins:
     user.ps_view_show_edit_pins()
 
-(toggle | show | hide) All:
+## +++++++++++++++++++ multiple extras .
+
+[view] (toggle | show | hide | flip) Extras:
+    user.ps_view_extras()
+
+[view] show All extras:
     user.ps_view_show_all()
 
-(toggle | show | hide) None:
+[view] hide all extras:
     user.ps_view_show_none()
 
-(toggle | show | hide) Show Extras Options:
+[view] (toggle | show | hide) Extras (Options | list):
     user.ps_view_show_show_extras_options()
 
-View Rulers:
+## +++++++++++++++++++++++++++++ ruler .
+
+(toggle | show | hide) (Rulers | ruler) | (rulers | ruler) (on | off):
     user.ps_view_rulers()
 
-View Snap:
-    user.ps_view_snap()
 
 ## ++++++++++++++++++++++++++++++ snap .
+
+(toggle | enable | disable) Snap | snap (on | off):
+    user.ps_view_snap()
 
 Snap To Guides:
     user.ps_view_snap_to_guides()
@@ -1429,23 +1458,37 @@ Clear Slices:
 
 ## +++++++++++++++++++++++++ touch bar .
 
-Customize Touch Bar:
+Customize Touch Bar | touch bar settings:
     user.ps_view_customize_touch_bar()
 
 
 ## +++++++++++++++++++++++++++ history state
 
-Undo:
+Undo | nope:
     user.ps_undo()
 
 Redo:
     user.ps_redo()
 
-[(Toggle | swap)] Last [State]:
+[(Toggle | swap | flip)] Last [State]:
     user.ps_toggle_last_state()
 
-Fade:
+## +++++++++++++++++ fade last bitmap: .
+
+Fade [(stroke | that)]:
     user.ps_fade()
+
+Fade [(stroke | that)] <user.number_string> wait:
+    user.ps_fade()
+    sleep(300ms)
+    insert(number_string)
+
+Fade [(stroke | that)] <user.number_string>:
+    user.ps_fade()
+    sleep(200ms)
+    insert(number_string)
+    sleep(200ms)
+    key(enter)
 
 ## +++++++++++++++++++++++ cut / paste .
 
@@ -1835,7 +1878,7 @@ define variables:
 Apply Data Set:
     user.ps_apply_data_set()
 
-Trap:
+photo Trap:
     user.ps_trap()
 
 Set Measurement Scale:

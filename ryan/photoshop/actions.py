@@ -1703,7 +1703,8 @@ class Actions:
 
     def ps_fade():
         """edit fade"""
-        actions.user.menu_select("Edit|Fade...")
+        actions.key("shift-cmd-f")
+        # actions.user.menu_select("Edit|Fade...")
 
     def ps_cut():
         """edit cut"""
