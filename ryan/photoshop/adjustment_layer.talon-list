@@ -8,9 +8,9 @@ curves: Curves
 exposure: Exposure
 vibrance: Vibrance
 
-hue saturation: Hue Saturation
-hue: Hue Saturation
-saturation: Hue Saturation
+hue saturation: Hue/Saturation
+hue: Hue/Saturation
+saturation: Hue/Saturation
 
 color balance: Color Balance
 

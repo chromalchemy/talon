@@ -2018,7 +2018,7 @@ class Actions:
 
     def ps_adjustments_hue_saturation():
         """image adjustments hue saturation"""
-        actions.user.menu_select("Image|Adjustments|Hue Saturation...")
+        actions.user.menu_select("Image|Adjustments|Hue/Saturation...")
 
     def ps_adjustments_color_balance():
         """image adjustments color balance"""

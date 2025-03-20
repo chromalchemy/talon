@@ -383,7 +383,7 @@ Lock Layers [popup]:
 send (back | backward | down):
     user.ps_arrange_send_backward()
 
-send to (back | bottom):
+send to (back | bottom) | (centerback | center back):
     user.ps_arrange_send_to_back()
 
 reverse (layer | layers) [order]:
@@ -894,7 +894,7 @@ Custom filter:
 High Pass:
     user.ps_filter_other_high_pass()
 
-(hsl | hue saturation lightness):
+hsl | hue saturation lightness:
     user.ps_filter_other_hsb_hsl()
 
 Maximum:
@@ -1295,13 +1295,13 @@ Pattern Preview:
 
 ## ++++++++++++++++++++++++++++++ screen mode .
 
-Standard Screen Mode:
+Standard Screen [Mode]:
     user.ps_view_screen_mode_standard_screen_mode()
 
-Full Screen Mode With Menu Bar:
+Full Screen [Mode] With Menu [Bar]:
     user.ps_view_screen_mode_full_screen_mode_with_menu_bar()
 
-Full Screen Mode:
+Full Screen [Mode]:
     user.ps_view_screen_mode_full_screen_mode()
 
 ## ++++++++++++++++++++++++++++ show / hide extras.
@@ -1475,20 +1475,48 @@ Redo:
 
 ## +++++++++++++++++ fade last bitmap: .
 
-Fade [(stroke | that)]:
+(Fade | fades) [(stroke | that)]:
     user.ps_fade()
 
-Fade [(stroke | that)] <user.number_string> wait:
+(Fade | fades) [(stroke | that)] <user.number_string> wait:
     user.ps_fade()
-    sleep(300ms)
+    sleep(100ms)
     insert(number_string)
 
-Fade [(stroke | that)] <user.number_string>:
+(Fade | fades) [(stroke | that)] <user.number_string>:
     user.ps_fade()
-    sleep(200ms)
+    sleep(100ms)
     insert(number_string)
-    sleep(200ms)
+    sleep(100ms)
     key(enter)
+
+(Fade | fades | vade | they'd) [(stroke | that)] {user.ryan.photoshop.blending_mode.list}:
+    user.ps_fade()
+    sleep(100ms)
+    user.mouse_helper_position_save()
+    user.mouse_helper_move_image_relative("2025-03-19_23.03.01.698214.png", 0)
+    sleep(0.05)
+    mouse_click(0)
+    sleep(0.05)
+    insert("{user.ryan.photoshop.blending_mode.list}")
+    sleep(100ms)
+    key(enter:2)
+    user.mouse_helper_position_restore()
+
+(Fade | fades | vade | they'd) [(stroke | that)] {user.ryan.photoshop.blending_mode.list} <user.number_string>:
+    user.ps_fade()
+    sleep(100ms)
+    insert(number_string)
+    sleep(100ms)
+    user.mouse_helper_position_save()
+    user.mouse_helper_move_image_relative("2025-03-19_23.03.01.698214.png", 0)
+    sleep(0.05)
+    mouse_click(0)
+    sleep(0.05)
+    insert("{user.ryan.photoshop.blending_mode.list}")
+    sleep(100ms)
+    key(enter:2)
+    user.mouse_helper_position_restore()
 
 ## +++++++++++++++++++++++ cut / paste .
 
@@ -1815,10 +1843,10 @@ Auto Color:
 
 ## +++++++++++++++++++++ document size .
 
-Image Size:
+[change] Image Size:
     user.ps_image_size()
 
-Canvas Size:
+[change] Canvas Size:
     user.ps_canvas_size()
 
 ## ++++++++++++++++++++++ rotate image .
