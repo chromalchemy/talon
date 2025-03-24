@@ -15,6 +15,9 @@ read
 watch
 demo
 
+goal
+col: goal
+
 inbox
 clojure inbox: clj/inbox
 closure inbox: clj/inbox
@@ -44,6 +47,8 @@ calva
 vs code
 talon
 cursorless
+cursors: cursorless
+
 talon command: talon/command
 
 roam research: roam

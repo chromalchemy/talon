@@ -4,18 +4,19 @@ mode: command
 
 ## +++++++++++++++++++   inline code  formatting.
 
-code [(line | inline)] that: 
+[(line | inline)] code [(line | inline)] that: 
     s = edit.selected_text() 
     user.paste("`{s}`")
     key(esc:2)
 
-code [(line | inline)] point:
+[(line | inline)] code [(line | inline)] point:
     key(shift:down)
     mouse_click(0)
     sleep(100ms)
     s = edit.selected_text() 
     user.paste("`{s}`")
 
+# make selection to point inline code, then exit block to see it rendered    
 code (line | inline) point force:
     key(shift:down)
     mouse_click(0)
@@ -25,7 +26,8 @@ code (line | inline) point force:
     sleep(100ms)
     key(esc:2)
 
-code (line | inline) block | make inline code block:
+## convert inline code to block
+code (line | inline) (all | block inside | inside block) | make block  inline code :
     edit.select_all()
     sleep(100ms)
     s = edit.selected_text() 
@@ -33,10 +35,12 @@ code (line | inline) block | make inline code block:
     sleep(100ms)
     key(esc)
 
+# paste inline code
 (paste | pace) (code [(line | inline | in line)] | [(line | inline | in line)] code ) | code [(line | inline)] (paste | pace):
     t = clip.text()
     user.paste("`{t}` ")
 
+# render pasted inline code
 ((paste | pace) (code [(line | inline)] | [(line | inline | in line)] code ) | code [(line | inline | in line)] (paste | pace)) force:
     t = clip.text()
     user.paste("`{t}`")
