@@ -1,8 +1,20 @@
+default
 black
-dark
-medium
+
+dark gray
+dark: dark gray
+
+medium gray
+gray: medium gray
+middle gray: medium gray
+middle: medium gray
+medium: medium gray
+
 light
+light gray
+
 custom
 white: custom
+
 select: Select Custom Color
 choose: Select Custom Color
