@@ -3,10 +3,21 @@ import os
 from talon import Module, actions
 from typing import Optional
 
+
+def normalize_amount_str(amount: str):
+    amount_lower = amount.lower()
+    if amount_lower == "max" or amount_lower == "ax":
+        return "100"
+    elif amount_lower == "half":
+        return "50"
+    elif "%" in amount:
+        return amount.replace("%", "")
+    return amount
+
+
 mod = Module()
 
 @mod.action_class
-
 
 class Actions:
     def ps_new_background_from_layer():
@@ -1701,11 +1712,6 @@ class Actions:
         """edit toggle last state"""
         actions.user.menu_select("Edit|Toggle Last State")
 
-    def ps_fade():
-        """edit fade"""
-        actions.key("shift-cmd-f")
-        # actions.user.menu_select("Edit|Fade...")
-
     def ps_cut():
         """edit cut"""
         actions.user.menu_select("Edit|Cut")
@@ -2503,3 +2509,38 @@ class Actions:
         actions.insert(color_name)
         actions.sleep("200ms")
         actions.key("enter")
+
+    def ps_choose_fade_blending_mode(blending_mode: str):
+        """choose fade blending mode"""
+        actions.user.mouse_helper_click_image_relative("2025-03-24_12.03.32.644427.png", 0, 51, 1, 0, False)
+        actions.insert(blending_mode)
+        actions.sleep("100ms")
+    
+    def ps_fade(amount: Optional[str] = None, blending_mode: Optional[str] = None):
+        """edit / fade"""
+        actions.key("shift-cmd-f")
+        actions.sleep("100ms")
+
+
+        if amount and blending_mode:
+            actions.insert(amount)
+            actions.sleep("100ms")
+            actions.user.ps_choose_fade_blending_mode(blending_mode)
+            actions.key("enter:2")
+            actions.user.mouse_helper_position_restore()
+            return
+        
+        if amount:
+            print(f"amount: {amount}")
+            actions.insert(amount)
+            actions.sleep("100ms")
+            actions.key("enter")
+            return
+
+        if blending_mode:
+            actions.user.ps_choose_fade_blending_mode(blending_mode)
+            actions.key("enter:2")
+            actions.user.mouse_helper_position_restore()
+            return
+
+    

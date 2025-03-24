@@ -5,47 +5,80 @@ Dissolve
 Darken
 
 Multiply
+multi: multiply
+mult: multiply
 
 Color Burn
+burn: color burn
 
 Linear Burn
+lin burn: linear burn
+line burn: linear burn
 
 Darker Color
+darker: darker color
 
 Lighten
 
 Screen
 
+#more dramatic
 Color Dodge
+dodge: color dodge
+color add: color dodge
 
-Linear Dodge (Add)
+#more realistic
+Linear Dodge 
+add: linear dodge
+ad: linear dodge
+linear add: linear dodge
+lin dodge: linear dodge
+lin add: linear dodge 
+line dodge: linear dodge
 
 Lighter Color
+lighter: lighter color
 
 Overlay
+over: overlay
 
 Soft Light
+soft: soft light
+
 Hard Light
+hard: hard light
+
 Vivid Light
+vivid: vivid light
 
 Linear Light
+linear: linear light
 
 Pin Light
+pin: pin light
 
 Hard Mix
 
 Difference
+diff: difference
+deaf: difference
 
 Exclusion
+exclude: exclusion
 
 Subtract
+sub: subtract
+minus: subtract
 
 Divide
 
 Hue
 
 Saturation
+sat: saturation
 
 Color
 
 luminosity
+lumens: luminosity
+lum: luminosity

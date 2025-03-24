@@ -4,6 +4,14 @@ from talon import Module, actions
 
 mod = Module()
 
+
+def number_keys(amount: str, modifier: str = ""):
+    """take a number string and type the number keys, with optional modifier"""
+    if len(amount) == 1:
+        amount = f'0{amount}'
+    for digit in amount:
+        actions.key(f'{modifier}{digit}')
+
 @mod.action_class
 class Actions:
 
@@ -120,4 +128,11 @@ class Actions:
             actions.user.paste(layer_name)
             actions.sleep("200ms")
         actions.key("enter")
-        
+
+    def ps_set_brush_flow(level: str):
+        """set brush flow"""
+        number_keys(level)
+
+    def ps_set_brush_opacity(level: str):
+        """set brush opacity"""
+        number_keys(level, "shift-")

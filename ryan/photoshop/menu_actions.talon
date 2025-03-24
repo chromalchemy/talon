@@ -692,6 +692,11 @@ camera (raw | ra) [(filter | module)]:
 Lens Correction:
     user.ps_filter_lens_correction()
 
+# from automate menu
+Auto Lens Correction:
+    user.ps_file_automate_lens_correction()
+
+
 Liquify:
     user.ps_filter_liquify()
 
@@ -1041,8 +1046,6 @@ Conditional Mode Change:
 Fit Image:
     user.ps_file_automate_fit_image()
 
-Lens Correction:
-    user.ps_file_automate_lens_correction()
 
 Merge to HDR [Pro]:
     user.ps_file_automate_merge_to_hdr_pro()
@@ -1475,48 +1478,24 @@ Redo:
 
 ## +++++++++++++++++ fade last bitmap: .
 
-(Fade | fades) [(stroke | that)]:
+(Fade | fades | vade | they'd | fig) [(stroke | that)]:
     user.ps_fade()
 
-(Fade | fades) [(stroke | that)] <user.number_string> wait:
-    user.ps_fade()
-    sleep(100ms)
-    insert(number_string)
+(Fade | fades | vade | they'd | fig) [(stroke | that)] <user.number_string>:
+    user.ps_fade(number_string)
 
-(Fade | fades) [(stroke | that)] <user.number_string>:
-    user.ps_fade()
-    sleep(100ms)
-    insert(number_string)
-    sleep(100ms)
-    key(enter)
+(Fade | fades | vade | they'd | fig) [(stroke | that)] {user.ryan.proportions.list}:
+    user.ps_fade("{user.ryan.proportions.list}")
 
-(Fade | fades | vade | they'd) [(stroke | that)] {user.ryan.photoshop.blending_mode.list}:
-    user.ps_fade()
-    sleep(100ms)
-    user.mouse_helper_position_save()
-    user.mouse_helper_move_image_relative("2025-03-19_23.03.01.698214.png", 0)
-    sleep(0.05)
-    mouse_click(0)
-    sleep(0.05)
-    insert("{user.ryan.photoshop.blending_mode.list}")
-    sleep(100ms)
-    key(enter:2)
-    user.mouse_helper_position_restore()
+(Fade | fades | vade | they'd | fig) [(stroke | that)] {user.ryan.photoshop.blending_mode.list}:
+    none = types.none()
+    user.ps_fade(none, "{user.ryan.photoshop.blending_mode.list}")
 
-(Fade | fades | vade | they'd) [(stroke | that)] {user.ryan.photoshop.blending_mode.list} <user.number_string>:
-    user.ps_fade()
-    sleep(100ms)
-    insert(number_string)
-    sleep(100ms)
-    user.mouse_helper_position_save()
-    user.mouse_helper_move_image_relative("2025-03-19_23.03.01.698214.png", 0)
-    sleep(0.05)
-    mouse_click(0)
-    sleep(0.05)
-    insert("{user.ryan.photoshop.blending_mode.list}")
-    sleep(100ms)
-    key(enter:2)
-    user.mouse_helper_position_restore()
+(Fade | fades | vade | they'd | fig) [(stroke | that)] ({user.ryan.photoshop.blending_mode.list} <user.number_string> | <user.number_string>  {user.ryan.photoshop.blending_mode.list} ):
+    user.ps_fade(number_string, "{user.ryan.photoshop.blending_mode.list}")
+
+(Fade | fades | vade | they'd | fig) [(stroke | that)] ({user.ryan.photoshop.blending_mode.list} {user.ryan.proportions.list} | {user.ryan.proportions.list}  {user.ryan.photoshop.blending_mode.list} ):
+    user.ps_fade("{user.ryan.proportions.list}", "{user.ryan.photoshop.blending_mode.list}")
 
 ## +++++++++++++++++++++++ cut / paste .
 
@@ -2128,7 +2107,7 @@ bar Shapes:
 bar Styles:
     user.ps_window_styles()
 
-bar Swatches:
+[bar] Swatches:
     user.ps_window_swatches()
 
 bar Timeline:
@@ -2170,31 +2149,28 @@ brush [size] up [<user.number_string>]:
 [brush] (hardness | hard) down [<user.number_string>]: 
      key("shift-[:{number_string or 1}")
  
-  ## ++++++++++++++++++++++++++++++ flow .
+  ## +++|+++++++++++++++++++++++++++ flow .
  
-[brush] flow <user.number_string> <user.number_string> : 
-     key("shift-{number_string_1}")
-     key("shift-{number_string_2}")
- 
-[brush] flow single <digits> : 
-     key(shift:down)
-     key(shift-0)
-     key("shift-{digits}")
- 
+[brush] flow <user.number_string>:
+    user.ps_set_brush_flow(number_string)
+
+# ex hitting 5 = level 50
 [brush] flow level <user.number_string>: 
-     key("shift-{number_string}")
+     key("{number_string}")
+
+[brush] flow max:
+    key(0) 
  
 ## +++++++++++++++++++++++++++ opacity .
  
-[brush] (opacity | transparency | trans | opaque) <user.number_string> <user.number_string> : 
-     key("{number_string_1}")
-     key("{number_string_2}")
+[brush] (opacity | transparency | trans | opaque) <user.number_string> : 
+    user.ps_set_brush_opacity(number_string)
  
 [brush] (opacity | transparency | trans | opaque) level <user.number_string>: 
-     key("{number_string}") 
+     key("shift-{number_string}") 
  
-[brush] full (opacity | transparency | trans | opaque)  | brush fully opaque: 
-     key(0)    
+[brush] (opacity | transparency | trans | opaque)  max: 
+     key(shift-0)    
  
 
 ## +++++++++++++++++++++++++++++ tools .
@@ -2240,8 +2216,8 @@ rotate clone [<number>]:
 ## ++++++++++++++++++ background color .
 
 # this .talon list reference points to this relative path: ryan/photoshop/backdrop_color.talon-list 
-[canvas] backdrop [color] {user.ryan.photoshop.backdrop_color.list}:
-    user.ps_set_backdrop_color(user.ryan.photoshop.backdrop_color.list)
+[set] [canvas] backdrop [color] [to] {user.ryan.photoshop.backdrop_color.list}:
+    user.ps_set_backdrop_color(user.ryan.photoshop.backdrop_color.list or "medium gray")
 
 ## +++++++++++++++++++++ copy/past color
 [photo] paste color:
