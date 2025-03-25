@@ -39,6 +39,9 @@ line dodge: linear dodge
 Lighter Color
 lighter: lighter color
 
+pass through
+pass: pass through
+
 Overlay
 over: overlay
 

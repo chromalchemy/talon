@@ -1476,7 +1476,7 @@ Redo:
 [(Toggle | swap | flip)] Last [State]:
     user.ps_toggle_last_state()
 
-## +++++++++++++++++ fade last bitmap: .
+## +++++++++++++++++ fade last bitmap (edit/fade..)
 
 (Fade | fades | vade | they'd | fig) [(stroke | that)]:
     user.ps_fade()
@@ -1496,6 +1496,23 @@ Redo:
 
 (Fade | fades | vade | they'd | fig) [(stroke | that)] ({user.ryan.photoshop.blending_mode.list} {user.ryan.proportions.list} | {user.ryan.proportions.list}  {user.ryan.photoshop.blending_mode.list} ):
     user.ps_fade("{user.ryan.proportions.list}", "{user.ryan.photoshop.blending_mode.list}")
+
+## ++++++++++++++++++++++++ fade layer .
+
+[(Fade | fades | vade | they'd | fig)] (layer | lay) <number>:
+    user.ps_command_nb("(fade-layer {{:opacity {number}}})")
+
+[(Fade | fades | vade | they'd | fig)] (layer | lay) {user.ryan.proportions.list}:
+    user.ps_command_nb("(fade-layer {{:opacity {user.ryan.proportions.list}}})")
+
+[(Fade | fades | vade | they'd | fig)] (layer | lay) {user.ryan.photoshop.blending_mode.list}:
+    user.ps_command_nb('(fade-layer {{:blending-mode "{user.ryan.photoshop.blending_mode.list}"}})')
+
+[(Fade | fades | vade | they'd | fig)] (layer | lay) ({user.ryan.photoshop.blending_mode.list} <number> | <number>  {user.ryan.photoshop.blending_mode.list} ):
+    user.ps_command_nb('(fade-layer {{:opacity {number} :blending-mode "{user.ryan.photoshop.blending_mode.list}"}})')
+
+[(Fade | fades | vade | they'd | fig)] (layer | lay) ({user.ryan.photoshop.blending_mode.list} {user.ryan.proportions.list} | {user.ryan.proportions.list}  {user.ryan.photoshop.blending_mode.list} ):
+    user.ps_command_nb('(fade-layer {{:opacity {user.ryan.proportions.list} :blending-mode "{user.ryan.photoshop.blending_mode.list}"}})')
 
 ## +++++++++++++++++++++++ cut / paste .
 
@@ -2249,8 +2266,8 @@ Clone [and] (raster | rasterize) (layer | gradient) [<user.text>]:
 [set] font size <user.number_string>:
     user.ps_command_nb("(set-font-size! {number_string})")
 
-[set] [font] tracking <user.number_string>:
-    user.ps_command_nb("(set-font-tracking! {number_string})")
+[set] [font] tracking <user.number_signed_string>:
+    user.ps_command_nb("(set-font-tracking! {number_signed_string})")
 
 ((increase | raise | boost) [font] tracking  | [font] tracking (up | raise | boost | add)) <user.number_string>:
     user.ps_command_nb("(update-font-tracking! {number_string})")
