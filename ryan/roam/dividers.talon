@@ -2,18 +2,24 @@ app.name: Roam Research
 mode: command
 -
 
-make divider:
+divider (chars | characters): "---"
+
+new [block] divider [block]:
+    insert("---")
+    user.roam_new_block_below()
+
+make [block] divider [block]:
     user.roam_select_block_text()
     sleep(100ms)
     insert("---")
     key(esc)
 
-(insert | (add | ad) | new) divider:
+(insert | (add | ad)) divider [block]:
     user.roam_new_block_below()
     insert("---")
     key(esc)
 
-(insert | (add | ad) | new) divider (fresh | new) [block]:
+(insert | (add | ad)) divider (fresh | new) [block]:
     user.roam_new_block_below()
     insert("---")
     sleep(100ms)
@@ -21,19 +27,19 @@ make divider:
 
 # use escape twice to fully exit new divider (but then cant The keyboard navigate from there)
 
-divider [block] [below] | divide below:
+[insert] divider [block] [below] | divide [blocks] below:
     user.roam_new_block_below()
     insert("---")
     key(esc)
 
-divide point:
+divide [blocks] point:
     user.roam_click_block()
     user.roam_break_block()
     user.roam_new_block_above()
     insert("---")
     key(esc)
 
-divide here:
+divide [blocks] here:
     user.roam_break_block()
     user.roam_new_block_above()
     insert("---")
