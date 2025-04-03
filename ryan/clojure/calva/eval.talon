@@ -99,16 +99,25 @@ please calva (evaluate | eval):
 
 # eval from start of the current enclosing list to cursor 
 # not available when text selected
-(evaluate | eval | run | runt) [from] ([(list | form)] start | start of list): 
+(evaluate | eval | run | runt) [from] (list | form | pair) [start] (to | two | too) (here | curse | cursor): 
     user.run_rpc_command("calva.evaluateToCursor")
 
-# eval from start of top level form to cursor
-(evaluate | eval | run | runt) (from top [form] | top (closing | close | closed)) : 
+(evaluate | eval | run | runt) [from] (list | form | pair) [start] (to | two | too) point: 
+    mouse_click(0)
+    user.run_rpc_command("calva.evaluateToCursor")
+
+# eval from start of top level form to cursor, for threading macros
+(evaluate | eval | run | runt) [from] [top] [form] (to | two | too) (here | curse | cursor): 
+    user.run_rpc_command("calva.evaluateTopLevelFormToCursor")
+
+(evaluate | eval | run | runt) [from] [top] [form] (to | two | too) point:
+    mouse_click(0)
     user.run_rpc_command("calva.evaluateTopLevelFormToCursor")
 
 (evaluate | eval | run | runt) [from] (start of file | file (start | top) ):  
     user.run_rpc_command("calva.evaluateStartOfFileToCursor")
 
+    
 run top (symbol | name):
     user.run_rpc_command("calva.runCustomREPLCommand", "ets")
 
