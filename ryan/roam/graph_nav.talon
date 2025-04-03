@@ -18,13 +18,13 @@ go (forward | fore | ahead):
     key(ctrl-m)
 
 #zoom in on block
-(zoom | focus) (block  | down): 
+(zoom | focus) [in] [on] (block  | down): 
     key(cmd-.)
 
 #same as above? todo: Or disambiguate
 # key(ctrl-o)
 
 #zoom out to parent
-(zoom | focus) (parent |  up) [block]: 
-    key(cmd-shift-ctrl-alt-u)
+(zoom | focus) (parent | (up | out) [to] [parent]) [block]: 
+    key(cmd-,)
     
