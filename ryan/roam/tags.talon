@@ -21,7 +21,7 @@ test [insert] tag {user.ryan.roam.tags.list}:
     insert(" #{tag_text} ")
 
 #keep chooser open    
-^[(new | now)] tag (ink | parcel | partial) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) $:
+^[(new | now)] tag (ink | incremental | parcel | partial | (wait | weight) | hold ) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) $:
     tag_text = user.roam_tag("{formatters or 'SLASH_SEPARATED'}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
     insert(" #{tag_text}")
     
