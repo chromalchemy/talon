@@ -50,6 +50,9 @@ cursorless
 cursors: cursorless
 
 talon command: talon/command
+towel in command: talon/command
+towel and command: talon/command
+tail and command: talon/command
 
 roam research: roam
 notes: roam 
