@@ -5,8 +5,12 @@
             [camel-snake-kebab.core :as csk]
             [separator.io :as s]
             [babashka.fs :as fs]
-            ))
-(def snippets-path "../../cursorless-snippets/")
+            [snitch.core :refer [defn* defmethod* *fn *let]]
+            )
+  (:use [selmer.parser :as selmer]))
+
+
+(def snippets-path "../../community/core/snippets/snippets/")
 
 (def csv-header-str->kw
   {"Spoken form" :spoken
@@ -32,8 +36,56 @@
              :var substitution-var})))))
   )
 
+(defn snippet-bindings-csv [snippet-type snippets]
+  (->> snippets
+    (mapv 
+      (fn [{snippet-types :type
+            snippet-name :name
+            :keys [spoken var ] 
+            :as snippet}]
+        (let [var (when 
+                    (not= snippet-type :insert)
+                    (str "." var))]
+          (str spoken ", " snippet-name var "\n"))))
+    (concat ["Spoken form, Cursorless identifier\n"])
+    (apply str)
+))
 
-(def starter-wrapper-name-bindings 
+
+(defn snippet-config-text
+  [{:keys [description scope template name spoken]
+    :or 
+    {scope "clojure"
+     description "Clj snippet"}
+    :as snippet}]
+  (-> snippet
+    (merge 
+      {:scope scope
+       :description description})
+    (->>
+      (render 
+        "name: {{name}}
+description: {{description}}
+phrase: {{spoken}}
+
+${{var}}.wrapperPhrase: {{spoken}}
+---
+
+language: {{scope}}
+
+${{var}}.insertionFormatter: NOOP
+-
+{{template|safe}}
+---
+"))))
+
+(comment
+  (->
+    (snippet-config-text 
+      (nth clj-snippets 0 ))
+    (println)))
+
+(def starter-wrapper-name-bindings
   [{:spoken  "else"
     :name "ifElseStatement"
     :var     "alternative"
@@ -59,112 +111,16 @@
     :type
     #{:wrap :insert}}
    #_{:spoken  "funk"
-    :name "newFn"
-    :var     "fnName"}
+      :name "newFn"
+      :var     "fnName"}
    {:spoken  "general funk"
     :name "functionDeclaration"
     :var     "body"
     :type
     #{:wrap :insert+phrase}}
    #_{:spoken  "comment"
-    :name "comment-form"
-    :var     "form"}])
-
-(defn snippet-name
-  [{:keys [spoken name]}]
-  (cond
-    (some? name) name
-    (string? spoken)
-    (csk/->kebab-case-string spoken)
-    :else "bad-name"))
-
-
-(defn snippet-bindings-csv [snippet-type snippets]
-  (->> snippets
-    (mapv 
-      (fn [{snippet-types :type 
-            :keys [spoken var] 
-            :as snippet}]
-        (let [name (snippet-name snippet)
-              var (when 
-                    (not= snippet-type :insert)
-                    (str "." var))]
-          (str spoken ", " name var "\n"))))
-    (concat ["Spoken form, Cursorless identifier\n"])
-    (apply str)
-))
-
-
-;; json snippet -> edn
-(comment
-  (->
-    (slurp "/Users/ryan/.talon/user/cursorless-snippets/functionDeclaration.cursorless-snippets")
-    (json/parse-string  csk/->kebab-case-keyword)
-    (->> 
-      (spit "edn/functionDeclaration.edn")))
-  )
-
-(comment
-  (-> new
-    (json/generate-string
-      {:pretty true
-       :key-fn csk/->camelCaseString})
-    (->>
-      (spit "/Users/ryan/.talon/user/cursorless-snippets/functionDeclaration2.cursorless-snippets"))))
-
-
-(def example-snippet-file
-  {:function-declaration
-   {:description "Function declaration",
-    :variables {:body {:wrapper-scope-type "statement"}},
-    :insertion-scope-types ["namedFunction" "statement" "line"]
-
-    :definitions
-    [{:scope {:lang-ids ["typescript" "typescriptreact" "javascript" "javascriptreact"]},
-      :body ["function $name($parameterList) {" "\t$body" "}"],
-      :variables {:name {:formatter "camelCase"}}}
-
-     {:scope {:lang-ids ["typescript" "typescriptreact" "javascript" "javascriptreact"],
-              :scope-types ["class"],
-              :exclude-descendant-scope-types ["namedFunction"]},
-      :body ["$name($parameterList) {" "\t$body" "}"],
-      :variables {:name {:formatter "camelCase"}}}
-
-     {:scope {:lang-ids ["go"]},
-      :body ["func $name($parameterList) {" "\t$body" "}"],
-      :variables {:name {:formatter "camelCase"}}}
-
-     {:scope {:lang-ids ["python"]},
-      :body ["def $name($parameterList):" "\t$body"],
-      :variables {:name {:formatter "snakeCase"}}}
-
-     {:scope {:lang-ids ["python"],
-              :scope-types ["class"],
-              :exclude-descendant-scope-types ["namedFunction"]},
-      :body ["def $name(self${parameterList:, }):" "\t$body"],
-      :variables {:name {:formatter "snakeCase"}}}]}})
-
-(defn snippet-config
-  [{:keys [description scope template name spoken]
-    :or 
-    {scope
-     {:lang-ids ["clojure"]}
-     description "Clj snippet"}
-    :as snippet}]
-  (let [name
-        (snippet-name snippet)]
-    {name
-     {:definitions
-      [{:scope scope
-        :body [template]
-        #_#_
-            :variables {:name {:formatter "kebabCase"}}}]
-      :description description
-      #_#_
-          :variables {:body {:wrapper-scope-type "statement"}}
-      #_#_
-          :insertion-scope-types ["namedFunction" "statement" "line"]
-      }}))
+      :name "comment-form"
+      :var     "form"}])
 
 (def clj-snippets 
   [{:description "clj comment fn"
@@ -273,23 +229,28 @@
     :type
     #{:wrap :insert :insert+phrase}}])
 
-
-(comment
-  "(defn $fnName [$params]\n  $CURRENT_SECONDS_UNIX $body)"
-  )
-
-(defn clear-snippets-dir! []
-  (->>
-    (fs/list-dir snippets-path)
-    (filter #(not (fs/directory? %)))
-    (mapv fs/delete))
-  (println "Cleared snippets dir."))
+(defn normalize-snippet [{:keys [name spoken] :as snippet}]
+  (-> snippet
+    (cond->
+      (and (nil? name)
+        (string? spoken))
+      (assoc :name
+        (csk/->kebab-case-string spoken)))))
 
 
 (def all-snippet-declarations
   (concat
     starter-wrapper-name-bindings
-    clj-snippets))
+    (->> clj-snippets
+      (mapv normalize-snippet))))
+
+(defn delete-old-snippets! []
+  (->>
+    (fs/list-dir snippets-path)
+    (filter #(not (fs/directory? %)))
+    #_(mapv fs/delete))
+  #_(println "Cleared snippets dir."))
+
 
 (def cursorless-experimental-settings-path 
   "../../cursorless-settings/experimental/")
@@ -311,33 +272,34 @@
 
 
 (defn write-cursorless-snippet-file! 
-  [{:keys [name] :as snippet}]
-  (let [name
-        (if name name
-          (ffirst snippet))]
-    (-> snippet
-      (json/encode
-        {:pretty true
-         :key-fn csk/->camelCaseString})
-      (->>
-        (spit
-          (str
-            snippets-path
-            name
-            ".cursorless-snippets"))))))
+  [{snippet-name :name :as snippet}]
+  (let [file-path
+        (str snippets-path snippet-name ".snippet")]
+    (spit
+      file-path
+      (snippet-config-text snippet))
+    (println (str "Wrote " snippet-name " snippet"))))
 
 ;;;; mutate state
 
-(clear-snippets-dir!)
+#_(delete-old-snippets!)
 
-(->> [:wrap :insert :insert+phrase]
+#_(->> [:wrap :insert :insert+phrase]
   (mapv write-snippet-bindings-csv-file))
 
+(def snippet*
+  (normalize-snippet (first clj-snippets)))
+
+(comment 
+  (->> snippet*
+    (write-cursorless-snippet-file!)))
+
 ;; write custom snippets files
-(->> clj-snippets
-  (map snippet-config)
-  (mapv write-cursorless-snippet-file!))
-(println "Wrote Wrapper Snippet files")
+(comment 
+  (->> clj-snippets
+    (map normalize-snippet)
+    (mapv write-cursorless-snippet-file!)))
+#_(println "Wrote Wrapper Snippet files")
 
 
 

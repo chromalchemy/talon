@@ -4,5 +4,7 @@
         com.amperity/separator              {:mvn/version "0.2.0"}
         camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.3"} 
         babashka/fs {:mvn/version "0.5.20"}
-        org.clojure/data.xml {:mvn/version "0.0.8"}}
+        org.clojure/data.xml {:mvn/version "0.0.8"}
+        selmer/selmer {:mvn/version "1.12.62"}
+        org.clojars.abhinav/snitch {:mvn/version "0.1.16"}}
  :aliases {}}
