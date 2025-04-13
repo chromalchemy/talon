@@ -32,12 +32,12 @@ restore terminals:
 
 ## ++++++++++++++++++++++++++++++ show .
 
-(go | show) (term | terminal) | term show: 
+(go | show) ((term | turn) | terminal) | ((term | turn) | terminal) show: 
     user.run_rpc_command("workbench.action.terminal.focus")
 
 ## +++++++++++++++++++++++++++++ state .
 
-clear (term | terminal) | clear (term | terminal) : 
+clear ((term | turn) | terminal) | clear ((term | turn) | terminal) : 
     user.run_rpc_command("workbench.action.terminal.clear")   
     
 kill process:               
