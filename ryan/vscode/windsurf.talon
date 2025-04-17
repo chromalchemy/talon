@@ -5,7 +5,36 @@ tag: user.cursorless
 
 # surf test: print("testing from windsurf next")
 
-(send [to] | reference [in]  | (add | had) context [to] ) [chat | chatbot]  | cascade [that]:
+## ++++++++++++++++ show cascade panel .
+
+#  doesn't go to form
+bar (cascade | chat | surf | serf):
+    user.run_rpc_command("windsurf.cascadePanel.focus")
+
+# same as above?
+# cascade:
+#     user.run_rpc_command("windsurf.cascadeViewContainerId")
+
+## ++++++++++++++++++++++++++++++ auto .
+
+#prompt?
+auto cascade:
+    user.run_rpc_command("windsurf.triggerAutoCascade")
+
+## ++++++++++++++++++++++++++ not sure .
+
+#  she doesn't seem to do anything
+# toggle cascade visibility:
+#     user.run_rpc_command("windsurf.cascadePanel.toggleVisibility")
+
+# toggles whole sidebar,  but not necessarily windsurf panel.  doesn't focus
+# open cascade:
+#     user.run_rpc_command("windsurf.openCascade")
+
+
+## +++++++++++++++++ send selection reference to chat form, focus  if showing. doesn't go to panel
+
+(reference [in]  | (add | had) (reference | context) [to]) [(chat [box] | chatbot | cascade)]  | (cascade | chat) that | (go | focus | curse) (cascade | surf | serf | chat) box:
     user.run_rpc_command("windsurf.prioritized.chat.open")   
 
 (cascade | add context) <user.cursorless_target>:
@@ -13,10 +42,10 @@ tag: user.cursorless
 
 ## +++++++++++++++++++++++ edit inline .
 
-(surf | windsurf) [edit] [that] [(inline | in place)]:
+(windsurf | surf | serf) [edit] [that] [(inline | in place)]:
     key(cmd-i)   
 
-(surf | windsurf) edit [(inline | in place)] <user.cursorless_target>:
+(windsurf | surf | serf) edit [(inline | in place)] <user.cursorless_target>:
     user.cursorless_ide_command("setSelection", cursorless_target)
     # sleep(500ms)
     # key(cmd-i)
@@ -24,6 +53,6 @@ tag: user.cursorless
     # insert(text or "")
 
 
-(windsurf | surf) (write | wright | right) mode: 
+# (windsurf | surf | serf) [toggle] (write | wright | right | chat) mode: 
     key(cmd-.)
 
