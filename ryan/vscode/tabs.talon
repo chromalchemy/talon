@@ -152,6 +152,14 @@ decrease group width | group (thin | thinner | slimmer):
 (reset | restore) (group | groups) (size | sizes | width | widths  | with):
     user.run_rpc_command("workbench.action.evenEditorWidths")
 
+
+(increase | add) (group | groups | tab | view) (size | sizes | width | widths | with) | (group | groups | tab | view) (wider | widen | more | fatter | fatten) |  (decrease | less) (sidebar | bar) (size | sizes | width | widths | with) | (sidebar | bar) (thinner | narrower | narrow | thin):
+    user.run_rpc_command("workbench.action.increaseViewSize")
+
+(decrease | less) (group | groups | tab | view) (size | sizes | width | widths | with) | (group | groups | tab | view) (thinner | narrower | narrow | thin) |  (increase | add) (sidebar | bar) (size | sizes | width | widths | with) | (sidebar | bar) (wider | widen | more | fatter | fatten):
+    user.run_rpc_command("workbench.action.decreaseViewSize")
+
+
 ## ++++++++++++++ andreas tab nav  .
 
 #prefer andreas panel
