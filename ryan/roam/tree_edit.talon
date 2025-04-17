@@ -144,7 +144,7 @@ new base block:
 
 # pasting children
 
-(insert | new | add | put) (child | kid | (right | write) ) [block] (paste | pace) | (paste | pace) (child | kid | (right | write) | nuchal) [block]:
+(insert | new | add | put) ((child | chow) | kid | (right | write)) [block] (paste | pace) | (paste | pace) (child | ((child | chow) | kid | (right | write)) kid | (right | write) | nuchal) [block]:
     user.roam_new_child_block()
     edit.paste()
 
@@ -154,7 +154,7 @@ new base block:
 #     sleep(100ms)
 #     key(esc)
 
-paste (child | kid) [block] raw:
+paste (child | ((child | chow) | kid | (right | write)) kid | (right | write) | nuchal) [block] raw:
     user.roam_new_child_block()
     user.paste_without_formatting()
 
