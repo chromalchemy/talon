@@ -4,6 +4,9 @@ app.name: Windsurf
 app.name: Windsurf - Next
 -
 
+(open | reveal) in (terminal | term):
+    user.run_rpc_command("open-terminal.open")
+
 ## +++++++++++++++++++++++++ font size .
 
 (terminal | term) font [size] down: 
