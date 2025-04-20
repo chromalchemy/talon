@@ -34,12 +34,8 @@ date [string] <user.number_string> [plus] <user.number_string>:
     sleep(200ms)
     key(escape)
 
-Open linear mouse [panel]: 
-    key(cmd-space)
-    # sleep(100ms)
-    insert("linearmouse")
-    sleep(100ms)
-    key(enter)
+Open linear mouse [panel] | [go] linear mouse [(panel | settings)]:
+    user.run_raycast_command("LinearMouse")
 
 ## ++++++++++ go to open tab In chrome .
 
