@@ -5,6 +5,9 @@ tag: user.cursorless
 
 # surf test: print("testing from windsurf next")
 
+bar (cascade | chat | surf | serf) (memories | rules):
+    user.run_rpc_command("windsurf.openMemoriesTab")
+
 ## ++++++++++++++++ show cascade panel .
 
 #  doesn't go to form
