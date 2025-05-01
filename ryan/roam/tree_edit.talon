@@ -38,7 +38,7 @@ copy block:
 ## ++++++++++++++++++++++++ kill block .
 
 # only for use when cursor is inside block
-(delete | kill | remove | chuck) [whole] block | block delete: 
+(delete | kill | remove | chuck) [whole] (block | line ) | block delete: 
     # doesnt keep focus
     # key(cmd-backspace) 
     user.roam_select_block()

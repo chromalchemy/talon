@@ -106,10 +106,10 @@ go commit [(graph | craft)] details:
     user.run_rpc_command("workbench.action.editor.previousChange")
 
 #in compare view
-[go] next [diff] change: 
+[go] next [(diff | code)] change: 
     user.run_rpc_command("workbench.action.compareEditor.nextChange")
 
-[go] last [diff] change: 
+[go] last [(diff | code)] change: 
     user.run_rpc_command("workbench.action.compareEditor.previousChange")
 
 ## ___________________________________ .

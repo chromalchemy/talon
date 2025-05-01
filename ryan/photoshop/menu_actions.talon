@@ -89,55 +89,55 @@ rename layer [<user.text>]:
 [layer] (Blending | blend) (Options | opts):
     user.ps_layer_style_blending_options()
 
-(Bevel | Emboss) [layer] style:
+(Bevel | Emboss) [layer] (style | thou):
     user.ps_layer_style_bevel_and_emboss()
 
-Stroke [layer] style:
+Stroke [layer] (style | thou):
     user.ps_layer_style_stroke()
 
-Inner Shadow [layer] style:
+Inner Shadow [layer] (style | thou):
     user.ps_layer_style_inner_shadow()
 
-Inner Glow [layer] style:
+Inner Glow [layer] (style | thou):
     user.ps_layer_style_inner_glow()
 
-Satin [layer] style:
+Satin [layer] (style | thou):
     user.ps_layer_style_satin()
 
-Color Overlay [layer] style:
+Color Overlay [layer] (style | thou):
     user.ps_layer_style_color_overlay()
 
-Gradient Overlay [layer] style:
+Gradient Overlay [layer] (style | thou):
     user.ps_layer_style_gradient_overlay()
 
-Pattern Overlay [layer] style:
+Pattern Overlay [layer] (style | thou):
     user.ps_layer_style_pattern_overlay()
 
-Outer Glow [layer] style:
+Outer Glow [layer] (style | thou):
     user.ps_layer_style_outer_glow()
 
-Drop Shadow [layer] style:
+Drop Shadow [layer] (style | thou):
     user.ps_layer_style_drop_shadow()
 
-Copy [Layer] Style:
+(Copy | carve) [Layer] (style | thou):
     user.ps_layer_style_copy_layer_style()
 
-Paste [Layer] Style:
+(Paste | pace) [Layer] (style | thou):
     user.ps_layer_style_paste_layer_style()
 
-Clear [Layer] Style:
+(Clear | chuck) [Layer] (style | thou):
     user.ps_layer_style_clear_layer_style()
 
 Global Light:
     user.ps_layer_style_global_light()
 
-Create Layer style:
+(Create | new) Layer (style | thou):
     user.ps_layer_style_create_layer()
 
 Hide All (Effects | styles):
     user.ps_layer_style_hide_all_effects()
 
-Scale (Effects | styles | style):
+Scale (Effects | styles | style | thou):
     user.ps_layer_style_scale_effects()
 
 Smart Filter:
