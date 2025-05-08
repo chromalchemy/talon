@@ -18,17 +18,12 @@ app.name: Windsurf - Next
 quick open tab: 
     user.run_rpc_command("workbench.action.quickOpenPreviousRecentlyUsedEditor")
     
-(pic| pick) open [(tab | tabs | editor | editors)] [<user.text>]:
+(pic| pick) (open [(tab | tabs | editor | editors)] | [open] (tab | tabs | editor)) [<user.text>]:
     user.run_rpc_command("opened-editors.openedEditors")
     sleep(100ms)
     insert(text)
 
-(pic| pick) [open] (tab | tabs | editor) [<user.text>]:
-    user.run_rpc_command("opened-editors.openedEditors")
-    sleep(100ms)
-    insert(text)
-
-(pic| pick) [open] (tab | editor) [<user.text>] pop:
+(pic| pick) [open] (tab | editor) <user.text> pop | go (tab | editor) <user.text>:
     user.run_rpc_command("opened-editors.openedEditors")
     sleep(100ms)
     insert(text)
