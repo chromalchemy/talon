@@ -51,10 +51,10 @@ go [to] last (edit | at it):
 
 ## ++++++++++++++ traverse recent nav location
 
-go back: 
+go back [code]: 
     user.run_rpc_command("workbench.action.navigateBack")
 
-go (forward | ahead) : 
+go (forward | ahead) [code]: 
     user.run_rpc_command("workbench.action.navigateForward")
 
 # what is defference here?

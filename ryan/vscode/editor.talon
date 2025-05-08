@@ -66,9 +66,9 @@ copy line number: user.run_rpc_command("copy-current-line-number.helloWorld")
 
 #-------------- scopes
 
-(show | hide | view | visualize) [context] (tokens | scopes | scope): user.run_rpc_command("editor.action.inspectTMScopes")
+(show | hide | view | visualize) [code] [context] (tokens | scopes | scope): user.run_rpc_command("editor.action.inspectTMScopes")
 
-(bar | go) (scope | scopes): 
+(bar | go) [cursorless] (scope | scopes): 
     user.run_rpc_command("cursorless.scopes.focus")
     
 # todo: bug, working from command menu, but not talon command (context issue?)

@@ -18,7 +18,7 @@ sleep action <user.number_string>:
 
 [(add | new)] action:
     insert("insert(\"\")")
-    key(left:2)
+    (left:2)
 
 [(add | new)] sleep action:
     insert("sleep(ms)")
@@ -54,4 +54,3 @@ paste code action:
     user.paste("({t} | {text})")
     sleep(200ms)
     key(left)
-
