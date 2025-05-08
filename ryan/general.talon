@@ -39,7 +39,7 @@ Open linear mouse [panel] | [go] linear mouse [(panel | settings)]:
 
 ## ++++++++++ go to open tab In chrome .
 
-go (browse | page | tab) <user.text>:
+browse (page | tab) <user.text>:
     user.switcher_focus("Google Chrome") 
     key(cmd-shift-a)
     sleep(200ms) 

@@ -520,6 +520,7 @@
 		"bookmark-manager.createJsonFile": true,
 		"bookmark-manager.alwaysIgnore": false,
 		"calva.autoStartRepl": false,
-		"python.terminal.activateEnvironment": false
+		"python.terminal.activateEnvironment": false,
+		"calva-backseat-driver.enableReplEvaluation": true
 	}
 }
