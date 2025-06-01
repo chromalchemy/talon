@@ -23,7 +23,7 @@ quick open tab:
     sleep(100ms)
     insert(text)
 
-(pic| pick) [open] (tab | editor) <user.text> pop | go (tab | editor) <user.text>:
+go [open] (tab | editor) <user.text>:
     user.run_rpc_command("opened-editors.openedEditors")
     sleep(100ms)
     insert(text)
@@ -129,13 +129,13 @@ unpin (editor | tab):
 
 ## +++++++ expand and minimize editors .
 
-increase group width | group (widen | wider | fatter): 
+increase group width  | group width up | group (widen | wider | fatter): 
     user.run_rpc_command("workbench.action.increaseViewWidth")
 
-decrease group width | group (thin | thinner | slimmer): 
+decrease group width | group width down | group (thin | thinner | slimmer): 
     user.run_rpc_command("workbench.action.decreaseViewWidth")
 
-(expand | widen) group | group (max | wide | expand): 
+(expand) group | group (max | wide | expand): 
     user.run_rpc_command("workbench.action.minimizeOtherEditors")
 
 [toggle] (group full | grateful) | exit (group full | grateful): 
@@ -144,7 +144,7 @@ decrease group width | group (thin | thinner | slimmer):
 (toggle | flip | reset) [(editor | tab)] (group | groups) [(size | sizes | width | widths  | with)]: 
     user.run_rpc_command("workbench.action.toggleEditorWidths")
 
-(reset | restore) (group | groups) (size | sizes | width | widths  | with):
+(reset | restore | default | even) (group | groups) (size | sizes | width | widths  | with):
     user.run_rpc_command("workbench.action.evenEditorWidths")
 
 
@@ -228,10 +228,17 @@ split [(editor | tab)] (right | rite):
 
  ## +++++++++ move tab group .
 
-(send | move) [(editor | tab)] group right: user.run_rpc_command("workbench.action.moveActiveEditorGroupRight")
-(send | move) [(editor | tab)] group left: user.run_rpc_command("workbench.action.moveActiveEditorGroupLeft")
-(send | move) [(editor | tab)] group up: user.run_rpc_command("workbench.action.moveActiveEditorGroupUp")
-(send | move) [(editor | tab)] group down: user.run_rpc_command("workbench.action.moveActiveEditorGroupDown")
+(send | move) [(editor | tab)] group right: 
+    user.run_rpc_command("workbench.action.moveActiveEditorGroupRight")
+
+(send | move) [(editor | tab)] group left: 
+    user.run_rpc_command("workbench.action.moveActiveEditorGroupLeft")
+
+(send | move) [(editor | tab)] group up: 
+    user.run_rpc_command("workbench.action.moveActiveEditorGroupUp")
+
+(send | move) [(editor | tab)] group down: 
+    user.run_rpc_command("workbench.action.moveActiveEditorGroupDown")
 
  ## +++++++++ move tab to another group .
 
