@@ -26,11 +26,26 @@
     (string/split #"\?")
     (first)))
 
-(defn remove-url-params! [x]
+(defn remove-url-params! [s]
   (run-on-stdin remove-url-params))
 
 (comment 
   (remove-url-params url-w-params*))
+
+;; +++++++++++++++++++++++++ path only .
+
+
+(defn url->path [url]
+  (-> url
+    (string/split #"^(https?:\/\/[^\/]+)")
+    (last)
+    (remove-url-params)))
+
+(comment 
+  (url->path url-w-params*))
+
+(defn url-path-only! [s]
+  (run-on-stdin url->path))
 
 (def multiline-block-string
   "kdjfoie
