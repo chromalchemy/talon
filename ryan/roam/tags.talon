@@ -85,7 +85,7 @@ test [insert] tag {user.ryan.roam.tags.list}:
     s = edit.selected_text()
     edit.delete()
     sleep(300ms)
-    user.paste("[[{s}]] ")
+    user.paste(" [[{s}]] ")
     
 (square tag | dub square) (word | single):
     edit.select_word()
@@ -93,7 +93,7 @@ test [insert] tag {user.ryan.roam.tags.list}:
     s = edit.selected_text()
     edit.delete()
     sleep(300ms)
-    user.paste("[[{s}]]")
+    user.paste(" [[{s}]]")
     print("[[{s}]] ")
 
 [(new | fresh)] (square tag | dub square):
