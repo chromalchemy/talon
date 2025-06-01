@@ -13,7 +13,7 @@ tag(): browser
 
 ## ++++++++++++++++++++++ edit product .
 
-edit product:
+(edit | headed) product:
     user.load_bookmark("edit prod+")
 
 

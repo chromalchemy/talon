@@ -233,10 +233,10 @@ copy to [Smart] Object:
 Reveal [smart] [object] [in Finder]:
     user.ps_smart_objects_reveal_in_finder()
 
-Update Modified (object | [object] (Contents | content)):
+Update [Modified] (object | [object] (Contents | content)):
     user.ps_smart_objects_update_modified_content()
 
-Update All Modified (objects | [object] (Contents | content)):
+Update [All] [Modified] objects:
     user.ps_smart_objects_update_all_modified_content()
 
 Edit [object] (Contents | content):
@@ -499,6 +499,13 @@ Remove White Matte:
 
 More from Adobe Fonts:
     user.ps_type_more_from_adobe_fonts()
+
+
+#refresh text block
+## fixes broke variable fond rendering
+refresh (text | type) [block]: 
+    user.ps_type_anti_alias_crisp()
+    user.ps_type_anti_alias_sharp()
 
 ## ++++++++++++++++++++++++++++ type panels .
 
@@ -928,16 +935,16 @@ File Open [as] Smart Object | open file as smart object:
 File Open Recent | open recent file:
     user.ps_file_open_recent()
 
-File Close | close (file | tab):
+(file | tab) Close | close (file | tab):
     user.ps_file_close()
 
-File Close All | close all (files | tabs):
+(file | tab) Close All | close all (files | tabs):
     user.ps_file_close_all()
 
-File Close Others | close other files:
+(file | tab) Close Others | close other files:
     user.ps_file_close_others()
 
-Close file and Go [to] Bridge:
+Close [(file | tab)] and Go [to] Bridge:
     user.ps_file_close_and_go_to_bridge()
 
 ## +++++++++++++++++++++++++ save file .
@@ -1522,22 +1529,22 @@ Cut:
 Copy:
     user.ps_copy()
 
-Copy Merged:
+copy merged:
     user.ps_copy_merged()
 
-Paste:
+[photo] (paste | pace):
     user.ps_paste()
 
-Paste raw:
+[photo] (paste | pace) [text | type] (raw | unformatted | without formatting | [and] match style):
     user.ps_paste_without_formatting()
 
-Paste in Place:
+[photo] (paste | pace) [(in | to)] place:
     user.ps_paste_in_place()
 
-Paste Into:
+[photo] (paste | pace) into:
     user.ps_paste_into()
 
-Paste Outside:
+[photo] (paste | pace) outside:
     user.ps_paste_outside()
 
 ## +++++++++++++++++++++++++++++ clear .
@@ -1941,28 +1948,28 @@ ProStacker:
 [(windows | tabs)] Tile (all | windows) (Horizontal | horz):
     user.ps_window_tile_all_horizontally()
 
-[(windows | tabs)] 2 up (Horizontal | horz):
+[(windows | tabs)] two up (Horizontal | horz) | tabs two up (Horizontal | horz | horizontally) | tabs two wide:
     user.ps_window_2_up_horizontal()
 
-[(windows | tabs)] 2 up (Vertical | vert):
-    user.ps_window_2_up_vertical()
+[(windows | tabs)] two up (Vertical | vert) | tabs two up [(Vertical | Vertically | vert)]:
+    user.ps_window_2_up_vertical() 
 
-[(windows | tabs)] 3 up (Horizontal | horz):
+[(windows | tabs)] three up (Horizontal | horz):
     user.ps_window_3_up_horizontal()
 
-[(windows | tabs)] 3 up (Vertical | vert):
+[(windows | tabs)] three up (Vertical | vert):
     user.ps_window_3_up_vertical()
 
-[(windows | tabs)] 3 up Stacked:
+[(windows | tabs)] three up stacked:
     user.ps_window_3_up_stacked()
 
-[(windows | tabs)] [windows] 4 up:
+[(windows | tabs)] [windows] four up:
     user.ps_window_4_up()
 
-[(windows | tabs)] 6-up:
+[(windows | tabs)] six up:
     user.ps_window_6_up()
 
-(consolidate | windows) to Tabs:
+(consolidate | group | gather) [windows] [to] tabs:
     user.ps_window_consolidate_all_to_tabs()
 
 cascade windows:
@@ -2360,6 +2367,11 @@ edit text [(here | point)]:
 
 take text [(here | point)]:
     user.ps_select_text()
+
+copy text [block] [(here | point)]:
+    user.ps_select_text()
+    sleep(500ms)
+    edit.copy()
 
 (paste | pace) text [(here | point)]:
     user.ps_select_text()

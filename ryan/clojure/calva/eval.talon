@@ -15,7 +15,7 @@ please calva (evaluate | eval):
 
 ## +++++++++++++++++++++++++ load file .
 
-[(rep | repl | ripple | rebel)] (load | reload) file [in (rep | repl | ripple | rebel)]: 
+[(rep | repl | ripple | rebel)] (load | reload) file [in (rep | repl | ripple | rebel)] | (reload it | reloaded): 
     user.run_rpc_command("calva.loadFile")
     sleep(300ms)
     user.run_rpc_command("notifications.clearAll")

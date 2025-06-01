@@ -133,10 +133,10 @@ new base block:
 
 ## +++++++++++++++++ new child block .
 
-(insert | new | add | put) (child | kid | (right | write) | write) [block] | (child | kid | (right | write) | write) block | nuchal:
+(insert | (new | you) | add | put) (child | kid | (right | write) | write) [block] | (child | kid | (right | write) | write) block | nuchal:
     user.roam_new_child_block()
 
-(insert | new | add | put) (child | kid | (right | write) | write) [block] | (child | kid | (right | write) | write) block | nuchal <user.text>:
+(insert | (new | you) | add | put) (child | kid | (right | write) | write) [block] | (child | kid | (right | write) | write) block | nuchal <user.text>:
     user.roam_go_block_end()
     user.roam_break_block()
     insert(text) 
@@ -144,7 +144,7 @@ new base block:
 
 # pasting children
 
-(insert | new | add | put) ((child | chow) | kid | (right | write)) [block] (paste | pace) | (paste | pace) (child | ((child | chow) | kid | (right | write)) kid | (right | write) | nuchal) [block]:
+(insert | (new | you) | add | put) ((child | chow) | kid | (right | write)) [block] (paste | pace) | (paste | pace) (child | ((child | chow) | kid | (right | write)) kid | (right | write) | nuchal) [block]:
     user.roam_new_child_block()
     edit.paste()
 
