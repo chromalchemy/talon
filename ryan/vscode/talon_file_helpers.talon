@@ -18,7 +18,7 @@ sleep action <user.number_string>:
 
 [(add | new)] action:
     insert("insert(\"\")")
-    (left:2)
+    key(left:2)
 
 [(add | new)] sleep action:
     insert("sleep(ms)")
