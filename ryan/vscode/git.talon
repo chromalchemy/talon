@@ -105,16 +105,8 @@ go commit [(graph | craft)] details:
 [go] (file | tab | editor) last [diff] change: 
     user.run_rpc_command("workbench.action.editor.previousChange")
 
-#in compare view
-[go] next [(diff | code)] change: 
-    user.run_rpc_command("workbench.action.compareEditor.nextChange")
 
-[go] last [(diff | code)] change: 
-    user.run_rpc_command("workbench.action.compareEditor.previousChange")
-
-## ___________________________________ .
-
-(open  | go) working file : user.run_rpc_command("gitlens.openWorkingFile")
+## +++++++++++++++++++++ open revision .
 
 open file [at] revision: user.run_rpc_command("gitlens.openFileRevision")
 
