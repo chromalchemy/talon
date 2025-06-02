@@ -18,8 +18,7 @@ bar (cascade | chat | surf | serf):
 # cascade:
 #     user.run_rpc_command("windsurf.cascadeViewContainerId")
 
-## ++++++++++++++++++++++++++++++ auto .
-
+## ++++++++++++++++++++++++++++++ auto cascade
 #prompt?
 auto cascade:
     user.run_rpc_command("windsurf.triggerAutoCascade")
@@ -40,8 +39,9 @@ auto cascade:
 (reference [in]  | (add | had) (reference | context) [to]) [(chat [box] | chatbot | cascade)]  | (cascade | chat) that | (go | focus | curse) (cascade | surf | serf | chat) box:
     user.run_rpc_command("windsurf.prioritized.chat.open")   
 
-(cascade | add context) <user.cursorless_target>:
+(cascade | add [to] context) <user.cursorless_target>:
     user.cursorless_ide_command("windsurf.prioritized.chat.open", cursorless_target)
+
 
 ## +++++++++++++++++++++++ edit inline .
 
