@@ -114,7 +114,7 @@
 			"path": "community/core/numbers/ordinals.py",
 			"bookmarks": [
 				{
-					"line": 18,
+					"line": 51,
 					"column": 13,
 					"label": "ordinal_words"
 				}
@@ -157,6 +157,16 @@
 					"line": 124,
 					"column": 17,
 					"label": "clj-snippets"
+				}
+			]
+		},
+		{
+			"path": "ryan/claude_desktop_config.json",
+			"bookmarks": [
+				{
+					"line": 1,
+					"column": 0,
+					"label": "Claude MCP Config"
 				}
 			]
 		}
