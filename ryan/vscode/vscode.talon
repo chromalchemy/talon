@@ -85,4 +85,3 @@ open file in browser:
 # Navigate Previous in Quick Open
 please go (previous | prev | last): 
     user.vscode(workbench.action.quickOpenNavigatePrevious)
-    
