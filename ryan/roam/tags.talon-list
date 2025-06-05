@@ -68,3 +68,6 @@ anti pattern: antipattern
 into great: integrate
 
 close your inbox: clj/inbox
+
+time sheets: gb/timesheet
+time sheet: gb/timesheet
