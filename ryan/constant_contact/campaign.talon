@@ -17,26 +17,35 @@ title: /app.constantcontact.com/pages/campaign/
 #     key(enter)
 
 paste link:
-    user.rango_run_action_on_reference("clickElement", "link")
-    sleep(100ms)
-    key(down enter)
-    sleep(300ms)
-    key(cmd-a)
-    sleep(100ms)
-    key(cmd-v)
-    sleep(100ms)
-    key(enter)
+    user.cc_paste_link()
 
 remove link:
-    user.rango_run_action_on_reference("clickElement", "link")
+    user.rango_click_ref("link")
     sleep(100ms)
     key(down:2 enter)
 
-background color:
-    user.rango_run_action_on_reference("clickElement", "options")
-    # sleep(100ms)
-    user.rango_run_action_on_reference("clickElement", "background")
+edit [block] background color:
+    user.cc_edit_block_background_color()
+
+edit [block] background color advanced:
+    user.cc_select_block_background_val()
+
+copy background color: 
+    user.cc_select_block_background_val()
+    sleep(200ms)
+    edit.copy()
+    user.rango_click_ref("options")
+
+clear background color:
+    user.cc_select_block_background_val()
+    user.rango_flick_ref("clear background color")
+
+paste background color:
+    user.cc_select_block_background_val()
+    edit.paste()
+    sleep(300ms)
+    user.rango_flick_ref("apply background color")
 
 clone block:
-    user.rango_run_action_on_reference("clickElement", "options")
-    user.rango_run_action_on_reference("clickElement", "duplicate")
+    user.rango_click_ref("options")
+    user.rango_click_ref("duplicate")
