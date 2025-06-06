@@ -36,7 +36,7 @@ copy background color:
     edit.copy()
     user.rango_click_ref("options")
 
-clear background color:
+(clear | remove | chuck) background color:
     user.cc_select_block_background_val()
     user.rango_flick_ref("clear background color")
 
