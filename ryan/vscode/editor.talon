@@ -19,7 +19,8 @@ copy [(tab | current | active)] [file] relative path [of] [(tab | current | acti
 
 ## ++++++++++++++++++++++++++++++ wrap lines .
 
-wrap (words | lines) | toggle (word | line) wrap: user.run_rpc_command("editor.action.toggleWordWrap")
+(wrap | unwrap) (words | lines) | toggle (word | line) wrap: 
+    user.run_rpc_command("editor.action.toggleWordWrap")
 
 ## +++++++++++++++++  zoom level .
 
