@@ -1,5 +1,4 @@
 from talon import Module, actions
-import re
 
 mod = Module()
 
