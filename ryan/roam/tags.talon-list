@@ -71,3 +71,8 @@ close your inbox: clj/inbox
 
 time sheets: gb/timesheet
 time sheet: gb/timesheet
+
+clojure mcp: clojure-mcp
+clojuremcp: clojure-mcp
+clojure and bc: clojure-mcp
+clojure and cp: clojure-mcp
