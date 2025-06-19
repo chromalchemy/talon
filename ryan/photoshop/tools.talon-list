@@ -1,16 +1,34 @@
 move
 artboard
 
+marquee: marquee-rect
 marquee rect: marquee-rect
+marquee rectangle: marquee-rect
+ants rect: marquee-rect
+ants rectangle: marquee-rect
+ants square: marquee-rect
+
 marquee ellipse: marquee-ellipse
+ants ellipse: marquee-ellipse
+ants circle: marquee-ellipse
+
 marquee single row: marquee-single-row
 marquee single column: marquee-single-column
 
 lasso
+draw ants: lasso
+
 selection brush: selection-brush
+
 polygon lasso: polygon-lasso
+poly lasso: polygon-lasso
+shape lasso: polygon-lasso
+
 magnetic lasso: magnetic-lasso
+magnet ants: magnetic-lasso
+
 magic lasso: magic-lasso
+
 quick select: quick-select
 magic wand: magic-wand
 
@@ -23,7 +41,11 @@ slice select: slice-select
 frame
 
 eyedropper
-color sampler: color-sampler
+dropper: eyedropper
+sample: eyedropper
+
+color sample: color-sampler
+color dropper: color-sampler
 
 ruler
 
@@ -34,7 +56,10 @@ spot healing brush: spot-healing-brush
 remove
 healing brush: healing-brush
 patch
+
 content aware move: content-aware-move
+content move: content-aware-move
+
 red eye: red-eye
 
 brush
@@ -80,6 +105,7 @@ path selection: path-selection
 direct selection: direct-selection
 
 rectangle
+shape: rectangle
 ellipse
 triangle
 polygon
