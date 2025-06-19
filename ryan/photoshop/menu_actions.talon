@@ -1472,6 +1472,7 @@ Customize Touch Bar | touch bar settings:
     user.ps_view_customize_touch_bar()
 
 
+
 ## +++++++++++++++++++++++++++ history state
 
 Undo | nope:
@@ -1702,6 +1703,9 @@ Migrate Presets:
     user.ps_export_import_presets()
 
 ## +++++++++++++++++++++++++ ps config .
+
+Open settings:
+    user.ps_open_settings()
 
 Remote Connection settings:
     user.ps_remote_connections()
@@ -2205,8 +2209,12 @@ move group [tool]:
 move layer [tool]:
     user.ps_select_move_layer_tool()
 
-{user.ryan.photoshop.tool_key.list} [(tool | to)]:
-    key(user.ryan.photoshop.tool_key.list)
+
+{user.ryan.photoshop.tools.list} [(tool | to)]:
+    user.ps_command_nb("(select-tool! :{user.ryan.photoshop.tools.list})")
+
+# {user.ryan.photoshop.tool_key.list} [(tool | to)]:
+#     key(user.ryan.photoshop.tool_key.list)
 
 hold {user.ryan.photoshop.tool_key.list} |  {user.ryan.photoshop.tool_key.list} (mode | hold):
     key("{user.ryan.photoshop.tool_key.list}:down")
@@ -2383,3 +2391,6 @@ copy text [block] [(here | point)]:
 (paste | pace) [text] raw [(here | point)]:
     user.ps_select_text()
     user.menu_select('Edit|Paste Special|Paste without Formatting')
+
+
+

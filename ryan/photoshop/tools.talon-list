@@ -1,0 +1,92 @@
+move
+artboard
+
+marquee rect: marquee-rect
+marquee ellipse: marquee-ellipse
+marquee single row: marquee-single-row
+marquee single column: marquee-single-column
+
+lasso
+selection brush: selection-brush
+polygon lasso: polygon-lasso
+magnetic lasso: magnetic-lasso
+magic lasso: magic-lasso
+quick select: quick-select
+magic wand: magic-wand
+
+crop
+perspective crop: perspective-crop
+
+slice
+slice select: slice-select
+
+frame
+
+eyedropper
+color sampler: color-sampler
+
+ruler
+
+note
+count
+
+spot healing brush: spot-healing-brush
+remove
+healing brush: healing-brush
+patch
+content aware move: content-aware-move
+red eye: red-eye
+
+brush
+pencil
+color replacement: color-replacement
+mixer brush: mixer-brush
+
+clone
+pattern
+history brush: history-brush
+art history brush: art-history-brush
+
+eraser
+background eraser: background-eraser
+magic eraser: magic-eraser
+
+gradient
+paint bucket: paint-bucket
+
+blur
+sharpen
+smudge
+
+adjustment brush: adjustment-brush
+dodge
+burn
+sponge
+
+pen
+freeform pen: freeform-pen
+content aware tracing: content-aware-tracing
+curvature pen: curvature-pen
+add anchor point: add-anchor-point
+delete anchor point: delete-anchor-point
+convert anchor point: convert-anchor-point
+
+type
+vertical type: vertical-type
+vertical type mask: vertical-type-mask
+type mask: type-mask
+
+path selection: path-selection
+direct selection: direct-selection
+
+rectangle
+ellipse
+triangle
+polygon
+line
+custom shape: custom-shape
+
+hand
+rotate
+
+zoom

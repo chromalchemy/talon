@@ -2510,6 +2510,10 @@ class Actions:
         actions.sleep("200ms")
         actions.key("enter")
 
+    def ps_open_settings():
+        """open settings"""
+        actions.key("cmd-k")
+
     def ps_choose_fade_blending_mode(blending_mode: str):
         """choose fade blending mode"""
         actions.user.mouse_helper_click_image_relative("2025-03-24_12.03.32.644427.png", 0, 51, 1, 0, False)
