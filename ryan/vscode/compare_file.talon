@@ -31,4 +31,7 @@ compare file (with | to) (saved | last):
 
 ## ___________________________________ .
 
-(open  | go) working file : user.run_rpc_command("gitlens.openWorkingFile")
+[git] (open  | go) working file | git (open  | go) file : 
+    user.run_rpc_command("git-graph.openFile")
+    # user.run_rpc_command("gitlens.openWorkingFile")
+
