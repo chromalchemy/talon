@@ -158,19 +158,19 @@ Layer Content Options:
 
 ## ++++++++++++++++++++++++ layer mask .
 
-new layer mask [Reveal] [All]:
+(new | add) layer mask [Reveal] [All]:
     user.ps_layer_mask_reveal_all()
 
-new layer mask Hide [All]:
+(new | add) layer mask Hide [All]:
     user.ps_layer_mask_hide_all()
 
-new layer mask [Reveal] Selection:
+(new | add) layer mask [Reveal] Selection:
     user.ps_layer_mask_reveal_selection()
 
-new layer mask Hide Selection:
+(new | add) layer mask Hide Selection:
     user.ps_layer_mask_hide_selection()
 
-new layer mask [From] Transparency:
+(new | add) layer mask [From] Transparency:
     user.ps_layer_mask_from_transparency()
 
 (Delete | chuck) layer mask:
@@ -2277,6 +2277,10 @@ Clone [and] (raster | rasterize) (layer | gradient) [<user.text>]:
     user.ps_rasterize_layer()
 
 ## ++++++++++++++++++++ set font / character state . 
+
+[set] (font | type) style {user.ryan.photoshop.font_styles.list}:
+    user.ps_command_nb("(set-text-font! \"Avenir Next Condensed\" \"{user.ryan.photoshop.font_styles.list}\")")
+
 
 [set] font size <user.number_string>:
     user.ps_command_nb("(set-font-size! {number_string})")

@@ -73,6 +73,8 @@ history brush: history-brush
 art history brush: art-history-brush
 
 eraser
+user: eraser
+
 background eraser: background-eraser
 magic eraser: magic-eraser
 
