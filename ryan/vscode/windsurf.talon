@@ -3,6 +3,12 @@ app.name: Windsurf - Next
 tag: user.cursorless
 -
 
+(closure | clojure) prompt: 
+    insert("@resources:clojure-mcp:")
+
+init (closure | clojure) prompt:
+    insert("@clojure-mcp/PROJECT_SUMMARY.md @clojure-mcp/Clojure Project Info   @clojure-mcp/LLM_CODE_STYLE.md @clojure-mcp/CLAUDE.md ")
+
 # surf test: print("testing from windsurf next")
 
 bar (cascade | chat | surf | serf) (memories | rules):
