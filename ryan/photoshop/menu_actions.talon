@@ -1716,7 +1716,7 @@ Remote Connection settings:
 Convert to Profile:
     user.ps_convert_to_profile()
 
-[go] [edit] [keyboard] shortcuts:
+[(go | edit | open)]  [keyboard] shortcuts:
     user.ps_keyboard_shortcuts()
 
 edit Menus:
@@ -2163,6 +2163,9 @@ bar (floating | context | task) | [(toggle | show | hide)] [contextual] task bar
 
 ## ++++++++++++++++++++++++ brush size .
 
+brush [size]  <user.number_string> :
+    user.ps_command_nb("(set-brush-size! {number_string})")
+
 brush [size] down [<user.number_string>]: 
     key("[:{number_string or 1}")
 
@@ -2184,10 +2187,10 @@ brush [size] up [<user.number_string>]:
 
 # ex hitting 5 = level 50
 [brush] flow level <user.number_string>: 
-     key("{number_string}")
+     key("shift-{number_string}")
 
 [brush] flow max:
-    key(0) 
+    key(shift-0) 
  
 ## +++++++++++++++++++++++++++ opacity .
  
@@ -2195,10 +2198,10 @@ brush [size] up [<user.number_string>]:
     user.ps_set_brush_opacity(number_string)
  
 [brush] (opacity | transparency | trans | opaque) level <user.number_string>: 
-     key("shift-{number_string}") 
+     key("{number_string}") 
  
 [brush] (opacity | transparency | trans | opaque)  max: 
-     key(shift-0)    
+     key(0)    
  
 
 ## +++++++++++++++++++++++++++++ tools .
@@ -2281,8 +2284,8 @@ Clone [and] (raster | rasterize) (layer | gradient) [<user.text>]:
 [set] (font | type) style {user.ryan.photoshop.font_styles.list}:
     user.ps_command_nb("(set-text-font! \"Avenir Next Condensed\" \"{user.ryan.photoshop.font_styles.list}\")")
 
-
 [set] font size <user.number_string>:
+    print("setting font size {number_string}")
     user.ps_command_nb("(set-font-size! {number_string})")
 
 [set] [font] tracking <user.number_signed_string>:

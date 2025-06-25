@@ -128,8 +128,8 @@ class Actions:
 
     def ps_set_brush_flow(level: str):
         """set brush flow"""
-        number_keys(level)
+        number_keys(level, "shift-")
 
     def ps_set_brush_opacity(level: str):
         """set brush opacity"""
-        number_keys(level, "shift-")
+        number_keys(level)
