@@ -11,6 +11,12 @@
 		},
 		{
 			"path": "../../dev/ps script/plugins/ps-scittle-repl"
+		},
+		{
+			"path": "../../dev/ps script/scittle-mcp"
+		},
+		{
+			"path": "../../dev/uxp-photoshop/src/pages"
 		}
 	],
 	"settings": {
