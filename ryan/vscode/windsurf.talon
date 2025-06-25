@@ -3,6 +3,9 @@ app.name: Windsurf - Next
 tag: user.cursorless
 -
 
+(windsurf | serf | surf | cascade) settings:
+    key(cmd-,)
+
 (closure | clojure) prompt: 
     insert("@resources:clojure-mcp:")
 
