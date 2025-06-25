@@ -4,6 +4,8 @@ Dissolve
 
 Darken
 
+behind
+
 Multiply
 multi: multiply
 mult: multiply
@@ -17,6 +19,7 @@ line burn: linear burn
 
 Darker Color
 darker: darker color
+dark color: darker color
 
 Lighten
 

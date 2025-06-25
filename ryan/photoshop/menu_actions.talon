@@ -2172,6 +2172,11 @@ brush [size] down [<user.number_string>]:
 brush [size] up [<user.number_string>]: 
     key("]:{number_string or 1}")
  
+## +++++++++++++++ brush blending mode .
+
+[set] brush (blend | blending) [mode] {user.ryan.photoshop.blending_mode.list}:
+    user.ps_command_nb("(set-brush-blend-mode-talon! \"{user.ryan.photoshop.blending_mode.list}\")")
+
 ## ++++++++++++++++++++ Brush hardness .
  
 [brush] (hardness | hard) up [<user.number_string>]: 
