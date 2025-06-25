@@ -49,7 +49,7 @@ toggle (nightshift | night (shift  |  ship) | night light | nat if | system (tem
 
 ## +++++++++++++++ hardware brightness .
 
-# user.system_command_nb("brightness 0.0{number_string}")Brain is five
+# user.system_command_nb("brightness 0.0{number_string}")brain is | break nose five
 
 # [(system | macbook)] (brightness | brightens | brighten) up | brighten [up] (system | macbook):
 #     key(f15)
@@ -57,40 +57,40 @@ toggle (nightshift | night (shift  |  ship) | night light | nat if | system (tem
 # [(system | macbook)] (brightness | brighten | brightens | Brighton) down | dim [down] (system | macbook):
 #     key(f14)
 
-[{user.ryan.display.display_name.list}] (hardware | hard) (brightness | brighten | brightens | Brighton | brain is) <user.number_string> :
+[{user.ryan.display.display_name.list}] (hardware | hard) (brightness | brighten | brightens | Brighton | brain is | break nose) <user.number_string> :
     user.betterdisplay_set("hardwareBrightness={number_string}%", "{user.ryan.display.display_name.list or 'default'}")
 
-[{user.ryan.display.display_name.list}] (hardware | hard) (brightness | brighten | brightens | Brighton | brain is) (full | max):
+[{user.ryan.display.display_name.list}] (hardware | hard) (brightness | brighten | brightens | Brighton | brain is | break nose) (full | max):
     user.betterdisplay_set("hardwareBrightness=100%", "{user.ryan.display.display_name.list or 'default'}")
 
 ## ++++++++++++++++ software brightnss .
 
-[{user.ryan.display.display_name.list}] [(soft | software)] (brightness | brighten | brightens | Brighton | brain is) up [<user.number_string>]:
+[{user.ryan.display.display_name.list}] [(soft | software)] (brightness | brighten | brightens | Brighton | brain is | break nose) up [<user.number_string>]:
     user.betterdisplay_set("softwareBrightness={number_string or '5'}% --offset", "{user.ryan.display.display_name.list or 'default'}")
 
-[{user.ryan.display.display_name.list}] [(soft | software)] (brightness | brighten | brightens | Brighton | brain is) down [<user.number_string>]:
+[{user.ryan.display.display_name.list}] [(soft | software)] (brightness | brighten | brightens | Brighton | brain is | break nose) down [<user.number_string>]:
     user.betterdisplay_set("softwareBrightness=-{number_string or '5'}% --offset", "{user.ryan.display.display_name.list or 'default'}")
 
-[{user.ryan.display.display_name.list}] [(soft | software)] (brightness | brighten | brightens | Brighton | brain is) <user.number_string>:
+[{user.ryan.display.display_name.list}] [(soft | software)] (brightness | brighten | brightens | Brighton | brain is | break nose) <user.number_string>:
     user.betterdisplay_set("softwareBrightness={number_string}%", "{user.ryan.display.display_name.list or 'default'}")
 
-[{user.ryan.display.display_name.list}] [(soft | software)] (brightness | brighten | brightens | Brighton | brain is) (full | max):
+[{user.ryan.display.display_name.list}] [(soft | software)] (brightness | brighten | brightens | Brighton | brain is | break nose) (full | max):
     user.betterdisplay_set("softwareBrightness=100%", "{user.ryan.display.display_name.list or 'default'}")
  
 
 ## +++++++++++++++ brightness defaults .
 
-[macbook] [(display | screen)] (brightness | brighten | brightens | Brighton | brain is) default [library]:
+[macbook] [(display | screen)] (brightness | brighten | brightens | Brighton | brain is | break nose) default [library]:
     user.betterdisplay_set("hardwareBrightness=100%", "default")
     sleep(700ms)
     user.betterdisplay_set("softwareBrightness=51%", "default")
 
-[(lib | library | hp)] [(display | screen)] (brightness | brighten | brightens | Brighton | brain is) default: 
+[(lib | library | hp)] [(display | screen)] (brightness | brighten | brightens | Brighton | brain is | break nose) default: 
     user.betterdisplay_set("hardwareBrightness=100%", "HP ALL-in-One")
     sleep(700ms)
     user.betterdisplay_set("softwareBrightness=66%", "HP ALL-in-One")
 
-library (all | both) [(screen | screens | display | displays)] (brightness | brighten | brightens | Brighton | brain is) (default | defaults): 
+library (all | both) [(screen | screens | display | displays)] (brightness | brighten | brightens | Brighton | brain is | break nose) (default | defaults): 
     user.betterdisplay_set("hardwareBrightness=100%", "default")
     sleep(800ms)
     user.betterdisplay_set("softwareBrightness=51%", "default")
@@ -99,7 +99,7 @@ library (all | both) [(screen | screens | display | displays)] (brightness | bri
     sleep(800ms)
     user.betterdisplay_set("softwareBrightness=66%", "HP ALL-in-One")
 
-[(ace | acer)] [(display | screen)] [(brightness | brighten | brightens | Brighton | brain is)] default: 
+[(ace | acer)] [(display | screen)] [(brightness | brighten | brightens | Brighton | brain is | break nose)] default: 
     user.betterdisplay_set("softwareBrightness=50%", "Acer XF270H B")
 
 ## +++++++++++++++++++++++ adjustments .
