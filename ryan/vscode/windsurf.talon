@@ -6,7 +6,7 @@ tag: user.cursorless
 (windsurf | serf | surf | cascade) settings:
     key(cmd-,)
 
-(closure | clojure) prompt: 
+(closure | clojure) (prompt | resource): 
     insert("@resources:clojure-mcp:")
 
 init (closure | clojure) prompt:
