@@ -704,33 +704,33 @@ Auto Lens Correction:
     user.ps_file_automate_lens_correction()
 
 
-Liquify:
+[filter] Liquify:
     user.ps_filter_liquify()
 
-Vanishing Point:
+[filter] Vanishing Point:
     user.ps_filter_vanishing_point()
 
-Average:
+[filter] Average:
     user.ps_filter_blur_average()
 
-Blur (one | once | simple) | simple blur:
+[filter] Blur (one | once | simple) | simple blur:
     user.ps_filter_blur_blur()
 
-Blur More:
+[filter] Blur More:
     user.ps_filter_blur_blur_more()
 
-Box Blur:
+[filter] Box Blur:
     user.ps_filter_blur_box_blur()
 
 # Live [(Gaussian | gauss | power)] Blur | [(Gaussian | gauss | power)] Blur live:
 #     print("live gaussian blur")
 #     user.ps_filter_blur_live_gaussian_blur()
 
-[(gaussian | gauss | power)] Blur:
+[filter] [(gaussian | gauss | power)] Blur:
     print("gaussian blur")
     user.ps_filter_blur_gaussian_blur()
 
-[(gaussian | gauss | power)] Blur <user.number_string> [(pix | pixels)]:
+[filter] [(gaussian | gauss | power)] Blur <user.number_string> [(pix | pixels)]:
     print("gaussian blur")
     user.ps_filter_blur_gaussian_blur()
     sleep(200ms)
@@ -738,184 +738,184 @@ Box Blur:
     key(enter)
 
 
-Lens Blur:
+[filter] Lens Blur:
     user.ps_filter_blur_lens_blur()
 
-Motion Blur:
+[filter] Motion Blur:
     user.ps_filter_blur_motion_blur()
 
-Radial Blur:
+[filter] Radial Blur:
     user.ps_filter_blur_radial_blur()
 
-Shape Blur:
+[filter] Shape Blur:
     user.ps_filter_blur_shape_blur()
 
-Smart Blur:
+[filter] Smart Blur:
     user.ps_filter_blur_smart_blur()
 
-Surface Blur:
+[filter] Surface Blur:
     user.ps_filter_blur_surface_blur()
 
-Field Blur..:
+[filter] Field Blur:
     user.ps_filter_blur_gallery_field_blur()
 
-Iris Blur:
+[filter] Iris Blur:
     user.ps_filter_blur_gallery_iris_blur()
 
-Tilt-Shift:
+[filter] Tilt-Shift:
     user.ps_filter_blur_gallery_tilt_shift()
 
-Path Blur:
+[filter] Path Blur:
     user.ps_filter_blur_gallery_path_blur()
 
-Spin Blur:
+[filter] Spin Blur:
     user.ps_filter_blur_gallery_spin_blur()
 
-Displace:
+[filter] Displace:
     user.ps_filter_distort_displace()
 
-Pinch:
+[filter] Pinch:
     user.ps_filter_distort_pinch()
 
-Polar Coordinates:
+[filter] Polar Coordinates:
     user.ps_filter_distort_polar_coordinates()
 
-Ripple:
+[filter] Ripple:
     user.ps_filter_distort_ripple()
 
-Shear:
+[filter] Shear:
     user.ps_filter_distort_shear()
 
-Spherize:
+[filter] Spherize:
     user.ps_filter_distort_spherize()
 
-Twirl:
+[filter] Twirl:
     user.ps_filter_distort_twirl()
 
-Wave:
+[filter] Wave:
     user.ps_filter_distort_wave()
 
-ZigZag:
+[filter] ZigZag:
     user.ps_filter_distort_zigzag()
 
-Add Noise:
+[filter] Add Noise:
     user.ps_filter_noise_add_noise()
 
-Despeckle:
+[filter] Despeckle:
     user.ps_filter_noise_despeckle()
 
-Dust & Scratches:
+[filter] Dust & Scratches:
     user.ps_filter_noise_dust_and_scratches()
 
-Median:
+[filter] Median:
     user.ps_filter_noise_median()
 
-Reduce Noise:
+[filter] Reduce Noise:
     user.ps_filter_noise_reduce_noise()
 
-Color Halftone:
+[filter] Color Halftone:
     user.ps_filter_pixelate_color_halftone()
 
-Crystallize:
+[filter] Crystallize:
     user.ps_filter_pixelate_crystallize()
 
-Facet:
+[filter] Facet:
     user.ps_filter_pixelate_facet()
 
-Fragment:
+[filter] Fragment:
     user.ps_filter_pixelate_fragment()
 
-Mezzotint:
+[filter] Mezzotint:
     user.ps_filter_pixelate_mezzotint()
 
-Mosaic:
+[filter] Mosaic:
     user.ps_filter_pixelate_mosaic()
 
-Pointillize | make [into] points:
+[filter] Pointillize | make [into] points:
     user.ps_filter_pixelate_pointillize()
 
-Flame:
+[filter] Flame:
     user.ps_filter_render_flame()
 
-Picture Frame:
+[filter] Picture Frame:
     user.ps_filter_render_picture_frame()
 
-Tree:
+[filter] Tree:
     user.ps_filter_render_tree()
 
-Clouds:
+[filter] Clouds:
     user.ps_filter_render_clouds()
 
-Difference Clouds:
+[filter] Difference Clouds:
     user.ps_filter_render_difference_clouds()
 
-Fibers:
+[filter] Fibers:
     user.ps_filter_render_fibers()
 
-Lens Flare:
+[filter] Lens Flare:
     user.ps_filter_render_lens_flare()
 
-Lighting Effects:
+[filter] Lighting Effects:
     user.ps_filter_render_lighting_effects()
 
-Sharpen:
+[filter] Sharpen:
     user.ps_filter_sharpen_sharpen()
 
-Sharpen Edges:
+[filter] Sharpen Edges:
     user.ps_filter_sharpen_sharpen_edges()
 
-Sharpen More:
+[filter] Sharpen More:
     user.ps_filter_sharpen_sharpen_more()
 
-Smart Sharpen:
+[filter] Smart Sharpen:
     user.ps_filter_sharpen_smart_sharpen()
 
-Unsharp Mask:
+[filter] Unsharp Mask:
     user.ps_filter_sharpen_unsharp_mask()
 
-Diffuse:
+[filter] Diffuse:
     user.ps_filter_stylize_diffuse()
 
-Emboss:
+[filter] Emboss:
     user.ps_filter_stylize_emboss()
 
-Extrude:
+[filter] Extrude:
     user.ps_filter_stylize_extrude()
 
-Find Edges:
+[filter] Find Edges:
     user.ps_filter_stylize_find_edges()
 
-Oil Paint:
+[filter] Oil Paint:
     user.ps_filter_stylize_oil_paint()
 
-Solarize:
+[filter] Solarize:
     user.ps_filter_stylize_solarize()
 
-Tiles:
+[filter] Tiles:
     user.ps_filter_stylize_tiles()
 
-Trace Contour:
+[filter] Trace Contour:
     user.ps_filter_stylize_trace_contour()
 
-Wind:
+[filter] Wind:
     user.ps_filter_stylize_wind()
 
-Custom filter:
+[filter] Custom filter:
     user.ps_filter_other_custom()
 
-High Pass:
+[filter] High Pass:
     user.ps_filter_other_high_pass()
 
-hsl | hue saturation lightness:
+[filter] (hsl | hue saturation lightness):
     user.ps_filter_other_hsb_hsl()
 
-Maximum:
+[filter] Maximum:
     user.ps_filter_other_maximum()
 
-Minimum:
+[filter] Minimum:
     user.ps_filter_other_minimum()
 
-Offset:
+[filter] Offset:
     user.ps_filter_other_offset()
 
 ## ++++++++++++++++++++++++ open file.
@@ -2166,6 +2166,9 @@ bar (floating | context | task) | [(toggle | show | hide)] [contextual] task bar
 brush [size]  <user.number_string> :
     user.ps_command_nb("(set-brush-size! {number_string})")
 
+brush smoothing  <user.number_string> :
+    user.ps_command_nb("(set-brush-smoothing! {number_string})")
+
 brush [size] down [<user.number_string>]: 
     key("[:{number_string or 1}")
 
@@ -2286,20 +2289,22 @@ Clone [and] (raster | rasterize) (layer | gradient) [<user.text>]:
 
 ## ++++++++++++++++++++ set font / character state . 
 
-[set] (font | type) style {user.ryan.photoshop.font_styles.list}:
-    user.ps_command_nb("(set-text-font! \"Avenir Next Condensed\" \"{user.ryan.photoshop.font_styles.list}\")")
-
-[set] font size <user.number_string>:
+[set] (font | type) [size] <user.number_string>:
     print("setting font size {number_string}")
     user.ps_command_nb("(set-font-size! {number_string})")
 
-[set] [font] tracking <user.number_signed_string>:
+[set] (font | type) style {user.ryan.photoshop.font_styles.list}:
+    user.ps_command_nb("(set-text-font! \"Avenir Next Condensed\" \"{user.ryan.photoshop.font_styles.list}\")")
+ 
+## ++++++++++++++++++++++++++ tracking .
+
+[set] [(font | type)] tracking <user.number_signed_string>:
     user.ps_command_nb("(set-font-tracking! {number_signed_string})")
 
-((increase | raise | boost) [font] tracking  | [font] tracking (up | raise | boost | add)) <user.number_string>:
+((increase | raise | boost) [(font | type)] tracking  | [(font | type)] tracking (up | raise | boost | add)) <user.number_string>:
     user.ps_command_nb("(update-font-tracking! {number_string})")
 
-((decrease  | lower | reduce) [font] tracking  | [font] tracking (down | remove | subtract)) <user.number_string>:
+((decrease  | lower | reduce) [(font | type)] tracking  | [(font | type)] tracking (down | remove | subtract)) <user.number_string>:
     user.ps_command_nb("(update-font-tracking! -{number_string})")
 
 
