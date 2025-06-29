@@ -65,16 +65,16 @@ toggle (nightshift | night (shift  |  ship) | night light | nat if | system (tem
 
 ## ++++++++++++++++ software brightnss .
 
-[{user.ryan.display.display_name.list}] [(soft | software)] (brightness | brighten | brightens | Brighton | brain is | break nose) up [<user.number_string>]:
+({user.ryan.display.display_name.list} [soft] | [{user.ryan.display.display_name.list}] [soft] (brightness | brighten | brightens | Brighton | brain is | break nose)) up [<user.number_string>]:
     user.betterdisplay_set("softwareBrightness={number_string or '5'}% --offset", "{user.ryan.display.display_name.list or 'default'}")
 
-[{user.ryan.display.display_name.list}] [(soft | software)] (brightness | brighten | brightens | Brighton | brain is | break nose) down [<user.number_string>]:
+({user.ryan.display.display_name.list} [soft] | [{user.ryan.display.display_name.list}] [soft] (brightness | brighten | brightens | Brighton | brain is | break nose)) down [<user.number_string>]:
     user.betterdisplay_set("softwareBrightness=-{number_string or '5'}% --offset", "{user.ryan.display.display_name.list or 'default'}")
 
-[{user.ryan.display.display_name.list}] [(soft | software)] (brightness | brighten | brightens | Brighton | brain is | break nose) <user.number_string>:
+({user.ryan.display.display_name.list} | [{user.ryan.display.display_name.list}] [(soft | software)] (brightness | brighten | brightens | Brighton | brain is | break nose)) <user.number_string>:
     user.betterdisplay_set("softwareBrightness={number_string}%", "{user.ryan.display.display_name.list or 'default'}")
 
-[{user.ryan.display.display_name.list}] [(soft | software)] (brightness | brighten | brightens | Brighton | brain is | break nose) (full | max):
+({user.ryan.display.display_name.list} | [{user.ryan.display.display_name.list}] [(soft | software)] (brightness | brighten | brightens | Brighton | brain is | break nose)) (full | max):
     user.betterdisplay_set("softwareBrightness=100%", "{user.ryan.display.display_name.list or 'default'}")
  
 
