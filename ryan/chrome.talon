@@ -161,3 +161,9 @@ hunt last:
 exit hunt | hunt (exit | close):
     key(esc)
 
+
+tab split right: 
+    user.snap_window("LEFT")
+    # user.rango_move_tab_to_new_window()
+    # sleep(500ms)
+    # user.snap_window("RIGHT")
