@@ -510,6 +510,14 @@
 				"autoSelectForJackIn": false,
 				"projectRootPath": [".", "ryan", "clojure"]
 			},
+			{
+				"name": "ps nrepl",
+				"cljsType": "ClojureScript built-in for browser",
+				"projectType": "cljs-only",
+				// "autoSelectForConnect": true,
+				"nReplPortFile": [".ps-repl", ".nrepl-port"],
+				// "projectRootPath": ["."]
+			},
   ],
 		"calva.autoEvaluateCode": {
 			"onConnect": {

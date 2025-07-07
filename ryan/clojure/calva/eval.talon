@@ -15,17 +15,17 @@ please calva (evaluate | eval):
 
 ## +++++++++++++++++++++++++ load file .
 
-[(rep | repl | ripple | rebel)] (load | reload) file [in (rep | repl | ripple | rebel)] | (reload it | reloaded): 
+[(rep | repl | ripple | rebel)] (load | reload) (file | pile) [in (rep | repl | ripple | rebel)] | (reload it | reloaded): 
     user.run_rpc_command("calva.loadFile")
     sleep(300ms)
     user.run_rpc_command("notifications.clearAll")
 
-[(rep | repl | ripple | rebel)] (load | reload) file [in (rep | repl | ripple | rebel)] (alert | alerts | raw) : 
+[(rep | repl | ripple | rebel)] (load | reload) (file | pile) [in (rep | repl | ripple | rebel)] (alert | alerts | raw) : 
     user.run_rpc_command("calva.loadFile")
 
 ## +++++++++++++++++++++ eval whole file .
 
-[(rep | repl | ripple | rebel)] (evaluate | eval | compute | comp | run | runt) [(whole | entire)] file:
+[(rep | repl | ripple | rebel)] (evaluate | eval | compute | comp | run | runt) [(whole | entire)] (file | pile):
     user.run_rpc_command("editor.action.selectAll") 
     user.run_rpc_command("calva.evaluateSelection")
     user.run_rpc_command("cursorUndo")
