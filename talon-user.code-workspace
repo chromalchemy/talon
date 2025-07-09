@@ -1,21 +1,27 @@
 {
 	"folders": [
 		{
+			"name": "user",
 			"path": "."
 		},
 		{
+			"name": "repos",
 			"path": "../repos"
 		},
 		{
+			"name": "scripts",
 			"path": "../../.config/joyride/scripts"
 		},
 		{
+			"name": "ps-scittle-repl",
 			"path": "../../dev/ps script/plugins/ps-scittle-repl"
 		},
 		{
+			"name": "scittle-mcp",
 			"path": "../../dev/ps script/scittle-mcp"
 		},
 		{
+			"name": "pages",
 			"path": "../../dev/uxp-photoshop/src/pages"
 		}
 	],
