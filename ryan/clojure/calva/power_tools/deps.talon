@@ -8,15 +8,17 @@ tag: user.cursorless
 -
 
 
-^please (deps | depths)$: 
+^please (dependency | dep | dependencies | deps | depths)$: 
     user.command_search("tools-deps")
 
-## Deps Commands
-load dependencies:
+# Will prompt for and load dependencies.
+load (dependency | dep | dependencies | deps | depths):
     user.run_rpc_command("cpt.deps.loadDependencies")
 
-load selected dependencies:
+# Add one or more deps.edn dependencies coordinate that you have selected in the editor. E.g. if you have added it to your deps.edn file and want to load the dependency without restarting your REPL (or you may have some comment in the code with the dependency coordinates): Select the key-value pair(s) for the dependencies and then run this command.
+load (selected | these) (dependency | dep | dependencies | deps | depths):
     user.run_rpc_command("cpt.deps.loadSelectedDependencies")
 
-sync deps:
+# Sync (load any missing) dependencies in deps.edn. Prompts for aliases.
+(sync | sink) (dependency | dep | dependencies | deps | depths):
     user.run_rpc_command("cpt.deps.syncDeps")
