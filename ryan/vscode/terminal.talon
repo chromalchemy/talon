@@ -35,7 +35,7 @@ restore terminals:
 
 ## ++++++++++++++++++++++++++++++ show .
 
-(go | show) ((term | turn) | terminal) | ((term | turn) | terminal) show: 
+(show) ((term | turn) | terminal) | ((term | turn) | terminal) show: 
     user.run_rpc_command("workbench.action.terminal.focus")
 
 ## +++++++++++++++++++++++++++++ state .
