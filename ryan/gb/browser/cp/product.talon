@@ -1,4 +1,5 @@
 app: chrome
+browser.host: store-7hstasnrjg.mybigcommerce.com
 -
 tag(): browser
 

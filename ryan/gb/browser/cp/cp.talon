@@ -15,4 +15,26 @@ hunt (bc | Big commerce) products (paste | pace):
     sleep(200ms)
     key(enter)
     
+set [customer] [group] [to] wholesale:
+    user.rango_click_ref("customer group")
+    sleep(200ms)
+    insert("Wholesale")
+    sleep(1100ms)
+    key(space)
 
+add [wholesale] tax code:
+    user.rango_click_ref("tax code")
+    insert("G")
+
+make wholesale customer:
+    user.rango_click_ref("customer group")
+    sleep(200ms)
+    insert("Wholesale")
+    sleep(1100ms)
+    key(space)
+    sleep(200ms)
+    user.rango_click_ref("tax code")
+    insert("G")
+    sleep(200ms)
+    user.rango_click_ref("save")
+    
