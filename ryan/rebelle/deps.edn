@@ -1,0 +1,2 @@
+{:deps {#_#_org.babashka/http-client {:mvn/version "0.4.23"}
+        #_#_cheshire/cheshire {:mvn/version "6.0.0"}}}
