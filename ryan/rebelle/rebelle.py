@@ -4,9 +4,15 @@ mod = Module()
 
 @mod.action_class
 
-
-
 class Actions:
+    def rebelle_eval(rebelle_fn: str):
+        """execute a fn for ps repl via bb nrepl command"""
+        code_path = "/Users/ryan/dev/rebelle-api"
+        bb_path = "/usr/local/bin/bb"
+        cmd = f'''cd '{code_path}' && {bb_path} eval '{rebelle_fn}' '''
+        print(cmd)
+        actions.user.system_command_nb(cmd)
+
     def reb_open_settings():
         """open settings"""
         actions.key("cmd-,")

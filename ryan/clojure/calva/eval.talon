@@ -84,10 +84,6 @@ please calva (evaluate | eval):
 (rep | repl | ripple | evaluate | eval | compute | comp | run | runt) (selection [from] start | [from]  start (closing | close | closed)):
     user.run_rpc_command("paredit.selectBackwardUpSexp")
     user.run_rpc_command("calva.evaluateSelectionToSelectionEnd")
-    
-
-
-
 
 
 ## ++++++++++++++++ copy last repl result.

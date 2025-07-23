@@ -23,6 +23,9 @@
 		{
 			"name": "pages",
 			"path": "../../dev/uxp-photoshop/src/pages"
+		},
+		{
+			"path": "../../dev/rebelle-api"
 		}
 	],
 	"settings": {
