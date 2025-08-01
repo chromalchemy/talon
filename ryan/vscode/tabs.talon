@@ -115,6 +115,18 @@ unpin (editor | tab):
 (isolate | separate | join | flatten) (pinned | pin) (editors | tabs | editor tabs):
     user.run_rpc_command("workbench.action.toggleSeparatePinnedEditorTabs")
 
+
+## ++++++++++++++++++++++++ lock group .
+
+toggle group lock: 
+    user.run_rpc_command("workbench.action.toggleEditorGroupLock")
+
+unlock group:
+    user.run_rpc_command("workbench.action.unlockEditorGroup")
+
+lock group:
+    user.run_rpc_command("workbench.action.lockEditorGroup")
+
 ## +++++++++++++++++++ merge tab groups .
 
 (join | merge) (editor | tab | tabs | editors) [(in group | inside)]: 
