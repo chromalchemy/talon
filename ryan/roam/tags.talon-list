@@ -23,6 +23,8 @@ clojure inbox: clj/inbox
 closure inbox: clj/inbox
 closure in box: clj/inbox
 
+closure ncp: clojure-mcp
+
 ergonomics
 schema
 bug
@@ -41,6 +43,8 @@ kevin
 urgent
 someday
 roam
+
+voice plow: voice/flow
 
 calva
 
