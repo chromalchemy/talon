@@ -1,4 +1,4 @@
-app.name: Rebelle 7
+app.name: Rebelle 8
 mode: command
 -
 
