@@ -1,22 +1,12 @@
 app: chrome
 -
-tag(): browser
-# tag(): user.tabs
+# see also community/chrome.talon 
 
 settings():
     user.mouse_continuous_scroll_amount = 10
 
 settings():
     user.mouse_continuous_scroll_frequency = 16
-
-#### inspector
-
-(toggle | hide | show | open | close) (devtools | dev tools | tools | inspector): 
-    key(cmd-alt-i)
-
-(toggle | hide | show | open | close) console: key(cmd-alt-j)
-
-tools [dock] (sidebar | bar | panel | bottom | right | last | next): key(cmd-shift-d)
 
 ## ++++++++++++++++++++++++++ bookmarks .
 
@@ -167,3 +157,20 @@ tab split right:
     # user.rango_move_tab_to_new_window()
     # sleep(500ms)
     # user.snap_window("RIGHT")
+
+## +++ load and search browser history .
+
+(go  | show | search  | hunt) history [<user.text>]: 
+    browser.show_history()
+    sleep(300ms)
+    insert(text)
+
+(go  | show | search  | hunt) history (grouped  | groups) [<user.text>]: 
+    browser.go("chrome://history/grouped")
+    sleep(300ms)
+    insert(text)
+
+## ++++++++++++++++++ open closed tabs .
+(open | reopen) [last] (closed | close) tab | tab reopen:
+    key(cmd-shift-t)
+

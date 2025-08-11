@@ -1,0 +1,103 @@
+# panel
+
+Elements 
+Sources 
+Console 
+Network 
+Performance 
+Memory 
+Application 
+Privacy and security 
+Lighthouse 
+Recorder 
+Layers
+CSS overview
+Media
+
+#drawer 
+
+AI assistance
+Animations
+Autofill
+Changes
+Coverage
+Developer Resources
+Issues
+Memory inspector
+Network conditions
+Network request blocking
+Performance monitor
+Quick source
+Rendering
+Search
+Sensors
+WebAudio
+WebAuthn
+What's new
+
+#console 
+
+timestamps
+
+#elements
+
+Accessibility
+Computed Styles
+DOM Breakpoints
+Event Listeners
+Layout
+Properties
+Styles
+Rulers on hover
+
+# grid
+
+grid named areas
+grid track sizes
+line names
+
+#mobile
+
+device frame
+media queries
+rulers in the device mode toolbar
+
+#network
+
+Search
+
+#rendering
+
+frames per second (FPS) meter
+layer borders
+layout shift regions
+paint flashing rectangles
+scroll performance bottlenecks
+
+#settings
+
+AI innovations
+Devices
+Experiments
+Ignore List
+Locations
+Preferences
+Shortcuts
+Throttling
+Workspace settings 
+
+#sources
+
+CSP Violation Breakpoints
+Content scripts
+DOM Breakpoints
+Event Listener Break Points
+Global Listeners
+Overrides
+Page
+Snippet
+Workspace
+XHR/fetch Breakpoints 
+all whitespace characters
+trailing whitespace characters
+
