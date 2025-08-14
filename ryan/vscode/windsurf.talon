@@ -52,6 +52,11 @@ auto cascade:
     user.cursorless_ide_command("windsurf.prioritized.chat.open", cursorless_target)
 
 
+## ++++++++++++++++++++++ auto-suggest .
+
+suggest: 
+    user.run_rpc_command("editor.action.inlineSuggest.trigger")
+
 ## +++++++++++++++++++++++ edit inline .
 
 (windsurf | surf | serf) [edit] [that] [(inline | in place)]:
