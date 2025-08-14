@@ -83,7 +83,7 @@ Export Layer As:
 rename layer [<user.text>]:
     user.ps_rename_layer(text or "")
 
-(Rename artboard | artboard rename):
+Rename (artboard | ard port | art port | art  board) | artboard rename:
     user.ps_rename_artboard()
 
 [layer] (Blending | blend) (Options | opts):
