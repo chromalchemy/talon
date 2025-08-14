@@ -9,6 +9,14 @@ at yahoo: insert("@yahoo.com")
 dot com: insert(".com")
 edit [cell]: key(alt-enter)
 
+## ++++++++++++++++++++++++ formatting .
+
+copy [cell] (formatting  | style):
+    user.menu_select('Format|Copy Style')
+    
+paste [cell] (formatting  | style):
+    user.menu_select('Format|Paste Style')
+
 ## +++++++++++++++++ sidebars / panels .
 
 (show | hide | toggle | bar) (inspector | inspect):
@@ -36,11 +44,23 @@ zoom out:
 
 ## +++++++++++++++++ edit rows/columsn .
 
-(chuck | delete) (row |rows) [point]:
+(chuck | delete) row [point]:
     user.run_ctx_menu_cmd("delete row")
-    
-(chuck | delete) (column |columns) [point]:
+
+(chuck | delete) rows [point]:
+    user.run_ctx_menu_cmd("delete rows")
+
+(chuck | delete) selected rows [point]:
+    user.run_ctx_menu_cmd("delete selected rows")
+
+(chuck | delete) column [point]:
     user.run_ctx_menu_cmd("delete column")
+
+(chuck | delete) columns [point]:
+    user.run_ctx_menu_cmd("delete columns")
+
+(chuck | delete) selected columns [point]:
+    user.run_ctx_menu_cmd("delete selected columns")
 
 add column before:
     user.menu_select('Table|Add Column Before')
