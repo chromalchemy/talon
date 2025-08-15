@@ -7,7 +7,7 @@ class Actions:
     def cc_edit_link():
         """Select the link option from the context menu."""
         actions.user.rango_click_ref("link")
-        actions.sleep("100ms")
+        actions.sleep("200ms")
         actions.key("down enter")
         actions.sleep("300ms")  # Wait for link dialog to appear
 
