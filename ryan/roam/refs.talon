@@ -4,6 +4,8 @@ mode: command
 #copy ref
 copy [block] (ref | reference): key(cmd-shift-c)
 
+copy [block] (embed | in bed): key(cmd-shift-e)
+
 ## +++++++++++++ write out a reference .
 
 dub paren | [new] ([block] (reference | ref)  [link]  | backlink) [that]: 
