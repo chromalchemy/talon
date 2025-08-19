@@ -31,6 +31,8 @@ magic lasso: magic-lasso
 
 quick select: quick-select
 magic wand: magic-wand
+object selection: object-select
+object select: object-select
 
 crop
 perspective crop: perspective-crop
