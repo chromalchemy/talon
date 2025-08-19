@@ -18,7 +18,7 @@ yes: key(return)
 save file: key(cmd-s)
 quit app: key(cmd-q)
 
-okay | ok: key(enter)
+okay | ok | hoke: key(enter)
 
 # talon sleep
 key(cmd-ctrl-alt-shift-x): speech.disable()

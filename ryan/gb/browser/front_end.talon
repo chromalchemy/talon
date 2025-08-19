@@ -15,7 +15,3 @@ tag(): browser
 
 (edit | headed) product:
     user.load_bookmark("edit prod+")
-
-
-
-    
