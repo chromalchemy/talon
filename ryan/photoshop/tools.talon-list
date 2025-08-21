@@ -106,7 +106,9 @@ vertical type mask: vertical-type-mask
 type mask: type-mask
 
 path selection: path-selection
+path select: path-selection
 direct selection: direct-selection
+direct select: direct-selection
 
 rectangle
 shape: rectangle

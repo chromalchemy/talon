@@ -1,15 +1,19 @@
 # brush tools
 eraser: e
+erase her: e
 background eraser: e
+background erase her: e
 magic eraser: e
+magic erase her: e
 
 brush: b
 
 marquis: m
-select: m
 murky: m
 ants: m
 
+
+select: w
 object select: w
 object selection: w 
 quick selection: w
@@ -42,10 +46,10 @@ slice select: c
 
 # selection
 lasso: l
-
+polygon lasso: l
+poly lasso: l
 
 frame: k
-
 
 dropper: i
 color sampler: i

@@ -41,7 +41,7 @@ New Artboard:
 New Artboard from Group:
     user.ps_new_artboard_from_group()
 
-New Artboard from Layers:
+[New] Artboard from Layers:
     user.ps_new_artboard_from_layers()
 
 New Frame from Layers:
@@ -158,40 +158,40 @@ Layer Content Options:
 
 ## ++++++++++++++++++++++++ layer mask .
 
-(new | add) layer mask [Reveal] [All]:
+(new | add) (layer | there) mask [Reveal] [All]:
     user.ps_layer_mask_reveal_all()
 
-(new | add) layer mask Hide [All]:
+(new | add) (layer | there) mask Hide [All]:
     user.ps_layer_mask_hide_all()
 
-(new | add) layer mask [Reveal] Selection:
+[(new | add)] [(layer | there)] mask [(Reveal | from)] Selection | [(layer | there)] mask unselected:
     user.ps_layer_mask_reveal_selection()
 
-(new | add) layer mask Hide Selection:
+(new | add) (layer | there) mask Hide Selection:
     user.ps_layer_mask_hide_selection()
 
-(new | add) layer mask [From] Transparency:
+(new | add) (layer | there) mask [From] Transparency:
     user.ps_layer_mask_from_transparency()
 
-(Delete | chuck) layer mask:
+(Delete | chuck) (layer | there) mask:
     user.ps_layer_mask_delete()
 
-Apply layer mask:
+Apply (layer | there) mask:
     user.ps_layer_mask_apply()
 
-(enable | disable | toggle | hide | show) layer mask:
+(enable | disable | toggle | hide | show) (layer | there) mask:
     user.ps_layer_mask_enable()
 
-(link | unlink) layer mask:
+(link | unlink) (layer | there) mask:
     user.ps_layer_mask_link()
 
-go  layer mask: 
+go (layer | there) mask: 
     key(cmd-\)
 
-go layer:
+go (layer | there):
     key(cmd-shift-2)
 
-invert (layer | mask): 
+invert (layer | [layer] mask): 
     user.ps_adjustments_invert()
     
 ## +++++++++++++++++++++++ vector mask .
@@ -202,7 +202,7 @@ New vector mask reveal [all]:
 New vector mask Hide [All]:
     user.ps_vector_mask_hide_all()
 
-New vector mask [from] Current Path:
+[New] vector mask (from | and) [Current] Path:
     user.ps_vector_mask_current_path()
 
 (Delete | chuck) vector mask:
@@ -227,6 +227,11 @@ mask all objects:
 (Convert to | make) [Smart] Object:
     user.ps_smart_objects_convert_to_smart_object()
 
+paste [as | to] [new] object: 
+    edit.paste()
+    sleep(1000ms)
+    user.ps_smart_objects_convert_to_smart_object()
+
 copy to [Smart] Object:
     user.ps_smart_objects_new_smart_object_via_copy()
 
@@ -239,7 +244,7 @@ Update [Modified] (object | [object] (Contents | content)):
 Update [All] [Modified] objects:
     user.ps_smart_objects_update_all_modified_content()
 
-Edit [object] (Contents | content):
+Edit ([object] (Contents | content)  | object):
     user.ps_smart_objects_edit_contents()
 
 Reset [object] Transform:
@@ -332,10 +337,10 @@ new layer slice:
 
 ## ++++++++++++++++++++ layer grouping .
 
-Group Layers:
+Group (Layers | players):
     user.ps_group_layers()
 
-Ungroup Layers:
+Ungroup (Layers | players):
     user.ps_ungroup_layers()
 
 (Ungroup | release) (artboards | artboard):
@@ -1606,9 +1611,9 @@ Perspective Warp:
 [transform] Again:
     user.ps_transform_again()
 
-[transform] (Scale | skill) [that]:
+[transform] (Scale | skill | bill) [that]:
     user.ps_scale()
-
+  
 [transform] Rotate:
     user.ps_rotate()
 
@@ -2187,6 +2192,12 @@ brush [size] up [<user.number_string>]:
  
 [brush] (hardness | hard) down [<user.number_string>]: 
      key("shift-[:{number_string or 1}")
+
+[brush] (hardness | hard) max: 
+     key("shift-]:10")
+     
+[brush] (hardness | hard) min: 
+     key("shift-[:10")
  
   ## +++|+++++++++++++++++++++++++++ flow .
  
@@ -2221,11 +2232,12 @@ move layer [tool]:
     user.ps_select_move_layer_tool()
 
 
-{user.ryan.photoshop.tools.list} [(tool | to)]:
+[use] {user.ryan.photoshop.tools.list} [(tool | to)]:
     user.ps_command_nb("(select-tool! :{user.ryan.photoshop.tools.list})")
 
-# {user.ryan.photoshop.tool_key.list} [(tool | to)]:
-#     key(user.ryan.photoshop.tool_key.list)
+# hotkey version, superseded by api version above    
+go {user.ryan.photoshop.tool_key.list} [(tool | to)]:
+    key(user.ryan.photoshop.tool_key.list)
 
 hold {user.ryan.photoshop.tool_key.list} |  {user.ryan.photoshop.tool_key.list} (mode | hold):
     key("{user.ryan.photoshop.tool_key.list}:down")
@@ -2233,7 +2245,7 @@ hold {user.ryan.photoshop.tool_key.list} |  {user.ryan.photoshop.tool_key.list} 
 (release | exit) {user.ryan.photoshop.tool_key.list} |  {user.ryan.photoshop.tool_key.list} (release | exit):
     key("{user.ryan.photoshop.tool_key.list}:up")
 
-(other | next | last | prev) {user.ryan.photoshop.tool_key.list} [(tool | to) | {user.ryan.photoshop.tool_key.list} (next | last | prev)]:
+(other | next | last | prev) {user.ryan.photoshop.tool_key.list} [(tool | to)]  | {user.ryan.photoshop.tool_key.list} (next | last | prev):
     key("shift-{user.ryan.photoshop.tool_key.list}")
 
 
@@ -2368,9 +2380,11 @@ drag [current] layer:
 
 ## ++++++++++ primary /secondary color .
 
-(default | reset) colors: key(d)
+(default | reset) (colors | color) | black and white: 
+    key(d)
 
-(swap | flip) (colors | color | brush): key(x)
+(swap | flip | toggle | reverse) (colors | color | brush  | col | cull) | (flipper | flippy): 
+    key(x)
 
 ## +++++++++ toggle colors for masking .
 
