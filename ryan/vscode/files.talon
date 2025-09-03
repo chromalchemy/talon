@@ -4,6 +4,9 @@ app.name: Windsurf
 app.name: Windsurf - Next
 -
 
+revert file [to (saved | disk)] [version]: 
+    user.run_rpc_command("workbench.action.files.revert")
+
 kill current file:
     user.run_rpc_command("andreas.removeFile")
 
