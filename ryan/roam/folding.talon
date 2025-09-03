@@ -2,7 +2,7 @@ app.name: Roam Research
 mode: command
 -
 
-(fold | close | hide (children | kids)) block: 
+((fold | bold) | close | hide (children | kids)) block: 
     key(cmd-up)
 (unfold | open | show (children | kids)) block: 
     key(cmd-down)
