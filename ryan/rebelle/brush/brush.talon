@@ -3,6 +3,9 @@ app.name: Rebelle 8
 mode: command
 -
 
+## +++++++++++++++++++ set to defaults .
+
+# this is too raw Todo clean up
 set default brush:
     fn = """
     (send-rebelle-command
@@ -16,22 +19,25 @@ set default brush:
     """
     user.rebelle_eval(fn)
 
+    
 reset brush:
     key(cmd-shift-h)
 
-brush paint [mode]:
+## ++++++ brush paint application mode .
+
+(brush | rush) [(mode | modi | word)]  paint [(mode | modi | word)] :
     key(1)
     
-brush paint [and] mix [mode]:
+(brush | rush) [(mode | modi | word)]  [paint] [and] mix [(mode | modi | word)] :
     key(2)
 
-brush paint [and] blend [mode]:
+(brush | rush) [(mode | modni | word)]  (paint [and] blend  | blendy | smeary ) [(mode | modi | word)] :
     key(3)
 
-brush blend [mode]:
+(brush | rush) [(mode | modi | word)]   (blend | blender | (smear | near))  [(mode | modi | word)] :
     key(4)
 
-brush erase [mode]:
+(brush | rush) [(mode | modi | word)]  (erase | eraser | race ) [(mode | modi | word)] | brushy race:
     key(5)
     
 

@@ -20,7 +20,7 @@ release (color picker | eyedropper | dropper) | (color picker | eyedropper | dro
 
 ## +++++++ dirty, blended mixing color .
 
-(mix | dirty) (picker | eyedropper | dropper) tool:
+(mix | dirty) (picker | eyedropper | dropper) tool | [toggle] (dirty | partial) color [(sampler | mode)]:
     key(x)
 
 temp (mix | dirty) (picker | eyedropper | dropper) [tool]: 
