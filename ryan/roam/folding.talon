@@ -4,6 +4,7 @@ mode: command
 
 ((fold | bold) | close | hide (children | kids)) block: 
     key(cmd-up)
+
 (unfold | open | show (children | kids)) block: 
     key(cmd-down)
 
@@ -14,7 +15,7 @@ mode: command
 (expand | unfold) block:
     user.run_roam_command("Expand current block tree")
     
-(collapse | fold) all [blocks]: 
+((collapse | fold) all | full doll | fault hole) [blocks]: 
     user.run_roam_command("collapse all blocks on page")
     
 (expand | unfold) all [blocks]:
