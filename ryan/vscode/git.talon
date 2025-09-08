@@ -16,7 +16,7 @@ bar (repos | repositories):
 [pick] git (commands | command | [command] palette | menu): 
     user.run_rpc_command("gitlens.gitCommands")
 
- ## +++++++++++++++++++++++++++ sources .
+ ## +++++++++++++++++++++++++++ sources panel .
 
 [(show | view | bar)] (sources | git | source control): 
     user.run_rpc_command("workbench.view.scm")
@@ -122,16 +122,12 @@ stage [this] file [changes]: user.run_rpc_command("git.stage")
 ## ++++++++++++++++++++++++++++ ignore .
 
 add to git ignore [point]:
-    mouse_click(1)
-    sleep(200ms)
-    insert("Add to .gitgnore")
-    key(enter)
+    user.run_ctx_menu_cmd("Add to .gitignore")
 
 ## ++++++++++++++++++++++ file changes .
 
 (open | show) changes [with] [previous] [revision]:
     user.run_rpc_command("gitlens.diffWithPrevious")
-
 
 ## ++++++++++++++++++++++ file history .
 
@@ -198,10 +194,11 @@ stage selected changes:
 
 ## +++++++++++++++++++++++++++ staging staging panel
 
+# stage selected changed files that are under cursor
 stage [selected] files:
-    mouse_click(1)
-    sleep(200ms)
-    insert("Stage Changes")
-    sleep(200ms)
-    key(enter)
-
+    user.run_ctx_menu_cmd("Stage Changes")
+    
+# navigate to relevant submodule commit message in sources panel
+go commit message:
+    matches = user.mouse_helper_find_template_relative("2025-09-08_11.36.13.566610.png", 0, -39)
+    user.marker_ui_show(matches)
