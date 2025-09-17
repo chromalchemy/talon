@@ -19,12 +19,16 @@ mod = Module()
 # class UserActions:
 @mod.action_class   
 class Actions:
-    def run_roam_command(text: str):
+    def roam_find_command(text: str):
         """Run Command from command palette"""
         actions.key("cmd-p")
-        actions.sleep("50ms")
+        actions.sleep("100ms")
         actions.user.paste(text)
-        actions.sleep("50ms")
+        actions.sleep("100ms")
+
+    def run_roam_command(text: str):
+        """Run Command from command palette"""
+        actions.user.roam_find_command(text)
         actions.key("enter")
         actions.sleep("100ms")
 
@@ -55,7 +59,7 @@ class Actions:
 
     def roam_new_block_above():
         """ccc"""
-        actions.key("ctrl-shift-l")
+        actions.key("ctrl-shift-u")
         actions.sleep("1000ms")
 
     def roam_new_child_block():

@@ -9,10 +9,13 @@ mode: command
 # todo: setup defualt timeout
     
 #command palette
-please [<user.text>]: 
+please: key(cmd-p)
+
+please [command] <user.text>$: 
     key(cmd-p)
-    sleep(200ms)
+    sleep(500ms)
     insert(text)
+    
 
 #bug not working
 go all pages: 
