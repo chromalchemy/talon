@@ -11,14 +11,19 @@ bar search <user.text>:
     sleep(100ms)
     insert(text)
 
-go [bar] search [bar] (list | results | hits):
-     user.run_rpc_command("search.action.focusSearchList")
+bar search paste:
+    user.run_rpc_command("workbench.view.search")
+    sleep(100ms)
+    edit.paste()
 
-go search string [from results]: 
+go [bar] search [bar] (list | results | hits):
+    user.run_rpc_command("search.action.focusSearchList")
+
+go search string [from results]:
     user.run_rpc_command("search.action.focusSearchFromResults")
     user.run_rpc_command("search.action.focusSearchFromResults")
     user.run_rpc_command("search.action.focusSearchFromResults")
-     
+
 ## ++++++++++++++++++++++ query filter .
 
 go search filter:
@@ -33,48 +38,58 @@ clear search filter:
 
 ## ++++++++++++++++ results view style .
 
-bar search tree | search (results | hits) tree:            
+bar search tree | search (results | hits) tree:
     user.run_rpc_command("search.action.viewAsTree")
 
-bar search list | search (results | hits) list:            
+bar search list | search (results | hits) list:
     user.run_rpc_command("search.action.viewAsList")
 
-[bar] search fold | (collapse | clap | fold) search [(results | result | hits)]: 
+[bar] search fold | (collapse | clap | fold) search [(results | result | hits)]:
     user.run_rpc_command("search.action.collapseSearchResults")
 
-([bar] search fold | (collapse | clap | fold) search [(results | result | hits)]) (top [level] [items] | max): 
-    user.run_rpc_command("search.action.collapseSearchResults") 
+([bar] search fold | (collapse | clap | fold) search [(results | result | hits)]) (top [level] [items] | max):
+    user.run_rpc_command("search.action.collapseSearchResults")
     user.run_rpc_command("search.action.collapseSearchResults")
     user.run_rpc_command("search.action.collapseSearchResults")
 
-[bar] search [(results | hits)] expand | (expand | unfold) search [(results | hits)]: 
+[bar] search [(results | hits)] expand | (expand | unfold) search [(results | hits)]:
     user.run_rpc_command("search.action.expandSearchResults")
+
 
 ## ++++++++++++++++++++ filter results .
 
+# todo not working
+search focus files to include:
+    user.run_rpc_command("search.action.focusFilesToInclude")
+
+# todo not working
+search focus files to exclude:
+    user.run_rpc_command("search.action.focusFilesToExclude")
+
+# todo not working
 (restrict | filter) [search] results (to | by) folder | (focus | filter) [search] results here:
     key(alt-shift-f)
 
 ## +++++++++++++++++++++++++++++++++  .clear results
 
-bar search (clear | new) | clear search (results | hits) | (new | fresh) [bar] search: 
+bar search (clear | new) | clear search (results | hits) | (new | fresh) [bar] search:
     user.run_rpc_command("search.action.clearSearchResults")
 
 ###  search editor(s)
 
-new [workspace] search [(editor | tab)]: 
+new [workspace] search [(editor | tab)]:
     user.run_rpc_command("search.action.openNewEditor")
 
-new [workspace] search [(editor | tab)] (to [the] side | right): 
+new [workspace] search [(editor | tab)] (to [the] side | right):
     user.run_rpc_command("search.action.openNewEditorToSide")
 
-open [workspace] [search] (results | hits) to side: 
+open [workspace] [search] (results | hits) to side:
     user.run_rpc_command("search.action.openInEditor")
 
-[bar] search [(results | hits)] to tab: 
+[bar] search [(results | hits)] to tab:
     user.run_rpc_command("search.action.openInEditor")
 
-search (results | hits) to tab:      
+search (results | hits) to tab:
     user.run_rpc_command("search.action.openInEditor")
 
 move search results to tab:
@@ -82,15 +97,15 @@ move search results to tab:
     user.run_rpc_command("search.action.clearSearchResults")
 
 #scrolls to top and focuses new input
-(go) [workspace] search [(editor | tab)]: 
+(go) [workspace] search [(editor | tab)]:
     user.run_rpc_command("search.action.openEditor")
 
 # why is this popping normal search editor
-(search | find) in files:   
+(search | find) in files:
     user.run_rpc_command("workbench.action.findInFiles")
 
 ### search files
- 
+
 #todo: use file hunt commands instead?
 (open | find | fine | search) file [<user.text>]:
     key(cmd-p)
@@ -100,11 +115,11 @@ move search results to tab:
 ## ++++++++++++++++++++ find in folder .
 # must have folder selected and focused in explorer
 
-(search | find) [in] folder [<user.text>]: 
+(search | find) [in] folder [<user.text>]:
     key(shift-alt-f)
     sleep(200ms)
     insert(text or "")
-    
+
 (search | find) [in] folder (paste | pace):
     key(shift-alt-f)
     sleep(200ms)
