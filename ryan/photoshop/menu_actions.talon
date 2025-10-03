@@ -89,52 +89,52 @@ Rename (artboard | ard port | art port | art  board) | artboard rename:
 [layer] (Blending | blend) (Options | opts):
     user.ps_layer_style_blending_options()
 
-(Bevel | Emboss) [layer] (style | thou):
+[layer] (style | thou) (Bevel | Emboss):
     user.ps_layer_style_bevel_and_emboss()
 
-Stroke [layer] (style | thou):
+[layer] (style | thou) Stroke:
     user.ps_layer_style_stroke()
 
-Inner Shadow [layer] (style | thou):
+[layer] (style | thou) Inner Shadow:
     user.ps_layer_style_inner_shadow()
 
-Inner Glow [layer] (style | thou):
+[layer] (style | thou) Inner Glow:
     user.ps_layer_style_inner_glow()
 
-Satin [layer] (style | thou):
+[layer] (style | thou) Satin [layer]:
     user.ps_layer_style_satin()
 
-Color Overlay [layer] (style | thou):
+[layer] (style | thou) Color Overlay:
     user.ps_layer_style_color_overlay()
 
-Gradient Overlay [layer] (style | thou):
+[layer] (style | thou) Gradient Overlay:
     user.ps_layer_style_gradient_overlay()
 
-Pattern Overlay [layer] (style | thou):
+[layer] (style | thou) Pattern Overlay:
     user.ps_layer_style_pattern_overlay()
 
-Outer Glow [layer] (style | thou):
+[layer] (style | thou) Outer Glow:
     user.ps_layer_style_outer_glow()
 
-Drop Shadow [layer] (style | thou):
+[layer] (style | thou) Drop Shadow:
     user.ps_layer_style_drop_shadow()
 
-(Copy | carve) [Layer] (style | thou):
+[layer] (style | thou) (Copy | carve):
     user.ps_layer_style_copy_layer_style()
 
-(Paste | pace) [Layer] (style | thou):
+[layer] (style | thou) (Paste | pace):
     user.ps_layer_style_paste_layer_style()
 
-(Clear | chuck) [Layer] (style | thou):
+[layer] (style | thou) (Clear | chuck):
     user.ps_layer_style_clear_layer_style()
 
-Global Light:
+[layer] [(style | thou)] Global Light:
     user.ps_layer_style_global_light()
 
-(Create | new) Layer (style | thou):
+[layer] (style | thou) new |  (Create | new) Layer (style | thou):
     user.ps_layer_style_create_layer()
 
-Hide All (Effects | styles):
+[layer] (style | styles | thou) hide  | Hide All (Effects | styles):
     user.ps_layer_style_hide_all_effects()
 
 Scale (Effects | styles | style | thou):
@@ -954,16 +954,16 @@ Close [(file | tab)] and Go [to] Bridge:
 
 ## +++++++++++++++++++++++++ save file .
 
-File Save | save file:
+(File | bill | fil) Save | save (File | bill | fil):
     user.ps_file_save()
 
-[(File | fil)] Save As:
+[(File | bill | fil)] Save As:
     user.ps_file_save_as()
 
-[File | fil] Save a Copy:
+[(File | bill | fil)] Save [a] Copy:
     user.ps_file_save_a_copy()
 
-File Revert | revert file:
+(File | bill | fil) Revert | revert (File | bill | fil):
     user.ps_file_revert()
 
 ## +++++++++++++++++++++++ multiplayer .
