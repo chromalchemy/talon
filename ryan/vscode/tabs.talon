@@ -265,7 +265,7 @@ move (editor | tab):
 ^[(send | move)] (editor | tab) [to] (right | rite) [group]$: 
     user.run_rpc_command("workbench.action.moveEditorToRightGroup")
 
-^[(send | move)] (editor | tab) [to] left [group]$: 
+^[(send | move)] ((editor | tab) [to] left | tablet) [group]$: 
     user.run_rpc_command("workbench.action.moveEditorToLeftGroup")
 
 ^[(send | move)] (editor | tab) ([to] above | up) [group]$: 
