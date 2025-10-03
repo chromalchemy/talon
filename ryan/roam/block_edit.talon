@@ -42,10 +42,10 @@ copy (block end | rest of block ):
 
 ## +++++++++++++++++++++++++++++++ all block text .
 
-(select | take) (block [inside] text | inside block [text]): 
+(select | take) [block] inside [block] [text]: 
     user.roam_select_block_text()
 
-copy (block [inside] text | inside block [text]): 
+copy [block] inside [block] [text]: 
     user.roam_select_block_text()
     edit.copy()
 

@@ -16,7 +16,7 @@ timout test:
     user.roam_block_up(1)
 (block | move) down: 
     user.roam_block_down(1)
-(block | move) (in | (right | write) | forward | fore | four): 
+(block | move) (in | (right | write | rate) | forward | fore | four): 
     user.roam_block_forward(1)
 (block | move) (out | left | back): 
     user.roam_block_back(1)
