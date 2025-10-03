@@ -4,7 +4,7 @@ app.name: Windsurf
 app.name: Windsurf - Next
 -
 
-## +++++++++++++++++++ connect to repl .
+## +++++++++++++++++++ jack in to repl .
 
 (jack in | jacket) (repl | ripple | grapple) | (repl | ripple | grapple)  (jack in | jacket):
     user.run_rpc_command("calva.jackIn")
@@ -32,10 +32,18 @@ app.name: Windsurf - Next
 (jack out  | kill | stop) (repl | ripple) | (repl | ripple) (jack out  | kill | stop)   :
     user.run_rpc_command("calva.jackOut")
     
-[new] repl menu:
-    user.run_rpc_command("calva.startOrConnectRepl")
+## +++++++++++++++++++++ repl  connect .
+
+connect [to] [project] repl | repl connect:
+    user.run_rpc_command("calva.connect")
+
+disconnect repl | repl disconnect: 
+    user.run_rpc_command("calva.disconnect")
 
 ## ++++++++++++++++++++++++++++++ misc .
+
+[new] repl menu:
+    user.run_rpc_command("calva.startOrConnectRepl")
 
 clear repl history: 
     user.run_rpc_command("calva.clearReplHistory")
