@@ -11,10 +11,10 @@ edit [cell]: key(alt-enter)
 
 ## ++++++++++++++++++++++++ formatting .
 
-copy [cell] (formatting  | style):
+copy [cell] (formatting  | style | thou):
     user.menu_select('Format|Copy Style')
     
-paste [cell] (formatting  | style):
+paste [cell] (formatting  | style | thou):
     user.menu_select('Format|Paste Style')
 
 ## +++++++++++++++++ sidebars / panels .
@@ -62,29 +62,29 @@ zoom out:
 (chuck | delete) selected columns [point]:
     user.run_ctx_menu_cmd("delete selected columns")
 
-add column before:
+(add | insert) column before:
     user.menu_select('Table|Add Column Before')
 
-add column after:
+(add | insert) column after:
     user.menu_select('Table|Add Column After')
 
-add row above:
+(add | insert) row above:
     user.menu_select('Table|Add Row Above')
 
-add row below:
+(add | insert) row below:
     user.menu_select('Table|Add Row Below')
 
 
-add header column before:
+(add | insert) header column before:
     user.menu_select('Table|Add Header Column Before')
 
-add header column after:
+(add | insert) header column after:
     user.menu_select('Table|Add Header Column After')
 
-add header row above:
+(add | insert) header row above:
     user.menu_select('Table|Add Header Row Above')
 
-add header row below:
+(add | insert) header row below:
     user.menu_select('Table|Add Header Row Below')
 
 
@@ -94,7 +94,6 @@ new sheet:
     user.menu_select('Insert|Sheet')
 
 ## ++++++++++++++++++++++++++++ export .
-
 
 export new [(comma | csv)] sheet:
     user.menu_select('File|Export To|CSV…')
