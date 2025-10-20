@@ -26,18 +26,31 @@ app.name: Windsurf - Next
     user.run_rpc_command("calva.showOutputTerminal")
 
 
-(jack in  |  restart) (repl | ripple) | (repl | ripple)  (jack in | jacket) manual:
+(jack in  |  restart) (repl | ripple | grapple) | (repl | ripple | grapple)  (jack in | jacket) manual:
     user.run_rpc_command("calva.jackIn")
 
-(jack out  | kill | stop) (repl | ripple) | (repl | ripple) (jack out  | kill | stop)   :
+(jack out  | kill | stop) (repl | ripple | grapple) | (repl | ripple | grapple) (jack out  | kill | stop)   :
     user.run_rpc_command("calva.jackOut")
     
 ## +++++++++++++++++++++ repl  connect .
 
-connect [to] [project] repl | repl connect:
+connect [to] [project] (repl | ripple | grapple) | (repl | ripple | grapple) connect:
     user.run_rpc_command("calva.connect")
 
-disconnect repl | repl disconnect: 
+full connect [to] [project] (repl | ripple | grapple) | (repl | ripple | grapple) connect full:
+    user.run_rpc_command("calva.connect")
+    sleep(500ms)
+    user.run_rpc_command("calva.showOutputTerminal")
+    sleep(300ms)
+    user.run_rpc_command("workbench.action.terminal.moveToEditor")
+    sleep(200ms)
+    user.run_rpc_command("workbench.action.moveEditorToRightGroup")
+    sleep(200ms)
+    user.run_rpc_command("workbench.action.closePanel")
+    sleep(1000ms)
+    user.run_rpc_command("calva.showOutputTerminal")
+
+disconnect (repl | ripple | grapple) | (repl | ripple | grapple) disconnect: 
     user.run_rpc_command("calva.disconnect")
 
 ## ++++++++++++++++++++++++++++++ misc .
@@ -56,26 +69,26 @@ clear repl history:
     # user.run_rpc_command("calva.showResultOutputDestination")
     user.run_rpc_command("calva.showResultOutputDestination", "true")
 
-(show | open) [(calva | repl | ripple )] (output | results) [(term | terminal)]:
+(show | open) [(calva | repl | ripple | grapple )] (output | results) [(term | terminal)]:
     user.run_rpc_command("calva.showOutputTerminal")
 
-(show | open) [(calva | repl | ripple )] (output | results) (window generic | generic window):
+(show | open) [(calva | repl | ripple | grapple )] (output | results) (window generic | generic window):
     user.run_rpc_command("calva.showOutputWindow")
 
 #navigate open editors
 
-go [calva] (output | results | repl | ripple) [(term | terminal)]:
+go [calva] (output | results | repl | ripple | grapple) [(term | terminal)]:
     user.run_rpc_command("opened-editors.openedEditors")
     insert("Calva Output")
     key(enter)
 
-[go] [calva] (output | results | repl | ripple) [(term | terminal)] (bottom | end):
+[go] [calva] (output | results | repl | ripple | grapple) [(term | terminal)] (bottom | end):
     user.run_rpc_command("opened-editors.openedEditors")
     insert("Calva Output")
     key(enter)
     edit.file_end()
 
-[go] [calva] (output | results | repl | ripple) [(term | terminal)] (top | start | beginning):
+[go] [calva] (output | results | repl | ripple | grapple) [(term | terminal)] (top | start | beginning):
     user.run_rpc_command("opened-editors.openedEditors")
     insert("Calva Output")
     key(enter)
@@ -83,35 +96,35 @@ go [calva] (output | results | repl | ripple) [(term | terminal)]:
 
 # clear output terminal
 
-(clear [(it | t | tea)] | clarity) | (clear | dump) [(repl | ripple)] (results | output) [(term | terminal)]:
+(clear [(it | t | tea)] | clarity) | (clear | dump) [(repl | ripple | grapple)] (results | output) [(term | terminal)]:
     user.run_rpc_command("workbench.action.terminal.clear")
 
 ## +++++++++++++ move terminal output to tab or new window .
 
-(open | move) [calva] (output | results | repl | ripple) [(term | terminal)] [(as | to | too | two)] tab:
+(open | move) [calva] (output | results | repl | ripple | grapple) [(term | terminal)] [(as | to | too | two)] tab:
     user.run_rpc_command("calva.showOutputTerminal")
     sleep(100ms)
     user.run_rpc_command("workbench.action.terminal.moveToEditor")
     # sleep(300ms)
     user.run_rpc_command("workbench.action.closePanel")
 
-(open | show | move) [calva] (output | results | repl | ripple) [(term | terminal)] (as | to | too | two) [new] window:
+(open | show | move) [calva] (output | results | repl | ripple | grapple) [(term | terminal)] (as | to | too | two) [new] window:
     user.run_rpc_command("calva.showOutputTerminal")
     sleep(300ms)
     user.run_rpc_command("workbench.action.terminal.moveIntoNewWindow")
 
 ## +++++++++++ repl output window (not terminal)    
 
-(show | open) [(repl | ripple)] (results | output) window: 
+(show | open) [(repl | ripple | grapple)] (results | output) window: 
     user.run_rpc_command("calva.showReplWindow")
 
-(focus | go) [(repl | ripple)] (results | output) window: 
+(focus | go) [(repl | ripple | grapple)] (results | output) window: 
     user.run_rpc_command("opened-editors.openedEditors")
     insert("repl.calva-repl")
     sleep(50ms)
     key(enter)
     
-clear [(repl | ripple)] (results | output) window:
+clear [(repl | ripple | grapple)] (results | output) window:
     user.run_rpc_command("opened-editors.openedEditors")
     insert("repl.calva-repl")
     sleep(50ms)
@@ -123,7 +136,7 @@ clear [(repl | ripple)] (results | output) window:
     user.run_rpc_command("workbench.action.openPreviousRecentlyUsedEditor")
     # user.run_rpc_command("workbench.action.navigateBack")
  
-(close | hide) [(repl | ripple)] (results | output) window:
+(close | hide) [(repl | ripple | grapple)] (results | output) window:
     user.run_rpc_command("opened-editors.openedEditors")
     insert("repl.calva-repl")
     sleep(50ms)
@@ -131,7 +144,7 @@ clear [(repl | ripple)] (results | output) window:
     sleep(100ms)
     user.run_rpc_command("workbench.action.closeActiveEditor")
     
-go [(repl | ripple)] (results | output) window top:
+go [(repl | ripple | grapple)] (results | output) window top:
     # user.run_rpc_command("workbench.action.closeActiveEditor")
     user.run_rpc_command("opened-editors.openedEditors")
     insert("repl.calva-repl")
@@ -144,12 +157,12 @@ go [(repl | ripple)] (results | output) window top:
 
 ## ++++++++++++++++++++ output channel .
 
-(show | open | go) [calva] [says] (results | output | repl | ripple) channel:
+(show | open | go) [calva] [says] (results | output | repl | ripple | grapple) channel:
     user.run_rpc_command("calva.showOutputChannel")
     
 ## ++++++++++++++++++++ inline results .
 
-(hide | clear) inline [(repl | ripple)] [(results | eval | evaluations)]: user.run_rpc_command("calva.clearInlineResults")
+(hide | clear) inline [(repl | ripple | grapple)] [(results | eval | evaluations)]: user.run_rpc_command("calva.clearInlineResults")
 
 ## ++++++++++++++++++++++++ print docs in repl .
 
