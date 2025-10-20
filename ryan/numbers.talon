@@ -11,10 +11,10 @@ edit [cell]: key(alt-enter)
 
 ## ++++++++++++++++++++++++ formatting .
 
-copy [cell] (formatting  | style | thou):
+copy [cell] (formatting  | style | thou | tile):
     user.menu_select('Format|Copy Style')
     
-paste [cell] (formatting  | style | thou):
+paste [cell] (formatting  | style | thou | tile):
     user.menu_select('Format|Paste Style')
 
 ## +++++++++++++++++ sidebars / panels .

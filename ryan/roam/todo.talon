@@ -3,7 +3,7 @@ mode: command
 -
 ## +++++++++++++++++++ edit checkboxes .
 
-(make | mark) (todo | to do | task | action): 
+(make | mark | big) (todo | to do | task | action): 
     key(cmd-return)
     
 [new] (todo | to do | task | action) <user.text> : 

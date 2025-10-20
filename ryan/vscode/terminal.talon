@@ -48,10 +48,10 @@ kill process:
 
 ## ++++++++++++++++++++++++++++++ move .
 
-[(move | send)] (term | terminal) (to | too | two) (tab | editor):
+[(move | send)] (term | terminal) (to | too | two) (tab | editor) | tab (term | terminal):
     user.run_rpc_command("workbench.action.terminal.moveToEditor")
 
-[(move | send)] (term | terminal) (to | too | two) [new] (window | win):
+[(move | send)] (term | terminal) (to | too | two) [new] (window | win) | [new] (window | win) (term | terminal):
     user.run_rpc_command("workbench.action.terminal.moveIntoNewWindow")
 
 [(move | send)] (term | terminal) (to | too | two) panel:
