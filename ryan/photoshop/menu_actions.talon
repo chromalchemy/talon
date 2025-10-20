@@ -119,13 +119,13 @@ Rename (artboard | ard port | art port | art  board) | artboard rename:
 [layer] (style | thou) Drop Shadow:
     user.ps_layer_style_drop_shadow()
 
-[layer] (style | thou) (Copy | carve):
+[layer] (style | thou) (Copy | carve) | (Copy | carve)  [layer] (style | thou):
     user.ps_layer_style_copy_layer_style()
 
-[layer] (style | thou) (Paste | pace):
+[layer] (style | thou) (Paste | pace) | (Paste | pace)  [layer] (style | thou):
     user.ps_layer_style_paste_layer_style()
 
-[layer] (style | thou) (Clear | chuck):
+[layer] (style | thou) (Clear | chuck) | (Clear | chuck) [layer] (style | thou):
     user.ps_layer_style_clear_layer_style()
 
 [layer] [(style | thou)] Global Light:
@@ -371,8 +371,15 @@ Hide Layers:
 
 ## +++++++++++++++++++++++ lock layers .
 
-Lock Layers [popup]:
+lock (Layers | layer): 
     user.ps_lock_layers()
+
+#when only one group is selected
+lock group (popup | pop | choose):
+    user.menu_select("Layer|Lock Group")
+
+Lock (Layers | layer)  (popup | pop | choose) :
+    user.ps_lock_layers_modal()
 
 (Toggle | disable | enable | flip) [layer] locks:
     user.ps_scripts_toggle_locks()
@@ -2305,7 +2312,7 @@ Clone [and] (raster | rasterize) (layer | gradient) [<user.text>]:
     print("setting font size {number_string}")
     user.ps_command_nb("(set-font-size! {number_string})")
 
-[set] (font | type) style {user.ryan.photoshop.font_styles.list}:
+[set] ((ant | font | type) style | fans ou) {user.ryan.photoshop.font_styles.list}:
     user.ps_command_nb("(set-text-font! \"Avenir Next Condensed\" \"{user.ryan.photoshop.font_styles.list}\")")
  
 ## ++++++++++++++++++++++++++ tracking .

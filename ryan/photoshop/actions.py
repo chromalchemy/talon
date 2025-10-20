@@ -497,10 +497,14 @@ class Actions:
         """layer distribute vertically"""
         actions.user.menu_select("Layer|Distribute|Vertically")
 
-    def ps_lock_layers():
-        """layer lock layers"""
+    def ps_lock_layers_modal():
+        """oopen layer lock layers modal"""
         actions.user.menu_select("Layer|Lock Layers...")
         # actions.key(cmd-/)
+
+    def ps_lock_layers():
+        """layer lock layers without modal"""
+        actions.key("cmd-/")
 
     def ps_link_layers():
         """layer link layers"""
