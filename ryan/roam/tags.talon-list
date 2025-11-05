@@ -18,6 +18,10 @@ demo
 goal
 col: goal
 
+clot: claude
+
+marta house: martin/house
+
 inbox
 clojure inbox: clj/inbox
 closure inbox: clj/inbox

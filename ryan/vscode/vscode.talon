@@ -54,10 +54,10 @@ check [for] extension updates | update extensions:
 
  ## ++++++++ vscode notification popups .
  
-(dismiss | clear | hide | kill) (notifications |  alerts): 
+(dismiss | clear | hide | kill) (notifications |  alerts | alert): 
     user.run_rpc_command("notifications.clearAll")
 
-show (notifications |  alerts): 
+show (notifications |  alerts | alert): 
     user.run_rpc_command("notifications.showList")
 
 accept (notification | alert): 
