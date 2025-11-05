@@ -46,13 +46,27 @@ clear ((term | turn) | terminal) | clear ((term | turn) | terminal) :
 kill process:               
     key(ctrl-c)
 
-## ++++++++++++++++++++++++++++++ move .
+## ++++++++++++ move terminal to a tab .
 
 [(move | send)] (term | terminal) (to | too | two) (tab | editor) | tab (term | terminal):
     user.run_rpc_command("workbench.action.terminal.moveToEditor")
 
+[(move | send)] (term | terminal) (to | too | two) (tab | editor) left [group] | tab left (term | terminal):
+    user.run_rpc_command("workbench.action.terminal.moveToEditor")
+    sleep(500ms)
+    user.run_rpc_command("workbench.action.moveEditorToLeftGroup")
+
+[(move | send)] (term | terminal) (to | too | two) (tab | editor) (right | rite) [group] | tab (right | rite) (term | terminal):
+    user.run_rpc_command("workbench.action.terminal.moveToEditor")
+    sleep(500ms)
+    user.run_rpc_command("workbench.action.moveEditorToRightGroup")
+
+## +++++++++ move terminal to a window .
+
 [(move | send)] (term | terminal) (to | too | two) [new] (window | win) | [new] (window | win) (term | terminal):
     user.run_rpc_command("workbench.action.terminal.moveIntoNewWindow")
+
+## +++++++++ move terminal to bottom panel
 
 [(move | send)] (term | terminal) (to | too | two) panel:
     user.run_rpc_command("workbench.action.terminal.moveToTerminalPanel")
