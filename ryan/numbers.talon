@@ -9,6 +9,17 @@ at yahoo: insert("@yahoo.com")
 dot com: insert(".com")
 edit [cell]: key(alt-enter)
 
+(freeze | unfreeze) (header (row | rows) | (row | rows) header):
+    user.menu_select('Table|Freeze Header Rows')
+
+(freeze | unfreeze) (header (column | columns) | (column | columns) header):
+    user.menu_select('Table|Freeze Header Columns')
+
+(freeze | unfreeze) headers:
+    user.menu_select('Table|Freeze Header Rows')
+    sleep(300ms)    
+    user.menu_select('Table|Freeze Header Columns')
+
 ## ++++++++++++++++++++++++ formatting .
 
 copy [cell] (formatting  | style | thou | tile):
