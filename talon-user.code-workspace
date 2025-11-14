@@ -25,6 +25,7 @@
 			"path": "../../dev/uxp-photoshop/src/pages"
 		},
 		{
+			"name": "rebelle-api",
 			"path": "../../dev/rebelle-api"
 		}
 	],
@@ -527,6 +528,28 @@
 				"nReplPortFile": [".ps-repl", ".nrepl-port"],
 				// "projectRootPath": ["."]
 			},
+			{
+			"name": "mcp aware clj repl",
+			"projectType": "deps.edn",
+			"nReplPortFile": [".", "ryan", "clojure", ".nrepl-port"],
+			"projectRootPath": [".", "ryan", "clojure"],
+			"menuSelections": {
+				"cljAliases": [
+					"nrepl"
+				]
+			}
+		},
+		{
+			"name": "mcp aware clj repl",
+			"projectType": "deps.edn",
+			"nReplPortFile": [".", "ryan", "clojure", ".nrepl-port"],
+			"projectRootPath": [".", "ryan", "clojure"],
+			"menuSelections": {
+				"cljAliases": [
+					"nrepl"
+				]
+			}
+		}
   ],
 		"calva.autoEvaluateCode": {
 			"onConnect": {
