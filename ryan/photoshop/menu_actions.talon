@@ -255,10 +255,10 @@ Reset [object] Transform:
 
 ## ++++++++++++++++++++ linked objects .
 
-Relink (object | [object] to File):
+(Relink | replace) ([linked] object | [object] [to] [linked] File):
     user.ps_smart_objects_relink_to_file()
 
-Relink (layer | claire | clare) (to | with) File | replace layer with linked [file]:
+(Relink | replace) (layer | claire | clare) (to | with) (File [link] | linked [file]):
     user.ps_smart_objects_convert_to_smart_object()
     sleep(800ms)
     user.ps_smart_objects_relink_to_file()
@@ -961,16 +961,16 @@ Close [(file | tab)] and Go [to] Bridge:
 
 ## +++++++++++++++++++++++++ save file .
 
-(File | bill | fil) Save | save (File | bill | fil):
+(File | bill | fil | fill) Save | save (File | bill | fil | fill):
     user.ps_file_save()
 
-[(File | bill | fil)] Save As:
+[(File | bill | fil | fill)] (save as | say that):
     user.ps_file_save_as()
 
-[(File | bill | fil)] Save [a] Copy:
+[(File | bill | fil | fill)] Save [a] Copy:
     user.ps_file_save_a_copy()
 
-(File | bill | fil) Revert | revert (File | bill | fil):
+(File | bill | fil | fill) Revert | revert (File | bill | fil | fill):
     user.ps_file_revert()
 
 ## +++++++++++++++++++++++ multiplayer .
