@@ -13,3 +13,4 @@ clojure/.lsp/
 ryan/clojure/string-fns/.lsp/
 cheatsheet/.calva/repl.calva-repl
 ryan/clojure/.nrepl-port
+ryan/clojure/.joyride/.nrepl-port
