@@ -6,7 +6,10 @@ app.name: Windsurf - Next
 
 ## ++++++++++++++++++++++++ search bar .
 
-bar search <user.text>:
+show search bar: 
+    user.run_rpc_command("workbench.view.search.focus")
+
+(bar search | search bar | scout all | go search (input | field)) [<user.text>]:
     user.run_rpc_command("workbench.view.search")
     sleep(100ms)
     insert(text)
