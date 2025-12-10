@@ -64,6 +64,11 @@ towel in command: talon/command
 towel and command: talon/command
 tail and command: talon/command
 
+talon action: talon/action
+towel in action: talon/action
+towel and action: talon/action
+tail and action: talon/action
+
 roam research: roam
 notes: roam 
 
@@ -98,3 +103,5 @@ date eleven: datalevin
 
 bay engage: bayengage
 target bay: targetbay
+
+linnworks: linn
