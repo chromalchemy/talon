@@ -57,11 +57,22 @@ fold [all] commits:
 (search | find) (commits | commit): 
     user.run_rpc_command("gitlens.showCommitSearch")
 
-show [git lens] commit graph:
+source graph view | (bar commit | (arc | bark) emit) graph:
+    user.run_rpc_command("workbench.scm.history.focus")
+
+(go | show) git graph:
+    user.run_rpc_command("git-graph.view")
+
+[(open | go)] (git | kid) graph here:
+    mouse_click(0)
+    sleep(300ms)
+    insert("View Git Graph")
+    sleep(300ms)
+    key(enter)
+
+show [git lens] [commit] graph:
     user.run_rpc_command("gitlens.showGraph")
 
-(bar commit | (arc | bark) emit) graph: 
-    user.run_rpc_command("workbench.scm.history.focus")
 
 show search [and] compare commits [view]:
     user.run_rpc_command("gitlens.showSearchAndCompareView")
