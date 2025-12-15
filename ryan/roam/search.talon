@@ -58,11 +58,19 @@ exit [page] (hunt | search):
 (hunt | search) advanced: 
     key(ctrl-shift-p)
 
-#native block ref search
-(hunt | search) block refs: 
+
+# -------------- native "advanced" block ref search
+
+(hunt | search) block (refs | ref): 
     key(ctrl-shift-9)
 
-#find and replace extension search page or workspace
+search (up | parent): 
+    key(shift-tab)
+
+search (down | child | children)
+    key(tab)
+
+#---------- find and replace extension search page or workspace
 search workspace: 
     key(ctrl-s)
 
