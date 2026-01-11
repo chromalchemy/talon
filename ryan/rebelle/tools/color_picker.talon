@@ -4,16 +4,16 @@ mode: command
 
 ## ++++++++++++++++++++++ regular color picker .
 
-(color picker | eyedropper | dropper) tool:
+(color picker | eyedropper | dropper) [tool]:
     key(i)
 
-temp (color picker | eyedropper | dropper) [tool]: 
+(temp | hold | scan) (color picker | eyedropper | dropper) [tool] | scan color: 
     key(i:down)
 
 release (color picker | eyedropper | dropper) | (color picker | eyedropper | dropper) over:
     key(i:up)
 
-(take | sample) color: 
+(take | sample) color | take: 
     key(i:down)
     mouse_click(0)
     key(i:up)

@@ -4,17 +4,33 @@ mode: command
 
 ## +++++++++++++++++++++++++++++ tools .
 
-transform tool:
+transform [tool]$:
     key(t) 
 
-(select | selection | marquee) tool:
+(select | selection | marquee | marquis) tool | marquis:
     key(m)
 
+# todo: conflicts with clippy hotkey
 canvas size | crop canvas:
     key(cmd-alt-c)
 
-brush [tool]: 
+brush [tool]$: 
     key(b)
+
+
+# general tool size control
+size up:
+    key(])
+    
+size down:
+    key([)
+
+opacity up:
+    key(cmd-])
+
+opacity down:
+    key(cmd-[)
+
 
 ## +++++++++++++++ sponge tool
 
