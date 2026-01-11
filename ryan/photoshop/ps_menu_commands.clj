@@ -1057,7 +1057,7 @@
 (def ps-beta-app-name
   "Adobe Photoshop (Beta)")
 (def ps-app-name
-  "Adobe Photoshop 2025")
+  "Adobe Photoshop 2026")
 
 (def talon-header
   (strs->lines-padded
