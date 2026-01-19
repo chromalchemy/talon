@@ -60,6 +60,8 @@ fold [all] commits:
 source graph view | (bar commit | (arc | bark) emit) graph:
     user.run_rpc_command("workbench.scm.history.focus")
 
+## +++++++++++++++++++++++++ git graph .
+
 (go | show) git graph:
     user.run_rpc_command("git-graph.view")
 
@@ -73,6 +75,7 @@ source graph view | (bar commit | (arc | bark) emit) graph:
 show [git lens] [commit] graph:
     user.run_rpc_command("gitlens.showGraph")
 
+## ___________________________________ .
 
 show search [and] compare commits [view]:
     user.run_rpc_command("gitlens.showSearchAndCompareView")
