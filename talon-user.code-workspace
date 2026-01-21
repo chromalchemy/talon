@@ -363,18 +363,7 @@
 				"filePath": "/Users/ryan/.talon/user/andreas-talon/core/edit/edit.talon",
 				"group": "Default"
 			},
-			{
-				"filePath": "/Users/ryan/.talon/user/cursorless-snippets",
-				"group": "Default"
-			},
-			{
-				"filePath": "/Users/ryan/.talon/repos/pokey_dotfiles/cursorless-snippets",
-				"group": "Default"
-			},
-			{
-				"filePath": "/Users/ryan/.talon/user/cursorless-snippets/cursorless-snippets.json",
-				"group": "Default"
-			},
+
 			{
 				"filePath": "/Users/ryan/.talon/user/rango-talon/rango.talon",
 				"group": "Default"
@@ -529,17 +518,13 @@
 				// "projectRootPath": ["."]
 			},
 			{
-			"name": "mcp aware clj repl",
-			"projectType": "deps.edn",
-			"nReplPortFile": [".", "ryan", "clojure", ".nrepl-port"],
-			"projectRootPath": [".", "ryan", "clojure"],
-			"menuSelections": {
-				"cljAliases": [
-					"nrepl"
-				]
-			}
-		},
-		{
+				"name": "rebelle nrepl",
+				"projectType": "deps.edn",
+				// "autoSelectForConnect": true,
+				"nReplPortFile": ["../../dev/rebelle-api", ".nrepl-port"],
+				// "projectRootPath": ["/Users/ryan/dev/rebelle-api"]
+			},
+			{
 			"name": "mcp aware clj repl",
 			"projectType": "deps.edn",
 			"nReplPortFile": [".", "ryan", "clojure", ".nrepl-port"],
@@ -567,6 +552,9 @@
 		"bookmark-manager.alwaysIgnore": false,
 		"calva.autoStartRepl": false,
 		"python.terminal.activateEnvironment": false,
-		"calva-backseat-driver.enableReplEvaluation": true
+		"calva-backseat-driver.enableReplEvaluation": true,
+		"restoreTerminals.terminals": [
+			
+		]
 	}
 }
