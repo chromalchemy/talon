@@ -4,11 +4,12 @@ term brew (upgrade | update):
     user.switcher_focus("Warp")
     key(cmd-t)
     sleep(200ms)
-    user.menu_select('Tab|Rename the Current Tab')
-    insert("Brew")
+    insert("brew upgrade")
+    sleep(2000ms)
     key(enter)
-    insert("brew update")
     sleep(1000ms)
+    user.menu_select('Tab|Rename the Current Tab')
+    insert("brew upgrade")
     key(enter)
 
 (warp | term) [new] (babashka | b b | be be | bb ) [repl]: 
