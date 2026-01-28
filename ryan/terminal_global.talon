@@ -1,38 +1,13 @@
 ## ++++ open terminal and run commands .
 
 term brew (upgrade | update): 
-    user.switcher_focus("Warp")
-    key(cmd-t)
-    sleep(200ms)
-    insert("brew upgrade")
-    sleep(2000ms)
-    key(enter)
-    sleep(1000ms)
-    user.menu_select('Tab|Rename the Current Tab')
-    insert("brew upgrade")
-    key(enter)
+    user.warp_run_command_in_new_tab("brew upgrade", "Brew")
 
-(warp | term) [new] (babashka | b b | be be | bb ) [repl]: 
-    user.switcher_focus("Warp")
-    key(cmd-t)
-    sleep(300ms)
-    user.menu_select('Tab|Rename the Current Tab')
-    insert("BB")
-    key(enter)
-    sleep(1000ms)
-    insert("bb")
-    key(enter)
+(warp | term) [new] (babashka | b b | be be | bb ) [repl]:
+    user.warp_run_command_in_new_tab("bb", "BB") 
 
 (warp | term) [new] (node (bb | b b) | n b b | nbb | en be be ) [repl]: 
-    user.switcher_focus("Warp")
-    key(cmd-t)
-    sleep(300ms)
-    user.menu_select('Tab|Rename the Current Tab')
-    insert("NBB")
-    key(enter) 
-    sleep(1000ms)
-    insert("nbb")
-    key(enter)
+    user.warp_run_command_in_new_tab("nbb", "NBB")
 
 term (quit | exit) [( repl | command)]: 
     key(ctrl-c)
