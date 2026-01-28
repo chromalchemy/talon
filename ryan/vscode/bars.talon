@@ -19,7 +19,7 @@ app.name: Windsurf - Next
 
 ## ++++++++++ left / secondary sidebar .
 
-right (sidebar | bar) | raper | bar right | (toggle | show) right (sidebar | bar) : 
+(right | great) (sidebar | bar) | raper | bar right | (toggle | show) right (sidebar | bar) : 
     user.run_rpc_command("workbench.action.toggleAuxiliaryBar")
     
 (close | hide) right (sidebar | bar) | bar right hide | right bar hide: 
