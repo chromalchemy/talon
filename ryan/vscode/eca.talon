@@ -12,7 +12,7 @@ chat command:
 ## +++++++++++++++++++++++ add context .
 
 add [current] file [(as | to | too | two)] context:
-    cuser.run_rpc_command("eca.chat.addContextToSystemPrompt")
+    user.run_rpc_command("eca.chat.addContextToSystemPrompt")
 
 ## ++++++++++++++++++++++++ navigation .
 
@@ -25,8 +25,6 @@ focus eca view:
 [go] eca input [<user.text>]:
     user.eca_focus_prompt_input()
     insert(text)
-
-
 
 ## ++++++++++++++++++++++++++++ output .
 
@@ -43,11 +41,17 @@ open [eca] MCP details:
 manage [eca] server:
     user.run_rpc_command("eca.manage")
 
-start eca [server] process: 
+(start | launch) eca [server] process | eca (start | launch): 
     user.run_rpc_command("eca.start")
 
-stop eca [server] process: 
+(stop | kill) eca [server] process | eca (stop | kill): 
     user.run_rpc_command("eca.stop")
+
+restart eca | eca restart:
+    user.run_rpc_command("eca.stop")
+    sleep(500ms)
+    user.run_rpc_command("eca.start")
+
 
 ## +++++++++++++++++++++++++++ rewrite .
 
