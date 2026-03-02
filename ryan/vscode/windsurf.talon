@@ -6,21 +6,15 @@ tag: user.cursorless
 (windsurf | serf | surf | cascade) settings:
     key(cmd-,)
 
-(closure | clojure) (prompt | resource): 
-    insert("@resources:clojure-mcp:")
-
-init (closure | clojure) prompt:
-    insert("@clojure-mcp/PROJECT_SUMMARY.md @clojure-mcp/Clojure Project Info   @clojure-mcp/LLM_CODE_STYLE.md @clojure-mcp/CLAUDE.md ")
-
 # surf test: print("testing from windsurf next")
 
-bar (cascade | chat | surf | serf) (memories | rules):
+bar (cascade | surf | serf) (memories | rules):
     user.run_rpc_command("windsurf.openMemoriesTab")
 
 ## ++++++++++++++++ show cascade panel .
 
 #  doesn't go to form
-bar (cascade | chat | surf | serf):
+bar (cascade | surf | serf):
     user.run_rpc_command("windsurf.cascadePanel.focus")
 
 # same as above?
@@ -45,16 +39,16 @@ auto cascade:
 
 ## +++++++++++++++++ send selection reference to chat form, focus  if showing. doesn't go to panel
 
-(reference [in]  | (add | had) (reference | context) [to]) [(chat [box] | chatbot | cascade)]  | (cascade | chat) that | (go | focus | curse) (cascade | surf | serf | chat) box:
+(reference [in]  | (add | had) (reference | context) [to]) (cascade)  | (cascade) that | (go | focus | curse) (cascade | surf | serf) box:
     user.run_rpc_command("windsurf.prioritized.chat.open")   
 
-(cascade | add [to] context) <user.cursorless_target>:
+(cascade | add [to] cascade context) <user.cursorless_target>:
     user.cursorless_ide_command("windsurf.prioritized.chat.open", cursorless_target)
 
 
 ## ++++++++++++++++++++++ auto-suggest .
 
-suggest: 
+(windsurf | surf | serf) suggest: 
     user.run_rpc_command("editor.action.inlineSuggest.trigger")
 
 ## +++++++++++++++++++++++ edit inline .

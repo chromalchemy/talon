@@ -1,0 +1,41 @@
+
+config
+configure: config
+
+doctor
+
+resume 
+resume latest
+
+repo map show: repo-map-show
+repository map show: repo-map-show
+show repository map: repo-map-show
+
+
+show prompt: prompt-show
+prompt show: prompt-show
+
+
+subagents
+sub agents: subagents
+
+clojure eval: clojure-eval
+closure eval: clojure-eval
+
+
+
+skill creator: skill-creator
+
+flowstorm: flowstorm
+flow storm: flowstorm
+
+datalevin 
+
+linnworks api: linnworks-api
+linnworks: linnworks-api
+
+squint: squint-runtime
+squint runtime: squint-runtime
+
+project summary: @clojure-mcp/PROJECT_SUMMARY.md
+clojure project: @clojure-mcp/Clojure Project Info   @clojure-mcp/LLM_CODE_STYLE.md @clojure-mcp/CLAUDE.md
