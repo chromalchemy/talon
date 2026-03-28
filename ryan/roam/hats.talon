@@ -2,48 +2,26 @@ app.name: Roam Research
 mode: command
 -
 
-deep nav:key(alt-g)
-
-
-#deep nav (cursorless style) hats 
-
 ^(hat | hats | nav | deep nav [hats] | block point | block hats | show hats)$: 
-    key(cmd-alt-0)
+    user.roam_bb_task("bridge --on")
 
-hide hats:
-    key(esc)
+hide hats | hats off:
+    user.roam_bb_task("bridge --off")
 
 ((deep | do you) grab | go) <user.number_string>: 
-    insert(number_string)
-
-((deep | do you ) grab | go)  <user.number_key>:
-    key(number_key)
-    sleep(100ms)
-    key(enter)
-
-((deep | do you ) grab | go) (single | small)  <user.number_key>:
-    key(number_key)
-    
-((deep | do you ) grab | go) <user.number_key> <user.number_key>:
-    key(number_key_1 number_key_2)
+    user.roam_bb_task("bridge --select {number_string}")
     
 ((deep | do you ) grab | go)  <user.letter>:
-    key("{letter}")
-    sleep(100ms)
-    key(enter)
+    user.roam_bb_task("bridge --select {letter}")
 
+((deep | do you ) grab | go)  <user.letters>:
+    user.roam_bb_task("bridge --select {letters}")    
 
-((deep | do you ) grab | go) (single | small)  <user.letter>:
-    key(user.letter)
-    
-((deep | do you ) grab | go)  <user.letter> <user.letter>:
-    key("{letter_1} {letter_2}")
-    
 ((deep | do you ) grab | go)  <user.letter> <user.number_key>:
-    key("{letter} {number_key}")
-    sleep(100ms)
-    key(enter)
+    user.roam_bb_task("bridge --select {letter}{number_key}")
 
+((deep | do you ) grab | go)  <user.number_key> <user.number_key>:
+    user.roam_bb_task("bridge --select {number_key}{number_key}")
 
 ## ++++++++++++++++++++++++++++++ fold .
 
