@@ -1,7 +1,7 @@
 ## ++++++++++++++++ open vscode project by name .
 
 [open | go] [{user.ryan.vscode.vscode_apps.list}] {user.code_workspace} (project | workspace | work space) [in] [new]  [window] | [{user.ryan.vscode.vscode_apps.list}] project {user.code_workspace}:
-    ide_app = "{user.ryan.vscode.vscode_apps.list or 'Windsurf - Next'}" 
+    ide_app = "{user.ryan.vscode.vscode_apps.list or 'Visual Studio Code'}" 
     cmd = """open -a '{ide_app}' '/Users/ryan{code_workspace}'"""
     user.system_command_nb(cmd)
     print("open project with {ide_app} completed")
