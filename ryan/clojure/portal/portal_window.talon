@@ -25,13 +25,13 @@ launch portal clearing:
 
 go portal [(tab | window)]:
     user.run_rpc_command("opened-editors.openedEditors")
-    insert("portal")
+    insert("portal -")
     sleep(50ms)
     key(enter)
 
 show portal [(tab | window)]:
     user.run_rpc_command("opened-editors.openedEditors")
-    insert("portal")
+    insert("portal -")
     sleep(50ms)
     key(enter)
     sleep(150ms)
