@@ -15,7 +15,16 @@ please [command] <user.text>$:
     key(cmd-p)
     sleep(500ms)
     insert(text)
-    
+ 
+(show | hide | bar) (devtools | dev tools | inspector | inspect):
+    key(cmd-alt-i)
+    # user.menu_select('View|Toggle Developer Tools')
+
+(reload | load | low) [developer] (extensions | extension | plugin | plugins):
+    user.run_roam_command("reload developer extensions")
+
+[force] reload [all]:
+    key(cmd-shift-r)
 
 #bug not working
 go all pages: 
