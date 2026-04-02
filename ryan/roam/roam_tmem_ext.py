@@ -10,8 +10,9 @@ BB_PATH = "/usr/local/bin/bb"
 mod.list("roam_move_mode", desc="Optional move mode for bridge commands")
 ctx.lists["user.roam_move_mode"] = {
     "alias": "--alias",
-    "link": "--link",
+    "ref": "--alias",
     "leave alias": "--alias",
+    "link": "--link",
 }
 
 @mod.capture(rule="{user.roam_move_mode}")
@@ -19,18 +20,26 @@ def roam_move_mode(m) -> str:
     """Capture a bridge move mode flag (alias/link)"""
     return m.roam_move_mode
 
-# Block position: "top"/"first" → --first, "bottom"/"last" → --last
-mod.list("roam_position", desc="Child position for block placement")
+# Block position relative to target — values passed as --pos <value> to bridge.bb:
+#   top/first/bottom/last = child placement within target
+#   before/after = sibling placement
+mod.list("roam_position", desc="Block placement position")
 ctx.lists["user.roam_position"] = {
-    "top": "--first",
-    "first": "--first",
-    "bottom": "--last",
-    "last": "--last",
+    "top": "first",
+    "start": "first",
+    "first": "first",
+    "bottom": "last",
+    "end": "last",
+    "last": "last",
+    "before": "before",
+    "above": "before",
+    "after": "after",
+    "below": "after",
 }
 
 @mod.capture(rule="{user.roam_position}")
 def roam_position(m) -> str:
-    """Capture a block position flag (top/bottom/first/last)"""
+    """Capture a block position value"""
     return m.roam_position
 
 @mod.action_class
@@ -42,16 +51,21 @@ class Actions:
         print(cmd)
         actions.user.system_command_nb(cmd)
 
-    def roam_move(base_cmd: str, mode: str) -> str:
-        """Build bridge move/link command based on mode.
-        mode='--alias': appends --alias to the move command.
-        mode='--link': swaps --move-selected→--link-selected, --move→--link.
-        mode='': returns base_cmd unchanged."""
+    def roam_move(base_cmd: str, position: str, mode: str) -> str:
+        """Build bridge move/link command from base command, position, and mode.
+        position: 'first'/'last'/'before'/'after' → appended as --pos <value>.
+                  empty string for default (last child).
+        mode: --alias appends flag, --link swaps verb, empty for plain move."""
+        cmd = base_cmd
+        # Apply position via --pos flag
+        if position:
+            cmd = cmd + " --pos " + position
+        # Apply mode
         if mode == "--link":
-            return base_cmd.replace("--move-selected", "--link-selected").replace("--move", "--link")
+            return cmd.replace("--move-selected", "--link-selected").replace("--move", "--link")
         elif mode == "--alias":
-            return base_cmd + " --alias"
-        return base_cmd
+            return cmd + " --alias"
+        return cmd
 
 
     

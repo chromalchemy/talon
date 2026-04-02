@@ -60,40 +60,32 @@ zoom parent [block] [of] <user.letters> :
 ## ++++ move block to first/last child .
 
 [<user.roam_position>] child <user.letters> :
-    user.roam_bb_task("bridge --reorder {letters_1} {roam_position or ''}")
+    user.roam_bb_task("bridge --reorder {letters_1} --pos {roam_position or 'last'}")
 
-## ++++++++++++++++++++++++ move block(s) to child of target block .
-## optional "alias" or "link" suffix on any move command:
-##   "move A to D"       → --move A --to D
-##   "move A to D alias" → --move A --to D --alias  (move + leave ref behind)
-##   "move A to D link"  → --link A --to D           (don't move, create ref at target)
+## ++++++++++++++++++++++++ move block(s) .
+## "move A to D"              → --move A --to D           (last child of D)
+## "move A to D top"          → --move A --to D --first   (first child of D)
+## "move A to D before"       → --move A --before D       (sibling above D)
+## "move A to D after"        → --move A --after D        (sibling below D)
+## "move A to D alias"        → --move A --to D --alias   (move + leave ref behind)
+## "move A to D link"         → --link A --to D           (don't move, create ref at target)
+## "move A to D before link"  → --link A --before D       (ref as sibling above D)
 
 move (selected [blocks] | [block] selection) to [<user.roam_position>] [of] <user.letters> [<user.roam_move_mode>]:
-    user.roam_bb_task(user.roam_move("bridge --move-selected --to {letters} {roam_position or ''}", roam_move_mode or ""))
+    user.roam_bb_task(user.roam_move("bridge --move-selected --to {letters}", roam_position or "", roam_move_mode or ""))
 
 move <user.letters> to <user.letters> [<user.roam_position>] [<user.roam_move_mode>]:
-    user.roam_bb_task(user.roam_move("bridge --move {letters_1} --to {letters_2} {roam_position or ''}", roam_move_mode or ""))
-
-## ++++++++ move block(s) before/after target block
-
-move <user.letters> after <user.letters> [<user.roam_move_mode>]:
-    user.roam_bb_task(user.roam_move("bridge --move {letters_1} --after {letters_2}", roam_move_mode or ""))
-
-move <user.letters> before <user.letters> [<user.roam_move_mode>]:
-    user.roam_bb_task(user.roam_move("bridge --move {letters_1} --before {letters_2}", roam_move_mode or ""))
+    user.roam_bb_task(user.roam_move("bridge --move {letters_1} --to {letters_2}", roam_position or "", roam_move_mode or ""))
 
 ## ++++++++++++++++++++++ move to page .
 
-my tag test {user.roam_tag}:
-    print("{roam_tag}") 
-
 move <user.letters> to {user.roam_tag} [<user.roam_position>] [<user.roam_move_mode>]:
-    user.roam_bb_task(user.roam_move("bridge --move {letters_1} --page '{user.roam_tag or ''}' {roam_position or ''}", roam_move_mode or ""))
+    user.roam_bb_task(user.roam_move("bridge --move {letters_1} --page '{user.roam_tag or ''}'", roam_position or "", roam_move_mode or ""))
 
 ## +++++++++++++++++++++++ move to ref .
 
 move <user.letters> to {user.roam_ref} [<user.roam_position>] [<user.roam_move_mode>]:
-    user.roam_bb_task(user.roam_move("bridge --move {letters_1} --ref {user.roam_ref or ''} {roam_position or ''}", roam_move_mode or ""))
+    user.roam_bb_task(user.roam_move("bridge --move {letters_1} --ref {user.roam_ref or ''}", roam_position or "", roam_move_mode or ""))
 
 # name = user.formatted_text(text, "COMMA_SEPARATED_NOSPACE")
 
