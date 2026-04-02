@@ -6,32 +6,39 @@ ctx = Context()
 CODE_PATH = "/Users/ryan/dev/tmem-roam-ext"
 BB_PATH = "/usr/local/bin/bb"
 
-# Move mode: spoken word → clojure keyword
-mod.list("roam_move_mode", desc="Optional move mode for bridge commands")
-ctx.lists["user.roam_move_mode"] = {
+# Block transfer action — the verb
+mod.list("roam_action", desc="Block transfer action verb")
+ctx.lists["user.roam_action"] = {
+    "move": ":move",
+    "link": ":link",
     "alias": ":alias",
     "ref": ":alias",
-    "leave alias": ":alias",
-    "link": ":link",
 }
 
-@mod.capture(rule="{user.roam_move_mode}")
-def roam_move_mode(m) -> str:
-    return m.roam_move_mode
+@mod.capture(rule="{user.roam_action}")
+def roam_action(m) -> str:
+    return m.roam_action
 
 # Block position relative to target — clojure keywords
 mod.list("roam_position", desc="Block placement position")
 ctx.lists["user.roam_position"] = {
     "top": ":first",
+    "to top": ":first",
+    "to top of": ":first",
     "start": ":first",
     "first": ":first",
     "bottom": ":last",
+    "to bottom": ":last",
+    "to bottom of": ":last",
     "end": ":last",
     "last": ":last",
+    "to": ":last",
+    "inside": ":last",
     "before": ":before",
     "above": ":before",
     "after": ":after",
     "below": ":after",
+    "outside": ":after",
 }
 
 @mod.capture(rule="{user.roam_position}")
