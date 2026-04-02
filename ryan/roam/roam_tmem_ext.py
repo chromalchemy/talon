@@ -6,90 +6,93 @@ ctx = Context()
 CODE_PATH = "/Users/ryan/dev/tmem-roam-ext"
 BB_PATH = "/usr/local/bin/bb"
 
-# Bridge move-mode flags: "alias" → --alias, "link" → --link
+# Move mode: spoken word → value for opts map
 mod.list("roam_move_mode", desc="Optional move mode for bridge commands")
 ctx.lists["user.roam_move_mode"] = {
-    "alias": "--alias",
-    "ref": "--alias",
-    "leave alias": "--alias",
-    "link": "--link",
+    "alias": "alias",
+    "ref": "alias",
+    "leave alias": "alias",
+    "link": "link",
 }
 
 @mod.capture(rule="{user.roam_move_mode}")
 def roam_move_mode(m) -> str:
-    """Capture a bridge move mode flag (alias/link)"""
     return m.roam_move_mode
 
-# Block position relative to target — values passed as --pos <value> to bridge.bb:
-#   top/first/bottom/last = child placement within target
-#   before/after = sibling placement
+# Block position relative to target
 mod.list("roam_position", desc="Block placement position")
 ctx.lists["user.roam_position"] = {
-    "top": "first",
-    "start": "first",
-    "first": "first",
-    "bottom": "last",
-    "end": "last",
-    "last": "last",
-    "before": "before",
-    "above": "before",
-    "after": "after",
-    "below": "after",
+    "top": ":first",
+    "start": ":first",
+    "first": ":first",
+    "bottom": ":last",
+    "end": ":last",
+    "last": ":last",
+    "before": ":before",
+    "above": ":before",
+    "after": ":after",
+    "below": ":after",
 }
 
 @mod.capture(rule="{user.roam_position}")
 def roam_position(m) -> str:
-    """Capture a block position value"""
     return m.roam_position
 
-# Unified source capture: letters (label), roam_ref (UID), or selected blocks.
-# Returns the CLI fragment for the source: --move A, --source-uid <uid>, --move-selected
+# Source capture: returns a clojure map literal string
+# label → {:labels [:A]}, ref → {:source-uid "uid"}, selected → {:selected true}
 @mod.capture(rule="<user.letters> | {user.roam_ref} | (selected [blocks] | [block] selection)")
 def roam_source(m) -> str:
-    """Capture a block source: label, ref UID, or current selection"""
     try:
-        return "--move " + m.letters
+        return "{:labels [:" + m.letters + "]}"
     except AttributeError:
         pass
     try:
-        return "--source-uid " + m.roam_ref
+        return '{:source-uid "' + m.roam_ref + '"}'
     except AttributeError:
         pass
-    return "--move-selected"
+    return "{:selected true}"
 
 @mod.action_class
-
 class Actions:
-    def roam_bb_task(call: str):
-        """shell out to bb to run bb task for roam tmem extension"""
-        cmd = f"cd '{CODE_PATH}' && {BB_PATH} {call} "
-        print(cmd)
-        actions.user.system_command_nb(cmd)
-
     def roam_fn(clj: str):
-        """shell out to bb to eval string of roam tmem clojure code"""
-        cmd = f"cd '{CODE_PATH}' && {BB_PATH} eval '{clj}' "
+        """Evaluate a clojure expression in bridge.clj context"""
+        cmd = f'''cd '{CODE_PATH}' && {BB_PATH} -e '(load-file "bridge.clj") {clj}' '''
         print(cmd)
         actions.user.system_command_nb(cmd)
 
-    def roam_move(base_cmd: str, position: str, mode: str) -> str:
-        """Build bridge move/link command from base command, position, and mode.
-        position: 'first'/'last'/'before'/'after' → appended as --pos <value>.
-                  empty string for default (last child).
-        mode: --alias appends flag, --link swaps verb, empty for plain move."""
-        cmd = base_cmd
-        # Apply position via --pos flag
-        if position:
-            cmd = cmd + " --pos " + position
-        # Apply mode
-        if mode == "--link":
-            return (cmd
-                .replace("--move-selected", "--link-selected")
-                .replace("--source-uid", "--link-uid")
-                .replace("--move", "--link"))
-        elif mode == "--alias":
-            return cmd + " --alias"
-        return cmd
+    def roam_move_or_link(source: str, target_key: str, target_val: str,
+                          position: str, mode: str):
+        """Build and execute a move!/link! call.
+        source: clojure map string e.g. '{:labels [:A]}'
+        target_key: :label, :uid, :page
+        target_val: the target value (label name, uid, or page title)
+        position: first/last/before/after or empty
+        mode: alias/link or empty (plain move)"""
+        # Determine if target value is a keyword (label) or string (uid/page)
+        val_is_keyword = target_key == ":label"
 
+        # before/after positions change the target key to :before/:after (always keyword val)
+        if position in (":before", ":after"):
+            tgt = "{" + position + " :" + target_val + "}"
+            opts_order = ""
+        else:
+            if val_is_keyword:
+                tgt = "{" + target_key + " :" + target_val + "}"
+            else:
+                tgt = '{' + target_key + ' "' + target_val + '"}'
+            opts_order = ":order " + position + " " if position else ""
 
-    
+        if mode == "link":
+            fn = "link!"
+            opts = "{" + opts_order + "}" if opts_order else ""
+        else:
+            alias_flag = ":alias true " if mode == "alias" else ""
+            opts = "{" + opts_order + alias_flag + "}" if (opts_order or alias_flag) else ""
+            fn = "move!"
+
+        if opts:
+            clj = f"({fn} {source} {tgt} {opts})"
+        else:
+            clj = f"({fn} {source} {tgt})"
+
+        actions.user.roam_fn(clj)
