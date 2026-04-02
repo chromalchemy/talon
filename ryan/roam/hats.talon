@@ -65,25 +65,17 @@ zoom parent [block] [of] <user.letters> :
 ## ++++++++++++++++++++++++ move block(s) .
 ## (transfer! source target position mode) — all composition in clojure
 ##
-## "move A to D"         → (transfer! {:labels [:A]} {:label :D})
-## "move A to D top"     → (transfer! {:labels [:A]} {:label :D} :first)
-## "move A to D after"   → (transfer! {:labels [:A]} {:label :D} :after)
-## "move A to D alias"   → (transfer! {:labels [:A]} {:label :D} nil :alias)
-## "move A to D link"    → (transfer! {:labels [:A]} {:label :D} nil :link)
-## "move selected to D"  → (transfer! {:selected true} {:label :D})
+## "move A to D"              → (transfer! {:labels [:A]} {:label :D})
+## "move A to D top"          → (transfer! {:labels [:A]} {:label :D} :first)
+## "move A to D after"        → (transfer! {:labels [:A]} {:label :D} :after)
+## "move A to D alias"        → (transfer! {:labels [:A]} {:label :D} nil :alias)
+## "move A to D link"         → (transfer! {:labels [:A]} {:label :D} nil :link)
+## "move selected to D"       → (transfer! {:selected true} {:label :D})
+## "move A to inbox"          → (transfer! {:labels [:A]} {:page "inbox"})
+## "move A to agenda"         → (transfer! {:labels [:A]} {:uid "CGDDdKiFq"})
 
-move <user.roam_source> to <user.letters> [<user.roam_position>] [<user.roam_move_mode>]:
-    user.roam_fn("(transfer! {roam_source} {{:label :{letters}}} {roam_position or 'nil'} {roam_move_mode or 'nil'})")
-
-## ++++++++++++++++++++++ move to page .
-
-move <user.roam_source> to {user.roam_tag} [<user.roam_position>] [<user.roam_move_mode>]:
-    user.roam_fn('(transfer! {roam_source} {{:page "{roam_tag}"}} {roam_position or "nil"} {roam_move_mode or "nil"})')
-
-## +++++++++++++++++++++++ move to ref .
-
-move <user.roam_source> to {user.roam_ref} [<user.roam_position>] [<user.roam_move_mode>]:
-    user.roam_fn('(transfer! {roam_source} {{:uid "{roam_ref}"}} {roam_position or "nil"} {roam_move_mode or "nil"})')
+move <user.roam_source> to <user.roam_destination> [<user.roam_position>] [<user.roam_move_mode>]:
+    user.roam_fn('(transfer! {roam_source} {roam_destination} {roam_position or "nil"} {roam_move_mode or "nil"})')
 
 ## ++++++++++++++++++++++ delete block .
 

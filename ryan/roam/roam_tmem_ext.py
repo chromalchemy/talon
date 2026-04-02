@@ -51,6 +51,20 @@ def roam_source(m) -> str:
         pass
     return "{:selected true}"
 
+# Destination capture: returns a clojure target map literal string
+# label → {:label :D}, page → {:page "title"}, ref → {:uid "uid"}
+@mod.capture(rule="<user.letters> | {user.roam_tag} | {user.roam_ref}")
+def roam_destination(m) -> str:
+    try:
+        return "{:label :" + m.letters + "}"
+    except AttributeError:
+        pass
+    try:
+        return '{:page "' + m.roam_tag + '"}'
+    except AttributeError:
+        pass
+    return '{:uid "' + m.roam_ref + '"}'
+
 @mod.action_class
 class Actions:
     def roam_fn(clj: str):
