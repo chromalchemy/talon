@@ -63,19 +63,24 @@ zoom parent [block] [of] <user.letters> :
     user.roam_fn("(reorder! [:{letters_1}] {roam_position or ':last'})")
 
 ## ++++++++++++++++++++++++ move block(s) .
-## (transfer! source target position mode) — all composition in clojure
+## (transfer! {source + target + opts}) — single map, all composition in clojure
 ##
-## "move A to D"              → (transfer! {:labels [:A]} {:label :D})
-## "move A to D top"          → (transfer! {:labels [:A]} {:label :D} :first)
-## "move A to D after"        → (transfer! {:labels [:A]} {:label :D} :after)
-## "move A to D alias"        → (transfer! {:labels [:A]} {:label :D} nil :alias)
-## "move A to D link"         → (transfer! {:labels [:A]} {:label :D} nil :link)
-## "move selected to D"       → (transfer! {:selected true} {:label :D})
-## "move A to inbox"          → (transfer! {:labels [:A]} {:page "inbox"})
-## "move A to agenda"         → (transfer! {:labels [:A]} {:uid "CGDDdKiFq"})
+## "move A to D"         → (transfer! {:labels [:A] :label :D})
+## "move A to D top"     → (transfer! {:labels [:A] :label :D :position :first})
+## "move A to D after"   → (transfer! {:labels [:A] :label :D :position :after})
+## "move A to D alias"   → (transfer! {:labels [:A] :label :D :mode :alias})
+## "move A to D link"    → (transfer! {:labels [:A] :label :D :mode :link})
+## "move selected to D"  → (transfer! {:selected true :label :D})
+## "move A to inbox"     → (transfer! {:labels [:A] :page "inbox"})
 
 move <user.roam_source> to <user.roam_destination> [<user.roam_position>] [<user.roam_move_mode>]:
-    user.roam_fn('(transfer! {{{roam_source} {roam_destination} :position {roam_position or "nil"} :mode {roam_move_mode or "nil"}}})')
+    fn = """
+    (transfer! 
+      {{{roam_source} {roam_destination} 
+       :position {roam_position or "nil"} 
+       :mode {roam_move_mode or "nil"}}})
+    """
+    user.roam_fn(fn)
 
 ## ++++++++++++++++++++++ delete block .
 
