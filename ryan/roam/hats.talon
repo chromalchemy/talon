@@ -75,7 +75,7 @@ zoom parent [block] [of] <user.letters> :
 ## "move A to agenda"         → (transfer! {:labels [:A]} {:uid "CGDDdKiFq"})
 
 move <user.roam_source> to <user.roam_destination> [<user.roam_position>] [<user.roam_move_mode>]:
-    user.roam_fn('(transfer! {roam_source} {roam_destination} {roam_position or "nil"} {roam_move_mode or "nil"})')
+    user.roam_fn('(transfer! {{{roam_source} {roam_destination} :position {roam_position or "nil"} :mode {roam_move_mode or "nil"}}})')
 
 ## ++++++++++++++++++++++ delete block .
 

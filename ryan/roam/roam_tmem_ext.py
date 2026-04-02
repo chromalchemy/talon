@@ -38,32 +38,31 @@ ctx.lists["user.roam_position"] = {
 def roam_position(m) -> str:
     return m.roam_position
 
-# Source capture: returns a clojure map literal string
+# Source capture: returns clojure kv-pair fragment (no braces)
 @mod.capture(rule="<user.letters> | {user.roam_ref} | (selected [blocks] | [block] selection)")
 def roam_source(m) -> str:
     try:
-        return "{:labels [:" + m.letters + "]}"
+        return ":labels [:" + m.letters + "]"
     except AttributeError:
         pass
     try:
-        return '{:source-uid "' + m.roam_ref + '"}'
+        return ':source-uid "' + m.roam_ref + '"'
     except AttributeError:
         pass
-    return "{:selected true}"
+    return ":selected true"
 
-# Destination capture: returns a clojure target map literal string
-# label → {:label :D}, page → {:page "title"}, ref → {:uid "uid"}
+# Destination capture: returns clojure kv-pair fragment (no braces)
 @mod.capture(rule="<user.letters> | {user.roam_tag} | {user.roam_ref}")
 def roam_destination(m) -> str:
     try:
-        return "{:label :" + m.letters + "}"
+        return ":label :" + m.letters
     except AttributeError:
         pass
     try:
-        return '{:page "' + m.roam_tag + '"}'
+        return ':page "' + m.roam_tag + '"'
     except AttributeError:
         pass
-    return '{:uid "' + m.roam_ref + '"}'
+    return ':uid "' + m.roam_ref + '"'
 
 @mod.action_class
 class Actions:
