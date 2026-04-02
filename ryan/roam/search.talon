@@ -2,6 +2,11 @@ app.name: Roam Research
 mode: command
 -
 
+# inline block/page searh
+
+(show | hide) [(search | hunt)] (block | page) preview: 
+    key(ctrl-o)
+
 # todo: currently disabled, extension not loaded?
 
 page blocks [panel]: 

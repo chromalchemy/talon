@@ -1,7 +1,7 @@
 app.name: Roam Research 
 mode: command
 -
-depot (market | marketplace | store):
+(open | go) (extension | (plugin | plugging)) (depot | market | marketplace | store):
     user.run_roam_command("Roam Depot Marketplace")
 
 depot (market | marketplace | store) <user.text>:

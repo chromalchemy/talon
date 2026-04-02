@@ -9,20 +9,24 @@ timout test:
     print("one")
     print("two")
 
-
-## ++++++++++++++++++++++++ move block on page 
+## ++++++++++++++++++++++++ move current block on page 
 
 (block | move) up: 
     user.roam_block_up(1)
+
 (block | move) down: 
     user.roam_block_down(1)
+
 (block | move) (in | (right | write | rate) | forward | fore | four): 
     user.roam_block_forward(1)
-(block | move) (out | left | back): 
+
+(block | move) (out | left | back) | dedent | indent less: 
     user.roam_block_back(1)
 
-dedent: user.roam_block_back(1)
-indent less: user.roam_block_back(1)
+
+#make unlimited todo
+(block | move) (all [(the way | way)] (out | left | back) | top level | base | wayback ): 
+    user.roam_block_back(4)
 
 ## ++++++++++++++++++++++ select block .
 
@@ -51,27 +55,60 @@ copy block:
 
 
 ## ++++++++++++++++++++++++ cut blocks .
-(cut | carve) block: 
+(cut | carve) block [here]: 
     user.roam_select_block()
     edit.cut()
 
+## ++++++++++++++++++++++++ new (empty) blocks .
 
-#make unlimited todo
-(block | move) (all [(the way | way)] (out | left | back) | top level | base | wayback ): 
-    user.roam_block_back(4)
+# to top/bottom of current page
 
-## ++++++++++++++++++++++++ new blocks .
+(insert | new) top block $:
+    user.roam_bb_task("bridge --new-block")
 
-## ++++++++++ new block on top of page .
+(insert | new) bottom block $:
+    user.roam_bb_task("bridge --new-block --last")
 
-#not behaving consistently, assign keyboard shortcuts    
-(insert | new) top block:
-    # user.run_roam_command("wb jump to top of page")
-    key(cmd-shift-t)
-    sleep(700ms)
-    user.roam_new_block_above()
+# to top/bottom of current parent block
 
- ## ++++++++++++++++++++ new block .
+(insert | new) (block here [(top | first)] | first child) $:
+    user.roam_bb_task("bridge --new-sibling")
+
+(insert | new) (block here (bottom | last) | last child) $:
+    user.roam_bb_task("bridge --new-sibling --last")
+
+# before/after target  block
+
+(insert | new) block (above | before | pre) <user.letters>:
+    user.roam_bb_task("bridge --new-before {letters}")
+
+(insert | new) block (below | after | post) <user.letters>:
+    user.roam_bb_task("bridge --new-after {letters}")
+
+
+# to top/bottom child of labeled block 
+
+(insert | new) ([top] block [in] | [first] child [block] [first] [in]) <user.letters>:
+    user.roam_bb_task("bridge --new-child {letters}")
+
+(insert | new) (bottom block [in] | last child [block] [in] | child last) <user.letters>:
+    user.roam_bb_task("bridge --new-child {letters} --last")
+
+# to top/bottom of specified page
+
+(insert | new) top block {user.ryan.roam.tags.list}:
+    user.roam_bb_task("bridge --new-block '{user.ryan.roam.tags.list or ''}'")
+
+(insert | new) bottom block {user.ryan.roam.tags.list}:
+    user.roam_bb_task("bridge --new-block '{user.ryan.roam.tags.list or ''}' --last")
+
+# to top/bottom of ref
+
+(insert | new) top (block | child) {user.ryan.roam.refs.list}:
+    user.roam_bb_task("bridge --new-child {user.ryan.roam.refs.list or ''}")
+
+(insert | new) bottom (block | child) {user.ryan.roam.refs.list}:
+    user.roam_bb_task("bridge --new-child {user.ryan.roam.refs.list or ''} --last")
 
 ## +++++++++++++++++++ paste block below .
 
@@ -89,10 +126,10 @@ copy block:
 
 ## +++++++++++++ # new block above, .
 
-(new | insert) block [(up | above)] | block above: 
+((new | insert) block [(up | above)] | block above) $: 
     user.roam_new_block_above()
 
-((new | insert) block [(up | above)] | block above) <user.text>: 
+((new | insert) block [(up | above)] | block above) with <user.text>: 
     user.roam_new_block_above()
     insert(text)
 
