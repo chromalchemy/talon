@@ -63,31 +63,27 @@ zoom parent [block] [of] <user.letters> :
     user.roam_fn("(reorder! [:{letters_1}] {roam_position or ':last'})")
 
 ## ++++++++++++++++++++++++ move block(s) .
-## Source: label (A), ref name (agenda), or "selected"
-## Target: label, page name, or ref name
-## Position: top/first/bottom/last (child), before/after (sibling)
-## Mode: alias (move + leave ref behind), link (ref only, don't move)
+## (transfer! source target position mode) — all composition in clojure
 ##
-## "move A to D"              → (move! {:labels [:A]} {:label :D})
-## "move A to D top"          → (move! {:labels [:A]} {:label :D} {:order :first})
-## "move A to D after"        → (move! {:labels [:A]} {:after :D})
-## "move A to D alias"        → (move! {:labels [:A]} {:label :D} {:alias true})
-## "move A to D link"         → (link! {:labels [:A]} {:label :D})
-## "move selected to D"       → (move! {:selected true} {:label :D})
-## "move agenda to D"         → (move! {:source-uid "CGDDdKiFq"} {:label :D})
+## "move A to D"         → (transfer! {:labels [:A]} {:label :D})
+## "move A to D top"     → (transfer! {:labels [:A]} {:label :D} :first)
+## "move A to D after"   → (transfer! {:labels [:A]} {:label :D} :after)
+## "move A to D alias"   → (transfer! {:labels [:A]} {:label :D} nil :alias)
+## "move A to D link"    → (transfer! {:labels [:A]} {:label :D} nil :link)
+## "move selected to D"  → (transfer! {:selected true} {:label :D})
 
 move <user.roam_source> to <user.letters> [<user.roam_position>] [<user.roam_move_mode>]:
-    user.roam_move_or_link(roam_source, ":label", letters, roam_position or "", roam_move_mode or "")
+    user.roam_fn("(transfer! {roam_source} {{:label :{letters}}} {roam_position or 'nil'} {roam_move_mode or 'nil'})")
 
 ## ++++++++++++++++++++++ move to page .
 
 move <user.roam_source> to {user.roam_tag} [<user.roam_position>] [<user.roam_move_mode>]:
-    user.roam_move_or_link(roam_source, ":page", roam_tag, roam_position or "", roam_move_mode or "")
+    user.roam_fn('(transfer! {roam_source} {{:page "{roam_tag}"}} {roam_position or "nil"} {roam_move_mode or "nil"})')
 
 ## +++++++++++++++++++++++ move to ref .
 
 move <user.roam_source> to {user.roam_ref} [<user.roam_position>] [<user.roam_move_mode>]:
-    user.roam_move_or_link(roam_source, ":uid", roam_ref, roam_position or "", roam_move_mode or "")
+    user.roam_fn('(transfer! {roam_source} {{:uid "{roam_ref}"}} {roam_position or "nil"} {roam_move_mode or "nil"})')
 
 ## ++++++++++++++++++++++ delete block .
 
