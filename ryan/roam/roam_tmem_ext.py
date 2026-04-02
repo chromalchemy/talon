@@ -45,9 +45,9 @@ ctx.lists["user.roam_position"] = {
 def roam_position(m) -> str:
     return m.roam_position
 
-# Source capture: returns clojure kv-pair fragment (no braces)
+# Base source: label, ref uid, or selection
 @mod.capture(rule="<user.letters> | {user.roam_ref} | (selected [blocks] | [block] selection)")
-def roam_source(m) -> str:
+def roam_source_base(m) -> str:
     try:
         return ":labels [:" + m.letters + "]"
     except AttributeError:
@@ -57,6 +57,21 @@ def roam_source(m) -> str:
     except AttributeError:
         pass
     return ":selected true"
+
+# Source with optional parent modifier
+# "A" → :labels [:A]
+# "parent A" → :labels [:A] :parent true
+# "parent agenda" → :source-uid "uid" :parent true
+# "parent" → :parent true  (parent of focused block)
+@mod.capture(rule="parent [of] <user.roam_source_base> | parent | <user.roam_source_base>")
+def roam_source(m) -> str:
+    try:
+        base = m.roam_source_base
+    except AttributeError:
+        return ":parent true"
+    if len(list(m)) > 1:
+        return base + " :parent true"
+    return base
 
 # Destination capture: returns clojure kv-pair fragment (no braces)
 @mod.capture(rule="<user.letters> | {user.roam_tag} | {user.roam_ref}")
