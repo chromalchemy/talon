@@ -2,8 +2,8 @@ app.name: Roam Research
 mode: command
 -
 
-test [insert] tag {user.ryan.roam.tags.list}:
-    insert("{user.ryan.roam.tags.list}")
+test [insert] tag {user.roam_tag}:
+    insert("{user.roam_tag}")
 
 # open talon lists helpers
 
@@ -16,36 +16,36 @@ test [insert] tag {user.ryan.roam.tags.list}:
 
 ## ++++++++++++++++++++++++++ hash tags .
 
-^[(new | now)] tag ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) $:
-    tag_text = user.roam_tag("{formatters or 'SLASH_SEPARATED'}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
+^[(new | now)] tag ({user.abbreviation} | {user.roam_tag} | [<user.formatters>] <user.text>) $:
+    tag_text = user.roam_tag("{formatters or 'SLASH_SEPARATED'}", "{text or ''}", "{abbreviation or ''}", "{user.roam_tag or ''}")
     insert(" #{tag_text} ")
 
 #keep chooser open    
-^[(new | now)] tag (ink | incremental | parcel | partial | (wait | weight) | hold ) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) $:
-    tag_text = user.roam_tag("{formatters or 'SLASH_SEPARATED'}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
+^[(new | now)] tag (ink | incremental | parcel | partial | (wait | weight) | hold ) ({user.abbreviation} | {user.roam_tag} | [<user.formatters>] <user.text>) $:
+    tag_text = user.roam_tag("{formatters or 'SLASH_SEPARATED'}", "{text or ''}", "{abbreviation or ''}", "{user.roam_tag or ''}")
     insert(" #{tag_text}")
     
-(make [block] | tag block | add tag) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>):
-    tag_text = user.roam_tag("{formatters or 'SLASH_SEPARATED'}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
+(make [block] | tag block | add tag) ({user.abbreviation} | {user.roam_tag} | [<user.formatters>] <user.text>):
+    tag_text = user.roam_tag("{formatters or 'SLASH_SEPARATED'}", "{text or ''}", "{abbreviation or ''}", "{user.roam_tag or ''}")
     user.roam_insert_text_at_beginning_of_block(tag_text)
 
 ## +++++++++++++++++++++ multiple tags .
 
-^[(new | now  |  multi )] (tags | tax) {user.ryan.roam.tags.list} [and] {user.ryan.roam.tags.list}$: 
-    insert(" #{user.ryan.roam.tags.list_1} #{user.ryan.roam.tags.list_2} ")
+^[(new | now  |  multi )] (tags | tax) {user.roam_tag} [and] {user.roam_tag}$: 
+    insert(" #{user.roam_tag_1} #{user.roam_tag_2} ")
 
 
-^[(new | now  |  multi )] (tags | tax) {user.ryan.roam.tags.list} [and] {user.ryan.roam.tags.list} [and] {user.ryan.roam.tags.list}$: 
-    insert(" #{user.ryan.roam.tags.list_1} #{user.ryan.roam.tags.list_2} #{user.ryan.roam.tags.list_3} ")
+^[(new | now  |  multi )] (tags | tax) {user.roam_tag} [and] {user.roam_tag} [and] {user.roam_tag}$: 
+    insert(" #{user.roam_tag_1} #{user.roam_tag_2} #{user.roam_tag_3} ")
 
-^[(new | now | multi )] (tags | tax) {user.ryan.roam.tags.list} [and] {user.ryan.roam.tags.list} [and] {user.ryan.roam.tags.list} [and] {user.ryan.roam.tags.list}$: 
-    insert(" #{user.ryan.roam.tags.list_1} #{user.ryan.roam.tags.list_2} #{user.ryan.roam.tags.list_3} #{user.ryan.roam.tags.list_4} ")
+^[(new | now | multi )] (tags | tax) {user.roam_tag} [and] {user.roam_tag} [and] {user.roam_tag} [and] {user.roam_tag}$: 
+    insert(" #{user.roam_tag_1} #{user.roam_tag_2} #{user.roam_tag_3} #{user.roam_tag_4} ")
 
-^[(new | now | multi )] (tags | tax) {user.ryan.roam.tags.list} [and] {user.ryan.roam.tags.list}$: 
-    insert(" #{user.ryan.roam.tags.list_1} #{user.ryan.roam.tags.list_2} ")
+^[(new | now | multi )] (tags | tax) {user.roam_tag} [and] {user.roam_tag}$: 
+    insert(" #{user.roam_tag_1} #{user.roam_tag_2} ")
 
-^[(new | now | multi )] (tags | tax) {user.ryan.roam.tags.list} [and] {user.ryan.roam.tags.list} [and] {user.ryan.roam.tags.list}$: 
-    insert(" #{user.ryan.roam.tags.list_1} #{user.ryan.roam.tags.list_2} #{user.ryan.roam.tags.list_3} ")
+^[(new | now | multi )] (tags | tax) {user.roam_tag} [and] {user.roam_tag} [and] {user.roam_tag}$: 
+    insert(" #{user.roam_tag_1} #{user.roam_tag_2} #{user.roam_tag_3} ")
 
 #turn local text into tag
 
@@ -106,12 +106,12 @@ test paste:
 # test brief {user.abbreviation}:
 #     print(abbreviation)
 
-(square tag | dub square) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>):
-    tag_text = user.roam_tag("{formatters or ''}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
+(square tag | dub square) ({user.abbreviation} | {user.roam_tag} | [<user.formatters>] <user.text>):
+    tag_text = user.roam_tag("{formatters or ''}", "{text or ''}", "{abbreviation or ''}", "{user.roam_tag or ''}")
     insert("[[{tag_text}]] ")
 
-(square tag | dub square) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) (ink | parcel | partial) :
-    tag_text = user.roam_tag("{formatters or ''}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
+(square tag | dub square) ({user.abbreviation} | {user.roam_tag} | [<user.formatters>] <user.text>) (ink | parcel | partial) :
+    tag_text = user.roam_tag("{formatters or ''}", "{text or ''}", "{abbreviation or ''}", "{user.roam_tag or ''}")
     insert("[[{tag_text}")
     # sleep(500ms)
     # key(left left)
@@ -120,8 +120,8 @@ test paste:
     # # sleep(200ms)
     # key(backspace)
 
-(square tag | dub square) (auto | use | pop) ({user.abbreviation} | {user.ryan.roam.tags.list} | [<user.formatters>] <user.text>) :
-    tag_text = user.roam_tag("{formatters or ''}", "{text or ''}", "{abbreviation or ''}", "{user.ryan.roam.tags.list or ''}")
+(square tag | dub square) (auto | use | pop) ({user.abbreviation} | {user.roam_tag} | [<user.formatters>] <user.text>) :
+    tag_text = user.roam_tag("{formatters or ''}", "{text or ''}", "{abbreviation or ''}", "{user.roam_tag or ''}")
     insert("[[{tag_text}")
     sleep(300ms)
     key(enter)

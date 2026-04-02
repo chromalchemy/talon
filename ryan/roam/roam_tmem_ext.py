@@ -7,31 +7,31 @@ CODE_PATH = "/Users/ryan/dev/tmem-roam-ext"
 BB_PATH = "/usr/local/bin/bb"
 
 # Bridge move-mode flags: "alias" → --alias, "link" → --link
-mod.list("roam_bridge_move_mode", desc="Optional move mode for bridge commands")
-ctx.lists["user.roam_bridge_move_mode"] = {
+mod.list("roam_move_mode", desc="Optional move mode for bridge commands")
+ctx.lists["user.roam_move_mode"] = {
     "alias": "--alias",
     "link": "--link",
     "leave alias": "--alias",
 }
 
-@mod.capture(rule="{user.roam_bridge_move_mode}")
-def roam_bridge_move_mode(m) -> str:
+@mod.capture(rule="{user.roam_move_mode}")
+def roam_move_mode(m) -> str:
     """Capture a bridge move mode flag (alias/link)"""
-    return m.roam_bridge_move_mode
+    return m.roam_move_mode
 
 # Block position: "top"/"first" → --first, "bottom"/"last" → --last
-mod.list("roam_bridge_position", desc="Child position for block placement")
-ctx.lists["user.roam_bridge_position"] = {
+mod.list("roam_position", desc="Child position for block placement")
+ctx.lists["user.roam_position"] = {
     "top": "--first",
     "first": "--first",
     "bottom": "--last",
     "last": "--last",
 }
 
-@mod.capture(rule="{user.roam_bridge_position}")
-def roam_bridge_position(m) -> str:
+@mod.capture(rule="{user.roam_position}")
+def roam_position(m) -> str:
     """Capture a block position flag (top/bottom/first/last)"""
-    return m.roam_bridge_position
+    return m.roam_position
 
 @mod.action_class
 
@@ -42,7 +42,7 @@ class Actions:
         print(cmd)
         actions.user.system_command_nb(cmd)
 
-    def roam_bridge_move(base_cmd: str, mode: str) -> str:
+    def roam_move(base_cmd: str, mode: str) -> str:
         """Build bridge move/link command based on mode.
         mode='--alias': appends --alias to the move command.
         mode='--link': swaps --move-selected→--link-selected, --move→--link.

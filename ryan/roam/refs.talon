@@ -25,16 +25,16 @@ dub paren | [new] ([block] (reference | ref)  [link]  | backlink) [that]:
 
 ## ++++++++++++++++++ named references .
 
-(paste | pace) {user.ryan.roam.refs.list} (ref | reference) [text] :
-    user.paste("(({user.ryan.roam.refs.list}))")
+(paste | pace) {user.roam_ref} (ref | reference) [text] :
+    user.paste("(({user.roam_ref}))")
 
-(paste | pace) (ref | reference) (id | token) {user.ryan.roam.refs.list}:
-    user.paste("{user.ryan.roam.refs.list}")
+(paste | pace) (ref | reference) (id | token) {user.roam_ref}:
+    user.paste("{user.roam_ref}")
 
 ## +++++++++++++++++ jump to named ref (on page)
 
 #buggy todo: find better implementation
-(jump | go ) [to] {user.ryan.roam.refs.list} [(ref | reference)]:
+(jump | go ) [to] {user.roam_ref} [(ref | reference)]:
     user.run_roam_command("wb jump to block in page")
     sleep(500ms)
     user.paste()

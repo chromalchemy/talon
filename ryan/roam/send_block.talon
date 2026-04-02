@@ -35,8 +35,8 @@ teleport [(todo | to do)] [and] leave (ref | reference):
 ## +++++++++++++ move + sidebar 
 #########################################
 
-move [(block | blocks)] to [top] [of] {user.ryan.roam.tags.list} (sidebar | side | bar):
-    user.roam_send_block_to_page_top_and_sidebar("{user.ryan.roam.tags.list or ''}")
+move [(block | blocks)] to [top] [of] {user.roam_tag} (sidebar | side | bar):
+    user.roam_send_block_to_page_top_and_sidebar("{user.roam_tag or ''}")
 
 
 move [(block | blocks)] to  (paste | pace | clip) page [and] (sidebar | side | bar):
@@ -47,8 +47,8 @@ move [(block | blocks)] to  (paste | pace | clip) page [and] (sidebar | side | b
 ## +++++++++++++++ move + zoom .
 ###############################################
 
-move [(block | blocks)] to [top] [of] {user.ryan.roam.tags.list} [and] (zoom | go [there] | focus):
-    user.roam_send_block_to_page_top_and_zoom("{user.ryan.roam.tags.list or ''}")
+move [(block | blocks)] to [top] [of] {user.roam_tag} [and] (zoom | go [there] | focus):
+    user.roam_send_block_to_page_top_and_zoom("{user.roam_tag or ''}")
 
 ###############################################
 ## +++++++++++++++ move + leave ref .
@@ -57,14 +57,14 @@ move [(block | blocks)] to [top] [of] {user.ryan.roam.tags.list} [and] (zoom | g
 
 ## +++++++++ move to page + ref
 
-(sticky | stick | ticky | tick | pin [block] [and]) (send | move) [(block | blocks)] to [top] [of] {user.ryan.roam.tags.list} | (send | move) [(block | blocks)] to {user.ryan.roam.tags.list} [and] [leave] [(ref | reference | rough)]:
-    user.roam_send_block_to_page_top_and_leave_reference("{user.ryan.roam.tags.list or ''}")
+(sticky | stick | ticky | tick | pin [block] [and]) (send | move) [(block | blocks)] to [top] [of] {user.roam_tag} | (send | move) [(block | blocks)] to {user.roam_tag} [and] [leave] [(ref | reference | rough)]:
+    user.roam_send_block_to_page_top_and_leave_reference("{user.roam_tag or ''}")
     # print("moved block to page and left reference")
 
 ## +++++++++ move to ref + ref
 
-(sticky | stick | ticky | tick | pin [block] [and]) (send | move) [(block | blocks)] (to | too | two) {user.ryan.roam.refs.list} | (send | move) [(block | blocks)] to {user.ryan.roam.refs.list} [and] [leave] [(ref | reference | rough)]:
-    user.roam_send_block_to_reference_top_and_leave_reference("{user.ryan.roam.refs.list}")
+(sticky | stick | ticky | tick | pin [block] [and]) (send | move) [(block | blocks)] (to | too | two) {user.roam_ref} | (send | move) [(block | blocks)] to {user.roam_ref} [and] [leave] [(ref | reference | rough)]:
+    user.roam_send_block_to_reference_top_and_leave_reference("{user.roam_ref}")
 
 
 
@@ -78,17 +78,17 @@ move [(block | blocks)] to [top] [of] {user.ryan.roam.tags.list} [and] (zoom | g
     page_name = clip.text()
     user.roam_send_block_to_page_top(page_name)
 
-move [(block | blocks)] to [top] [of] {user.ryan.roam.tags.list}:
-    user.roam_send_block_to_page_top("{user.ryan.roam.tags.list or ''}") 
+move [(block | blocks)] to [top] [of] {user.roam_tag}:
+    user.roam_send_block_to_page_top("{user.roam_tag or ''}") 
 
-[move] <user.letters> [move] (to | two) [top] [of] {user.ryan.roam.tags.list}:
+[move] <user.letters> [move] (to | two) [top] [of] {user.roam_tag}:
     user.roam_select_block_hat(letters)
-    user.roam_send_block_to_page_top("{user.ryan.roam.tags.list or ''}")
+    user.roam_send_block_to_page_top("{user.roam_tag or ''}")
 
 
-[move] <user.number_string> [move] (to | two) [top] [of] {user.ryan.roam.tags.list}:
+[move] <user.number_string> [move] (to | two) [top] [of] {user.roam_tag}:
     user.roam_select_block_hat(number_string)
-    user.roam_send_block_to_page_top("{user.ryan.roam.tags.list or ''}")
+    user.roam_send_block_to_page_top("{user.roam_tag or ''}")
 
 ## +++++++++++ move to reference .
 
@@ -96,12 +96,12 @@ move [(block | blocks)] to (ref | reference | rough) (paste | pace | clip):
     reference_string = clip.text()
     user.roam_send_block_to_reference_top(reference_string) 
 
-(move | send) [(block | blocks)] (to | too | two) {user.ryan.roam.refs.list}: 
-    user.roam_send_block_to_reference_top("{user.ryan.roam.refs.list}")
+(move | send) [(block | blocks)] (to | too | two) {user.roam_ref}: 
+    user.roam_send_block_to_reference_top("{user.roam_ref}")
 
 
 ## ++++++++ move to inbox refs
 
 #move to #tag #inbox combo reference
-move [(block | blocks)] to {user.ryan.roam.tags.list} inbox: 
-    user.roam_send_block_to_reference_top("#{user.ryan.roam.tags.list} #inbox")
+move [(block | blocks)] to {user.roam_tag} inbox: 
+    user.roam_send_block_to_reference_top("#{user.roam_tag} #inbox")

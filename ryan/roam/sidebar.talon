@@ -45,9 +45,9 @@ open [(ref | reference | link)] in (sidebar | bar):
 open [this] page [in] sidebar: 
     user.run_roam_command("wb open page in sidebar")
 
-open {user.ryan.roam.tags.list} [in] (sidebar | bar ) | bar {user.ryan.roam.tags.list}:
+open {user.roam_tag} [in] (sidebar | bar ) | bar {user.roam_tag}:
     key(cmd-u)
     # sleep(100ms)
-    insert("{user.ryan.roam.tags.list}")
+    insert("{user.roam_tag}")
     sleep(500ms)
     key(shift-enter)

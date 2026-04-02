@@ -96,19 +96,19 @@ copy block:
 
 # to top/bottom of specified page
 
-(insert | new) top block {user.ryan.roam.tags.list}:
-    user.roam_bb_task("bridge --new-block '{user.ryan.roam.tags.list or ''}'")
+(insert | new) top block {user.roam_tag}:
+    user.roam_bb_task("bridge --new-block '{user.roam_tag or ''}'")
 
-(insert | new) bottom block {user.ryan.roam.tags.list}:
-    user.roam_bb_task("bridge --new-block '{user.ryan.roam.tags.list or ''}' --last")
+(insert | new) bottom block {user.roam_tag}:
+    user.roam_bb_task("bridge --new-block '{user.roam_tag or ''}' --last")
 
 # to top/bottom of ref
 
-(insert | new) top (block | child) {user.ryan.roam.refs.list}:
-    user.roam_bb_task("bridge --new-child {user.ryan.roam.refs.list or ''}")
+(insert | new) top (block | child) {user.roam_ref}:
+    user.roam_bb_task("bridge --new-child {user.roam_ref or ''}")
 
-(insert | new) bottom (block | child) {user.ryan.roam.refs.list}:
-    user.roam_bb_task("bridge --new-child {user.ryan.roam.refs.list or ''} --last")
+(insert | new) bottom (block | child) {user.roam_ref}:
+    user.roam_bb_task("bridge --new-child {user.roam_ref or ''} --last")
 
 ## +++++++++++++++++++ paste block below .
 
