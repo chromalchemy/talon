@@ -84,6 +84,9 @@ zoom parent [block] [of] <user.letters> :
 swap <user.letters> [and | with] <user.letters>:
     user.roam_fn("(swap-blocks! :{letters_1} :{letters_2})")
 
+swap content <user.letters> [and | with] <user.letters>:
+    user.roam_fn("(swap-blocks! :{letters_1} :{letters_2} {{:content true}})")
+
 ## ++++++++++++++++++++++ delete block .
 
 (delete | chuck) <user.letters>:
