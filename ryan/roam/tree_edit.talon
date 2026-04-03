@@ -64,51 +64,51 @@ copy block:
 # to top/bottom of current page
 
 (insert | new) top block $:
-    user.roam_bb_task("bridge --new-block")
+    user.roam_fn("(new-block!)")
 
 (insert | new) bottom block $:
-    user.roam_bb_task("bridge --new-block --last")
+    user.roam_fn("(new-block! {{:order :last}})")
 
 # to top/bottom of current parent block
 
 (insert | new) (block here [(top | first)] | first child) $:
-    user.roam_bb_task("bridge --new-sibling")
+    user.roam_fn("(new-sibling!)")
 
 (insert | new) (block here (bottom | last) | last child) $:
-    user.roam_bb_task("bridge --new-sibling --last")
+    user.roam_fn("(new-sibling! {{:order :last}})")
 
 # before/after target  block
 
 (insert | new) block (above | before | pre) <user.letters>:
-    user.roam_bb_task("bridge --new-before {letters}")
+    user.roam_fn("(new-before! :{letters})")
 
 (insert | new) block (below | after | post) <user.letters>:
-    user.roam_bb_task("bridge --new-after {letters}")
+    user.roam_fn("(new-after! :{letters})")
 
 
 # to top/bottom child of labeled block 
 
 (insert | new) ([top] block [in] | [first] child [block] [first] [in]) <user.letters>:
-    user.roam_bb_task("bridge --new-child {letters}")
+    user.roam_fn("(new-child! :{letters})")
 
 (insert | new) (bottom block [in] | last child [block] [in] | child last) <user.letters>:
-    user.roam_bb_task("bridge --new-child {letters} --last")
+    user.roam_fn("(new-child! :{letters} {{:order :last}})")
 
 # to top/bottom of specified page
 
 (insert | new) top block {user.roam_tag}:
-    user.roam_bb_task("bridge --new-block '{user.roam_tag or ''}'")
+    user.roam_fn('(new-block! {{:page "{roam_tag}"}})')
 
 (insert | new) bottom block {user.roam_tag}:
-    user.roam_bb_task("bridge --new-block '{user.roam_tag or ''}' --last")
+    user.roam_fn('(new-block! {{:page "{roam_tag}" :order :last}})')
 
 # to top/bottom of ref
 
 (insert | new) top (block | child) {user.roam_ref}:
-    user.roam_bb_task("bridge --new-child {user.roam_ref or ''}")
+    user.roam_fn('(new-child! "{roam_ref}")')
 
 (insert | new) bottom (block | child) {user.roam_ref}:
-    user.roam_bb_task("bridge --new-child {user.roam_ref or ''} --last")
+    user.roam_fn('(new-child! "{roam_ref}" {{:order :last}})')
 
 ## +++++++++++++++++++ paste block below .
 
