@@ -69,6 +69,9 @@ zoom [to] {user.roam_tag}:
 zoom [to] {user.roam_ref}:
     user.roam_fn('(zoom! {{:uid "{roam_ref}"}})')
 
+zoom {user.roam_daily}:
+    user.roam_fn("(zoom! {{:daily {roam_daily}}})")
+
 zoom parent [block] [of] <user.letters> :
     user.roam_fn("(zoom-parent! :{letters_1})")
 
@@ -80,7 +83,7 @@ zoom parent [block] [of] <user.letters> :
 ## ++++ move block to first/last child .
 !
 # intended  for use in single list (no alias commands)
-<user.roam_source> <user.roam_position> $:
+[move] <user.roam_source> <user.roam_position> $:
     user.roam_fn("(transfer! {{ {roam_source} :position {roam_position or ':last'}}})")
 
 <user.roam_action> <user.roam_source> ( to <user.roam_destination> [<user.roam_position>] | [to] [<user.roam_position>] [of] <user.roam_destination>)$:

@@ -97,6 +97,18 @@ def roam_destination(m) -> str:
         pass
     return ':uid "' + m.roam_ref + '"'
 
+# Daily note page keywords
+mod.list("roam_daily", desc="Daily note page references")
+ctx.lists["user.roam_daily"] = {
+    "today": ":today",
+    "yesterday": ":yesterday",
+    "tomorrow": ":tomorrow",
+}
+
+@mod.capture(rule="{user.roam_daily}")
+def roam_daily(m) -> str:
+    return m.roam_daily
+
 # Relative direction for nudging blocks in the outliner
 mod.list("roam_direction", desc="Relative block movement direction")
 ctx.lists["user.roam_direction"] = {
