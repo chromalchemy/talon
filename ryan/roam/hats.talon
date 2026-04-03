@@ -2,6 +2,14 @@ app.name: Roam Research
 mode: command
 -
 
+## +++++++++++++++++++++ debug helpers .
+
+print source <user.roam_source>:
+    print("command ran")
+    print(roam_source)
+
+## ++++++++++++++++++ show hide labels .
+
 show [block] hats | [block] hats show | [block] hats on: 
     user.roam_fn("(hats-on!)")
 
@@ -27,10 +35,10 @@ hide [block] hats | [block] hats off :
 (take) <user.letters> and <user.letters>:
     user.roam_fn("(select! [:{letters_1} :{letters_2}])")
 
-((take) (add | ad | also) | (add | ad | also) take) <user.letters>:
+((take) (add | ad | also) | (also | and) take | (ad | add) to selected [blocks]) <user.letters> | (ad | add) <user.letters> to (selection | select | take | selected [blocks]):
     user.roam_fn("(select-add! [:{letters}])")
 
-(un take | not take | take not | unselect | remove from [block] selection ) <user.letters> | remove <user.letters> from selection:
+(un take | not take | take not | unselect | deselect | remove from [block] (selection | select | selected [blocks]) ) <user.letters> | remove <user.letters> from (selection | select | selected [blocks]):
     user.roam_fn("(select-remove! [:{letters}])")
 
 ## ++++++++++++++++++++++++ fold block .
@@ -62,11 +70,10 @@ zoom parent [block] [of] <user.letters> :
 [<user.roam_position>] child <user.letters> :
     user.roam_fn("(reorder! [:{letters_1}] {roam_position or ':last'})")
 
-<user.roam_action> <user.roam_source> <user.roam_position> <user.roam_destination>:
+<user.roam_action> <user.roam_source> ( to <user.roam_destination> [<user.roam_position>] | [to] [<user.roam_position>] [of] <user.roam_destination>)$:
     fn = """
     (transfer! 
-      {{{roam_source} 
-       {roam_destination} 
+      {{{roam_source} {roam_destination} 
        :position {roam_position or "nil"} 
        :action {roam_action}}})
     """

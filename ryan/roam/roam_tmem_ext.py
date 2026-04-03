@@ -23,17 +23,16 @@ def roam_action(m) -> str:
 mod.list("roam_position", desc="Block placement position")
 ctx.lists["user.roam_position"] = {
     "top": ":first",
-    "to top": ":first",
-    "to top of": ":first",
     "start": ":first",
     "first": ":first",
+    "first child": ":first",
+    "under": ":last",
     "bottom": ":last",
-    "to bottom": ":last",
-    "to bottom of": ":last",
     "end": ":last",
     "last": ":last",
-    "to": ":last",
+    "last child": ":last",
     "inside": ":last",
+    "over": ":last",
     "before": ":before",
     "above": ":before",
     "after": ":after",
@@ -63,7 +62,7 @@ def roam_source_base(m) -> str:
 # "parent A" → :labels [:A] :parent true
 # "parent agenda" → :source-uid "uid" :parent true
 # "parent" → :parent true  (parent of focused block)
-@mod.capture(rule="parent [of] <user.roam_source_base> | parent | <user.roam_source_base>")
+@mod.capture(rule="(parent [of] | tree) <user.roam_source_base> | parent | <user.roam_source_base>")
 def roam_source(m) -> str:
     try:
         base = m.roam_source_base
