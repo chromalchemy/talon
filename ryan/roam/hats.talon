@@ -97,6 +97,9 @@ zoom parent [block] [of] <user.letters> :
 nudge <user.letters> <user.roam_direction>:
     user.roam_fn("(nudge! :{letters} {roam_direction})")
 
+nudge <user.roam_direction>:
+    user.roam_fn("(nudge! {roam_direction})")
+
 ## ++++++++++++++++++++++++++ swap blocks .
 
 swap <user.letters> [and | with] <user.letters>:
