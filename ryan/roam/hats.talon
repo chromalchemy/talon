@@ -60,8 +60,14 @@ hide [block] hats | [block] hats off :
 zoom (out | parent) block | go (parent | parents | parens):
     user.roam_fn("(zoom-out!)")
 
-zoom <user.roam_destination>:
-    user.roam_fn('(zoom! {{roam_destination}})')
+zoom [block] <user.letters>:
+    user.roam_fn("(zoom! :{letters_1})")
+
+zoom [to] {user.roam_tag}:
+    user.roam_fn('(zoom! {{:page "{roam_tag}"}})')
+
+zoom [to] {user.roam_ref}:
+    user.roam_fn('(zoom! {{:uid "{roam_ref}"}})')
 
 zoom parent [block] [of] <user.letters> :
     user.roam_fn("(zoom-parent! :{letters_1})")
