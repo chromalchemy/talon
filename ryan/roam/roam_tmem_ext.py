@@ -97,6 +97,21 @@ def roam_destination(m) -> str:
         pass
     return ':uid "' + m.roam_ref + '"'
 
+# Relative direction for nudging blocks in the outliner
+mod.list("roam_direction", desc="Relative block movement direction")
+ctx.lists["user.roam_direction"] = {
+    "up": ":up",
+    "down": ":down",
+    "left above": ":left-above",
+    "left below": ":left-below",
+    "right": ":right",
+    "right below": ":right-below",
+}
+
+@mod.capture(rule="{user.roam_direction}")
+def roam_direction(m) -> str:
+    return m.roam_direction
+
 @mod.action_class
 class Actions:
     def roam_fn(clj: str):
