@@ -83,11 +83,17 @@ zoom parent [block] [of] <user.letters> :
 
 ## +++++++++++++ open block in sidebar .
 
-(bar | sidebar) <user.roam_destination>:
-    user.roam_fn('(open-sidebar! {{roam_destination}})')
-
-open <user.letters> in (bar | sidebar):
+(bar | sidebar) [block] <user.letters> | open <user.letters> in (bar | sidebar):
     user.roam_fn("(open-sidebar! :{letters})")
+
+(bar | sidebar) [to] {user.roam_tag}:
+    user.roam_fn('(open-sidebar! {{:page "{roam_tag}"}})')
+
+(bar | sidebar) [to] {user.roam_ref}:
+    user.roam_fn('(open-sidebar! {{:uid "{roam_ref}"}})')
+
+(bar | sidebar) {user.roam_daily}:
+    user.roam_fn("(open-sidebar! {{:daily {roam_daily}}})")
 
 ## ++++ move block to first/last child .
 !
