@@ -83,8 +83,11 @@ zoom parent [block] [of] <user.letters> :
 
 ## +++++++++++++ open block in sidebar .
 
-(bar | sidebar) <user.letters> | open <user.letters> in (bar | sidebar):
-    user.roam_fn("(open-sidebar! :{letters_1})")
+(bar | sidebar) <user.roam_destination>:
+    user.roam_fn('(open-sidebar! {{roam_destination}})')
+
+open <user.letters> in (bar | sidebar):
+    user.roam_fn("(open-sidebar! :{letters})")
 
 ## ++++ move block to first/last child .
 !
