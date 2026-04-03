@@ -39,33 +39,34 @@ change date point:
     key(cmd-alt-shift-j) 
     #telport extension
 
-go [to] today:  
-    key(ctrl-shift-d)
+# go [to] today:  
+#     key(ctrl-shift-d)
 
-(open | go) [to] today [in] (sidebar | bar):
-    user.run_roam_command("go to today (sidebar)")
+# (open | go) [to] today [in] (sidebar | bar):
+#     user.run_roam_command("go to today (sidebar)")
 
 ## +++++++++++++++++++++ go relative date .
 
-go tomorrow:
-    key(ctrl-shift-d)
-    sleep(500ms)
-    key(ctrl-alt-n)
+# go tomorrow:
+#     key(ctrl-shift-d)
+#     sleep(500ms)
+#     key(ctrl-alt-n)
     
-go yesterday:
-    key(ctrl-shift-d)
-    sleep(500ms)
-    key(ctrl-alt-p)
+# go yesterday:
+#     key(ctrl-shift-d)
+#     sleep(500ms)
+#     key(ctrl-alt-p)
 
-go (next day | day next): 
-    key(ctrl-alt-n)
+# go (next day | day next): 
+#     key(ctrl-alt-n)
 
 # tomorrow not always accurate
-(open | go [to]) (next day | day next | tomorrow) [in] (sidebar | bar):
-    user.run_roam_command("go to next day (sidebar)")
+# (open | go [to]) (next day | day next | tomorrow) [in] (sidebar | bar):
+#     user.run_roam_command("go to next day (sidebar)")
+
 # yesterday not always accurate
-go ((prev | previous | last) day | day (prev | previous | last)):  
-    key(ctrl-alt-p)
+# go ((prev | previous | last) day | day (prev | previous | last)):  
+#     key(ctrl-alt-p)
 
 # yesterday not always accurate
 (open | go) [to] ((prev | previous | last) day | day (prev | previous | last) | yesterday)  [in] (sidebar | bar):

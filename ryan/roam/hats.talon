@@ -63,6 +63,12 @@ zoom (out | (parent | parents | parens) [of]) (top | root) [block]:
 zoom <user.roam_destination>:
     user.roam_fn('(zoom! {roam_destination})')
 
+zoom (forward | next) day $:
+    user.roam_fn("(zoom! :daily 1)")
+
+zoom (back | previous | prev | last) day $:
+    user.roam_fn("(zoom! :daily -1)")
+
 zoom (forward | next | plus) <number_small> [days]:
     user.roam_fn("(zoom! :daily {number_small})")
 
