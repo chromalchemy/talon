@@ -60,40 +60,25 @@ hide [block] hats | [block] hats off :
 zoom (out | (parent | parents | parens) [of]) (top | root) [block]:
     user.roam_fn("(zoom-out!)")
 
-zoom [block] <user.letters>:
-    user.roam_fn("(zoom! :{letters_1})")
-
-zoom [to] {user.roam_tag}:
-    user.roam_fn('(zoom! {{:page "{roam_tag}"}})')
-
-zoom [to] {user.roam_ref}:
-    user.roam_fn('(zoom! {{:uid "{roam_ref}"}})')
-
-zoom {user.roam_daily}:
-    user.roam_fn("(zoom! {{:daily {roam_daily}}})")
+zoom <user.roam_destination>:
+    user.roam_fn('(zoom! {roam_destination})')
 
 zoom (forward | next | plus) <number_small> [days]:
-    user.roam_fn("(zoom! {{:daily {number_small}}})")
+    user.roam_fn("(zoom! :daily {number_small})")
 
 zoom (back | previous | minus) <number_small> [days]:
-    user.roam_fn("(zoom! {{:daily -{number_small}}})")
+    user.roam_fn("(zoom! :daily -{number_small})")
 
 zoom parent [block] [of] <user.letters> :
     user.roam_fn("(zoom-parent! :{letters_1})")
 
 ## +++++++++++++ open block in sidebar .
 
-(bar | sidebar) [block] <user.letters> | open <user.letters> in (bar | sidebar):
-    user.roam_fn("(open-sidebar! :{letters})")
+(bar | sidebar) <user.roam_destination>:
+    user.roam_fn('(open-sidebar! {roam_destination})')
 
-(bar | sidebar) [to] {user.roam_tag}:
-    user.roam_fn('(open-sidebar! {{:page "{roam_tag}"}})')
-
-(bar | sidebar) [to] {user.roam_ref}:
-    user.roam_fn('(open-sidebar! {{:uid "{roam_ref}"}})')
-
-(bar | sidebar) {user.roam_daily}:
-    user.roam_fn("(open-sidebar! {{:daily {roam_daily}}})")
+open <user.letters> in (bar | sidebar):
+    user.roam_fn("(open-sidebar! :label :{letters})")
 
 ## ++++ move block to first/last child .
 !
