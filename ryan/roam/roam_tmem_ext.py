@@ -103,6 +103,20 @@ ctx.lists["user.roam_daily"] = {
     "today": ":today",
     "yesterday": ":yesterday",
     "tomorrow": ":tomorrow",
+    "next monday": ":next-mon",
+    "next tuesday": ":next-tue",
+    "next wednesday": ":next-wed",
+    "next thursday": ":next-thu",
+    "next friday": ":next-fri",
+    "next saturday": ":next-sat",
+    "next sunday": ":next-sun",
+    "last monday": ":last-mon",
+    "last tuesday": ":last-tue",
+    "last wednesday": ":last-wed",
+    "last thursday": ":last-thu",
+    "last friday": ":last-fri",
+    "last saturday": ":last-sat",
+    "last sunday": ":last-sun",
 }
 
 @mod.capture(rule="{user.roam_daily}")

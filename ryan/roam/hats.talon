@@ -72,6 +72,12 @@ zoom [to] {user.roam_ref}:
 zoom {user.roam_daily}:
     user.roam_fn("(zoom! {{:daily {roam_daily}}})")
 
+zoom (forward | next | plus) <number_small> [days]:
+    user.roam_fn("(zoom! {{:daily {number_small}}})")
+
+zoom (back | previous | minus) <number_small> [days]:
+    user.roam_fn("(zoom! {{:daily -{number_small}}})")
+
 zoom parent [block] [of] <user.letters> :
     user.roam_fn("(zoom-parent! :{letters_1})")
 
