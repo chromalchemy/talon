@@ -11,8 +11,20 @@ mod.list("roam_action", desc="Block transfer action verb")
 ctx.lists["user.roam_action"] = {
     "move": ":move",
     "link": ":link",
+    "send link": ":link",
     "alias": ":alias",
-    "ref": ":alias",
+    "link move": ":alias",
+    "link and move": ":alias",
+    "link block and move": ":alias",
+    "ref block and move": ":alias",
+    "ref block move": ":alias",
+    "reference block and move": ":alias",
+    "reference block move": ":alias",
+    "leave alias": ":alias",
+    "leave ref": ":alias",
+    "leave ref move": ":alias",
+    "leave ref and move": ":alias",
+    "ref": ":link",
 }
 
 @mod.capture(rule="{user.roam_action}")
