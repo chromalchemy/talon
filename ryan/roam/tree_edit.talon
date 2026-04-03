@@ -11,17 +11,17 @@ timout test:
 
 ## ++++++++++++++++++++++++ move current block on page 
 
-(block | move) up: 
-    user.roam_block_up(1)
+# (block | move) up: 
+#     user.roam_block_up(1)
 
-(block | move) down: 
-    user.roam_block_down(1)
+# (block | move) down: 
+#     user.roam_block_down(1)
 
-(block | move) (in | (right | write | rate) | forward | fore | four): 
-    user.roam_block_forward(1)
+# (block | move) (in | (right | write | rate) | forward | fore | four): 
+#     user.roam_block_forward(1)
 
-(block | move) (out | left | back) | dedent | indent less: 
-    user.roam_block_back(1)
+# (block | move) (out | left | back) | dedent | indent less: 
+#     user.roam_block_back(1)
 
 
 #make unlimited todo

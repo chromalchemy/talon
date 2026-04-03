@@ -57,7 +57,7 @@ hide [block] hats | [block] hats off :
 
 ## ++++++++++++++++++++++++ zoom block .
 
-zoom (out | parent) block | go (parent | parents | parens):
+zoom (out | (parent | parents | parens) [of]) (top | root) [block]:
     user.roam_fn("(zoom-out!)")
 
 zoom [block] <user.letters>:
@@ -80,7 +80,7 @@ zoom parent [block] [of] <user.letters> :
 ## ++++ move block to first/last child .
 !
 # intended  for use in single list (no alias commands)
-[<user.roam_position>] <user.roam_source> $:
+<user.roam_source> <user.roam_position> $:
     user.roam_fn("(transfer! {{ {roam_source} :position {roam_position or ':last'}}})")
 
 <user.roam_action> <user.roam_source> ( to <user.roam_destination> [<user.roam_position>] | [to] [<user.roam_position>] [of] <user.roam_destination>)$:
@@ -94,10 +94,10 @@ zoom parent [block] [of] <user.letters> :
 
 ## ++++++++++++++++++++ nudge block .
 
-nudge <user.letters> <user.roam_direction>:
+[nudge] <user.letters> <user.roam_direction>:
     user.roam_fn("(nudge! :{letters} {roam_direction})")
 
-nudge <user.roam_direction>:
+[nudge] block <user.roam_direction>:
     user.roam_fn("(nudge! {roam_direction})")
 
 ## ++++++++++++++++++++++++++ swap blocks .
