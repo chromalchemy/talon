@@ -85,7 +85,7 @@ def roam_source(m) -> str:
     return base
 
 # Destination capture: returns clojure kv-pair fragment (no braces)
-@mod.capture(rule="<user.letters> | {user.roam_tag} | {user.roam_ref}")
+@mod.capture(rule="<user.letters> | {user.roam_tag} | {user.roam_ref} | {user.roam_daily}")
 def roam_destination(m) -> str:
     try:
         return ":label :" + m.letters
@@ -95,7 +95,11 @@ def roam_destination(m) -> str:
         return ':page "' + m.roam_tag + '"'
     except AttributeError:
         pass
-    return ':uid "' + m.roam_ref + '"'
+    try:
+        return ':uid "' + m.roam_ref + '"'
+    except AttributeError:
+        pass
+    return ":daily " + m.roam_daily
 
 # Daily note page keywords
 mod.list("roam_daily", desc="Daily note page references")
