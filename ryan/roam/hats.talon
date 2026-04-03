@@ -74,7 +74,7 @@ zoom parent [block] [of] <user.letters> :
 ## ++++ move block to first/last child .
 
 [<user.roam_position>] child <user.letters> :
-    user.roam_fn("(reorder! [:{letters_1}] {roam_position or ':last'})")
+    user.roam_fn("(transfer! {{:labels [:{letters_1}] :position {roam_position or ':last'}}})")
 
 <user.roam_action> <user.roam_source> ( to <user.roam_destination> [<user.roam_position>] | [to] [<user.roam_position>] [of] <user.roam_destination>)$:
     fn = """
