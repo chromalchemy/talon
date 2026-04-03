@@ -64,10 +64,10 @@ zoom <user.roam_destination>:
     user.roam_fn('(zoom! {roam_destination})')
 
 zoom (forward | next) day $:
-    user.roam_fn("(zoom! :daily 1)")
+    user.roam_fn("(zoom! :daily :next-day)")
 
 zoom (back | previous | prev | last) day $:
-    user.roam_fn("(zoom! :daily -1)")
+    user.roam_fn("(zoom! :daily :prev-day)")
 
 zoom (forward | next | plus) <number_small> [days]:
     user.roam_fn("(zoom! :daily {number_small})")

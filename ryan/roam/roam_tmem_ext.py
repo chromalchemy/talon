@@ -84,8 +84,20 @@ def roam_source(m) -> str:
         return base + " :parent true"
     return base
 
+# Relative day direction for N-days offset (multiplier)
+mod.list("roam_dnp_dir", desc="Direction for relative DNP day offset")
+ctx.lists["user.roam_dnp_dir"] = {
+    "forward": "1",
+    "ahead": "1",
+    "from now": "1",
+    "after": "1",
+    "back": "-1",
+    "ago": "-1",
+    "before": "-1",
+}
+
 # Destination capture: returns clojure kv-pair fragment (no braces)
-@mod.capture(rule="<user.letters> | {user.roam_tag} | {user.roam_ref} | {user.roam_daily}")
+@mod.capture(rule="<user.letters> | {user.roam_tag} | {user.roam_ref} | {user.roam_daily} | <number_small> days {user.roam_dnp_dir}")
 def roam_destination(m) -> str:
     try:
         return ":label :" + m.letters
@@ -99,6 +111,12 @@ def roam_destination(m) -> str:
         return ':uid "' + m.roam_ref + '"'
     except AttributeError:
         pass
+    try:
+        n = m.number_small
+        sign = int(m.roam_dnp_dir)
+        return ":daily " + str(n * sign)
+    except AttributeError:
+        pass
     return ":daily " + m.roam_daily
 
 # Daily note page keywords
@@ -107,6 +125,9 @@ ctx.lists["user.roam_daily"] = {
     "today": ":today",
     "yesterday": ":yesterday",
     "tomorrow": ":tomorrow",
+    "next day": ":next-day",
+    "previous day": ":prev-day",
+    "last day": ":prev-day",
     "next monday": ":next-mon",
     "next tuesday": ":next-tue",
     "next wednesday": ":next-wed",
