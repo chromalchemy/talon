@@ -49,10 +49,10 @@ hide [block] hats | [block] hats off :
 (unfold | collapse) <user.letters> :
     user.roam_fn("(unfold! [:{letters_1}])")
 
-(fold | expand) children [of] <user.letters> :
+(fold | expand) (children | kids) [of] <user.letters> :
     user.roam_fn("(fold-children! :{letters_1})")
 
-(unfold | collapse) children [of] <user.letters> :
+(unfold | collapse) (children | kids) [of] <user.letters> :
     user.roam_fn("(unfold-children! :{letters_1})")
 
 ## ++++++++++++++++++++++++ zoom block .
