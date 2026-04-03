@@ -72,9 +72,10 @@ zoom parent [block] [of] <user.letters> :
     user.roam_fn("(open-sidebar! :{letters_1})")
 
 ## ++++ move block to first/last child .
-
-[<user.roam_position>] child <user.letters> :
-    user.roam_fn("(transfer! {{:labels [:{letters_1}] :position {roam_position or ':last'}}})")
+!
+# intended  for use in single list (no alias commands)
+[<user.roam_position>] <user.roam_source> $:
+    user.roam_fn("(transfer! {{ {roam_source} :position {roam_position or ':last'}}})")
 
 <user.roam_action> <user.roam_source> ( to <user.roam_destination> [<user.roam_position>] | [to] [<user.roam_position>] [of] <user.roam_destination>)$:
     fn = """
@@ -84,6 +85,11 @@ zoom parent [block] [of] <user.letters> :
        :action {roam_action}}})
     """
     user.roam_fn(fn)
+
+## ++++++++++++++++++++ nudge block .
+
+nudge <user.letters> <user.roam_direction>:
+    user.roam_fn("(nudge! :{letters} {roam_direction})")
 
 ## ++++++++++++++++++++++++++ swap blocks .
 
