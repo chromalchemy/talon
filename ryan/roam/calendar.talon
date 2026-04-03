@@ -3,36 +3,16 @@ mode: command
 -
 
 calendar reminder | set reminder:
-    key(cmd-p)
-    sleep(150ms)
-    insert("Full Calendar: Set Reminder")
-    sleep(150ms)
-    key(enter)
+    user.run_roam_command("Full Calendar: Set Reminder")
 
-calendar (show | hide | toggle) [main]:
-    key(cmd-p)
-    sleep(150ms)
-    insert("Full Calendar: Display/Hide in main window")
-    sleep(150ms)
-    key(enter)
+calendar (show | hide | toggle) [main] | (show | hide | toggle) [main] calendar:
+    user.run_roam_command("Full Calendar: Display/Hide in main window")
 
-calendar (show | hide | toggle) (bar | sidebar):
-    key(cmd-p)
-    sleep(150ms)
-    insert("Full Calendar: Display/Hide in Sidebar")
-    sleep(150ms)
-    key(enter)
+bar calendar:
+    user.run_roam_command("Full Calendar: Display/Hide in Sidebar")
 
-calendar sync [google]:
-    key(cmd-p)
-    sleep(150ms)
-    insert("Full Calendar: Sync to default Google calendar")
-    sleep(150ms)
-    key(enter)
+sync calendar [to] [google] [calendar] | sync google calendar:
+    user.run_roam_command("Full Calendar: Sync to default Google calendar")
 
-calendar settings:
-    key(cmd-p)
-    sleep(150ms)
-    insert("Roam Depot Extension Settings: Full Calendar")
-    sleep(150ms)
-    key(enter)
+[go] calendar (settings | options | config):
+    user.run_roam_command("Roam Depot Extension Settings: Full Calendar")
