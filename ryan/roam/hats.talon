@@ -57,25 +57,25 @@ hide [block] hats | [block] hats off :
 
 ## ++++++++++++++++++++++++ zoom block .
 
-zoom (out | (parent | parents | parens) [of]) (top | root) [block]:
+(zoom | load) (out | (parent | parents | parens) [of]) (top | root) [block]:
     user.roam_fn("(zoom-out!)")
 
-zoom <user.roam_destination>:
+(zoom | load) <user.roam_destination>:
     user.roam_fn('(zoom! {roam_destination})')
 
-zoom (forward | next) day $:
+(zoom | load) (forward | next) day $:
     user.roam_fn("(zoom! :daily :next-day)")
 
-zoom (back | previous | prev | last) day $:
+(zoom | load) (back | previous | prev | last) day $:
     user.roam_fn("(zoom! :daily :prev-day)")
 
-zoom (forward | next | plus) <number_small> [days]:
+(zoom | load) (forward | next | plus) <number_small> [days]:
     user.roam_fn("(zoom! :daily {number_small})")
 
-zoom (back | previous | minus) <number_small> [days]:
+(zoom | load) (back | previous | minus) <number_small> [days]:
     user.roam_fn("(zoom! :daily -{number_small})")
 
-zoom parent [block] [of] <user.letters> :
+(zoom | load) parent [block] [of] <user.letters> :
     user.roam_fn("(zoom-parent! :{letters_1})")
 
 ## +++++++++++++ open block in sidebar .
@@ -89,7 +89,7 @@ open <user.letters> in (bar | sidebar):
 ## ++++ move block to first/last child .
 !
 # intended  for use in single list (no alias commands)
-[move] <user.roam_source> <user.roam_position> $:
+[move] <user.roam_source> [to] <user.roam_position> $:
     user.roam_fn("(transfer! {{ {roam_source} :position {roam_position or ':last'}}})")
 
 <user.roam_action> <user.roam_source> ( to <user.roam_destination> [<user.roam_position>] | [to] [<user.roam_position>] [of] <user.roam_destination>)$:
