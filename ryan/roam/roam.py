@@ -50,7 +50,7 @@ class Actions:
     def roam_new_block_below():
         """ccc"""
         actions.key("ctrl-shift-k")
-        actions.sleep("700ms")
+        actions.sleep("900ms")
 
     def roam_new_block_above():
         """ccc"""
@@ -182,6 +182,11 @@ class Actions:
         """inserts a formal tag reference string"""
         x = "{{[[" + s + "]]}}"
         actions.insert(x)
+
+    def roam_insert_divider():
+        """inserts a formal tag reference string"""
+        actions.insert("---")
+        actions.sleep("100ms")
 
 
     
