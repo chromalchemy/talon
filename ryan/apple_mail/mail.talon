@@ -47,18 +47,18 @@ to do: key(ctrl-o)
 (get | check) [for] new mail:
     user.menu_select('Mailbox|Get New Mail')
 
-download attachment here:
+(download | save) attachment [here]:
     mouse_click(1)
     sleep(100ms)
     insert("save attachment")
 
-download and copy attachment here:
+(download | save) and copy attachment [here]:
     mouse_click(1)
     sleep(400ms)
     insert("save attachment")
     key(enter)
     sleep(1000ms)
     key(cmd-c)
-    sleep(200ms)
+    sleep(500ms)
     # edit.copy()
     key(enter)
