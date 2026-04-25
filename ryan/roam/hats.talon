@@ -21,6 +21,27 @@ hide [block] hats | [block] hats off :
 (go) <user.letters>:
     user.roam_fn("(select! [:{letters}] {{:edit true}})")
 
+(make | mark | big) <user.letters>  (todo | to do | task | action): 
+    user.roam_fn("(select! [:{letters}] {{:edit true}})")
+    sleep(300ms)
+    key(cmd-return)
+    sleep(100ms)
+    key(esc:2)
+
+mark <user.letters> done:
+    user.roam_fn("(select! [:{letters}] {{:edit true}})")
+    sleep(300ms)
+    key(cmd-return)
+    sleep(100ms)
+    key(esc:2) 
+    
+make <user.letters> done: 
+    user.roam_fn("(select! [:{letters}] {{:edit true}})")
+    sleep(300ms)
+    key(cmd-return:2)
+    sleep(100ms)
+    key(esc:2)
+
 ## +++++++++++++++++++++ select blocks .
 
 (take) <user.letters>:
