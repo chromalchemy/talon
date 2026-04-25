@@ -16,13 +16,13 @@ ryan/clojure/.nrepl-port
 ryan/clojure/.joyride/.nrepl-port
 
 # Nested repos (managed independently)
-andreas/
-clippy-talon/
-community/
-cursorless-talon/
-rango-talon/
-talon-ai-tools/
-talon-gaze-ocr/
-talon_axkit/
-talon_hud/
+# andreas/
+# clippy-talon/
+# community/
+# cursorless-talon/
+# rango-talon/
+# talon-ai-tools/
+# talon-gaze-ocr/
+# talon_axkit/
+# talon_hud/
 .nrepl-port
