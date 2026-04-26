@@ -62,17 +62,19 @@ make <user.letters> done:
 (take) <user.letters> and <user.letters>:
     user.roam_select_labels(letters_1, letters_2)
 
-# Hard-take variants stay legacy (drop into edit mode then escape)
-(take) <user.letters> (classic) | (hard take) <user.letters> :
-    user.roam_fn("(select! [:{letters}] {{:edit true}})")
-    sleep(800ms)
-    key(esc)
-
 ((take) (add | ad | also) | (also | and) take | (ad | add) to selected [blocks]) <user.roam_target> | (ad | add) <user.roam_target> to (selection | select | take | selected [blocks]):
     user.roam_action("addToSelection", roam_target)
 
 (un take | not take | take not | unselect | deselect | remove from [block] (selection | select | selected [blocks]) ) <user.roam_target> | remove <user.roam_target> from (selection | select | selected [blocks]):
     user.roam_action("removeFromSelection", roam_target)
+
+## ++++++++++++++++++++ hard selection .
+
+# Hard-take variants stay legacy (drop into edit mode then escape)
+(take) <user.letters> (classic) | (hard take) <user.letters> :
+    user.roam_fn("(select! [:{letters}] {{:edit true}})")
+    sleep(800ms)
+    key(esc)
 
 ## ++++++++++++++++++++++++ fold block (PHASE E composable) .
 ## NOTE: spoken-form-to-action mapping preserved from legacy:
@@ -89,7 +91,7 @@ make <user.letters> done:
 (zoom | load) (forward | next | plus) <number_small> [days]:
     user.roam_zoom_daily_offset(number_small)
 
-(zoom | load) (back | previous | minus) <number_small> [days]:
+(zoom | load) (back | backward | backwards | previous | minus) <number_small> [days]:
     user.roam_zoom_daily_offset(0 - number_small)
 
 ## +++++++++++++ open block in sidebar (PHASE E composable) .

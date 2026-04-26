@@ -354,9 +354,9 @@ class Actions:
     def roam_fn(clj: str):
         """Evaluate a clojure expression in bridge.clj context (legacy).
         Falls back to bb shell-out for commands not yet on the daemon path."""
-        cmd = f'''cd '{CODE_PATH}' && {BB_PATH} -e '(load-file "bridge.clj") {clj}' '''
+        cmd = f'''{clj}'''
         print(cmd)
-        actions.user.system_command_nb(cmd)
+        _eval(cmd)
 
     # ── Composable action surface (daemon mode) ─────────────────────
     def roam_action(name: str, target: str):
