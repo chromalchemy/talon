@@ -59,56 +59,90 @@ copy block:
     user.roam_select_block()
     edit.cut()
 
-## ++++++++++++++++++++++++ new (empty) blocks .
+## ++++++++++++++++++++++++ new (empty) blocks (PHASE E composable) .
+## All 12 spoken forms route through user.roam_action_dest("insertNewBlock", dest).
+## Each spoken form constructs the destination AST inline; bridge.clj's
+## insertNewBlock dispatch handles parent-uid + order resolution uniformly.
 
-# to top/bottom of current page
-
+# to top/bottom of current page (cursor → containing page → position start|end)
 (insert | new) top block $:
-    user.roam_fn("(new-block!)")
+    target = {"type": "primitive", "mark": {"type": "cursor"},
+              "modifiers": [{"type": "containing", "scope": "page"},
+                            {"type": "position", "at": "start"}]}
+    dest = {"type": "destination", "insertionMode": "to", "target": target}
+    user.roam_action_dest("insertNewBlock", dest)
 
 (insert | new) bottom block $:
-    user.roam_fn("(new-block! {{:order :last}})")
+    target = {"type": "primitive", "mark": {"type": "cursor"},
+              "modifiers": [{"type": "containing", "scope": "page"},
+                            {"type": "position", "at": "end"}]}
+    dest = {"type": "destination", "insertionMode": "to", "target": target}
+    user.roam_action_dest("insertNewBlock", dest)
 
-# to top/bottom of current parent block
-
+# to top/bottom of current parent block (sibling-style)
 (insert | new) (block here [(top | first)] | first child) $:
-    user.roam_fn("(new-sibling!)")
+    target = {"type": "primitive", "mark": {"type": "cursor"},
+              "modifiers": [{"type": "containing", "scope": "parent"},
+                            {"type": "position", "at": "start"}]}
+    dest = {"type": "destination", "insertionMode": "to", "target": target}
+    user.roam_action_dest("insertNewBlock", dest)
 
 (insert | new) (block here (bottom | last) | last child) $:
-    user.roam_fn("(new-sibling! {{:order :last}})")
+    target = {"type": "primitive", "mark": {"type": "cursor"},
+              "modifiers": [{"type": "containing", "scope": "parent"},
+                            {"type": "position", "at": "end"}]}
+    dest = {"type": "destination", "insertionMode": "to", "target": target}
+    user.roam_action_dest("insertNewBlock", dest)
 
-# before/after target  block
-
+# before/after target block (sibling insertion)
 (insert | new) block (above | before | pre) <user.letters>:
-    user.roam_fn("(new-before! :{letters})")
+    target = {"type": "primitive", "mark": {"type": "label", "value": letters.upper()}}
+    dest = {"type": "destination", "insertionMode": "before", "target": target}
+    user.roam_action_dest("insertNewBlock", dest)
 
 (insert | new) block (below | after | post) <user.letters>:
-    user.roam_fn("(new-after! :{letters})")
+    target = {"type": "primitive", "mark": {"type": "label", "value": letters.upper()}}
+    dest = {"type": "destination", "insertionMode": "after", "target": target}
+    user.roam_action_dest("insertNewBlock", dest)
 
-
-# to top/bottom child of labeled block 
-
+# to top/bottom child of labeled block
 (insert | new) ([top] block [in] | [first] child [block] [first] [in]) <user.letters>:
-    user.roam_fn("(new-child! :{letters})")
+    target = {"type": "primitive", "mark": {"type": "label", "value": letters.upper()},
+              "modifiers": [{"type": "position", "at": "start"}]}
+    dest = {"type": "destination", "insertionMode": "to", "target": target}
+    user.roam_action_dest("insertNewBlock", dest)
 
 (insert | new) (bottom block [in] | last child [block] [in] | child last) <user.letters>:
-    user.roam_fn("(new-child! :{letters} {{:order :last}})")
+    target = {"type": "primitive", "mark": {"type": "label", "value": letters.upper()},
+              "modifiers": [{"type": "position", "at": "end"}]}
+    dest = {"type": "destination", "insertionMode": "to", "target": target}
+    user.roam_action_dest("insertNewBlock", dest)
 
 # to top/bottom of specified page
-
 (insert | new) top block {user.roam_tag}:
-    user.roam_fn('(new-block! {{:page "{roam_tag}"}})')
+    target = {"type": "primitive", "mark": {"type": "pageTitle", "value": roam_tag},
+              "modifiers": [{"type": "position", "at": "start"}]}
+    dest = {"type": "destination", "insertionMode": "to", "target": target}
+    user.roam_action_dest("insertNewBlock", dest)
 
 (insert | new) bottom block {user.roam_tag}:
-    user.roam_fn('(new-block! {{:page "{roam_tag}" :order :last}})')
+    target = {"type": "primitive", "mark": {"type": "pageTitle", "value": roam_tag},
+              "modifiers": [{"type": "position", "at": "end"}]}
+    dest = {"type": "destination", "insertionMode": "to", "target": target}
+    user.roam_action_dest("insertNewBlock", dest)
 
-# to top/bottom of ref
-
+# to top/bottom child of ref UID
 (insert | new) top (block | child) {user.roam_ref}:
-    user.roam_fn('(new-child! "{roam_ref}")')
+    target = {"type": "primitive", "mark": {"type": "uid", "value": roam_ref},
+              "modifiers": [{"type": "position", "at": "start"}]}
+    dest = {"type": "destination", "insertionMode": "to", "target": target}
+    user.roam_action_dest("insertNewBlock", dest)
 
 (insert | new) bottom (block | child) {user.roam_ref}:
-    user.roam_fn('(new-child! "{roam_ref}" {{:order :last}})')
+    target = {"type": "primitive", "mark": {"type": "uid", "value": roam_ref},
+              "modifiers": [{"type": "position", "at": "end"}]}
+    dest = {"type": "destination", "insertionMode": "to", "target": target}
+    user.roam_action_dest("insertNewBlock", dest)
 
 ## +++++++++++++++++++ paste block below .
 
