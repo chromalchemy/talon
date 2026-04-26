@@ -92,6 +92,13 @@ make <user.letters> done:
 (zoom | load) (back | previous | minus) <number_small> [days]:
     user.roam_zoom_daily_offset(0 - number_small)
 
+## +++++++++++++ open block in sidebar (PHASE E composable) .
+## Generic "bar A" / "sidebar A" handled by the action-verb rule above.
+
+# Legacy "open A in sidebar" phrasing preserved for muscle memory
+open <user.letters> in (bar | sidebar):
+    user.roam_action_label("openInSidebar", letters)
+
 ## ++++ move block to first/last child (PHASE E composable) .
 ## moveToTarget / linkToTarget / aliasMove via composable destination AST.
 
