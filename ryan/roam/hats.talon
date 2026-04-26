@@ -60,9 +60,9 @@ make <user.letters> done:
 
 # Two-letter list (multi-mark setSelection)
 (take) <user.letters> and <user.letters>:
-    t1 = {"type": "primitive", "mark": {"type": "label", "value": letters_1.upper()}}
-    t2 = {"type": "primitive", "mark": {"type": "label", "value": letters_2.upper()}}
-    user.roam_action("setSelection", {"type": "list", "elements": [t1, t2]})
+    t1 = '{:type "primitive" :mark {:type "label" :value "' + letters_1.upper() + '"}}'
+    t2 = '{:type "primitive" :mark {:type "label" :value "' + letters_2.upper() + '"}}'
+    user.roam_action("setSelection", '{:type "list" :elements [' + t1 + ' ' + t2 + ']}')
 
 # Hard-take variants stay legacy (drop into edit mode then escape)
 (take) <user.letters> (classic) | (hard take) <user.letters> :
@@ -86,97 +86,81 @@ make <user.letters> done:
 # Spoken-form sugar: "fold children of A" → collapse with every:child modifier.
 # Equivalent to "fold every child of A" via the generic rule above.
 (fold | expand) (children | kids) [of] <user.letters>:
-    target = {"type": "primitive",
-              "mark": {"type": "label", "value": letters.upper()},
-              "modifiers": [{"type": "every", "scope": "child"}]}
+    target = '{:type "primitive" :mark {:type "label" :value "' + letters.upper() + '"} :modifiers [{:type "every" :scope "child"}]}'
     user.roam_action("collapse", target)
 
 (unfold | collapse) (children | kids) [of] <user.letters>:
-    target = {"type": "primitive",
-              "mark": {"type": "label", "value": letters.upper()},
-              "modifiers": [{"type": "every", "scope": "child"}]}
+    target = '{:type "primitive" :mark {:type "label" :value "' + letters.upper() + '"} :modifiers [{:type "every" :scope "child"}]}'
     user.roam_action("expand", target)
 
 ## ++++++++++++++++++++++++ zoom block (PHASE E composable) .
 
 # zoom out to current page (cursor → containing page)
 (zoom | load) (out | (parent | parents | parens) [of] (top | root) [block] | top | root):
-    target = {"type": "primitive", "mark": {"type": "cursor"},
-              "modifiers": [{"type": "containing", "scope": "page"}]}
-    user.roam_action("zoom", target)
+    user.roam_action("zoom", '{:type "primitive" :mark {:type "cursor"} :modifiers [{:type "containing" :scope "page"}]}')
 
 # Generic "zoom A" / "load A" handled by the action-verb rule above.
 # Day-relative zoom (preserves legacy spoken forms)
 (zoom | load) (forward | next) day $:
-    user.roam_action("zoom", {"type": "primitive", "mark": {"type": "daily", "value": "next-day"}})
+    user.roam_action("zoom", '{:type "primitive" :mark {:type "daily" :value "next-day"}}')
 
 (zoom | load) (back | previous | prev | last) day $:
-    user.roam_action("zoom", {"type": "primitive", "mark": {"type": "daily", "value": "prev-day"}})
+    user.roam_action("zoom", '{:type "primitive" :mark {:type "daily" :value "prev-day"}}')
 
 (zoom | load) (forward | next | plus) <number_small> [days]:
-    user.roam_action("zoom", {"type": "primitive", "mark": {"type": "daily", "value": number_small}})
+    user.roam_action("zoom", '{:type "primitive" :mark {:type "daily" :value ' + str(number_small) + '}}')
 
 (zoom | load) (back | previous | minus) <number_small> [days]:
-    user.roam_action("zoom", {"type": "primitive", "mark": {"type": "daily", "value": -number_small}})
+    user.roam_action("zoom", '{:type "primitive" :mark {:type "daily" :value ' + str(-number_small) + '}}')
 
 ## +++++++++++++ open block in sidebar (PHASE E composable) .
 ## Generic "bar A" / "sidebar A" handled by the action-verb rule above.
 
 # Legacy "open A in sidebar" phrasing preserved for muscle memory
 open <user.letters> in (bar | sidebar):
-    target = {"type": "primitive", "mark": {"type": "label", "value": letters.upper()}}
-    user.roam_action("openInSidebar", target)
+    user.roam_action("openInSidebar", '{:type "primitive" :mark {:type "label" :value "' + letters.upper() + '"}}')
 
 ## ++++ move block to first/last child (PHASE E composable) .
 ## moveToTarget / linkToTarget / aliasMove via composable destination AST.
 
 # Single-list reorder: "move A to first" / "alias selected to last" / "B to start"
 # → moveToTarget src=<target> dest={to + position:start|end + parent-of-source}.
-# Bridge.clj's implicit destination for moveToTarget is exactly this shape, so
-# we let it default when no destination is spoken.
 [move] <user.roam_target> [to] (first | start | top) $:
-    parent_dest = dict(roam_target)
-    parent_dest["modifiers"] = list(parent_dest.get("modifiers", [])) + [
-        {"type": "containing", "scope": "parent"},
-        {"type": "position", "at": "start"}]
-    dest = {"type": "destination", "insertionMode": "to", "target": parent_dest}
-    user.roam_action_pair("moveToTarget", roam_target, dest)
+    user.roam_move_to_position(roam_target, "start")
 
 [move] <user.roam_target> [to] (last | end | bottom) $:
-    parent_dest = dict(roam_target)
-    parent_dest["modifiers"] = list(parent_dest.get("modifiers", [])) + [
-        {"type": "containing", "scope": "parent"},
-        {"type": "position", "at": "end"}]
-    dest = {"type": "destination", "insertionMode": "to", "target": parent_dest}
-    user.roam_action_pair("moveToTarget", roam_target, dest)
+    user.roam_move_to_position(roam_target, "end")
 
 # Full transfer: "move/link/alias <target> to <destination>"
 # Destination grammar: {to|before|after} [start of|end of] <target>.
-<user.roam_transfer_verb> <user.roam_target> <user.roam_destination>:
-    action_name = {":move": "moveToTarget",
-                   ":link": "linkToTarget",
-                   ":alias": "aliasMove"}[roam_transfer_verb]
-    user.roam_action_pair(action_name, roam_target, roam_destination)
+# roam_transfer_verb values are ":move"/":link"/":alias" (legacy clj keywords).
+move <user.roam_target> <user.roam_destination>:
+    user.roam_action_pair("moveToTarget", roam_target, roam_destination)
+
+link <user.roam_target> <user.roam_destination>:
+    user.roam_action_pair("linkToTarget", roam_target, roam_destination)
+
+(alias | leave ref | leave alias) <user.roam_target> <user.roam_destination>:
+    user.roam_action_pair("aliasMove", roam_target, roam_destination)
 
 ## ++++++++++++++++++++ nudge block (PHASE E composable) .
 
 [nudge] <user.letters> <user.roam_direction>:
-    target = {"type": "primitive", "mark": {"type": "label", "value": letters.upper()}}
-    user.roam_nudge(target, roam_direction[1:])
+    user.roam_nudge('{:type "primitive" :mark {:type "label" :value "' + letters.upper() + '"}}', roam_direction[1:])
 
 [nudge] block <user.roam_direction>:
-    user.roam_nudge({"type": "implicit"}, roam_direction[1:])
+    user.roam_nudge('{:type "implicit"}', roam_direction[1:])
 
 ## ++++++++++++++++++++++++++ swap blocks (PHASE E composable) .
 
 swap <user.letters> [and | with] <user.letters>:
-    t1 = {"type": "primitive", "mark": {"type": "label", "value": letters_1.upper()}}
-    t2 = {"type": "primitive", "mark": {"type": "label", "value": letters_2.upper()}}
-    user.roam_swap(t1, t2, False)
+    t1 = '{:type "primitive" :mark {:type "label" :value "' + letters_1.upper() + '"}}'
+    t2 = '{:type "primitive" :mark {:type "label" :value "' + letters_2.upper() + '"}}'
+    user.roam_swap(t1, t2, 0)
 
 swap content <user.letters> [and | with] <user.letters>:
-    t1 = {"type": "primitive", "mark": {"type": "label", "value": letters_1.upper()}}
-    t2 = {"type": "primitive", "mark": {"type": "label", "value": letters_2.upper()}}
-    user.roam_swap(t1, t2, True)
+    t1 = '{:type "primitive" :mark {:type "label" :value "' + letters_1.upper() + '"}}'
+    t2 = '{:type "primitive" :mark {:type "label" :value "' + letters_2.upper() + '"}}'
+    user.roam_swap(t1, t2, 1)
 
 ## "delete A" / "chuck A" handled by the action-verb rule at the top.

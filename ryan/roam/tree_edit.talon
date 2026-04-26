@@ -66,83 +66,45 @@ copy block:
 
 # to top/bottom of current page (cursor → containing page → position start|end)
 (insert | new) top block $:
-    target = {"type": "primitive", "mark": {"type": "cursor"},
-              "modifiers": [{"type": "containing", "scope": "page"},
-                            {"type": "position", "at": "start"}]}
-    dest = {"type": "destination", "insertionMode": "to", "target": target}
-    user.roam_action_dest("insertNewBlock", dest)
+    user.roam_action_dest("insertNewBlock", '{:insertionMode "to" :target {:type "primitive" :mark {:type "cursor"} :modifiers [{:type "containing" :scope "page"} {:type "position" :at "start"}]}}')
 
 (insert | new) bottom block $:
-    target = {"type": "primitive", "mark": {"type": "cursor"},
-              "modifiers": [{"type": "containing", "scope": "page"},
-                            {"type": "position", "at": "end"}]}
-    dest = {"type": "destination", "insertionMode": "to", "target": target}
-    user.roam_action_dest("insertNewBlock", dest)
+    user.roam_action_dest("insertNewBlock", '{:insertionMode "to" :target {:type "primitive" :mark {:type "cursor"} :modifiers [{:type "containing" :scope "page"} {:type "position" :at "end"}]}}')
 
 # to top/bottom of current parent block (sibling-style)
 (insert | new) (block here [(top | first)] | first child) $:
-    target = {"type": "primitive", "mark": {"type": "cursor"},
-              "modifiers": [{"type": "containing", "scope": "parent"},
-                            {"type": "position", "at": "start"}]}
-    dest = {"type": "destination", "insertionMode": "to", "target": target}
-    user.roam_action_dest("insertNewBlock", dest)
+    user.roam_action_dest("insertNewBlock", '{:insertionMode "to" :target {:type "primitive" :mark {:type "cursor"} :modifiers [{:type "containing" :scope "parent"} {:type "position" :at "start"}]}}')
 
 (insert | new) (block here (bottom | last) | last child) $:
-    target = {"type": "primitive", "mark": {"type": "cursor"},
-              "modifiers": [{"type": "containing", "scope": "parent"},
-                            {"type": "position", "at": "end"}]}
-    dest = {"type": "destination", "insertionMode": "to", "target": target}
-    user.roam_action_dest("insertNewBlock", dest)
+    user.roam_action_dest("insertNewBlock", '{:insertionMode "to" :target {:type "primitive" :mark {:type "cursor"} :modifiers [{:type "containing" :scope "parent"} {:type "position" :at "end"}]}}')
 
 # before/after target block (sibling insertion)
 (insert | new) block (above | before | pre) <user.letters>:
-    target = {"type": "primitive", "mark": {"type": "label", "value": letters.upper()}}
-    dest = {"type": "destination", "insertionMode": "before", "target": target}
-    user.roam_action_dest("insertNewBlock", dest)
+    user.roam_action_dest("insertNewBlock", '{:insertionMode "before" :target {:type "primitive" :mark {:type "label" :value "' + letters.upper() + '"}}}')
 
 (insert | new) block (below | after | post) <user.letters>:
-    target = {"type": "primitive", "mark": {"type": "label", "value": letters.upper()}}
-    dest = {"type": "destination", "insertionMode": "after", "target": target}
-    user.roam_action_dest("insertNewBlock", dest)
+    user.roam_action_dest("insertNewBlock", '{:insertionMode "after" :target {:type "primitive" :mark {:type "label" :value "' + letters.upper() + '"}}}')
 
 # to top/bottom child of labeled block
 (insert | new) ([top] block [in] | [first] child [block] [first] [in]) <user.letters>:
-    target = {"type": "primitive", "mark": {"type": "label", "value": letters.upper()},
-              "modifiers": [{"type": "position", "at": "start"}]}
-    dest = {"type": "destination", "insertionMode": "to", "target": target}
-    user.roam_action_dest("insertNewBlock", dest)
+    user.roam_action_dest("insertNewBlock", '{:insertionMode "to" :target {:type "primitive" :mark {:type "label" :value "' + letters.upper() + '"} :modifiers [{:type "position" :at "start"}]}}')
 
 (insert | new) (bottom block [in] | last child [block] [in] | child last) <user.letters>:
-    target = {"type": "primitive", "mark": {"type": "label", "value": letters.upper()},
-              "modifiers": [{"type": "position", "at": "end"}]}
-    dest = {"type": "destination", "insertionMode": "to", "target": target}
-    user.roam_action_dest("insertNewBlock", dest)
+    user.roam_action_dest("insertNewBlock", '{:insertionMode "to" :target {:type "primitive" :mark {:type "label" :value "' + letters.upper() + '"} :modifiers [{:type "position" :at "end"}]}}')
 
 # to top/bottom of specified page
 (insert | new) top block {user.roam_tag}:
-    target = {"type": "primitive", "mark": {"type": "pageTitle", "value": roam_tag},
-              "modifiers": [{"type": "position", "at": "start"}]}
-    dest = {"type": "destination", "insertionMode": "to", "target": target}
-    user.roam_action_dest("insertNewBlock", dest)
+    user.roam_action_dest("insertNewBlock", '{:insertionMode "to" :target {:type "primitive" :mark {:type "pageTitle" :value "' + roam_tag + '"} :modifiers [{:type "position" :at "start"}]}}')
 
 (insert | new) bottom block {user.roam_tag}:
-    target = {"type": "primitive", "mark": {"type": "pageTitle", "value": roam_tag},
-              "modifiers": [{"type": "position", "at": "end"}]}
-    dest = {"type": "destination", "insertionMode": "to", "target": target}
-    user.roam_action_dest("insertNewBlock", dest)
+    user.roam_action_dest("insertNewBlock", '{:insertionMode "to" :target {:type "primitive" :mark {:type "pageTitle" :value "' + roam_tag + '"} :modifiers [{:type "position" :at "end"}]}}')
 
 # to top/bottom child of ref UID
 (insert | new) top (block | child) {user.roam_ref}:
-    target = {"type": "primitive", "mark": {"type": "uid", "value": roam_ref},
-              "modifiers": [{"type": "position", "at": "start"}]}
-    dest = {"type": "destination", "insertionMode": "to", "target": target}
-    user.roam_action_dest("insertNewBlock", dest)
+    user.roam_action_dest("insertNewBlock", '{:insertionMode "to" :target {:type "primitive" :mark {:type "uid" :value "' + roam_ref + '"} :modifiers [{:type "position" :at "start"}]}}')
 
 (insert | new) bottom (block | child) {user.roam_ref}:
-    target = {"type": "primitive", "mark": {"type": "uid", "value": roam_ref},
-              "modifiers": [{"type": "position", "at": "end"}]}
-    dest = {"type": "destination", "insertionMode": "to", "target": target}
-    user.roam_action_dest("insertNewBlock", dest)
+    user.roam_action_dest("insertNewBlock", '{:insertionMode "to" :target {:type "primitive" :mark {:type "uid" :value "' + roam_ref + '"} :modifiers [{:type "position" :at "end"}]}}')
 
 ## +++++++++++++++++++ paste block below .
 

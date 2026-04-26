@@ -1,7 +1,4 @@
 from talon import Module, Context, actions
-import json
-import os
-import time
 import uuid
 
 mod = Module()
@@ -9,7 +6,6 @@ ctx = Context()
 
 CODE_PATH = "/Users/ryan/dev/tmem-roam-ext"
 BB_PATH = "/usr/local/bin/bb"
-ENVELOPE_DIR = "/tmp"
 
 # Block transfer action — the verb (legacy: feeds into transfer! Clojure fn)
 # NOTE: renamed from roam_action → roam_transfer_verb in Phase E to free the
@@ -185,12 +181,20 @@ def roam_direction(m) -> str:
     return m.roam_direction
 
 # ════════════════════════════════════════════════════════════════════
-# Phase E — composable captures (mark + modifier chain → target → action)
-# Phase F — pronoun / containing / every / ordinal scope vocabulary +
-#          new roam_action_verb list now live in .talon-list files under
-#          ~/.talon/user/roam-vocabulary/. Talon auto-loads them natively
-#          so the {user.roam_*} captures below still work.
+# Phase E+G — composable captures returning EDN string fragments.
+# Captures build EDN directly; actions send via clj-nrepl-eval to
+# a persistent bb daemon (port 7888).
+#
+# Pipeline: Talon capture → EDN string → envelope → clj-nrepl-eval → execute!
 # ════════════════════════════════════════════════════════════════════
+
+NREPL_PORT = "6888"
+NREPL_EVAL = "/Users/ryan/.local/bin/clj-nrepl-eval"
+
+# ─── EDN helper ───
+def _edn_str(s: str) -> str:
+    """Escape a string for EDN embedding: wraps in double quotes."""
+    return '"' + s.replace('\\', '\\\\').replace('"', '\\"') + '"'
 
 # ─── Insertion mode (destination prefix) ───
 mod.list("roam_insertion_mode", desc="Destination insertion mode: to/before/after")
@@ -230,32 +234,31 @@ ctx.lists["user.roam_position_at"] = {
     "bottom": "end",
 }
 
-# ─── Modifier captures ───
+# ─── Modifier captures (return EDN strings) ───
 @mod.capture(rule="{user.roam_containing_scope} of")
-def roam_containing_modifier(m) -> dict:
-    return {"type": "containing", "scope": m.roam_containing_scope}
+def roam_containing_modifier(m) -> str:
+    return '{:type "containing" :scope "' + m.roam_containing_scope + '"}'
 
 @mod.capture(rule="every {user.roam_every_scope} of")
-def roam_every_modifier(m) -> dict:
-    return {"type": "every", "scope": m.roam_every_scope}
+def roam_every_modifier(m) -> str:
+    return '{:type "every" :scope "' + m.roam_every_scope + '"}'
 
 @mod.capture(rule="{user.roam_ordinal_word} {user.roam_ordinal_scope} of")
-def roam_ordinal_modifier(m) -> dict:
-    return {"type": "ordinal",
-            "scope": m.roam_ordinal_scope,
-            "index": int(m.roam_ordinal_word)}
+def roam_ordinal_modifier(m) -> str:
+    return ('{:type "ordinal" :scope "' + m.roam_ordinal_scope +
+            '" :index ' + m.roam_ordinal_word + '}')
 
 # Position modifier — only valid in destinations (bridge.clj will error on
 # `position-on-target` if it leaks into a non-destination context).
 @mod.capture(rule="{user.roam_position_at} of")
-def roam_position_modifier(m) -> dict:
-    return {"type": "position", "at": m.roam_position_at}
+def roam_position_modifier(m) -> str:
+    return '{:type "position" :at "' + m.roam_position_at + '"}'
 
 # Union of non-position modifiers (used inside roam_target).
 @mod.capture(rule="<user.roam_containing_modifier> "
                   "| <user.roam_every_modifier> "
                   "| <user.roam_ordinal_modifier>")
-def roam_modifier(m) -> dict:
+def roam_modifier(m) -> str:
     for attr in ("roam_containing_modifier", "roam_every_modifier",
                  "roam_ordinal_modifier"):
         try:
@@ -264,85 +267,78 @@ def roam_modifier(m) -> dict:
             continue
     raise ValueError("no modifier matched in roam_modifier")
 
-# ─── Mark capture ───
+# ─── Mark capture (returns EDN string) ───
 @mod.capture(rule="<user.letters> "
                   "| {user.roam_ref} "
                   "| {user.roam_tag} "
                   "| {user.roam_daily} "
                   "| {user.roam_pronoun}")
-def roam_mark(m) -> dict:
+def roam_mark(m) -> str:
     try:
-        return {"type": "label", "value": m.letters.upper()}
+        return '{:type "label" :value "' + m.letters.upper() + '"}'
     except AttributeError:
         pass
     try:
-        return {"type": "uid", "value": m.roam_ref}
+        return '{:type "uid" :value ' + _edn_str(m.roam_ref) + '}'
     except AttributeError:
         pass
     try:
-        return {"type": "pageTitle", "value": m.roam_tag}
+        return '{:type "pageTitle" :value ' + _edn_str(m.roam_tag) + '}'
     except AttributeError:
         pass
     try:
-        # roam_daily list values are like ":today" (legacy clj keyword form);
-        # strip the leading colon for the new {type:daily, value:"today"} shape.
+        # roam_daily list values are like ":today"; strip leading colon
         v = m.roam_daily
-        return {"type": "daily", "value": v[1:] if v.startswith(":") else v}
+        val = v[1:] if v.startswith(":") else v
+        return '{:type "daily" :value "' + val + '"}'
     except AttributeError:
         pass
-    return {"type": m.roam_pronoun}  # cursor / that / source / selection
+    # Pronoun marks: cursor / that / source / selection (no :value needed)
+    return '{:type "' + m.roam_pronoun + '"}'
 
-# ─── Target capture ───
+# ─── Target capture (returns EDN string) ───
 # Modifier chain reads outside-in in spoken form ("parent of every child of A")
 # but bridge.clj's resolver applies modifiers left-to-right against the mark.
 # So we collect modifiers in spoken order, then REVERSE for the AST list.
 @mod.capture(rule="<user.roam_modifier>+ <user.roam_mark> | <user.roam_mark>")
-def roam_target(m) -> dict:
+def roam_target(m) -> str:
     mark = m.roam_mark
     try:
         modifiers = list(reversed(m.roam_modifier_list))
     except AttributeError:
         modifiers = []
-    out = {"type": "primitive", "mark": mark}
     if modifiers:
-        out["modifiers"] = modifiers
-    return out
+        mods_edn = "[" + " ".join(modifiers) + "]"
+        return '{:type "primitive" :mark ' + mark + ' :modifiers ' + mods_edn + '}'
+    return '{:type "primitive" :mark ' + mark + '}'
 
-# ─── Destination capture ───
+# ─── Destination capture (returns EDN string) ───
 # Optional position modifier ("start of"/"end of") chains onto the target.
 @mod.capture(rule="{user.roam_insertion_mode} "
                   "[<user.roam_position_modifier>] "
                   "<user.roam_target>")
-def roam_destination(m) -> dict:
-    target = dict(m.roam_target)  # don't mutate the captured dict
+def roam_destination(m) -> str:
+    target_edn = m.roam_target
     try:
         pos_mod = m.roam_position_modifier
-        target.setdefault("modifiers", []).append(pos_mod)
+        # Inject position modifier into the target's modifier list.
+        # Target is '{:type "primitive" :mark ... [:modifiers [...]]}'
+        # We append the position modifier to the modifiers vector.
+        if ":modifiers [" in target_edn:
+            # Insert before closing ]
+            target_edn = target_edn.replace("]}", " " + pos_mod + "]}")
+        else:
+            # No modifiers yet — add the key before closing }
+            target_edn = target_edn[:-1] + ' :modifiers [' + pos_mod + ']}'
     except AttributeError:
         pass
-    return {"type": "destination",
-            "insertionMode": m.roam_insertion_mode,
-            "target": target}
+    return ('{:insertionMode "' + m.roam_insertion_mode + '"'
+            ' :target ' + target_edn + '}')
 
-# ─── Helpers: envelope construction + bb shell-out ───
-def _write_envelope(payload: dict) -> str:
-    """Write a v1 envelope to a unique /tmp file. Returns the path.
-    Caller (bridge.clj/execute-from-file!) deletes the file post-success."""
-    payload.setdefault("version", 1)
-    payload.setdefault("id", f"voice-{uuid.uuid4().hex[:8]}")
-    payload.setdefault("ts", int(time.time() * 1000))
-    path = os.path.join(ENVELOPE_DIR,
-                        f"roam-bridge-cmd-{payload['id']}.json")
-    with open(path, "w") as f:
-        json.dump(payload, f)
-    return path
-
-def _execute_envelope(payload: dict):
-    """Write envelope + shell to bridge.clj's execute-from-file!."""
-    path = _write_envelope(payload)
-    cmd = (f"cd '{CODE_PATH}' && {BB_PATH} -e "
-           f"'(load-file \"bridge.clj\") "
-           f"(execute-from-file! \"{path}\")'")
+# ─── Daemon eval helper ───
+def _eval(code: str):
+    """Send a Clojure expression to the bridge daemon via clj-nrepl-eval."""
+    cmd = f"{NREPL_EVAL} --port {NREPL_PORT} '{code}'"
     print(cmd)
     actions.user.system_command_nb(cmd)
 
@@ -350,44 +346,63 @@ def _execute_envelope(payload: dict):
 @mod.action_class
 class Actions:
     def roam_fn(clj: str):
-        """Evaluate a clojure expression in bridge.clj context (legacy)."""
+        """Evaluate a clojure expression in bridge.clj context (legacy).
+        Falls back to bb shell-out for commands not yet on the daemon path."""
         cmd = f'''cd '{CODE_PATH}' && {BB_PATH} -e '(load-file "bridge.clj") {clj}' '''
         print(cmd)
         actions.user.system_command_nb(cmd)
 
-    # ── Phase E composable action surface ───────────────────────────
-    def roam_action(name: str, target: dict):
-        """Phase E: action+target shape (setSelection, remove, collapse,
-        expand, zoom, openInSidebar, getText, getRefs, addToSelection,
+    # ── Composable action surface (daemon mode) ─────────────────────
+    def roam_action(name: str, target: str):
+        """Action+target shape (setSelection, remove, collapse, expand,
+        zoom, openInSidebar, getText, getRefs, addToSelection,
         removeFromSelection)."""
-        _execute_envelope({"action": {"name": name, "target": target}})
+        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
+              '" :action {:name "' + name + '" :target ' + target + '}})')
 
-    def roam_action_pair(name: str, source: dict, destination: dict):
-        """Phase E: action+source+destination shape (moveToTarget,
-        linkToTarget, aliasMove)."""
-        _execute_envelope({"action": {"name": name,
-                                      "source": source,
-                                      "destination": destination}})
+    def roam_action_pair(name: str, source: str, destination: str):
+        """Action+source+destination shape (moveToTarget, linkToTarget,
+        aliasMove)."""
+        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
+              '" :action {:name "' + name +
+              '" :source ' + source +
+              ' :destination ' + destination + '}})')
 
-    def roam_action_dest(name: str, destination: dict, string: str = ""):
-        """Phase E: action+destination shape (insertNewBlock).
+    def roam_action_dest(name: str, destination: str, string: str = ""):
+        """Action+destination shape (insertNewBlock).
         string is the initial block content; default empty."""
-        action = {"name": name, "destination": destination}
-        if string:
-            action["string"] = string
-        _execute_envelope({"action": action})
+        str_slot = (' :string ' + _edn_str(string)) if string else ""
+        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
+              '" :action {:name "' + name + '"' + str_slot +
+              ' :destination ' + destination + '}})')
 
-    def roam_swap(target1: dict, target2: dict, content: bool = False):
-        """Phase E: action+two-targets shape (swap, swapContent)."""
+    def roam_swap(target1: str, target2: str, content: int = 0):
+        """Action+two-targets shape (swap, swapContent)."""
         name = "swapContent" if content else "swap"
-        _execute_envelope({"action": {"name": name,
-                                      "target1": target1,
-                                      "target2": target2}})
+        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
+              '" :action {:name "' + name +
+              '" :target1 ' + target1 +
+              ' :target2 ' + target2 + '}})')
 
-    def roam_nudge(target: dict, direction: str):
-        """Phase E: nudge — single target + direction slot.
-        direction is the bridge.clj keyword sans colon
-        (up / down / left-below / right / right-below / left-above)."""
-        _execute_envelope({"action": {"name": "nudge",
-                                      "target": target,
-                                      "direction": direction}})
+    def roam_nudge(target: str, direction: str):
+        """Nudge — single target + direction slot."""
+        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
+              '" :action {:name "nudge"'
+              ' :target ' + target +
+              ' :direction "' + direction + '"}})')
+
+    def roam_move_to_position(target_edn: str, position: str):
+        """Move target to first/last within its parent.
+        Builds dest = {to + target's parent + position modifier}."""
+        # Append containing:parent and position modifiers to the target
+        if ":modifiers [" in target_edn:
+            # Has modifiers — insert before closing ]}
+            dt = target_edn.replace("]}", ' {:type "containing" :scope "parent"} {:type "position" :at "' + position + '"}]}')
+        else:
+            # No modifiers — add before closing }
+            dt = target_edn[:-1] + ' :modifiers [{:type "containing" :scope "parent"} {:type "position" :at "' + position + '"}]}'
+        dest = '{:insertionMode "to" :target ' + dt + '}'
+        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
+              '" :action {:name "moveToTarget"'
+              ' :source ' + target_edn +
+              ' :destination ' + dest + '}})')
