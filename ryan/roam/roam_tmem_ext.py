@@ -187,9 +187,9 @@ def roam_direction(m) -> str:
 # ════════════════════════════════════════════════════════════════════
 # Phase E — composable captures (mark + modifier chain → target → action)
 # Phase F — pronoun / containing / every / ordinal scope vocabulary +
-#          new roam_action_verb list now live in roam_csv.py, populated
-#          from ~/.talon/user/roam-vocabulary/*.csv. Talon resolves list
-#          names globally so the {user.roam_*} captures below still work.
+#          new roam_action_verb list now live in .talon-list files under
+#          ~/.talon/user/roam-vocabulary/. Talon auto-loads them natively
+#          so the {user.roam_*} captures below still work.
 # ════════════════════════════════════════════════════════════════════
 
 # ─── Insertion mode (destination prefix) ───
@@ -205,7 +205,7 @@ ctx.lists["user.roam_insertion_mode"] = {
 }
 
 # ─── Modifier vocabulary ───
-# (containing/every/ordinal scope lists moved to roam_csv.py — Phase F)
+# (containing/every/ordinal scope lists in roam-vocabulary/*.talon-list — Phase F)
 
 mod.list("roam_ordinal_word", desc="Ordinal index word (0-indexed; -1 = last)")
 ctx.lists["user.roam_ordinal_word"] = {

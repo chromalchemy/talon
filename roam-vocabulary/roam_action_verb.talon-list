@@ -1,0 +1,15 @@
+list: user.roam_action_verb
+-
+
+bar: openInSidebar
+chuck: remove
+collapse: expand
+delete: remove
+expand: collapse
+fold: collapse
+load: zoom
+mark: setSelection
+sidebar: openInSidebar
+take: setSelection
+unfold: expand
+zoom: zoom
