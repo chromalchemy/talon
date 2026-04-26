@@ -186,20 +186,11 @@ def roam_direction(m) -> str:
 
 # ════════════════════════════════════════════════════════════════════
 # Phase E — composable captures (mark + modifier chain → target → action)
+# Phase F — pronoun / containing / every / ordinal scope vocabulary +
+#          new roam_action_verb list now live in roam_csv.py, populated
+#          from ~/.talon/user/roam-vocabulary/*.csv. Talon resolves list
+#          names globally so the {user.roam_*} captures below still work.
 # ════════════════════════════════════════════════════════════════════
-
-# ─── Pronouns (first-class marks) ───
-mod.list("roam_pronoun", desc="Roam pronoun marks (cursor / that / source / selection)")
-ctx.lists["user.roam_pronoun"] = {
-    "cursor":   "cursor",
-    "current":  "cursor",
-    "this":     "cursor",
-    "that":     "that",
-    "source":   "source",
-    "selection":      "selection",
-    "selected":       "selection",
-    "selected blocks": "selection",
-}
 
 # ─── Insertion mode (destination prefix) ───
 mod.list("roam_insertion_mode", desc="Destination insertion mode: to/before/after")
@@ -214,31 +205,7 @@ ctx.lists["user.roam_insertion_mode"] = {
 }
 
 # ─── Modifier vocabulary ───
-mod.list("roam_containing_scope", desc="Containing modifier scope")
-ctx.lists["user.roam_containing_scope"] = {
-    "parent":    "parent",
-    "folks":     "parent",
-    "page":      "page",
-    "top level": "topLevel",
-}
-
-mod.list("roam_every_scope", desc="Every modifier scope")
-ctx.lists["user.roam_every_scope"] = {
-    "child":       "child",
-    "kid":         "child",
-    "children":    "child",
-    "kids":        "child",
-    "descendant":  "descendant",
-    "descendants": "descendant",
-    "sub":         "descendant",
-    "subs":        "descendant",
-    "sibling":     "sibling",
-    "siblings":    "sibling",
-    "neighbor":    "sibling",
-    "neighbors":   "sibling",
-    "neighbour":   "sibling",
-    "neighbours":  "sibling",
-}
+# (containing/every/ordinal scope lists moved to roam_csv.py — Phase F)
 
 mod.list("roam_ordinal_word", desc="Ordinal index word (0-indexed; -1 = last)")
 ctx.lists["user.roam_ordinal_word"] = {
@@ -253,14 +220,6 @@ ctx.lists["user.roam_ordinal_word"] = {
     "ninth":   "8",
     "tenth":   "9",
     "last":    "-1",
-}
-
-mod.list("roam_ordinal_scope", desc="Ordinal modifier scope")
-ctx.lists["user.roam_ordinal_scope"] = {
-    "child":    "child",
-    "kid":      "child",
-    "sibling":  "sibling",
-    "siblings": "sibling",
 }
 
 mod.list("roam_position_at", desc="Position modifier at (destination only)")

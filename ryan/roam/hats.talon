@@ -43,10 +43,20 @@ make <user.letters> done:
     sleep(100ms)
     key(esc:2)
 
-## +++++++++++++++++++++ select blocks (PHASE E composable) .
+## +++++++++++++ generic single-target action (PHASE F) .
+## One rule subsumes ~6 single-verb rules. Spoken vocabulary lives in
+## ~/.talon/user/roam-vocabulary/roam-actions.csv. Rule shape:
+##   {verb} <target>          e.g. "chuck A", "fold every child of B"
+## Compound rules (transfers, swaps, two-letter lists, edit-mode legacy,
+## moveToPosition, addToSelection, fold-children sugar, etc.) keep
+## their own grammar below.
 
-(take | mark) <user.roam_target>:
-    user.roam_action("setSelection", roam_target)
+{user.roam_action_verb} <user.roam_target>:
+    user.roam_action(roam_action_verb, roam_target)
+
+## +++++++++++++++++++++ select blocks (PHASE E composable) .
+## Generic "take A" / "mark A" handled by the action-verb rule above.
+## Compound select rules below.
 
 # Two-letter list (multi-mark setSelection)
 (take) <user.letters> and <user.letters>:
@@ -70,12 +80,8 @@ make <user.letters> done:
 ## NOTE: spoken-form-to-action mapping preserved from legacy:
 ##   "fold A" / "expand A"   → collapse  (legacy `fold!`)
 ##   "unfold A" / "collapse A" → expand  (legacy `unfold!`)
-
-(fold | expand) <user.roam_target>:
-    user.roam_action("collapse", roam_target)
-
-(unfold | collapse) <user.roam_target>:
-    user.roam_action("expand", roam_target)
+## Generic "fold A" handled by the action-verb rule at the top of this
+## file (vocabulary in roam-actions.csv). Children-sugar rules below.
 
 # Spoken-form sugar: "fold children of A" → collapse with every:child modifier.
 # Equivalent to "fold every child of A" via the generic rule above.
@@ -99,10 +105,7 @@ make <user.letters> done:
               "modifiers": [{"type": "containing", "scope": "page"}]}
     user.roam_action("zoom", target)
 
-# generic zoom: letter | ref | tag | daily | pronoun, with optional modifier chain
-(zoom | load) <user.roam_target>:
-    user.roam_action("zoom", roam_target)
-
+# Generic "zoom A" / "load A" handled by the action-verb rule above.
 # Day-relative zoom (preserves legacy spoken forms)
 (zoom | load) (forward | next) day $:
     user.roam_action("zoom", {"type": "primitive", "mark": {"type": "daily", "value": "next-day"}})
@@ -117,11 +120,9 @@ make <user.letters> done:
     user.roam_action("zoom", {"type": "primitive", "mark": {"type": "daily", "value": -number_small}})
 
 ## +++++++++++++ open block in sidebar (PHASE E composable) .
+## Generic "bar A" / "sidebar A" handled by the action-verb rule above.
 
-(bar | sidebar) <user.roam_target>:
-    user.roam_action("openInSidebar", roam_target)
-
-# Legacy spoken form preserved for muscle memory
+# Legacy "open A in sidebar" phrasing preserved for muscle memory
 open <user.letters> in (bar | sidebar):
     target = {"type": "primitive", "mark": {"type": "label", "value": letters.upper()}}
     user.roam_action("openInSidebar", target)
@@ -178,7 +179,4 @@ swap content <user.letters> [and | with] <user.letters>:
     t2 = {"type": "primitive", "mark": {"type": "label", "value": letters_2.upper()}}
     user.roam_swap(t1, t2, True)
 
-## ++++++++++++++++++++++ delete block (PHASE E composable) .
-
-(delete | chuck) <user.roam_target>:
-    user.roam_action("remove", roam_target)
+## "delete A" / "chuck A" handled by the action-verb rule at the top.
