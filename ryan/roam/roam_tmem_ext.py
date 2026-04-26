@@ -211,6 +211,12 @@ ctx.lists["user.roam_insertion_mode"] = {
 # ─── Modifier vocabulary ───
 # (containing/every/ordinal scope lists in roam-vocabulary/*.talon-list — Phase F)
 
+mod.list("roam_pronoun", desc="Roam pronoun marks")
+mod.list("roam_action_verb", desc="Single-target action verbs")
+mod.list("roam_containing_scope", desc="Containing modifier scope")
+mod.list("roam_every_scope", desc="Every modifier scope")
+mod.list("roam_ordinal_scope", desc="Ordinal modifier scope")
+
 mod.list("roam_ordinal_word", desc="Ordinal index word (0-indexed; -1 = last)")
 ctx.lists["user.roam_ordinal_word"] = {
     "first":   "0",
@@ -406,3 +412,75 @@ class Actions:
               '" :action {:name "moveToTarget"'
               ' :source ' + target_edn +
               ' :destination ' + dest + '}})')
+
+    # ── Talon-safe helpers (no .upper() / str() in .talon bodies) ───
+
+    def roam_zoom_daily_offset(offset: int):
+        """Zoom to a daily note page by numeric offset."""
+        target = '{:type "primitive" :mark {:type "daily" :value ' + str(offset) + '}}'
+        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
+              '" :action {:name "zoom" :target ' + target + '}})')
+
+    def roam_nudge_label(letter: str, direction: str):
+        """Nudge a labeled block in a direction."""
+        target = '{:type "primitive" :mark {:type "label" :value "' + letter.upper() + '"}}'
+        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
+              '" :action {:name "nudge" :target ' + target +
+              ' :direction "' + direction[1:] + '"}})')
+
+    def roam_nudge_implicit(direction: str):
+        """Nudge the implicit (cursor) block in a direction."""
+        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
+              '" :action {:name "nudge" :target {:type "implicit"} :direction "' + direction[1:] + '"}})')
+
+    def roam_swap_labels(letter1: str, letter2: str, content: int):
+        """Swap two labeled blocks."""
+        name = "swapContent" if content else "swap"
+        t1 = '{:type "primitive" :mark {:type "label" :value "' + letter1.upper() + '"}}'
+        t2 = '{:type "primitive" :mark {:type "label" :value "' + letter2.upper() + '"}}'
+        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
+              '" :action {:name "' + name + '" :target1 ' + t1 + ' :target2 ' + t2 + '}})')
+
+    def roam_select_labels(letter1: str, letter2: str):
+        """Select two labeled blocks as a list target."""
+        t1 = '{:type "primitive" :mark {:type "label" :value "' + letter1.upper() + '"}}'
+        t2 = '{:type "primitive" :mark {:type "label" :value "' + letter2.upper() + '"}}'
+        target = '{:type "list" :elements [' + t1 + ' ' + t2 + ']}'
+        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
+              '" :action {:name "setSelection" :target ' + target + '}})')
+
+    def roam_insert_before_label(letter: str):
+        """Insert new block before a labeled block."""
+        dest = '{:insertionMode "before" :target {:type "primitive" :mark {:type "label" :value "' + letter.upper() + '"}}}'
+        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
+              '" :action {:name "insertNewBlock" :destination ' + dest + '}})')
+
+    def roam_insert_after_label(letter: str):
+        """Insert new block after a labeled block."""
+        dest = '{:insertionMode "after" :target {:type "primitive" :mark {:type "label" :value "' + letter.upper() + '"}}}'
+        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
+              '" :action {:name "insertNewBlock" :destination ' + dest + '}})')
+
+    def roam_insert_child_of_label(letter: str, position: str):
+        """Insert new block as first/last child of a labeled block."""
+        dest = '{:insertionMode "to" :target {:type "primitive" :mark {:type "label" :value "' + letter.upper() + '"} :modifiers [{:type "position" :at "' + position + '"}]}}'
+        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
+              '" :action {:name "insertNewBlock" :destination ' + dest + '}})')
+
+    def roam_insert_child_of_page(page: str, position: str):
+        """Insert new block as first/last child of a page."""
+        dest = '{:insertionMode "to" :target {:type "primitive" :mark {:type "pageTitle" :value ' + _edn_str(page) + '} :modifiers [{:type "position" :at "' + position + '"}]}}'
+        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
+              '" :action {:name "insertNewBlock" :destination ' + dest + '}})')
+
+    def roam_insert_child_of_uid(uid: str, position: str):
+        """Insert new block as first/last child of a UID block."""
+        dest = '{:insertionMode "to" :target {:type "primitive" :mark {:type "uid" :value ' + _edn_str(uid) + '} :modifiers [{:type "position" :at "' + position + '"}]}}'
+        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
+              '" :action {:name "insertNewBlock" :destination ' + dest + '}})')
+
+    def roam_insert_cursor_scope(scope: str, position: str):
+        """Insert new block relative to cursor's containing scope (page or parent)."""
+        dest = '{:insertionMode "to" :target {:type "primitive" :mark {:type "cursor"} :modifiers [{:type "containing" :scope "' + scope + '"} {:type "position" :at "' + position + '"}]}}'
+        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
+              '" :action {:name "insertNewBlock" :destination ' + dest + '}})')
