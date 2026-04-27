@@ -1,0 +1,21 @@
+list: user.roam_direction
+-
+
+up: :up
+down: :down
+left above: :left-above
+left up: :left-above
+left: :left-below
+left below: :left-below
+left down: :left-below
+down left: :left-below
+back: :left-below
+dedent: :left-below
+indent less: :left-below
+right: :right
+indent: :right
+write: :right
+rate: :right
+right below: :right-below
+right down: :right-below
+down right: :right-below

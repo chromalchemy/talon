@@ -4,9 +4,6 @@ mode: command
 
 ## +++++++++++++++++++++ debug helpers .
 
-print source <user.roam_source>:
-    print("command ran")
-    print(roam_source)
 
 ## ++++++++++++++++++ show hide labels .
 
@@ -114,7 +111,6 @@ open <user.letters> in (bar | sidebar):
 
 # Full transfer: "move/link/alias <target> to <destination>"
 # Destination grammar: {to|before|after} [start of|end of] <target>.
-# roam_transfer_verb values are ":move"/":link"/":alias" (legacy clj keywords).
 move <user.roam_target> <user.roam_destination>:
     user.roam_action_pair("moveToTarget", roam_target, roam_destination)
 
