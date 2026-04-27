@@ -1,10 +1,12 @@
 list: user.roam_insertion_mode
 -
 
-to: to
+to
 into: to
 in: to
-before: before
+
+before
 above: before
-after: after
+
+after
 below: after
