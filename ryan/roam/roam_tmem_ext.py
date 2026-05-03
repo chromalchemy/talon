@@ -47,6 +47,7 @@ mod.list("roam_insertion_mode", desc="Destination insertion mode: to/before/afte
 
 mod.list("roam_pronoun", desc="Roam pronoun marks")
 mod.list("roam_action_verb", desc="Single-target action verbs")
+mod.list("roam_todo_state", desc="TODO state words → 'todo' | 'done' (no entry for 'none' — handled by clear/unmark rule)")
 mod.list("roam_containing_scope", desc="Containing modifier scope")
 mod.list("roam_every_scope", desc="Every modifier scope")
 mod.list("roam_ordinal_scope", desc="Ordinal modifier scope")

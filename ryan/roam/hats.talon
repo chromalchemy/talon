@@ -30,13 +30,11 @@ hide [block] hats | [block] hats off :
 ##   "unmark this"                (cursor pronoun)
 ##   "clear selection todo"       (selection pronoun)
 
-(make | mark | big) <user.roam_target> (todo | to do | task | action):
-    user.roam_set_todo(roam_target, "todo")
+(make | mark | big) <user.roam_target> {user.roam_todo_state}:
+    user.roam_set_todo(roam_target, roam_todo_state)
 
-(make | mark) <user.roam_target> done:
-    user.roam_set_todo(roam_target, "done")
-
-(unmark | clear | untodo | undone | untask) <user.roam_target>:
+# Clear-state rule stays separate — no trailing state word to capture.
+(unmark | clear | untodo | untask | non task | no task) <user.roam_target>:
     user.roam_set_todo(roam_target, "none")
 
 ## +++++++++++++ generic single-target action (PHASE F) .
