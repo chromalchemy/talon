@@ -84,7 +84,7 @@ Daemon launch: `bb bridge.clj` from `~/dev/tmem-roam-ext/`. It writes
 |---|---|---|
 | `docs/COMPOSABLE-REFACTOR-PLAN.md` | 🟢 stable, North Star | Conceptual model, mappings old→new, AST shapes, file-by-file plan |
 | `docs/COMMAND-SCHEMA.md` | 🟢 current | Wire contract — envelope, AST, mark catalogue, modifier catalogue, action shapes, error codes, examples |
-| `docs/REFACTOR-PROGRESS.md` | 🟡 mostly current, **drift on daemon mode** | What's done, gotchas (21 numbered), verifications. The daemon-mode section says "deferred"; in fact it shipped — see Drift below. |
+| `docs/REFACTOR-PROGRESS.md` | 🟢 current as of 2026-05-03 | What's done, gotchas (21 numbered), verifications. Phase G+ daemon-mode row added; legacy-fn deletion marked done. |
 | `docs/AGENT-BRIDGE.md` | 🟡 partly stale post-G | JS-side command catalogue. Two cases removed (`delete-blocks`, `get-view` — though `get-view` may still be wired). |
 | `docs/PROJECT.md` | 🟢 current | Architecture overview; what is/isn't Nautilus-derived |
 | `docs/BLOCK-SELECTION-LIMITATIONS.md` | 🟢 current | Why `select-block` uses CSS-only highlight; 9 dead-ends documented |
@@ -98,9 +98,10 @@ Daemon launch: `bb bridge.clj` from `~/dev/tmem-roam-ext/`. It writes
 2. ✅ **Comment ↔ code aligned.** Was: `roam_tmem_ext.py` comment said
    "port 7888" while `NREPL_PORT = "6888"`. Fixed.
 3. ✅ **Doc move committed.** (User did this.)
-4. ⏳ **Legacy public fns in `bridge.clj`** (~25 of them, lines 1–1170)
-   are still deletion candidates per progress §"Important gotchas" #5
-   and the open-questions list. Voice surface no longer touches them.
+4. ✅ **Legacy public fns deleted** 2026-05-03 (`fc47932` + `1fb4734`).
+   ~25 fns + their only-called-by-legacy private helpers removed.
+   `bridge.clj` shrunk 2234 → 1506 lines (–32%). Diagnostics clean
+   (0 errors, 1 pre-existing warning, 3 expected info-level keepers).
 
 ## Branch state
 
