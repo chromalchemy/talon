@@ -119,12 +119,17 @@ link <user.roam_primitive_target> <user.roam_destination>:
     user.roam_action_pair("aliasMove", roam_primitive_target, roam_destination)
 
 ## ++++++++++++++++++++ nudge block (PHASE E composable) .
+## Generalized: any target shape works in a direction. List targets are
+## supported (multi-block nudge, sibling-aware ordering in bridge.clj).
+## Examples: "nudge A up", "nudge A and B up", "nudge every child of C
+## down", "nudge cursor up", "nudge block up".
 
-[nudge] <user.letters> <user.roam_direction>:
-    user.roam_nudge_label(letters, roam_direction)
+[nudge] <user.roam_target> <user.roam_direction>:
+    user.roam_nudge(roam_target, roam_direction)
 
+# Implicit-block sugar — equivalent to `nudge` with no target.
 [nudge] block <user.roam_direction>:
-    user.roam_nudge_implicit(roam_direction)
+    user.roam_nudge("{:type \"implicit\"}", roam_direction)
 
 ## ++++++++++++++++++++++++++ swap blocks (PHASE E composable) .
 

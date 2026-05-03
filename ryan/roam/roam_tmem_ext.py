@@ -231,11 +231,15 @@ class Actions:
               ' :target2 ' + target2 + '}})')
 
     def roam_nudge(target: str, direction: str):
-        """Nudge — single target + direction slot."""
+        """Nudge — composable target + direction. Target is EDN
+        (primitive | list | implicit). Direction is the talon list value
+        (e.g. ":up"); leading colon is stripped before sending so the
+        bridge sees the bare keyword name."""
+        dir_str = direction[1:] if direction.startswith(":") else direction
         _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
               '" :action {:name "nudge"'
               ' :target ' + target +
-              ' :direction "' + direction + '"}})')
+              ' :direction "' + dir_str + '"}})')
 
     def roam_move_to_position(target_edn: str, position: str):
         """Move target to first/last within its parent.
@@ -260,18 +264,6 @@ class Actions:
         target = '{:type "primitive" :mark {:type "daily" :value ' + str(offset) + '}}'
         _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
               '" :action {:name "zoom" :target ' + target + '}})')
-
-    def roam_nudge_label(letter: str, direction: str):
-        """Nudge a labeled block in a direction."""
-        target = '{:type "primitive" :mark {:type "label" :value "' + letter.upper() + '"}}'
-        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
-              '" :action {:name "nudge" :target ' + target +
-              ' :direction "' + direction[1:] + '"}})')
-
-    def roam_nudge_implicit(direction: str):
-        """Nudge the implicit (cursor) block in a direction."""
-        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
-              '" :action {:name "nudge" :target {:type "implicit"} :direction "' + direction[1:] + '"}})')
 
     def roam_swap_labels(letter1: str, letter2: str, content: int):
         """Swap two labeled blocks."""
