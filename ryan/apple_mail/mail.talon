@@ -52,7 +52,7 @@ to do: key(ctrl-o)
     sleep(100ms)
     insert("save attachment")
 
-(download | save) and copy attachment [here]:
+(download | save) [and] copy (attachment | file) [here]:
     mouse_click(1)
     sleep(400ms)
     insert("save attachment")
