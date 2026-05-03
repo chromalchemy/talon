@@ -19,26 +19,25 @@ hide [block] hats | [block] hats off :
 (go) <user.letters>:
     user.roam_fn("(select! [:{letters}] {{:edit true}})")
 
-(make | mark | big) <user.letters>  (todo | to do | task | action): 
-    user.roam_fn("(select! [:{letters}] {{:edit true}})")
-    sleep(300ms)
-    key(cmd-return)
-    sleep(100ms)
-    key(esc:2)
+## ++++++ mark blocks with to-do state (PHASE G+ composable) .
+## Generic todo/done/none state with composable target. Replaces the
+## legacy select+cmd-return+esc edit-mode dance with direct text-prefix
+## manipulation via the setTodoState dispatch. Multi-target via list
+## grammar:
+##   "make A todo"                (single)
+##   "make A and B done"          (list)
+##   "make every child of C todo" (modifier)
+##   "unmark this"                (cursor pronoun)
+##   "clear selection todo"       (selection pronoun)
 
-mark <user.letters> done:
-    user.roam_fn("(select! [:{letters}] {{:edit true}})")
-    sleep(300ms)
-    key(cmd-return)
-    sleep(100ms)
-    key(esc:2) 
-    
-make <user.letters> done: 
-    user.roam_fn("(select! [:{letters}] {{:edit true}})")
-    sleep(300ms)
-    key(cmd-return:2)
-    sleep(100ms)
-    key(esc:2)
+(make | mark | big) <user.roam_target> (todo | to do | task | action):
+    user.roam_set_todo(roam_target, "todo")
+
+(make | mark) <user.roam_target> done:
+    user.roam_set_todo(roam_target, "done")
+
+(unmark | clear | untodo | undone | untask) <user.roam_target>:
+    user.roam_set_todo(roam_target, "none")
 
 ## +++++++++++++ generic single-target action (PHASE F) .
 ## One rule subsumes ~6 single-verb rules. Spoken vocabulary lives in
@@ -128,10 +127,10 @@ link <user.roam_primitive_target> <user.roam_destination>:
     user.roam_nudge(roam_target, roam_direction)
 
 # Implicit-block sugar — equivalent to `nudge` with no target.
-# `{{...}}` escapes literal braces in TalonScript string interpolation,
-# so the body emits the literal EDN `{:type "implicit"}`.
+# (Implicit target EDN is built in Python; TalonScript string literals
+# can't contain ':' safely — the lexer reads `:type` as a KEYNAME.)
 nudge block <user.roam_direction>:
-    user.roam_nudge("{{:type \"implicit\"}}", roam_direction)
+    user.roam_nudge_implicit(roam_direction)
 
 ## ++++++++++++++++++++++++++ swap blocks (PHASE E composable) .
 

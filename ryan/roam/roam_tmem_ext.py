@@ -222,6 +222,15 @@ class Actions:
               '" :action {:name "' + name + '"' + str_slot +
               ' :destination ' + destination + '}})')
 
+    def roam_set_todo(target: str, state: str):
+        """Set TODO/DONE state on a target. state: 'todo' | 'done' | 'none'.
+        Composable target → multi-block via list-target. Replaces the
+        legacy edit-mode + cmd-return dance."""
+        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
+              '" :action {:name "setTodoState"'
+              ' :target ' + target +
+              ' :state "' + state + '"}})')
+
     def roam_swap(target1: str, target2: str, content: int = 0):
         """Action+two-targets shape (swap, swapContent)."""
         name = "swapContent" if content else "swap"
