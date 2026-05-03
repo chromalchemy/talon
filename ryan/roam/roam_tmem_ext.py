@@ -117,12 +117,12 @@ def roam_mark(m) -> str:
     # Pronoun marks: cursor / that / source / selection (no :value needed)
     return '{:type "' + m.roam_pronoun + '"}'
 
-# ─── Target capture (returns EDN string) ───
+# ─── Primitive target capture (returns EDN string) ───
 # Modifier chain reads outside-in in spoken form ("parent of every child of A")
 # but bridge.clj's resolver applies modifiers left-to-right against the mark.
 # So we collect modifiers in spoken order, then REVERSE for the AST list.
 @mod.capture(rule="<user.roam_modifier>+ <user.roam_mark> | <user.roam_mark>")
-def roam_target(m) -> str:
+def roam_primitive_target(m) -> str:
     mark = m.roam_mark
     try:
         modifiers = list(reversed(m.roam_modifier_list))
@@ -133,13 +133,38 @@ def roam_target(m) -> str:
         return '{:type "primitive" :mark ' + mark + ' :modifiers ' + mods_edn + '}'
     return '{:type "primitive" :mark ' + mark + '}'
 
+# ─── Target capture (returns EDN string) ───
+# A target is `primitive (and primitive)*`. Single-element lists collapse
+# to the bare primitive (cursorless §3.5: "If the list collapses to one
+# element, return the bare primitive — don't wrap a single-element
+# ListTarget"). Multi-element form serializes to {:type "list"
+# :elements [...]} which bridge.clj's resolve-target already handles.
+#
+# Lists distribute pointwise across most action verbs (remove, collapse,
+# expand, openInSidebar, setSelection, addToSelection, removeFromSelection,
+# getText, getRefs). Inherently single-target verbs (zoom) reject multi-uid
+# regions in bridge.clj rather than at parse time — see cursorless §4
+# Option A: keep grammar uniform, enforce arity per-action at runtime.
+@mod.capture(rule="<user.roam_primitive_target> "
+                  "(and <user.roam_primitive_target>)*")
+def roam_target(m) -> str:
+    primitives = m.roam_primitive_target_list
+    if len(primitives) == 1:
+        return primitives[0]
+    return '{:type "list" :elements [' + " ".join(primitives) + ']}'
+
 # ─── Destination capture (returns EDN string) ───
 # Optional position modifier ("start of"/"end of") chains onto the target.
+# Note: destinations take a *primitive* target, not a list — the position
+# modifier injection logic and the bridge's destination handling both
+# assume a single primitive shape. Cursorless §4.1: slot type enforces
+# arity; destinations refuse list-targets even though both are
+# transport-compatible.
 @mod.capture(rule="{user.roam_insertion_mode} "
                   "[<user.roam_position_modifier>] "
-                  "<user.roam_target>")
+                  "<user.roam_primitive_target>")
 def roam_destination(m) -> str:
-    target_edn = m.roam_target
+    target_edn = m.roam_primitive_target
     try:
         pos_mod = m.roam_position_modifier
         # Inject position modifier into the target's modifier list.
@@ -255,14 +280,6 @@ class Actions:
         t2 = '{:type "primitive" :mark {:type "label" :value "' + letter2.upper() + '"}}'
         _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
               '" :action {:name "' + name + '" :target1 ' + t1 + ' :target2 ' + t2 + '}})')
-
-    def roam_select_labels(letter1: str, letter2: str):
-        """Select two labeled blocks as a list target."""
-        t1 = '{:type "primitive" :mark {:type "label" :value "' + letter1.upper() + '"}}'
-        t2 = '{:type "primitive" :mark {:type "label" :value "' + letter2.upper() + '"}}'
-        target = '{:type "list" :elements [' + t1 + ' ' + t2 + ']}'
-        _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
-              '" :action {:name "setSelection" :target ' + target + '}})')
 
     def roam_insert_before_label(letter: str):
         """Insert new block before a labeled block."""

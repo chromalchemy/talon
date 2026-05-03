@@ -52,12 +52,8 @@ make <user.letters> done:
     user.roam_action(roam_action_verb, roam_target)
 
 ## +++++++++++++++++++++ select blocks (PHASE E composable) .
-## Generic "take A" / "mark A" handled by the action-verb rule above.
-## Compound select rules below.
-
-# Two-letter list (multi-mark setSelection)
-(take) <user.letters> and <user.letters>:
-    user.roam_select_labels(letters_1, letters_2)
+## Generic "take A" / "mark A" / "take A and B" handled by the action-verb
+## rule above (now list-capable). Compound add/remove select rules below.
 
 ((take) (add | ad | also) | (also | and) take | (ad | add) to selected [blocks]) <user.roam_target> | (ad | add) <user.roam_target> to (selection | select | take | selected [blocks]):
     user.roam_action("addToSelection", roam_target)
@@ -103,22 +99,24 @@ open <user.letters> in (bar | sidebar):
 
 # Single-list reorder: "move A to first" / "alias selected to last" / "B to start"
 # → moveToTarget src=<target> dest={to + position:start|end + parent-of-source}.
-[move] <user.roam_target> [to] (first | start | top) $:
-    user.roam_move_to_position(roam_target, "start")
+# Source slot is *primitive* — bring/move semantics on a list source would
+# need a per-element parent calc, which the helper can't express today.
+[move] <user.roam_primitive_target> [to] (first | start | top) $:
+    user.roam_move_to_position(roam_primitive_target, "start")
 
-[move] <user.roam_target> [to] (last | end | bottom) $:
-    user.roam_move_to_position(roam_target, "end")
+[move] <user.roam_primitive_target> [to] (last | end | bottom) $:
+    user.roam_move_to_position(roam_primitive_target, "end")
 
 # Full transfer: "move/link/alias <target> to <destination>"
-# Destination grammar: {to|before|after} [start of|end of] <target>.
-move <user.roam_target> <user.roam_destination>:
-    user.roam_action_pair("moveToTarget", roam_target, roam_destination)
+# Destination grammar: {to|before|after} [start of|end of] <primitive_target>.
+move <user.roam_primitive_target> <user.roam_destination>:
+    user.roam_action_pair("moveToTarget", roam_primitive_target, roam_destination)
 
-link <user.roam_target> <user.roam_destination>:
-    user.roam_action_pair("linkToTarget", roam_target, roam_destination)
+link <user.roam_primitive_target> <user.roam_destination>:
+    user.roam_action_pair("linkToTarget", roam_primitive_target, roam_destination)
 
-(alias | leave ref | leave alias) <user.roam_target> <user.roam_destination>:
-    user.roam_action_pair("aliasMove", roam_target, roam_destination)
+(alias | leave ref | leave alias) <user.roam_primitive_target> <user.roam_destination>:
+    user.roam_action_pair("aliasMove", roam_primitive_target, roam_destination)
 
 ## ++++++++++++++++++++ nudge block (PHASE E composable) .
 
