@@ -5,14 +5,10 @@
 **`tmem-roam-bridge`** — composable voice grammar for editing Roam blocks.
 See `mementum/knowledge/tmem-roam-bridge.md` for the workstream page.
 
-Phases A–G of the Cursorless-style refactor are complete; daemon mode
-shipped on top of G (drift from progress doc — see memory
-`2026-05-03-progress-doc-says-daemon-deferred-but-shipped`).
-
-Next-up candidates (none committed): doc fixups for the daemon drift,
-deletion of ~25 legacy public fns in `bridge.clj`, lifting `getRefs`
-into a `reference`/`mention` modifier scope, optional Phase H (LLM
-string DSL).
+Phases A–G+ complete (G+ = nREPL daemon mode on port 6888). Workstream
+is in a steady state: voice surface fully migrated, legacy code
+deleted, all 7 modifier categories live across all 16 actions. No
+active tasks.
 
 ## Layout
 
@@ -22,41 +18,61 @@ string DSL).
 | Talon grammar | `unify-source-blocks` | `~/.talon/user/ryan/roam` |
 
 Daemon: `bb bridge.clj` from `~/dev/tmem-roam-ext`, nREPL on port 6888.
+After kill/restart, bb writes `.nrepl-port` and self-starts. Hot reload:
+`clj-nrepl-eval --port 6888 '(load-file "bridge.clj")'`.
 
-## Recent context
+## What this session shipped (2026-05-03)
 
-- Mementum substrate created (session 0).
-- First workstream knowledge page written for `tmem-roam-bridge`.
-- Verified phases A–G against actual code; flagged 4 drift points.
-- Resolved all 4: docs aligned with shipped daemon mode, port comment
-  fixed, doc move committed, legacy fns + helpers deleted (–728 lines
-  in `bridge.clj`).
-- Bonus: lifted `every:reference` and `every:mention` modifier scopes
-  from stub to live; added bare-modifier-target support per schema §2.1.
-- Subagent caught one audit error during legacy-fn deletion and
-  recovered without intervention (see memory
-  `2026-05-03-subagent-caught-audit-mistake`).
+| Commit | Repo | Subject |
+|---|---|---|
+| `054a062` | tmem-roam-ext | docs: reflect daemon mode shipped (Phase G+) |
+| `7cde418` | talon | fix port number in roam_tmem_ext.py comment |
+| `61f8a26` | tmem-roam-ext | feat(modifier): wire every:reference and every:mention scopes |
+| `78e6a8c` | talon | add reference/mention vocab |
+| `fc47932` | tmem-roam-ext | refactor(bridge): delete ~25 orphaned legacy public fns + helpers |
+| `1fb4734` | tmem-roam-ext | docs(progress): legacy public fns deleted |
+
+`bridge.clj`: 2234 → **1506 lines** (–728, –32%). Talon repo got the
+mementum substrate (`d594327` bootstrap) plus several knowledge/state
+updates.
 
 ## How to orient (next session)
 
 1. Read this file.
-2. `git log -n 10 -- mementum/` — what changed since.
+2. `git log -n 10 -- mementum/` — what's changed.
 3. Read `mementum/knowledge/tmem-roam-bridge.md` if continuing the workstream.
-4. Spot-check the 4 drift items at the end of that page before trusting docs.
-5. The 21 numbered gotchas in `~/dev/tmem-roam-ext/docs/REFACTOR-PROGRESS.md`
-   are mandatory reading before edits to phrase marks, pronouns, TalonScript
-   bodies, or modifier order.
+4. Skim memories under `mementum/memories/` (4 from 2026-05-03):
+   - `progress-doc-says-daemon-deferred-but-shipped` — the architectural drift
+   - `staged-refactor-docs-triplet-pattern` — PLAN+SCHEMA+PROGRESS as a model
+   - `subagent-caught-audit-mistake` — reverse-direction grep when deleting
+   - `daemon-vs-stray-bb-nrepls` — periodic kill of `bb --nrepl-server` cruft
+5. The **21 numbered gotchas** in `~/dev/tmem-roam-ext/docs/REFACTOR-PROGRESS.md`
+   are mandatory reading before edits to phrase marks, pronouns,
+   TalonScript bodies, or modifier order.
 
 ## Open questions / candidates
 
-- ✅ ~~Delete legacy public fns~~ done.
-- ✅ ~~Lift reference/mention modifiers~~ done.
-- Replace upstream Nautilus `README.md` (still upstream content).
+- Replace upstream Nautilus `README.md` (still upstream content; misleading).
 - Decide whether to enforce `labelsVersion` on the Clojure side
-  (JS already does).
+  (JS already does via 4-snapshot ring buffer; bridge.clj ignores).
 - Optional Phase H: embedded LLM string DSL for placeholder marks.
-- Doc consolidation pass on `REFACTOR-PROGRESS.md` (the cumulative
-  "Files modified" section is now mostly historical).
+- Doc consolidation pass on `REFACTOR-PROGRESS.md` ("Files modified
+  (cumulative)" section is now mostly historical).
+- Tag the daemon distinctively (e.g. `(defonce DAEMON :v1)`) so
+  discovery scripts can filter strays. (Per memory
+  `daemon-vs-stray-bb-nrepls`.)
+
+## Workflow notes (heuristics confirmed this session)
+
+- bridge daemon is on port **6888**. `clj-nrepl-eval --port 6888 '(...)'`
+  for one-shots; `clojure-mcp__clojure_eval :port 6888` from this agent.
+- For multi-edit refactors of `bridge.clj`, the **general subagent** is
+  worth the delegation — it handles mechanical multi-fn deletion well
+  and can run reload+smoke-test loops.
+- `clojure-lsp` diagnostics surface unused-public-vars and arity
+  errors. Treat clean diagnostics as the post-refactor success signal.
+- bb nREPL strays accumulate. Kill `bb --nrepl-server` processes
+  freely; the daemon launched as `bb bridge.clj` is unaffected.
 
 ## Symbols (from `agents.md`)
 
