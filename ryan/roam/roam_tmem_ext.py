@@ -26,7 +26,7 @@ def roam_direction(m) -> str:
 # ════════════════════════════════════════════════════════════════════
 # — composable captures returning EDN string fragments.
 # Captures build EDN directly; actions send via clj-nrepl-eval to
-# a persistent bb daemon (port 7888).
+# a persistent bb daemon (port 6888).
 #
 # Pipeline: Talon capture → EDN string → envelope → clj-nrepl-eval → execute!
 # ════════════════════════════════════════════════════════════════════
