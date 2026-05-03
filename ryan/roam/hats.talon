@@ -128,10 +128,10 @@ link <user.roam_primitive_target> <user.roam_destination>:
     user.roam_nudge(roam_target, roam_direction)
 
 # Implicit-block sugar — equivalent to `nudge` with no target.
-# (Implicit target EDN is built in Python; TalonScript string literals
-# can't contain ':' safely — the lexer reads `:type` as a KEYNAME.)
+# `{{...}}` escapes literal braces in TalonScript string interpolation,
+# so the body emits the literal EDN `{:type "implicit"}`.
 nudge block <user.roam_direction>:
-    user.roam_nudge_implicit(roam_direction)
+    user.roam_nudge("{{:type \"implicit\"}}", roam_direction)
 
 ## ++++++++++++++++++++++++++ swap blocks (PHASE E composable) .
 
