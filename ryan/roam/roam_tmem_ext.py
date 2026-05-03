@@ -241,6 +241,14 @@ class Actions:
               ' :target ' + target +
               ' :direction "' + dir_str + '"}})')
 
+    def roam_nudge_implicit(direction: str):
+        """Nudge the implicit (selection/cursor) target in a direction.
+        Thin wrapper around roam_nudge — TalonScript bodies can't embed
+        a string literal containing `:` (lexer treats `:foo` as KEYNAME),
+        so the implicit-target EDN is constructed in Python rather than
+        passed as a literal from the .talon rule."""
+        actions.user.roam_nudge('{:type "implicit"}', direction)
+
     def roam_move_to_position(target_edn: str, position: str):
         """Move target to first/last within its parent.
         Builds dest = {to + target's parent + position modifier}."""
