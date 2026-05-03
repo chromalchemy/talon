@@ -44,6 +44,17 @@ updates.
 | `bda5b24` | tmem-roam-ext | feat(zoom): reject list targets with list-not-supported error |
 | `f8b14a0` | tmem-roam-ext | feat(nudge): list-capable target with sibling-aware ordering |
 | `2f19be5` | talon | feat(nudge): composable target capture |
+| `2d97616` | talon | fix(nudge): use Python wrapper for implicit-target EDN |
+| `116ded0` | talon | refactor(nudge): inline-escape EDN literal, drop Python wrapper |
+| `fbcaab3` | tmem-roam-ext | docs(progress): rewrite gotcha #21 — TalonScript brace escaping |
+
+❌ Tripped over the gotcha #21 interpolation flavour. First fix used a
+Python wrapper (`roam_nudge_implicit`); user corrected — TalonScript
+string literals are f-string-like, so `{{...}}` escapes to literal
+braces. Reverted to inline-escape, rewrote gotcha #21 to clarify
+mechanism (vs the original "no inline literals" framing), captured the
+**avoid Python helpers mirroring Clojure** design principle in
+`memories/talonscript-curly-brace-interpolation.md`.
 
 **Multi-target action-verb grammar.** `chuck A and B`, `fold A and B`,
 `bar A and B and C`, `take A and B` now all work in one phrase via the
