@@ -47,6 +47,15 @@ updates.
 | `2d97616` | talon | fix(nudge): use Python wrapper for implicit-target EDN |
 | `116ded0` | talon | refactor(nudge): inline-escape EDN literal, drop Python wrapper |
 | `fbcaab3` | tmem-roam-ext | docs(progress): rewrite gotcha #21 — TalonScript brace escaping |
+| `f0a9542` | tmem-roam-ext | feat(setTodoState): explicit todo/done/none with composable target |
+| `5e1dd1c` | talon | feat(todo): composable setTodoState rules; drop legacy edit-mode dance |
+
+**Multi-target todo state.** `make A and B done`, `unmark every child
+of C`, `clear selection todo` now work via the new `setTodoState`
+dispatch — direct text-prefix manipulation of `{{[[TODO]]}} ` /
+`{{[[DONE]]}} ` markers via `data.block.update`. Replaces the four
+legacy rules that synthesized cmd-Enter keypresses + sleeps + escapes
+inside edit mode. Schema documented in COMMAND-SCHEMA.md §5.1, §7, §8.
 
 ❌ Tripped over the gotcha #21 interpolation flavour. First fix used a
 Python wrapper (`roam_nudge_implicit`); user corrected — TalonScript
