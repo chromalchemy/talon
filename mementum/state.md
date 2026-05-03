@@ -36,6 +36,24 @@ After kill/restart, bb writes `.nrepl-port` and self-starts. Hot reload:
 mementum substrate (`d594327` bootstrap) plus several knowledge/state
 updates.
 
+## What this session shipped (2026-05-03, second pass)
+
+| Commit | Repo | Subject |
+|---|---|---|
+| `c5e12c5` | talon | feat(roam): list-capable roam_target capture |
+| `bda5b24` | tmem-roam-ext | feat(zoom): reject list targets with list-not-supported error |
+
+**Multi-target action-verb grammar.** `chuck A and B`, `fold A and B`,
+`bar A and B and C`, `take A and B` now all work in one phrase via the
+single action-verb rule. `roam_target` is now `<primitive> (and
+<primitive>)*` with single-element collapse (cursorless §3.5). Slot
+shapes preserved: destinations + bring/move sources stay primitive-only
+(§4.1 slot-type-enforces-arity). Inherently single-target verbs (`zoom`)
+reject multi-uid regions in `bridge.clj` rather than at parse time
+(§4 Option A — keep grammar uniform, enforce arity per-action).
+
+`bridge.clj`: 1506 → **1514 lines** (+8, the zoom guard).
+
 ## How to orient (next session)
 
 1. Read this file.
