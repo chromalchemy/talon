@@ -28,10 +28,14 @@ Daemon: `bb bridge.clj` from `~/dev/tmem-roam-ext`, nREPL on port 6888.
 - Mementum substrate created (session 0).
 - First workstream knowledge page written for `tmem-roam-bridge`.
 - Verified phases A–G against actual code; flagged 4 drift points.
-- Resolved 3 of 4: docs aligned with shipped daemon mode (Phase G+ row
-  + "Architectural pivot" marked historical), `roam_tmem_ext.py` port
-  comment fixed, doc move committed by user. Only legacy-fn deletion
-  remains open.
+- Resolved all 4: docs aligned with shipped daemon mode, port comment
+  fixed, doc move committed, legacy fns + helpers deleted (–728 lines
+  in `bridge.clj`).
+- Bonus: lifted `every:reference` and `every:mention` modifier scopes
+  from stub to live; added bare-modifier-target support per schema §2.1.
+- Subagent caught one audit error during legacy-fn deletion and
+  recovered without intervention (see memory
+  `2026-05-03-subagent-caught-audit-mistake`).
 
 ## How to orient (next session)
 
@@ -45,12 +49,14 @@ Daemon: `bb bridge.clj` from `~/dev/tmem-roam-ext`, nREPL on port 6888.
 
 ## Open questions / candidates
 
-- Delete the ~25 legacy public fns in `bridge.clj` (lines 1–1170) in
-  groups, voice-testing after each. Voice surface verified across E–G.
-- Lift `getRefs` query into a `reference`/`mention` modifier scope
-  (~10 lines, per progress doc open-questions list).
+- ✅ ~~Delete legacy public fns~~ done.
+- ✅ ~~Lift reference/mention modifiers~~ done.
 - Replace upstream Nautilus `README.md` (still upstream content).
-- Optional Phase H: embedded LLM string DSL.
+- Decide whether to enforce `labelsVersion` on the Clojure side
+  (JS already does).
+- Optional Phase H: embedded LLM string DSL for placeholder marks.
+- Doc consolidation pass on `REFACTOR-PROGRESS.md` (the cumulative
+  "Files modified" section is now mostly historical).
 
 ## Symbols (from `agents.md`)
 

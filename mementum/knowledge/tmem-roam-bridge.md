@@ -32,7 +32,7 @@ Talon voice ──► clj-nrepl-eval ──► bb daemon ──► Roam Local AP
 | Layer | Path | What it owns |
 |---|---|---|
 | **Talon grammar** | `~/.talon/user/ryan/roam/` | Voice → EDN envelope. `hats.talon` is the post-refactor surface (only 7 legacy `roam_fn` calls remain, all in edit-mode legacy). `roam_tmem_ext.py` (301 lines) defines composable captures + 5 Python actions (`roam_action`, `_pair`, `_dest`, `_swap`, `_nudge`). Vocabulary lives in 10 native `.talon-list` files under `roam-vocabulary/`. |
-| **Bridge daemon** | `~/dev/tmem-roam-ext/bridge.clj` (2211 lines) | A bb script that, when run directly, self-starts an nREPL on port 6888. Top half (~lines 1–1170) = legacy public fns (`select!`, `move!`, `transfer!`, etc.) — *deletion candidates*, untouched. Bottom half = composable resolver spine (`resolve-mark*`, `apply-modifier`, `dispatch` multimethod with 16 actions, `execute!` entry point). |
+| **Bridge daemon** | `~/dev/tmem-roam-ext/bridge.clj` (~1506 lines) | A bb script that, when run directly, self-starts an nREPL on port 6888. Composable resolver spine (`resolve-mark*`, `apply-modifier`, `dispatch` multimethod with 16 actions, `execute!` entry point) plus daily-date helpers. The legacy public fns (~25 of them, lines 1–1170 in older revisions) were deleted 2026-05-03 (commits `fc47932` + `1fb4734`). Keepers: `gc!` (utility), `hats-on!`/`hats-off!` (called from Talon), plus `is-descendant?` and `get-current-selection` (used by new dispatch). |
 | **Roam extension** | `~/dev/tmem-roam-ext/src/agent-bridge.js` (1131 lines) | DOM-side responsibilities only after Phase G: 9 commands (`annotate`, `clear`, `scan-blocks`, `nav-mode`, `nav-off`, `select-block`, `notify`, `eval`, `get-view`-deferred-but-still-listed). Polls Roam state every 2s, writes to `__state__` block on change. `__commands__`/`__state__` blocks live on a control page `roam-agent/bridge`. |
 
 ## North-Star design
@@ -131,22 +131,22 @@ user.roam_nudge(target, direction)
 
 ## Open work / candidates
 
+- ✅ ~~Lift `reference`/`mention` modifier scopes.~~ Done 2026-05-03 (`61f8a26`).
+- ✅ ~~Delete legacy `bridge.clj` public fns.~~ Done 2026-05-03 (`fc47932` + `1fb4734`).
 - **Phase H (LLM string DSL).** Optional; nothing in flight.
-- **Delete legacy `bridge.clj` public fns.** Voice surface verified across
-  E–G. Plan is groups + voice-test after each.
-- **`reference`/`mention` modifier scopes** stubbed; `getRefs` action
-  contains the underlying query and could be lifted in ~10 lines.
 - **`labelsVersion` enforcement on the Clojure side.** JS-side ring buffer
   exists; `bridge.clj` ignores `labelsVersion` entirely. Decide if
   Clojure-side validation is wanted.
-- **Doc fixups** (drift items §1–3 above).
-- **README.md replacement** (still upstream Nautilus content).
+- **Replace upstream Nautilus `README.md`** (still upstream content).
+- **Doc cleanup pass on `REFACTOR-PROGRESS.md`** — the post-deletion
+  doc still has a "Files modified (cumulative)" section that pre-dates
+  this session; could use a final consolidation pass.
 
 ## Working memory pointers
 
-- `bridge.clj` is **2211 lines** — read by section, not whole. Use the
-  `═══` banners or the line numbers in the section above to jump to the
-  resolver / dispatch / daemon parts.
+- `bridge.clj` is **~1506 lines** post-cleanup. Read by section. Use
+  the `═══` banners or the line numbers in the section above to jump
+  to the resolver / dispatch / daemon parts.
 - The 21 numbered gotchas in `REFACTOR-PROGRESS.md` are extremely high
   signal — read them before touching any of: phrase marks (case),
   pronouns (lifetime), TalonScript bodies (no inline dicts, gotcha §21),
