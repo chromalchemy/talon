@@ -7,6 +7,7 @@ related:
   - composable-action-grammar
 depends-on: []
 last-touched: 2026-05-03
+last-update-note: drift items 1–3 resolved 2026-05-03
 ---
 
 # tmem-roam-bridge
@@ -89,21 +90,17 @@ Daemon launch: `bb bridge.clj` from `~/dev/tmem-roam-ext/`. It writes
 | `docs/BLOCK-SELECTION-LIMITATIONS.md` | 🟢 current | Why `select-block` uses CSS-only highlight; 9 dead-ends documented |
 | `README.md` | ❌ untouched fork | Still the upstream Nautilus README. Ignore. |
 
-## Drift to be aware of
+## Drift — most resolved 2026-05-03
 
-1. **Daemon mode is live, not deferred.** `bridge.clj:2188+` self-starts an
-   nREPL daemon on port 6888; `roam_tmem_ext.py` shells `clj-nrepl-eval
-   --port 6888`. The progress doc still describes daemon as a future
-   migration. *Action candidate:* fold a "Phase G+: daemon shipped" note
-   into REFACTOR-PROGRESS.md.
-2. **Comment ↔ code mismatch.** `roam_tmem_ext.py` line 31 comment says
-   "port 7888"; `NREPL_PORT = "6888"`. Trivial fix.
-3. **Uncommitted doc move.** `PROJECT.md` and `AGENT-BRIDGE.md` were moved
-   from repo root to `docs/` but the move is in the working tree, not
-   committed. Branch: `cursorless-style-refactor`.
-4. **Legacy public fns in `bridge.clj`** (~25 of them, lines 1–1170) are
-   now deletion candidates per progress §"Important gotchas" #5 and the
-   open-questions list. Voice surface no longer touches them.
+1. ✅ **Daemon mode is live.** Was: progress doc said deferred. Now:
+   `REFACTOR-PROGRESS.md` has a `G+ — Daemon mode ✅ shipped` row and
+   the "Architectural pivot" section is marked historical rationale.
+2. ✅ **Comment ↔ code aligned.** Was: `roam_tmem_ext.py` comment said
+   "port 7888" while `NREPL_PORT = "6888"`. Fixed.
+3. ✅ **Doc move committed.** (User did this.)
+4. ⏳ **Legacy public fns in `bridge.clj`** (~25 of them, lines 1–1170)
+   are still deletion candidates per progress §"Important gotchas" #5
+   and the open-questions list. Voice surface no longer touches them.
 
 ## Branch state
 

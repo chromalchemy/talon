@@ -27,8 +27,11 @@ Daemon: `bb bridge.clj` from `~/dev/tmem-roam-ext`, nREPL on port 6888.
 
 - Mementum substrate created (session 0).
 - First workstream knowledge page written for `tmem-roam-bridge`.
-- Verified phases A–G against actual code; flagged 4 drift points (see
-  knowledge page §"Drift to be aware of").
+- Verified phases A–G against actual code; flagged 4 drift points.
+- Resolved 3 of 4: docs aligned with shipped daemon mode (Phase G+ row
+  + "Architectural pivot" marked historical), `roam_tmem_ext.py` port
+  comment fixed, doc move committed by user. Only legacy-fn deletion
+  remains open.
 
 ## How to orient (next session)
 
@@ -42,10 +45,12 @@ Daemon: `bb bridge.clj` from `~/dev/tmem-roam-ext`, nREPL on port 6888.
 
 ## Open questions / candidates
 
-- Update `REFACTOR-PROGRESS.md` to reflect that daemon mode shipped (one
-  commit; awaiting user direction).
-- Commit pending doc move (`PROJECT.md`, `AGENT-BRIDGE.md` → `docs/`).
-- Replace upstream Nautilus `README.md`.
+- Delete the ~25 legacy public fns in `bridge.clj` (lines 1–1170) in
+  groups, voice-testing after each. Voice surface verified across E–G.
+- Lift `getRefs` query into a `reference`/`mention` modifier scope
+  (~10 lines, per progress doc open-questions list).
+- Replace upstream Nautilus `README.md` (still upstream content).
+- Optional Phase H: embedded LLM string DSL.
 
 ## Symbols (from `agents.md`)
 
