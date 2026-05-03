@@ -42,6 +42,8 @@ updates.
 |---|---|---|
 | `c5e12c5` | talon | feat(roam): list-capable roam_target capture |
 | `bda5b24` | tmem-roam-ext | feat(zoom): reject list targets with list-not-supported error |
+| `f8b14a0` | tmem-roam-ext | feat(nudge): list-capable target with sibling-aware ordering |
+| `2f19be5` | talon | feat(nudge): composable target capture |
 
 **Multi-target action-verb grammar.** `chuck A and B`, `fold A and B`,
 `bar A and B and C`, `take A and B` now all work in one phrase via the
@@ -52,7 +54,17 @@ shapes preserved: destinations + bring/move sources stay primitive-only
 reject multi-uid regions in `bridge.clj` rather than at parse time
 (§4 Option A — keep grammar uniform, enforce arity per-action).
 
-`bridge.clj`: 1506 → **1514 lines** (+8, the zoom guard).
+**Multi-target nudge.** `nudge A and B up`, `nudge every child of C
+down`, `nudge cursor up` now work via the composable target capture.
+Talon's three nudge helpers (`roam_nudge_label`, `roam_nudge_implicit`,
+old single-purpose `roam_nudge`) collapsed to one general
+`roam_nudge(target_edn, direction)`. Bridge factors per-block logic
+into `nudge-one!` and iterates with sibling-index sort: ascending for
+`:up`/`:left-above`/`:right` (block moves toward start), descending for
+`:down`/`:left-below`/`:right-below` (block moves toward end), so
+multi-target ops don't trip over themselves.
+
+`bridge.clj`: 1506 → **1553 lines** (+47).
 
 ## How to orient (next session)
 
