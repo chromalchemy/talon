@@ -50,6 +50,8 @@ urgent
 someday
 roam
 
+roam hats: roam/hats
+
 voice plow: voice/flow
 
 room research: roam
@@ -89,15 +91,15 @@ close your inbox: clj/inbox
 time sheets: gb/timesheet
 time sheet: gb/timesheet
 
+get it: gb
+get pit: gb 
+
 clojure mcp: clojure-mcp
 clojuremcp: clojure-mcp
 clojure and bc: clojure-mcp
 clojure and cp: clojure-mcp
 
 back up: backup
-
-get it: gb
-get pit: gb
 
 kevin: kevin
 

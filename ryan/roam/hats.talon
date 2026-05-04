@@ -2,98 +2,140 @@ app.name: Roam Research
 mode: command
 -
 
+## +++++++++++++++++++++ debug helpers .
+
+
+## ++++++++++++++++++ show hide labels .
+
 show [block] hats | [block] hats show | [block] hats on: 
-    user.roam_bb_task("bridge --on")
+    user.roam_fn("(hats-on!)")
 
 hide [block] hats | [block] hats off :
-    user.roam_bb_task("bridge --off")
+    user.roam_fn("(hats-off!)")
 
-## ++++++++++++++++++++++++++++ edit block
+## ++++++++++++++++++++++++++++ edit block .
+## (LEGACY — uses :edit true flag, not yet in v1 envelope)
 
 (go) <user.letters>:
-    user.roam_bb_task("bridge --select {letters} -e")    
+    user.roam_fn("(select! [:{letters}] {{:edit true}})")
 
-## +++++++++++++++++++++ select blocks .
+## ++++++ mark blocks with to-do state (PHASE G+ composable) .
+## Generic todo/done/none state with composable target. Replaces the
+## legacy select+cmd-return+esc edit-mode dance with direct text-prefix
+## manipulation via the setTodoState dispatch. Multi-target via list
+## grammar:
+##   "make A todo"                (single)
+##   "make A and B done"          (list)
+##   "make every child of C todo" (modifier)
+##   "unmark this"                (cursor pronoun)
+##   "clear selection todo"       (selection pronoun)
 
-(take) <user.letters>:
-    user.roam_bb_task("bridge --select {letters}")
+(make | mark | big) <user.roam_target> {user.roam_todo_state}:
+    user.roam_set_todo(roam_target, roam_todo_state)
 
-# use edit block,then esc to selecte block with real ui mechanism, so can move block after
+# Clear-state rule stays separate — no trailing state word to capture.
+(unmark | clear | untodo | untask | non task | no task) <user.roam_target>:
+    user.roam_set_todo(roam_target, "none")
+
+## +++++++++++++ generic single-target action (PHASE F) .
+## One rule subsumes ~6 single-verb rules. Spoken vocabulary lives in
+## ~/.talon/user/roam-vocabulary/roam-actions.csv. Rule shape:
+##   {verb} <target>          e.g. "chuck A", "fold every child of B"
+## Compound rules (transfers, swaps, two-letter lists, edit-mode legacy,
+## moveToPosition, addToSelection, fold-children sugar, etc.) keep
+## their own grammar below.
+
+{user.roam_action_verb} <user.roam_target>:
+    user.roam_action(roam_action_verb, roam_target)
+
+## +++++++++++++++++++++ select blocks (PHASE E composable) .
+## Generic "take A" / "mark A" / "take A and B" handled by the action-verb
+## rule above (now list-capable). Compound add/remove select rules below.
+
+((take) (add | ad | also) | (also | and) take | (ad | add) to selected [blocks]) <user.roam_target> | (ad | add) <user.roam_target> to (selection | select | take | selected [blocks]):
+    user.roam_action("addToSelection", roam_target)
+
+(un take | not take | take not | unselect | deselect | remove from [block] (selection | select | selected [blocks]) ) <user.roam_target> | remove <user.roam_target> from (selection | select | selected [blocks]):
+    user.roam_action("removeFromSelection", roam_target)
+
+## ++++++++++++++++++++ hard selection .
+
+# Hard-take variants stay legacy (drop into edit mode then escape)
 (take) <user.letters> (classic) | (hard take) <user.letters> :
-    user.roam_bb_task("bridge --select {letters} -e")
+    user.roam_fn("(select! [:{letters}] {{:edit true}})")
     sleep(800ms)
     key(esc)
 
-(take) <user.letters> and <user.letters>:
-    user.roam_bb_task("bridge --select {letters_1},{letters_2}")
+## ++++++++++++++++++++++++ fold block (PHASE E composable) .
+## NOTE: spoken-form-to-action mapping preserved from legacy:
+##   "fold A" / "expand A"   → collapse  (legacy `fold!`)
+##   "unfold A" / "collapse A" → expand  (legacy `unfold!`)
+## Generic "fold A" / "fold every child of A" handled by the action-verb
+## rule at the top of this file (vocabulary in roam-actions.csv).
 
-((take) (add | ad | also) | (add | ad | also) take) <user.letters>:
-    user.roam_bb_task("bridge --select-add {letters}")
+## ++++++++++++++++++++++++ zoom block (PHASE E composable) .
+## Generic "zoom A" / "load A" / "zoom next day" / "zoom page of cursor"
+## handled by the action-verb rule above.
 
-(un take | not take | take not | unselect | remove from [block] selection ) <user.letters> | remove <user.letters> from selection:
-    user.roam_bb_task("bridge --select-remove {letters}")
+# N-day offset zoom (needs number→string conversion not in capture grammar)
+(zoom | load) (forward | next | plus) <number_small> [days]:
+    user.roam_zoom_daily_offset(number_small)
 
-## ++++++++++++++++++++++++ fold block .
+(zoom | load) (back | backward | backwards | previous | minus) <number_small> [days]:
+    user.roam_zoom_daily_offset(0 - number_small)
 
-(fold | expand) <user.letters> :
-    user.roam_bb_task("bridge --fold {letters_1}")
+## +++++++++++++ open block in sidebar (PHASE E composable) .
+## Generic "bar A" / "sidebar A" handled by the action-verb rule above.
 
-(unfold | collapse) <user.letters> :
-    user.roam_bb_task("bridge --unfold {letters_1}")
+# Legacy "open A in sidebar" phrasing preserved for muscle memory
+open <user.letters> in (bar | sidebar):
+    user.roam_action_label("openInSidebar", letters)
 
-## ++++++++++++++++++++++++ zoom block .
+## ++++ move block to first/last child (PHASE E composable) .
+## moveToTarget / linkToTarget / aliasMove via composable destination AST.
 
-zoom (out | parent) block | go (parent | parents | parens):
-    user.roam_bb_task("bridge --zoom-out")
+# Single-list reorder: "move A to first" / "alias selected to last" / "B to start"
+# → moveToTarget src=<target> dest={to + position:start|end + parent-of-source}.
+# Source slot is *primitive* — bring/move semantics on a list source would
+# need a per-element parent calc, which the helper can't express today.
+[move] <user.roam_primitive_target> [to] (first | start | top) $:
+    user.roam_move_to_position(roam_primitive_target, "start")
 
-zoom [block] <user.letters> :
-    user.roam_bb_task("bridge --zoom {letters_1}")
+[move] <user.roam_primitive_target> [to] (last | end | bottom) $:
+    user.roam_move_to_position(roam_primitive_target, "end")
 
-zoom parent [block] [of] <user.letters> :
-    user.roam_bb_task("bridge --zoom-parent {letters_1}")
+# Full transfer: "move/link/alias <target> to <destination>"
+# Destination grammar: {to|before|after} [start of|end of] <primitive_target>.
+move <user.roam_primitive_target> <user.roam_destination>:
+    user.roam_action_pair("moveToTarget", roam_primitive_target, roam_destination)
 
-## +++++++++++++ open block in sidebar .
+link <user.roam_primitive_target> <user.roam_destination>:
+    user.roam_action_pair("linkToTarget", roam_primitive_target, roam_destination)
 
-(bar | sidebar) <user.letters> | open <user.letters> in (bar | sidebar):
-    user.roam_bb_task("bridge --open-sidebar {letters_1}")
+(alias | leave ref | leave alias) <user.roam_primitive_target> <user.roam_destination>:
+    user.roam_action_pair("aliasMove", roam_primitive_target, roam_destination)
 
-## ++++ move block to first/last child .
+## ++++++++++++++++++++ nudge block (PHASE E composable) .
+## Generalized: any target shape works in a direction. List targets are
+## supported (multi-block nudge, sibling-aware ordering in bridge.clj).
+## Examples: "nudge A up", "nudge A and B up", "nudge every child of C
+## down", "nudge cursor up", "nudge block up".
 
-[<user.roam_position>] child <user.letters> :
-    user.roam_bb_task("bridge --reorder {letters_1} --pos {roam_position or 'last'}")
+[nudge] <user.roam_target> <user.roam_direction>:
+    user.roam_nudge(roam_target, roam_direction)
 
-## ++++++++++++++++++++++++ move block(s) .
-## "move A to D"              → --move A --to D           (last child of D)
-## "move A to D top"          → --move A --to D --first   (first child of D)
-## "move A to D before"       → --move A --before D       (sibling above D)
-## "move A to D after"        → --move A --after D        (sibling below D)
-## "move A to D alias"        → --move A --to D --alias   (move + leave ref behind)
-## "move A to D link"         → --link A --to D           (don't move, create ref at target)
-## "move A to D before link"  → --link A --before D       (ref as sibling above D)
+# Implicit-block sugar — equivalent to `nudge` with no target.
+# (Implicit target EDN is built in Python; TalonScript string literals
+# can't contain ':' safely — the lexer reads `:type` as a KEYNAME.)
+nudge block <user.roam_direction>:
+    user.roam_nudge_implicit(roam_direction)
 
-move (selected [blocks] | [block] selection) to [<user.roam_position>] [of] <user.letters> [<user.roam_move_mode>]:
-    user.roam_bb_task(user.roam_move("bridge --move-selected --to {letters}", roam_position or "", roam_move_mode or ""))
+## ++++++++++++++++++++++++++ swap blocks (PHASE E composable) .
 
-move <user.letters> to <user.letters> [<user.roam_position>] [<user.roam_move_mode>]:
-    user.roam_bb_task(user.roam_move("bridge --move {letters_1} --to {letters_2}", roam_position or "", roam_move_mode or ""))
+swap <user.letters> [and | with] <user.letters>:
+    user.roam_swap_labels(letters_1, letters_2, 0)
 
-## ++++++++++++++++++++++ move to page .
+swap content <user.letters> [and | with] <user.letters>:
+    user.roam_swap_labels(letters_1, letters_2, 1)
 
-move <user.letters> to {user.roam_tag} [<user.roam_position>] [<user.roam_move_mode>]:
-    user.roam_bb_task(user.roam_move("bridge --move {letters_1} --page '{user.roam_tag or ''}'", roam_position or "", roam_move_mode or ""))
-
-## +++++++++++++++++++++++ move to ref .
-
-move <user.letters> to {user.roam_ref} [<user.roam_position>] [<user.roam_move_mode>]:
-    user.roam_bb_task(user.roam_move("bridge --move {letters_1} --ref {user.roam_ref or ''}", roam_position or "", roam_move_mode or ""))
-
-# name = user.formatted_text(text, "COMMA_SEPARATED_NOSPACE")
-
-# {user.roam_tag or ''}
-# {user.roam_ref}
-
-## ++++++++++++++++++++++ delete block .
-
-(delete | chuck) <user.letters>:
-    user.roam_bb_task("bridge --delete {letters}")
-
+## "delete A" / "chuck A" handled by the action-verb rule at the top.

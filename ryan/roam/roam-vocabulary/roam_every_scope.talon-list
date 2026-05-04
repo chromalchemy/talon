@@ -1,0 +1,23 @@
+list: user.roam_every_scope
+-
+
+child: child
+children: child
+descendant: descendant
+descendants: descendant
+kid: child
+kids: child
+neighbor: sibling
+neighbors: sibling
+neighbour: sibling
+neighbours: sibling
+sibling: sibling
+siblings: sibling
+sub: descendant
+subs: descendant
+reference: reference
+references: reference
+ref: reference
+refs: reference
+mention: mention
+mentions: mention

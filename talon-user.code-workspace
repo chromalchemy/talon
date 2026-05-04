@@ -31,6 +31,9 @@
 		{
 			"name": "tmem-roam-ext",
 			"path": "../../dev/tmem-roam-ext"
+		},
+		{
+			"path": "../../dev/roam-docs"
 		}
 	],
 	"settings": {

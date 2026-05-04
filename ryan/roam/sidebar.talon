@@ -7,7 +7,7 @@ mode: command
 (toggle | hide | show | close | open | reveal) ((sidebar | bar) | side bar) | bar (show | hide) | (barca | bar read | bared) :
     key(cmd-/)
 
-(clear | kill) (sidebar | bar): key(ctrl-l)
+(clear | kill) [all] ((side bar |sidebar | sidebars)  | (bar | bars) ): key(ctrl-l)
 
 (close | kill | chuck) (pinned sidebar | sidebar force) :
     mouse_click(0)
@@ -16,7 +16,7 @@ mode: command
 
 ## ++++++++++++++++++++++++++++++ swap .
 
-swap ((sidebar | bar) | main) [with ((sidebar | bar) | main)]:
+swap ((sidebar | bar) | main) [(with | and) ((sidebar | bar) | main)]:
     user.run_roam_command("wb sidebars - swap with main window (swap)")
 
 #switch+ sidebar
@@ -25,10 +25,10 @@ swap ((sidebar | bar) | main) [with ((sidebar | bar) | main)]:
 #     sleep(500ms)
 #     insert("r:")
 
-## +++++++++++++++++++++++++++ folding .
+## +++++++++++++++++++++++++++ fold sidebars (not nodes in sidebar) .
 
-(expand | collapse | fold) [all] ((sidebar | bar) | side bar):
-    user.run_roam_command("toggle")
+(expand | collapse | fold) [all] ((side bar |sidebar | sidebars)  | (bar | bars) ) :
+    user.run_roam_command("Clear Sidebar: Toggle Collapse All")
 
 ## +++++++++++++++++++ open in sidebar .
 
@@ -38,7 +38,7 @@ swap ((sidebar | bar) | main) [with ((sidebar | bar) | main)]:
     mouse_click(0)
 
 #works when cursor is in or adjacent to reference id text
-open [(ref | reference | link)] in (sidebar | bar): 
+open [(ref | reference | link | block)] in (sidebar | bar) | (sidebar | bar) block: 
     key(ctrl-shift-o)
 
 # open current page

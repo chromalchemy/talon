@@ -1,0 +1,12 @@
+list: user.roam_todo_state
+-
+
+todo: todo
+to do: todo
+task: todo
+action: todo
+done: done
+none: none 
+clear: none
+no task: none
+non task: none

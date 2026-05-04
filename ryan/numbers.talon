@@ -106,13 +106,24 @@ new sheet:
 
 ## ++++++++++++++++++++++++++++ export .
 
-export new [(comma | csv)] sheet:
+export (new | manual) [(comma | csv)] sheet [manual]:
+    user.menu_select('File|Export To|CSV…')
+    sleep(200ms)
+    key(space)
+
+export [to] [(comma | csv)] sheet [(comma | csv)]:
     user.menu_select('File|Export To|CSV…')
     sleep(200ms)
     key(enter)
+    sleep(1800ms)
+    key(enter)
+    sleep(200ms)
+    key(tab)nes
+    sleep(200ms)
+    key(space)
 
-export [(comma | csv)] sheet:
-    user.menu_select('File|Export To|CSV…')
+export [to]  ((excel | xl)  sheet | (excel | xl) sheet):
+    user.menu_select('File|Export To|Excel…')
     sleep(200ms)
     key(enter)
     sleep(1800ms)
