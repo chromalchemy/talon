@@ -3,21 +3,36 @@ app.name: Numbers
 
 <user.arrow_keys>: user.move_cursor(arrow_keys)
 
+## +++++++++++++ email address helpers .
+
 gmail: insert("gmail.com")
 at gmail: insert("@gmail.com")
 at yahoo: insert("@yahoo.com")
 dot com: insert(".com")
 edit [cell]: key(alt-enter)
 
-(freeze | unfreeze) (header (row | rows) | (row | rows) header):
+## +++++++++++++++ freeze rows/columns .
+
+(freeze | unfreeze) ([header] (row | rows) | (row | rows) header):
     user.menu_select('Table|Freeze Header Rows')
 
-(freeze | unfreeze) (header (column | columns) | (column | columns) header):
+freeze first [header] row:
+    user.menu_select('Table|Header Rows|1')
+
+freeze second [header] row:
+    user.menu_select('Table|Header Rows|2')
+
+(freeze | unfreeze) ([header] (column | columns) | (column | columns) header):
     user.menu_select('Table|Freeze Header Columns')
 
+freeze first [header] column:
+    user.menu_select('Table|Header Columns|1')
+    
 (freeze | unfreeze) headers:
+    user.menu_select('Table|Header Columns|1')
+    user.menu_select('Table|Header Rows|1')
     user.menu_select('Table|Freeze Header Rows')
-    sleep(300ms)    
+    # sleep(300ms)    
     user.menu_select('Table|Freeze Header Columns')
 
 ## ++++++++++++++++++++++++ formatting .
@@ -42,16 +57,19 @@ paste [cell] (formatting  | style | thou | tile):
 bar colors: 
     key(cmd-shift-c)
 
-zoom in:
-    key(cmd->)
-zoom out:
-    key(cmd-<)
-
 (inspect | inspector) next:
     key(ctrl-`)
 
 (inspect | inspector) last:
     key(ctrl-shift-`)
+
+
+## ++++++++++++++++++++++++++++++ zoom .
+
+zoom in:
+    key(cmd->)
+zoom out:
+    key(cmd-<)
 
 ## +++++++++++++++++ edit rows/columsn .
 
@@ -118,7 +136,7 @@ export [to] [(comma | csv)] sheet [(comma | csv)]:
     sleep(1800ms)
     key(enter)
     sleep(200ms)
-    key(tab)nes
+    key(tab)
     sleep(200ms)
     key(space)
 
