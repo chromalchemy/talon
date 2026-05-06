@@ -72,7 +72,7 @@ exit [page] (hunt | search):
 search (up | parent): 
     key(shift-tab)
 
-search (down | child | children)
+search (down | child | children):
     key(tab)
 
 #---------- find and replace extension search page or workspace
