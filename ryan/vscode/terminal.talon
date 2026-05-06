@@ -56,7 +56,7 @@ kill process:
     sleep(500ms)
     user.run_rpc_command("workbench.action.moveEditorToLeftGroup")
 
-[(move | send)] (term | terminal) (to | too | two) (tab | editor) (right | rite) [group] | tab (right | rite) (term | terminal):
+[(move | send)] (term | terminal) (to | too | two) (tab | editor) (right | rite) [group] | tab (right | rite) (term | terminal) | pop repl [term] [to] (pane | group | editor | view)  :
     user.run_rpc_command("workbench.action.terminal.moveToEditor")
     sleep(500ms)
     user.run_rpc_command("workbench.action.moveEditorToRightGroup")
