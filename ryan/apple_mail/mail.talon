@@ -52,13 +52,15 @@ to do: key(ctrl-o)
     sleep(100ms)
     insert("save attachment")
 
-(download | save) [and] copy (attachment | file) [here]:
+(download | save) [and] copy (attachment | file) [here] | save attachment copy:
     mouse_click(1)
     sleep(400ms)
     insert("save attachment")
     key(enter)
-    sleep(1000ms)
+    sleep(1200ms)
     key(cmd-c)
-    sleep(500ms)
+    sleep(300ms)
+    user.finder_modal_open_directory("/Users/ryan/dev/gbo/resources/linnworks/kevin edits")
+    sleep(1000ms)
     # edit.copy()
     key(enter)
