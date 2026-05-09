@@ -30,9 +30,11 @@ freeze first [header] column:
     
 (freeze | unfreeze) headers:
     user.menu_select('Table|Header Columns|1')
+    sleep(300ms)
     user.menu_select('Table|Header Rows|1')
+    sleep(300ms)
     user.menu_select('Table|Freeze Header Rows')
-    # sleep(300ms)    
+    sleep(300ms)    
     user.menu_select('Table|Freeze Header Columns')
 
 ## ++++++++++++++++++++++++ formatting .
