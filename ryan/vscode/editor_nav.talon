@@ -14,8 +14,21 @@ app.name: Windsurf - Next
 
 ## ++++++++ nav top level (of nested) forms .
 
+reveal (name space | namespace):
+    user.run_rpc_command("joyride.runUserScript", "reveal_ns.cljs")
+
+copy (name space | namespace):
+    user.run_rpc_command("joyride.runUserScript", "copy_ns.cljs")
+
+(go (to | before) | pre) top form:
+    user.run_rpc_command("joyride.runUserScript", "goto_top_of_form.cljs")
+
+(go (after | past) | post) top form:
+    user.run_rpc_command("joyride.runUserScript", "goto_end_of_form.cljs")
+
 # todo:  vscode and cursorless cops to implement this  
 
+# browse top level code breadcrumbs
 go (top [level] form | form top):
     user.run_rpc_command("breadcrumbs.focusAndSelect")
     sleep(100ms)
@@ -72,17 +85,29 @@ go [to] last nav:
     user.run_rpc_command("workbench.action.navigateToLastNavigationLocations")
 
 
-## +++++++++++++++++++++++ nav tli symbols .
+## +++++++++++++++++++++++ nav symbols 
 
-(go [to] | pick) symbol:    
+(go [to] | pick) (workspace | project) symbol:    
+    user.run_rpc_command("workbench.action.showAllSymbols")
+
+symbol hunt all [<user.text>]:
+    user.vscode("workbench.action.showAllSymbols")
+    sleep(50ms)
+    insert(text or "")
+
+(go [to] | pick) [file] symbol:    
     user.run_rpc_command("workbench.action.gotoSymbol")
+
+symbol hunt [<user.text>]:
+    user.vscode("workbench.action.gotoSymbol")
+    sleep(50ms)
+    insert(text or "")
 
 symbol last:                
     user.run_rpc_command("gotoNextPreviousMember.previousMember")
     
 symbol next:                
     user.run_rpc_command("gotoNextPreviousMember.nextMember")
-
 
 ## +++++++++++++++++ Symbol references .
 
@@ -142,6 +167,8 @@ bar (references | refs) | (go | focus) (references | refs) bar:
 
 [(show | reveal)] (def | deaf | definition | depth) [(to | in)] (new | side | other) [(editor | tab | group)]:
     user.run_rpc_command("editor.action.revealDefinitionAside")
+
+
 
 ## ___________________________________ problems .
 
