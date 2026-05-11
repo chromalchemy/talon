@@ -60,7 +60,7 @@ hide [block] hats | [block] hats off :
 
 ## ++++++++++++++++++++ hard selection .
 
-# Hard-take variants stay legacy (drop into edit mode then escape)
+# slect a block with the classic ui metho (go into edit mode then escape)
 (take) <user.letters> (classic) | (hard take) <user.letters> :
     user.roam_fn("(select! [:{letters}] {{:edit true}})")
     sleep(800ms)
