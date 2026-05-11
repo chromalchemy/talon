@@ -13,12 +13,6 @@ show [block] hats | [block] hats show | [block] hats on:
 hide [block] hats | [block] hats off :
     user.roam_fn("(hats-off!)")
 
-## ++++++++++++++++++++++++++++ edit block .
-## (LEGACY — uses :edit true flag, not yet in v1 envelope)
-
-(go) <user.letters>:
-    user.roam_fn("(select! [:{letters}] {{:edit true}})")
-
 ## ++++++ mark blocks with to-do state (PHASE G+ composable) .
 ## Generic todo/done/none state with composable target. Replaces the
 ## legacy select+cmd-return+esc edit-mode dance with direct text-prefix
@@ -41,9 +35,9 @@ hide [block] hats | [block] hats off :
 ## One rule subsumes ~6 single-verb rules. Spoken vocabulary lives in
 ## ~/.talon/user/roam-vocabulary/roam-actions.csv. Rule shape:
 ##   {verb} <target>          e.g. "chuck A", "fold every child of B"
-## Compound rules (transfers, swaps, two-letter lists, edit-mode legacy,
-## moveToPosition, addToSelection, fold-children sugar, etc.) keep
-## their own grammar below.
+## Compound rules (transfers, swaps, two-letter lists, moveToPosition,
+## addToSelection, fold-children sugar, etc.) keep their own grammar
+## below.
 
 {user.roam_action_verb} <user.roam_target>:
     user.roam_action(roam_action_verb, roam_target)
@@ -59,11 +53,23 @@ hide [block] hats | [block] hats off :
     user.roam_action("removeFromSelection", roam_target)
 
 ## ++++++++++++++++++++ hard selection .
+## Roam has two distinct selection states (see docs/BLOCK-SELECTION-LIMITATIONS.md):
+##   1. Edit mode    — textarea open, caret inside
+##   2. Native select — block highlighted blue, arrow-key navigable
+## There's no public API for state 2. The only way to reach it is:
+##   API focus → real Escape keypress (must be isTrusted=true; synthetic
+##   KeyboardEvent dispatch is rejected by Roam's CLJS handler).
+##
+## `take A` (via the action-verb rule above) uses the JS-bridge CSS
+## highlight — a *visual* substitute that doesn't drive Roam's internal
+## selection state. Use `hard take A` when you need real Roam selection
+## (e.g. for native indent/outdent, drag handles, or right-click menu).
+## Single-target only (Roam's native selection is per-block; multi-block
+## hard-select would require Cmd-M dance which has its own bridge limits).
 
-# slect a block with the classic ui metho (go into edit mode then escape)
-(take) <user.letters> (classic) | (hard take) <user.letters> :
-    user.roam_fn("(select! [:{letters}] {{:edit true}})")
-    sleep(800ms)
+(hard take) <user.roam_primitive_target>:
+    user.roam_action("enterEdit", roam_primitive_target)
+    sleep(400ms)
     key(esc)
 
 ## ++++++++++++++++++++++++ fold block (PHASE E composable) .

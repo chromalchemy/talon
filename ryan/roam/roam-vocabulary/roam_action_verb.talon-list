@@ -18,3 +18,7 @@ zoom: zoom
 
 mark: setSelection
 take: setSelection
+
+edit: enterEdit
+focus: enterEdit
+go: enterEdit

@@ -143,9 +143,10 @@ def roam_primitive_target(m) -> str:
 #
 # Lists distribute pointwise across most action verbs (remove, collapse,
 # expand, openInSidebar, setSelection, addToSelection, removeFromSelection,
-# getText, getRefs). Inherently single-target verbs (zoom) reject multi-uid
-# regions in bridge.clj rather than at parse time — see cursorless §4
-# Option A: keep grammar uniform, enforce arity per-action at runtime.
+# getText, getRefs). Inherently single-target verbs (zoom, enterEdit)
+# reject multi-uid regions in bridge.clj rather than at parse time — see
+# cursorless §4 Option A: keep grammar uniform, enforce arity per-action
+# at runtime.
 @mod.capture(rule="<user.roam_primitive_target> "
                   "(and <user.roam_primitive_target>)*")
 def roam_target(m) -> str:
@@ -202,7 +203,7 @@ class Actions:
     # ── Composable action surface (daemon mode) ─────────────────────
     def roam_action(name: str, target: str):
         """Action+target shape (setSelection, remove, collapse, expand,
-        zoom, openInSidebar, getText, getRefs, addToSelection,
+        zoom, enterEdit, openInSidebar, getText, getRefs, addToSelection,
         removeFromSelection)."""
         _eval('(execute! {:version 1 :id "voice-' + uuid.uuid4().hex[:8] +
               '" :action {:name "' + name + '" :target ' + target + '}})')
