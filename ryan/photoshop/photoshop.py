@@ -43,7 +43,7 @@ class Actions:
         actions.key("cmd-a")
         actions.sleep("500ms")
 
-    def ps_duplicate_layer(layer_name: str):
+    def ps_duplicate_layer():
         """kdjojif"""
         actions.user.menu_select('Layer|Duplicate Layer...')
         actions.key("right")

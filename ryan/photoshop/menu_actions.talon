@@ -62,10 +62,10 @@ Copy (CSS | C S S | cee es es):
 Copy (S V G | es vee gee):
     user.ps_copy_svg()
 
-Duplicate Layer:
+(Duplicate | clone) Layer:
     user.ps_duplicate_layer()
 
-Duplicate layers:
+(Duplicate | clone) layers:
     user.ps_duplicate_layers()
 
 (Delete | chuck) layer:

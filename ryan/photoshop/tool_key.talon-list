@@ -54,7 +54,8 @@ frame: k
 dropper: i
 color sampler: i
 ruler: i
-note: i
+# Conflicts with roam short app name assignment
+# note: i
 count: i
 
 spot healing: j

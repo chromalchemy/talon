@@ -68,10 +68,6 @@ class Actions:
         """layer copy svg"""
         actions.user.menu_select("Layer|Copy SVG")
 
-    def ps_duplicate_layer():
-        """layer duplicate layer"""
-        actions.user.menu_select("Layer|Duplicate Layer...")
-
     def ps_duplicate_layers():
         """duplicate layers"""
         actions.user.menu_select('Layer|Duplicate Layers...')

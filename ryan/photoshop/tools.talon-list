@@ -51,7 +51,8 @@ color dropper: color-sampler
 
 ruler
 
-note
+# conflicts with roam app shortname
+# note
 count
 
 spot healing brush: spot-healing-brush
