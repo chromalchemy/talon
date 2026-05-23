@@ -133,3 +133,33 @@ class Actions:
     def ps_set_brush_opacity(level: str):
         """set brush opacity"""
         number_keys(level)
+
+    def uxp_select_ps_dev_plugin():
+        """tab to plugin"""
+        actions.key("tab")
+        actions.sleep("100ms")
+        actions.key("tab")
+        actions.sleep("100ms")
+        actions.key("tab")
+        actions.sleep("100ms")
+        actions.key("tab")
+        actions.sleep("100ms")
+        actions.key("tab")
+        actions.sleep("100ms")
+        actions.key("tab")
+        actions.sleep("100ms")
+        actions.key("tab")
+        actions.sleep("100ms")
+        actions.key("tab")
+        actions.sleep("100ms")
+        actions.key("tab")
+        actions.sleep("100ms")
+
+    def uxp_watch_ps_dev_plugin():
+        """watch ps dev plugin"""
+        actions.user.uxp_select_ps_dev_plugin()
+        actions.key("left")
+        actions.sleep("100ms")
+        actions.key("left")
+        actions.sleep("100ms")
+        actions.key("space")
