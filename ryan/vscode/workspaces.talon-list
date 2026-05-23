@@ -1,6 +1,7 @@
 list: user.code_workspace
 -
 groun: /dev/groundedsol/groundesol w biff.code-workspace
+ground: /dev/groundedsol/groundesol w biff.code-workspace
 ground sol: /dev/groundedsol/groundesol w biff.code-workspace
 grounded: /dev/groundedsol/groundesol w biff.code-workspace
 grounded sol: /dev/groundedsol/groundesol w biff.code-workspace
