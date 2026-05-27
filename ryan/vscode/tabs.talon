@@ -195,7 +195,7 @@ please (go | focus) [tab] group:
     sleep(200ms)
     insert("view focus group")
 
-(focus | go) (editor | tab | group): 
+(focus | go) (editor | tab | [tab] group | file): 
     user.run_rpc_command("workbench.action.focusActiveEditorGroup")
 
 [(focus | go)] walk [(editor | tab | tap)] group: user.run_rpc_command("workbench.action.navigateEditorGroups")
