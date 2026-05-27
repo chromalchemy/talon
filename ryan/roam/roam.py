@@ -116,7 +116,7 @@ class Actions:
             actions.sleep("100ms")
             
     def roam_break_block():
-        "break block"
+        "break block to child at cursor"
         actions.key("enter")
         actions.sleep("300ms")
 
@@ -409,5 +409,11 @@ class Actions:
         """select block hat"""
         actions.insert(target)
         actions.sleep("300ms")
+
+    def roam_insert_snippet(snippet_name: str, text: str):
+        "inster a talon snippet with a text substitution"
+        substitutions = {"0": text}
+        actions.user.insert_snippet_by_name(snippet_name, substitutions)
+        actions.sleep("100ms")
 
         
