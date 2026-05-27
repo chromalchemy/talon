@@ -17,13 +17,38 @@ app.name: Windsurf - Next
 (close | hide) [left] (sidebar | bar) | bar [left] hide | left bar hide: 
     user.run_rpc_command("workbench.action.closeSidebar")
 
-## ++++++++++ left / secondary sidebar .
+bar right (max | expand | shrink | min) | (max | expand | shrink | min) bar right | toggle bar right (max | expand | shrink | min) | minbar right:
+    # opens right sidebar if not open
+    user.run_rpc_command("workbench.action.toggleMaximizedAuxiliaryBar")
+
+next bar right | bar right next:
+    user.run_rpc_command("workbench.action.nextAuxiliaryBarView")
+
+last bar right | bar right last:
+    user.run_rpc_command("workbench.action.previousAuxiliaryBarView")
+
+focus bar right:
+    user.run_rpc_command("workbench.action.focusAuxiliaryBar")
+
+## ++++++++++ right / secondary / auxiliary sidebar .
 
 (right | great) (sidebar | bar) | raper | bar right | (toggle | show) right (sidebar | bar) : 
     user.run_rpc_command("workbench.action.toggleAuxiliaryBar")
     
 (close | hide) right (sidebar | bar) | bar right hide | right bar hide: 
     user.run_rpc_command("workbench.action.closeAuxiliaryBar")
+
+bar right (max | expand | shrink | min) | (max | expand | shrink | min) bar right | toggle bar right (max | expand | shrink | min) | minbar right:
+    user.run_rpc_command("workbench.action.toggleMaximizedAuxiliaryBar")
+
+next bar right | bar right next:
+    user.run_rpc_command("workbench.action.nextAuxiliaryBarView")
+
+last bar right | bar right last:
+    user.run_rpc_command("workbench.action.previousAuxiliaryBarView")
+
+focus bar right:
+    user.run_rpc_command("workbench.action.focusAuxiliaryBar")
  
 ## +++++++++++++++++++++++++++++ bottom panel .
 
