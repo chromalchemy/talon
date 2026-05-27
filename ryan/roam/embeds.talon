@@ -1,64 +1,48 @@
 
 #----------------- embed block
 
-embed (block | ref | reference):
-    insert("/embed")
-    sleep(100ms)
-    user.roam_break_block()
-    key(right:2 backspace:4)
-    edit.paste()
-    sleep(100ms)
+(in bed | embed) (block | ref | reference) | (paste | pace) (embed | in bed):
+    r = clip.text()
+    user.roam_insert_snippet("embed", r)
     key(esc)
 
 #embed block/page children only
 
-#todo: Make versions that queue up we search for the block or or page, rather than pasting it
-embed (block | black | ref | reference) (children | kids):
-    key({:2)
-    user.paste("embed-children: ")
-    sleep(300ms)
-    edit.paste()
-    sleep(100ms)
+(in bed | embed) (block | black | ref | reference) (children | kids):
+    r = clip.text()
+    user.roam_insert_snippet("embedChildren", r)
+    key(esc)
+
+
+(in bed | embed) (block | black | ref | reference) (path | breadcrumbs | crumbs):
+    r = clip.text()
+    user.roam_insert_snippet("embedPath", r)
     key(esc)
 
 # ----------- block/page mentions
 
-(paste | embed | insert) (block | black | ref | reference) (mentions | links):
-    key({:2)
-    insert("children-mentions: ")
-    sleep(300ms)
-    edit.paste()
-    sleep(100ms)
+(paste | (in bed | embed) | insert) (block | black | ref | reference) (mentions | links):
+    r = clip.text()
+    user.roam_insert_snippet("mentions", r)
     key(esc)
 
-(embed | insert) (block | black | ref | reference) (mentions | links) [from] page [<user.text>]:
-    key({:2)
-    insert("children-mentions: ")
-    sleep(300ms)
-    key([:2)
-    sleep(100ms)
-    insert(text)
+(in bed | embed) mentions [for] {user.roam_ref}:
+    user.roam_insert_snippet("refMentions", roam_tag)
+    key(esc:2)
 
-(embed | insert) (block | black | ref | reference) (mentions | links) [from] block [<user.text>]:
-    key({:2)
-    insert("children-mentions: ")
-    sleep(300ms)
-    key((:2)
-    sleep(100ms)
-    insert(text)
+(in bed | embed) page mentions [for] {user.roam_tag}:
+    user.roam_insert_snippet("pageMentions", roam_tag)
+    key(esc:2)
 
-    ###-------- alternative implementation
-    # edit.paste()
-    # sleep(300ms)
-    # key(cmd-a)
-    # sleep(300ms)
-    # refstr = edit.selected_text()
-    # firsthalf = "{{[[embed]]: " + refstr
-    # fullembed = firsthalf + "}}"
-    # insert(fullembed)
-    # sleep(300ms)
-    # key(cmd-a)
-    # sleep(300ms)
-    # key({)
-    # sleep(300ms)
-    # key(esc)
+((in bed | embed) | insert) page (mentions | links):
+    user.insert_snippet_by_name_with_stop_at_end("pageMentions")
+
+((in bed | embed) | insert) (mentions | links) [for] page <user.text>:
+    user.insert_snippet_by_name_with_stop_at_end("pageMentions")
+    insert(text)
+    # how to insert a snippet with stop after substituted text?
+    # user.roam_insert_snippet("pageMentions", text)
+
+((in bed | embed) | insert) (mentions | links) [for] (block | black | ref | reference) <user.text>:
+    user.insert_snippet_by_name_with_stop_at_end("blockMentions")
+    insert(text)
