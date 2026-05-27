@@ -4,6 +4,9 @@ app.name: Adobe Photoshop 2026
 
 -
 
+hide (uxp | dev) (panel | plugin):
+    user.menu_select('Plugins|scittle-repl|Starter Panel')
+
 ## +++++++++++++++++++++++++++ confirm changes (to exit modal)
 
 ^okay$: key(enter)
