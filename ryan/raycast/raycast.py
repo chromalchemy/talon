@@ -8,7 +8,7 @@ class Actions:
     def run_raycast_command(text: str):
         """Run Command from command palette"""
         actions.key("cmd-space")
-        actions.sleep("300ms")
+        actions.sleep("500ms")
         actions.user.paste(text)
         actions.sleep("400ms")
         actions.key("enter")
