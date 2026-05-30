@@ -1,34 +1,32 @@
 app.name: Roam Research 
 mode: command
 -
+settings():
+    user.snippet_raw_text_paste = true
 
 ## ++++++++++++++++++++++ insert dates .
 
 insert today: 
-    insert("/today")
-    sleep(300ms)
-    user.roam_break_block()
+    user.roam_run_slash_command("today")
     key(space)
 
 insert tomorrow: 
-    insert("/tomorrow")
-    sleep(300ms)
-    user.roam_break_block()
+    user.roam_run_slash_command("tomorrow")
     key(space)
 
 (add) date [link]:
-    insert("/date picker")
-    sleep(300ms)
-    key(enter)
+    user.roam_run_slash_command("date picker")
 
 ## ++++++++++++++++++++ edit block date .
 
+#pops up inline calendar model over date stamp
 change date point: 
     key(alt:down)
     mouse_click(0)
 
+
 (teleport | change) [(todo | to do)] date:
-    key(alt-shift-t)
+    user.roam_teleport_todo_date_tag()
 
 ## +++++++++++++++++++ go to date page .
 
@@ -36,8 +34,10 @@ change date point:
 
 #teleport extension
 (pick | go [to]) date: 
-    key(cmd-alt-shift-j) 
-    #telport extension
+    user.roam_teleport_todo_block()
+
+
+## ___________________________________ . deprecated by extension cmds
 
 # go [to] today:  
 #     key(ctrl-shift-d)
@@ -69,14 +69,14 @@ change date point:
 #     key(ctrl-alt-p)
 
 # yesterday not always accurate
-(open | go) [to] ((prev | previous | last) day | day (prev | previous | last) | yesterday)  [in] (sidebar | bar):
-    user.run_roam_command("go to previous day (sidebar)")
+# (open | go) [to] ((prev | previous | last) day | day (prev | previous | last) | yesterday)  [in] (sidebar | bar):
+#     user.run_roam_command("go to previous day (sidebar)")
 
 
 ## ++++++++++++++++++++++ add date to block 
 
 
 add date [stamp] [to block]: 
-    insert("{{{{date}}}} ")
+    user.roam_insert_snippet("templateVar", "date")
     key(esc)
    

@@ -1,10 +1,23 @@
 app.name: Roam Research 
 mode: command
 -
+settings():
+    user.snippet_raw_text_paste = true
 
 # edit.paragraph_start()
 # edit.jump_line
 # edit.sentence_start
+
+{user.snippet} wrap [up] that:
+    t = edit.selected_text()
+    #if i leave text, and paste over, it will create a markdown link
+    edit.delete() 
+    user.roam_insert_snippet(snippet, t) 
+
+(pop | activate) (ref | reference | page) (selector | browser | browse | chooser) | pick other ref:
+    key(/)
+    # sleep(100ms)
+    edit.delete()
 
 ## +++++++++++++ navigate within block .
 

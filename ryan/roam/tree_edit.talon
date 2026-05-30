@@ -170,8 +170,7 @@ new base block:
     user.roam_new_child_block()
 
 (insert | (new | you) | add | put) (child | kid | (right | write) | write) [block] | (child | kid | (right | write) | write) block | nuchal <user.text>:
-    user.roam_go_block_end()
-    user.roam_break_block()
+    user.roam_new_block_below()
     insert(text) 
     user.roam_block_forward(1)
 
@@ -217,7 +216,7 @@ slurp [( block | below block )] [left] ([to] peer):
 nest here:
     user.roam_break_block()
     user.roam_block_forward(1)
-    key(escape:2)
+    roam_select_none()
 
 (split | break) here [block] : 
     #user.roam_break_block()

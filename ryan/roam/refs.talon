@@ -1,10 +1,15 @@
 app.name: Roam Research 
 mode: command
 -       
+settings():
+    user.snippet_raw_text_paste = true
+    
 #copy ref
-copy [block] (ref | reference): key(cmd-shift-c)
+copy [block] (ref | reference): 
+    key(cmd-shift-c)
 
-copy [block] (embed | in bed): key(cmd-shift-e)
+copy [block] (embed | in bed): 
+    key(cmd-shift-e)
 
 ## +++++++++++++ write out a reference .
 
@@ -14,6 +19,7 @@ dub paren | [new] ([block] (reference | ref)  [link]  | backlink) [that]:
 ([block] (reference | ref)  [link]  | backlink) word: 
     edit.select_word()
     insert("((")
+    # user.roam_insert_snippet("blockRef", "paren")
 
 [new] ([block] (reference | ref)  [link]  | backlink) <user.text>:
     insert("((")
@@ -39,7 +45,7 @@ dub paren | [new] ([block] (reference | ref)  [link]  | backlink) [that]:
     sleep(500ms)
     user.paste()
     sleep(100ms)
-    user.roam_break_block()
+    key(enter)
     key(tab)
     sleep(100ms)
     key(enter)

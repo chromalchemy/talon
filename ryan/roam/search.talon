@@ -4,18 +4,25 @@ mode: command
 
 # inline block/page searh
 
-(show | hide) [(search | hunt)] (block | page) preview: 
+[(show | hide)] [(search | hunt)] (block | page) preview: 
     key(ctrl-o)
 
-# todo: currently disabled, extension not loaded?
+# switch +
 
-page blocks [panel]: 
-    key(cmd-shift-p)
+page blocks [panel]  | switch plus [search]: 
+    user.roam_open_switch_page_search()
+
+
 
 page (refs | references) [panel]: 
-    key(cmd-shift-p)
+    user.roam_open_switch_page_search()
     sleep(500ms)
-    insert("@")
+    insert("@:")
+
+switch (sidebars | bars) [panel]: 
+    user.roam_open_switch_page_search()
+    sleep(500ms)
+    insert("r:")
 
 
 ## +++++++ pop up (cross graph) search .
@@ -83,7 +90,7 @@ search (whole | entire) graph:
     user.run_roam_command("wgs")
 
 #search pages block
-^new search block$:
+^(new | insert) search block$:
     user.roam_insert_tag("search")
     sleep(100ms)
     key(escape)

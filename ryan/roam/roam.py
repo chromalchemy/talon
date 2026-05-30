@@ -14,6 +14,14 @@ mod.list("roam_ref", desc="Roam block reference UIDs")
 # class UserActions:
 @mod.action_class   
 class Actions:
+    def roam_run_slash_command(cmd: str):
+        """invoke slash command and choose it from popup menu"""
+        c = "/" + cmd
+        actions.insert(c)
+        actions.sleep("300ms")
+        actions.key("enter")
+        actions.sleep("100ms")
+
     def roam_find_command(text: str):
         """Run Command from command palette"""
         actions.key("cmd-p")
@@ -31,26 +39,41 @@ class Actions:
         """Lowercases text"""
         return text.lower()
     
+    def roam_go_block_start():
+        """select block text"""
+        actions.key("shift-home left")
+
+    def roam_select_block_start():
+        """select block text"""
+        actions.key("shift-home")
+
+    def roam_select_block_end():
+        """select block text"""
+        actions.key("shift-end")
+            
     def roam_go_block_end():
-        """go to end of block"""
-        actions.key("cmd-a")
-        actions.sleep("100ms")
+        """select block text"""
+        actions.user.roam_select_block_end()
         actions.key("right")
         actions.sleep("100ms")
 
-    def roam_new_block_direct_below():
-        """ccc"""
-        actions.key("cmd-a")
-        actions.sleep("100ms")
-        actions.key("right")
-        actions.sleep("100ms")
-        actions.key("enter")
-        actions.sleep("100ms")
+    def roam_cut_block_end():
+        """select block text"""
+        actions.user.roam_select_block_end()
+        actions.sleep("300ms")
+        actions.edit.cut()
+        actions.sleep("300ms")
 
     def roam_new_block_below():
-        """ccc"""
+        """block below, on same level of nesting"""
         actions.key("ctrl-shift-k")
         actions.sleep("900ms")
+
+    def roam_new_block_direct_below():
+        """makes new first child, if there are children"""
+        actions.user.roam_go_block_end()
+        actions.key("enter")
+        actions.sleep("100ms")
 
     def roam_new_block_above():
         """ccc"""
@@ -59,12 +82,7 @@ class Actions:
 
     def roam_new_child_block():
         """new child block"""
-        actions.key("cmd-a")
-        actions.sleep("100ms")
-        actions.key("right")
-        actions.sleep("100ms")
-        actions.key("enter")
-        actions.sleep("100ms")
+        actions.user.roam_new_block_direct_below()
         actions.key("tab")
         actions.sleep("100ms")
 
@@ -155,28 +173,7 @@ class Actions:
         actions.sleep("100ms")
         actions.edit.cut()
 
-    def roam_go_block_start():
-        """select block text"""
-        actions.key("shift-home left")
-
-    def roam_select_block_start():
-        """select block text"""
-        actions.key("shift-home")
-            
-    def roam_go_block_end():
-        """select block text"""
-        actions.key("shift-end right")
-
-    def roam_select_block_end():
-        """select block text"""
-        actions.key("shift-end")
-
-    def roam_cut_block_end():
-        """select block text"""
-        actions.key("shift-end")
-        actions.sleep("300ms")
-        actions.edit.cut()
-        actions.sleep("300ms")
+    
 
     def roam_insert_tag(s: str):
         """inserts a formal tag reference string"""
@@ -208,7 +205,6 @@ class Actions:
         """send block to date with string"""
         actions.key("cmd-d")
         actions.sleep("200ms")
-        
 
     def roam_clear_block_to_date_text():
         """clear block to date text"""
@@ -411,9 +407,44 @@ class Actions:
         actions.sleep("300ms")
 
     def roam_insert_snippet(snippet_name: str, text: str):
-        "inster a talon snippet with a text substitution"
+        """inster a talon snippet with a text substitution"""
         substitutions = {"0": text}
         actions.user.insert_snippet_by_name(snippet_name, substitutions)
         actions.sleep("100ms")
+
+    def roam_wrap_snippet(snippet_name: str, text: str):
+        """inster a talon snippet with a text substitution"""
+        substitutions = {"0": text}
+        actions.user.insert_snippet_by_name(snippet_name, substitutions)
+        actions.sleep("100ms")
+
+    def roam_open_command_palette():
+        """exit block edit, then block selected mode"""
+        actions.key("cmd-p")
+
+    def roam_new_block_below():
+        """exit block edit, then block selected mode"""
+        actions.user.roam_go_block_end()
+        actions.key("enter")
+        actions.sleep("300ms")
+
+    def roam_teleport_todo_date_tag():
+        """exit block edit, then block selected mode"""
+        actions.key("cmd-shift-t")
+
+    def roam_teleport_todo_block():
+        """exit block edit, then block selected mode"""
+        actions.key("cmd-shift-t")
+
+    def roam_copy_block_ref():
+        """exit block edit, then block selected mode"""
+        actions.key("cmd-shift-e")
+
+    def roam_open_switch_page_search():
+        """switch + plugin modal navigate blocks, references, and sidebar currently on page"""
+        actions.key("cmd-shift-p")
+        # actions.sleep("500ms")
+    
+
 
         

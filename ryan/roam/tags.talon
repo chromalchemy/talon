@@ -1,17 +1,19 @@
 app.name: Roam Research 
 mode: command
 -
+settings():
+    user.snippet_raw_text_paste = true
 
 test [insert] tag {user.roam_tag}:
     insert("{user.roam_tag}")
 
 # open talon lists helpers
 
-(open | hope in) (tags | tag) file:
-    user.system_command_nb('open -a "Windsurf" /Users/ryan/.talon/user/ryan/roam/tags.talon-list')
+(open | hope in | edit) (tags | tag) (file | list):
+    user.system_command_nb('open /Users/ryan/.talon/user/ryan/roam/tags.talon-list')
 
-(open | hope in) (refs | ref | references) file:
-    user.system_command_nb('open -a "Windsurf" /Users/ryan/.talon/user/ryan/roam/refs.talon-list')
+(open | hope in | edit) (refs | ref | references) (file | list):
+    user.system_command_nb('open /Users/ryan/.talon/user/ryan/roam/refs.talon-list')
 
 
 ## ++++++++++++++++++++++++++ hash tags .
@@ -50,15 +52,13 @@ test [insert] tag {user.roam_tag}:
 #turn local text into tag
 
 ^tag [that] | make [into] tag$: 
-    s = edit.selected_text() 
-    insert("#{s} ")
+    s = edit.selected_text()
+    user.roam_insert_snippet("tagRefClosed", s)
 
 ^tag [point] here:
-    key(shift:down)
-    mouse_click(0) 
-    s = edit.selected_text()
+    s = user.copy_to_click()
     y = user.roam_lower(s)
-    insert("#{y}")
+    user.roam_insert_snippet("tagRefClosed", y)
 
 ^pad tag [point] here:
     key(shift:down)

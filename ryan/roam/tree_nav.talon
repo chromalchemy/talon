@@ -6,7 +6,7 @@ mode: command
 #same as block below?
 [go] next block: 
     # key(ctrl-n) # doesnt work reliably on broken paragraphs
-    user.roam_select_block()
+    user.roam_go_block_end()
     key(down)   
 
 ## ___________________________________ .

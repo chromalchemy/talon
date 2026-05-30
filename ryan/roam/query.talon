@@ -9,6 +9,7 @@ mode: command
 
 #query builder
 Open query (drawer | builder): 
+    # user.run_roam_command("Open Query Drawer")
     key(cmd-shift-ctrl-alt-8)
 
 # open query drawer

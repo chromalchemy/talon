@@ -13,9 +13,14 @@ go (forward | fore | ahead):
 ## ++++++++++++++++++++++++ zoom block .
 
 #zoom into next block at current level
-(go | jump) next [top] [level] block: 
+(jump [to] | zoom) (next | below) [top] [level] block | zoom block below: 
     key(ctrl-c)
     key(ctrl-m)
+
+#zoom into prev block at current level
+(jump [to] | zoom) (previous | prev | last | above) [top] [level] block | zoom block above: 
+    key(ctrl-c)
+    key(ctrl-n)
 
 #zoom in on block
 (zoom | focus) [in] [on] (block  | down): 

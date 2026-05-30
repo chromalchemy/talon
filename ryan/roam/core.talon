@@ -9,10 +9,10 @@ mode: command
 # todo: setup defualt timeout
     
 #command palette
-please: key(cmd-p)
+please: user.roam_open_command_palette():
 
 please [command] <user.text>$: 
-    key(cmd-p)
+    user.roam_open_command_palette():
     sleep(500ms)
     insert(text)
  
@@ -52,6 +52,6 @@ go all pages:
     key(space)
     
 # do I need these overrides?
-exit: key(esc)
-nope: key(cmd-z)
+# exit: key(esc)
+# nope: key(cmd-z)
 

@@ -1,4 +1,8 @@
-
+app.name: Roam Research 
+mode: command
+-
+settings():
+    user.snippet_raw_text_paste = true
 #----------------- embed block
 
 (in bed | embed) (block | ref | reference) | (paste | pace) (embed | in bed):
@@ -28,11 +32,11 @@
 
 (in bed | embed) mentions [for] {user.roam_ref}:
     user.roam_insert_snippet("refMentions", roam_tag)
-    key(esc:2)
+    user.roam_select_none()
 
 (in bed | embed) page mentions [for] {user.roam_tag}:
     user.roam_insert_snippet("pageMentions", roam_tag)
-    key(esc:2)
+    user.roam_select_none()
 
 ((in bed | embed) | insert) page (mentions | links):
     user.insert_snippet_by_name_with_stop_at_end("pageMentions")

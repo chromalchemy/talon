@@ -7,9 +7,10 @@ mode: command
 (toggle | hide | show | close | open | reveal) ((sidebar | bar) | side bar) | bar (show | hide) | (barca | bar read | bared) :
     key(cmd-/)
 
-(clear | kill) [all] ((side bar |sidebar | sidebars)  | (bar | bars) ): key(ctrl-l)
+(clear | kill) [all] ((side bar |sidebar | sidebars)  | (bar | bars) ): 
+    key(ctrl-l)
 
-(close | kill | chuck) (pinned sidebar | sidebar force) :
+(close | kill | chuck) (pinned sidebar | sidebar force) [(here | point)] :
     mouse_click(0)
     sleep(100ms)
     key(enter)
@@ -27,27 +28,29 @@ swap ((sidebar | bar) | main) [(with | and) ((sidebar | bar) | main)]:
 
 ## +++++++++++++++++++++++++++ fold sidebars (not nodes in sidebar) .
 
-(expand | collapse | fold) [all] ((side bar |sidebar | sidebars)  | (bar | bars) ) :
+(expand | collapse | fold | unfold) [all] ((side bar |sidebar | sidebars)  | (bar | bars) ) :
     user.run_roam_command("Clear Sidebar: Toggle Collapse All")
 
 ## +++++++++++++++++++ open in sidebar .
 
 #shift click to open link in sidebar
-[open] [(ref | reference | link | tag)] [in] (sidebar | bar) point: 
+[open] [(ref | reference | link | tag)] [in] (sidebar | bar) point | bar (ref | reference) point: 
     key(shift:down)
     mouse_click(0)
 
 #works when cursor is in or adjacent to reference id text
-open [(ref | reference | link | block)] in (sidebar | bar) | (sidebar | bar) block: 
-    key(ctrl-shift-o)
+# cant find command (extension based?)
+# open [(ref | reference | link | block)] in (sidebar | bar) | (sidebar | bar) block: 
+#     key(ctrl-shift-o)
 
 # open current page
-open [this] page [in] sidebar: 
+open [this] page [in] sidebar | bar page: 
     user.run_roam_command("wb open page in sidebar")
 
-open {user.roam_tag} [in] (sidebar | bar ) | bar {user.roam_tag}:
-    key(cmd-u)
-    # sleep(100ms)
-    insert("{user.roam_tag}")
-    sleep(500ms)
-    key(shift-enter)
+# deprecated, using roam api
+# open {user.roam_tag} [in] (sidebar | bar ) | bar {user.roam_tag}:
+#     key(cmd-u)
+#     # sleep(100ms)
+#     insert("{user.roam_tag}")
+#     sleep(500ms)
+#     key(shift-enter)

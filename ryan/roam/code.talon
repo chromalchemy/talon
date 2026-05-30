@@ -9,7 +9,7 @@ settings():
 [(line | inline)] code [(line | inline)] that: 
     s = edit.selected_text() 
     user.roam_insert_snippet("codeInline", s)
-    key(esc:2)
+    user.roam_select_none()
 
 [(line | inline)] code [(line | inline)] point:
     s = user.copy_to_click()
@@ -19,7 +19,7 @@ settings():
 code (line | inline) point force:
     s = user.copy_to_click()
     user.roam_insert_snippet("codeInline", s)
-    key(esc:2)
+    user.roam_select_none()
 
 ## convert inline code to block
 code (line | inline) (all | block inside | inside block) | make block  inline code :
