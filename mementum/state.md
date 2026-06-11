@@ -18,10 +18,12 @@ layer via Basilisp, nREPL-first. Shipped `8eb1f6b` (2026-06-10):
   loader thread. Fix: scoped flag-flip during basilisp compiles.
   Measured: 17.4s cold → **0.30s warm**. Cache pre-warmed via
   `~/.talon/bin/python` (same CPython 3.13 as Talon).
-- Dev loop: edit `.lpy` → `clj-nrepl-eval --port 7891` /
-  `(load-file ...)`. CLI evals land in `user` ns — wrap redefs in
-  `(binding [*ns* (the-ns 'tlisp.demo)] (eval '(defn ...)))` or use an
-  editor client that sends ns.
+- Dev loop (two options): **save the `.lpy` file** — scoped watcher on
+  `lisp/` reimports the changed module (~0.02s, deduped via sentinel in
+  sys.modules, direct reimport, no touch cascade) — or nREPL
+  `clj-nrepl-eval --port 7891` / `(load-file ...)`. CLI evals land in
+  `user` ns — wrap redefs in `(binding [*ns* (the-ns 'tlisp.demo)]
+  (eval '(defn ...)))` or use an editor client that sends ns.
 - Verified end-to-end by voice ("basilisp test") + live redefinition.
 
 Next candidates: migrate a real action to .lpy; Calva/Portal over 7891;

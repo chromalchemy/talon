@@ -5,9 +5,13 @@ guarded by a lock upstream) and starts an nREPL server inside the Talon
 process for live, REPL-first development.
 
 Design notes (v2 — lessons from the old `basilisp` branch):
-- NO fs.watch. The old global watcher accumulated duplicate registrations on
-  every Talon reload of the loader and triggered touch-cascade reload storms.
-  The dev loop here is nREPL: edit .lpy -> load-file/eval over port 7888.
+- Scoped .lpy watcher, not a global one. The old branch watched the entire
+  user dir, accumulated duplicate registrations on every Talon reload of the
+  loader (no unwatch), and used a touch-a-sibling-py cascade to force reloads.
+  Here: watch LISP_ROOT only, dedupe via a sentinel module in sys.modules,
+  and reimport the changed .lpy module directly. Stubs are late-bound, so a
+  reimport is sufficient — save a .lpy and the next voice command runs it.
+  nREPL (eval/load-file) remains available for finer-grained dev.
 - Namespace bytecode caching (.lpyc) is left ON (basilisp default), so the
   one-time compile cost is only paid when sources actually change.
 - Talon reloads this file on change; module globals reset, so the duplicate
@@ -21,6 +25,7 @@ import socket
 import sys
 import threading
 import time
+import types
 
 NREPL_PORT = 7891
 LISP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -115,8 +120,69 @@ def start_nrepl():
     print(f"basilisp: nREPL server starting on port {NREPL_PORT}")
 
 
+_SENTINEL = "talon_basilisp_state"
+
+
+def _state() -> types.ModuleType:
+    """Mutable state that survives Talon reloads of this file (module globals
+    don't: each reload is a fresh module object). Parked in sys.modules."""
+    m = sys.modules.get(_SENTINEL)
+    if m is None:
+        m = types.ModuleType(_SENTINEL)
+        sys.modules[_SENTINEL] = m
+    return m
+
+
+def _module_name_for(path: str):
+    """Map an absolute .lpy path under LISP_ROOT to its Python module name,
+    e.g. .../lisp/tlisp/demo.lpy -> 'tlisp.demo'. None for anything else."""
+    if not path.endswith(".lpy"):
+        return None
+    rel = os.path.relpath(path, LISP_ROOT)
+    if rel.startswith(".."):
+        return None
+    return rel[:-len(".lpy")].replace(os.sep, ".")
+
+
+def _on_lpy_change(path: str, flags) -> None:
+    name = _module_name_for(path)
+    if name is None:
+        return
+    try:
+        mod = sys.modules.get(name)
+        t0 = time.perf_counter()
+        with _bytecode_writing_enabled():
+            if mod is None:
+                importlib.import_module(name)
+            else:
+                importlib.reload(mod)
+        print(f"basilisp: (re)loaded {name} in {time.perf_counter() - t0:.3f}s")
+    except Exception as e:
+        print(f"basilisp: reload of {name} FAILED, previous definitions still "
+              f"live: {e!r}")
+
+
+def start_lpy_watcher() -> None:
+    """Watch LISP_ROOT (only) for .lpy saves and reimport the changed module.
+    Deduped: unregisters the previously registered callback first, so Talon
+    reloads of this file don't accumulate watchers (the v1 bug)."""
+    from talon import fs
+
+    st = _state()
+    prev = getattr(st, "lpy_watcher", None)
+    if prev is not None:
+        try:
+            fs.unwatch(LISP_ROOT, prev)
+        except Exception:
+            pass
+    fs.watch(LISP_ROOT, _on_lpy_change)
+    st.lpy_watcher = _on_lpy_change
+    print(f"basilisp: watching {LISP_ROOT} for .lpy changes")
+
+
 try:
     ensure_basilisp()
     start_nrepl()
+    start_lpy_watcher()
 except Exception as e:
     print(f"basilisp boot error: {e!r}")
