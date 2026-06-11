@@ -6,7 +6,8 @@
     (eval! code-str)  -> {:value s :out [s] :err s} or {:error s}
     (value! code-str) -> value string (or error string)
     (alive?)          -> bool"
-  (:import socket os subprocess shutil time))
+  (:require [basilisp.edn :as edn])
+  (:import socket os subprocess shutil time threading))
 
 (def ^:private addr (python/tuple ["127.0.0.1" 7892]))
 (def ^:private brain-dir (os.path/expanduser "~/dev/talon-brain"))
@@ -29,8 +30,15 @@
                      ["/opt/homebrew/bin/clojure" "/usr/local/bin/clojure"]))
       (throw (python/FileNotFoundError "clojure CLI not found"))))
 
+(defn- brain-cmd []
+  (let [jar (os.path/join brain-dir "target" "brain.jar")]
+    (if (os.path/exists jar)
+      [(or (shutil/which "java") "/usr/bin/java") "-jar" jar]
+      [(clojure-bin) "-M:brain"])))
+
 (defn start!
   "Launch the JVM brain detached if :7892 isn't already serving.
+  Prefers target/brain.jar (fast AOT boot) over clojure -M:brain.
   Blocks up to ~20s waiting for the port. Returns true when up."
   []
   (if (port-open?)
@@ -38,14 +46,18 @@
     (do
       (when (nil? @proc-state)
         (let [log (python/open brain-log "ab")
-              p (subprocess/Popen [(clojure-bin) "-M:brain"]
+              p (subprocess/Popen (brain-cmd)
                                   **
                                   :cwd brain-dir
                                   :stdout log
                                   :stderr subprocess/STDOUT
                                   :start_new_session true)]
           (reset! proc-state p)
-          (println "tlisp.brain: starting JVM brain, pid" (.-pid p))))
+          (println "tlisp.brain: starting JVM brain, pid" (.-pid p))
+          (try
+            (let [talon (importlib/import-module "talon")]
+              (.notify (.-app talon) "talon-brain" "starting JVM brain"))
+            (catch python/Exception _ nil))))
       (loop [n 80]
         (cond
           (port-open?) true
@@ -170,3 +182,27 @@
 
 (defn alive? []
   (= "2" (:value (eval! "(+ 1 1)"))))
+
+;; Pre-warm: bring the brain up in the background at module load
+;; (Talon boot), so the first voice use never pays the cold start.
+;; defonce ⇒ watcher reloads don't spawn extra threads.
+(defonce ^:private prewarm-thread
+  (doto (threading/Thread **
+                          :target start!
+                          :daemon true
+                          :name "tlisp-brain-prewarm")
+    (.start)))
+
+(defn call!
+  "RPC-style call: (call! 'talon-brain.core/sha256 \"x\").
+  Args are EDN-serialized (data only); the JVM's printed return value
+  is EDN-read back into Basilisp data. Throws on brain error."
+  [sym & args]
+  (let [code (str "(" sym " "
+                  (apply str (interpose " " (map #(str "(quote " (pr-str %) ")") args)))
+                  ")")
+        {:keys [value error err]} (eval! code)]
+    (cond
+      error (throw (python/OSError error))
+      err (throw (python/OSError err))
+      :else (edn/read-string value))))

@@ -237,9 +237,39 @@ def start_lpy_watcher() -> None:
     print(f"basilisp: watching {USER_ROOT} for .lpy changes")
 
 
+def load_all_lpy():
+    """Import every .lpy under USER_ROOT at boot. The watcher only (re)loads
+    on *save*; without this, pure-Basilisp action modules simply never load
+    after a Talon restart and their actions vanish. Idempotent: skips modules
+    already in sys.modules, so Talon reloads of this file are cheap."""
+    t0 = time.perf_counter()
+    count = 0
+    for dirpath, dirnames, filenames in os.walk(USER_ROOT):
+        dirnames[:] = [
+            d for d in dirnames
+            if not d.startswith((".", "_")) and d != "node_modules"
+        ]
+        for fn in filenames:
+            if not fn.endswith(".lpy"):
+                continue
+            name = _module_name_for(os.path.join(dirpath, fn))
+            if name is None or name in sys.modules:
+                continue
+            try:
+                with _bytecode_writing_enabled(), _reload_quiet():
+                    importlib.import_module(name)
+                count += 1
+            except Exception as e:
+                print(f"basilisp: boot load of {name} FAILED: {e!r}")
+    if count:
+        print(f"basilisp: boot-loaded {count} .lpy modules "
+              f"in {time.perf_counter() - t0:.2f}s")
+
+
 try:
     ensure_basilisp()
     start_nrepl()
     start_lpy_watcher()
+    load_all_lpy()
 except Exception as e:
     print(f"basilisp boot error: {e!r}")

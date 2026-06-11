@@ -154,6 +154,22 @@ brain → next call resurrected it (cold ~11.4s incl. JVM boot; warm
 median 3.6–6.8ms, first post-boot call ~120ms JIT). Brain JVM is now
 owned by Talon's process tree (detached, survives Talon restart).
 
+## Polish 2026-06-11 (brain spike follow-up)
+
+- `brain/call!`: RPC API — `(call! 'talon-brain.core/sha256 "x")`,
+  args quoted+EDN'd, return value EDN-read back; throws on error.
+- Uberjar: `clojure -T:build uber` → `target/brain.jar`; shim prefers
+  `java -jar`. Cold start **11.4s → 0.58s**.
+- Pre-warm: defonce daemon thread in brain.lpy calls `start!` at module
+  load; app.notify on spawn.
+- ❌→✅ **Critical find**: boot never imported .lpy modules — after any
+  Talon restart ALL pure-Basilisp actions (incl. the 67 roam ones) were
+  unregistered. Watcher only loads on save. Fix: `load_all_lpy()` in
+  00_boot.py (walks USER_ROOT, idempotent). Memory:
+  `lpy-modules-need-boot-loader`. Lesson: verify by full restart, not
+  just live reload. Restart-verified: roam canary + brain action work
+  cold; detached brain JVM survives Talon restarts.
+
 ## Open / next candidates
 
 - Delete `ryan/roam/roam.py.migrated-to-lisp` once migration has soaked.
