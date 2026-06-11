@@ -124,6 +124,16 @@ documented in knowledge page Recovery section.
    `basilisp-import-alias-value-use-fails-at-top-level`,
    `registry-parity-baseline-for-talon-migrations`.
 
+## Spike 2026-06-11: in-process JVM → ❌ no-go
+
+cljbridge/libpython-clj embedded-JVM-in-Talon killed empirically:
+dlopen(libjvm) inside Talon fails library validation ("different Team
+IDs") — hardened runtime without `disable-library-validation`. Verdict:
+JVM-as-orchestrator must be the **external brain** pattern (external
+JVM + thin Basilisp RPC shim). Memories:
+`basilisp-vs-libpython-clj-for-talon`,
+`in-process-jvm-in-talon-blocked-by-library-validation`.
+
 ## Open / next candidates
 
 - Delete `ryan/roam/roam.py.migrated-to-lisp` once migration has soaked.
