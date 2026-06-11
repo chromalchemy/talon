@@ -3,7 +3,12 @@
 ## Active focus
 
 **`basilisp-v2`** (branch `basilisp-v2`) — Clojure as Talon's scripting
-layer via Basilisp, nREPL-first. Shipped `8eb1f6b` (2026-06-10):
+layer via Basilisp, nREPL-first. See
+`mementum/knowledge/basilisp-talon.md` for the full picture.
+
+Shipped 2026-06-10: `8eb1f6b` (core integration), `50bdcea`
+(save-to-update watcher), `4140f8c` (quiet reloads), plus 3 memories +
+1 memory update. Detail on the core commit:
 
 - `lisp/00_boot.py`: idempotent `basilisp.main.init()` + nREPL server
   **port 7891** inside the Talon process (port-probe guard vs duplicate
@@ -25,6 +30,15 @@ layer via Basilisp, nREPL-first. Shipped `8eb1f6b` (2026-06-10):
   `user` ns — wrap redefs in `(binding [*ns* (the-ns 'tlisp.demo)]
   (eval '(defn ...)))` or use an editor client that sends ns.
 - Verified end-to-end by voice ("basilisp test") + live redefinition.
+
+- ⚠️ `^:redef` gotcha for later: basilisp direct-links intra-namespace
+  calls. nREPL-redefining `hello` does NOT update a same-ns `foo` that
+  calls it — unless `hello` is `(defn ^:redef ...)`. File-save reloads
+  recompile the whole ns, so they're immune. Mark live-redefined fns
+  `^:redef` once .lpy namespaces grow multiple fns.
+- Reload warnings ("may shadow alias", "redefining Var") are ungated
+  `logger.warning` from `basilisp.lang.compiler.analyzer`; the watcher
+  suppresses that logger scoped to its reload only (`_reload_quiet`).
 
 Next candidates: migrate a real action to .lpy; Calva/Portal over 7891;
 background pre-warm for fresh installs (first boot still pays ~19s once).
