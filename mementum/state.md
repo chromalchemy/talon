@@ -40,8 +40,24 @@ Shipped 2026-06-10: `8eb1f6b` (core integration), `50bdcea`
   `logger.warning` from `basilisp.lang.compiler.analyzer`; the watcher
   suppresses that logger scoped to its reload only (`_reload_quiet`).
 
-Next candidates: migrate a real action to .lpy; Calva/Portal over 7891;
-background pre-warm for fresh installs (first boot still pays ~19s once).
+Shipped 2026-06-11: **stubs are now optional** — `f292ead` adds
+`lisp/tlisp/talon.lpy` (`defaction` macro + `register!`) so actions are
+defined once, in pure Clojure. Mechanism: own
+`rctx.context("user....")` → `Module`/`action_class` → **`mod._load()`**
+(required to commit decls); previous ResourceContext freed on reload
+via sys.modules sentinel. `lisp/tlisp/spike.lpy` is the working
+example. Verified: watcher reload → 1 module/1 impl, new body live;
+nREPL redef of the `^:redef` fn applies on next action call. Memory:
+`talon-actions-from-pure-basilisp`. ⚠️ rctx is Talon internals —
+re-verify after Talon upgrades. Not yet tested: a voice command
+through a `.talon` file hitting a defaction-registered action (needs
+speech; registry decl/impl look identical to stub-based ones).
+
+Next candidates: wire a `.talon` voice command to the spike action and
+speak it; migrate a real action surface to .lpy via defaction; decide
+demo_stub.py's fate (delete vs keep as legacy reference); Calva/Portal
+over 7891; background pre-warm for fresh installs (first boot still
+pays ~19s once).
 
 ## Previous focus
 
