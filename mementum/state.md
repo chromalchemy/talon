@@ -49,12 +49,11 @@ via sys.modules sentinel. `lisp/tlisp/spike.lpy` is the working
 example. Verified: watcher reload → 1 module/1 impl, new body live;
 nREPL redef of the `^:redef` fn applies on next action call. Memory:
 `talon-actions-from-pure-basilisp`. ⚠️ rctx is Talon internals —
-re-verify after Talon upgrades. Not yet tested: a voice command
-through a `.talon` file hitting a defaction-registered action (needs
-speech; registry decl/impl look identical to stub-based ones).
+re-verify after Talon upgrades. **Voice-verified end-to-end**: "basilisp
+spike" (`ryan/roam/basilisp_spike.talon`) fired the defaction-registered
+action — no Python stub anywhere in the chain.
 
-Next candidates: wire a `.talon` voice command to the spike action and
-speak it; migrate a real action surface to .lpy via defaction; decide
+Next candidates: migrate a real action surface to .lpy via defaction; decide
 demo_stub.py's fate (delete vs keep as legacy reference); Calva/Portal
 over 7891; background pre-warm for fresh installs (first boot still
 pays ~19s once).
