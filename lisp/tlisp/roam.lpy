@@ -526,6 +526,11 @@
   []
   (key! "cmd-shift-p"))
 
+(t/defaction roam-basil-test
+  "live-loop smoke test: edit the println, save, speak, watch the log"
+  []
+  (println "hello from basillisp clojure in roam xxx!"))
+
 ;; ---------------------------------------------------------------------------
 
 (t/register! "user.lisp.tlisp.roam" "Roam Research actions (pure Basilisp)")
