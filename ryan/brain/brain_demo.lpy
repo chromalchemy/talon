@@ -3,13 +3,16 @@
   (talon-brain, nREPL :7892) via tlisp.brain's persistent connection.
   Proves: voice -> Talon -> Basilisp action -> JVM Java lib -> value back."
   (:require [tlisp.talon :as t]
-            [tlisp.brain :as brain]))
+            [tlisp.brain :as brain])
+  (:import importlib))
 
 (t/defaction brain-sha256
   "SHA-256 of text, computed by java.security.MessageDigest on the JVM brain"
   [text :- python/str]
-  (let [r (brain/value! (str "(talon-brain.core/sha256 " (pr-str text) ")"))]
+  (let [r (brain/value! (str "(talon-brain.core/sha256 " (pr-str text) ")"))
+        talon (importlib/import-module "talon")]
     (println (str "brain-sha256(" text ") = " r))
+    (.notify (.-app talon) "brain test ✓" (str "sha256(" text ") = " (subs r 1 13) "…"))
     r))
 
 (t/register! "user.ryan.brain.brain-demo" "spike: JVM-brain-backed actions")
