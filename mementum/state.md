@@ -86,7 +86,20 @@ old ctx manually from `talon_basilisp_state`-style sentinel
 exactly 1 decl, canary `user.roam_basil_test` owned by new module.
 lisp/ now holds only tlisp.* infrastructure, as intended.
 
-## Session 2026-06-11 commits (this session)
+## Session 2026-06-11 commits (colocation session)
+
+| Commit | Subject |
+|---|---|
+| `25caf15` | boot: user/ as sys.path root, watcher widened, multi-root mapping |
+| `4f670e0` | 💡 memory: lpy-domain-colocation recipe + gotchas |
+| `22c2411` | roam.lpy moved home → ryan/roam/roam.lpy (ns ryan.roam.roam) |
+| `0ca1ee0` | boot shadow-check: warn on user/ dirs colliding with module names |
+
+User-verified working. `~/.talon/bin/repl` evaluated as recovery escape
+hatch (substrate-level complement, not a clj-loading alternative) —
+documented in knowledge page Recovery section.
+
+## Session 2026-06-11 commits (earlier session)
 
 | Commit | Subject |
 |---|---|
@@ -114,6 +127,9 @@ lisp/ now holds only tlisp.* infrastructure, as intended.
 ## Open / next candidates
 
 - Delete `ryan/roam/roam.py.migrated-to-lisp` once migration has soaked.
+- New domains: drop `.lpy` next to its `.talon` files, ns = path from
+  user/, `(t/register! "user.<dotted-path>" ...)`. No new sys.path or
+  watcher work needed.
 - Decide demo_stub.py fate (legacy-pattern reference vs delete).
 - Migrate further py action surfaces (parity-baseline memory = recipe).
 - Calva/Portal over 7891; background pre-warm for fresh installs

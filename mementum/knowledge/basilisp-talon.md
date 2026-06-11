@@ -17,16 +17,33 @@ Branch `basilisp-v2` in `~/.talon/user`. basilisp 0.5.1 in Talon's venv
 ## Architecture
 
 ```
-lisp/00_boot.py        bootstrap: init + nREPL server + .lpy watcher
+lisp/00_boot.py        bootstrap: init + nREPL + watcher + shadow check
 lisp/tlisp/talon.lpy   defaction macro + deflist + register! (the framework)
-lisp/tlisp/*.lpy       Clojure namespaces defining actions directly (no stubs)
+lisp/tlisp/*.lpy       INFRASTRUCTURE only (tlisp.*)
+<domain>/*.lpy         domain code, colocated with its .talon grammars
 lisp/<x>_stub.py       LEGACY pattern: stub declarations + late-bound delegation
 <anywhere>/*.talon     voice commands -> user.<action> (location unrestricted)
 ```
 
+**Domain colocation (since 2026-06-11, `25caf15`):** `~/.talon/user`
+itself is a sys.path root (APPENDED — stdlib/site-packages win
+lookups), so ns = path from user root: `ryan/roam/roam.lpy` →
+`ryan.roam.roam`. No `__init__.py` (PEP 420). `.lpyc` caches colocate
+in each dir's `__pycache__`. The watcher watches all of user/ (covers
+both roots; path→module resolves LISP_ROOT before USER_ROOT). A boot
+check warns loudly if a user/ top-level dir collides with a
+stdlib/installed module name (such a dir would be silently
+unimportable). Memory: `lpy-domain-colocation-via-user-sys-path-root`.
+
 First production surface migrated: `ryan/roam/roam.py` (67 actions +
-2 lists) → `lisp/tlisp/roam.lpy`, registry-parity verified, voice
-verified. Old file kept as `ryan/roam/roam.py.migrated-to-lisp`.
+2 lists) → `ryan/roam/roam.lpy` (ns `ryan.roam.roam`, ctx
+`user.ryan.roam.roam`), registry-parity verified, voice verified. Old
+file kept as `ryan/roam/roam.py.migrated-to-lisp`. ⚠️ When renaming a
+ctx-name, auto-free-on-reload does NOT apply — free the old context
+manually from the `talon_basilisp_action_state` sentinel
+(`(.free old)` + delete the dict entry + pop stale module from
+sys.modules), then verify each `user.*` action has exactly 1 decl in
+`talon.registry.actions`.
 
 `tlisp.talon/defaction` features: `name :- type` params (python/str,
 python/int...), `:= default` (trailing), dash→underscore munging for
@@ -89,6 +106,21 @@ bytecode), set flag False, `basilisp.main.init()`.
 - basilisp version upgrades invalidate caches → one slow boot after
   `pip install -U basilisp`. Consider CLI pre-warm after upgrades.
 
+## Recovery (when the Clojure layer is wedged)
+
+Talon ships a Python REPL into the live process: `~/.talon/bin/repl`
+(also tails the log). It doesn't depend on basilisp, so it's the escape
+hatch if 00_boot.py fails or the nREPL thread dies: inspect `sys.path`,
+exec the boot file manually / call `start_nrepl()`, free a stuck
+ResourceContext via `sys.modules["talon_basilisp_action_state"].contexts`,
+inspect `talon.registry.actions` ground truth. Not a Clojure-loading
+alternative (no reader/ns/editor support, and `dont_write_bytecode` is
+still set there) — substrate-level only.
+
+Note: ad-hoc nREPL `require`s of new namespaces skip .lpyc writing (the
+cache flip is scoped to boot/watcher paths); self-heals on first file
+save, warm starts unaffected.
+
 ## Open candidates
 
 - Migrate a first real action surface to .lpy.
@@ -104,3 +136,4 @@ bytecode), set flag False, `basilisp.main.init()`.
 - basilisp-nrepl-cli-evals-land-in-user-ns (CLI ns gotcha)
 - basilisp-direct-linking-freezes-intra-ns-redefs (^:redef)
 - talon-actions-from-pure-basilisp (no-stub action registration recipe)
+- lpy-domain-colocation-via-user-sys-path-root (user/ as ns root)
