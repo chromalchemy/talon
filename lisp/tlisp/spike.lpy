@@ -6,7 +6,8 @@
 (t/defaction basilisp-spike-file-hello
   "Spike action defined entirely in spike.lpy"
   [text :- python/str]
-  (println (str "spike.lpy v3 (defaction) says: " text))
+  (println 
+    (str "spike.lpy v3 (defaction) says: " text))
   (str "spike-defaction:" text))
 
 (t/register! "user.lisp.tlisp.spike" "spike: actions defined in pure basilisp")

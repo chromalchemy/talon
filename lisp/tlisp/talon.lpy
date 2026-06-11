@@ -54,20 +54,29 @@
 (defn register-actions!
   "Register {action-name fn} (a python dict) as Talon actions inside a
   fresh ResourceContext named ctx-name (must start with 'user.').
-  Frees any previous context under ctx-name, so reloads are clean."
-  [ctx-name desc fns]
-  (let [contexts (.-contexts (state))
-        prev     (.get contexts ctx-name)]
-    (when prev
-      (try (.free prev) (catch python/Exception _ nil)))
-    (let [c (rctx/context ctx-name)]
-      (with [_ (.enter c)]
-        (let [m   (pytalon/Module desc)
-              cls (python/type "Actions" (python/tuple) fns)]
-          (.action_class m cls)
-          (._load m)))
-      (.__setitem__ contexts ctx-name c)
-      c)))
+  lists is {list-name desc}. Frees any previous context under
+  ctx-name, so reloads are clean."
+  ([ctx-name desc fns] (register-actions! ctx-name desc fns {}))
+  ([ctx-name desc fns lists]
+   (let [contexts (.-contexts (state))
+         prev     (.get contexts ctx-name)]
+     (when prev
+       (try (.free prev) (catch python/Exception _ nil)))
+     (let [c (rctx/context ctx-name)]
+       (try
+         (with [_ (.enter c)]
+           (let [m (pytalon/Module desc)]
+             (doseq [[lname ldesc] lists]
+               (.list m lname ** :desc ldesc))
+             (when (seq fns)
+               (.action_class m (python/type "Actions" (python/tuple) fns)))
+             (._load m)))
+         (catch python/Exception e
+           ;; failed registration must not leak a partial module
+           (try (.free c) (catch python/Exception _ nil))
+           (throw e)))
+       (.__setitem__ contexts ctx-name c)
+       c))))
 
 ;; ---------------------------------------------------------------------------
 ;; defaction / register!
@@ -78,40 +87,71 @@
   defactions, so rebuilding from empty drops deleted actions."
   (atom {}))
 
+(def ^:private pending-lists
+  "Talon lists stashed by deflist, keyed [ns-name list-name]."
+  (atom {}))
+
 (defn stash-action!
-  [ns-name action-name doc annotations f]
+  [ns-name action-name doc annotations defaults f]
   (annotate! f action-name doc annotations)
+  (when (seq defaults)
+    (set! (.-__defaults__ f) (python/tuple defaults)))
   (swap! pending assoc-in [ns-name action-name] f))
 
+(defn deflist
+  "Declare a Talon list (e.g. \"roam_tag\") to be registered with this
+  namespace's Module by register!."
+  [list-name desc]
+  (swap! pending-lists assoc-in [(str *ns*) list-name] desc))
+
+(defn- parse-params
+  "Parse [name :- type (:= default)? ...] into {:syms [..] :anns {..}
+  :defaults [..]}. Defaults must be trailing (Python rule)."
+  [params]
+  (loop [ps (seq params) syms [] anns {} defaults []]
+    (if-not ps
+      {:syms syms :anns anns :defaults defaults}
+      (let [[nm sep ty & more] ps]
+        (assert (= :- sep) (str "expected :- after " nm))
+        (let [[df more] (if (= ':= (first more))
+                          [[(second more)] (nnext more)]
+                          [nil more])]
+          (assert (or df (empty? defaults))
+                  (str "non-default param " nm " after defaulted param"))
+          ;; annotation keys must match the *compiled* (munged) python
+          ;; arg names: snippet-name -> snippet_name
+          (recur more (conj syms nm) (assoc anns (.replace (name nm) "-" "_") ty)
+                 (if df (conj defaults (first df)) defaults)))))))
+
 (defmacro defaction
-  "(defaction my-action \"doc\" [arg :- python/str ...] body...)
+  "(defaction my-action \"doc\" [arg :- python/str, n :- python/int := 1] body...)
 
   Defines a ^:redef fn `my-action` in the current ns AND stashes an
   annotated Talon-action wrapper under the dash->underscore name
   (my-action -> my_action). Finish the namespace with (register! ...).
-  Param vector must be `name :- type` triples; types are evaluated
-  (use python/str, python/int, ...)."
+  Params are `name :- type` pairs, optionally `:= default` (trailing
+  only). Types are evaluated (use python/str, python/int, ...)."
   [fname doc params & body]
-  (assert (zero? (rem (count params) 3)) "params must be name :- type triples")
-  (let [syms        (vec (take-nth 3 params))
-        seps        (take-nth 3 (drop 1 params))
-        type-exprs  (vec (take-nth 3 (drop 2 params)))
-        _           (assert (every? #(= :- %) seps) "expected :- separators")
-        action-name (.replace (name fname) "-" "_")
-        ann-map     (zipmap (map name syms) type-exprs)]
+  (let [{:keys [syms anns defaults]} (parse-params params)
+        action-name (.replace (name fname) "-" "_")]
     `(do
        (defn ~(with-meta fname {:redef true}) ~syms ~@body)
        (stash-action! (str *ns*) ~action-name ~doc
-                      (python/dict ~ann-map)
+                      (python/dict ~anns)
+                      ~(vec defaults)
                       (fn ~syms (~fname ~@syms)))
        (var ~fname))))
 
 (defn register!
-  "Register every action stashed by defaction in the calling namespace.
-  Call as the last form of an action namespace, while it is loading."
+  "Register every action/list stashed by defaction/deflist in the
+  calling namespace. Call as the last form of an action namespace,
+  while it is loading."
   [ctx-name desc]
   (let [ns-name (str *ns*)
-        fns     (get @pending ns-name)]
-    (assert (seq fns) (str "no defactions stashed for ns " ns-name))
+        fns     (get @pending ns-name)
+        lists   (get @pending-lists ns-name {})]
+    (assert (or (seq fns) (seq lists))
+            (str "nothing stashed for ns " ns-name))
     (swap! pending dissoc ns-name)
-    (register-actions! ctx-name desc (python/dict fns))))
+    (swap! pending-lists dissoc ns-name)
+    (register-actions! ctx-name desc (python/dict (or fns {})) lists)))
