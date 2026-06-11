@@ -2,7 +2,7 @@
   "Demo Talon action bodies implemented in Basilisp.
 
   Live dev loop: connect to the nREPL server started by 00_boot.py
-  (port 7888), redefine fns here, and the next voice command picks
+  (port 7891), redefine fns here, and the next voice command picks
   them up via the late-bound stub in demo_stub.py."
   (:import [talon.app :as app]))
 
