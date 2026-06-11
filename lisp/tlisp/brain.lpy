@@ -6,7 +6,8 @@
     (eval! code-str)  -> {:value s :out [s] :err s} or {:error s}
     (value! code-str) -> value string (or error string)
     (alive?)          -> bool"
-  (:require [basilisp.edn :as edn])
+  (:require [basilisp.contrib.bencode :as bc]
+            [basilisp.edn :as edn])
   (:import socket os subprocess shutil time threading))
 
 (def ^:private addr (python/tuple ["127.0.0.1" 7892]))
@@ -64,85 +65,46 @@
           (zero? n) (do (reset! proc-state nil) false)
           :else (do (time/sleep 0.25) (recur (dec n))))))))
 
-;;; bencode ------------------------------------------------------------
-
-(defn- b-bytes [s] (.encode s "utf-8"))
-
-(defn- b-str [s]
-  (let [d (b-bytes s)]
-    (.join #b "" [(b-bytes (str (python/len d))) #b ":" d])))
-
-(defn- benc [x]
-  (cond
-    (string? x) (b-str x)
-    (keyword? x) (b-str (name x))
-    (int? x) (b-bytes (str "i" x "e"))
-    (map? x) (.join #b ""
-                    (concat [#b "d"]
-                            (mapcat (fn [kv] [(b-str (name (key kv))) (benc (val kv))])
-                                    (sort-by (fn [kv] (name (key kv))) x))
-                            [#b "e"]))
-    :else (throw (python/ValueError (str "benc: unsupported " x)))))
-
-(declare ^:private bdec)
-
-(defn- bdec1 [f c]
-  (cond
-    (= c #b "i")
-    (loop [acc []]
-      (let [c2 (.read f 1)]
-        (if (= c2 #b "e")
-          (python/int (.decode (.join #b "" acc) "utf-8"))
-          (recur (conj acc c2)))))
-
-    (= c #b "l")
-    (loop [acc []]
-      (let [c2 (.read f 1)]
-        (if (= c2 #b "e") acc (recur (conj acc (bdec1 f c2))))))
-
-    (= c #b "d")
-    (loop [acc {}]
-      (let [c2 (.read f 1)]
-        (if (= c2 #b "e")
-          acc
-          (let [k (bdec1 f c2)
-                v (bdec f)]
-            (recur (assoc acc k v))))))
-
-    (.isdigit c)
-    (loop [acc [c]]
-      (let [c2 (.read f 1)]
-        (if (= c2 #b ":")
-          (let [n (python/int (.decode (.join #b "" acc) "utf-8"))]
-            (.decode (.read f n) "utf-8"))
-          (recur (conj acc c2)))))
-
-    :else (throw (python/OSError (str "bdec: unexpected byte " c)))))
-
-(defn- bdec [f]
-  (let [c (.read f 1)]
-    (if (= c #b "")
-      (throw (python/OSError "brain connection closed"))
-      (bdec1 f c))))
-
 ;;; connection ---------------------------------------------------------
+;; Wire format via basilisp.contrib.bencode — the same implementation
+;; that serves Talon's own nREPL on :7891. Messages decode to maps with
+;; keyword keys and utf-8 string values.
+
+(defn- recv-msg!
+  "Pop the next decoded nREPL message, recv'ing and buffering as needed."
+  []
+  (loop []
+    (let [{:keys [sock buf msgs]} @conn-state]
+      (if (seq msgs)
+        (let [m (first msgs)]
+          (swap! conn-state update :msgs rest)
+          m)
+        (let [data (.recv sock 65536)]
+          (when (= data #b "")
+            (throw (python/OSError "brain connection closed")))
+          (let [[items remaining]
+                (bc/decode-all (.join #b "" [buf data])
+                               {:keywordize-keys true
+                                :string-fn #(.decode % "utf-8")})]
+            (swap! conn-state assoc :buf (or remaining #b "") :msgs (seq items))
+            (recur)))))))
 
 (defn- read-until-done
-  "Read messages for id from f, merging interesting keys; ignores
-  messages for other ids (e.g. interrupt acks sharing the socket)."
-  [f id]
+  "Read messages for id, merging interesting keys; ignores messages for
+  other ids (e.g. interrupt acks sharing the socket)."
+  [id]
   (loop [value nil
          out []
          err nil
          news nil]
-    (let [msg (bdec f)]
-      (if (not= (get msg "id") id)
+    (let [msg (recv-msg!)]
+      (if (not= (:id msg) id)
         (recur value out err news)
-        (let [status (set (get msg "status" []))
-              value (or (get msg "value") value)
-              out (if-let [o (get msg "out")] (conj out o) out)
-              err (or (get msg "err") err)
-              news (or (get msg "new-session") news)]
+        (let [status (set (:status msg))
+              value (or (:value msg) value)
+              out (if-let [o (:out msg)] (conj out o) out)
+              err (or (:err msg) err)
+              news (or (:new-session msg) news)]
           (if (contains? status "done")
             {:value value :out out :err err :new-session news
              :interrupted? (contains? status "interrupted")}
@@ -152,19 +114,16 @@
   (let [s (socket/create_connection addr 3)]
     (.setsockopt s socket/IPPROTO_TCP socket/TCP_NODELAY 1)
     (.settimeout s 30)
-    (let [f (.makefile s "rb")
-          id (str "clone-" (rand-int 1000000))
-          _ (.sendall s (benc {"op" "clone" "id" id}))
-          session (:new-session (read-until-done f id))
-          st {:sock s :f f :session session}]
-      (reset! conn-state st)
-      st)))
+    (reset! conn-state {:sock s :buf #b "" :msgs nil :session nil})
+    (let [id (str "clone-" (rand-int 1000000))]
+      (.sendall s (bc/encode {:op "clone" :id id}))
+      (swap! conn-state assoc :session (:new-session (read-until-done id)))
+      @conn-state)))
 
 (defn- conn [] (or @conn-state (connect!)))
 
 (defn close! []
-  (when-let [{:keys [sock f]} @conn-state]
-    (try (.close f) (catch python/Exception _ nil))
+  (when-let [{:keys [sock]} @conn-state]
     (try (.close sock) (catch python/Exception _ nil)))
   (reset! conn-state nil))
 
@@ -173,12 +132,12 @@
 (defonce ^:private in-flight (atom nil))
 
 (defn- eval-once [code]
-  (let [{:keys [sock f session]} (conn)
+  (let [{:keys [sock session]} (conn)
         id (str "brain-" (rand-int 1000000))]
     (reset! in-flight id)
-    (.sendall sock (benc {"op" "eval" "code" code "id" id "session" session}))
+    (.sendall sock (bc/encode {:op "eval" :code code :id id :session session}))
     (try
-      (read-until-done f id)
+      (read-until-done id)
       (finally (reset! in-flight nil)))))
 
 (defn interrupt!
@@ -187,10 +146,10 @@
   []
   (when-let [{:keys [sock session]} @conn-state]
     (when-let [id @in-flight]
-      (.sendall sock (benc {"op" "interrupt"
-                            "session" session
-                            "interrupt-id" id
-                            "id" (str "int-" (rand-int 1000000))}))
+      (.sendall sock (bc/encode {:op "interrupt"
+                                 :session session
+                                 :interrupt-id id
+                                 :id (str "int-" (rand-int 1000000))}))
       true)))
 
 (defn eval!

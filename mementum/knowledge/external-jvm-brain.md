@@ -45,7 +45,11 @@ available to voice actions, without embedding a JVM in Talon.
 - `(interrupt!)` — kills the in-flight eval (hung Java call) from any
   thread WITHOUT dropping the connection. Verified: 60s sleep killed in
   1.7s, connection still live.
-- Persistent socket, TCP_NODELAY, reconnect-once, hand-rolled bencode.
+- Persistent socket, TCP_NODELAY, reconnect-once. Wire format via
+  **basilisp.contrib.bencode** (ships with Basilisp; same impl as the
+  :7891 server) — replaced an earlier hand-rolled bencode. Costs ~2-3ms
+  vs hand-rolled stream reads (median ~9ms vs ~7ms): accepted, prefer
+  Basilisp-shipped infrastructure.
 - Protocol hygiene per nrepl.org building-clients doc: clones a session
   at connect, all evals carry session+id, response loop filters by id
   (so interrupt acks on the shared socket don't confuse it). Evaluated
