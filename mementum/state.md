@@ -134,6 +134,21 @@ JVM + thin Basilisp RPC shim). Memories:
 `basilisp-vs-libpython-clj-for-talon`,
 `in-process-jvm-in-talon-blocked-by-library-validation`.
 
+## Spike 2026-06-11: external JVM brain → ✅ working end-to-end
+
+`~/dev/talon-brain` (deps.edn, nREPL :7892, `clojure -M:brain`) +
+`lisp/tlisp/brain.lpy` (hand-rolled bencode, persistent socket w/
+TCP_NODELAY, reconnect-once, `eval!`/`value!`/`alive?`, never throws)
++ demo `ryan/brain/brain_demo.lpy` → action `user.brain_sha256` calls
+java.security.MessageDigest on the JVM. Voice rule: "brain test"
+(`ryan/brain/brain_demo.talon`). Latency from inside Talon: **median
+3.6ms, p90 4.3ms** per eval (nREPL server overhead, not transport —
+NODELAY only shaved ~0.5ms). Fine for voice. Gotchas hit: nREPL eval of
+`(do (require ...) (alias/use ...))` fails — require must be a separate
+eval (analysis-time resolution); don't guess `talon.*` internals, call
+via `(.-actions talon)`. Brain currently launched ad-hoc (bg job) —
+needs a launchd/supervisor story before real use.
+
 ## Open / next candidates
 
 - Delete `ryan/roam/roam.py.migrated-to-lisp` once migration has soaked.

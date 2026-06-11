@@ -1,0 +1,15 @@
+(ns ryan.brain.brain-demo
+  "SPIKE: voice-callable Talon action backed by the external JVM brain
+  (talon-brain, nREPL :7892) via tlisp.brain's persistent connection.
+  Proves: voice -> Talon -> Basilisp action -> JVM Java lib -> value back."
+  (:require [tlisp.talon :as t]
+            [tlisp.brain :as brain]))
+
+(t/defaction brain-sha256
+  "SHA-256 of text, computed by java.security.MessageDigest on the JVM brain"
+  [text :- python/str]
+  (let [r (brain/value! (str "(talon-brain.core/sha256 " (pr-str text) ")"))]
+    (println (str "brain-sha256(" text ") = " r))
+    r))
+
+(t/register! "user.ryan.brain.brain-demo" "spike: JVM-brain-backed actions")

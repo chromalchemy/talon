@@ -1,0 +1,130 @@
+(ns tlisp.brain
+  "Persistent nREPL client to the external JVM brain (talon-brain, port 7892).
+
+  Tier-3 transport: resident JVM + one persistent socket. Never spawns a
+  process. API:
+    (eval! code-str)  -> {:value s :out [s] :err s} or {:error s}
+    (value! code-str) -> value string (or error string)
+    (alive?)          -> bool"
+  (:import socket))
+
+(def ^:private addr (python/tuple ["127.0.0.1" 7892]))
+
+(defonce ^:private conn-state (atom nil))
+
+;;; bencode ------------------------------------------------------------
+
+(defn- b-bytes [s] (.encode s "utf-8"))
+
+(defn- b-str [s]
+  (let [d (b-bytes s)]
+    (.join #b "" [(b-bytes (str (python/len d))) #b ":" d])))
+
+(defn- benc [x]
+  (cond
+    (string? x) (b-str x)
+    (keyword? x) (b-str (name x))
+    (int? x) (b-bytes (str "i" x "e"))
+    (map? x) (.join #b ""
+                    (concat [#b "d"]
+                            (mapcat (fn [kv] [(b-str (name (key kv))) (benc (val kv))])
+                                    (sort-by (fn [kv] (name (key kv))) x))
+                            [#b "e"]))
+    :else (throw (python/ValueError (str "benc: unsupported " x)))))
+
+(declare ^:private bdec)
+
+(defn- bdec1 [f c]
+  (cond
+    (= c #b "i")
+    (loop [acc []]
+      (let [c2 (.read f 1)]
+        (if (= c2 #b "e")
+          (python/int (.decode (.join #b "" acc) "utf-8"))
+          (recur (conj acc c2)))))
+
+    (= c #b "l")
+    (loop [acc []]
+      (let [c2 (.read f 1)]
+        (if (= c2 #b "e") acc (recur (conj acc (bdec1 f c2))))))
+
+    (= c #b "d")
+    (loop [acc {}]
+      (let [c2 (.read f 1)]
+        (if (= c2 #b "e")
+          acc
+          (let [k (bdec1 f c2)
+                v (bdec f)]
+            (recur (assoc acc k v))))))
+
+    (.isdigit c)
+    (loop [acc [c]]
+      (let [c2 (.read f 1)]
+        (if (= c2 #b ":")
+          (let [n (python/int (.decode (.join #b "" acc) "utf-8"))]
+            (.decode (.read f n) "utf-8"))
+          (recur (conj acc c2)))))
+
+    :else (throw (python/OSError (str "bdec: unexpected byte " c)))))
+
+(defn- bdec [f]
+  (let [c (.read f 1)]
+    (if (= c #b "")
+      (throw (python/OSError "brain connection closed"))
+      (bdec1 f c))))
+
+;;; connection ---------------------------------------------------------
+
+(defn- connect! []
+  (let [s (socket/create_connection addr 3)]
+    (.setsockopt s socket/IPPROTO_TCP socket/TCP_NODELAY 1)
+    (.settimeout s 30)
+    (let [st {:sock s :f (.makefile s "rb")}]
+      (reset! conn-state st)
+      st)))
+
+(defn- conn [] (or @conn-state (connect!)))
+
+(defn close! []
+  (when-let [{:keys [sock f]} @conn-state]
+    (try (.close f) (catch python/Exception _ nil))
+    (try (.close sock) (catch python/Exception _ nil)))
+  (reset! conn-state nil))
+
+;;; eval ---------------------------------------------------------------
+
+(defn- eval-once [code]
+  (let [{:keys [sock f]} (conn)
+        id (str "brain-" (rand-int 1000000))]
+    (.sendall sock (benc {"op" "eval" "code" code "id" id}))
+    (loop [value nil
+           out []
+           err nil]
+      (let [msg (bdec f)
+            status (set (get msg "status" []))
+            value (or (get msg "value") value)
+            out (if-let [o (get msg "out")] (conj out o) out)
+            err (or (get msg "err") err)]
+        (if (contains? status "done")
+          {:value value :out out :err err}
+          (recur value out err))))))
+
+(defn eval!
+  "Evaluate code-str on the JVM brain. Reconnects once on failure;
+  returns {:error ...} if the brain is down (never throws)."
+  [code]
+  (try
+    (eval-once code)
+    (catch python/Exception _
+      (close!)
+      (try
+        (eval-once code)
+        (catch python/Exception e2
+          {:error (str "brain unavailable: " e2)})))))
+
+(defn value! [code]
+  (let [r (eval! code)]
+    (or (:value r) (:error r) (:err r))))
+
+(defn alive? []
+  (= "2" (:value (eval! "(+ 1 1)"))))
