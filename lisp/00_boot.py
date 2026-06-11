@@ -20,6 +20,7 @@ Design notes (v2 — lessons from the old `basilisp` branch):
 
 import contextlib
 import importlib
+import logging
 import os
 import socket
 import sys
@@ -144,6 +145,22 @@ def _module_name_for(path: str):
     return rel[:-len(".lpy")].replace(os.sep, ".")
 
 
+@contextlib.contextmanager
+def _reload_quiet():
+    """Re-executing a namespace re-registers its aliases/imports/vars, which
+    basilisp's analyzer reports via ungated logger.warning calls ("may shadow
+    an existing alias", "redefining Var"). That is the definition of a reload,
+    not a problem -- suppress the analyzer logger for the reload only, so
+    genuine warnings from fresh compiles and nREPL evals still surface."""
+    analyzer_logger = logging.getLogger("basilisp.lang.compiler.analyzer")
+    prev = analyzer_logger.level
+    analyzer_logger.setLevel(logging.ERROR)
+    try:
+        yield
+    finally:
+        analyzer_logger.setLevel(prev)
+
+
 def _on_lpy_change(path: str, flags) -> None:
     name = _module_name_for(path)
     if name is None:
@@ -151,7 +168,7 @@ def _on_lpy_change(path: str, flags) -> None:
     try:
         mod = sys.modules.get(name)
         t0 = time.perf_counter()
-        with _bytecode_writing_enabled():
+        with _bytecode_writing_enabled(), _reload_quiet():
             if mod is None:
                 importlib.import_module(name)
             else:
