@@ -17,7 +17,7 @@ app.name: Windsurf - Next
 (close | hide) [left] (sidebar | bar) | bar [left] hide | left bar hide: 
     user.run_rpc_command("workbench.action.closeSidebar")
 
-bar right (max | expand | shrink | min) | (max | expand | shrink | min) bar right | toggle bar right (max | expand | shrink | min) | minbar right:
+bar right (max | maximize | expand | shrink | min) | (max | maximize | expand | shrink | min) bar right | toggle bar right (max | maximize | expand | shrink | min) | minbar right:
     # opens right sidebar if not open
     user.run_rpc_command("workbench.action.toggleMaximizedAuxiliaryBar")
 
@@ -38,7 +38,7 @@ focus bar right:
 (close | hide) right (sidebar | bar) | bar right hide | right bar hide: 
     user.run_rpc_command("workbench.action.closeAuxiliaryBar")
 
-bar right (max | expand | shrink | min) | (max | expand | shrink | min) bar right | toggle bar right (max | expand | shrink | min) | minbar right:
+[toggle] bar right (max | maximize | expand | shrink | min) | (max | maximize | expand | shrink | min) bar right | minbar right | right bar (max | maximize | expand | shrink | min):
     user.run_rpc_command("workbench.action.toggleMaximizedAuxiliaryBar")
 
 next bar right | bar right next:

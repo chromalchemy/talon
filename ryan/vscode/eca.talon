@@ -39,7 +39,7 @@ add [current] file [(as | to | too | two)] context:
 focus eca (web view | webview | view):
     user.run_rpc_command("eca.webview.focus")
 
-(focus | go | open) ([eca] chat | eca | prompt): 
+(focus | go | open) ([eca] chat | eca | prompt) | bar chat: 
     user.run_rpc_command("eca.chat.focus")
 
 [go] eca input [<user.text>]:
