@@ -53,7 +53,18 @@ re-verify after Talon upgrades. **Voice-verified end-to-end**: "basilisp
 spike" (`ryan/roam/basilisp_spike.talon`) fired the defaction-registered
 action — no Python stub anywhere in the chain.
 
-Next candidates: migrate a real action surface to .lpy via defaction; decide
+Shipped 2026-06-11 (later): **roam.py migrated** (`3122f6b`) — 67
+actions + 2 lists now in `lisp/tlisp/roam.lpy`, 1:1 port, registry
+parity verified (0 sig diffs), `ryan/roam/roam.py` →
+`.migrated-to-lisp`. tlisp.talon grew `deflist`, `:=` default args,
+munged annotation keys, and free-on-failed-registration (failed
+register! used to leak a partial module). ⚠️ Interop gotcha: value use
+of an :import alias at module top level (`(.-actions pytalon)`) →
+NameError; use `(importlib/import-module "talon")`. Voice-level smoke
+test of migrated roam commands still pending (pure fns verified via
+REPL; keystroke actions need a Roam window).
+
+Next candidates: voice-test migrated roam actions in Roam; decide
 demo_stub.py's fate (delete vs keep as legacy reference); Calva/Portal
 over 7891; background pre-warm for fresh installs (first boot still
 pays ~19s once).
