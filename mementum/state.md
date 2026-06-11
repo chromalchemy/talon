@@ -159,6 +159,24 @@ brain → next call resurrected it (cold ~11.4s incl. JVM boot; warm
 median 3.6–6.8ms, first post-boot call ~120ms JIT). Brain JVM is now
 owned by Talon's process tree (detached, survives Talon restart).
 
+## Shim hardening 2026-06-11 (post-polish, same session)
+
+- `c0cdfd6` nREPL protocol hygiene per nrepl.org building-clients doc:
+  session clone at connect, evals carry session+id, response loop
+  filters by id, **`interrupt!`** (killed a hung 60s JVM call in 1.7s,
+  connection survived). Rejected cemerick/nrepl-python-client
+  (unmaintained dep vs ~60 working lines).
+- `7492a2e` hand-rolled bencode → **basilisp.contrib.bencode** (same
+  impl as the :7891 server). Median ~9ms/eval (was ~7; accepted).
+  🎯 New standing directive memory:
+  `prefer-basilisp-shipped-infrastructure` — check basilisp.contrib.*
+  before hand-rolling; read nrepl_server.lpy as API reference.
+- Uncommitted user WIP: roam.lpy println canary edit (xxx→yyy) —
+  user's live-loop test, intentionally left.
+- Untracked note: `lisp/libpython-clj integration investigation.md`
+  (user's). Untracked dirs (community/, cursorless-talon/ etc.) are
+  vendored grammars, pre-existing.
+
 ## Polish 2026-06-11 (brain spike follow-up)
 
 - `brain/call!`: RPC API — `(call! 'talon-brain.core/sha256 "x")`,
