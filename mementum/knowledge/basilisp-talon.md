@@ -23,8 +23,15 @@ lisp/<x>_stub.py       Module/action_class declarations, late-bound delegation
 lisp/<x>.talon         voice commands -> user.<action>
 ```
 
-- **Stubs are the only .py per action surface.** Talon only discovers
-  `Module`/`action_class` in files it loads itself. Stub bodies call
+- **Stubs are OPTIONAL (since 2026-06-11).** Actions can be registered
+  from pure Basilisp: `talon.Module()` only requires an active
+  `talon.scripting.rctx` ResourceContext, which a .lpy can create
+  itself (`rctx.context("user.lisp.x")` → enter → Module +
+  action_class → **`mod._load()`** to commit decls). Proven in
+  `lisp/tlisp/spike.lpy`; helpers/`defaction` in `lisp/tlisp/talon.lpy`.
+  See memory `talon-actions-from-pure-basilisp`. ⚠️ rctx is Talon
+  internals — re-verify after Talon upgrades.
+- **Legacy stub pattern** (demo_stub.py) still valid: stub bodies call
   `_mod.fn(args)` — module-attr lookup per call = late binding, so any
   redef (nREPL or reload) applies on the next voice command.
 - **nREPL server on port 7891** (7888 = stray java; 6888 = roam bridge
@@ -85,3 +92,4 @@ bytecode), set flag False, `basilisp.main.init()`.
 - nrepl-first-beats-file-watchers-for-in-process-lisp (watcher rules)
 - basilisp-nrepl-cli-evals-land-in-user-ns (CLI ns gotcha)
 - basilisp-direct-linking-freezes-intra-ns-redefs (^:redef)
+- talon-actions-from-pure-basilisp (no-stub action registration recipe)
