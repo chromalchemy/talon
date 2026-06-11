@@ -112,6 +112,11 @@ documented in knowledge page Recovery section.
 
 ## How to orient (next session)
 
+0. Newest workstream: **external JVM brain** —
+   `mementum/knowledge/external-jvm-brain.md` (architecture, shim API,
+   lifecycle, gotchas). Brain nREPL = **:7892**, repo `~/dev/talon-brain`.
+   ⚠️ User has NOT yet voice-verified post-restart: ask them to say
+   "basil roam test" and "brain test" early.
 1. Read this file, then `mementum/knowledge/basilisp-talon.md` (the
    architecture + all gotchas live there, current as of this session).
 2. `git log --oneline -n 15` — see table above.
