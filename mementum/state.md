@@ -210,7 +210,6 @@ Candidate: upstream PR to basilisp.
 
 ## Open / next candidates
 
-- Delete `ryan/roam/roam.py.migrated-to-lisp` once migration has soaked.
 - New domains: drop `.lpy` next to its `.talon` files, ns = path from
   user/, `(t/register! "user.<dotted-path>" ...)`. No new sys.path or
   watcher work needed.
