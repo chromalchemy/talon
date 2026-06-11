@@ -199,6 +199,15 @@ owned by Talon's process tree (detached, survives Talon restart).
   just live reload. Restart-verified: roam canary + brain action work
   cold; detached brain JVM survives Talon restarts.
 
+## Fix 2026-06-11: mixed .py/.lpy dirs were broken (`fe4e2fb`)
+
+Colocation side effect: BasilispImporter poisoned `user.ryan.roam` pkg
+(empty `__path__`) → roam_tmem_ext.py + roam_language.py failed every
+restart → 11 tmem lists dead + log noise loop. Patched find_spec in
+00_boot; live-repaired; **user-verified**: tmem roam block commands
+working again. Memory: `basilisp-importer-poisons-mixed-py-lpy-dirs`.
+Candidate: upstream PR to basilisp.
+
 ## Open / next candidates
 
 - Delete `ryan/roam/roam.py.migrated-to-lisp` once migration has soaked.
