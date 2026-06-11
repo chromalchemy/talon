@@ -2,6 +2,33 @@
 
 ## Active focus
 
+**`basilisp-v2`** (branch `basilisp-v2`) — Clojure as Talon's scripting
+layer via Basilisp, nREPL-first. Shipped `8eb1f6b` (2026-06-10):
+
+- `lisp/00_boot.py`: idempotent `basilisp.main.init()` + nREPL server
+  **port 7891** inside the Talon process (port-probe guard vs duplicate
+  servers; 7888 was taken by an unrelated java nREPL).
+- `lisp/tlisp/demo.lpy` + `lisp/demo_stub.py` + `basilisp_demo.talon`:
+  action bodies in Clojure; stubs declare Module/action_class and
+  delegate **late-bound** (module-attr lookup per call) → nREPL redefs
+  apply on the next voice command, zero reloads, zero watchers.
+- 🎯 Root cause of old `basilisp` branch slowness: **Talon sets
+  `sys.dont_write_bytecode=True`** → basilisp could never write `.lpyc`
+  caches → ~19s basilisp.core recompile on EVERY launch, blocking the
+  loader thread. Fix: scoped flag-flip during basilisp compiles.
+  Measured: 17.4s cold → **0.30s warm**. Cache pre-warmed via
+  `~/.talon/bin/python` (same CPython 3.13 as Talon).
+- Dev loop: edit `.lpy` → `clj-nrepl-eval --port 7891` /
+  `(load-file ...)`. CLI evals land in `user` ns — wrap redefs in
+  `(binding [*ns* (the-ns 'tlisp.demo)] (eval '(defn ...)))` or use an
+  editor client that sends ns.
+- Verified end-to-end by voice ("basilisp test") + live redefinition.
+
+Next candidates: migrate a real action to .lpy; Calva/Portal over 7891;
+background pre-warm for fresh installs (first boot still pays ~19s once).
+
+## Previous focus
+
 **`tmem-roam-bridge`** — composable voice grammar for editing Roam blocks.
 See `mementum/knowledge/tmem-roam-bridge.md` for the workstream page.
 
