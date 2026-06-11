@@ -146,8 +146,13 @@ java.security.MessageDigest on the JVM. Voice rule: "brain test"
 NODELAY only shaved ~0.5ms). Fine for voice. Gotchas hit: nREPL eval of
 `(do (require ...) (alias/use ...))` fails — require must be a separate
 eval (analysis-time resolution); don't guess `talon.*` internals, call
-via `(.-actions talon)`. Brain currently launched ad-hoc (bg job) —
-needs a launchd/supervisor story before real use.
+via `(.-actions talon)`. Lifecycle: shim **auto-starts** the brain —
+`(brain/start!)` spawns detached `clojure -M:brain` (cwd
+~/dev/talon-brain, log ~/.talon/talon-brain.log) when :7892 is down;
+`eval!` does this transparently on connect failure. Verified: killed
+brain → next call resurrected it (cold ~11.4s incl. JVM boot; warm
+median 3.6–6.8ms, first post-boot call ~120ms JIT). Brain JVM is now
+owned by Talon's process tree (detached, survives Talon restart).
 
 ## Open / next candidates
 

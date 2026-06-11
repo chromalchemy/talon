@@ -6,11 +6,51 @@
     (eval! code-str)  -> {:value s :out [s] :err s} or {:error s}
     (value! code-str) -> value string (or error string)
     (alive?)          -> bool"
-  (:import socket))
+  (:import socket os subprocess shutil time))
 
 (def ^:private addr (python/tuple ["127.0.0.1" 7892]))
+(def ^:private brain-dir (os.path/expanduser "~/dev/talon-brain"))
+(def ^:private brain-log (os.path/expanduser "~/.talon/talon-brain.log"))
 
 (defonce ^:private conn-state (atom nil))
+(defonce ^:private proc-state (atom nil))
+
+;;; lifecycle ----------------------------------------------------------
+
+(defn- port-open? []
+  (try
+    (.close (socket/create_connection addr 0.2))
+    true
+    (catch python/Exception _ false)))
+
+(defn- clojure-bin []
+  (or (shutil/which "clojure")
+      (first (filter os.path/exists
+                     ["/opt/homebrew/bin/clojure" "/usr/local/bin/clojure"]))
+      (throw (python/FileNotFoundError "clojure CLI not found"))))
+
+(defn start!
+  "Launch the JVM brain detached if :7892 isn't already serving.
+  Blocks up to ~20s waiting for the port. Returns true when up."
+  []
+  (if (port-open?)
+    true
+    (do
+      (when (nil? @proc-state)
+        (let [log (python/open brain-log "ab")
+              p (subprocess/Popen [(clojure-bin) "-M:brain"]
+                                  **
+                                  :cwd brain-dir
+                                  :stdout log
+                                  :stderr subprocess/STDOUT
+                                  :start_new_session true)]
+          (reset! proc-state p)
+          (println "tlisp.brain: starting JVM brain, pid" (.-pid p))))
+      (loop [n 80]
+        (cond
+          (port-open?) true
+          (zero? n) (do (reset! proc-state nil) false)
+          :else (do (time/sleep 0.25) (recur (dec n))))))))
 
 ;;; bencode ------------------------------------------------------------
 
@@ -118,6 +158,8 @@
     (catch python/Exception _
       (close!)
       (try
+        (when-not (start!)
+          (throw (python/OSError "brain failed to start")))
         (eval-once code)
         (catch python/Exception e2
           {:error (str "brain unavailable: " e2)})))))
