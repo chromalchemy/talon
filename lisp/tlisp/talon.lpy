@@ -1,0 +1,117 @@
+(ns tlisp.talon
+  "Define Talon actions in pure Basilisp -- no Python stubs.
+
+  Usage in an action namespace:
+
+    (ns tlisp.spike (:require [tlisp.talon :as t]))
+
+    (t/defaction spike-hello
+      \"Docstring shown in Talon's action registry\"
+      [text :- python/str]
+      (do-something text))
+
+    (t/register! \"user.lisp.tlisp.spike\" \"spike: pure basilisp actions\")
+
+  Mechanism (see memory talon-actions-from-pure-basilisp):
+  - talon.Module() requires an active rctx ResourceContext; we make our
+    own. First dotted segment of the context name = action namespace,
+    so context names must start with 'user.'.
+  - Module._load() is required to commit decls to the registry.
+  - Previous ResourceContext is freed before re-registering (tracked in
+    a sys.modules sentinel that survives ns reloads), so file-save
+    reloads leave exactly one module + one impl per action.
+  ⚠️ rctx is Talon internals -- re-verify after Talon upgrades."
+  (:import sys
+           types
+           [talon :as pytalon]
+           [talon.scripting.rctx :as rctx]))
+
+;; ---------------------------------------------------------------------------
+;; reload-surviving context registry
+
+(def ^:private state-key "talon_basilisp_action_state")
+
+(defn- state []
+  (or (.get sys/modules state-key)
+      (let [m (types/ModuleType state-key)]
+        (set! (.-contexts m) (python/dict))
+        (.__setitem__ sys/modules state-key m)
+        m)))
+
+;; ---------------------------------------------------------------------------
+;; registration
+
+(defn annotate!
+  "Make a Basilisp fn look like a Talon action_class method: name,
+  qualname, docstring, type annotations (action_class introspects all)."
+  [f fname doc annotations]
+  (set! (.-__name__ f) fname)
+  (set! (.-__qualname__ f) (str "Actions." fname))
+  (set! (.-__doc__ f) doc)
+  (set! (.-__annotations__ f) annotations)
+  f)
+
+(defn register-actions!
+  "Register {action-name fn} (a python dict) as Talon actions inside a
+  fresh ResourceContext named ctx-name (must start with 'user.').
+  Frees any previous context under ctx-name, so reloads are clean."
+  [ctx-name desc fns]
+  (let [contexts (.-contexts (state))
+        prev     (.get contexts ctx-name)]
+    (when prev
+      (try (.free prev) (catch python/Exception _ nil)))
+    (let [c (rctx/context ctx-name)]
+      (with [_ (.enter c)]
+        (let [m   (pytalon/Module desc)
+              cls (python/type "Actions" (python/tuple) fns)]
+          (.action_class m cls)
+          (._load m)))
+      (.__setitem__ contexts ctx-name c)
+      c)))
+
+;; ---------------------------------------------------------------------------
+;; defaction / register!
+
+(def ^:private pending
+  "Actions stashed by defaction, keyed [ns-name action-name], consumed
+  by register!. Plain def (not defonce): a ns reload re-runs its
+  defactions, so rebuilding from empty drops deleted actions."
+  (atom {}))
+
+(defn stash-action!
+  [ns-name action-name doc annotations f]
+  (annotate! f action-name doc annotations)
+  (swap! pending assoc-in [ns-name action-name] f))
+
+(defmacro defaction
+  "(defaction my-action \"doc\" [arg :- python/str ...] body...)
+
+  Defines a ^:redef fn `my-action` in the current ns AND stashes an
+  annotated Talon-action wrapper under the dash->underscore name
+  (my-action -> my_action). Finish the namespace with (register! ...).
+  Param vector must be `name :- type` triples; types are evaluated
+  (use python/str, python/int, ...)."
+  [fname doc params & body]
+  (assert (zero? (rem (count params) 3)) "params must be name :- type triples")
+  (let [syms        (vec (take-nth 3 params))
+        seps        (take-nth 3 (drop 1 params))
+        type-exprs  (vec (take-nth 3 (drop 2 params)))
+        _           (assert (every? #(= :- %) seps) "expected :- separators")
+        action-name (.replace (name fname) "-" "_")
+        ann-map     (zipmap (map name syms) type-exprs)]
+    `(do
+       (defn ~(with-meta fname {:redef true}) ~syms ~@body)
+       (stash-action! (str *ns*) ~action-name ~doc
+                      (python/dict ~ann-map)
+                      (fn ~syms (~fname ~@syms)))
+       (var ~fname))))
+
+(defn register!
+  "Register every action stashed by defaction in the calling namespace.
+  Call as the last form of an action namespace, while it is loading."
+  [ctx-name desc]
+  (let [ns-name (str *ns*)
+        fns     (get @pending ns-name)]
+    (assert (seq fns) (str "no defactions stashed for ns " ns-name))
+    (swap! pending dissoc ns-name)
+    (register-actions! ctx-name desc (python/dict fns))))

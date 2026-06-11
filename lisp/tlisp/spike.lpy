@@ -1,0 +1,14 @@
+(ns tlisp.spike
+  "SPIKE: Talon actions defined entirely in Basilisp via tlisp.talon.
+  No Python stub. See memory talon-actions-from-pure-basilisp."
+  (:require [tlisp.talon :as t]))
+
+(t/defaction basilisp-spike-file-hello
+  "Spike action defined entirely in spike.lpy"
+  [text :- python/str]
+  (println (str "spike.lpy v3 (defaction) says: " text))
+  (str "spike-defaction:" text))
+
+(t/register! "user.lisp.tlisp.spike" "spike: actions defined in pure basilisp")
+
+(println "tlisp.spike: actions registered via defaction")
