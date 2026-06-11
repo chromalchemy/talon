@@ -30,6 +30,7 @@ import types
 
 NREPL_PORT = 7891
 LISP_ROOT = os.path.dirname(os.path.abspath(__file__))
+USER_ROOT = os.path.dirname(LISP_ROOT)
 PORT_FILE = os.path.join(LISP_ROOT, ".nrepl-port")
 
 
@@ -63,6 +64,12 @@ def ensure_paths():
         sys.path.append(venv_sp)
     if LISP_ROOT not in sys.path:
         sys.path.insert(0, LISP_ROOT)
+    # The whole user dir is a namespace root too, so .lpy files can live
+    # next to the .talon grammars they serve (ryan/roam/foo.lpy ->
+    # ryan.roam.foo). APPEND, not insert: stdlib/site-packages must win
+    # lookups so user dirs can never shadow real modules.
+    if USER_ROOT not in sys.path:
+        sys.path.append(USER_ROOT)
 
 
 def ensure_basilisp():
@@ -135,14 +142,18 @@ def _state() -> types.ModuleType:
 
 
 def _module_name_for(path: str):
-    """Map an absolute .lpy path under LISP_ROOT to its Python module name,
-    e.g. .../lisp/tlisp/demo.lpy -> 'tlisp.demo'. None for anything else."""
+    """Map an absolute .lpy path to its Python module name, resolving against
+    LISP_ROOT first (infrastructure: .../lisp/tlisp/demo.lpy -> 'tlisp.demo'),
+    then USER_ROOT (domain code: .../ryan/roam/foo.lpy -> 'ryan.roam.foo').
+    LISP_ROOT must win for files under lisp/, since that's how they're
+    importable (lisp/ is its own sys.path root). None for anything else."""
     if not path.endswith(".lpy"):
         return None
-    rel = os.path.relpath(path, LISP_ROOT)
-    if rel.startswith(".."):
-        return None
-    return rel[:-len(".lpy")].replace(os.sep, ".")
+    for root in (LISP_ROOT, USER_ROOT):
+        rel = os.path.relpath(path, root)
+        if not rel.startswith(".."):
+            return rel[:-len(".lpy")].replace(os.sep, ".")
+    return None
 
 
 @contextlib.contextmanager
@@ -180,21 +191,25 @@ def _on_lpy_change(path: str, flags) -> None:
 
 
 def start_lpy_watcher() -> None:
-    """Watch LISP_ROOT (only) for .lpy saves and reimport the changed module.
+    """Watch USER_ROOT for .lpy saves and reimport the changed module (the
+    callback early-exits on non-.lpy paths, so watching the whole tree is
+    cheap). USER_ROOT contains LISP_ROOT, so one watcher covers both roots.
     Deduped: unregisters the previously registered callback first, so Talon
     reloads of this file don't accumulate watchers (the v1 bug)."""
     from talon import fs
 
     st = _state()
     prev = getattr(st, "lpy_watcher", None)
+    prev_path = getattr(st, "lpy_watcher_path", LISP_ROOT)
     if prev is not None:
         try:
-            fs.unwatch(LISP_ROOT, prev)
+            fs.unwatch(prev_path, prev)
         except Exception:
             pass
-    fs.watch(LISP_ROOT, _on_lpy_change)
+    fs.watch(USER_ROOT, _on_lpy_change)
     st.lpy_watcher = _on_lpy_change
-    print(f"basilisp: watching {LISP_ROOT} for .lpy changes")
+    st.lpy_watcher_path = USER_ROOT
+    print(f"basilisp: watching {USER_ROOT} for .lpy changes")
 
 
 try:
