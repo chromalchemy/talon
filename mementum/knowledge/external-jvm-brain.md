@@ -42,7 +42,15 @@ available to voice actions, without embedding a JVM in Talon.
 - `(value! code-str)` / `(eval! code-str)` — string-level, never throws
   (`{:error ...}` when brain down).
 - `(alive?)`, `(start!)`, `(close!)`.
+- `(interrupt!)` — kills the in-flight eval (hung Java call) from any
+  thread WITHOUT dropping the connection. Verified: 60s sleep killed in
+  1.7s, connection still live.
 - Persistent socket, TCP_NODELAY, reconnect-once, hand-rolled bencode.
+- Protocol hygiene per nrepl.org building-clients doc: clones a session
+  at connect, all evals carry session+id, response loop filters by id
+  (so interrupt acks on the shared socket don't confuse it). Evaluated
+  cemerick/nrepl-python-client as alternative: rejected (unmaintained
+  ~2015, new venv dep for ~60 working lines).
 
 ## Lifecycle
 
@@ -64,7 +72,10 @@ available to voice actions, without embedding a JVM in Talon.
    restart. Memory: `lpy-modules-need-boot-loader`. Verify changes with
    a full Talon quit/relaunch, not just live reload.
 3. nREPL eval of `(do (require ...) (alias/fn ...))` fails — analysis
-   resolves symbols before require runs; eval require separately.
+   resolves symbols before require runs; eval require separately, or
+   just use fully-qualified symbols (module is boot-loaded anyway).
+   Related: `(local/attr ...)` on a let-bound Python module is analyzed
+   as a namespace lookup — use `((.-attr local) ...)`.
 4. Don't guess `talon.*` internals for registry checks — call through
    `(.-user (.-actions talon))`.
 5. Rebuild the jar after changing brain src (`clojure -T:build uber`),

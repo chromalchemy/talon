@@ -127,11 +127,36 @@
 
 ;;; connection ---------------------------------------------------------
 
+(defn- read-until-done
+  "Read messages for id from f, merging interesting keys; ignores
+  messages for other ids (e.g. interrupt acks sharing the socket)."
+  [f id]
+  (loop [value nil
+         out []
+         err nil
+         news nil]
+    (let [msg (bdec f)]
+      (if (not= (get msg "id") id)
+        (recur value out err news)
+        (let [status (set (get msg "status" []))
+              value (or (get msg "value") value)
+              out (if-let [o (get msg "out")] (conj out o) out)
+              err (or (get msg "err") err)
+              news (or (get msg "new-session") news)]
+          (if (contains? status "done")
+            {:value value :out out :err err :new-session news
+             :interrupted? (contains? status "interrupted")}
+            (recur value out err news)))))))
+
 (defn- connect! []
   (let [s (socket/create_connection addr 3)]
     (.setsockopt s socket/IPPROTO_TCP socket/TCP_NODELAY 1)
     (.settimeout s 30)
-    (let [st {:sock s :f (.makefile s "rb")}]
+    (let [f (.makefile s "rb")
+          id (str "clone-" (rand-int 1000000))
+          _ (.sendall s (benc {"op" "clone" "id" id}))
+          session (:new-session (read-until-done f id))
+          st {:sock s :f f :session session}]
       (reset! conn-state st)
       st)))
 
@@ -145,21 +170,28 @@
 
 ;;; eval ---------------------------------------------------------------
 
+(defonce ^:private in-flight (atom nil))
+
 (defn- eval-once [code]
-  (let [{:keys [sock f]} (conn)
+  (let [{:keys [sock f session]} (conn)
         id (str "brain-" (rand-int 1000000))]
-    (.sendall sock (benc {"op" "eval" "code" code "id" id}))
-    (loop [value nil
-           out []
-           err nil]
-      (let [msg (bdec f)
-            status (set (get msg "status" []))
-            value (or (get msg "value") value)
-            out (if-let [o (get msg "out")] (conj out o) out)
-            err (or (get msg "err") err)]
-        (if (contains? status "done")
-          {:value value :out out :err err}
-          (recur value out err))))))
+    (reset! in-flight id)
+    (.sendall sock (benc {"op" "eval" "code" code "id" id "session" session}))
+    (try
+      (read-until-done f id)
+      (finally (reset! in-flight nil)))))
+
+(defn interrupt!
+  "Interrupt the in-flight eval (e.g. a hung Java call) without
+  dropping the connection. Safe to call from any thread."
+  []
+  (when-let [{:keys [sock session]} @conn-state]
+    (when-let [id @in-flight]
+      (.sendall sock (benc {"op" "interrupt"
+                            "session" session
+                            "interrupt-id" id
+                            "id" (str "int-" (rand-int 1000000))}))
+      true)))
 
 (defn eval!
   "Evaluate code-str on the JVM brain. Reconnects once on failure;
