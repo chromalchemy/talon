@@ -6,6 +6,9 @@ mode: command
 
 ####################
 
+basil (roam | rome) test:
+    user.roam_basil_test()
+
 # todo: setup defualt timeout
     
 #command palette
@@ -45,7 +48,7 @@ go all pages:
     key(space)
 
 ^(choose | pick) [<user.ordinals>]:
-    spacesDown= orinals or 1
+    spacesDown= ordinals or 1
     print("spacesDown: {spacesDown}")
     key("down:{spacesDown}")
     key(enter)
