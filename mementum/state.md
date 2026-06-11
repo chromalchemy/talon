@@ -60,14 +60,48 @@ parity verified (0 sig diffs), `ryan/roam/roam.py` →
 munged annotation keys, and free-on-failed-registration (failed
 register! used to leak a partial module). ⚠️ Interop gotcha: value use
 of an :import alias at module top level (`(.-actions pytalon)`) →
-NameError; use `(importlib/import-module "talon")`. Voice-level smoke
-test of migrated roam commands still pending (pure fns verified via
-REPL; keystroke actions need a Roam window).
+NameError; use `(importlib/import-module "talon")`.
+**Voice-verified by user in Roam**: migrated actions work, and the
+live loop is confirmed first-hand (edited a println in roam.lpy, saved,
+spoke, saw new string in log). Smoke canary: `roam-basil-test` action +
+"basil roam test" rule in `ryan/roam/core.talon`.
 
-Next candidates: voice-test migrated roam actions in Roam; decide
-demo_stub.py's fate (delete vs keep as legacy reference); Calva/Portal
-over 7891; background pre-warm for fresh installs (first boot still
-pays ~19s once).
+## Session 2026-06-11 commits (this session)
+
+| Commit | Subject |
+|---|---|
+| `ed36c93`/`31e3b08` | memory + knowledge: pure-Basilisp action registration |
+| `f292ead` | tlisp.talon: defaction macro + register!, no stubs |
+| `21bc96c` | voice command wired to pure-Basilisp action (verified) |
+| `3122f6b` | **roam.py migrated** → lisp/tlisp/roam.lpy (67 actions) |
+| `dcb63a2`/`b4aa827` | memories: import-alias gotcha, parity-baseline pattern |
+| `93b79f7`/`0a67389` | roam-basil-test smoke action + voice rule |
+
+## How to orient (next session)
+
+1. Read this file, then `mementum/knowledge/basilisp-talon.md` (the
+   architecture + all gotchas live there, current as of this session).
+2. `git log --oneline -n 15` — see table above.
+3. nREPL into Talon: port **7891** (`clj-nrepl-eval --port 7891`, or
+   `clojure-mcp__clojure_eval :port 7891` from an agent). Port 6888 =
+   separate bb roam-bridge daemon (tmem workstream).
+4. Memories this workstream (7): grep `git log --oneline --
+   mementum/memories/ | grep -i "basilisp\|talon"`. Key ones:
+   `talon-actions-from-pure-basilisp` (the no-stub recipe),
+   `basilisp-import-alias-value-use-fails-at-top-level`,
+   `registry-parity-baseline-for-talon-migrations`.
+
+## Open / next candidates
+
+- Delete `ryan/roam/roam.py.migrated-to-lisp` once migration has soaked.
+- Decide demo_stub.py fate (legacy-pattern reference vs delete).
+- Migrate further py action surfaces (parity-baseline memory = recipe).
+- Calva/Portal over 7891; background pre-warm for fresh installs
+  (first boot still pays ~19s once).
+- ⚠️ After any Talon upgrade: re-verify rctx internals (Module
+  registration) — say "basil roam test" as the canary.
+- Inert leftover: stale module objects pinned by nREPL eval history
+  clear on Talon restart (harmless).
 
 ## Previous focus
 
@@ -90,108 +124,16 @@ Daemon: `bb bridge.clj` from `~/dev/tmem-roam-ext`, nREPL on port 6888.
 After kill/restart, bb writes `.nrepl-port` and self-starts. Hot reload:
 `clj-nrepl-eval --port 6888 '(load-file "bridge.clj")'`.
 
-## What this session shipped (2026-05-03)
-
-| Commit | Repo | Subject |
-|---|---|---|
-| `054a062` | tmem-roam-ext | docs: reflect daemon mode shipped (Phase G+) |
-| `7cde418` | talon | fix port number in roam_tmem_ext.py comment |
-| `61f8a26` | tmem-roam-ext | feat(modifier): wire every:reference and every:mention scopes |
-| `78e6a8c` | talon | add reference/mention vocab |
-| `fc47932` | tmem-roam-ext | refactor(bridge): delete ~25 orphaned legacy public fns + helpers |
-| `1fb4734` | tmem-roam-ext | docs(progress): legacy public fns deleted |
-
-`bridge.clj`: 2234 → **1506 lines** (–728, –32%). Talon repo got the
-mementum substrate (`d594327` bootstrap) plus several knowledge/state
-updates.
-
-## What this session shipped (2026-05-03, second pass)
-
-| Commit | Repo | Subject |
-|---|---|---|
-| `c5e12c5` | talon | feat(roam): list-capable roam_target capture |
-| `bda5b24` | tmem-roam-ext | feat(zoom): reject list targets with list-not-supported error |
-| `f8b14a0` | tmem-roam-ext | feat(nudge): list-capable target with sibling-aware ordering |
-| `2f19be5` | talon | feat(nudge): composable target capture |
-| `2d97616` | talon | fix(nudge): use Python wrapper for implicit-target EDN |
-| `116ded0` | talon | refactor(nudge): inline-escape EDN literal, drop Python wrapper |
-| `fbcaab3` | tmem-roam-ext | docs(progress): rewrite gotcha #21 — TalonScript brace escaping |
-| `f0a9542` | tmem-roam-ext | feat(setTodoState): explicit todo/done/none with composable target |
-| `5e1dd1c` | talon | feat(todo): composable setTodoState rules; drop legacy edit-mode dance |
-
-**Multi-target todo state.** `make A and B done`, `unmark every child
-of C`, `clear selection todo` now work via the new `setTodoState`
-dispatch — direct text-prefix manipulation of `{{[[TODO]]}} ` /
-`{{[[DONE]]}} ` markers via `data.block.update`. Replaces the four
-legacy rules that synthesized cmd-Enter keypresses + sleeps + escapes
-inside edit mode. Schema documented in COMMAND-SCHEMA.md §5.1, §7, §8.
-
-❌ Tripped over the gotcha #21 interpolation flavour. First fix used a
-Python wrapper (`roam_nudge_implicit`); user corrected — TalonScript
-string literals are f-string-like, so `{{...}}` escapes to literal
-braces. Reverted to inline-escape, rewrote gotcha #21 to clarify
-mechanism (vs the original "no inline literals" framing), captured the
-**avoid Python helpers mirroring Clojure** design principle in
-`memories/talonscript-curly-brace-interpolation.md`.
-
-**Multi-target action-verb grammar.** `chuck A and B`, `fold A and B`,
-`bar A and B and C`, `take A and B` now all work in one phrase via the
-single action-verb rule. `roam_target` is now `<primitive> (and
-<primitive>)*` with single-element collapse (cursorless §3.5). Slot
-shapes preserved: destinations + bring/move sources stay primitive-only
-(§4.1 slot-type-enforces-arity). Inherently single-target verbs (`zoom`)
-reject multi-uid regions in `bridge.clj` rather than at parse time
-(§4 Option A — keep grammar uniform, enforce arity per-action).
-
-**Multi-target nudge.** `nudge A and B up`, `nudge every child of C
-down`, `nudge cursor up` now work via the composable target capture.
-Talon's three nudge helpers (`roam_nudge_label`, `roam_nudge_implicit`,
-old single-purpose `roam_nudge`) collapsed to one general
-`roam_nudge(target_edn, direction)`. Bridge factors per-block logic
-into `nudge-one!` and iterates with sibling-index sort: ascending for
-`:up`/`:left-above`/`:right` (block moves toward start), descending for
-`:down`/`:left-below`/`:right-below` (block moves toward end), so
-multi-target ops don't trip over themselves.
-
-`bridge.clj`: 1506 → **1553 lines** (+47).
-
-## How to orient (next session)
-
-1. Read this file.
-2. `git log -n 10 -- mementum/` — what's changed.
-3. Read `mementum/knowledge/tmem-roam-bridge.md` if continuing the workstream.
-4. Skim memories under `mementum/memories/` (4 from 2026-05-03):
-   - `progress-doc-says-daemon-deferred-but-shipped` — the architectural drift
-   - `staged-refactor-docs-triplet-pattern` — PLAN+SCHEMA+PROGRESS as a model
-   - `subagent-caught-audit-mistake` — reverse-direction grep when deleting
-   - `daemon-vs-stray-bb-nrepls` — periodic kill of `bb --nrepl-server` cruft
-5. The **21 numbered gotchas** in `~/dev/tmem-roam-ext/docs/REFACTOR-PROGRESS.md`
-   are mandatory reading before edits to phrase marks, pronouns,
-   TalonScript bodies, or modifier order.
-
-## Open questions / candidates
-
-- Replace upstream Nautilus `README.md` (still upstream content; misleading).
-- Decide whether to enforce `labelsVersion` on the Clojure side
-  (JS already does via 4-snapshot ring buffer; bridge.clj ignores).
-- Optional Phase H: embedded LLM string DSL for placeholder marks.
-- Doc consolidation pass on `REFACTOR-PROGRESS.md` ("Files modified
-  (cumulative)" section is now mostly historical).
-- Tag the daemon distinctively (e.g. `(defonce DAEMON :v1)`) so
-  discovery scripts can filter strays. (Per memory
-  `daemon-vs-stray-bb-nrepls`.)
-
-## Workflow notes (heuristics confirmed this session)
-
-- bridge daemon is on port **6888**. `clj-nrepl-eval --port 6888 '(...)'`
-  for one-shots; `clojure-mcp__clojure_eval :port 6888` from this agent.
-- For multi-edit refactors of `bridge.clj`, the **general subagent** is
-  worth the delegation — it handles mechanical multi-fn deletion well
-  and can run reload+smoke-test loops.
-- `clojure-lsp` diagnostics surface unused-public-vars and arity
-  errors. Treat clean diagnostics as the post-refactor success signal.
-- bb nREPL strays accumulate. Kill `bb --nrepl-server` processes
-  freely; the daemon launched as `bb bridge.clj` is unaffected.
+tmem detail (2026-05-03 sessions: multi-target grammar, setTodoState,
+nudge, –32% bridge.clj) lives in git history of this file and in
+`mementum/knowledge/tmem-roam-bridge.md`. Before editing phrase marks,
+pronouns, TalonScript bodies, or modifier order: the **21 numbered
+gotchas** in `~/dev/tmem-roam-ext/docs/REFACTOR-PROGRESS.md` are
+mandatory reading. tmem open candidates are tracked in the knowledge
+page. Workflow: general subagent is worth it for multi-edit bridge.clj
+refactors; clean clojure-lsp diagnostics = post-refactor success
+signal; kill `bb --nrepl-server` strays freely (daemon `bb bridge.clj`
+unaffected).
 
 ## Symbols (from `agents.md`)
 

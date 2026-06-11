@@ -18,10 +18,21 @@ Branch `basilisp-v2` in `~/.talon/user`. basilisp 0.5.1 in Talon's venv
 
 ```
 lisp/00_boot.py        bootstrap: init + nREPL server + .lpy watcher
-lisp/tlisp/*.lpy       Clojure namespaces (action bodies)
-lisp/<x>_stub.py       Module/action_class declarations, late-bound delegation
-lisp/<x>.talon         voice commands -> user.<action>
+lisp/tlisp/talon.lpy   defaction macro + deflist + register! (the framework)
+lisp/tlisp/*.lpy       Clojure namespaces defining actions directly (no stubs)
+lisp/<x>_stub.py       LEGACY pattern: stub declarations + late-bound delegation
+<anywhere>/*.talon     voice commands -> user.<action> (location unrestricted)
 ```
+
+First production surface migrated: `ryan/roam/roam.py` (67 actions +
+2 lists) → `lisp/tlisp/roam.lpy`, registry-parity verified, voice
+verified. Old file kept as `ryan/roam/roam.py.migrated-to-lisp`.
+
+`tlisp.talon/defaction` features: `name :- type` params (python/str,
+python/int...), `:= default` (trailing), dash→underscore munging for
+action and arg names, `^:redef` on the defined fn (nREPL redefs live),
+`deflist` for Module.list declarations, contexts freed on reload AND on
+failed registration (failure otherwise leaks a partial module).
 
 - **Stubs are OPTIONAL (since 2026-06-11).** Actions can be registered
   from pure Basilisp: `talon.Module()` only requires an active
