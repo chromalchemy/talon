@@ -115,8 +115,14 @@ documented in knowledge page Recovery section.
 0. Newest workstream: **external JVM brain** —
    `mementum/knowledge/external-jvm-brain.md` (architecture, shim API,
    lifecycle, gotchas). Brain nREPL = **:7892**, repo `~/dev/talon-brain`.
-   ⚠️ User has NOT yet voice-verified post-restart: ask them to say
-   "basil roam test" and "brain test" early.
+   ✅ "brain test" IS voice-verified post-restart (user spoke it twice
+   at 01:53/01:54; log proves full chain). It *looked* like a no-op
+   because output was log-only println — now raises app.notify.
+   "basil roam test" still unspoken since restart; suggest it early.
+   Debug recipe for "voice command does nothing": (1) check
+   talon.log for the println, (2) registry check via 7891 —
+   `(.-commands (.-registry talon))` / `(.-contexts ...)`. The command
+   often fired fine and just lacked visible feedback.
 1. Read this file, then `mementum/knowledge/basilisp-talon.md` (the
    architecture + all gotchas live there, current as of this session).
 2. `git log --oneline -n 15` — see table above.

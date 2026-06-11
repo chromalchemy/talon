@@ -92,4 +92,7 @@ available to voice actions, without embedding a JVM in Talon.
 - Real Java-lib use cases: replace sha256 demo with actual needs
   (candidates: Datalevin, JVM-only libs, absorbing the bb roam bridge
   on :6888 into the brain).
-- Voice double-check pending: "basil roam test" + "brain test".
+- "brain test" voice-verified ✅ (2026-06-11; whole chain by voice).
+  Demo actions must produce *visible* feedback (app.notify), not just
+  println — a log-only action is indistinguishable from a dead grammar.
+  "basil roam test" still unspoken since the restart fix.
