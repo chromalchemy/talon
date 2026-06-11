@@ -97,6 +97,43 @@ def _warn_shadowed_names():
         print(f"basilisp: shadow check skipped: {e!r}")
 
 
+def _patch_importer_namespace_specs():
+    """Work around an upstream basilisp bug (importer.py find_spec): for
+    "namespace packages" (a dir with .lpy files and no __init__), it returns
+    `ModuleSpec(fullname, None, is_package=True)` with EMPTY
+    submodule_search_locations. BasilispImporter sits first on sys.meta_path,
+    so it claims such parent packages before Python's PathFinder can -- and
+    sibling .py modules in mixed .py/.lpy dirs then fail to import with
+    ModuleNotFoundError (seen as Talon 'import failed' + cascading
+    'lists skipped because they have no matching declaration' noise).
+
+    Fix: give those namespace-package specs their real directory path."""
+    from basilisp import importer as _bimp
+
+    if getattr(_bimp.BasilispImporter.find_spec, "_talon_ns_patch", False):
+        return
+    orig = _bimp.BasilispImporter.find_spec
+
+    def find_spec(self, fullname, path=None, target=None):
+        spec = orig(self, fullname, path, target)
+        if (
+            spec is not None
+            and spec.loader is None
+            and spec.submodule_search_locations is not None
+            and not list(spec.submodule_search_locations)
+        ):
+            parts = fullname.split(".")
+            names = parts if not path else [parts[-1]]
+            for entry in path or sys.path:
+                root = os.path.join(str(entry), *names)
+                if os.path.isdir(root):
+                    spec.submodule_search_locations.append(root)
+        return spec
+
+    find_spec._talon_ns_patch = True
+    _bimp.BasilispImporter.find_spec = find_spec
+
+
 def ensure_basilisp():
     """Initialize the Basilisp runtime. Safe to call from every stub: upstream
     init() returns immediately if already initialized."""
@@ -106,6 +143,7 @@ def ensure_basilisp():
     t0 = time.perf_counter()
     with _bytecode_writing_enabled():
         basilisp.main.init()
+    _patch_importer_namespace_specs()
     dt = time.perf_counter() - t0
     if dt > 0.05:
         print(f"basilisp: runtime initialized in {dt:.2f}s")

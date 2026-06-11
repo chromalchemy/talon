@@ -118,7 +118,7 @@ documented in knowledge page Recovery section.
    ✅ "brain test" IS voice-verified post-restart (user spoke it twice
    at 01:53/01:54; log proves full chain). It *looked* like a no-op
    because output was log-only println — now raises app.notify.
-   "basil roam test" still unspoken since restart; suggest it early.
+   "basil roam test" ✅ user-verified working 2026-06-11 (post-restart).
    Debug recipe for "voice command does nothing": (1) check
    talon.log for the println, (2) registry check via 7891 —
    `(.-commands (.-registry talon))` / `(.-contexts ...)`. The command
