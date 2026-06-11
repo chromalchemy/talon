@@ -70,6 +70,31 @@ def ensure_paths():
     # lookups so user dirs can never shadow real modules.
     if USER_ROOT not in sys.path:
         sys.path.append(USER_ROOT)
+        _warn_shadowed_names()
+
+
+def _warn_shadowed_names():
+    """user/ being a sys.path root means its top-level names are importable.
+    They can't shadow stdlib/site-packages (USER_ROOT is appended, earlier
+    entries win) -- but a stdlib- or installed-package-named dir here would
+    itself be UNIMPORTABLE as a namespace root, silently. Make that noisy."""
+    try:
+        import importlib.metadata as md
+
+        taken = set(sys.stdlib_module_names)
+        taken.update(md.packages_distributions().keys())
+        user_tops = {
+            e.split(".")[0].replace("-", "_")
+            for e in os.listdir(USER_ROOT)
+            if not e.startswith((".", "_"))
+        }
+        for name in sorted(user_tops & taken):
+            print(
+                f"basilisp: WARNING: user/{name} collides with an installed "
+                f"module name; .lpy namespaces under it will not resolve"
+            )
+    except Exception as e:
+        print(f"basilisp: shadow check skipped: {e!r}")
 
 
 def ensure_basilisp():
