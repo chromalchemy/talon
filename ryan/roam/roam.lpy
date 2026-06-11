@@ -1,5 +1,7 @@
-(ns tlisp.roam
+(ns ryan.roam.roam
   "Roam Research actions, migrated 1:1 from ryan/roam/roam.py.
+  Domain-colocated: lives next to the .talon grammars it serves
+  (user/ is a sys.path root; ns = path).
   Defined entirely in Basilisp via tlisp.talon/defaction -- no stub.
 
   Note: the .talon-list files that populate user.roam_tag /
@@ -533,6 +535,6 @@
 
 ;; ---------------------------------------------------------------------------
 
-(t/register! "user.lisp.tlisp.roam" "Roam Research actions (pure Basilisp)")
+(t/register! "user.ryan.roam.roam" "Roam Research actions (pure Basilisp)")
 
-(println "tlisp.roam: actions registered")
+(println "ryan.roam.roam: actions registered")

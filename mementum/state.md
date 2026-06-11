@@ -66,6 +66,26 @@ live loop is confirmed first-hand (edited a println in roam.lpy, saved,
 spoke, saw new string in log). Smoke canary: `roam-basil-test` action +
 "basil roam test" rule in `ryan/roam/core.talon`.
 
+Shipped 2026-06-11 (later still): **domain-colocated .lpy** (`25caf15`)
+— user/ is now a second sys.path root (appended; stdlib wins), so
+`.lpy` files live next to their `.talon` grammars: `ryan/roam/foo.lpy`
+→ ns `ryan.roam.foo`. lisp/ remains the root for `tlisp.*`
+infrastructure. Watcher widened to user/ (covers both roots;
+LISP_ROOT-first path→module mapping). Spike-verified: PEP 420 no
+`__init__.py`, cross-root requires, colocated .lpyc, 0.027s reloads,
+zero stdlib collisions. Known minor gap: ad-hoc nREPL `require`s don't
+write .lpyc (cache flip is scoped to boot/watcher paths) — watcher/boot
+loads do the caching, so warm starts unaffected.
+
+Then **roam.lpy migrated home**: `lisp/tlisp/roam.lpy` →
+`ryan/roam/roam.lpy`, ns `tlisp.roam` → `ryan.roam.roam`, ctx
+`user.lisp.tlisp.roam` → `user.ryan.roam.roam`. Old context freed live
+via nREPL (new ctx-name ⇒ auto-free-on-reload doesn't apply — free the
+old ctx manually from `talon_basilisp_state`-style sentinel
+`talon_basilisp_action_state`). Registry verified: all roam actions
+exactly 1 decl, canary `user.roam_basil_test` owned by new module.
+lisp/ now holds only tlisp.* infrastructure, as intended.
+
 ## Session 2026-06-11 commits (this session)
 
 | Commit | Subject |
