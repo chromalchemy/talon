@@ -531,7 +531,7 @@
 (t/defaction roam-basil-test
   "live-loop smoke test: edit the println, save, speak, watch the log"
   []
-  (println "hello from basillisp clojure in roam xxx!"))
+  (println "hello from basillisp clojure in roam yyy!"))
 
 ;; ---------------------------------------------------------------------------
 
