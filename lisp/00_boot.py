@@ -55,9 +55,13 @@ def ensure_paths():
     """Idempotently add the lisp source root (and, defensively, Talon's venv
     site-packages where `talon pip` installs) to sys.path. Keep sys.path lean:
     basilisp's meta_path importer scans these entries on every import."""
+    # NB: include sys.abiflags ('t' on free-threaded builds, '' otherwise).
+    # Talon's bundled Python went 3.13 -> 3.14t (free-threaded), whose venv
+    # site-packages dir is python3.14t/ -- dropping the suffix silently points
+    # at an empty python3.14/ dir and basilisp "vanishes" (ModuleNotFoundError).
     venv_sp = os.path.expanduser(
-        "~/.talon/.venv/lib/python{}.{}/site-packages".format(
-            sys.version_info.major, sys.version_info.minor
+        "~/.talon/.venv/lib/python{}.{}{}/site-packages".format(
+            sys.version_info.major, sys.version_info.minor, sys.abiflags
         )
     )
     if os.path.isdir(venv_sp) and venv_sp not in sys.path:

@@ -1,5 +1,26 @@
 # State
 
+## ⚠️ Platform: Talon now ships Python 3.14t (free-threaded)
+
+2026-06-15: a Talon update bumped the bundled Python **3.13 → 3.14.5
+free-threaded** (`sys.abiflags == 't'`, GIL off). This broke the whole
+basilisp layer — `import basilisp` failed (deps only in old
+`python3.13/site-packages`) → boot aborted → no `.lpy` loaded → nREPL
+:7891 down + recurring talon.log TRACE `lists skipped because they have
+no matching declaration: user.roam_ref / user.roam_tag`.
+
+Fixed: (1) reinstalled basilisp 0.5.1 + deps **pure-Python**
+into `~/.talon/.venv/lib/python3.14t/site-packages` (no cp314t wheels for
+the C-ext deps — `pyrsistent` via `PYRSISTENT_SKIP_EXTENSION=1`,
+`immutables` via patched setup.py; both have clean runtime fallbacks);
+(2) `00_boot.py ensure_paths()` now builds the venv path with
+`sys.abiflags` so `python3.14t` resolves (bare `python3.14` was empty).
+Verified: `boot-loaded 6 .lpy modules in 3.30s`, nREPL :7891 up, both
+roam lists declared in the live registry. rctx/Module registration
+survived the upgrade. Memory:
+`talon-python-upgrade-breaks-basilisp-abiflags`. **Re-run pure-Python
+dep install whenever Talon bumps Python again.**
+
 ## Active focus
 
 **`basilisp-v2`** (branch `basilisp-v2`) — Clojure as Talon's scripting
