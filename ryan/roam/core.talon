@@ -12,10 +12,10 @@ basil (roam | rome) test:
 # todo: setup defualt timeout
     
 #command palette
-please: user.roam_open_command_palette():
+please: user.roam_open_command_palette()
 
 please [command] <user.text>$: 
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(500ms)
     insert(text)
  
