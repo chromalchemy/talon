@@ -21,6 +21,17 @@ survived the upgrade. Memory:
 `talon-python-upgrade-breaks-basilisp-abiflags`. **Re-run pure-Python
 dep install whenever Talon bumps Python again.**
 
+## Fix 2026-06-24: community microphone_selection cubeb NameError
+
+Not a 3.14t casualty — a **stale pre-PR#2207 file** kept by a merge on
+`ryan-edits` (origin/main had already dropped `talon.lib.cubeb`). Startup
+threw `NameError: name 'cubeb' is not defined`. Fixed by adopting
+origin/main's cubeb-free `.py` + re-adding local
+`set_microphone_input_volume` (needs `talon.mac.applescript`); personal
+`.talon`/`.talon-list` untouched. community `90d5e58b`. Lesson: check
+`git diff origin/main -- <file>` before blaming the platform upgrade.
+Memory: `talon-cubeb-error-is-stale-merge-not-314t`.
+
 ## Active focus
 
 **`basilisp-v2`** (branch `basilisp-v2`) — Clojure as Talon's scripting
