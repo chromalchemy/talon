@@ -13,15 +13,7 @@ app.name: Windsurf - Next
 ## +++++++++++++++++++++++++++ vscode tab nav .
 # basic tab nav in community core (tab last)
 
-## +++++++++++++++++++++++++ open tabs .
-
-quick open tab: 
-    user.run_rpc_command("workbench.action.quickOpenPreviousRecentlyUsedEditor")
-    
-(pic| pick) (open [(tab | tabs | editor | editors)] | [open] (tab | tabs | editor)) [<user.text>]:
-    user.run_rpc_command("opened-editors.openedEditors")
-    sleep(100ms)
-    insert(text)
+## +++++++++++++++++++++++++ open tabs directly
 
 go [open] (tab | editor) <user.text>:
     user.run_rpc_command("opened-editors.openedEditors")
@@ -54,21 +46,6 @@ pop (forward | fore | four) | go (next | forward | for) used [(editor | tab)] :
 (pop (forward | fore | four) | go (next | forward | for) used [(editor | tab)]) [in] group: 
     user.run_rpc_command("workbench.action.openNextRecentlyUsedEditorInGroup")
 
-######## pick to open, 
-
-# cannot fuzzy filter quickOpen panels
-
-# pick from recently used (open) tabs; 
-(pick | choose) [open] [(used | recent)] (tab | editor):
-    user.run_rpc_command("workbench.action.quickOpenPreviousRecentlyUsedEditor")
-
-# pick from history of tabs (open or closed)
-(pick | choose) ((closed | close) (tab | tabs | editor) | [from] (tab | editor) history): 
-    user.run_rpc_command("workbench.action.openPreviousEditorFromHistory")
-
-# pick from least used (open) tab in group
-(pop | go) least (used | use) (tab | editor) [in] group: 
-    user.run_rpc_command("workbench.action.quickOpenLeastRecentlyUsedEditorInGroup")
 
 ############## toggle btw current and last used 
 
@@ -77,10 +54,32 @@ pop tab:
     sleep(50ms) 
     key(enter)
 
-pop tab [in] group:
+(pop | go) (recent | previous | prev) tab [in] [group]:
     user.run_rpc_command("workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup")
-    sleep(50ms) 
+    sleep(50ms)
     key(enter)
+
+######## pick to open tab, editor
+
+# cannot fuzzy filter quickOpen panels
+
+# pick from recently used (open) tabs; 
+(pick | choose) [open] [(used | recent)] (tab | editor) | quick [open] [recent] tab | pick recent tab:
+    user.run_rpc_command("workbench.action.quickOpenPreviousRecentlyUsedEditor")
+    
+(pic| pick) (open [(tab | tabs | editor | editors)] | [open] (tab | tabs | editor)) [<user.text>]:
+    user.run_rpc_command("opened-editors.openedEditors")
+    sleep(100ms)
+    insert(text)Ai
+
+# pick from history of tabs (open or closed)
+(pick | choose) ((closed | close) (tab | tabs | editor) | [from] (tab | editor) history): 
+    user.run_rpc_command("workbench.action.openPreviousEditorFromHistory")
+
+
+# pick from least used (open) tab in group
+(pop | go | pick) least (used | use) (tab | editor) [in] group: 
+    user.run_rpc_command("workbench.action.quickOpenLeastRecentlyUsedEditorInGroup")
     
 ## +++++++++++++++++++++++++ close tab(s) .
 
@@ -151,13 +150,22 @@ increase group width  | group width up | group (widen | wider | fatter):
 decrease group width | group width down | group (thin | thinner | slimmer): 
     user.run_rpc_command("workbench.action.decreaseViewWidth")
 
-(expand) group | group (max | wide | expand): 
+(expand) group | group (wide | expand) | (min | minimize) other groups: 
     user.run_rpc_command("workbench.action.minimizeOtherEditors")
 
-[toggle] (group full | grateful) | exit (group full | grateful): 
+[(toggle | enter | exit)] ((group full | grateful) | group (max | full)): 
     user.run_rpc_command("workbench.action.toggleMaximizeEditorGroup")
 
-(toggle | flip | reset) [(editor | tab)] (group | groups) [(size | sizes | width | widths  | with)]: 
+# maximizes one group and minimizes others
+group (expand | wide ) no bars | expand wide mode:
+    user.run_rpc_command("workbench.action.minimizeOtherEditorsHideSidebar")
+
+# toggles into current group shown, others hidden state
+group (full | max) no bars | full wide mode: 
+    user.run_rpc_command("workbench.action.maximizeEditorHideSidebar")
+    
+
+((toggle | togo) | flip  | hide | show) [(editor | tab)] (group | groups) [(size | sizes | width | widths  | with)]: 
     user.run_rpc_command("workbench.action.toggleEditorWidths")
 
 (reset | restore | default | even) (group | groups) (size | sizes | width | widths  | with):
@@ -170,7 +178,6 @@ decrease group width | group width down | group (thin | thinner | slimmer):
 (decrease | less) (group | groups | tab | view) (size | sizes | width | widths | with) | (group | groups | tab | view) (thinner | narrower | narrow | thin) |  (increase | add) (sidebar | bar) (size | sizes | width | widths | with) | (sidebar | bar) (wider | widen | more | fatter | fatten):
     user.run_rpc_command("workbench.action.decreaseViewSize")
 
-
 ## ++++++++++++++ andreas tab nav  .
 
 #prefer andreas panel
@@ -179,14 +186,30 @@ decrease group width | group width down | group (thin | thinner | slimmer):
 #open editors/tabs sidebar
 (bar | show | go | focus | list)  (tabs | taps | editors | [tab] groups | open files) [view]: 
     user.run_rpc_command("andreas.tabs.focus")
-    
+
+
+
+## act on tab by hat
+
 [(focus | go)] tab {self.letter} [{self.letter}]:
     user.run_rpc_command("andreas.focusTab", "{letter_1}{letter_2 or ''}")
+
+(close | clothes | kill) tab {self.letter} [{self.letter}]:
+    user.run_rpc_command("andreas.focusTab", "{letter_1}{letter_2 or ''}")
+    sleep(300ms)
+    user.tab_close_wrapper()
+
+## act on tab by numerical index
 
 #being overridden by keys without prefix
 [(focus | go)] tab <number>:
     myNum = number - 1
     user.run_rpc_command("andreas.openEditorAtIndex", number)
+
+(close | clothes | kill) tab <number>:
+    myNum = number - 1
+    user.run_rpc_command("andreas.openEditorAtIndex", number)
+    user.tab_close_wrapper()
 
 ## +++++++++++++++++++++++++ vscode group nav .
 
@@ -207,7 +230,6 @@ please (go | focus) [tab] group:
 (focus | go) next [(editor | tab | tap)] group:
     user.run_rpc_command("vscode-dynamic-layouts.focusNextGroup")
     # user.run_rpc_command("workbench.action.focusNextGroup")
-
 
 ## ++++++++++++++++++++++++ split tab in place.
 
