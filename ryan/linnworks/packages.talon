@@ -1,7 +1,7 @@
 app: chrome
 title: /PackagingGroups/
 -
-;; for linnworks packaging groups config web ui 
+# for linnworks packaging groups config web ui 
 
 (pace | paste) [to] cell: 
     mouse_click(0)

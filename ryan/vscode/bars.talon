@@ -17,7 +17,16 @@ app.name: Windsurf - Next
 (close | hide) [left] (sidebar | bar) | bar [left] hide | left bar hide: 
     user.run_rpc_command("workbench.action.closeSidebar")
 
-bar right (max | maximize | expand | shrink | min) | (max | maximize | expand | shrink | min) bar right | toggle bar right (max | maximize | expand | shrink | min) | minbar right:
+
+## ++++++++++ right / secondary / auxiliary sidebar .
+
+(right | great) (sidebar | bar) | raper | bar right | (toggle | show) right (sidebar | bar) : 
+    user.run_rpc_command("workbench.action.toggleAuxiliaryBar")
+    
+(close | hide) right (sidebar | bar) | bar right hide | right bar hide: 
+    user.run_rpc_command("workbench.action.closeAuxiliaryBar")
+
+[toggle] bar right (max | maximize | expand | shrink | min) | (max | maximize | expand | shrink | min) bar right | minbar right | right bar (max | maximize | expand | shrink | min):
     # opens right sidebar if not open
     user.run_rpc_command("workbench.action.toggleMaximizedAuxiliaryBar")
 
@@ -30,26 +39,6 @@ last bar right | bar right last:
 focus bar right:
     user.run_rpc_command("workbench.action.focusAuxiliaryBar")
 
-## ++++++++++ right / secondary / auxiliary sidebar .
-
-(right | great) (sidebar | bar) | raper | bar right | (toggle | show) right (sidebar | bar) : 
-    user.run_rpc_command("workbench.action.toggleAuxiliaryBar")
-    
-(close | hide) right (sidebar | bar) | bar right hide | right bar hide: 
-    user.run_rpc_command("workbench.action.closeAuxiliaryBar")
-
-[toggle] bar right (max | maximize | expand | shrink | min) | (max | maximize | expand | shrink | min) bar right | minbar right | right bar (max | maximize | expand | shrink | min):
-    user.run_rpc_command("workbench.action.toggleMaximizedAuxiliaryBar")
-
-next bar right | bar right next:
-    user.run_rpc_command("workbench.action.nextAuxiliaryBarView")
-
-last bar right | bar right last:
-    user.run_rpc_command("workbench.action.previousAuxiliaryBarView")
-
-focus bar right:
-    user.run_rpc_command("workbench.action.focusAuxiliaryBar")
- 
 ## +++++++++++++++++++++++++++++ bottom panel .
 
 [(toggle | show | view )] [bottom] panel [view]: 
@@ -85,15 +74,6 @@ panel (close | hide) | (close | hide) panel [view]:
 (hide | close) [both] (bars | sidebars) | (tab | tabs) wide | wide (view | mode): 
     user.run_rpc_command("workbench.action.closeSidebar")
     user.run_rpc_command("workbench.action.closeAuxiliaryBar")
-
-# maximizes one group and minimizes others
-group (expand | wide ) no bars | expand wide mode:
-    user.run_rpc_command("workbench.action.minimizeOtherEditorsHideSidebar")
-
-# toggles into current group shown, others hidden state
-group full no bars | full wide mode: 
-    user.run_rpc_command("workbench.action.maximizeEditorHideSidebar")
-    
 
 ## ++++++++++++++++++ show bars and panel 
 

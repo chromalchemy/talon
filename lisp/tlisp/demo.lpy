@@ -1,0 +1,13 @@
+(ns tlisp.demo
+  "Demo Talon action bodies implemented in Basilisp.
+
+  Live dev loop: connect to the nREPL server started by 00_boot.py
+  (port 7891), redefine fns here, and the next voice command picks
+  them up via the late-bound stub in demo_stub.py."
+  (:import [talon.app :as app]))
+
+(defn hello
+  "Demo action body: notify + log."
+  [text]
+  (println (str "tlisp.demo/hello called with: " text))
+  (app/notify (str "basilisp: " text)))

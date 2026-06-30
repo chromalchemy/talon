@@ -1,6 +1,260 @@
 # State
 
+## ⚠️ Platform: Talon now ships Python 3.14t (free-threaded)
+
+2026-06-15: a Talon update bumped the bundled Python **3.13 → 3.14.5
+free-threaded** (`sys.abiflags == 't'`, GIL off). This broke the whole
+basilisp layer — `import basilisp` failed (deps only in old
+`python3.13/site-packages`) → boot aborted → no `.lpy` loaded → nREPL
+:7891 down + recurring talon.log TRACE `lists skipped because they have
+no matching declaration: user.roam_ref / user.roam_tag`.
+
+Fixed: (1) reinstalled basilisp 0.5.1 + deps **pure-Python**
+into `~/.talon/.venv/lib/python3.14t/site-packages` (no cp314t wheels for
+the C-ext deps — `pyrsistent` via `PYRSISTENT_SKIP_EXTENSION=1`,
+`immutables` via patched setup.py; both have clean runtime fallbacks);
+(2) `00_boot.py ensure_paths()` now builds the venv path with
+`sys.abiflags` so `python3.14t` resolves (bare `python3.14` was empty).
+Verified: `boot-loaded 6 .lpy modules in 3.30s`, nREPL :7891 up, both
+roam lists declared in the live registry. rctx/Module registration
+survived the upgrade. Memory:
+`talon-python-upgrade-breaks-basilisp-abiflags`. **Re-run pure-Python
+dep install whenever Talon bumps Python again.**
+
+## Fix 2026-06-24: community microphone_selection cubeb NameError
+
+Not a 3.14t casualty — a **stale pre-PR#2207 file** kept by a merge on
+`ryan-edits` (origin/main had already dropped `talon.lib.cubeb`). Startup
+threw `NameError: name 'cubeb' is not defined`. Fixed by adopting
+origin/main's cubeb-free `.py` + re-adding local
+`set_microphone_input_volume` (needs `talon.mac.applescript`); personal
+`.talon`/`.talon-list` untouched. community `90d5e58b`. Lesson: check
+`git diff origin/main -- <file>` before blaming the platform upgrade.
+Memory: `talon-cubeb-error-is-stale-merge-not-314t`.
+
 ## Active focus
+
+**`basilisp-v2`** (branch `basilisp-v2`) — Clojure as Talon's scripting
+layer via Basilisp, nREPL-first. See
+`mementum/knowledge/basilisp-talon.md` for the full picture.
+
+Shipped 2026-06-10: `8eb1f6b` (core integration), `50bdcea`
+(save-to-update watcher), `4140f8c` (quiet reloads), plus 3 memories +
+1 memory update. Detail on the core commit:
+
+- `lisp/00_boot.py`: idempotent `basilisp.main.init()` + nREPL server
+  **port 7891** inside the Talon process (port-probe guard vs duplicate
+  servers; 7888 was taken by an unrelated java nREPL).
+- `lisp/tlisp/demo.lpy` + `lisp/demo_stub.py` + `basilisp_demo.talon`:
+  action bodies in Clojure; stubs declare Module/action_class and
+  delegate **late-bound** (module-attr lookup per call) → nREPL redefs
+  apply on the next voice command, zero reloads, zero watchers.
+- 🎯 Root cause of old `basilisp` branch slowness: **Talon sets
+  `sys.dont_write_bytecode=True`** → basilisp could never write `.lpyc`
+  caches → ~19s basilisp.core recompile on EVERY launch, blocking the
+  loader thread. Fix: scoped flag-flip during basilisp compiles.
+  Measured: 17.4s cold → **0.30s warm**. Cache pre-warmed via
+  `~/.talon/bin/python` (same CPython 3.13 as Talon).
+- Dev loop (two options): **save the `.lpy` file** — scoped watcher on
+  `lisp/` reimports the changed module (~0.02s, deduped via sentinel in
+  sys.modules, direct reimport, no touch cascade) — or nREPL
+  `clj-nrepl-eval --port 7891` / `(load-file ...)`. CLI evals land in
+  `user` ns — wrap redefs in `(binding [*ns* (the-ns 'tlisp.demo)]
+  (eval '(defn ...)))` or use an editor client that sends ns.
+- Verified end-to-end by voice ("basilisp test") + live redefinition.
+
+- ⚠️ `^:redef` gotcha for later: basilisp direct-links intra-namespace
+  calls. nREPL-redefining `hello` does NOT update a same-ns `foo` that
+  calls it — unless `hello` is `(defn ^:redef ...)`. File-save reloads
+  recompile the whole ns, so they're immune. Mark live-redefined fns
+  `^:redef` once .lpy namespaces grow multiple fns.
+- Reload warnings ("may shadow alias", "redefining Var") are ungated
+  `logger.warning` from `basilisp.lang.compiler.analyzer`; the watcher
+  suppresses that logger scoped to its reload only (`_reload_quiet`).
+
+Shipped 2026-06-11: **stubs are now optional** — `f292ead` adds
+`lisp/tlisp/talon.lpy` (`defaction` macro + `register!`) so actions are
+defined once, in pure Clojure. Mechanism: own
+`rctx.context("user....")` → `Module`/`action_class` → **`mod._load()`**
+(required to commit decls); previous ResourceContext freed on reload
+via sys.modules sentinel. `lisp/tlisp/spike.lpy` is the working
+example. Verified: watcher reload → 1 module/1 impl, new body live;
+nREPL redef of the `^:redef` fn applies on next action call. Memory:
+`talon-actions-from-pure-basilisp`. ⚠️ rctx is Talon internals —
+re-verify after Talon upgrades. **Voice-verified end-to-end**: "basilisp
+spike" (`ryan/roam/basilisp_spike.talon`) fired the defaction-registered
+action — no Python stub anywhere in the chain.
+
+Shipped 2026-06-11 (later): **roam.py migrated** (`3122f6b`) — 67
+actions + 2 lists now in `lisp/tlisp/roam.lpy`, 1:1 port, registry
+parity verified (0 sig diffs), `ryan/roam/roam.py` →
+`.migrated-to-lisp`. tlisp.talon grew `deflist`, `:=` default args,
+munged annotation keys, and free-on-failed-registration (failed
+register! used to leak a partial module). ⚠️ Interop gotcha: value use
+of an :import alias at module top level (`(.-actions pytalon)`) →
+NameError; use `(importlib/import-module "talon")`.
+**Voice-verified by user in Roam**: migrated actions work, and the
+live loop is confirmed first-hand (edited a println in roam.lpy, saved,
+spoke, saw new string in log). Smoke canary: `roam-basil-test` action +
+"basil roam test" rule in `ryan/roam/core.talon`.
+
+Shipped 2026-06-11 (later still): **domain-colocated .lpy** (`25caf15`)
+— user/ is now a second sys.path root (appended; stdlib wins), so
+`.lpy` files live next to their `.talon` grammars: `ryan/roam/foo.lpy`
+→ ns `ryan.roam.foo`. lisp/ remains the root for `tlisp.*`
+infrastructure. Watcher widened to user/ (covers both roots;
+LISP_ROOT-first path→module mapping). Spike-verified: PEP 420 no
+`__init__.py`, cross-root requires, colocated .lpyc, 0.027s reloads,
+zero stdlib collisions. Known minor gap: ad-hoc nREPL `require`s don't
+write .lpyc (cache flip is scoped to boot/watcher paths) — watcher/boot
+loads do the caching, so warm starts unaffected.
+
+Then **roam.lpy migrated home**: `lisp/tlisp/roam.lpy` →
+`ryan/roam/roam.lpy`, ns `tlisp.roam` → `ryan.roam.roam`, ctx
+`user.lisp.tlisp.roam` → `user.ryan.roam.roam`. Old context freed live
+via nREPL (new ctx-name ⇒ auto-free-on-reload doesn't apply — free the
+old ctx manually from `talon_basilisp_state`-style sentinel
+`talon_basilisp_action_state`). Registry verified: all roam actions
+exactly 1 decl, canary `user.roam_basil_test` owned by new module.
+lisp/ now holds only tlisp.* infrastructure, as intended.
+
+## Session 2026-06-11 commits (colocation session)
+
+| Commit | Subject |
+|---|---|
+| `25caf15` | boot: user/ as sys.path root, watcher widened, multi-root mapping |
+| `4f670e0` | 💡 memory: lpy-domain-colocation recipe + gotchas |
+| `22c2411` | roam.lpy moved home → ryan/roam/roam.lpy (ns ryan.roam.roam) |
+| `0ca1ee0` | boot shadow-check: warn on user/ dirs colliding with module names |
+
+User-verified working. `~/.talon/bin/repl` evaluated as recovery escape
+hatch (substrate-level complement, not a clj-loading alternative) —
+documented in knowledge page Recovery section.
+
+## Session 2026-06-11 commits (earlier session)
+
+| Commit | Subject |
+|---|---|
+| `ed36c93`/`31e3b08` | memory + knowledge: pure-Basilisp action registration |
+| `f292ead` | tlisp.talon: defaction macro + register!, no stubs |
+| `21bc96c` | voice command wired to pure-Basilisp action (verified) |
+| `3122f6b` | **roam.py migrated** → lisp/tlisp/roam.lpy (67 actions) |
+| `dcb63a2`/`b4aa827` | memories: import-alias gotcha, parity-baseline pattern |
+| `93b79f7`/`0a67389` | roam-basil-test smoke action + voice rule |
+
+## How to orient (next session)
+
+0. Newest workstream: **external JVM brain** —
+   `mementum/knowledge/external-jvm-brain.md` (architecture, shim API,
+   lifecycle, gotchas). Brain nREPL = **:7892**, repo `~/dev/talon-brain`.
+   ✅ "brain test" IS voice-verified post-restart (user spoke it twice
+   at 01:53/01:54; log proves full chain). It *looked* like a no-op
+   because output was log-only println — now raises app.notify.
+   "basil roam test" ✅ user-verified working 2026-06-11 (post-restart).
+   Debug recipe for "voice command does nothing": (1) check
+   talon.log for the println, (2) registry check via 7891 —
+   `(.-commands (.-registry talon))` / `(.-contexts ...)`. The command
+   often fired fine and just lacked visible feedback.
+1. Read this file, then `mementum/knowledge/basilisp-talon.md` (the
+   architecture + all gotchas live there, current as of this session).
+2. `git log --oneline -n 15` — see table above.
+3. nREPL into Talon: port **7891** (`clj-nrepl-eval --port 7891`, or
+   `clojure-mcp__clojure_eval :port 7891` from an agent). Port 6888 =
+   separate bb roam-bridge daemon (tmem workstream).
+4. Memories this workstream (7): grep `git log --oneline --
+   mementum/memories/ | grep -i "basilisp\|talon"`. Key ones:
+   `talon-actions-from-pure-basilisp` (the no-stub recipe),
+   `basilisp-import-alias-value-use-fails-at-top-level`,
+   `registry-parity-baseline-for-talon-migrations`.
+
+## Spike 2026-06-11: in-process JVM → ❌ no-go
+
+cljbridge/libpython-clj embedded-JVM-in-Talon killed empirically:
+dlopen(libjvm) inside Talon fails library validation ("different Team
+IDs") — hardened runtime without `disable-library-validation`. Verdict:
+JVM-as-orchestrator must be the **external brain** pattern (external
+JVM + thin Basilisp RPC shim). Memories:
+`basilisp-vs-libpython-clj-for-talon`,
+`in-process-jvm-in-talon-blocked-by-library-validation`.
+
+## Spike 2026-06-11: external JVM brain → ✅ working end-to-end
+
+`~/dev/talon-brain` (deps.edn, nREPL :7892, `clojure -M:brain`) +
+`lisp/tlisp/brain.lpy` (hand-rolled bencode, persistent socket w/
+TCP_NODELAY, reconnect-once, `eval!`/`value!`/`alive?`, never throws)
++ demo `ryan/brain/brain_demo.lpy` → action `user.brain_sha256` calls
+java.security.MessageDigest on the JVM. Voice rule: "brain test"
+(`ryan/brain/brain_demo.talon`). Latency from inside Talon: **median
+3.6ms, p90 4.3ms** per eval (nREPL server overhead, not transport —
+NODELAY only shaved ~0.5ms). Fine for voice. Gotchas hit: nREPL eval of
+`(do (require ...) (alias/use ...))` fails — require must be a separate
+eval (analysis-time resolution); don't guess `talon.*` internals, call
+via `(.-actions talon)`. Lifecycle: shim **auto-starts** the brain —
+`(brain/start!)` spawns detached `clojure -M:brain` (cwd
+~/dev/talon-brain, log ~/.talon/talon-brain.log) when :7892 is down;
+`eval!` does this transparently on connect failure. Verified: killed
+brain → next call resurrected it (cold ~11.4s incl. JVM boot; warm
+median 3.6–6.8ms, first post-boot call ~120ms JIT). Brain JVM is now
+owned by Talon's process tree (detached, survives Talon restart).
+
+## Shim hardening 2026-06-11 (post-polish, same session)
+
+- `c0cdfd6` nREPL protocol hygiene per nrepl.org building-clients doc:
+  session clone at connect, evals carry session+id, response loop
+  filters by id, **`interrupt!`** (killed a hung 60s JVM call in 1.7s,
+  connection survived). Rejected cemerick/nrepl-python-client
+  (unmaintained dep vs ~60 working lines).
+- `7492a2e` hand-rolled bencode → **basilisp.contrib.bencode** (same
+  impl as the :7891 server). Median ~9ms/eval (was ~7; accepted).
+  🎯 New standing directive memory:
+  `prefer-basilisp-shipped-infrastructure` — check basilisp.contrib.*
+  before hand-rolling; read nrepl_server.lpy as API reference.
+- Uncommitted user WIP: roam.lpy println canary edit (xxx→yyy) —
+  user's live-loop test, intentionally left.
+- Untracked note: `lisp/libpython-clj integration investigation.md`
+  (user's). Untracked dirs (community/, cursorless-talon/ etc.) are
+  vendored grammars, pre-existing.
+
+## Polish 2026-06-11 (brain spike follow-up)
+
+- `brain/call!`: RPC API — `(call! 'talon-brain.core/sha256 "x")`,
+  args quoted+EDN'd, return value EDN-read back; throws on error.
+- Uberjar: `clojure -T:build uber` → `target/brain.jar`; shim prefers
+  `java -jar`. Cold start **11.4s → 0.58s**.
+- Pre-warm: defonce daemon thread in brain.lpy calls `start!` at module
+  load; app.notify on spawn.
+- ❌→✅ **Critical find**: boot never imported .lpy modules — after any
+  Talon restart ALL pure-Basilisp actions (incl. the 67 roam ones) were
+  unregistered. Watcher only loads on save. Fix: `load_all_lpy()` in
+  00_boot.py (walks USER_ROOT, idempotent). Memory:
+  `lpy-modules-need-boot-loader`. Lesson: verify by full restart, not
+  just live reload. Restart-verified: roam canary + brain action work
+  cold; detached brain JVM survives Talon restarts.
+
+## Fix 2026-06-11: mixed .py/.lpy dirs were broken (`fe4e2fb`)
+
+Colocation side effect: BasilispImporter poisoned `user.ryan.roam` pkg
+(empty `__path__`) → roam_tmem_ext.py + roam_language.py failed every
+restart → 11 tmem lists dead + log noise loop. Patched find_spec in
+00_boot; live-repaired; **user-verified**: tmem roam block commands
+working again. Memory: `basilisp-importer-poisons-mixed-py-lpy-dirs`.
+Candidate: upstream PR to basilisp.
+
+## Open / next candidates
+
+- New domains: drop `.lpy` next to its `.talon` files, ns = path from
+  user/, `(t/register! "user.<dotted-path>" ...)`. No new sys.path or
+  watcher work needed.
+- Decide demo_stub.py fate (legacy-pattern reference vs delete).
+- Migrate further py action surfaces (parity-baseline memory = recipe).
+- Calva/Portal over 7891; background pre-warm for fresh installs
+  (first boot still pays ~19s once).
+- ⚠️ After any Talon upgrade: re-verify rctx internals (Module
+  registration) — say "basil roam test" as the canary.
+- Inert leftover: stale module objects pinned by nREPL eval history
+  clear on Talon restart (harmless).
+
+## Previous focus
 
 **`tmem-roam-bridge`** — composable voice grammar for editing Roam blocks.
 See `mementum/knowledge/tmem-roam-bridge.md` for the workstream page.
@@ -21,108 +275,16 @@ Daemon: `bb bridge.clj` from `~/dev/tmem-roam-ext`, nREPL on port 6888.
 After kill/restart, bb writes `.nrepl-port` and self-starts. Hot reload:
 `clj-nrepl-eval --port 6888 '(load-file "bridge.clj")'`.
 
-## What this session shipped (2026-05-03)
-
-| Commit | Repo | Subject |
-|---|---|---|
-| `054a062` | tmem-roam-ext | docs: reflect daemon mode shipped (Phase G+) |
-| `7cde418` | talon | fix port number in roam_tmem_ext.py comment |
-| `61f8a26` | tmem-roam-ext | feat(modifier): wire every:reference and every:mention scopes |
-| `78e6a8c` | talon | add reference/mention vocab |
-| `fc47932` | tmem-roam-ext | refactor(bridge): delete ~25 orphaned legacy public fns + helpers |
-| `1fb4734` | tmem-roam-ext | docs(progress): legacy public fns deleted |
-
-`bridge.clj`: 2234 → **1506 lines** (–728, –32%). Talon repo got the
-mementum substrate (`d594327` bootstrap) plus several knowledge/state
-updates.
-
-## What this session shipped (2026-05-03, second pass)
-
-| Commit | Repo | Subject |
-|---|---|---|
-| `c5e12c5` | talon | feat(roam): list-capable roam_target capture |
-| `bda5b24` | tmem-roam-ext | feat(zoom): reject list targets with list-not-supported error |
-| `f8b14a0` | tmem-roam-ext | feat(nudge): list-capable target with sibling-aware ordering |
-| `2f19be5` | talon | feat(nudge): composable target capture |
-| `2d97616` | talon | fix(nudge): use Python wrapper for implicit-target EDN |
-| `116ded0` | talon | refactor(nudge): inline-escape EDN literal, drop Python wrapper |
-| `fbcaab3` | tmem-roam-ext | docs(progress): rewrite gotcha #21 — TalonScript brace escaping |
-| `f0a9542` | tmem-roam-ext | feat(setTodoState): explicit todo/done/none with composable target |
-| `5e1dd1c` | talon | feat(todo): composable setTodoState rules; drop legacy edit-mode dance |
-
-**Multi-target todo state.** `make A and B done`, `unmark every child
-of C`, `clear selection todo` now work via the new `setTodoState`
-dispatch — direct text-prefix manipulation of `{{[[TODO]]}} ` /
-`{{[[DONE]]}} ` markers via `data.block.update`. Replaces the four
-legacy rules that synthesized cmd-Enter keypresses + sleeps + escapes
-inside edit mode. Schema documented in COMMAND-SCHEMA.md §5.1, §7, §8.
-
-❌ Tripped over the gotcha #21 interpolation flavour. First fix used a
-Python wrapper (`roam_nudge_implicit`); user corrected — TalonScript
-string literals are f-string-like, so `{{...}}` escapes to literal
-braces. Reverted to inline-escape, rewrote gotcha #21 to clarify
-mechanism (vs the original "no inline literals" framing), captured the
-**avoid Python helpers mirroring Clojure** design principle in
-`memories/talonscript-curly-brace-interpolation.md`.
-
-**Multi-target action-verb grammar.** `chuck A and B`, `fold A and B`,
-`bar A and B and C`, `take A and B` now all work in one phrase via the
-single action-verb rule. `roam_target` is now `<primitive> (and
-<primitive>)*` with single-element collapse (cursorless §3.5). Slot
-shapes preserved: destinations + bring/move sources stay primitive-only
-(§4.1 slot-type-enforces-arity). Inherently single-target verbs (`zoom`)
-reject multi-uid regions in `bridge.clj` rather than at parse time
-(§4 Option A — keep grammar uniform, enforce arity per-action).
-
-**Multi-target nudge.** `nudge A and B up`, `nudge every child of C
-down`, `nudge cursor up` now work via the composable target capture.
-Talon's three nudge helpers (`roam_nudge_label`, `roam_nudge_implicit`,
-old single-purpose `roam_nudge`) collapsed to one general
-`roam_nudge(target_edn, direction)`. Bridge factors per-block logic
-into `nudge-one!` and iterates with sibling-index sort: ascending for
-`:up`/`:left-above`/`:right` (block moves toward start), descending for
-`:down`/`:left-below`/`:right-below` (block moves toward end), so
-multi-target ops don't trip over themselves.
-
-`bridge.clj`: 1506 → **1553 lines** (+47).
-
-## How to orient (next session)
-
-1. Read this file.
-2. `git log -n 10 -- mementum/` — what's changed.
-3. Read `mementum/knowledge/tmem-roam-bridge.md` if continuing the workstream.
-4. Skim memories under `mementum/memories/` (4 from 2026-05-03):
-   - `progress-doc-says-daemon-deferred-but-shipped` — the architectural drift
-   - `staged-refactor-docs-triplet-pattern` — PLAN+SCHEMA+PROGRESS as a model
-   - `subagent-caught-audit-mistake` — reverse-direction grep when deleting
-   - `daemon-vs-stray-bb-nrepls` — periodic kill of `bb --nrepl-server` cruft
-5. The **21 numbered gotchas** in `~/dev/tmem-roam-ext/docs/REFACTOR-PROGRESS.md`
-   are mandatory reading before edits to phrase marks, pronouns,
-   TalonScript bodies, or modifier order.
-
-## Open questions / candidates
-
-- Replace upstream Nautilus `README.md` (still upstream content; misleading).
-- Decide whether to enforce `labelsVersion` on the Clojure side
-  (JS already does via 4-snapshot ring buffer; bridge.clj ignores).
-- Optional Phase H: embedded LLM string DSL for placeholder marks.
-- Doc consolidation pass on `REFACTOR-PROGRESS.md` ("Files modified
-  (cumulative)" section is now mostly historical).
-- Tag the daemon distinctively (e.g. `(defonce DAEMON :v1)`) so
-  discovery scripts can filter strays. (Per memory
-  `daemon-vs-stray-bb-nrepls`.)
-
-## Workflow notes (heuristics confirmed this session)
-
-- bridge daemon is on port **6888**. `clj-nrepl-eval --port 6888 '(...)'`
-  for one-shots; `clojure-mcp__clojure_eval :port 6888` from this agent.
-- For multi-edit refactors of `bridge.clj`, the **general subagent** is
-  worth the delegation — it handles mechanical multi-fn deletion well
-  and can run reload+smoke-test loops.
-- `clojure-lsp` diagnostics surface unused-public-vars and arity
-  errors. Treat clean diagnostics as the post-refactor success signal.
-- bb nREPL strays accumulate. Kill `bb --nrepl-server` processes
-  freely; the daemon launched as `bb bridge.clj` is unaffected.
+tmem detail (2026-05-03 sessions: multi-target grammar, setTodoState,
+nudge, –32% bridge.clj) lives in git history of this file and in
+`mementum/knowledge/tmem-roam-bridge.md`. Before editing phrase marks,
+pronouns, TalonScript bodies, or modifier order: the **21 numbered
+gotchas** in `~/dev/tmem-roam-ext/docs/REFACTOR-PROGRESS.md` are
+mandatory reading. tmem open candidates are tracked in the knowledge
+page. Workflow: general subagent is worth it for multi-edit bridge.clj
+refactors; clean clojure-lsp diagnostics = post-refactor success
+signal; kill `bb --nrepl-server` strays freely (daemon `bb bridge.clj`
+unaffected).
 
 ## Symbols (from `agents.md`)
 

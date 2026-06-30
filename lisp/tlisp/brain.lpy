@@ -1,0 +1,199 @@
+(ns tlisp.brain
+  "Persistent nREPL client to the external JVM brain (talon-brain, port 7892).
+
+  Tier-3 transport: resident JVM + one persistent socket. Never spawns a
+  process. API:
+    (eval! code-str)  -> {:value s :out [s] :err s} or {:error s}
+    (value! code-str) -> value string (or error string)
+    (alive?)          -> bool"
+  (:require [basilisp.contrib.bencode :as bc]
+            [basilisp.edn :as edn])
+  (:import socket os subprocess shutil time threading))
+
+(def ^:private addr (python/tuple ["127.0.0.1" 7892]))
+(def ^:private brain-dir (os.path/expanduser "~/dev/talon-brain"))
+(def ^:private brain-log (os.path/expanduser "~/.talon/talon-brain.log"))
+
+(defonce ^:private conn-state (atom nil))
+(defonce ^:private proc-state (atom nil))
+
+;;; lifecycle ----------------------------------------------------------
+
+(defn- port-open? []
+  (try
+    (.close (socket/create_connection addr 0.2))
+    true
+    (catch python/Exception _ false)))
+
+(defn- clojure-bin []
+  (or (shutil/which "clojure")
+      (first (filter os.path/exists
+                     ["/opt/homebrew/bin/clojure" "/usr/local/bin/clojure"]))
+      (throw (python/FileNotFoundError "clojure CLI not found"))))
+
+(defn- brain-cmd []
+  (let [jar (os.path/join brain-dir "target" "brain.jar")]
+    (if (os.path/exists jar)
+      [(or (shutil/which "java") "/usr/bin/java") "-jar" jar]
+      [(clojure-bin) "-M:brain"])))
+
+(defn start!
+  "Launch the JVM brain detached if :7892 isn't already serving.
+  Prefers target/brain.jar (fast AOT boot) over clojure -M:brain.
+  Blocks up to ~20s waiting for the port. Returns true when up."
+  []
+  (if (port-open?)
+    true
+    (do
+      (when (nil? @proc-state)
+        (let [log (python/open brain-log "ab")
+              p (subprocess/Popen (brain-cmd)
+                                  **
+                                  :cwd brain-dir
+                                  :stdout log
+                                  :stderr subprocess/STDOUT
+                                  :start_new_session true)]
+          (reset! proc-state p)
+          (println "tlisp.brain: starting JVM brain, pid" (.-pid p))
+          (try
+            (let [talon (importlib/import-module "talon")]
+              (.notify (.-app talon) "talon-brain" "starting JVM brain"))
+            (catch python/Exception _ nil))))
+      (loop [n 80]
+        (cond
+          (port-open?) true
+          (zero? n) (do (reset! proc-state nil) false)
+          :else (do (time/sleep 0.25) (recur (dec n))))))))
+
+;;; connection ---------------------------------------------------------
+;; Wire format via basilisp.contrib.bencode — the same implementation
+;; that serves Talon's own nREPL on :7891. Messages decode to maps with
+;; keyword keys and utf-8 string values.
+
+(defn- recv-msg!
+  "Pop the next decoded nREPL message, recv'ing and buffering as needed."
+  []
+  (loop []
+    (let [{:keys [sock buf msgs]} @conn-state]
+      (if (seq msgs)
+        (let [m (first msgs)]
+          (swap! conn-state update :msgs rest)
+          m)
+        (let [data (.recv sock 65536)]
+          (when (= data #b "")
+            (throw (python/OSError "brain connection closed")))
+          (let [[items remaining]
+                (bc/decode-all (.join #b "" [buf data])
+                               {:keywordize-keys true
+                                :string-fn #(.decode % "utf-8")})]
+            (swap! conn-state assoc :buf (or remaining #b "") :msgs (seq items))
+            (recur)))))))
+
+(defn- read-until-done
+  "Read messages for id, merging interesting keys; ignores messages for
+  other ids (e.g. interrupt acks sharing the socket)."
+  [id]
+  (loop [value nil
+         out []
+         err nil
+         news nil]
+    (let [msg (recv-msg!)]
+      (if (not= (:id msg) id)
+        (recur value out err news)
+        (let [status (set (:status msg))
+              value (or (:value msg) value)
+              out (if-let [o (:out msg)] (conj out o) out)
+              err (or (:err msg) err)
+              news (or (:new-session msg) news)]
+          (if (contains? status "done")
+            {:value value :out out :err err :new-session news
+             :interrupted? (contains? status "interrupted")}
+            (recur value out err news)))))))
+
+(defn- connect! []
+  (let [s (socket/create_connection addr 3)]
+    (.setsockopt s socket/IPPROTO_TCP socket/TCP_NODELAY 1)
+    (.settimeout s 30)
+    (reset! conn-state {:sock s :buf #b "" :msgs nil :session nil})
+    (let [id (str "clone-" (rand-int 1000000))]
+      (.sendall s (bc/encode {:op "clone" :id id}))
+      (swap! conn-state assoc :session (:new-session (read-until-done id)))
+      @conn-state)))
+
+(defn- conn [] (or @conn-state (connect!)))
+
+(defn close! []
+  (when-let [{:keys [sock]} @conn-state]
+    (try (.close sock) (catch python/Exception _ nil)))
+  (reset! conn-state nil))
+
+;;; eval ---------------------------------------------------------------
+
+(defonce ^:private in-flight (atom nil))
+
+(defn- eval-once [code]
+  (let [{:keys [sock session]} (conn)
+        id (str "brain-" (rand-int 1000000))]
+    (reset! in-flight id)
+    (.sendall sock (bc/encode {:op "eval" :code code :id id :session session}))
+    (try
+      (read-until-done id)
+      (finally (reset! in-flight nil)))))
+
+(defn interrupt!
+  "Interrupt the in-flight eval (e.g. a hung Java call) without
+  dropping the connection. Safe to call from any thread."
+  []
+  (when-let [{:keys [sock session]} @conn-state]
+    (when-let [id @in-flight]
+      (.sendall sock (bc/encode {:op "interrupt"
+                                 :session session
+                                 :interrupt-id id
+                                 :id (str "int-" (rand-int 1000000))}))
+      true)))
+
+(defn eval!
+  "Evaluate code-str on the JVM brain. Reconnects once on failure;
+  returns {:error ...} if the brain is down (never throws)."
+  [code]
+  (try
+    (eval-once code)
+    (catch python/Exception _
+      (close!)
+      (try
+        (when-not (start!)
+          (throw (python/OSError "brain failed to start")))
+        (eval-once code)
+        (catch python/Exception e2
+          {:error (str "brain unavailable: " e2)})))))
+
+(defn value! [code]
+  (let [r (eval! code)]
+    (or (:value r) (:error r) (:err r))))
+
+(defn alive? []
+  (= "2" (:value (eval! "(+ 1 1)"))))
+
+;; Pre-warm: bring the brain up in the background at module load
+;; (Talon boot), so the first voice use never pays the cold start.
+;; defonce ⇒ watcher reloads don't spawn extra threads.
+(defonce ^:private prewarm-thread
+  (doto (threading/Thread **
+                          :target start!
+                          :daemon true
+                          :name "tlisp-brain-prewarm")
+    (.start)))
+
+(defn call!
+  "RPC-style call: (call! 'talon-brain.core/sha256 \"x\").
+  Args are EDN-serialized (data only); the JVM's printed return value
+  is EDN-read back into Basilisp data. Throws on brain error."
+  [sym & args]
+  (let [code (str "(" sym " "
+                  (apply str (interpose " " (map #(str "(quote " (pr-str %) ")") args)))
+                  ")")
+        {:keys [value error err]} (eval! code)]
+    (cond
+      error (throw (python/OSError error))
+      err (throw (python/OSError err))
+      :else (edn/read-string value))))

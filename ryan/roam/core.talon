@@ -6,13 +6,16 @@ mode: command
 
 ####################
 
+basil (roam | rome) test:
+    user.roam_basil_test()
+
 # todo: setup defualt timeout
     
 #command palette
-please: user.roam_open_command_palette():
+please: user.roam_open_command_palette()
 
 please [command] <user.text>$: 
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(500ms)
     insert(text)
  
@@ -45,7 +48,7 @@ go all pages:
     key(space)
 
 ^(choose | pick) [<user.ordinals>]:
-    spacesDown= orinals or 1
+    spacesDown= ordinals or 1
     print("spacesDown: {spacesDown}")
     key("down:{spacesDown}")
     key(enter)

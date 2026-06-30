@@ -13,5 +13,5 @@ convert (to | two) delivered here:
     user.rango_run_action_on_reference("clickElement", "convert to delivered")
     sleep(1000ms)
     user.rango_run_action_on_reference("clickElement", "confirm conversion") 
-    sleep(800ms)
+    sleep(1000ms)
     user.rango_run_action_on_reference("clickElement", "close purchase order")

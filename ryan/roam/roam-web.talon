@@ -12,20 +12,20 @@ tag(): user.line_commands
 # todo: setup defualt timeout
     
 please [<user.text>]: 
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(200ms)
     insert(text)
 
 ## +++++++++++++++++++++ open settings .
 
 ^workbench settings$: 
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(200ms)
     insert("settings workbench")
     key(enter)
 
 ^(tag (icons | icon) | magic (tag | tags)) settings$: 
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(200ms)
     insert("magic tags")
     key(enter)
@@ -36,7 +36,7 @@ please [<user.text>]:
 
 #------------------not working
 add (shortcut | bookmark): 
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(100ms)
     insert("wb add shortcut")
     sleep(100ms)
@@ -109,14 +109,14 @@ embed (block | black | ref | reference) (children | kids):
 ## +++++++++++++++++++++++ Swap blocks .
 
 ^(replace | swap) (ref | reference) [with original]: 
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(100ms)
     insert("wb replace last reference before cursor with original")
     sleep(100ms)
     key(enter)
 
 ^(replace | swap) (ref | reference) [with] alias: 
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(100ms)
     insert("wb replace last reference before cursor with text and alias")
     sleep(100ms)
@@ -126,21 +126,21 @@ embed (block | black | ref | reference) (children | kids):
 #navigation
 
 go all pages: 
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(100ms)
     insert("wb all pages")
     sleep(100ms)
     key(enter)
 
 go [page] top: 
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(100ms)
     insert("jump top")
     sleep(100ms)
     key(enter)
 
 go [page] bottom: 
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(100ms)
     insert("jump bottom")
     sleep(100ms)
@@ -166,7 +166,7 @@ zoom [in] (block  | down): key(cmd-.)
 zoom  (out block | parent | up): key(cmd-,)
 
 go parent [block]: key(ctrl-alt-u)
-    # user.roam_open_command_palette():
+    # user.roam_open_command_palette()
     # sleep(200ms)
     # insert("go to parent block")
     # sleep(200ms)
@@ -179,14 +179,14 @@ deep nav:key(alt-g)
 (toggle | hide |  show | close | open) (sidebar | side bar) :  key(cmd-/)
 
 (swap with sidebar | swap with main):
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(100ms)
     insert("wb sidebars - swap with main window (swap)")
     sleep(100ms)
     key(enter)  
 
 (expand | collapse | fold) (sidebar | side bar):
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(100ms)
     insert("toggle expand sidebar")
     sleep(100ms)
@@ -200,7 +200,7 @@ deep nav:key(alt-g)
 
 open link in sidebar: key(ctrl-shift-o)
 open page in sidebar: 
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(100ms)
     insert("wb open page in sidebar")
     sleep(100ms)
@@ -211,7 +211,7 @@ clear sidebar: key(ctrl-l)
 ###roam prefs
 
 open hotkeys: 
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(100ms)
     insert("hotkeys")
     sleep(100ms)
@@ -252,7 +252,7 @@ search block refs: key(ctrl-shift-9)
 #find and replace extension search page or workspace
 search workspace: key(ctrl-s)
 search (whole | entire) graph: 
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(100ms)
     insert("wgs")
     sleep(300ms)
@@ -299,7 +299,7 @@ next block: key(ctrl-n)
 (unfold | open | show (children | kids)) block: key(cmd-down)
 
 (collapse | fold) tree: 
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(100ms)
     insert("collapse current block tree")
     sleep(100ms)
@@ -307,21 +307,21 @@ next block: key(ctrl-n)
 
 #only exands one leve deep (not recursive)
 expand block:
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(100ms)
     insert("Expand current block tree")
     sleep(100ms)
     key(enter)
     
 (collapse | fold) all [blocks]: 
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(100ms)
     insert("collapse all blocks on page")
     sleep(100ms)
     key(enter)
     
 (expand | unfold) all [blocks]: 
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(100ms)
     insert("expand all blocks on page")
     sleep(100ms)
@@ -331,7 +331,7 @@ expand block:
 #how to take a digit, do math on in, then use as key
 (expand | fold) all [blocks] <number_small>: 
     mynumber = number_small + 1
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(100ms)
     insert("wb expand/collapse block tree")
     sleep(100ms)
@@ -411,7 +411,7 @@ select all blocks: key(cmd-shift-a)
 
 #not behaving consistently, assign keyboard shortcuts    
 (insert | new) top block:
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(200ms)
     insert("wb jump to top of page")
     sleep(200ms)
@@ -421,7 +421,7 @@ select all blocks: key(cmd-shift-a)
     sleep(200ms)
     key(right)
     sleep(300ms)
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(200ms)
     insert("Insert block above")
     sleep(300ms)
@@ -635,7 +635,7 @@ move [block] [to] agenda:
 
 
 move [block] [to] (paste | pace) sidebar: 
-    user.roam_open_command_palette():
+    user.roam_open_command_palette()
     sleep(300ms)
     insert("mbts")
     sleep(300ms)
@@ -908,7 +908,7 @@ open page in tab:
 # tail doesnt work either
 
 go [to] crown [of] [page]: key(cmd-alt-shift-t)
-# user.roam_open_command_palette():
+# user.roam_open_command_palette()
 # sleep(100ms)
 # insert("wb jump to top of page")
 # sleep(100ms)

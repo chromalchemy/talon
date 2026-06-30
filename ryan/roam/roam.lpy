@@ -1,0 +1,540 @@
+(ns ryan.roam.roam
+  "Roam Research actions, migrated 1:1 from ryan/roam/roam.py.
+  Domain-colocated: lives next to the .talon grammars it serves
+  (user/ is a sys.path root; ns = path).
+  Defined entirely in Basilisp via tlisp.talon/defaction -- no stub.
+
+  Note: the .talon-list files that populate user.roam_tag /
+  user.roam_ref are unchanged; the lists are declared here via
+  t/deflist."
+  (:require [tlisp.talon :as t])
+  (:import importlib))
+
+;; NB: (.-actions <alias>) on a module imported via :import trips
+;; basilisp's alias munging at module top level; importlib sidesteps it.
+(def ^:private actions (.-actions (importlib/import-module "talon")))
+(def ^:private user-a (.-user actions))
+(def ^:private edit-a (.-edit actions))
+
+(defn- key!    [s] (.key actions s))
+(defn- sleep!  [s] (.sleep actions s))
+(defn- insert! [s] (.insert actions s))
+
+;; ---------------------------------------------------------------------------
+;; lists (populated by .talon-list files, unchanged)
+
+(t/deflist "roam_tag" "Roam page/tag names")
+(t/deflist "roam_ref" "Roam block reference UIDs")
+
+;; ---------------------------------------------------------------------------
+;; command palette / slash commands
+
+(t/defaction roam-run-slash-command
+  "invoke slash command and choose it from popup menu"
+  [cmd :- python/str]
+  (insert! (str "/" cmd))
+  (sleep! "300ms")
+  (key! "enter")
+  (sleep! "100ms"))
+
+(t/defaction roam-find-command
+  "Run Command from command palette"
+  [text :- python/str]
+  (key! "cmd-p")
+  (sleep! "100ms")
+  (.paste user-a text)
+  (sleep! "100ms"))
+
+(t/defaction run-roam-command
+  "Run Command from command palette"
+  [text :- python/str]
+  (roam-find-command text)
+  (key! "enter")
+  (sleep! "100ms"))
+
+(t/defaction roam-lower
+  "Lowercases text"
+  [text :- python/str]
+  (.lower text))
+
+;; ---------------------------------------------------------------------------
+;; block navigation / selection
+
+(t/defaction roam-go-block-start
+  "select block text"
+  []
+  (key! "shift-home left"))
+
+(t/defaction roam-select-block-start
+  "select block text"
+  []
+  (key! "shift-home"))
+
+(t/defaction roam-select-block-end
+  "select block text"
+  []
+  (key! "shift-end"))
+
+(t/defaction roam-go-block-end
+  "select block text"
+  []
+  (roam-select-block-end)
+  (key! "right")
+  (sleep! "100ms"))
+
+(t/defaction roam-cut-block-end
+  "select block text"
+  []
+  (roam-select-block-end)
+  (sleep! "300ms")
+  (.cut edit-a)
+  (sleep! "300ms"))
+
+;; ---------------------------------------------------------------------------
+;; new blocks
+
+;; NB: roam.py defined roam_new_block_below twice; the later definition
+;; (go-block-end + enter) won and is the one migrated here.
+(t/defaction roam-new-block-below
+  "exit block edit, then block selected mode"
+  []
+  (roam-go-block-end)
+  (key! "enter")
+  (sleep! "300ms"))
+
+(t/defaction roam-new-block-direct-below
+  "makes new first child, if there are children"
+  []
+  (roam-go-block-end)
+  (key! "enter")
+  (sleep! "100ms"))
+
+(t/defaction roam-new-block-above
+  "ccc"
+  []
+  (key! "ctrl-shift-u")
+  (sleep! "1000ms"))
+
+(t/defaction roam-new-child-block
+  "new child block"
+  []
+  (roam-new-block-direct-below)
+  (key! "tab")
+  (sleep! "100ms"))
+
+;; ---------------------------------------------------------------------------
+;; block selection modes
+
+(t/defaction roam-select-block
+  " "
+  []
+  (key! "esc")
+  (sleep! "100ms"))
+
+(t/defaction roam-select-none
+  " "
+  []
+  (key! "esc:2")
+  (sleep! "100ms"))
+
+(t/defaction roam-select-block-below
+  "select block below"
+  []
+  (key! "esc")
+  (sleep! "100ms")
+  (key! "down")
+  (sleep! "100ms"))
+
+;; ---------------------------------------------------------------------------
+;; block movement
+
+(t/defaction roam-block-back
+  "block back with timeout"
+  [n :- python/int]
+  (if (= n 1)
+    (key! "shift-tab")
+    (dotimes [_ n]
+      (key! "shift-tab")
+      (sleep! "100ms"))))
+
+(t/defaction roam-block-forward
+  "block back with timeout"
+  [n :- python/int]
+  (if (= n 1)
+    (key! "tab")
+    (dotimes [_ n]
+      (key! "tab")
+      (sleep! "100ms"))))
+
+(t/defaction roam-block-down
+  "block back with timeout"
+  [n :- python/int]
+  (dotimes [_ n]
+    (key! "cmd-shift-down")
+    (sleep! "100ms")))
+
+(t/defaction roam-block-up
+  "block back with timeout"
+  [n :- python/int]
+  (dotimes [_ n]
+    (key! "cmd-shift-up")
+    (sleep! "100ms")))
+
+(t/defaction roam-break-block
+  "break block to child at cursor"
+  []
+  (key! "enter")
+  (sleep! "300ms"))
+
+(t/defaction roam-click-block
+  "click inside block and wait to settle"
+  []
+  (.mouse_click actions 0)
+  (.mouse_drag_end user-a)
+  (sleep! "200ms"))
+
+;; ---------------------------------------------------------------------------
+;; block text
+
+(t/defaction roam-select-block-text
+  "select block text"
+  []
+  (.select_all edit-a)
+  (sleep! "100ms"))
+
+(t/defaction roam-strip-block-text-whitespace-padding
+  "select block text"
+  []
+  (.select_all edit-a)
+  (sleep! "200ms")
+  (let [block-str (.selected_text edit-a)]
+    (.delete edit-a)
+    (sleep! "300ms")
+    (let [x (.bb_run_fn user-a block-str
+                        "string-transforms/trim-block"
+                        "ryan/clojure/string-fns/")]
+      (sleep! "300ms")
+      (println x))))
+
+(t/defaction roam-cut-block-text
+  "select block text"
+  []
+  (.select_all edit-a)
+  (sleep! "100ms")
+  (.cut edit-a))
+
+;; ---------------------------------------------------------------------------
+;; insertions
+
+(t/defaction roam-insert-tag
+  "inserts a formal tag reference string"
+  [s :- python/str]
+  (insert! (str "{{[[" s "]]}}")))
+
+(t/defaction roam-insert-divider
+  "inserts a formal tag reference string"
+  []
+  (insert! "---")
+  (sleep! "100ms"))
+
+(t/defaction roam-tag
+  "build a tag string from formatter/text/abbreviation/specified-tag"
+  [formatter :- python/str
+   text :- python/str
+   abbreviation :- python/str
+   specified-tag :- python/str]
+  (let [txt (if (and (seq formatter) (seq text))
+              (.formatted_text user-a text formatter)
+              text)]
+    (str abbreviation specified-tag txt)))
+
+;; ---------------------------------------------------------------------------
+;; send block to date
+
+(t/defaction roam-init-send-block-to-date-text
+  "send block to date with string"
+  []
+  (key! "cmd-d")
+  (sleep! "200ms"))
+
+(t/defaction roam-clear-block-to-date-text
+  "clear block to date text"
+  []
+  (.select_all edit-a)
+  (sleep! "100ms")
+  (key! "delete")
+  (sleep! "100ms"))
+
+(t/defaction roam-exit-block-to-date-text
+  "exit block to date text"
+  []
+  (sleep! "100ms")
+  (key! "tab enter")
+  (sleep! "100ms")
+  (key! "tab:2 enter"))
+
+(t/defaction roam-send-block-to-date-text
+  "send block to date with string"
+  [date :- python/str]
+  (roam-init-send-block-to-date-text)
+  (roam-clear-block-to-date-text)
+  (insert! date)
+  (roam-exit-block-to-date-text))
+
+(t/defaction roam-insert-text-at-beginning-of-block
+  "insert at beginning of block"
+  [text :- python/str]
+  (roam-select-block-text)
+  (let [selected-text (.selected_text edit-a)]
+    (insert! (str selected-text " #" text))
+    (sleep! "300ms")
+    (key! "enter")))
+
+(t/defaction roam-primary-search
+  "primary search"
+  [text :- python/str := ""]
+  (key! "cmd-u")
+  (when (not= text "")
+    (sleep! "200ms")
+    (insert! text)
+    (sleep! "500ms")
+    (key! "enter")))
+
+(t/defaction roam-send-block-to-date-by-calendar
+  "send block to date by calendar with teleport extension"
+  []
+  (key! "cmd-alt-shift-t"))
+
+;; ---------------------------------------------------------------------------
+;; roam send block plugin -- general
+
+(t/defaction roam-select-send-block-to-reference-field
+  "send block to reference"
+  []
+  (println "trying to select field")
+  (key! "left")
+  (sleep! "500ms")
+  (key! "tab")
+  (sleep! "500ms")
+  (key! "right")
+  (sleep! "700ms"))
+
+(t/defaction roam-select-send-block-to-page-field
+  "send block to page"
+  []
+  (println "trying to select page field")
+  (key! "right")
+  (sleep! "100ms"))
+
+(t/defaction roam-close-out-send-block-modal-from-ref-field
+  "close out send block modal"
+  []
+  (sleep! "1600ms")
+  (key! "tab")
+  (sleep! "200ms")
+  (key! "enter"))
+
+(t/defaction roam-close-out-send-block-modal-from-page-field
+  "close out send block modal"
+  []
+  (sleep! "1600ms")
+  (key! "enter tab:2 enter"))
+
+;; ---------------------------------------------------------------------------
+;; send block to location top
+
+(t/defaction roam-start-send-block-to-location-top
+  "start send block to location top"
+  []
+  (key! "cmd-alt-m")
+  (sleep! "2500ms"))
+
+(t/defaction roam-start-send-block-to-reference-top
+  "start send block to reference"
+  []
+  (roam-start-send-block-to-location-top)
+  (roam-select-send-block-to-reference-field))
+
+(t/defaction roam-send-block-to-reference-top
+  "send block to reference"
+  [reference :- python/str]
+  (roam-start-send-block-to-reference-top)
+  (insert! reference)
+  (roam-close-out-send-block-modal-from-ref-field))
+
+(t/defaction roam-start-send-block-to-page-top
+  "start send block to page"
+  []
+  (roam-start-send-block-to-location-top)
+  (roam-select-send-block-to-page-field))
+
+(t/defaction roam-send-block-to-page-top
+  "send block to page"
+  [page-string :- python/str]
+  (roam-start-send-block-to-page-top)
+  (insert! page-string)
+  (roam-close-out-send-block-modal-from-page-field))
+
+;; ---------------------------------------------------------------------------
+;; send block to top of reference and leave reference
+
+(t/defaction roam-start-send-block-to-location-top-leave-reference
+  "start send block to location"
+  []
+  (key! "cmd-alt-ctrl-m")
+  (sleep! "2500ms"))
+
+(t/defaction roam-start-send-block-to-reference-top-leave-reference
+  "start send block to reference"
+  []
+  (roam-start-send-block-to-location-top-leave-reference)
+  (roam-select-send-block-to-reference-field))
+
+(t/defaction roam-send-block-to-reference-top-leave-reference
+  "send block to ref and leave ref"
+  [reference :- python/str]
+  (roam-start-send-block-to-reference-top-leave-reference)
+  (insert! reference)
+  (roam-close-out-send-block-modal-from-ref-field))
+
+(t/defaction roam-start-send-block-to-page-top-and-leave-reference
+  "start send block to page"
+  []
+  (roam-start-send-block-to-location-top-leave-reference)
+  (roam-select-send-block-to-page-field))
+
+(t/defaction roam-send-block-to-page-top-and-leave-reference
+  "send block to page and leave ref"
+  [page-string :- python/str]
+  (roam-start-send-block-to-page-top-and-leave-reference)
+  (insert! page-string)
+  (roam-close-out-send-block-modal-from-page-field))
+
+;; ---------------------------------------------------------------------------
+;; move to top and sidebar
+
+(t/defaction roam-start-send-block-to-location-top-and-sidebar
+  "start send block to top and sidebar"
+  []
+  (run-roam-command "mbts")
+  (sleep! "2500ms"))
+
+(t/defaction roam-start-send-block-to-reference-top-and-sidebar
+  "start send block to reference"
+  []
+  (roam-start-send-block-to-location-top-and-sidebar)
+  (roam-select-send-block-to-reference-field))
+
+(t/defaction roam-send-block-to-reference-top-and-sidebar
+  "send block to reference"
+  [reference :- python/str]
+  (roam-start-send-block-to-reference-top-and-sidebar)
+  (insert! reference)
+  (roam-close-out-send-block-modal-from-ref-field))
+
+(t/defaction roam-start-send-block-to-page-top-and-sidebar
+  "start send block to page"
+  []
+  (roam-start-send-block-to-location-top-and-sidebar)
+  (roam-select-send-block-to-page-field))
+
+(t/defaction roam-send-block-to-page-top-and-sidebar
+  "send block to page"
+  [page-string :- python/str]
+  (roam-start-send-block-to-page-top-and-sidebar)
+  (insert! page-string)
+  (roam-close-out-send-block-modal-from-page-field))
+
+;; ---------------------------------------------------------------------------
+;; move and zoom
+
+(t/defaction roam-start-send-block-to-location-top-and-zoom
+  "start send block to top and sidebar"
+  []
+  (run-roam-command "mbtz")
+  (sleep! "2500ms"))
+
+(t/defaction roam-start-send-block-to-reference-top-and-zoom
+  "start send block to reference"
+  []
+  (roam-start-send-block-to-location-top-and-zoom)
+  (roam-select-send-block-to-reference-field))
+
+(t/defaction roam-send-block-to-reference-top-and-zoom
+  "send block to reference"
+  [reference :- python/str]
+  (roam-start-send-block-to-reference-top-and-zoom)
+  (insert! reference)
+  (roam-close-out-send-block-modal-from-ref-field))
+
+(t/defaction roam-start-send-block-to-page-top-and-zoom
+  "start send block to page"
+  []
+  (roam-start-send-block-to-location-top-and-zoom)
+  (roam-select-send-block-to-page-field))
+
+(t/defaction roam-send-block-to-page-top-and-zoom
+  "send block to page"
+  [page-string :- python/str]
+  (roam-start-send-block-to-page-top-and-zoom)
+  (insert! page-string)
+  (roam-close-out-send-block-modal-from-page-field))
+
+;; ---------------------------------------------------------------------------
+;; misc
+
+(t/defaction roam-select-block-hat
+  "select block hat"
+  [target :- python/str]
+  (insert! target)
+  (sleep! "300ms"))
+
+(t/defaction roam-insert-snippet
+  "inster a talon snippet with a text substitution"
+  [snippet-name :- python/str
+   text :- python/str]
+  (.insert_snippet_by_name user-a snippet-name (python/dict {"0" text}))
+  (sleep! "100ms"))
+
+(t/defaction roam-wrap-snippet
+  "inster a talon snippet with a text substitution"
+  [snippet-name :- python/str
+   text :- python/str]
+  (.insert_snippet_by_name user-a snippet-name (python/dict {"0" text}))
+  (sleep! "100ms"))
+
+(t/defaction roam-open-command-palette
+  "exit block edit, then block selected mode"
+  []
+  (key! "cmd-p"))
+
+(t/defaction roam-teleport-todo-date-tag
+  "exit block edit, then block selected mode"
+  []
+  (key! "cmd-shift-t"))
+
+(t/defaction roam-teleport-todo-block
+  "exit block edit, then block selected mode"
+  []
+  (key! "cmd-shift-t"))
+
+(t/defaction roam-copy-block-ref
+  "exit block edit, then block selected mode"
+  []
+  (key! "cmd-shift-e"))
+
+(t/defaction roam-open-switch-page-search
+  "switch + plugin modal navigate blocks, references, and sidebar currently on page"
+  []
+  (key! "cmd-shift-p"))
+
+(t/defaction roam-basil-test
+  "live-loop smoke test: edit the println, save, speak, watch the log"
+  []
+  (println "hello from basillisp clojure in roam yyy!"))
+
+;; ---------------------------------------------------------------------------
+
+(t/register! "user.ryan.roam.roam" "Roam Research actions (pure Basilisp)")
+
+(println "ryan.roam.roam: actions registered")
