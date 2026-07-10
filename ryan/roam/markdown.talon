@@ -6,6 +6,13 @@ mode: command
 
 bold that: key(cmd-b)
 
+bold point: 
+    key(shift:down)
+    mouse_click(0)
+    key(cmd-b)
+    sleep(100ms)
+    key(esc:2)
+
 ## ++++++++++++++++++++++++++ headings .
 
 [make] (heading | header) one: 

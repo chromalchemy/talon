@@ -235,13 +235,13 @@ nest here:
 # user.mouse_drag_end()
 # sleep(100ms)
       
-(split | break) (child | (right | write) | rate | [and] nest) [block] [point]: 
+(split | break) (child | (right | write | great) | rate | [and] nest) [block] [point] | pretty great: 
     user.roam_click_block()
     user.roam_break_block()
     user.roam_block_forward(1)
     key(escape:2)
 
-(split | break) (child | (right | write) | rate | [and] nest) [block] here: 
+(split | break) (child | (right | write | great) | rate | [and] nest) [block] here: 
     user.roam_break_block()
     user.roam_block_forward(1)
     key(escape)
