@@ -70,7 +70,7 @@ pop tab:
 (pic| pick) (open [(tab | tabs | editor | editors)] | [open] (tab | tabs | editor)) [<user.text>]:
     user.run_rpc_command("opened-editors.openedEditors")
     sleep(100ms)
-    insert(text)Ai
+    insert(text)
 
 # pick from history of tabs (open or closed)
 (pick | choose) ((closed | close) (tab | tabs | editor) | [from] (tab | editor) history): 
