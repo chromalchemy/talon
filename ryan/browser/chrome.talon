@@ -174,3 +174,8 @@ tab split right:
 (open | reopen) [last] (closed | close) tab | tab reopen:
     key(cmd-shift-t)
 
+## +++++++++++++++++++++++++ incognito .
+
+
+(new | open) incognito (window | browser):
+    key(shift-cmd-n)
