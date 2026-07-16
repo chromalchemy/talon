@@ -49,7 +49,7 @@ panel (close | hide) | (close | hide) panel [view]:
 
 ## ++++++++++++++++++++++++++ full screen "zen" mode .
 
-(go | toggle | enter | exit | leave) (in | then | zen | zend | full) mode | zen mode: 
+(go | toggle | enter | exit | leave) (in | then | zen | zend | full) (mode | mood) | zen (mode | mood): 
     user.run_rpc_command("workbench.action.toggleZenMode")
 
 ## ++++++++++++++++++ toggle both left and right bars and panel visibility
@@ -65,19 +65,19 @@ panel (close | hide) | (close | hide) panel [view]:
 
 ## +++++++++++ show / toggle both bars .
 
-(toggle | show | open) [both] (bars | sidebars) | (stuffed | thin | narrow | bar | bars ) (view | mode): 
+(toggle | show | open) [both] (bars | sidebars) | (stuffed | thin | narrow | bar | bars ) (view | (mode | mood)): 
     user.run_rpc_command("workbench.action.toggleSidebarVisibility")
     user.run_rpc_command("workbench.action.toggleAuxiliaryBar")
 
 ## ++++++++++++++++++++ hide both bars .
 
-(hide | close) [both] (bars | sidebars) | (tab | tabs) wide | wide (view | mode): 
+(hide | close) [both] (bars | sidebars) | (tab | tabs) wide | wide (view | (mode | mood)): 
     user.run_rpc_command("workbench.action.closeSidebar")
     user.run_rpc_command("workbench.action.closeAuxiliaryBar")
 
 ## ++++++++++++++++++ show bars and panel 
 
-(show | open | toggle) [all] (views | bars | panels) | kit (view | mode):
+(show | open | toggle) [all] (views | bars | panels) | kit (view | (mode | mood)):
     user.run_rpc_command("workbench.action.closeSidebar")
     user.run_rpc_command("workbench.action.closeAuxiliaryBar")
     user.run_rpc_command("workbench.action.closePanel") 
@@ -88,7 +88,7 @@ panel (close | hide) | (close | hide) panel [view]:
 
 ## +++++++++++++++ hide bars and panel .
 
-(hide | close) [all] (views | bars | panels) | (focus | show) [only] [on] (tab | tabs | editor | editors) | (focus | show) [only] on code | (focused | focus) (view | mode | win | window ): 
+(hide | close) [all] (views | bars | panels) | (focus | show) [only] [on] (tab | tabs | editor | editors) | (focus | show) [only] on code | (focused | focus) (view | (mode | mood) | win | window ): 
     user.run_rpc_command("workbench.action.closeSidebar")
     user.run_rpc_command("workbench.action.closeAuxiliaryBar")
     user.run_rpc_command("workbench.action.closePanel")    
@@ -103,19 +103,19 @@ focus [and] [snap] [(win | window)] <user.window_snap_position>:
 
 ## ++++++++++++ only left or right bar or panel .
 
-only show left bar | left bar only | left mode:
+only show left bar | left bar only | left (mode | mood):
     user.run_rpc_command("workbench.action.closeSidebar")
     user.run_rpc_command("workbench.action.closeAuxiliaryBar")
     user.run_rpc_command("workbench.action.closePanel")
     user.run_rpc_command("workbench.action.toggleSidebarVisibility")
 
-only show right bar | right bar only | right mode:
+only show right bar | right bar only | right (mode | mood):
     user.run_rpc_command("workbench.action.closeSidebar")
     user.run_rpc_command("workbench.action.closeAuxiliaryBar")
     user.run_rpc_command("workbench.action.closePanel")
     user.run_rpc_command("workbench.action.toggleAuxiliaryBar")
 
-only show panel | panel only | panel mode:
+only show panel | panel only | panel (mode | mood):
     user.run_rpc_command("workbench.action.closeSidebar")
     user.run_rpc_command("workbench.action.closeAuxiliaryBar")
     user.run_rpc_command("workbench.action.closePanel")
@@ -123,14 +123,14 @@ only show panel | panel only | panel mode:
 
 ## ++++++++++++ only left or right bar .
 
-(left bar | bar left) and panel [only] | left panel (mode | view):
+(left bar | bar left) and panel [only] | left panel ((mode | mood) | view):
     user.run_rpc_command("workbench.action.closeSidebar")
     user.run_rpc_command("workbench.action.closeAuxiliaryBar")
     user.run_rpc_command("workbench.action.closePanel")
     user.run_rpc_command("workbench.action.toggleSidebarVisibility")
     user.run_rpc_command("workbench.action.togglePanel")
 
-(right bar | bar right) [and] panel [only] | right panel (mode | view):
+(right bar | bar right) [and] panel [only] | right panel ((mode | mood) | view):
     user.run_rpc_command("workbench.action.closeSidebar")
     user.run_rpc_command("workbench.action.closeAuxiliaryBar")
     user.run_rpc_command("workbench.action.closePanel")
