@@ -2,9 +2,12 @@ app.name: Roam Research
 mode: command
 -
 
+(toggle | hide | show | close | open | reveal) left ((sidebar | bar) | side bar) | bar (show | hide) | (barca | bar read | bared) | left (barca | bar read | bared |  bar) :
+    key(cmd-\)
+
 ## +++++++++++++++++++++++ hide / show .
 
-(toggle | hide | show | close | open | reveal) ((sidebar | bar) | side bar) | bar (show | hide) | (barca | bar read | bared) :
+(toggle | hide | show | close | open | reveal) ((sidebar | bar) | side bar) | bar (show | hide) | (barca | bar read | bared) | right (barca | bar read | bared |  bar) :
     key(cmd-/)
 
 (clear | kill) [all] ((side bar |sidebar | sidebars)  | (bar | bars) ): 
