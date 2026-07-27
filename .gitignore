@@ -27,3 +27,4 @@ ryan/clojure/.joyride/.nrepl-port
 # talon_hud/
 .nrepl-port
 __pycache__/
+.joyride/mcp-server/port
