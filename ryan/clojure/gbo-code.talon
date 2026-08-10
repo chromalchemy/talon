@@ -9,3 +9,8 @@ app.name: Windsurf - Next
     user.run_rpc_command("calva.loadFile")
     sleep(500ms)
     user.run_rpc_command("calva.runCustomREPLCommand", "b")
+
+[repl] (build | rebuild) legacy (templates | theme | home [page]): 
+    user.run_rpc_command("calva.loadFile")
+    sleep(500ms)
+    user.run_rpc_command("calva.runCustomREPLCommand", "lb")
