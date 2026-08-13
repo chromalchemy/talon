@@ -11,11 +11,17 @@ app.name: Windsurf - Next
 copy [(tab | current | active)] (filename | file name) [of] [(tab | current | active)]:
     user.run_rpc_command("andreas.copyFilename")
 
-copy [(tab | current | active)] [file] path [of] [(tab | current | active)] [file] :
+copy [(tab | current | active)] [file] [full] path [of] [(tab | current | active)] [file] :
      user.run_rpc_command("copyFilePath")
+
+copy [(tab | current | active)] [file] [full] path here :
+    user.run_ctx_menu_cmd("copy path")
  
 copy [(tab | current | active)] [file] relative path [of] [(tab | current | active)] [file]:
     user.run_rpc_command("copyRelativeFilePath")
+
+copy [(tab | current | active)] [file] relative path here :
+    user.run_ctx_menu_cmd("copy relative path")
 
 ## ++++++++++++++++++++++++++++++ wrap lines .
 
