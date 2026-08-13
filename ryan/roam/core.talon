@@ -58,3 +58,5 @@ go all pages:
 # exit: key(esc)
 # nope: key(cmd-z)
 
+copy link here:
+    user.run_ctx_menu_cmd("copy link")
