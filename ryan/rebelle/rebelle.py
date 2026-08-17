@@ -15,8 +15,12 @@ class Actions:
         actions.user.system_command_nb(cmd)
 
     def rebelle_fn(rebelle_fn: str):
-        """execute a rebelle fn"""
-        actions.user.rebelle_eval(f"(send-rebelle-command {rebelle_fn})")
+        """execute a rebelle fn (a complete, self-sending action ending in !)"""
+        actions.user.rebelle_eval(rebelle_fn)
+
+    def rebelle_cmd(rebelle_cmd_fn: str):
+        """execute a rebelle fn (a complete, self-sending action ending in !)"""
+        actions.user.rebelle_eval(f"(send-rebelle-command {rebelle_cmd_fn})")
 
     def reb_open_settings():
         """open settings"""
