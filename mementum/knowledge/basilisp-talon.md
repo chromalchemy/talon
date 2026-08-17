@@ -109,8 +109,9 @@ rebelle.lpy into the :7888 Calva jack-in.)
 
 Calva → Talon: separate VS Code window (one connection per window),
 "Connect to a Running REPL Server, not in the Project", project type
-basilisp (or Generic), localhost:7891. Editor clients send ns per
-eval, so the CLI `user`-ns gotcha doesn't apply.
+**basilisp**, localhost:7891. ✅ User-verified working 2026-08-17.
+Editor clients send ns per eval, so the CLI `user`-ns gotcha doesn't
+apply.
 
 ## Gotchas
 
@@ -143,8 +144,10 @@ save, warm starts unaffected.
 
 ## Open candidates
 
-- Migrate a first real action surface to .lpy.
-- Calva connect / Portal (djblue ported Portal to basilisp) over 7891.
+- ~~Migrate a first real action surface to .lpy~~ done: roam (67),
+  rebelle (8).
+- ~~Calva connect over 7891~~ ✅ verified 2026-08-17 (basilisp project
+  type). Still open: Portal (djblue ported Portal to basilisp).
 - Background pre-warm thread or setup script for fresh installs.
 - defonce-style state: file-save reload re-executes whole ns; prefer
   nREPL eval when protecting in-memory state, or use defonce.
