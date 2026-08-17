@@ -22,3 +22,12 @@ partial 18-action module that a name-only check would have missed.
 Caveat: REPL eval history pins dead module objects in
 `registry.modules` (weak refs) — a lingering old module that owns no
 impls is inert; Talon restart clears it.
+
+Sequencing (rebelle.py migration, 2026-08-17): for a *colocated*
+migration, the .py module's registry `.path` IS the dotted name the
+.lpy ctx will claim (`user.ryan.rebelle.rebelle`). Retire the .py
+(rename → `.migrated-to-lisp`) BEFORE writing the .lpy, else both are
+live briefly → duplicate impls per action during the window. Talon
+unloads on rename (`loader: [-]` in log); the watcher loads the .lpy
+on save. Roam never hit this — it first migrated into `lisp/tlisp/`
+under a different ctx name.
