@@ -1,7 +1,6 @@
 .portal/
 .DS_Store
 .cpcache/
-.clj-kondo/
 .calva/output-window/
 cursorless-snippets/.calva/output-window/
 .lsp/.cache/
@@ -28,3 +27,7 @@ ryan/clojure/.joyride/.nrepl-port
 .nrepl-port
 __pycache__/
 .joyride/mcp-server/port
+.clj-kondo/.cache
+ryan/clojure/.clj-kondo/.cache/
+ryan/clojure/string-fns/.clj-kondo/.cache/
+ryan/clojure/string-fns/.clj-kondo/imports/

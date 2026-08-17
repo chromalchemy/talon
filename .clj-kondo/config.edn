@@ -1,0 +1,25 @@
+;; clj-kondo config for the Talon user tree.
+;;
+;; This tree is Basilisp (.lpy) + Python + Talon grammars. clj-kondo has
+;; no model of Basilisp's dialect: the `tlisp.talon/defaction` macro
+;; (defines a fn from `[arg :- python/type := default]` gradual-type
+;; params) and Python interop namespaces (python/str, importlib, ...)
+;; read as unresolved symbols / namespaces.
+;;
+;; Basilisp itself ships no clj-kondo config, and `:lint-as defn` makes
+;; things WORSE (clj-kondo rejects `:- python/str` as a binding form) —
+;; the param munging is a tracked upstream issue:
+;;   https://github.com/basilisp-lang/basilisp/issues/1212
+;;
+;; So we suppress the two dialect-driven linters wholesale. Empirically
+;; this takes rebelle.lpy from 12 errors / 1 warning -> 0 / 0.
+{:linters {:unresolved-symbol    {:level :off}
+           :unresolved-namespace {:level :off}
+           ;; basilisp (:import os) used as os.path/foo -- kondo can't
+           ;; see python attr-path usage, flags every such import.
+           :unused-import        {:level :off}
+           ;; intentional: side-effecting defonce + fallback fns.
+           :unused-private-var
+           {:exclude [tlisp.brain/prewarm-thread
+                      ryan.rebelle.rebelle/sh-bb-eval!
+                      ryan.rebelle.rebelle/sh-nrepl-eval!]}}}
