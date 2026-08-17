@@ -92,6 +92,26 @@ bytecode), set flag False, `basilisp.main.init()`.
    real modules; `talon.actions` is a package attribute, not a module —
    `(import talon)` then `(.-actions talon)`.
 
+### Which REPL am I talking to? (bitten twice — check before eval)
+
+| Port | Process | Compiles |
+|---|---|---|
+| **7891** | Talon (Basilisp nREPL) | `.lpy` — the ONLY place .lpy evals work |
+| 7888 | rebelle-api bb daemon | bb-flavored .clj (`(in-ns 'main)`) |
+| 6888 | tmem roam-bridge bb daemon | bridge.clj |
+| 7892 | external JVM brain | JVM .clj |
+
+Symptom of sending .lpy to a bb/JVM REPL:
+`FileNotFoundException: Could not locate tlisp/talon.bb, .clj or
+.cljc on classpath` — the receiving REPL is resolving requires on ITS
+classpath; nothing is wrong with the .lpy. (Hit 2026-08-17 loading
+rebelle.lpy into the :7888 Calva jack-in.)
+
+Calva → Talon: separate VS Code window (one connection per window),
+"Connect to a Running REPL Server, not in the Project", project type
+basilisp (or Generic), localhost:7891. Editor clients send ns per
+eval, so the CLI `user`-ns gotcha doesn't apply.
+
 ## Gotchas
 
 - **`^:redef` for intra-ns live redefs.** Direct linking means same-ns
