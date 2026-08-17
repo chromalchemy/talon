@@ -532,6 +532,13 @@
 				// "projectRootPath": ["/Users/ryan/dev/rebelle-api"]
 			},
 			{
+				"name": "talon basilisp nrepl",
+				"projectType": "basilisp",
+				// "autoSelectForConnect": true,
+				"nReplPortFile": [".", "lisp", ".nrepl-port"],
+				// "projectRootPath": ["/Users/ryan/dev/rebelle-api"]
+			},
+			{
 			"name": "mcp aware clj repl",
 			"projectType": "deps.edn",
 			"nReplPortFile": [".", "ryan", "clojure", ".nrepl-port"],

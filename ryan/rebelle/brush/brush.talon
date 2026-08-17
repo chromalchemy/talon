@@ -6,7 +6,7 @@ mode: command
 ## +++++++++++++++++++ set to defaults .
 
 # this is too raw Todo clean up
-[(set | said)] default [brush]:
+[(set | said | load)] default [brush]:
     fn = """
     (select-brush! {{
         :tool "WATERCOLOR"

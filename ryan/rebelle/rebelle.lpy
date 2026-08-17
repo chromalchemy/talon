@@ -45,7 +45,8 @@
 (t/defaction rebelle-nrep-eval
   "execute rebelle fn vian nrepl and clj-nrepl-eval-tool"
   [clj :- python/str]
-  (let [cmd (str clj-nrepl-eval-path " -p 7888 <<'EOF'\n"
+  (let [cmd (str clj-nrepl-eval-path 
+              " -p 7888 <<'EOF'\n"
                  "(in-ns 'main)\n"
                  clj "\n"
                  "EOF\n")]
@@ -55,7 +56,7 @@
 (t/defaction invoker-clj-eval
   "use invoker in rebelle project to call fn"
   [params :- python/str]
-  (println "running updated  invoker cmd: " params)
+  (println "running invoker cmd: " params)
   (.system_command_nb user-a (str "cd '" code-path "' && " nvk-path " " params " ")))
 
 ;; ---------------------------------------------------------------------------
