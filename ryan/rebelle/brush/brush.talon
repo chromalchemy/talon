@@ -5,8 +5,8 @@ mode: command
 
 ## +++++++++++++++++++ set to defaults .
 
-# this is too raw Todo clean up
-[(set | said | load)] default [brush]:
+# body (incl. the brush spec map) lives in ryan/rebelle/rebelle.lpy
+[(set | said | load)] default [brush]: 
     fn = """
     (select-brush! {{
         :tool "WATERCOLOR"
@@ -16,13 +16,14 @@ mode: command
         :color {{:r 255 :g 0 :b 0}}
         }}
     )"""
-    user.rebelle_nrep_eval(fn)
+    # user.rebelle_nrep_eval(fn)
     # user.rebelle_eval(fn)
     # user.rebelle_eval("(set-default-brush!)")
     # user.invoker_clj_eval("main/set-default-brush!")
     # user.rebelle_nrep_eval("(set-default-brush!)")
+    user.reb_default_brush()
 
-    
+
 reset brush:
     key(cmd-shift-h)
 

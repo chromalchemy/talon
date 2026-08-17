@@ -82,6 +82,24 @@
   (.system_command_nb user-a (str "cd '" code-path "' && " nvk-path " " params " ")))
 
 ;; ---------------------------------------------------------------------------
+;; brushes
+
+(def ^:private default-brush
+  {:tool "WATERCOLOR"
+   :preset "Gouache/Gouache Flat"
+   :size 50
+   :opacity 75
+   :color {:r 255 :g 0 :b 0}})
+
+(t/defaction reb-default-brush
+  "select the default brush (spec lives here as data; edit + save to tweak)"
+  []
+  (rebelle-eval 
+    (str 
+      "(select-brush! " 
+      (pr-str default-brush) ")")))
+
+;; ---------------------------------------------------------------------------
 ;; settings / layout
 
 (t/defaction reb-open-settings
