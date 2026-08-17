@@ -290,8 +290,12 @@ fns. Verified: action call → bb daemon → readback 77; registry parity
 hot reload, so `(defonce conn (client ...))` kept the stale FN — renamed
 `brain-conn` (vars survive reload; only Talon restart clears). bb's
 nREPL honors `:ns` per message and persists `in-ns` per session (both
-verified). **Voice-verify pending**: "rebelle-cmd → send-command! →
-canvas" path untested by voice.
+verified). ✅ **Voice-verified by user** ("set default brush" →
+rebelle_nrep_eval → :7888 → canvas). Fixed en route in brush.talon:
+action refs in .talon need the MUNGED name (`user.rebelle_nrep_eval`,
+not `user.rebelle-nrep-eval` — lark can't lex `-`), and a leading `'`
+on the code string makes the eval a silent no-op (returns the
+unevaluated list).
 
 2026-08-17: **rebelle.py → rebelle.lpy migrated** (2nd production
 surface after roam; 8 actions, 0 lists, ns `ryan.rebelle.rebelle`, ctx

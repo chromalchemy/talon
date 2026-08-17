@@ -19,7 +19,8 @@ mode: command
     # user.rebelle_nrep_eval(fn)
     # user.rebelle_eval(fn)
     # user.rebelle_eval("(set-default-brush!)")
-    user.invoker_clj_eval("main/set-default-brush!")
+    # user.invoker_clj_eval("main/set-default-brush!")
+    user.rebelle_nrep_eval("(set-default-brush!)")
 
     
 reset brush:
