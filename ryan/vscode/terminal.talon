@@ -4,7 +4,7 @@ app.name: Windsurf
 app.name: Windsurf - Next
 -
 
-(open | reveal) in (terminal | term):
+(open | reveal) [file] in (terminal | term):
     user.run_rpc_command("open-terminal.open")
 
 ## +++++++++++++++++++++++++ font size .
@@ -27,8 +27,17 @@ app.name: Windsurf - Next
 
 ## +++++++++++++++++++++++++++++ stage
 
-go warp (terminal | term):  
+(go | new) warp (terminal | term):  
     user.run_rpc_command("workbench.action.terminal.openNativeConsole")
+
+# Open in native terminal  current folder
+warp (terminal | term) here:
+    user.run_ctx_menu_cmd("Open in native ")
+
+# Open in native terminal  root folder    
+warp (terminal | term) root here:
+    user.run_ctx_menu_cmd("Open in native terminal  root folder ")
+    
 
 restore terminals: 
     user.run_rpc_command("restore-terminals.restoreTerminals")
