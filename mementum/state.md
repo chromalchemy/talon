@@ -165,6 +165,14 @@ documented in knowledge page Recovery section.
 3. nREPL into Talon: port **7891** (`clj-nrepl-eval --port 7891`, or
    `clojure-mcp__clojure_eval :port 7891` from an agent). Port 6888 =
    separate bb roam-bridge daemon (tmem workstream).
+   ⚠️ Agent-tooling gotchas (hit 2026-08-17):
+   - The `eca__clj-nrepl-eval` MCP tool takes NO port arg → defaults to
+     `.nrepl-port` discovery in cwd and fails ("cat: .nrepl-port"). Use
+     `eca__shell_command` with `clj-nrepl-eval --port 7891 <<'EOF' …`
+     instead (heredoc for multiline; lands in `user` ns).
+   - **Basilisp ≠ JVM**: `java.lang.Thread/sleep` etc. do NOT resolve.
+     For sleeps in test snippets `(import time)` then `(time/sleep 0.8)`
+     (seconds, float). Reach for Python stdlib, not `java.*`.
 4. Memories this workstream (7): grep `git log --oneline --
    mementum/memories/ | grep -i "basilisp\|talon"`. Key ones:
    `talon-actions-from-pure-basilisp` (the no-stub recipe),
