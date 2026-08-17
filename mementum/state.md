@@ -34,8 +34,8 @@ Memory: `talon-cubeb-error-is-stale-merge-not-314t`.
 
 ## Active focus
 
-**`basilisp-v2`** (branch `basilisp-v2`) — Clojure as Talon's scripting
-layer via Basilisp, nREPL-first. See
+**`basilisp-v2`** (now merged; work continues on `main`) — Clojure as
+Talon's scripting layer via Basilisp, nREPL-first. See
 `mementum/knowledge/basilisp-talon.md` for the full picture.
 
 Shipped 2026-06-10: `8eb1f6b` (core integration), `50bdcea`
