@@ -301,9 +301,9 @@ Then (`e64dba5`) **spec-as-data pattern**: default-brush body moved
 into rebelle.lpy — `reb-default-brush` defaction holds the brush spec
 as a Clojure map, `(str "(select-brush! " (pr-str spec) ")")` over the
 direct socket; brush.talon is a one-line rule. This is the template
-for future rebelle commands. ⚠️ needs one more user voice-verify
-("set default brush" — action changed under the same phrase; REPL-
-verified fire + registry 9/9×1).
+for future rebelle commands. ✅ **user voice-verified 2026-08-17**
+("set default brush" works under the same phrase; was REPL-verified
+fire + registry 9/9×1, now spoken-confirmed).
 
 Also this session: kondo config for .lpy (suppress unresolved-symbol/
 namespace + unused-import; `:lint-as defn` is WORSE — memory
@@ -314,8 +314,16 @@ Open candidates (rebelle/tlisp):
 - **defcommand spike**: voice rules in pure Basilisp — internals recon
   DONE, see memory `talon-voice-commands-from-lpy-recon` (CommandImpl /
   DictionaryMeta / read-only public property; unknowns listed).
-- eval-async! spawns a thread per call → Talon WARN per voice command
-  (log noise, harmless). Polish: single worker queue in tlisp.nrepl.
+- ✅ DONE 2026-08-17: eval-async! single worker queue (was: thread per
+  call → Talon WARN per voice command). tlisp.nrepl each client now
+  lazily starts ONE daemon worker draining a queue.Queue; eval-async!
+  enqueues [code cb]. Worker install via `compare-and-set!` (NOT a
+  lock) — atomic under 3.14t GIL-off AND independent of pre-seeded atom
+  keys, so a defonce client atom surviving a hot reload from the old
+  `client` def still works (dodged a `(.acquire nil)` landmine on stale
+  atoms). Verified live on :7891: 5 jobs → 1 worker/client, FIFO,
+  stale-atom path drains OK, diagnostics clean. Memory:
+  `eval-async-single-worker-queue-cas-install`.
   (Closed: Python nREPL client libs — cemerick + clojure-vim forks —
   rejected for tlisp.nrepl; memory
   `python-nrepl-client-libs-rejected-for-lpy`.)
