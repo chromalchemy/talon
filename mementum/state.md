@@ -275,6 +275,19 @@ lands in `user` ns so wrap in `(in-ns 'main)`. 2026-08-16 session:
 fixed 3 Talon-layer bugs + drift, all voice-loop paths smoke-tested
 green.
 
+2026-08-17: **rebelle.py → rebelle.lpy migrated** (2nd production
+surface after roam; 8 actions, 0 lists, ns `ryan.rebelle.rebelle`, ctx
+`user.ryan.rebelle.rebelle`). Registry parity: 0 diffs, 8/8 actions
+exactly 1 impl. Old file → `rebelle.py.migrated-to-lisp`. Sequencing
+note: a colocated .py module's registry `.path` IS the dotted name the
+.lpy ctx will claim — retire the .py BEFORE writing the .lpy to avoid a
+duplicate-impl window. **Voice-verified by user** ✅. Post-migration
+lesson: user tried to reload the .lpy from Calva while jacked into the
+rebelle-api bb REPL (:7888) → FileNotFoundException (bb can't compile
+.lpy) — .lpy updates go via file-save watcher, Calva→:7891, or
+`clj-nrepl-eval --port 7891 '(load-file ...)'`. REPL routing table now
+in `mementum/knowledge/basilisp-talon.md`.
+
 ## Previous focus
 
 **`tmem-roam-bridge`** — composable voice grammar for editing Roam blocks.

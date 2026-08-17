@@ -1,0 +1,103 @@
+(ns ryan.rebelle.rebelle
+  "Rebelle 8 voice actions, migrated 1:1 from ryan/rebelle/rebelle.py.
+  Domain-colocated: lives next to the .talon grammars it serves
+  (user/ is a sys.path root; ns = path).
+  Defined entirely in Basilisp via tlisp.talon/defaction -- no stub.
+
+  Three eval bridges into the rebelle-api project (~/dev/rebelle-api):
+  bb eval (fresh process), nREPL :7888 (persistent bb daemon), and the
+  nvk invoker. Plus keyboard-driven layout management."
+  (:require [tlisp.talon :as t])
+  (:import importlib))
+
+;; NB: (.-actions <alias>) on a module imported via :import trips
+;; basilisp's alias munging at module top level; importlib sidesteps it.
+(def ^:private actions (.-actions (importlib/import-module "talon")))
+(def ^:private user-a (.-user actions))
+
+(defn- key!    [s] (.key actions s))
+(defn- sleep!  [s] (.sleep actions s))
+(defn- insert! [s] (.insert actions s))
+
+;; ---------------------------------------------------------------------------
+;; paths
+
+(def ^:private code-path "/Users/ryan/dev/rebelle-api")
+(def ^:private bb-path "/usr/local/bin/bb")
+(def ^:private clj-nrepl-eval-path "/Users/ryan/.local/bin/clj-nrepl-eval")
+(def ^:private nvk-path "/Users/ryan/.local/bin/nvk")
+
+;; ---------------------------------------------------------------------------
+;; eval bridges
+
+(t/defaction rebelle-eval
+  "shell out to project bb task to eval quoted string of rebelle clojure code"
+  [clj :- python/str]
+  (let [cmd (str "cd '" code-path "' && " bb-path " eval '" clj "' ")]
+    (println cmd)
+    (.system_command_nb user-a cmd)))
+
+(t/defaction rebelle-cmd
+  "execute a rebelle command (wrapped in)"
+  [rebelle-cmd-fn :- python/str]
+  (rebelle-eval (str "(send-command! " rebelle-cmd-fn ")")))
+
+(t/defaction rebelle-nrep-eval
+  "execute rebelle fn vian nrepl and clj-nrepl-eval-tool"
+  [clj :- python/str]
+  (let [cmd (str clj-nrepl-eval-path " -p 7888 <<'EOF'\n"
+                 "(in-ns 'main)\n"
+                 clj "\n"
+                 "EOF\n")]
+    (println cmd)
+    (.system_command_nb user-a cmd)))
+
+(t/defaction invoker-clj-eval
+  "use invoker in rebelle project to call fn"
+  [params :- python/str]
+  (println "running updated  invoker cmd: " params)
+  (.system_command_nb user-a (str "cd '" code-path "' && " nvk-path " " params " ")))
+
+;; ---------------------------------------------------------------------------
+;; settings / layout
+
+(t/defaction reb-open-settings
+  "open settings"
+  []
+  (key! "cmd-,"))
+
+(t/defaction reb-save-layout
+  "save layout settings"
+  [filename :- python/str]
+  (.menu_select user-a "Window|Export Layout")
+  (sleep! "500ms")
+  (.paste user-a filename)
+  (sleep! "300ms")
+  (key! "enter"))
+
+(t/defaction reb-update-layout
+  "save layout settings"
+  [filename :- python/str]
+  (.menu_select user-a "Window|Export Layout")
+  (sleep! "500ms")
+  (insert! filename)
+  (sleep! "300ms")
+  (key! "enter")
+  (sleep! "300ms")
+  (key! "tab")
+  (sleep! "100ms")
+  (key! "space"))
+
+(t/defaction reb-load-layout
+  "load layout settings"
+  [filename :- python/str]
+  (.menu_select user-a "Window|Import Layout")
+  (sleep! "500ms")
+  (insert! filename)
+  (sleep! "500ms")
+  (key! "enter"))
+
+;; ---------------------------------------------------------------------------
+
+(t/register! "user.ryan.rebelle.rebelle"
+             "Rebelle 8 actions: eval bridges to rebelle-api + layout management")
