@@ -4,23 +4,33 @@ mod = Module()
 
 CODE_PATH = "/Users/ryan/dev/rebelle-api"
 BB_PATH = "/usr/local/bin/bb"
+CLJ_NREPL_EVAL_PATH = "/Users/ryan/.local/bin/clj-nrepl-eval"
 
 @mod.action_class
 
 class Actions:
     def rebelle_eval(clj: str):
-        """shell out to bb to eval string of rebelle clojure code"""
-        cmd = f"cd '{CODE_PATH}' && {BB_PATH} eval '{clj}' "
+        """shell out to project bb task to eval quoted string of rebelle clojure code"""
+        cmd = f"cd '{CODE_PATH}' && {BB_PATH} eval '{clj} "
         print(cmd)
         actions.user.system_command_nb(cmd)
 
-    def rebelle_fn(rebelle_fn: str):
-        """execute a rebelle fn (a complete, self-sending action ending in !)"""
-        actions.user.rebelle_eval(rebelle_fn)
-
     def rebelle_cmd(rebelle_cmd_fn: str):
-        """execute a rebelle fn (a complete, self-sending action ending in !)"""
-        actions.user.rebelle_eval(f"(send-rebelle-command {rebelle_cmd_fn})")
+        """execute a rebelle command (wrapped in)"""
+        actions.user.rebelle_eval(f"(send-command {rebelle_cmd_fn})")
+
+    def rebelle_nrep_eval(clj: str):
+        """execute rebelle fn vian nrepl and clj-nrepl-eval-tool"""
+        cmd = f""" 
+           {CLJ_NREPL_EVAL_PATH} -p 7888 <<'EOF'
+           (in-ns 'main)
+           {clj}
+           EOF  
+           """
+        print(cmd)
+        actions.user.system_command_nb(cmd)
+    
+      
 
     def reb_open_settings():
         """open settings"""

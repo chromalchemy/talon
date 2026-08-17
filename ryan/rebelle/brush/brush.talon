@@ -6,16 +6,19 @@ mode: command
 ## +++++++++++++++++++ set to defaults .
 
 # this is too raw Todo clean up
-set default brush:
+[(set | said)] default [brush]:
     fn = """
-    (set-brush!
-        {{:size 50
-        :opacity 75
-        :color {{:r 255 :g 0 :b 0}} 
+    (select-brush! {{
         :tool "WATERCOLOR"
-        :preset "Gouache/Gouache Flat"}})
-    """
-    user.rebelle_fn(fn)
+        :preset "Gouache/Gouache Flat"
+        :size 50
+        :opacity 75
+        :color {{:r 255 :g 0 :b 0}}
+        }}
+    )"""
+    user.rebelle_nrep_eval(fn)
+    # user.rebelle_eval(fn)
+    # user.rebelle_eval("(set-default-brush!)")
 
     
 reset brush:
