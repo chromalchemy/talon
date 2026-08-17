@@ -6,7 +6,7 @@ mode: command
 
 ####################
 
-basil (roam | rome) test:
+(basil | Basilisp) [(roam | rome)] test:
     user.roam_basil_test()
 
 # todo: setup defualt timeout
