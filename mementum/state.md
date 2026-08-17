@@ -258,6 +258,23 @@ Candidate: upstream PR to basilisp.
 - Inert leftover: stale module objects pinned by nREPL eval history
   clear on Talon restart (harmless).
 
+## Other workstream: rebelle-api (voice painting)
+
+**`rebelle-api`** (`~/dev/rebelle-api`) — babashka bridge driving
+**Rebelle 8** over its MotionIO **WebSocket** API (`ws://[::1]:8265`),
+exposed to a growing set of Talon commands in `ryan/rebelle/`. Own
+babashka **nREPL on :7888** (this is the "unrelated java nREPL" the
+7891 note refers to — it's bb, not java). Full page:
+`mementum/knowledge/rebelle-api.md` (architecture, the builder-vs-action
+layering, the 3 eval entry points + their escaping/ns footguns, the
+Talon↔Clojure drift trap, 2 unfixed code smells). Two eval-path gotchas
+worth remembering standalone: single-quote `bb eval` args (zsh `!`
+history-expansion — memory
+`zsh-histexpand-breaks-bang-fns-in-double-quotes`), and `clj-nrepl-eval`
+lands in `user` ns so wrap in `(in-ns 'main)`. 2026-08-16 session:
+fixed 3 Talon-layer bugs + drift, all voice-loop paths smoke-tested
+green.
+
 ## Previous focus
 
 **`tmem-roam-bridge`** — composable voice grammar for editing Roam blocks.
