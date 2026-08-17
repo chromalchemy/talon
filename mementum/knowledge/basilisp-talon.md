@@ -88,6 +88,13 @@ bytecode), set flag False, `basilisp.main.init()`.
    (eval '(defn ...)))` — CLI evals land in `user` ns and basilisp's
    `(eval form ns)` arity does NOT redirect interning. Editor clients
    (Calva/CIDER) send ns per eval and don't hit this.
+   ✅ Voice-verified 2026-08-17: Calva (basilisp type, :7891)
+   whole-file reload of rebelle.lpy → register! re-ran → next voice
+   command executed the new code. Fully independent of the file-save
+   watcher (paths 1 and 2 are peers, not fallbacks). Caveat: editor
+   reloads skip .lpyc writing (cache flip is watcher/boot-scoped) —
+   save the file once before quitting Talon if you care about the next
+   warm start.
 3. Talon interop from lisp: `(:import [talon.app :as app])` works for
    real modules; `talon.actions` is a package attribute, not a module —
    `(import talon)` then `(.-actions talon)`.
