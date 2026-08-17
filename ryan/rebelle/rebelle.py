@@ -16,7 +16,7 @@ class Actions:
 
     def rebelle_fn(rebelle_fn: str):
         """execute a rebelle fn"""
-        user.rebelle_eval(f"(send-rebelle-command {rebelle_fn})")
+        actions.user.rebelle_eval(f"(send-rebelle-command {rebelle_fn})")
 
     def reb_open_settings():
         """open settings"""

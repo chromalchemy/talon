@@ -150,11 +150,15 @@ documented in knowledge page Recovery section.
    ✅ "brain test" IS voice-verified post-restart (user spoke it twice
    at 01:53/01:54; log proves full chain). It *looked* like a no-op
    because output was log-only println — now raises app.notify.
-   "basil roam test" ✅ user-verified working 2026-06-11 (post-restart).
-   Debug recipe for "voice command does nothing": (1) check
-   talon.log for the println, (2) registry check via 7891 —
-   `(.-commands (.-registry talon))` / `(.-contexts ...)`. The command
-   often fired fine and just lacked visible feedback.
+   "basil roam test" ✅ user-verified working 2026-06-11 (post-restart);
+   **2026-08-16 it now fires `app.notify`** (toast "basil roam ✓"), not
+   just a println — so it's self-evidently visible. Added a reusable
+   `notify!` helper in roam.lpy (memory
+   `roam-canary-notify-and-helper`; `ae9de15`). Debug recipe for "voice
+   command does nothing": (1) check talon.log / watch for the toast,
+   (2) registry check via 7891 — `(.-commands (.-registry talon))` /
+   `(.-contexts ...)`. The command often fired fine and just lacked
+   visible feedback (which the notify now cures).
 1. Read this file, then `mementum/knowledge/basilisp-talon.md` (the
    architecture + all gotchas live there, current as of this session).
 2. `git log --oneline -n 15` — see table above.
