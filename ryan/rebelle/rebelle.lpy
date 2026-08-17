@@ -4,10 +4,13 @@
   (user/ is a sys.path root; ns = path).
   Defined entirely in Basilisp via tlisp.talon/defaction -- no stub.
 
-  Three eval bridges into the rebelle-api project (~/dev/rebelle-api):
-  bb eval (fresh process), nREPL :7888 (persistent bb daemon), and the
-  nvk invoker. Plus keyboard-driven layout management."
-  (:require [tlisp.talon :as t])
+  Eval bridges into the rebelle-api project (~/dev/rebelle-api):
+  a direct in-process nREPL client to the persistent bb daemon on
+  :7888 (tlisp.nrepl -- no process spawn, no shell escaping), and the
+  nvk invoker. Legacy shell paths (bb eval / clj-nrepl-eval) kept as
+  private fallback fns. Plus keyboard-driven layout management."
+  (:require [tlisp.talon :as t]
+            [tlisp.nrepl :as nrepl])
   (:import importlib))
 
 ;; NB: (.-actions <alias>) on a module imported via :import trips
@@ -30,28 +33,47 @@
 ;; ---------------------------------------------------------------------------
 ;; eval bridges
 
-(t/defaction rebelle-eval
-  "shell out to project bb task to eval quoted string of rebelle clojure code"
-  [clj :- python/str]
+;; Persistent in-process nREPL client to the rebelle-api bb daemon.
+;; :ns "main" on every eval message (bb's server honors it; survives
+;; daemon restarts mid-session). Connects lazily; reconnects once on
+;; failure. The daemon self-starts and manages its own lifecycle, so
+;; no :ensure! hook here.
+(defonce ^:private rebelle-conn
+  (nrepl/client "127.0.0.1" 7888 {:ns "main"}))
+
+;; Legacy shell fallbacks (unregistered). Manual escape hatches if the
+;; direct socket path ever misbehaves; also usable from the REPL.
+(defn- sh-bb-eval! [clj]
   (let [cmd (str "cd '" code-path "' && " bb-path " eval '" clj "' ")]
     (println cmd)
     (.system_command_nb user-a cmd)))
 
-(t/defaction rebelle-cmd
-  "execute a rebelle command (wrapped in)"
-  [rebelle-cmd-fn :- python/str]
-  (rebelle-eval (str "(send-command! " rebelle-cmd-fn ")")))
-
-(t/defaction rebelle-nrep-eval
-  "execute rebelle fn vian nrepl and clj-nrepl-eval-tool"
-  [clj :- python/str]
-  (let [cmd (str clj-nrepl-eval-path 
-              " -p 7888 <<'EOF'\n"
+(defn- sh-nrepl-eval! [clj]
+  (let [cmd (str clj-nrepl-eval-path " -p 7888 <<'EOF'\n"
                  "(in-ns 'main)\n"
                  clj "\n"
                  "EOF\n")]
     (println cmd)
     (.system_command_nb user-a cmd)))
+
+(t/defaction rebelle-eval
+  "eval a string of rebelle clojure code on the bb daemon (:7888),
+  direct nREPL, async fire-and-forget"
+  [clj :- python/str]
+  (println "rebelle-eval:" clj)
+  (nrepl/eval-async! rebelle-conn clj))
+
+(t/defaction rebelle-cmd
+  "execute a rebelle command (wrapped in send-command!)"
+  [rebelle-cmd-fn :- python/str]
+  (rebelle-eval (str "(send-command! " rebelle-cmd-fn ")")))
+
+(t/defaction rebelle-nrep-eval
+  "eval on the bb daemon via direct nREPL (same path as rebelle-eval;
+  kept as a distinct action for existing .talon grammars)"
+  [clj :- python/str]
+  (println "rebelle-nrep-eval:" clj)
+  (nrepl/eval-async! rebelle-conn clj))
 
 (t/defaction invoker-clj-eval
   "use invoker in rebelle project to call fn"

@@ -1,0 +1,175 @@
+(ns tlisp.nrepl
+  "Generic persistent bencode nREPL client. Transport extracted from
+  tlisp.brain (proven against the JVM brain on :7892); works against
+  any standard nREPL server: bb (rebelle-api :7888, tmem :6888), JVM,
+  or Basilisp itself.
+
+  A client is an atom handle; all fns take it as first arg:
+
+    (def c (client \"127.0.0.1\" 7888 {:ns \"main\"}))
+    (eval! c \"(+ 1 1)\")   ; -> {:value \"2\" :out [] :err nil ...}
+    (value! c \"(+ 1 1)\")  ; -> \"2\" (or error string)
+    (eval-async! c code)     ; fire-and-forget on a daemon thread
+    (interrupt! c)           ; abort the in-flight eval, keep the conn
+    (close! c)
+
+  opts:
+    :ns      target namespace string, sent with every eval message
+    :ensure! 0-arg fn called before the reconnect retry (e.g. start
+             the server); truthy return = proceed with retry
+    :timeout socket timeout in seconds (default 30)
+
+  Wire format via basilisp.contrib.bencode -- the same implementation
+  that serves Talon's own nREPL on :7891. Messages decode to maps with
+  keyword keys and utf-8 string values. eval! never throws: a downed
+  server yields {:error ...}. A per-client lock serializes evals, so
+  concurrent callers (voice thread + async sends) can't interleave
+  reads; interrupt! deliberately bypasses the lock."
+  (:require [basilisp.contrib.bencode :as bc])
+  (:import socket threading))
+
+(defn client
+  "Create a client handle for host:port. Connects lazily on first eval."
+  ([host port] (client host port {}))
+  ([host port opts]
+   (atom {:host host :port port :opts opts
+          :sock nil :buf #b "" :msgs nil :session nil
+          :lock (threading/Lock) :in-flight nil})))
+
+;;; wire ---------------------------------------------------------------
+
+(defn- recv-msg!
+  "Pop the next decoded nREPL message, recv'ing and buffering as needed."
+  [c]
+  (loop []
+    (let [{:keys [sock buf msgs]} @c]
+      (if (seq msgs)
+        (let [m (first msgs)]
+          (swap! c update :msgs rest)
+          m)
+        (let [data (.recv sock 65536)]
+          (when (= data #b "")
+            (throw (python/OSError "nrepl connection closed")))
+          (let [[items remaining]
+                (bc/decode-all (.join #b "" [buf data])
+                               {:keywordize-keys true
+                                :string-fn #(.decode % "utf-8")})]
+            (swap! c assoc :buf (or remaining #b "") :msgs (seq items))
+            (recur)))))))
+
+(defn- read-until-done
+  "Read messages for id, merging interesting keys; ignores messages for
+  other ids (e.g. interrupt acks sharing the socket)."
+  [c id]
+  (loop [value nil
+         out []
+         err nil
+         news nil]
+    (let [msg (recv-msg! c)]
+      (if (not= (:id msg) id)
+        (recur value out err news)
+        (let [status (set (:status msg))
+              value (or (:value msg) value)
+              out (if-let [o (:out msg)] (conj out o) out)
+              err (or (:err msg) err)
+              news (or (:new-session msg) news)]
+          (if (contains? status "done")
+            {:value value :out out :err err :new-session news
+             :interrupted? (contains? status "interrupted")}
+            (recur value out err news)))))))
+
+;;; connection ---------------------------------------------------------
+
+(defn close! [c]
+  (when-let [s (:sock @c)]
+    (try (.close s) (catch python/Exception _ nil)))
+  (swap! c assoc :sock nil :buf #b "" :msgs nil :session nil :in-flight nil)
+  nil)
+
+(defn- connect! [c]
+  (let [{:keys [host port opts]} @c
+        s (socket/create_connection (python/tuple [host port]) 3)]
+    (.setsockopt s socket/IPPROTO_TCP socket/TCP_NODELAY 1)
+    (.settimeout s (or (:timeout opts) 30))
+    (swap! c assoc :sock s :buf #b "" :msgs nil :session nil)
+    (let [id (str "clone-" (rand-int 1000000))]
+      (.sendall s (bc/encode {:op "clone" :id id}))
+      (swap! c assoc :session (:new-session (read-until-done c id))))
+    @c))
+
+(defn- ensure-conn! [c]
+  (if (:sock @c) @c (connect! c)))
+
+;;; eval ---------------------------------------------------------------
+
+(defn- eval-once [c code]
+  (let [lock (:lock @c)]
+    (.acquire lock)
+    (try
+      (let [{:keys [sock session opts]} (ensure-conn! c)
+            id (str "eval-" (rand-int 1000000))
+            msg (cond-> {:op "eval" :code code :id id :session session}
+                  (:ns opts) (assoc :ns (:ns opts)))]
+        (swap! c assoc :in-flight id)
+        (try
+          (.sendall sock (bc/encode msg))
+          (read-until-done c id)
+          (finally (swap! c assoc :in-flight nil))))
+      (finally (.release lock)))))
+
+(defn eval!
+  "Evaluate code-str on the server. Reconnects once on failure (calling
+  the :ensure! hook first, if any); returns {:error ...} if the server
+  is unreachable (never throws)."
+  [c code]
+  (try
+    (eval-once c code)
+    (catch python/Exception _
+      (close! c)
+      (try
+        (when-let [ensure! (get-in @c [:opts :ensure!])]
+          (when-not (ensure!)
+            (throw (python/OSError "ensure! hook failed"))))
+        (eval-once c code)
+        (catch python/Exception e2
+          {:error (str "nrepl " (:host @c) ":" (:port @c)
+                       " unavailable: " e2)})))))
+
+(defn value!
+  "Eval and return the value string (or error/err string)."
+  [c code]
+  (let [r (eval! c code)]
+    (or (:value r) (:error r) (:err r))))
+
+(defn eval-async!
+  "Fire-and-forget eval on a daemon thread -- never blocks the caller.
+  Optional cb receives the result map (runs on the worker thread)."
+  ([c code] (eval-async! c code nil))
+  ([c code cb]
+   (doto (threading/Thread
+          **
+          :target (fn []
+                    (let [r (eval! c code)]
+                      (when cb (cb r))
+                      (when (:error r)
+                        (println "tlisp.nrepl async error:" (:error r)))))
+          :daemon true
+          :name "tlisp-nrepl-async")
+     (.start))))
+
+(defn interrupt!
+  "Interrupt the in-flight eval (e.g. a hung call) without dropping the
+  connection. Safe to call from any thread; bypasses the eval lock."
+  [c]
+  (let [{:keys [sock session in-flight]} @c]
+    (when (and sock in-flight)
+      (.sendall sock (bc/encode {:op "interrupt"
+                                 :session session
+                                 :interrupt-id in-flight
+                                 :id (str "int-" (rand-int 1000000))}))
+      true)))
+
+(defn alive?
+  "True if the server answers (+ 1 1) => 2."
+  [c]
+  (= "2" (:value (eval! c "(+ 1 1)"))))
