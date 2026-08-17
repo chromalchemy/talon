@@ -26,7 +26,7 @@
   concurrent callers (voice thread + async sends) can't interleave
   reads; interrupt! deliberately bypasses the lock."
   (:require [basilisp.contrib.bencode :as bc])
-  (:import socket threading))
+  (:import queue socket threading))
 
 (defn client
   "Create a client handle for host:port. Connects lazily on first eval."
@@ -34,7 +34,8 @@
   ([host port opts]
    (atom {:host host :port port :opts opts
           :sock nil :buf #b "" :msgs nil :session nil
-          :lock (threading/Lock) :in-flight nil})))
+          :lock (threading/Lock) :in-flight nil
+          :queue nil :worker nil})))
 
 ;;; wire ---------------------------------------------------------------
 
@@ -141,21 +142,51 @@
   (let [r (eval! c code)]
     (or (:value r) (:error r) (:err r))))
 
+(defn- worker-loop
+  "Single daemon worker: drains the client's queue, running each job's
+  eval! in order. Runs forever (daemon, dies with the process)."
+  [c q]
+  (loop []
+    (let [[code cb] (.get q)]
+      (try
+        (let [r (eval! c code)]
+          (when cb (cb r))
+          (when (:error r)
+            (println "tlisp.nrepl async error:" (:error r))))
+        (catch python/Exception e
+          (println "tlisp.nrepl worker error:" e))))
+    (recur)))
+
+(defn- ensure-worker!
+  "Lazily start this client's single worker thread (once) and return its
+  job queue. Uses compare-and-set! so exactly one caller installs the
+  queue + starts the thread -- atomic under Talon's GIL-off free-threaded
+  CPython, and it doesn't depend on any pre-seeded atom key (so a client
+  atom created by an older `client` def, surviving a hot reload, still
+  works)."
+  [c]
+  (or (:queue @c)
+      (let [q (queue/Queue)]
+        (loop []
+          (let [cur @c]
+            (cond
+              (:queue cur) (:queue cur)          ; another caller won the race
+              (compare-and-set! c cur (assoc cur :queue q))
+              (do (doto (threading/Thread
+                         ** :target #(worker-loop c q)
+                         :daemon true :name "tlisp-nrepl-worker")
+                    (.start))
+                  q)
+              :else (recur)))))))                ; atom changed under us, retry
+
 (defn eval-async!
-  "Fire-and-forget eval on a daemon thread -- never blocks the caller.
+  "Enqueue an eval on this client's single worker thread -- never blocks
+  the caller and never spawns a thread per call (jobs run in FIFO order).
   Optional cb receives the result map (runs on the worker thread)."
   ([c code] (eval-async! c code nil))
   ([c code cb]
-   (doto (threading/Thread
-          **
-          :target (fn []
-                    (let [r (eval! c code)]
-                      (when cb (cb r))
-                      (when (:error r)
-                        (println "tlisp.nrepl async error:" (:error r)))))
-          :daemon true
-          :name "tlisp-nrepl-async")
-     (.start))))
+   (.put (ensure-worker! c) [code cb])
+   nil))
 
 (defn interrupt!
   "Interrupt the in-flight eval (e.g. a hung call) without dropping the
