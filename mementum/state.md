@@ -275,6 +275,24 @@ lands in `user` ns so wrap in `(in-ns 'main)`. 2026-08-16 session:
 fixed 3 Talon-layer bugs + drift, all voice-loop paths smoke-tested
 green.
 
+2026-08-17 (later): **shared nREPL client + rebelle direct-socket
+bridge**. New `lisp/tlisp/nrepl.lpy` — generic persistent bencode
+nREPL client (transport extracted from brain.lpy): `client`/`eval!`/
+`value!`/`eval-async!`/`interrupt!`/`close!`/`alive?`, per-client lock,
+reconnect-once w/ `:ensure!` hook, never-throws. brain.lpy refactored
+onto it (API + JVM lifecycle unchanged; verified alive?/value!/call!
+against :7892). rebelle.lpy `rebelle-eval` + `rebelle-nrep-eval` now
+use a direct client to :7888 (`{:ns "main"}`, `eval-async!` so the
+voice thread never blocks) — **no more process spawn or shell escaping
+per voice command**; old shell paths kept as private `sh-*` fallback
+fns. Verified: action call → bb daemon → readback 77; registry parity
+8/8×1. ⚠️ defonce gotcha hit: pre-refactor `(defn- conn [])` survived
+hot reload, so `(defonce conn (client ...))` kept the stale FN — renamed
+`brain-conn` (vars survive reload; only Talon restart clears). bb's
+nREPL honors `:ns` per message and persists `in-ns` per session (both
+verified). **Voice-verify pending**: "rebelle-cmd → send-command! →
+canvas" path untested by voice.
+
 2026-08-17: **rebelle.py → rebelle.lpy migrated** (2nd production
 surface after roam; 8 actions, 0 lists, ns `ryan.rebelle.rebelle`, ctx
 `user.ryan.rebelle.rebelle`). Registry parity: 0 diffs, 8/8 actions

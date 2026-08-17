@@ -120,6 +120,24 @@ Calva → Talon: separate VS Code window (one connection per window),
 Editor clients send ns per eval, so the CLI `user`-ns gotcha doesn't
 apply.
 
+### tlisp.nrepl — shared in-process nREPL client (2026-08-17)
+
+`lisp/tlisp/nrepl.lpy`: generic persistent bencode nREPL client
+(transport extracted from brain.lpy; basilisp.contrib.bencode). Talon
+`.lpy` code talks to the other REPLs **directly over sockets** — no
+shelling out to clj-nrepl-eval/bb, no zsh escaping footguns:
+
+- `(client host port {:ns "main" :ensure! f :timeout s})` → atom handle
+- `eval!`/`value!` (never throws; reconnect-once, :ensure! hook first),
+  `eval-async!` (daemon thread, for Talon action bodies — don't block
+  the voice thread), `interrupt!`, `close!`, `alive?`
+- per-client Lock serializes evals (read-until-done drops other ids —
+  unlocked concurrent evals would steal each other's replies)
+- consumers: brain.lpy (:7892, :ensure! = start! JVM), rebelle.lpy
+  (:7888, no ensure — bb daemon self-manages). tmem :6888 = candidate.
+- bb's nREPL honors `:ns` per eval message AND persists `in-ns` per
+  cloned session (both empirically verified against :7888).
+
 ## Gotchas
 
 - **`^:redef` for intra-ns live redefs.** Direct linking means same-ns
