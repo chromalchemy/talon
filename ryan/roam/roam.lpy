@@ -20,6 +20,11 @@
 (defn- sleep!  [s] (.sleep actions s))
 (defn- insert! [s] (.insert actions s))
 
+;; talon.app.notify for visible feedback (module app, per the brain_demo
+;; pattern; importlib sidesteps the top-level :import alias munging).
+(def ^:private app-mod (.-app (importlib/import-module "talon")))
+(defn- notify! [title body] (.notify app-mod title body))
+
 ;; ---------------------------------------------------------------------------
 ;; lists (populated by .talon-list files, unchanged)
 
@@ -529,8 +534,10 @@
   (key! "cmd-shift-p"))
 
 (t/defaction roam-basil-test
-  "live-loop smoke test: edit the println, save, speak, watch the log"
+  "live-loop smoke test: fires a visible notification (and logs).
+  Edit the strings, save, speak the command, see the toast."
   []
+  (notify! "basil roam ✓" "basilisp live-loop is alive")
   (println "hello from basillisp clojure in roam yyy!"))
 
 ;; ---------------------------------------------------------------------------
