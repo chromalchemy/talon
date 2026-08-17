@@ -316,6 +316,9 @@ Open candidates (rebelle/tlisp):
   DictionaryMeta / read-only public property; unknowns listed).
 - eval-async! spawns a thread per call → Talon WARN per voice command
   (log noise, harmless). Polish: single worker queue in tlisp.nrepl.
+  (Closed: Python nREPL client libs — cemerick + clojure-vim forks —
+  rejected for tlisp.nrepl; memory
+  `python-nrepl-client-libs-rejected-for-lpy`.)
 - tmem :6888 as third tlisp.nrepl consumer (~5 lines).
 - Delete rebelle.lpy sh-* fallbacks once direct path has mileage.
 
