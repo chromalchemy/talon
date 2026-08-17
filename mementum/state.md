@@ -297,6 +297,28 @@ not `user.rebelle-nrep-eval` — lark can't lex `-`), and a leading `'`
 on the code string makes the eval a silent no-op (returns the
 unevaluated list).
 
+Then (`e64dba5`) **spec-as-data pattern**: default-brush body moved
+into rebelle.lpy — `reb-default-brush` defaction holds the brush spec
+as a Clojure map, `(str "(select-brush! " (pr-str spec) ")")` over the
+direct socket; brush.talon is a one-line rule. This is the template
+for future rebelle commands. ⚠️ needs one more user voice-verify
+("set default brush" — action changed under the same phrase; REPL-
+verified fire + registry 9/9×1).
+
+Also this session: kondo config for .lpy (suppress unresolved-symbol/
+namespace + unused-import; `:lint-as defn` is WORSE — memory
+`lpy-clj-kondo-config-suppress-not-lint-as`; NB .clj-kondo/ is
+gitignored, re-apply on fresh clones), blank deps.edn committed.
+
+Open candidates (rebelle/tlisp):
+- **defcommand spike**: voice rules in pure Basilisp — internals recon
+  DONE, see memory `talon-voice-commands-from-lpy-recon` (CommandImpl /
+  DictionaryMeta / read-only public property; unknowns listed).
+- eval-async! spawns a thread per call → Talon WARN per voice command
+  (log noise, harmless). Polish: single worker queue in tlisp.nrepl.
+- tmem :6888 as third tlisp.nrepl consumer (~5 lines).
+- Delete rebelle.lpy sh-* fallbacks once direct path has mileage.
+
 2026-08-17: **rebelle.py → rebelle.lpy migrated** (2nd production
 surface after roam; 8 actions, 0 lists, ns `ryan.rebelle.rebelle`, ctx
 `user.ryan.rebelle.rebelle`). Registry parity: 0 diffs, 8/8 actions
