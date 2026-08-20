@@ -1161,7 +1161,7 @@ File Print One Copy:
 
 ## ___________________________________ . selection
 
-Deselect [all] | select none:
+(Deselect | do you select) [all] | select none:
     user.ps_select_deselect()
 
 Reselect | restore (selection | select | ants):
@@ -1172,7 +1172,7 @@ Reselect | restore (selection | select | ants):
 Select All Layers:
     user.ps_select_all_layers()
 
-Deselect Layers | (layer | layers) [select] none:
+((Deselect | do you select) | select (no | none)) (layer | layers) | (layer | layers) [select] (none | nil):
     user.ps_select_deselect_layers()
 
 (Find | search | hunt) Layers:
@@ -1960,6 +1960,9 @@ Manage Plugins..:
 
 ProStacker:
     user.ps_plugins_prostacker()
+
+(tab | file) (next | last):
+    key(cmd-`)
 
 [(windows | tabs)] Tile (all | windows) (Vertical | vert):
     user.ps_window_tile_all_vertically()
