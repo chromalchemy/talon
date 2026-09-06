@@ -21,21 +21,7 @@ kill current file:
     insert(text)
     sleep(200ms)
     key(enter)
-    
-## +++++++++++++++++++++++++++++++++ file explorer
 
-bar (file | files): 
-    user.run_rpc_command("workbench.files.action.focusFilesExplorer")
-
-(show | reveal) file [in] [(explore | explorer)]: 
-    user.run_rpc_command("workbench.files.action.showActiveFileInExplorer")
-
-(fold | collapse) ((explore | Explorer) [folders] | [bar] files): 
-    user.run_rpc_command("workbench.files.action.collapseExplorerFolders")
-
-(fold | collapse) ((explore | Explorer) [folders] | [bar] files) [to] top [level] [folders]: 
-    user.run_rpc_command("workbench.files.action.collapseExplorerFolders")
-    user.run_rpc_command("workbench.files.action.collapseExplorerFolders")
 
 (show | reveal) [file] [in] (finder | files): 
     user.run_rpc_command("revealFileInOS")
