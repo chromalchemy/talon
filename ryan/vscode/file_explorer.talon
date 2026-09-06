@@ -19,3 +19,11 @@ bar (file | files):
 
 add folder to (workspace | work space | project):
     user.run_rpc_command("workbench.action.addRootFolder")
+
+(the lead | delete) (file | folder) here:
+    mouse_click(0)
+    sleep(300ms)
+    # andreas command asks for confirmation
+    # user.run_rpc_command("andreas.removeFile")
+    user.run_rpc_command("fileutils.removeFile")
+    # key(cmd-backspace)
