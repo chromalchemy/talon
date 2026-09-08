@@ -313,6 +313,37 @@ for future rebelle commands. ✅ **user voice-verified 2026-08-17**
 ("set default brush" works under the same phrase; was REPL-verified
 fire + registry 9/9×1, now spoken-confirmed).
 
+2026-09-08: **rebelle.lpy shell-out rewritten; invoker moved onto the
+socket.** Three things, all live-verified via :7891:
+
+- ❌→✅ `launch-rebelle-app` hung Talon forever. Cause was the known
+  `system_command_nb`-blocks trap (`bb app` never exits). Replaced all
+  Talon shell actions with local `sh-detached!` / `sh!` calling
+  `subprocess` directly — argv **vector** + `:cwd`, so no shell and no
+  quoting hazard for `/Applications/Rebelle 8.app/…`. Launch now
+  returns in ~30ms; detached child gets `PGID == PID` (survives Talon
+  restart). Flags copied from the `bb app` task into `rebelle.lpy`, so
+  the app is spawned directly with **no lingering bb parent** —
+  ⚠️ flags now duplicated with bb.edn. Voice: "power launch rebelle"
+  (`ryan/rebelle/launch.talon`, untracked at session end).
+- 💡 `invoker-clj-eval` **170ms → 7ms**. nvk's cost is 2× babashka
+  boot (it's a bb script that exec's a second bb); invoker actually
+  evals *in the :7888 daemon*, add-lib'ing itself in, so
+  `invoker.utils` is already loaded on the socket we hold. Now calls
+  invoker's own `parse-var-and-args`/`parse-raw-args`/`dispatch`
+  remotely, with nvk kept as `sh-invoker!` fallback behind a sentinel.
+  12-case parity checked (incl. `--a=3` opts and atom deref). Reading
+  invoker's source mattered: `auto-coerce` makes bare words *strings*,
+  so the paren-wrap I first proposed would have been wrong.
+- 🌀 Process: I called the nvk path "~0.5s, blocks Talon" from a single
+  **cold** sample; user pushed back, warm n=3 showed shell/Talon
+  parity. Memory `benchmark-warm-and-repeated-before-blaming-a-layer`.
+
+Gotcha for .lpy authoring: Basilisp resolves symbols at **compile
+time**, so `rebelle-conn`'s `defonce` had to move ABOVE the action that
+uses it — a def sitting further down the file is invisible even though
+the call is at runtime.
+
 Also this session: kondo config for .lpy (suppress unresolved-symbol/
 namespace + unused-import; `:lint-as defn` is WORSE — memory
 `lpy-clj-kondo-config-suppress-not-lint-as`; NB .clj-kondo/ is
