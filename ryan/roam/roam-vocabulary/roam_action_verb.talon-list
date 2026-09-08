@@ -9,6 +9,7 @@ delete: remove
 
 collapse
 fold: collapse
+pad: collapse
 
 expand
 unfold: expand
