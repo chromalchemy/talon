@@ -11,12 +11,12 @@
   private fallback fns. Plus keyboard-driven layout management."
   (:require [tlisp.talon :as t]
             [tlisp.nrepl :as nrepl])
-  (:import importlib))
+  (:import importlib os subprocess))
 
 ;; NB: (.-actions <alias>) on a module imported via :import trips
 ;; basilisp's alias munging at module top level; importlib sidesteps it.
 (def ^:private actions (.-actions (importlib/import-module "talon")))
-(def ^:private user-a (.-user actions))
+(def ^:private user-actions (.-user actions))
 
 (defn- key!    [s] (.key actions s))
 (defn- sleep!  [s] (.sleep actions s))
@@ -25,36 +25,189 @@
 ;; ---------------------------------------------------------------------------
 ;; paths
 
-(def ^:private code-path "/Users/ryan/dev/rebelle-api")
-(def ^:private bb-path "/usr/local/bin/bb")
+(def ^:private rebelle-api-path "/Users/ryan/dev/rebelle-api")
+(def ^:private bb "/usr/local/bin/bb")
 (def ^:private clj-nrepl-eval-path "/Users/ryan/.local/bin/clj-nrepl-eval")
 (def ^:private nvk-path "/Users/ryan/.local/bin/nvk")
 
+;; App launch config -- mirrors the `app` task in rebelle-api/bb.edn.
+;; Kept here so the launch is one process (the app) instead of two
+;; (a lingering bb parent holding the shelled child). If you change
+;; the port or the allowed IPs, change them in BOTH places, or drop
+;; the bb task and treat this as the source of truth.
+(def ^:private rebelle-app-bin
+  "/Applications/Rebelle 8.app/Contents/MacOS/Rebelle 8")
+(def ^:private websocket-port "8265")
+(def ^:private websocket-allowed-ips "172.20.10.7,127.0.0.1")
+
 ;; ---------------------------------------------------------------------------
 ;; eval bridges
+
+
+;; ++++++++++++++ shell out commands
+
+;; Why not user.system_command_nb? It lies: it calls .communicate(),
+;; which waits for the child to exit. Fine for `bb down`; fatal for
+;; `bb app` (the task shells the Rebelle binary and never returns) --
+;; Talon's command thread hangs forever and voice recognition dies.
+;; So: shell out from Basilisp directly, truly detached.
+;;   - no .communicate()/.wait()      -> returns immediately
+;;   - start_new_session true         -> own process group, survives
+;;                                       a Talon restart (no SIGHUP)
+;;   - DEVNULL on all three streams   -> no pipe buffer to deadlock on
+;;   - vector cmd + :cwd              -> no shell, no quoting hazards
+;;     (paths with spaces are passed through as single argv entries)
+
+(def ^:private extra-path "/opt/homebrew/bin:/usr/local/bin")
+
+(defn- shell-env
+  "os.environ with homebrew paths prepended (Talon's PATH is minimal)."
+  []
+  (let [env (.copy os/environ)]
+    (.update env #py {"PATH" (str extra-path ":" (.get os/environ "PATH" ""))})
+    env))
+
+(defn- sh-detached!
+  "Fire-and-forget a command. Returns nil immediately -- NEVER waits.
+  cmd: vector of argv strings (preferred, no shell) or a string (shell=True).
+  Safe for long-running procs (apps, servers, watchers)."
+  ([cmd] (sh-detached! cmd nil))
+  ([cmd cwd]
+   (println "sh-detached!:" cmd (if cwd (str "(cwd " cwd ")") ""))
+   (let [shell? (string? cmd)
+         p (subprocess/Popen (if shell? cmd (python/list cmd))
+                             **
+                             :shell shell?
+                             :cwd cwd
+                             :env (shell-env)
+                             :stdin subprocess/DEVNULL
+                             :stdout subprocess/DEVNULL
+                             :stderr subprocess/DEVNULL
+                             :start_new_session true)]
+     (println "  -> pid" (.-pid p))
+     nil)))
+
+(defn- sh!
+  "Run a short-lived command to completion, return trimmed stdout.
+  BLOCKS -- only for sub-second commands. stdin is optional text."
+  ([cmd] (sh! cmd nil nil))
+  ([cmd cwd] (sh! cmd cwd nil))
+  ([cmd cwd stdin]
+   (println "sh!:" cmd)
+   (let [shell? (string? cmd)
+         p (subprocess/Popen (if shell? cmd (python/list cmd))
+                             **
+                             :shell shell?
+                             :cwd cwd
+                             :env (shell-env)
+                             :stdin subprocess/PIPE
+                             :stdout subprocess/PIPE
+                             :stderr subprocess/PIPE
+                             :text true)
+         result (.communicate p ** :input stdin)
+         out (aget result 0)
+         err (aget result 1)]
+     (when (seq (.strip (or err ""))) (println "  stderr:" err))
+     (.strip (or out "")))))
+
+;; Legacy shell fallbacks (unregistered). Manual escape hatches if the
+;; direct socket path ever misbehaves; also usable from the REPL.
+
+(defn- sh-bb-eval!
+  "eval CLJ via the `bb eval` task in bb.edn (blocking, short-lived)"
+  [clj]
+  (sh! [bb "eval" clj] rebelle-api-path))
+
+(defn- sh-bb-task!
+  "run a bb task from rebelle-api's bb.edn, detached (task may never exit)"
+  [task]
+  (sh-detached! [bb task] rebelle-api-path))
+
+(defn- sh-nrepl-eval!
+  "eval with the clj-nrepl-eval cmd line tool from clojure-mcp"
+  [clj]
+  (sh! [clj-nrepl-eval-path "-p" "7888"]
+       rebelle-api-path
+       (str "(in-ns 'main)\n" clj "\n")))
+
+;; ___________________________________ . daemon connection
 
 ;; Persistent in-process nREPL client to the rebelle-api bb daemon.
 ;; :ns "main" on every eval message (bb's server honors it; survives
 ;; daemon restarts mid-session). Connects lazily; reconnects once on
 ;; failure. The daemon self-starts and manages its own lifecycle, so
 ;; no :ensure! hook here.
+;; NB: defined here, above its first use -- Basilisp resolves symbols
+;; at compile time, so the invoker action below cannot see it if this
+;; sits further down the file.
 (defonce ^:private rebelle-conn
   (nrepl/client "127.0.0.1" 7888 {:ns "main"}))
 
-;; Legacy shell fallbacks (unregistered). Manual escape hatches if the
-;; direct socket path ever misbehaves; also usable from the REPL.
-(defn- sh-bb-eval! [clj]
-  (let [cmd (str "cd '" code-path "' && " bb-path " eval '" clj "' ")]
-    (println cmd)
-    (.system_command_nb user-a cmd)))
+;; ___________________________________ . invoker
 
-(defn- sh-nrepl-eval! [clj]
-  (let [cmd (str clj-nrepl-eval-path " -p 7888 <<'EOF'\n"
-                 "(in-ns 'main)\n"
-                 clj "\n"
-                 "EOF\n")]
-    (println cmd)
-    (.system_command_nb user-a cmd)))
+;; The nvk CLI costs ~170ms, essentially all of it babashka startup:
+;; nvk is itself a bb script (#!/usr/bin/env bb) that writes a temp
+;; deps.edn and process/exec's a SECOND bb with the invoker dep.
+;; 2 x ~80ms interpreter boot. Same cost in Talon as in a terminal.
+;;
+;; But invoker doesn't do the work in those processes -- it connects to
+;; the nREPL on :7888 and evaluates there, add-lib'ing itself into the
+;; daemon on first use. So invoker.utils is ALREADY LOADED in the very
+;; process we hold an open socket to. Calling its own parser/dispatcher
+;; over that socket skips both bb boots: ~170ms -> ~7ms, with identical
+;; CLI semantics (it is the same code), covering:
+;;   - "ns/fn a b"  and  "ns fn a b"      (parse-var-and-args)
+;;   - auto-coerce: 255 -> long, :k -> kw, else string (NOT a symbol,
+;;     which is what a naive paren-wrap would have produced)
+;;   - ":a 3" / "--a 3" / "--a=3" -> trailing opts map
+;;   - bare value/atom vars get deref'd instead of called (dispatch)
+;;
+;; The dep is add-lib'd, not baked in, so a daemon restart loses it ->
+;; return a sentinel and fall back to the nvk subprocess, which
+;; add-libs invoker back in on its way through.
+;; Verified: sentinel + fallback fire correctly when the var is missing.
+;; NOT verified: that the fallback restores it. Tested by ns-unmap'ing
+;; invoker.utils/dispatch, and nvk did NOT put it back -- add-lib is a
+;; no-op when the dep is already present and the ns already loaded.
+;; A real daemon restart (ns absent entirely) should re-require it, but
+;; that path is untested. Worst case the fallback just runs every time,
+;; i.e. exactly the old ~170ms behaviour. Never worse than before.
+
+(def ^:private invoker-absent ":ryan.rebelle/no-invoker")
+
+(defn- invoker-form
+  "Clojure source that runs invoker's own arg parsing + dispatch on the
+  daemon. PARAMS is embedded via pr-str, so embedded quotes survive."
+  [params]
+  (str "(if-let [dispatch (resolve 'invoker.utils/dispatch)]"
+       "  (let [tokenize (requiring-resolve 'babashka.process/tokenize)"
+       "        [v raw]     (invoker.utils/parse-var-and-args (tokenize " (pr-str params) "))"
+       "        [args opts] (invoker.utils/parse-raw-args v raw)]"
+       "    (dispatch v (cond-> args (seq opts) (conj opts))))"
+       "  " invoker-absent ")"))
+
+(defn- sh-invoker!
+  "nvk via subprocess (~170ms). The slow path, kept because it also
+  (re)installs invoker into the daemon."
+  [params]
+  (sh! (str nvk-path " " params) rebelle-api-path))
+
+(t/defaction invoker-clj-eval
+  "invoke a rebelle fn by CLI-style string (\"main/color 255 0 0\") using
+  invoker's semantics, over the open nREPL socket (~7ms). Falls back to
+  the nvk subprocess if the daemon has no invoker loaded. Returns the
+  printed value."
+  [params :- python/str]
+  (println "running invoker cmd: " params)
+  (let [out (nrepl/value! rebelle-conn (invoker-form params))
+        out (if (= invoker-absent (.strip (or out "")))
+              (do (println "  invoker absent on daemon -> nvk subprocess")
+                  (sh-invoker! params))
+              out)]
+    (println "invoker =>" out)
+    out))
+
+;; ___________________________________ . python nrepl
 
 (t/defaction rebelle-eval
   "eval a string of rebelle clojure code on the bb daemon (:7888),
@@ -68,18 +221,33 @@
   [rebelle-cmd-fn :- python/str]
   (rebelle-eval (str "(send-command! " rebelle-cmd-fn ")")))
 
-(t/defaction rebelle-nrep-eval
-  "eval on the bb daemon via direct nREPL (same path as rebelle-eval;
+;; ___________________________________ .
+
+(t/defaction rebelle-nrepl-eval
+  "eval on the bb nrepl server dircetly from python (same path as rebelle-eval;
   kept as a distinct action for existing .talon grammars)"
   [clj :- python/str]
   (println "rebelle-nrep-eval:" clj)
   (nrepl/eval-async! rebelle-conn clj))
 
-(t/defaction invoker-clj-eval
-  "use invoker in rebelle project to call fn"
-  [params :- python/str]
-  (println "running invoker cmd: " params)
-  (.system_command_nb user-a (str "cd '" code-path "' && " nvk-path " " params " ")))
+
+;; launch app
+
+;; Direct argv exec -- no bb, no shell. The app binary lives at a path
+;; with a space in it ("Rebelle 8"), which is precisely why this is a
+;; vector: each element is one argv entry, so there is nothing to quote
+;; and nothing to tokenize wrong.
+(defn- rebelle-app-argv []
+  [rebelle-app-bin
+   "-websocket-server-enable"
+   "-websocket-port" websocket-port
+   "-websocket-allowed-ip-addresses" websocket-allowed-ips])
+
+(t/defaction launch-rebelle-app
+  "launch Rebelle 8 with the websocket api enabled (detached, no bb layer)"
+  []
+  (println "Launching Rebelle!")
+  (sh-detached! (rebelle-app-argv)))
 
 ;; ---------------------------------------------------------------------------
 ;; brushes
@@ -110,16 +278,16 @@
 (t/defaction reb-save-layout
   "save layout settings"
   [filename :- python/str]
-  (.menu_select user-a "Window|Export Layout")
+  (.menu_select user-actions "Window|Export Layout")
   (sleep! "500ms")
-  (.paste user-a filename)
+  (.paste user-actions filename)
   (sleep! "300ms")
   (key! "enter"))
 
 (t/defaction reb-update-layout
   "save layout settings"
   [filename :- python/str]
-  (.menu_select user-a "Window|Export Layout")
+  (.menu_select user-actions "Window|Export Layout")
   (sleep! "500ms")
   (insert! filename)
   (sleep! "300ms")
@@ -132,7 +300,7 @@
 (t/defaction reb-load-layout
   "load layout settings"
   [filename :- python/str]
-  (.menu_select user-a "Window|Import Layout")
+  (.menu_select user-actions "Window|Import Layout")
   (sleep! "500ms")
   (insert! filename)
   (sleep! "500ms")
