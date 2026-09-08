@@ -73,3 +73,11 @@ action.
 
 **Future me:** any time a Talon command kicks off a long-running shell
 process, use `system_command_detached`. The `_nb` suffix is a lie.
+
+**Update 2026-09-08 — if you're in `.lpy`, skip these actions entirely.**
+Basilisp can call `subprocess` itself, which is both faster to reason
+about and immune to the quoting trap above: pass an **argv vector** plus
+`:cwd` and there is no shell to mis-tokenize `ps script` or `Rebelle 8`.
+See memory `lpy-shell-out-detached-subprocess` for the `sh-detached!` /
+`sh!` pair (live in `ryan/rebelle/rebelle.lpy`). The Python actions
+remain the right answer for `.talon`-only surfaces.
