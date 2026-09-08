@@ -16,7 +16,7 @@ app) over its **MotionIO WebSocket API**, exposed to a growing set of
 - Repo: `~/dev/rebelle-api` (flat, no `src/` — `main.clj`,
   `motion_io.clj`, `deps.edn`, `bb.edn`, `launch-rebelle.bash`)
 - Talon side: `~/.talon/user/ryan/rebelle/` (many `.talon` grammars +
-  `rebelle.py`)
+  `rebelle.lpy`; `rebelle.py` retired → `.migrated-to-lisp`)
 - MotionIO API docs:
   https://www.escapemotions.com/products/rebelle/motionio_doc/
 
@@ -55,21 +55,43 @@ taken by an unrelated java nREPL." That "unrelated" server is almost
 certainly *this* rebelle-api bb nREPL (bb, not java). Reconcile if it
 resurfaces.
 
-## THREE entry points, each with its own footgun
+## Entry points (current as of 2026-09-08)
 
-All three ultimately eval a Clojure form against :7888. They differ in
-escaping + namespace handling:
+The Talon layer is `ryan/rebelle/rebelle.lpy` (Basilisp; `rebelle.py`
+retired 2026-08-17). **The socket is the default path** — everything
+else is a fallback:
 
-| Entry | Namespace handling | Escaping trap |
+| Entry | Cost | Notes |
 |---|---|---|
-| `bb eval '<expr>'` (bb.edn task) | **auto-wraps** `(do (in-ns 'main) <expr>)` | zsh `!` history-expansion (see below) |
-| `clj-nrepl-eval -p 7888 '<expr>'` | **none** — lands in `user` ns | zsh `!` + wrong ns |
+| `nrepl/eval-async!` / `value!` on the persistent `:7888` client | ~0–7ms | `rebelle-eval`, `rebelle-cmd`, `rebelle-nrepl-eval`; `{:ns "main"}` per message, no shell, no escaping |
+| invoker over that same socket | ~7ms | `invoker-clj-eval`; see below |
+| `nvk <params>` subprocess | ~170ms | `sh-invoker!` fallback |
+| `bb eval '<expr>'` (bb.edn task) | ~170ms | `sh-bb-eval!`; **auto-wraps** `(do (in-ns 'main) …)` |
+| `clj-nrepl-eval -p 7888` | ~70ms | `sh-nrepl-eval!`; lands in `user` ns — wrap in `(in-ns 'main)` |
 
-The Talon layer (`ryan/rebelle/rebelle.py`) provides one action per
-entry point (evolving): `rebelle_eval` → bb eval; `rebelle_cmd` →
-wraps arg in `(send-command …)`; `rebelle_nrep_eval` → clj-nrepl-eval
-heredoc with `(in-ns 'main)`. All shell out via `system_command_nb`
-(which uses `/bin/sh`, `shell=True`).
+Shell fallbacks no longer go through `user.system_command_nb` (it
+blocks); they use local `sh!` / `sh-detached!` wrapping `subprocess`
+with an argv vector + `:cwd`. Memory:
+`lpy-shell-out-detached-subprocess`.
+
+### `invoker-clj-eval` — CLI ergonomics at socket speed
+`nvk` costs 2× babashka boot, but invoker **evals in this very daemon**
+(it `add-lib`s itself in on first use), so `invoker.utils` is already
+loaded on `:7888`. The action calls invoker's own
+`parse-var-and-args` → `parse-raw-args` → `dispatch` over the socket:
+20× faster with byte-identical semantics (auto-coerce, `:k v`/`--k v`
+opts, atom deref). Falls back to the `nvk` subprocess if the daemon
+lost the dep. **Do not hand-roll the arg parsing** — bare words coerce
+to *strings*, and value vars are deref'd, not called. Memory:
+`nvk-invoker-evals-in-your-nrepl`.
+
+### Launching the app
+`launch-rebelle-app` (voice: "power launch rebelle",
+`ryan/rebelle/launch.talon`, deliberately **not** `app.name`-scoped —
+Rebelle isn't frontmost yet) spawns the binary directly, detached, with
+the websocket flags as an argv vector. It no longer goes through the
+`bb app` task, so no bb parent lingers. ⚠️ The flags are now duplicated
+in `rebelle.lpy` and `bb.edn` — keep them in sync or retire the task.
 
 ### Footgun 1 — zsh history-expands `!` inside double quotes
 Clojure mutation fns end in `!`. In interactive zsh, `"(foo!)"`
@@ -143,3 +165,9 @@ Mixing them (wrap an action, or drop the bang) is the drift trap.
 - Resolve the doubled-`stroke!` mystery.
 - Consider a thin contract/guard so `rebelle_fn` can't call phantom fns.
 - Decide whether to record rebelle-api's :7888 in state.md's port map.
+- De-duplicate the websocket launch flags (`rebelle.lpy` vs `bb.edn`).
+- Untested: does the `nvk` fallback actually restore invoker after a
+  *daemon restart*? (`add-lib` was a no-op when I faked absence with
+  `ns-unmap`.) Worst case is the old ~170ms path, so it's not urgent.
+- `invoker-clj-eval` has no caller — only a commented-out line in
+  `brush/brush.talon`. Keep as the fallback bridge or delete?
