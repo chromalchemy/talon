@@ -49,7 +49,10 @@ deb: dev
 test tag: myTag
 
 code review: code/review
+coat review: code/review
 review code: code/review
+
+coat agent: code/agent
 
 kevin
 
