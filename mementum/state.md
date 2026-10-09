@@ -1,5 +1,19 @@
 # State
 
+## 2026-10-09: whisper mode = dictation + longer timeout + Whisper model
+
+Community repo (`ryan-edits`, **uncommitted** at time of writing):
+`core/modes/modes.py` (new `user.whisper` mode; other mode actions
+disable it), new `core/modes/whisper_mode.talon` (`speech.timeout =
+1.5`, `speech.engine = "wav2letter"` + `speech._engine_id` → Conformer
+D2 (2026-05-05) + Whisper), "whisper mode" voice rule in
+`command_and_dictation_mode.talon`. REPL-verified: whisper → 1.5s +
+Whisper engine; command → 0.4s + `Song (2026-09-20)`. Not yet
+voice-tested. Open offer: generic "use model <name>" command (tag per
+model). Memories: `talon-per-mode-settings-via-custom-mode`,
+`talon-engine-switch-needs-engine-id`,
+`talon-repl-context-tests-give-false-negatives`.
+
 ## ⚠️ Platform: Talon now ships Python 3.14t (free-threaded)
 
 2026-06-15: a Talon update bumped the bundled Python **3.13 → 3.14.5
