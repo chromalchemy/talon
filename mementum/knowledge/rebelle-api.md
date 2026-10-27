@@ -20,6 +20,14 @@ app) over its **MotionIO WebSocket API**, exposed to a growing set of
 - MotionIO API docs:
   https://www.escapemotions.com/products/rebelle/motionio_doc/
 
+> **The repo has its own mementum bundle (since 2026-10-27).**
+> `~/dev/rebelle-api/mementum/knowledge/rebelle-api.md` covers the repo
+> side: the `main.clj` layers, the :7888 daemon and its eval paths,
+> footguns, and the unchecked fn-name contract with Talon. When working
+> in that repo, read `~/dev/rebelle-api/mementum/state.md` first. This
+> page keeps the Talon side. If the two pages disagree about `main.clj`,
+> trust the repo's page.
+
 ## Architecture
 
 Two layers in `main.clj` (this split is clean — preserve it):
