@@ -62,8 +62,8 @@ failed registration (failure otherwise leaks a partial module).
 - **Legacy stub pattern** (demo_stub.py) still valid: stub bodies call
   `_mod.fn(args)` — module-attr lookup per call = late binding, so any
   redef (nREPL or reload) applies on the next voice command.
-- **nREPL server on port 7891** (7888 = stray java; 6888 = roam bridge
-  bb daemon). `clj-nrepl-eval --port 7891 '(...)'`. Daemon thread,
+- **nREPL server on port 7891** (7888 = groundedsol dev JVM; 8266 =
+  rebelle-api bb daemon; 6888 = roam bridge bb daemon). `clj-nrepl-eval --port 7891 '(...)'`. Daemon thread,
   startup guarded by port-probe (module globals reset on Talon reload).
 - **Scoped .lpy watcher**: watches `lisp/` only, deduped via sentinel
   module in `sys.modules`, reimports changed module directly
@@ -104,7 +104,9 @@ bytecode), set flag False, `basilisp.main.init()`.
 | Port | Process | Compiles |
 |---|---|---|
 | **7891** | Talon (Basilisp nREPL) | `.lpy` — the ONLY place .lpy evals work |
-| 7888 | rebelle-api bb daemon | bb-flavored .clj (`(in-ns 'main)`) |
+| 8266 | rebelle-api bb daemon (was 7888 until 2026-10-27) | bb-flavored .clj (`(in-ns 'main)`) |
+| 7888 | groundedsol dev JVM nREPL (not ours) | JVM .clj |
+| 7889 | gbo JVM nREPL (not ours) | JVM .clj |
 | 6888 | tmem roam-bridge bb daemon | bridge.clj |
 | 7892 | external JVM brain | JVM .clj |
 
@@ -112,7 +114,7 @@ Symptom of sending .lpy to a bb/JVM REPL:
 `FileNotFoundException: Could not locate tlisp/talon.bb, .clj or
 .cljc on classpath` — the receiving REPL is resolving requires on ITS
 classpath; nothing is wrong with the .lpy. (Hit 2026-08-17 loading
-rebelle.lpy into the :7888 Calva jack-in.)
+rebelle.lpy into the :7888 Calva jack-in, back when rebelle-api used 7888.)
 
 Calva → Talon: separate VS Code window (one connection per window),
 "Connect to a Running REPL Server, not in the Project", project type
@@ -134,9 +136,9 @@ shelling out to clj-nrepl-eval/bb, no zsh escaping footguns:
 - per-client Lock serializes evals (read-until-done drops other ids —
   unlocked concurrent evals would steal each other's replies)
 - consumers: brain.lpy (:7892, :ensure! = start! JVM), rebelle.lpy
-  (:7888, no ensure — bb daemon self-manages). tmem :6888 = candidate.
+  (:8266, no ensure — bb daemon self-manages). tmem :6888 = candidate.
 - bb's nREPL honors `:ns` per eval message AND persists `in-ns` per
-  cloned session (both empirically verified against :7888).
+  cloned session (both empirically verified against the daemon, then on :7888).
 
 ## Gotchas
 

@@ -22,7 +22,7 @@ app) over its **MotionIO WebSocket API**, exposed to a growing set of
 
 > **The repo has its own mementum bundle (since 2026-10-27).**
 > `~/dev/rebelle-api/mementum/knowledge/rebelle-api.md` covers the repo
-> side: the `main.clj` layers, the :7888 daemon and its eval paths,
+> side: the `main.clj` layers, the :8266 daemon and its eval paths,
 > footguns, and the unchecked fn-name contract with Talon. When working
 > in that repo, read `~/dev/rebelle-api/mementum/state.md` first. This
 > page keeps the Talon side. If the two pages disagree about `main.clj`,
@@ -53,15 +53,19 @@ form flagged "critical" in code). `send-command!` JSON-encodes with
 Motion IO.app` headless with `-batch-json`/`-batch-out-rgba` to render a
 PNG. Not part of the live WebSocket loop.
 
-## The live loop — nREPL on :7888
+## The live loop — nREPL on :8266
 
-`main.clj` starts its own **babashka nREPL on port 7888** and writes
+`main.clj` starts its own **babashka nREPL on port 8266** and writes
 `.nrepl-port`. This is the surface Talon commands and CLI drive.
 
-⚠️ **Cross-repo note:** state.md said 7891 was chosen because "7888 was
-taken by an unrelated java nREPL." That "unrelated" server is almost
-certainly *this* rebelle-api bb nREPL (bb, not java). Reconcile if it
-resurfaces.
+⚠️ **The port was 7888 until 2026-10-27.** state.md said 7891 was chosen
+because "7888 was taken by an unrelated java nREPL." That java server was
+most likely groundedsol's dev nREPL (`~/dev/groundedsol/bb.edn` hardcodes
+7888). It collided with rebelle-api, so rebelle-api moved to 8266. The
+port is hardcoded in `main.clj` (`nrepl-port`) and in `rebelle.lpy`
+(`rebelle-conn` and `sh-nrepl-eval!`), so change both together.
+`rebelle-conn` is a `defonce`, so **restart Talon** after a port change,
+because a file reload keeps the old client.
 
 ## Entry points (current as of 2026-09-08)
 
@@ -71,11 +75,11 @@ else is a fallback:
 
 | Entry | Cost | Notes |
 |---|---|---|
-| `nrepl/eval-async!` / `value!` on the persistent `:7888` client | ~0–7ms | `rebelle-eval`, `rebelle-cmd`, `rebelle-nrepl-eval`; `{:ns "main"}` per message, no shell, no escaping |
+| `nrepl/eval-async!` / `value!` on the persistent `:8266` client | ~0–7ms | `rebelle-eval`, `rebelle-cmd`, `rebelle-nrepl-eval`; `{:ns "main"}` per message, no shell, no escaping |
 | invoker over that same socket | ~7ms | `invoker-clj-eval`; see below |
 | `nvk <params>` subprocess | ~170ms | `sh-invoker!` fallback |
 | `bb eval '<expr>'` (bb.edn task) | ~170ms | `sh-bb-eval!`; **auto-wraps** `(do (in-ns 'main) …)` |
-| `clj-nrepl-eval -p 7888` | ~70ms | `sh-nrepl-eval!`; lands in `user` ns — wrap in `(in-ns 'main)` |
+| `clj-nrepl-eval -p 8266` | ~70ms | `sh-nrepl-eval!`; lands in `user` ns — wrap in `(in-ns 'main)` |
 
 Shell fallbacks no longer go through `user.system_command_nb` (it
 blocks); they use local `sh!` / `sh-detached!` wrapping `subprocess`
@@ -85,7 +89,7 @@ with an argv vector + `:cwd`. Memory:
 ### `invoker-clj-eval` — CLI ergonomics at socket speed
 `nvk` costs 2× babashka boot, but invoker **evals in this very daemon**
 (it `add-lib`s itself in on first use), so `invoker.utils` is already
-loaded on `:7888`. The action calls invoker's own
+loaded on `:8266`. The action calls invoker's own
 `parse-var-and-args` → `parse-raw-args` → `dispatch` over the socket:
 20× faster with byte-identical semantics (auto-coerce, `:k v`/`--k v`
 opts, atom deref). Falls back to the `nvk` subprocess if the daemon
@@ -112,16 +116,16 @@ Fns live in `main`. `bb eval` hides this by auto-wrapping in
 `(in-ns 'main)`, but `clj-nrepl-eval` does NOT. So:
 ```zsh
 # WRONG: Unable to resolve symbol: set-default-brush!
-clj-nrepl-eval -p 7888 "(set-default-brush!)"
+clj-nrepl-eval -p 8266 "(set-default-brush!)"
 # RIGHT — heredoc (no shell escaping) + explicit ns:
-clj-nrepl-eval -p 7888 <<'EOF'
+clj-nrepl-eval -p 8266 <<'EOF'
 (in-ns 'main)
 (set-default-brush!)
 EOF
 ```
 The clj-nrepl-eval **session is persistent per port**, so once you
 `(in-ns 'main)` it stays in `main` until the bb server restarts —
-subsequent calls can be bare `clj-nrepl-eval -p 7888 '(foo!)'`.
+subsequent calls can be bare `clj-nrepl-eval -p 8266 '(foo!)'`.
 (`-p` is the valid short form of `--port`.) Same root cause as memory
 `basilisp-nrepl-cli-evals-land-in-user-ns` (that was :7891 Talon).
 
@@ -172,7 +176,7 @@ Mixing them (wrap an action, or drop the bang) is the drift trap.
 - Fix or document the racy correlation (needs an API id, or serialize).
 - Resolve the doubled-`stroke!` mystery.
 - Consider a thin contract/guard so `rebelle_fn` can't call phantom fns.
-- Decide whether to record rebelle-api's :7888 in state.md's port map.
+- Decide whether to record rebelle-api's :8266 in state.md's port map.
 - De-duplicate the websocket launch flags (`rebelle.lpy` vs `bb.edn`).
 - Untested: does the `nvk` fallback actually restore invoker after a
   *daemon restart*? (`add-lib` was a no-op when I faked absence with

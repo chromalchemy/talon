@@ -285,8 +285,10 @@ Candidate: upstream PR to basilisp.
 **`rebelle-api`** (`~/dev/rebelle-api`) — babashka bridge driving
 **Rebelle 8** over its MotionIO **WebSocket** API (`ws://[::1]:8265`),
 exposed to a growing set of Talon commands in `ryan/rebelle/`. Own
-babashka **nREPL on :7888** (this is the "unrelated java nREPL" the
-7891 note refers to — it's bb, not java). Full page:
+babashka **nREPL on :8266** (moved from 7888 on 2026-10-27: groundedsol's
+dev JVM nREPL also hardcodes 7888 and was the "unrelated java nREPL" the
+7891 note refers to). After the move, **restart Talon**: `rebelle-conn` is
+a `defonce`. Older entries below still say :7888. Full page:
 `mementum/knowledge/rebelle-api.md` (architecture, the builder-vs-action
 layering, the 3 eval entry points + their escaping/ns footguns, the
 Talon↔Clojure drift trap, 2 unfixed code smells). Two eval-path gotchas
