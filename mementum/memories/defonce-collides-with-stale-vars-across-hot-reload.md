@@ -18,5 +18,13 @@ Rules:
    be running anymore". Before blaming the new code, check whether an
    old var is shadowing the new def (`(type the-var)` via :7891).
 
+4. Same var, same kind, **new init args**: a no-op too. Verified
+   2026-10-27. rebelle.lpy's `rebelle-conn` was changed from port 7888 to
+   8266 and the watcher reloaded the file, but the live client still read
+   `{:port 7888}` (checked via :7891,
+   `@@(find-var 'ryan.rebelle.rebelle/rebelle-conn)`). So config
+   baked into a `defonce` (ports, hosts, paths) needs a Talon restart or
+   a live `reset!`/`ns-unmap`. A reload does nothing.
+
 Same family as basilisp-direct-linking-freezes-intra-ns-redefs: both
 are "the live image remembers more than the file says" bugs.
