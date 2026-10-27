@@ -6,7 +6,7 @@
 
   Eval bridges into the rebelle-api project (~/dev/rebelle-api):
   a direct in-process nREPL client to the persistent bb daemon on
-  :7888 (tlisp.nrepl -- no process spawn, no shell escaping), and the
+  :8266 (tlisp.nrepl -- no process spawn, no shell escaping), and the
   nvk invoker. Legacy shell paths (bb eval / clj-nrepl-eval) kept as
   private fallback fns. Plus keyboard-driven layout management."
   (:require [tlisp.talon :as t]
@@ -126,7 +126,7 @@
 (defn- sh-nrepl-eval!
   "eval with the clj-nrepl-eval cmd line tool from clojure-mcp"
   [clj]
-  (sh! [clj-nrepl-eval-path "-p" "7888"]
+  (sh! [clj-nrepl-eval-path "-p" "8266"]
        rebelle-api-path
        (str "(in-ns 'main)\n" clj "\n")))
 
@@ -140,8 +140,11 @@
 ;; NB: defined here, above its first use -- Basilisp resolves symbols
 ;; at compile time, so the invoker action below cannot see it if this
 ;; sits further down the file.
+;; Port must match `nrepl-port` in rebelle-api/main.clj (8266; was 7888,
+;; which collides with groundedsol's dev nREPL). defonce: a file reload
+;; keeps the old client -- restart Talon after changing the port.
 (defonce ^:private rebelle-conn
-  (nrepl/client "127.0.0.1" 7888 {:ns "main"}))
+  (nrepl/client "127.0.0.1" 8266 {:ns "main"}))
 
 ;; ___________________________________ . invoker
 
@@ -151,7 +154,7 @@
 ;; 2 x ~80ms interpreter boot. Same cost in Talon as in a terminal.
 ;;
 ;; But invoker doesn't do the work in those processes -- it connects to
-;; the nREPL on :7888 and evaluates there, add-lib'ing itself into the
+;; the nREPL on :8266 and evaluates there, add-lib'ing itself into the
 ;; daemon on first use. So invoker.utils is ALREADY LOADED in the very
 ;; process we hold an open socket to. Calling its own parser/dispatcher
 ;; over that socket skips both bb boots: ~170ms -> ~7ms, with identical
@@ -210,7 +213,7 @@
 ;; ___________________________________ . python nrepl
 
 (t/defaction rebelle-eval
-  "eval a string of rebelle clojure code on the bb daemon (:7888),
+  "eval a string of rebelle clojure code on the bb daemon (:8266),
   direct nREPL, async fire-and-forget"
   [clj :- python/str]
   (println "rebelle-eval:" clj)
