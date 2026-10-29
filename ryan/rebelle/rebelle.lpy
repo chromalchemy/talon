@@ -255,12 +255,16 @@
 ;; ---------------------------------------------------------------------------
 ;; brushes
 
+;; rebelle-api's set-brush sends only the keys given (add0ce4), so name every
+;; key "default" should reset. Same spec as main/set-default-brush!.
 (def ^:private default-brush
   {:tool "WATERCOLOR"
    :preset "Gouache/Gouache Flat"
    :size 50
    :opacity 75
-   :color {:r 255 :g 0 :b 0}})
+   :color {:r 255 :g 0 :b 0}
+   :paint-type "PAINT"
+   :only-water false})
 
 (t/defaction reb-default-brush
   "select the default brush (spec lives here as data; edit + save to tweak)"
