@@ -212,6 +212,19 @@ documented in knowledge page Recovery section.
    - **Basilisp ≠ JVM**: `java.lang.Thread/sleep` etc. do NOT resolve.
      For sleeps in test snippets `(import time)` then `(time/sleep 0.8)`
      (seconds, float). Reach for Python stdlib, not `java.*`.
+   - Registry checks via :7891 (used 2026-11-07), with
+     `reg (.-registry (importlib/import-module "talon"))`:
+     implementations of an action and their source module:
+     `(for [i (python/list (.get (.-actions reg) "user.x"))]
+     (python/getattr (.-func i) "__module__" nil))`; commands of one
+     .talon file: `(.-commands (.get (.-contexts reg)
+     "user.ryan.dir.file.talon"))`. Do NOT nest `for` + `:when` over all
+     of `(.-commands reg)`: Basilisp RecursionError (lazy-seq depth).
+   - Python interop from a `let`-bound module: `(.getpid os)`, not
+     `os/getpid`; keyword args via `(apply-kw f {:max_depth 0})`.
+   - Check a change's effect on Talon: save `wc -l < ~/.talon/talon.log`
+     first, then grep `tail -n +$mark` for
+     `ERROR|failed type check|import failed`.
 4. Memories this workstream (7): grep `git log --oneline --
    mementum/memories/ | grep -i "basilisp\|talon"`. Key ones:
    `talon-actions-from-pure-basilisp` (the no-stub recipe),
