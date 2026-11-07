@@ -21,15 +21,7 @@ add folder to (workspace | work space | project):
     user.run_rpc_command("workbench.action.addRootFolder")
 
 (the lead | delete) (file | folder) here:
-    mouse_click(0)
-    sleep(300ms)
-    # andreas command asks for confirmation
-    # user.run_rpc_command("andreas.removeFile")
-    user.run_rpc_command("fileutils.removeFile")
-    # key(cmd-backspace)
+    user.ctx_menu_select("Delete")
 
 reveal (and | in) finder here:
-    mouse_click(1)
-    sleep(300ms)
-    # same as context menu "Reveal in Finder"; acts on the focused explorer item
-    user.run_rpc_command("revealFileInOS")
+    user.ctx_menu_select("Reveal in Finder")
