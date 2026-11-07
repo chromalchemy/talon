@@ -1,5 +1,30 @@
 # State
 
+## 2026-11-07: AXKit → nriley's fork; menu_select = pure copy of nriley's
+
+- `user/talon_axkit` now also merges **nriley/talon-axkit** (remote
+  `nriley`, branch `nriley`; merge `b02a378`, your own commits kept).
+  Why: nriley's menu_select calls `user.focused_element_safe`, which only
+  his AXKit fork defines (`inspect.py`), not phillco's. Update later with
+  `git fetch nriley && git merge nriley/nriley` (plus `origin/main`).
+- `community/plugin/menu_select/` is byte-identical to
+  `~/.talon/repos/nriley/plugin/menu_select/` → update = copy the 3 files.
+  `menu_select_helpers.py` deleted (its `ui_element_active_window_or_sheet`
+  never ran: `core/dynamic_ui/ui_mac.py`'s mac Context wins).
+- Your additions now live in `ryan/system_nav/menu_select_ext.{py,talon}`
+  (status_menu_by_title, Talon-menu actions, `menu_item_by_title`,
+  "status print"); they import plugin helpers via `from ...community...`.
+  `context_menu.py` = `run_ctx_menu_cmd` + `ctx_menu_select(title)`.
+  `open_talon_menu` finds Talon's status item by pid and hover+clicks
+  (AXPress on Talon's own menu deadlocks; nriley's status list skips it).
+- Hot-reloading axkit `inspect.py` (an action gained a param) left a
+  zombie `Context(user.talon_axkit.inspect)` → "failed type check" for
+  `element_print_*`; unload+reload did NOT clear it. ✅ Talon restart
+  (13:06) did: cold load clean, 1 impl per action. User voice-verified
+  "open talon menu" after restart.
+- Committed: community `ryan-edits` (menu_select = nriley copy) and user
+  repo (`ryan/system_nav/*`, `file_explorer.talon`, this entry).
+
 ## 2026-10-09: whisper mode = dictation + longer timeout + Whisper model
 
 Community repo (`ryan-edits`, **uncommitted** at time of writing):

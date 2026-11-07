@@ -15,4 +15,20 @@ class Actions:
         actions.key("enter")
         # # close the mouse grid if open
         actions.user.grid_close()
-        
+
+    def ctx_menu_select(title: str):
+        """Right-click at the mouse, then select the context menu item with this title"""
+        actions.tracking.zoom_cancel()
+        actions.user.grid_close()
+        actions.mouse_click(1)
+        for _ in range(20):
+            actions.sleep("50ms")
+            if actions.user.active_menu_safe() is not None:
+                break
+        try:
+            # declared in menu_select_ext.py
+            item = actions.user.menu_item_by_title(title)
+        except Exception:
+            actions.key("escape")
+            raise
+        actions.user.menu_item_select(item)

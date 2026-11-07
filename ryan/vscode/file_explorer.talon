@@ -27,3 +27,9 @@ add folder to (workspace | work space | project):
     # user.run_rpc_command("andreas.removeFile")
     user.run_rpc_command("fileutils.removeFile")
     # key(cmd-backspace)
+
+reveal (and | in) finder here:
+    mouse_click(1)
+    sleep(300ms)
+    # same as context menu "Reveal in Finder"; acts on the focused explorer item
+    user.run_rpc_command("revealFileInOS")
