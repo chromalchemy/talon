@@ -16,3 +16,6 @@ talent voice: /.talon/user/talon-user.code-workspace
 talin voice: /.talon/user/talon-user.code-workspace
 
 get bit: /dev/gbo
+
+rebelle: /dev/rebelle-api
+rebel: /dev/rebelle-api
