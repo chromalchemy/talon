@@ -241,10 +241,10 @@ copy to [Smart] Object:
 Reveal [smart] [object] [in Finder]:
     user.ps_smart_objects_reveal_in_finder()
 
-Update [Modified] (object | [object] (Contents | content)):
+(refresh | Update | reload) [Modified] (object | [object] (Contents | content) | layer):
     user.ps_smart_objects_update_modified_content()
 
-Update [All] [Modified] objects:
+(refresh | Update | reload) [All] [Modified] (objects | layers):
     user.ps_smart_objects_update_all_modified_content()
 
 Edit ([object] (Contents | content)  | object):
@@ -967,6 +967,11 @@ Close [(file | tab)] and Go [to] Bridge:
 (File | bill | fil | fill) Save | save (File | bill | fil | fill):
     user.ps_file_save()
 
+save [(File | bill | fil | fill)] and (close | clothes):
+    user.ps_file_save()
+    sleep(300ms)
+    user.ps_file_close()
+
 [(File | bill | fil | fill)] (save as | say that):
     user.ps_file_save_as()
 
@@ -1047,7 +1052,7 @@ Search [Adobe] Express Templates:
 
 ## +++++++++++++++++++++++ automations .
 
-Batch process:
+Batch process | (run | automate) batch | batch files:
     user.ps_file_automate_batch()
 
 create PDF Presentation:
@@ -1068,7 +1073,6 @@ Conditional Mode Change:
 Fit Image:
     user.ps_file_automate_fit_image()
 
-
 Merge to HDR [Pro]:
     user.ps_file_automate_merge_to_hdr_pro()
 
@@ -1077,7 +1081,7 @@ Photomerge | merge photos:
 
 ## +++++++++++++++++++++++++++ scripts .
 
-Image Processor | process images:
+[open] vImage Processor | process images:
     user.ps_scripts_image_processor()
 
 (Delete | chuck) [All] Empty Layers:
