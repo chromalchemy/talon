@@ -22,8 +22,6 @@ sub agents: subagents
 clojure eval: clojure-eval
 closure eval: clojure-eval
 
-
-
 skill creator: skill-creator
 
 flowstorm: flowstorm
@@ -39,3 +37,23 @@ squint runtime: squint-runtime
 
 project summary: @clojure-mcp/PROJECT_SUMMARY.md
 clojure project: @clojure-mcp/Clojure Project Info   @clojure-mcp/LLM_CODE_STYLE.md @clojure-mcp/CLAUDE.md
+
+attention defecit: i-have-adhd
+attention: i-have-adhd
+
+wrap
+wrap up: wrap
+wrap session: wrap
+wind down: wrap
+
+nucleus
+
+orient
+engage: orient
+engage nucleus: orient
+orient momentum: orient
+load momentum: orient
+engage momentum: orient 
+
+
+

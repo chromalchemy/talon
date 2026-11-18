@@ -6,13 +6,16 @@ app.name: Windsurf - Next
 
 ## ++++++++++++++++++++ prompt helpers .
 
-chat command:
-     insert("")
 
-eca [command] {user.ryan.vscode.eca_commands.list}:
+(eca | chat) [command] {user.ryan.vscode.eca_commands.list}:
     insert("/{user.ryan.vscode.eca_commands.list}")
     sleep(300ms)
+    key(esc)
+    sleep(200ms)
     key(enter)
+
+(eca | chat) [command] (partial | open) {user.ryan.vscode.eca_commands.list}:
+    insert("/{user.ryan.vscode.eca_commands.list}")
 
 ## ++++++++++ prompt text edit helpers .
 
@@ -90,6 +93,15 @@ agent rewrite accept:
 agent rewrite reject:
     user.run_rpc_command("eca.rewrite.reject")
 
+## +++++++++++++++++++++++++ font size .
 
+increase chat font size | chat font (up | larger):
+    user.run_rpc_command("eca.chat.increaseFontSize")
+
+decrease chat font size | chat font (down | smaller):
+    user.run_rpc_command("eca.chat.decreaseFontSize")
+
+chat font [size] (reset | default):
+    user.run_rpc_command("eca.chat.resetFontSize")
 
 
