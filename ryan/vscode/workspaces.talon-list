@@ -19,3 +19,8 @@ get bit: /dev/gbo
 
 rebelle: /dev/rebelle-api
 rebel: /dev/rebelle-api
+
+harness: /.config/eca/ECA.code-workspace
+eca: /.config/eca/ECA.code-workspace
+code assistant: /.config/eca/ECA.code-workspace
+code assist: /.config/eca/ECA.code-workspace
